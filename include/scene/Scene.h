@@ -26,21 +26,15 @@
 #include "resourceManager/ResourceManager.h"
 
 struct Scene {
-
+    struct SceneNode** sceneNodesList;
 };
-/*
-class Scene {
-public:
-    Scene(SceneResource* resource, ResourceManager* resourceManager);
-    ~Scene();
 
-    void addSceneNode(SceneNode*);
-    void removeSceneNode (SceneNode*);
-    std::list <SceneNode*>* getSceneNodesList();
+struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Scene_destruct (struct Scene* scene);
 
-private:
-    std::list <SceneNode*> sceneNodesList;
-};*/
-
+void Scene_addSceneNode(struct Scene* const, const char* const * const resId);
+void Scene_removeSceneNode(struct Scene* const, const char* const * const resId);
+struct SceneNode* const * const Scene_getSceneNodesList(struct Scene* const);
+void Scene_save(struct ResourceManager* const resourceManager, const char* const * const resId);
 
 #endif //ALONE_SCENE_H

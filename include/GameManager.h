@@ -21,6 +21,7 @@
 */
 #ifndef ALONE_GAMEMANAGER_H
 #define ALONE_GAMEMANAGER_H
+
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "musican/Musican.h"
@@ -41,19 +42,5 @@ struct GameManager {
 struct GameManager* GM_construct();
 int GM_main(struct GameManager* gm);
 void GM_destruct(struct GameManager* gm);
-/*
-class GameManager {
-public:
-    GameManager();
-    int main ();
-    ~GameManager();
-private:
-    EventManager* eventManager;
-    ResourceManager* resourceManager;
-    Renderer* renderer;
-    Controller* controller;
-    Musican* musican;
 
-    std::stack <Scene*> scenesStack;
-};*/
 #endif //ALONE_GAMEMANAGER_H
