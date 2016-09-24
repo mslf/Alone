@@ -22,39 +22,38 @@
 #ifndef ALONE_CHECKBOX_H
 #define ALONE_CHECKBOX_H
 
-#include "gui/Gui.h"
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
 #include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "musican/Sound.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 
 struct CheckBox {
-
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    struct SoundResource* focusedSoundResource;
+    struct SoundResource* checkedSoundResource;
+    struct GameEvent* checkedEvent;
+    unsigned char isChecked;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class CheckBox : Gui {
-public:
-    CheckBox();
-    ~CheckBox();
 
-    void createGuiElementFromResource(CheckBoxResource* checkBoxResource, ResourceManager* resourceManager);
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    //void setEvents(std::list <GameEvent*>* gameEventsList);
-    std::list <GameEvent*>* getEvents();
-    std::list <Sound*>* getSoundEvents();
-    bool check(bool state);
+struct CheckBox* CheckBox_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void CheckBox_destruct(struct CheckBox* checkBox);
 
-private:
-    bool isChecked;
-    bool isCreated;
-    bool isSounded;
-    Sound* focusedStateSound;
-    Sound* checkedStateSound;
-    GameEvent* checkedStateEvent;
-};*/
-
+void CheckBox_save(
+        const struct CheckBox* const checkBox, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void CheckBox_control(struct SceneNode* sceneNode, struct Controller* controller);
+void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void CheckBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void CheckBox_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_CHECKBOX_H

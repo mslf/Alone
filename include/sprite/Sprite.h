@@ -44,9 +44,9 @@ void Sprite_destruct(struct Sprite* sprite);
 void Sprite_save(
         const struct  Sprite* const sprite, struct ResourceManager* const resourceManager,
         const char* const * const resId);
-// void Sprite_control(struct Controller* controller);
-void Sprite_update(struct EventManager* eventManager);
-void Sprite_render(struct Renderer* renderer);
-// void Sprite_sound(struct Musican* musican);
+// void Sprite_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+// void Sprite_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_SPRITE_H

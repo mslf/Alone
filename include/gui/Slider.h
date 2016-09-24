@@ -22,42 +22,41 @@
 #ifndef ALONE_SLIDER_H
 #define ALONE_SLIDER_H
 
-#include "gui/Gui.h"
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
 #include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "musican/Sound.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 
 struct Slider {
-
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    struct TextResource* textResource;
+    struct SoundResource* focusedSoundResource;
+    struct SoundResource* pressedSoundResource;
+    struct GameEvent* pressedEvent;
+    unsigned char isPressed;
+    unsigned char value;
+    unsigned char step;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class Slider : Gui {
-public:
-    Slider();
-    ~Slider();
 
-    void createGuiElementFromResource(SliderResource* sliderResource, ResourceManager* resourceManager);
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable()
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    //void setEvents(std::list <GameEvent*>* gameEventsList);
-    std::list <GameEvent*>* getEvents();
-    std::list <Sound*>* getSoundEvents();
-    void setStep (int step);
-    void setValue (int value);
+struct Slider* Slider_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Slider_destruct(struct Slider* slider);
 
-private:
-    bool isCreated;
-    bool isSounded;
-    int value;
-    int step;
-    Sound* focusedStateSound;
-    Sound* pressedStateSound;
-    GameEvent* pressedStateEvent;
-
-};*/
-
+void Slider_save(
+        const struct Slider* const slider, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void Slider_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Slider_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void Slider_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_SLIDER_H

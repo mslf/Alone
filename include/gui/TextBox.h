@@ -22,39 +22,38 @@
 #ifndef ALONE_TEXTBOX_H
 #define ALONE_TEXTBOX_H
 
-#include "gui/Gui.h"
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
 #include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "musican/Sound.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 
 struct TextBox {
-
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    struct TextResource* textResource;
+    struct SoundResource* focusedSoundResource;
+    struct SoundResource* pressedSoundResource;
+    struct GameEvent* pressedEvent;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class TextBox : Gui {
-public:
-    TextBox();
-    ~TextBox();
 
-    void createGuiElementFromResource(TextBoxResource* textBoxResource, ResourceManager* resourceManager);
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    //void setEvents(std::list <GameEvent*>* gameEventsList);
-    std::list <GameEvent*>* getEvents();
-    std::list <Sound*>* getSoundEvents();
-    void setText(std::string);
+struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void TextBox_destruct(struct TextBox* textBox);
 
-private:
-    bool isCreated;
-    bool isSounded;
-    std::string text;
-    Sound* focusedStateSound;
-    Sound* pressedStateSound;
-    GameEvent* pressedStateEvent;
-};*/
-
+void TextBox_save(
+        const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void TextBox_control(struct SceneNode* sceneNode, struct Controller* controller);
+void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void TextBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void TextBox_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_TEXTBOX_H

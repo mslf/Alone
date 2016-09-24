@@ -22,33 +22,36 @@
 #ifndef ALONE_PROGRESSBAR_H
 #define ALONE_PROGRESSBAR_H
 
-#include "gui/Gui.h"
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
 #include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "musican/Sound.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 
-struct  ProgressBar {
-
+struct ProgressBar {
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    struct TextResource* textResource;
+    unsigned char value;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class ProgressBar : Gui {
-public:
-    ProgressBar();
-    ~ProgressBar();
 
-    void createGuiElementFromResource(ProgressBarResource* progressBarResource, ResourceManager* resourceManager);
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    //void setEvents(std::list <GameEvent*>* gameEventsList);
-    void setValue(int value);
+struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void ProgressBar_destruct(struct ProgressBar* progressBar);
 
-private:
-    bool isCreated;
-    int value;
-
-};*/
-
+void ProgressBar_save(
+        const struct ProgressBar* const progressBar, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+// void ProgressBar_control(struct SceneNode* sceneNode, struct Controller* controller);
+void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void ProgressBar_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+// void ProgressBar_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_PROGRESSBAR_H

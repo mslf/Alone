@@ -22,26 +22,31 @@
 #ifndef ALONE_TEXT_H
 #define ALONE_TEXT_H
 
+#include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
+#include "musican/Musican.h"
+#include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextResource.h"
 
 struct Text {
-
+    struct SceneNode* sceneNode;
+    struct TextResource* textResource;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class Text : SceneNode {
-public:
-    Text(TextResource textResource);
-    ~Text();
 
-    Graphics* getGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setText(std::string text);
+struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Text_destruct(struct Text* text);
 
-private:
-    std::string text;
-
-};*/
-
+void Text_save(
+        const struct  Text* const text, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+// void Text_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+// void Text_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_TEXT_H

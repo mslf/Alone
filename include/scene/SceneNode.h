@@ -23,7 +23,6 @@
 #define ALONE_SCENENODE_H
 
 #include <SDL2/SDL.h>
-#include "renderer/Graphics.h"
 #include "controller/ControllerEvent.h"
 #include "eventManager/GameEvent.h"
 #include "musican/Sound.h"
@@ -39,10 +38,10 @@ struct SceneNode {
     double angle;
     double scaleX;
     double scaleY;
-    void (*control)(struct Controller* controller);
-    void (*update)(struct EventManager* eventManager);
-    void (*render)(struct Renderer* renderer);
-    void (*sound)(struct Musican* musican);
+    void (*control)(struct SceneNode* sceneNode, struct Controller* controller);
+    void (*update)(struct SceneNode* sceneNode, struct EventManager* eventManager);
+    void (*render)(struct SceneNode* sceneNode, struct Renderer* renderer);
+    void (*sound)(struct SceneNode* sceneNode, struct Musican* musican);
 };
 
 struct SceneNode* SceneNode_construct();

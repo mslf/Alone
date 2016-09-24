@@ -22,39 +22,39 @@
 #ifndef ALONE_BUTTON_H
 #define ALONE_BUTTON_H
 
-#include "gui/Gui.h"
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
 #include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "musican/Sound.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 
-struct  Button {
-
+struct Button {
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    struct TextResource* textResource;
+    struct SoundResource* focusedSoundResource;
+    struct SoundResource* pressedSoundResource;
+    struct GameEvent* pressedEvent;
+    unsigned char isPressed;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class Button : Gui {
-public:
-    Button();
-    ~Button();
 
-    void createGuiElementFromResource(ButtonResource* buttonResource, ResourceManager* resourceManager);
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    //void setEvents(std::list <GameEvent*>* gameEventsList);
-    std::list <GameEvent*>* getEvents();
-    std::list <Sound*>* getSoundEvents();
-    void setLabel(std::string* text);
+struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Button_destruct(struct Button* button);
 
-private:
-    bool isCreated;
-    std::string text;
-    bool isSounded;
-    Sound* focusedStateSound;
-    Sound* pressedStateSound;
-    GameEvent* pressedStateEvent;
-};*/
-
+void Button_save(
+        const struct Button* const button, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void Button_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Button_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void Button_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_BUTTON_H

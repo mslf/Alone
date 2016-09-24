@@ -22,45 +22,49 @@
 #ifndef ALONE_CONTEXTMENU_H
 #define ALONE_CONTEXTMENU_H
 
-#include "gui/Gui.h"
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
 #include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "musican/Sound.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 
 struct MenuOption {
     struct GameEvent* pressedStateEvent;
-    char** label;
+    struct TextResource* textResource;
 };
 
 struct ContextMenu {
-
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    struct SoundResource* focusedSoundResource;
+    struct SoundResource* pressedSoundResource;
+    struct MenuOption* menuOptionsList;
+    unsigned char focusedMenuOptionIndex;
+    unsigned char pressedMenuOptionIndex;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class ContextMenu : Gui {
-public:
-    ContextMenu();
-    ~ContextMenu();
 
-    void createGuiElementFromResource(ContextMenuResource* contextMenuResource, ResourceManager* resourceManager);
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    //void setEvents(std::list <GameEvent*>* gameEventsList);
-    std::list <GameEvent*>* getEvents();
-    std::list <Sound*>* getSoundEvents();
-    void addMenuOption(MenuOption* menuOption);
-    std::list <MenuOption*> getMenuOptionsList ();
-    void removeMenuOption(int index);
+struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager,
+                                          const char* const * const resId);
+void ContextMenu_destruct(struct ContextMenu* contextMenu);
 
-private:
-    bool isCreated;
-    bool isSounded;
-    Sound* focusedStateSound;
-    Sound* pressedStateSound;
-    std::list <MenuOption*> menuOptionsList;
-};*/
-
+void ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
+                               const char* const * const resId);
+void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
+                                  const char* const * const resId);
+void ContextMenu_save(
+        const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void ContextMenu_control(struct SceneNode* sceneNode, struct Controller* controller);
+void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void ContextMenu_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void ContextMenu_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_CONTEXTMENU_H
