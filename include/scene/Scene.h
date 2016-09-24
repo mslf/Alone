@@ -31,9 +31,10 @@ struct Scene {
 
 struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
 void Scene_destruct (struct Scene* scene);
-
-void Scene_addSceneNode(struct Scene* const, const char* const * const resId);
-void Scene_removeSceneNode(struct Scene* const, const char* const * const resId);
+void Scene_addSceneNode(
+        struct Scene* const, struct ResourceManager* const resourceManager, const char* const * const resId);
+void Scene_removeSceneNode(
+        struct Scene* const, struct ResourceManager* const resourceManager, const char* const * const resId);
 struct SceneNode* const * const Scene_getSceneNodesList(struct Scene* const);
 void Scene_save(struct ResourceManager* const resourceManager, const char* const * const resId);
 

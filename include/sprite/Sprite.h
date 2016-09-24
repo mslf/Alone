@@ -22,31 +22,31 @@
 #ifndef ALONE_SPRITE_H
 #define ALONE_SPRITE_H
 
+#include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
+#include "musican/Musican.h"
+#include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextureResource.h"
 
 struct Sprite {
-
+    struct SceneNode* sceneNode;
+    struct TextureResource* textureResource;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
-/*
-class Sprite : SceneNode {
-public:
-    Sprite(SpriteResource* spriteResource);
-    ~Sprite();
 
-    Graphics* getGraphics();
-    void updateGraphics() =0;
-    int isGraphicsUpdatable() =0;
-    void setCoordinate(int x, int y);
-    int getAnimationsCount();
-    void setAnimation(int number);
-    int getFramesCount();
-    void resetAnimation();
+struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Sprite_destruct(struct Sprite* sprite);
 
-private:
-    bool isAnimated;
-    int animationsCount;
-    int* framesCount; // Array of framesCount for each animation
-};*/
-
+void Sprite_save(
+        const struct  Sprite* const sprite, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+// void Sprite_control(struct Controller* controller);
+void Sprite_update(struct EventManager* eventManager);
+void Sprite_render(struct Renderer* renderer);
+// void Sprite_sound(struct Musican* musican);
 
 #endif //ALONE_SPRITE_H

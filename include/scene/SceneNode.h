@@ -22,32 +22,30 @@
 #ifndef ALONE_SCENENODE_H
 #define ALONE_SCENENODE_H
 
-
+#include <SDL2/SDL.h>
 #include "renderer/Graphics.h"
 #include "controller/ControllerEvent.h"
 #include "eventManager/GameEvent.h"
 #include "musican/Sound.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
+#include "musican/Musican.h"
+
 struct SceneNode {
-
+    SDL_Point coordinates;
+    SDL_Point rotatePointCoordinates;
+    SDL_RendererFlip flip;
+    double angle;
+    double scaleX;
+    double scaleY;
+    void (*control)(struct Controller* controller);
+    void (*update)(struct EventManager* eventManager);
+    void (*render)(struct Renderer* renderer);
+    void (*sound)(struct Musican* musican);
 };
-/*
-class SceneNode {
-public:
-    virtual Graphics* getGraphics() =0;
-    virtual void updateGraphics() =0;
-    virtual int isGraphicsUpdatable() =0;
-    virtual void setCoordinate(int x, int y) =0;
-    virtual void setControlling(std::list <ControllerEvent*>* controllerEventsList) =0;
-    virtual void setEvents(std::list <GameEvent*>* gameEventsList) =0;
-    virtual std::list <GameEvent*>* getEvents() =0;
-    virtual std::list <Sound*>* getSoundEvents() =0;
 
-protected:
-    Graphics* graphics;
-    int x;
-    int y;
-
-};*/
-
+struct SceneNode* SceneNode_construct();
+void SceneNode_destruct(struct SceneNode* sceneNode);
 
 #endif //ALONE_SCENENODE_H
