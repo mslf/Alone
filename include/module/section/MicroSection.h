@@ -22,7 +22,6 @@
 #ifndef ALONE_MICROSECTION_H
 #define ALONE_MICROSECTION_H
 
-#include "module/section/Section.h"
 #include "module/section/NanoSection.h"
 
 struct  MicroSection {

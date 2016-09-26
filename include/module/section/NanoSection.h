@@ -22,8 +22,6 @@
 #ifndef ALONE_NANOSECTION_H
 #define ALONE_NANOSECTION_H
 
-#include "module/section/Section.h"
-
 struct NanoSection {
 
 };

@@ -22,25 +22,19 @@
 #ifndef ALONE_BACKGROUNDMODULE_H
 #define ALONE_BACKGROUNDMODULE_H
 
-#include "module/macro/MacroModule.h"
+#include <SDL2/SDL.h>
+#include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextureResource.h"
 
 struct BackgroundModule {
-
+    SDL_Point coordinates;
+    double scaleX;
+    double scaleY;
+    struct TextureResource* textureResource;
 };
-/*
-class BackgroundModule : MacroModule {
-public:
-    BackgroundModule(MacroModuleResource* macroModuleResource);
-    ~BackgroundModule();
 
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-
-private:
-};*/
-
+struct BackgroundModule* BackgroundModule_construct(struct ResourceManager* const resourceManager,
+                                                    const char* const * const textureResId, SDL_Point coordinates);
+void BackgroundModule_destruct(struct BackgroundModule* backgroundModule);
 
 #endif //ALONE_BACKGROUNDMODULE_H

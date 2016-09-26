@@ -22,14 +22,25 @@
 #ifndef ALONE_ACTIVEMODULE_H
 #define ALONE_ACTIVEMODULE_H
 
-#include "musican/Sound.h"
-#include "module/macro/MacroModule.h"
-#include "module/section/MacroSection.h"
+#include <SDL2/SDL.h>
+#include "lua.h"
 #include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
+#include "module/section/MacroSection.h"
+#include "module/section/MicroSection.h"
+#include "module/section/NanoSection.h"
 #include "module/MicroModule.h"
 
 struct ActiveModule {
-
+    SDL_Point coordinates;
+    double scaleX;
+    double scaleY;
+    struct TextureResource* textureResource;
+    struct MacroSection** macroSectionsList;
+    struct SoundResource** soundResourcesList;
+    struct MicroModule** microModulesList;
+    
 };
 /*
 class ActiveModule : MacroModule {

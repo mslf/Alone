@@ -1,5 +1,5 @@
 //
-// Created by mslf on 8/21/16.
+// Created by mslf on 9/25/16.
 //
 /*
 	Copyright 2016 Golikov Vitaliy
@@ -19,14 +19,30 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef ALONE_SECTION_H
-#define ALONE_SECTION_H
+#ifndef ALONE_CONNECTIONS_H
+#define ALONE_CONNECTIONS_H
 
-
-//TODO Section
-struct  Section {
-
+struct NanoConnection {
+    size_t firstDeviceIndex;
+    size_t firstNanoSectionIndex;
+    size_t secondDeviceIndex;
+    size_t secondNanoSectionIndex;
 };
 
+struct MicroConnection {
+    size_t firstDeviceIndex;
+    size_t firstMicroSectionIndex;
+    size_t secondDeviceIndex;
+    size_t secondMicroSectionIndex;
+    struct NanoConnection nanoConnection;
+};
 
-#endif //ALONE_SECTION_H
+struct  MacroConnection {
+    size_t firstDeviceIndex;
+    size_t firstMacroSectionIndex;
+    size_t secondDeviceIndex;
+    size_t secondMacroSectionIndex;
+    struct MicroConnection microConnection;
+};
+
+#endif //ALONE_CONNECTIONS_H

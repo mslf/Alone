@@ -22,38 +22,47 @@
 #ifndef ALONE_LEVEL_H
 #define ALONE_LEVEL_H
 
+#include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
+#include "eventManager/GameEvent.h"
+#include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextResource.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
 #include "module/macro/BackgroundModule.h"
 #include "module/macro/ActiveModule.h"
-#include "module/Module.h"
+#include "module/Connections.h"
 
 struct  Level {
-
+    struct SceneNode* sceneNode;
+    struct BackgroundModule** backgroundModulesList;
+    struct ActiveModule** activeModulesList;
+    struct MacroConnection* connectionsList;
+    size_t backgroundModulesNumber;
+    size_t activeModulesNumber;
+    size_t connectionsNumber;
 };
-/*
-class Level : SceneNode {
-public:
-    Level(LevelResource* levelResource, ResourceManager* resourceManager);
-    ~Level();
 
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    void setEvents(std::list <GameEvent*>* gameEventsList);
-    std::list <GameEvent*>* getEvents();
-    std::list <Sound*>* getSoundEvents();
-    bool addModule(MacroModule* macroModule, bool isActive);
-    bool removeModule(MacroModule* macroModule, bool isActive);
-    bool addConnection(Connection connection);
-    bool removeConnection(Connection connection);
-private:
-    std::list <BackgroundModule*> backgroundModulesList;
-    std::list <ActiveModule*> activeModulesList;
-    std::list <Connection> connectionsList;
-};*/
+struct Level* Level_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Level_destruct(struct Level* level);
 
+void Level_save(
+        const struct Level* const level, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void Level_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Level_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Level_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void Level_sound(struct SceneNode* sceneNode, struct Musican* musican);
+
+void Level_addBackgroundModule(struct Level* level, const char* const * const textureResId, SDL_Point coordinates);
+void Level_removeBackgroundModule(struct Level* level, SDL_Point coordinates);
+void Level_addActiveModule(struct Level* level, const char* const * const resId, SDL_Point coordinates);
+void Level_removeActiveModule(struct Level* level, SDL_Point coordinates);
+void Level_addConnection(struct Level* level, struct MacroConnection);
+void Level_removeConnection(struct Level* level, size_t index);
 
 #endif //ALONE_LEVEL_H

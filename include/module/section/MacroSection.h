@@ -22,7 +22,6 @@
 #ifndef ALONE_MACROSECTION_H
 #define ALONE_MACROSECTION_H
 
-#include "module/section/Section.h"
 #include "module/section/MicroSection.h"
 
 struct MacroSection {
