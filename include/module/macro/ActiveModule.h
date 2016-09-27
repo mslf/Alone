@@ -27,48 +27,42 @@
 #include "resourceManager/ResourceManager.h"
 #include "resourceManager/TextureResource.h"
 #include "resourceManager/SoundResource.h"
+#include "resourceManager/ScriptResource.h"
 #include "module/section/MacroSection.h"
 #include "module/section/MicroSection.h"
 #include "module/section/NanoSection.h"
 #include "module/MicroModule.h"
+#include "module/Connections.h"
 
 struct ActiveModule {
     SDL_Point coordinates;
     double scaleX;
     double scaleY;
+    struct ScriptResource* scriptResource;
     struct TextureResource* textureResource;
-    struct MacroSection** macroSectionsList;
     struct SoundResource** soundResourcesList;
+    struct MacroSection** macroSectionsList;
     struct MicroModule** microModulesList;
-    
+    struct MicroConnection* microConnectionsList;
+    size_t macroSectionsNumber;
+    size_t soundResourcesNumber;
+    size_t microModulesNumber;
+    size_t microConnectionsNumber;
+    size_t currentAnimation;
+    size_t currentFrame;
 };
-/*
-class ActiveModule : MacroModule {
-public:
-    ActiveModule(MacroModuleResource* macroModuleResource, ResourceManager* resourceManager);
-    ~ActiveModule();
 
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    std::list <Sound*>* getSoundEvents();
-    //void setSection(int index, MacroSection* macroSection);
-    MacroSection* getSection(int index);
-    int getSectionsCount();
-    void Cycle();
-    bool addModule(MicroModule* microModule);
-    bool removeModule(MicroModule* microModule);
-    bool addConnection(Connection connection);
-    bool removeConnection(Connection connection);
-private:
-    std::list <MacroSection*> sectionsList;
-    std::list <Sound*> soundsList;
-    bool isCollisionsActive;
-    std::list <MicroModule*> microModulesList;
-    std::list <Connection> connectionsList;
-};*/
+struct ActiveModule* ActiveModule_construct(struct ResourceManager* const resourceManager, const char* const resId);
+void ActiveModule_destruct(struct ActiveModule* activeModule);
 
+void ActiveModule_save(
+        const struct ActiveModule* const activeModule, struct ResourceManager* const resourceManager,
+        const char* const * const resId);
+void ActiveModule_addMicroModule(struct ActiveModule* activeModule, const char* const resId, SDL_Point coordinates);
+void ActiveModule_removeMicroModule(struct ActiveModule* activeModule, SDL_Point coordinates);
+void ActiveModule_addConnection(struct ActiveModule* activeModule, struct MicroConnection);
+void ActiveModule_removeConnection(struct ActiveModule* activeModule, size_t index);
+void ActiveModule_addMacroSection(struct ActiveModule* activeModule, struct MacroSection* macroSection);
+void ActiveModule_removeMacroSection(struct ActiveModule* activeModule, const char* const name);
 
 #endif //ALONE_ACTIVEMODULE_H

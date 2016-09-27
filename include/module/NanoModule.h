@@ -22,7 +22,6 @@
 #ifndef ALONE_NANOMODULE_H
 #define ALONE_NANOMODULE_H
 
-#include "module/Module.h"
 #include "module/section/NanoSection.h"
 
 struct  NanoModule {

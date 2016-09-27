@@ -22,7 +22,6 @@
 #ifndef ALONE_MICROMODULE_H
 #define ALONE_MICROMODULE_H
 
-#include "module/Module.h"
 #include "musican/Sound.h"
 #include "module/section/MicroSection.h"
 #include "resourceManager/ResourceManager.h"

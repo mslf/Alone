@@ -1,5 +1,5 @@
 //
-// Created by mslf on 8/23/16.
+// Created by mslf on 9/27/16.
 //
 /*
 	Copyright 2016 Golikov Vitaliy
@@ -19,25 +19,3 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef ALONE_NANOSECTION_H
-#define ALONE_NANOSECTION_H
-
-enum NanoSectionType {
-    Command,
-    IntegerData,
-    DoubleData,
-    StringData
-};
-
-struct NanoSection {
-    enum NanoSectionType type;
-    char* sectionName;
-    char* valueString;
-};
-
-struct NanoSection* NanoSection_construct(enum NanoSectionType nanoSectionType, const char* const name);
-void NanoSection_destruct(struct NanoSection* nanoSection);
-
-void NanoSection_setValue(struct NanoSection* nanoSection, const char* const value);
-
-#endif //ALONE_NANOSECTION_H

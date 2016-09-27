@@ -22,24 +22,33 @@
 #ifndef ALONE_MICROSECTION_H
 #define ALONE_MICROSECTION_H
 
+#include <stddef.h>
 #include "module/section/NanoSection.h"
 
-struct  MicroSection {
-
+enum MicroSectionType {
+    ElectricityMicroSection,
+    MCIMicroSection,
+    SCIMicroSection,
+    MDIMicroSection,
+    SDIMicroSection,
+    PipeMicroSection
 };
-/*
-//TODO MicroSection
-class MicroSection : Section {
-public:
-    MicroSection();
-    ~MicroSection();
 
-    virtual NanoSection* getSection(int index);
-    virtual int getSectionsCount();
+struct MicroSection {
+    enum MicroSectionType type;
+    char* sectionName;
+    char* pipeResourceName;
+    double pipeResourceCount;
+    struct NanoSection** nanoSectionsList;
+    size_t nanoSectionsCount;
+};
 
-private:
+struct MicroSection* MicroSection_construct(enum MicroSectionType microSectionType,const char* const pipeResName,
+                                            const char* const name);
+void MicroSection_destruct(struct MicroSection* microSection);
 
-};*/
-
+void MicroSection_addNanoSection(struct MicroSection* microSection, struct NanoSection* nanoSection);
+void MicroSection_removeNanoSection(struct MicroSection* microSection, const char* const name);
+void MicroSection_setPipeResource(struct MicroSection*, const char* const pipeResourceName, size_t count);
 
 #endif //ALONE_MICROSECTION_H

@@ -22,24 +22,26 @@
 #ifndef ALONE_MACROSECTION_H
 #define ALONE_MACROSECTION_H
 
+#include <stddef.h>
 #include "module/section/MicroSection.h"
 
-struct MacroSection {
-
+enum MacroSectionType {
+    ElectricityMacroSection,
+    PipeMacroSection,
+    InterfaceMacroSection
 };
-/*
-//TODO MacroSection
-class MacroSection : Section {
-public:
-    MacroSection();
-    ~MacroSection();
 
-    virtual MicroSection* getSection(int index);
-    virtual int getSectionsCount();
+struct MacroSection {
+    enum MacroSectionType type;
+    char* sectionName;
+    struct MicroSection** microSectionsList;
+    size_t microSectionsCount;
+};
 
-protected:
-    std::list <MicroSection*> microSectionsList;
-};*/
+struct MacroSection* MacroSection_construct(enum MacroSectionType macroSectionType, const char* const name);
+void MacroSection_destruct(struct MacroSection* macroSection);
 
+void MacroSection_addMicroSection(struct MacroSection* macroSection, struct MicroSection* microSection);
+void MacroSection_removeMicroSection(struct MacroSection* macroSection, const char* const name);
 
 #endif //ALONE_MACROSECTION_H
