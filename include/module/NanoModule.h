@@ -22,29 +22,32 @@
 #ifndef ALONE_NANOMODULE_H
 #define ALONE_NANOMODULE_H
 
+#include <SDL2/SDL.h>
+#include "lua.h"
+#include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/ScriptResource.h"
 #include "module/section/NanoSection.h"
 
-struct  NanoModule {
-
+struct NanoModule {
+    SDL_Point coordinates;
+    double scaleX;
+    double scaleY;
+    struct ScriptResource* scriptResource;
+    struct TextureResource* textureResource;
+    struct NanoSection** nanoSectionsList;
+    size_t nanoSectionsNumber;
+    size_t currentAnimation;
+    size_t currentFrame;
 };
-/*
-class NanoModule : Module{
-public:
-    NanoModule();
-    ~NanoModule();
 
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    //void setSection(int index, MacroSection* macroSection);
-    NanoSection* getSection(int index);
-    int getSectionsCount();
-    void Cycle();
-private:
-    std::list <NanoSection*> sectionsList;
-};*/
+struct NanoModule* NanoModule_construct(struct ResourceManager* const resourceManager, const char* const resId);
+void NanoModule_destruct(struct NanoModule* nanoModule);
 
+void NanoModule_save(
+        const struct NanoModule* const nanoModule, struct ResourceManager* const resourceManager,
+        const char* const resId);
+void MicroModule_addNanoSection(struct NanoModule* nanoModule, struct NanoSection* nanoSection);
+void MicroModule_removeNanoSection(struct NanoModule* nanoModule, size_t index);
 
 #endif //ALONE_NANOMODULE_H

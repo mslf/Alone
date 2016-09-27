@@ -23,24 +23,24 @@
 #define ALONE_CONNECTIONS_H
 
 struct NanoConnection {
-    size_t firstDeviceIndex;
+    size_t firstNanoModuleIndex;
     size_t firstNanoSectionIndex;
-    size_t secondDeviceIndex;
+    size_t secondNanoModuleIndex;
     size_t secondNanoSectionIndex;
 };
 
 struct MicroConnection {
-    size_t firstDeviceIndex;
+    size_t firstMicroModuleIndex;
     size_t firstMicroSectionIndex;
-    size_t secondDeviceIndex;
+    size_t secondMicroModuleIndex;
     size_t secondMicroSectionIndex;
     struct NanoConnection nanoConnection;
 };
 
 struct  MacroConnection {
-    size_t firstDeviceIndex;
+    size_t firstMacroModuleIndex;
     size_t firstMacroSectionIndex;
-    size_t secondDeviceIndex;
+    size_t secondMacroModuleIndex;
     size_t secondMacroSectionIndex;
     struct MicroConnection microConnection;
 };

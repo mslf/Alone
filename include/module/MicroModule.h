@@ -22,40 +22,49 @@
 #ifndef ALONE_MICROMODULE_H
 #define ALONE_MICROMODULE_H
 
-#include "musican/Sound.h"
-#include "module/section/MicroSection.h"
+#include <SDL2/SDL.h>
+#include "lua.h"
 #include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/SoundResource.h"
+#include "resourceManager/ScriptResource.h"
+#include "module/section/MicroSection.h"
+#include "module/section/NanoSection.h"
 #include "module/NanoModule.h"
+#include "module/Connections.h"
 
 struct MicroModule {
-
+    SDL_Point coordinates;
+    double scaleX;
+    double scaleY;
+    struct ScriptResource* scriptResource;
+    struct TextureResource* textureResource;
+    struct SoundResource** soundResourcesList;
+    struct MicroSection** microSectionsList;
+    struct NanoModule** nanoModulesList;
+    struct NanoConnection* nanoConnectionsList;
+    size_t microSectionsNumber;
+    size_t soundResourcesNumber;
+    size_t nanoModulesNumber;
+    size_t nanoConnectionsNumber;
+    size_t currentAnimation;
+    size_t currentFrame;
 };
-/*
-class MicroModule : Module{
-public:
-    MicroModule(MicroModuleResource* microModuleResource, ResourceManager* resourceManager);
-    ~MicroModule();
 
-    Graphics* getGraphics();
-    void updateGraphics();
-    int isGraphicsUpdatable();
-    void setCoordinate(int x, int y);
-    void setControlling(std::list <ControllerEvent*>* controllerEventsList);
-    std::list <Sound*>* getSoundEvents();
-    //void setSection(int index, MacroSection* macroSection);
-    MicroSection* getSection(int index);
-    int getSectionsCount();
-    void Cycle();
-    bool addModule(NanoModule* nanoModule);
-    bool removeModule(NanoModule* nanoModule);
-    bool addConnection(Connection connection);
-    bool removeConnection(Connection connection);
-private:
-    std::list <MicroSection*> sectionsList;
-    std::list <Sound*> soundsList;
-    std::list <NanoModule*> nanoModulesList;
-    std::list <Connection> connectionsList;
-};*/
+struct MicroModule* MicroModule_construct(struct ResourceManager* const resourceManager, const char* const resId);
+void MicroModule_destruct(struct MicroModule* microModule);
 
+void MicroModule_save(
+        const struct MicroModule* const microModule, struct ResourceManager* const resourceManager,
+        const char* const resId);
+void MicroModule_addNanoModule(struct MicroModule* microModule, const char* const resId, SDL_Point coordinates);
+void MicroModule_removeNanoModule(struct MicroModule* microModule, SDL_Point coordinates);
+void MicroModule_addConnection(struct MicroModule* microModule, struct NanoConnection);
+void MicroModule_removeConnection(struct MicroModule* microModule, size_t index);
+void MicroModule_addMicroSection(struct MicroModule* microModule, struct MicroSection* microSection);
+void MicroModule_removeMicroSection(struct MicroModule* microModule, size_t index);
+void MicroModule_addCrossConnection(struct MicroModule*, size_t firstNanoModuleIndex, size_t firstNanoSectionIndex,
+                                    size_t microSectionIndex);
+void MicroModule_removeCrossConnection(struct MicroModule* microModule, size_t microSectionIndex, size_t index);
 
 #endif //ALONE_MICROMODULE_H

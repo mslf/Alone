@@ -57,12 +57,12 @@ void ActiveModule_destruct(struct ActiveModule* activeModule);
 
 void ActiveModule_save(
         const struct ActiveModule* const activeModule, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 void ActiveModule_addMicroModule(struct ActiveModule* activeModule, const char* const resId, SDL_Point coordinates);
 void ActiveModule_removeMicroModule(struct ActiveModule* activeModule, SDL_Point coordinates);
 void ActiveModule_addConnection(struct ActiveModule* activeModule, struct MicroConnection);
 void ActiveModule_removeConnection(struct ActiveModule* activeModule, size_t index);
 void ActiveModule_addMacroSection(struct ActiveModule* activeModule, struct MacroSection* macroSection);
-void ActiveModule_removeMacroSection(struct ActiveModule* activeModule, const char* const name);
+void ActiveModule_removeMacroSection(struct ActiveModule* activeModule, size_t index);
 
 #endif //ALONE_ACTIVEMODULE_H
