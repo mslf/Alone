@@ -33,7 +33,13 @@
 #include "resourceManager/TextResource.h"
 #include "resourceManager/TextureResource.h"
 #include "resourceManager/SoundResource.h"
-
+/*
+ * TextBox is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of TextBox struct,
+ * if you want code to work with TextBox like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct TextBox {
     struct SceneNode* sceneNode;
     struct TextureResource* textureResource;
@@ -45,12 +51,12 @@ struct TextBox {
     SDL_Rect* dstRect;
 };
 
-struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void TextBox_destruct(struct TextBox* textBox);
 
 void TextBox_save(
         const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 void TextBox_control(struct SceneNode* sceneNode, struct Controller* controller);
 void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void TextBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);

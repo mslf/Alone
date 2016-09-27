@@ -36,7 +36,13 @@
 #include "module/macro/BackgroundModule.h"
 #include "module/macro/ActiveModule.h"
 #include "module/Connections.h"
-
+/*
+ * Level is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Level struct,
+ * if you want code to work with Level like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct  Level {
     struct SceneNode* sceneNode;
     struct BackgroundModule** backgroundModulesList;
@@ -47,20 +53,20 @@ struct  Level {
     size_t connectionsNumber;
 };
 
-struct Level* Level_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct Level* Level_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void Level_destruct(struct Level* level);
 
 void Level_save(
         const struct Level* const level, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 void Level_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Level_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Level_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void Level_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
-void Level_addBackgroundModule(struct Level* level, const char* const * const textureResId, SDL_Point coordinates);
+void Level_addBackgroundModule(struct Level* level, const char* const textureResId, SDL_Point coordinates);
 void Level_removeBackgroundModule(struct Level* level, SDL_Point coordinates);
-void Level_addActiveModule(struct Level* level, const char* const * const resId, SDL_Point coordinates);
+void Level_addActiveModule(struct Level* level, const char* const resId, SDL_Point coordinates);
 void Level_removeActiveModule(struct Level* level, SDL_Point coordinates);
 void Level_addConnection(struct Level* level, struct MacroConnection);
 void Level_removeConnection(struct Level* level, size_t index);

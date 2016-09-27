@@ -33,7 +33,13 @@
 #include "resourceManager/TextResource.h"
 #include "resourceManager/TextureResource.h"
 #include "resourceManager/SoundResource.h"
-
+/*
+ * ProgressBar is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ProgressBar struct,
+ * if you want code to work with ProgressBar like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct ProgressBar {
     struct SceneNode* sceneNode;
     struct TextureResource* textureResource;
@@ -43,12 +49,12 @@ struct ProgressBar {
     SDL_Rect* dstRect;
 };
 
-struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void ProgressBar_destruct(struct ProgressBar* progressBar);
 
 void ProgressBar_save(
         const struct ProgressBar* const progressBar, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 // void ProgressBar_control(struct SceneNode* sceneNode, struct Controller* controller);
 void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ProgressBar_render(struct SceneNode* sceneNode, struct Renderer* renderer);

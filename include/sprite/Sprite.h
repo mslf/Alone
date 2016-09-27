@@ -30,7 +30,13 @@
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
 #include "resourceManager/TextureResource.h"
-
+/*
+ * Sprite is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Sprite struct,
+ * if you want code to work with Sprite like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct Sprite {
     struct SceneNode* sceneNode;
     struct TextureResource* textureResource;
@@ -38,12 +44,12 @@ struct Sprite {
     SDL_Rect* dstRect;
 };
 
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void Sprite_destruct(struct Sprite* sprite);
 
 void Sprite_save(
         const struct  Sprite* const sprite, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 // void Sprite_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer);

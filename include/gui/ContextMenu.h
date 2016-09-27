@@ -38,7 +38,13 @@ struct MenuOption {
     struct GameEvent* pressedStateEvent;
     struct TextResource* textResource;
 };
-
+/*
+ * ContextMenu is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ContextMenu struct,
+ * if you want code to work with ContextMenu like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct ContextMenu {
     struct SceneNode* sceneNode;
     struct TextureResource* textureResource;
@@ -52,16 +58,16 @@ struct ContextMenu {
 };
 
 struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager,
-                                          const char* const * const resId);
+                                          const char* const resId);
 void ContextMenu_destruct(struct ContextMenu* contextMenu);
 
 void ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                               const char* const * const resId);
+                               const char* const resId);
 void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                                  const char* const * const resId);
+                                  const char* const resId);
 void ContextMenu_save(
         const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 void ContextMenu_control(struct SceneNode* sceneNode, struct Controller* controller);
 void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ContextMenu_render(struct SceneNode* sceneNode, struct Renderer* renderer);

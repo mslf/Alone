@@ -30,7 +30,13 @@
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
 #include "resourceManager/TextResource.h"
-
+/*
+ * Text is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Text struct,
+ * if you want code to work with Text like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct Text {
     struct SceneNode* sceneNode;
     struct TextResource* textResource;
@@ -38,12 +44,12 @@ struct Text {
     SDL_Rect* dstRect;
 };
 
-struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void Text_destruct(struct Text* text);
 
 void Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 // void Text_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer);

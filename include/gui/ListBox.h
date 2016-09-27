@@ -38,7 +38,13 @@ struct Element{
     struct GameEvent* pressedStateEvent;
     struct TextResource* textResource;
 };
-
+/*
+ * ListBox is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ListBox struct,
+ * if you want code to work with ListBox like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct ListBox {
     struct SceneNode* sceneNode;
     struct TextureResource* textureResource;
@@ -53,16 +59,16 @@ struct ListBox {
 };
 
 struct ListBox* ListBox_construct(struct ResourceManager* const resourceManager,
-                                          const char* const * const resId);
+                                          const char* const resId);
 void ListBox_destruct(struct ListBox* listBox);
 
 void ListBox_addElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                        const char* const * const resId);
+                        const char* const resId);
 void ListBox_removeElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                                  const char* const * const resId);
+                                  const char* const resId);
 void ListBox_save(
         const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 void ListBox_control(struct SceneNode* sceneNode, struct Controller* controller);
 void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ListBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);

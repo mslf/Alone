@@ -33,7 +33,13 @@
 #include "resourceManager/TextResource.h"
 #include "resourceManager/TextureResource.h"
 #include "resourceManager/SoundResource.h"
-
+/*
+ * Button is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Button struct,
+ * if you want code to work with Button like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct Button {
     struct SceneNode* sceneNode;
     struct TextureResource* textureResource;
@@ -46,12 +52,12 @@ struct Button {
     SDL_Rect* dstRect;
 };
 
-struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void Button_destruct(struct Button* button);
 
 void Button_save(
         const struct Button* const button, struct ResourceManager* const resourceManager,
-        const char* const * const resId);
+        const char* const resId);
 void Button_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Button_render(struct SceneNode* sceneNode, struct Renderer* renderer);

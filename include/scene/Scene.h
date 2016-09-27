@@ -24,18 +24,24 @@
 
 #include "scene/SceneNode.h"
 #include "resourceManager/ResourceManager.h"
-
+/*
+ * Scene is an inheritor of the SceneNode.
+ * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Scene struct,
+ * if you want code to work with Scene like with a SceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ */
 struct Scene {
     struct SceneNode** sceneNodesList;
 };
 
-struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const * const resId);
+struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const resId);
 void Scene_destruct (struct Scene* scene);
 void Scene_addSceneNode(
-        struct Scene* const, struct ResourceManager* const resourceManager, const char* const * const resId);
+        struct Scene* const, struct ResourceManager* const resourceManager, const char* const resId);
 void Scene_removeSceneNode(
-        struct Scene* const, struct ResourceManager* const resourceManager, const char* const * const resId);
+        struct Scene* const, struct ResourceManager* const resourceManager, const char* const resId);
 struct SceneNode* const * const Scene_getSceneNodesList(struct Scene* const);
-void Scene_save(struct ResourceManager* const resourceManager, const char* const * const resId);
+void Scene_save(struct ResourceManager* const resourceManager, const char* const resId);
 
 #endif //ALONE_SCENE_H
