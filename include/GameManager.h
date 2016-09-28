@@ -36,11 +36,13 @@ struct GameManager {
     struct Renderer* renderer;
     struct Controller* controller;
     struct Musican* musican;
-    struct Scene** scnenes;
+    struct Scene** scnenesStack;
 };
 
 struct GameManager* GM_construct();
-int GM_main(struct GameManager* gm);
 void GM_destruct(struct GameManager* gm);
 
+int GM_main(struct GameManager* gm);
+void GM_pushScene(struct GameManager* gm, const char* const resId);
+void GM_popScene(struct GameManager* gm);
 #endif //ALONE_GAMEMANAGER_H

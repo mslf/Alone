@@ -25,6 +25,7 @@
 #include "scene/SceneNode.h"
 #include "resourceManager/ResourceManager.h"
 #include "resourceManager/ScriptResource.h"
+#include "eventManager/EventManager.h"
 
 struct Scene {
     struct SceneNode** sceneNodesList;
@@ -45,5 +46,5 @@ void Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager*
                                     const char* const resId);
 void Scene_removeEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
                                        const char* const resId);
-
+void Scene_update(struct Scene* scene, struct EventManager* eventManager, struct ResourceManager* resourceManager);
 #endif //ALONE_SCENE_H

@@ -23,12 +23,10 @@
 #define ALONE_SCENENODE_H
 
 #include <SDL2/SDL.h>
-#include "controller/ControllerEvent.h"
-#include "eventManager/GameEvent.h"
+#include "eventManager/EventManager.h"
 #include "musican/Sound.h"
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
-#include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 
 struct SceneNode {

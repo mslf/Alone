@@ -22,10 +22,20 @@
 #ifndef ALONE_EVENTMANAGER_H
 #define ALONE_EVENTMANAGER_H
 
-//TODO EventManager
-struct EventManager {
+#include <stddef.h>
+#include "eventManager/GameEvent.h"
 
+struct EventManager {
+    struct GameEvent** gameEventsList;
+    size_t gameEventsCount;
 };
 
+struct EventManager* EventManager_construct();
+void EventManager_destruct(struct EventManager* eventManager);
+
+void EventManager_addEvent(struct EventManager* eventManager, struct GameEvent* gameEvent);
+void EventManager_removeEvent(struct EventManager* eventManager, size_t index);
+const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* eventManager,
+                                                            const char* const channel);
 
 #endif //ALONE_EVENTMANAGER_H
