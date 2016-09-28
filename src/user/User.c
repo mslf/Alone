@@ -1,5 +1,5 @@
 //
-// Created by mslf on 8/21/16.
+// Created by mslf on 9/28/16.
 //
 /*
 	Copyright 2016 Golikov Vitaliy
@@ -19,4 +19,4 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#include "module/section/Section.h"
+#include "user/User.h"

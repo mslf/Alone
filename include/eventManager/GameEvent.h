@@ -22,9 +22,18 @@
 #ifndef ALONE_GAMEEVENT_H
 #define ALONE_GAMEEVENT_H
 
-//TODO GameEvent
-struct  GameEvent {
+#include "scene/SceneNode.h"
 
+struct GameEvent {
+    char* eventChannel;
+    char* senderType;
+    struct SceneNode* sender;
+    char* command;
+    char* data;
 };
+
+struct GameEvent* GameEvent_construct(const char* const channel, const char* const senderType,
+                                      struct SceneNode* sender, const char* const command, const char* const data);
+void GameEvent_destruct(struct GameEvent* gameEvent);
 
 #endif //ALONE_GAMEEVENT_H
