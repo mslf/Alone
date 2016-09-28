@@ -22,34 +22,40 @@
 #ifndef ALONE_RESOURCEMANAGER_H
 #define ALONE_RESOURCEMANAGER_H
 
+#include <stddef.h>
 #include "TextureResource.h"
 #include "TextResource.h"
 #include "SoundResource.h"
+#include "ScriptResource.h"
 
 struct ResourceManager {
     char** textureResourcesIDs;
     char** textResourcesIDs;
+    char** scriptResourcesIDs;
     char** soundResourcesIDs;
-    struct TextureResource** textureResources;
-    struct TextResource** textResources;
-    struct SoundResource** soundResources;
+    size_t textureResourceCount;
+    size_t textResourcesCount;
+    size_t scriptResourcesCount;
+    size_t soundResourcesCount;
+    struct TextureResource** textureResourcesList;
+    struct TextResource** textResourcesList;
+    struct ScriptResource** scriptResourcesList;
+    struct SoundResource** soundResourcesList;
 };
-/*
-class ResourceManager {
-public:
-    ResourceManager();
-    ~ResourceManager();
 
-    bool loadResources(ResourceType type);
-    bool saveResource (std::string id);
-    Resource* getResource(std::string id);
-    bool setResource (std::string id, Resource* resource);
-    bool addResource (std::string id, Resource* resource);
-    void deleteResource (std::string id);
+struct ResourceManager* ResourceManager_construct();
+void ResourceManager_destruct(struct ResourceManager* resourceManager);
 
-private:
-    std::unordered_map <std::string, Resource*> resourcesList;
-};
-*/
+struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* resourceManager,
+                                                            const char* const resId);
+struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* resourceManager,
+                                                            const char* const resId);
+struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager* resourceManager,
+                                                            const char* const resId);
+struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* resourceManager,
+                                                            const char* const resId);
+void ResourceManager_saveExistingTextResource(struct ResourceManager* resourceManager, const char* const resId);
+void ResourceManager_saveNewTextResource(struct ResourceManager* resourceManager, struct TextResource* textResource,
+                                         const char* const resId);
 
 #endif //ALONE_RESOURCEMANAGER_H
