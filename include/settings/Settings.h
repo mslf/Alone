@@ -23,6 +23,8 @@
 #define ALONE_SETTINGS_H
 
 #include <SDL2/SDL.h>
+#include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextResource.h"
 
 struct Settings {
     char isMusicActive;
@@ -30,28 +32,7 @@ struct Settings {
     char isFullscreen;
     SDL_DisplayMode displayMode;
 };
-struct Settings* Settings_construct();
-SDL_DisplayMode Settings_getDisplayMode(struct Settings* settings);
-char Settings_getMusicState(struct Settings* settings);
-char Settings_getSoundState(struct Settings* settings);
-char Settings_getFullscreenState(struct Settings* settings);
+struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const resId);
 void Settings_destruct(struct Settings* settings);
-/*class Settings {
-public:
-    Settings(SettingsResource resource);
-    ~Settings();
-
-    SDL_DisplayMode getDisplayMode();
-    bool getMusicState();
-    bool getSoundState();
-    bool getFullscreenState();
-
-private:
-    bool isMusicActive;
-    bool isSoundActive;
-    bool isFullscreen;
-    SDL_DisplayMode displayMode;
-};*/
-
 
 #endif //ALONE_SETTINGS_H
