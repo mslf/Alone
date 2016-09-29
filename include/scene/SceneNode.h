@@ -29,6 +29,13 @@
 #include "controller/Controller.h"
 #include "musican/Musican.h"
 
+struct PhysicalSceneNode {
+    struct SceneNode* sceneNode;
+    double velX;
+    double velY;
+    double angleVel;
+};
+
 struct SceneNode {
     SDL_Point coordinates;
     SDL_Point rotatePointCoordinates;

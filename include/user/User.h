@@ -35,14 +35,14 @@
 #include "resourceManager/SoundResource.h"
 #include "module/section/MacroSection.h"
 /*
- * User is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of User struct,
- * if you want code to work with User like with a SceneNode.
+ * User is an inheritor of the PhysicalSceneNode.
+ * You SHOULD include the "struct PhysicalSceneNode* blablaNode;" at the begining of User struct,
+ * if you want code to work with User like with a PhysicalSceneNode.
  * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
- * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ * Don't forget to add this warning comment to your own new PhysicalSceneNode inheritors.
  */
 struct User {
-    struct SceneNode* sceneNode;
+    struct PhysicalSceneNode* physicalSceneNode;
     struct TextureResource* textureResource;
     struct ScriptResource* scriptResource;
     struct SoundResource** soundResources;

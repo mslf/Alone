@@ -22,10 +22,39 @@
 #ifndef ALONE_ITEM_H
 #define ALONE_ITEM_H
 
-//TODO Item
+#include <SDL2/SDL.h>
+#include "scene/SceneNode.h"
+#include "renderer/Renderer.h"
+#include "controller/Controller.h"
+#include "eventManager/EventManager.h"
+#include "musican/Musican.h"
+#include "resourceManager/ResourceManager.h"
+#include "resourceManager/TextureResource.h"
+#include "resourceManager/TextResource.h"
+/*
+ * Item is an inheritor of the PhysicalSceneNode.
+ * You SHOULD include the "struct PhysicalSceneNode* blablaNode;" at the begining of Item struct,
+ * if you want code to work with Item like with a PhysicalSceneNode.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * Don't forget to add this warning comment to your own new PhysicalSceneNode inheritors.
+ */
 struct Item {
-
+    struct PhysicalSceneNode* physicalSceneNode;
+    struct TextureResource* textureResource;
+    struct GameEvent* usedEvent;
+    size_t currentAnimation;
+    size_t currentFrame;
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
 };
 
+struct Item* Item_construct(struct ResourceManager* const resourceManager, const char* const resId);
+void Item_destruct(struct Item* item);
+
+void Item_save(
+        const struct Item* const item, struct ResourceManager* const resourceManager, const char* const resId);
+void Item_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Item_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Item_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 
 #endif //ALONE_ITEM_H
