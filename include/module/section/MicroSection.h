@@ -38,7 +38,8 @@ struct MicroSection {
     enum MicroSectionType type;
     char* sectionName;
     char* pipeResourceName;
-    double pipeResourceCount;
+    double pipeResourceHasCount;
+    double pipeResourceWantsCount;
     struct NanoSection** nanoSectionsList;
     size_t nanoSectionsCount;
 };

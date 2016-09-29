@@ -41,6 +41,11 @@
  * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
  * Don't forget to add this warning comment to your own new PhysicalSceneNode inheritors.
  */
+struct InventoryItem {
+    char* name;
+    size_t count;
+};
+
 struct User {
     struct PhysicalSceneNode* physicalSceneNode;
     struct TextResource* userResource;
@@ -49,7 +54,9 @@ struct User {
     struct ScriptResource* scriptResource;
     struct SoundResource** soundResources;
     struct MacroSection* macroSection;
+    struct InventoryItem* inventoryItemsList;
     size_t soundResourcesCount;
+    size_t inventoryItemsCount;
     size_t currentAnimation;
     size_t currentFrame;
     SDL_Rect* srcRect;
