@@ -29,7 +29,6 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextureResource.h"
 /*
  * Sprite is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Sprite struct,
@@ -39,6 +38,7 @@
  */
 struct Sprite {
     struct SceneNode* sceneNode;
+    struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     size_t currentAnimation;
     size_t currentFrame;
@@ -46,15 +46,13 @@ struct Sprite {
     SDL_Rect* dstRect;
 };
 
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, const char* const spriteResId);
 void Sprite_destruct(struct Sprite* sprite);
 
 void Sprite_save(
         const struct Sprite* const sprite, struct ResourceManager* const resourceManager,
-        const char* const resId);
-// void Sprite_control(struct SceneNode* sceneNode, struct Controller* controller);
+        const char* const spriteResId);
 void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer);
-// void Sprite_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_SPRITE_H

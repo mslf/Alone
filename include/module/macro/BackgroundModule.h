@@ -24,7 +24,6 @@
 
 #include <SDL2/SDL.h>
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextureResource.h"
 
 struct BackgroundModule {
     SDL_Point coordinates;

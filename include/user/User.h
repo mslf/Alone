@@ -43,6 +43,8 @@
  */
 struct User {
     struct PhysicalSceneNode* physicalSceneNode;
+    struct TextResource* userResource;
+    struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct ScriptResource* scriptResource;
     struct SoundResource** soundResources;
@@ -54,12 +56,12 @@ struct User {
     SDL_Rect* dstRect;
 };
 
-struct User* User_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct User* User_construct(struct ResourceManager* const resourceManager, const char* const userResId);
 void User_destruct(struct User* user);
 
 void User_save(
         const struct User* const user, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const userResId);
 void User_control(struct SceneNode* sceneNode, struct Controller* controller);
 void User_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void User_render(struct SceneNode* sceneNode, struct Renderer* renderer);

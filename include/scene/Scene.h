@@ -24,27 +24,27 @@
 
 #include "scene/SceneNode.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/ScriptResource.h"
 #include "eventManager/EventManager.h"
 
 struct Scene {
+    struct TextResource* sceneResource;
     struct SceneNode** sceneNodesList;
     struct ScriptResource** scriptResourcesList;
     size_t scriptResourcesCount;
 };
 
-struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const sceneResId);
 void Scene_destruct (struct Scene* scene);
 
 void Scene_addSceneNode(
-        struct Scene* const, struct ResourceManager* const resourceManager, const char* const resId);
+        struct Scene* const, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
 void Scene_removeSceneNode(
-        struct Scene* const, struct ResourceManager* const resourceManager, const char* const resId);
+        struct Scene* const, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
 struct SceneNode* const * const Scene_getSceneNodesList(struct Scene* const);
-void Scene_save(struct ResourceManager* const resourceManager, const char* const resId);
+void Scene_save(struct ResourceManager* const resourceManager, const char* const sceneResId);
 void Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
-                                    const char* const resId);
+                                    const char* const scriptResId);
 void Scene_removeEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
-                                       const char* const resId);
+                                       const char* const scriptResId);
 void Scene_update(struct Scene* scene, struct EventManager* eventManager, struct ResourceManager* resourceManager);
 #endif //ALONE_SCENE_H

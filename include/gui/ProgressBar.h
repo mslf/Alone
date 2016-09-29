@@ -27,12 +27,8 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 /*
  * ProgressBar is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ProgressBar struct,
@@ -42,22 +38,23 @@
  */
 struct ProgressBar {
     struct SceneNode* sceneNode;
+    struct TextResource* progressBarResource;
+    struct TextResource* spriteResource;
+    struct TextResource* labelResource;
     struct TextureResource* textureResource;
-    struct TextResource* textResource;
     unsigned char value;
     SDL_Rect* srcRect;
     SDL_Rect* dstRect;
 };
 
-struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager,
+                                          const char* const progressBarResId);
 void ProgressBar_destruct(struct ProgressBar* progressBar);
 
 void ProgressBar_save(
         const struct ProgressBar* const progressBar, struct ResourceManager* const resourceManager,
-        const char* const resId);
-// void ProgressBar_control(struct SceneNode* sceneNode, struct Controller* controller);
+        const char* const progressBarResId);
 void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ProgressBar_render(struct SceneNode* sceneNode, struct Renderer* renderer);
-// void ProgressBar_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_PROGRESSBAR_H

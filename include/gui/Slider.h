@@ -27,12 +27,8 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 /*
  * Slider is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Slider struct,
@@ -42,8 +38,11 @@
  */
 struct Slider {
     struct SceneNode* sceneNode;
+    struct TextResource* sliderResource;
+    struct TextResource* spriteResource;
+    struct TextResource* labelResource;
+    struct TextResource* pressedEventResource;
     struct TextureResource* textureResource;
-    struct TextResource* textResource;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* pressedSoundResource;
     struct GameEvent* pressedEvent;
@@ -54,12 +53,12 @@ struct Slider {
     SDL_Rect* dstRect;
 };
 
-struct Slider* Slider_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Slider* Slider_construct(struct ResourceManager* const resourceManager, const char* const sliderResId);
 void Slider_destruct(struct Slider* slider);
 
 void Slider_save(
         const struct Slider* const slider, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const sliderResId);
 void Slider_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Slider_render(struct SceneNode* sceneNode, struct Renderer* renderer);

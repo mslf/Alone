@@ -27,12 +27,8 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 /*
  * Button is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Button struct,
@@ -42,8 +38,11 @@
  */
 struct Button {
     struct SceneNode* sceneNode;
+    struct TextResource* buttonResource;
+    struct TextResource* labelResource;
+    struct TextResource* spriteResource;
+    struct TextResource* pressedEventResource;
     struct TextureResource* textureResource;
-    struct TextResource* textResource;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* pressedSoundResource;
     struct GameEvent* pressedEvent;
@@ -52,12 +51,12 @@ struct Button {
     SDL_Rect* dstRect;
 };
 
-struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const buttonResId);
 void Button_destruct(struct Button* button);
 
 void Button_save(
         const struct Button* const button, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const buttonResId);
 void Button_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Button_render(struct SceneNode* sceneNode, struct Renderer* renderer);

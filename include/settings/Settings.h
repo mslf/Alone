@@ -24,15 +24,15 @@
 
 #include <SDL2/SDL.h>
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
 
 struct Settings {
+    struct TextResource* settingsResource;
     char isMusicActive;
     char isSoundActive;
     char isFullscreen;
     SDL_DisplayMode displayMode;
 };
-struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const resId);
+struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId);
 void Settings_destruct(struct Settings* settings);
 
 #endif //ALONE_SETTINGS_H

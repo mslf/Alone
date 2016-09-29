@@ -23,16 +23,15 @@
 #define ALONE_NANOMODULE_H
 
 #include <SDL2/SDL.h>
-#include "lua.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/ScriptResource.h"
 #include "module/section/NanoSection.h"
 
 struct NanoModule {
     SDL_Point coordinates;
     double scaleX;
     double scaleY;
+    struct TextResource* nanoModuleResource;
+    struct TextResource* spriteResource;
     struct ScriptResource* scriptResource;
     struct TextureResource* textureResource;
     struct NanoSection** nanoSectionsList;
@@ -41,12 +40,13 @@ struct NanoModule {
     size_t currentFrame;
 };
 
-struct NanoModule* NanoModule_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct NanoModule* NanoModule_construct(struct ResourceManager* const resourceManager,
+                                        const char* const nanoModuleResId);
 void NanoModule_destruct(struct NanoModule* nanoModule);
 
 void NanoModule_save(
         const struct NanoModule* const nanoModule, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const nanoModuleResId);
 void MicroModule_addNanoSection(struct NanoModule* nanoModule, struct NanoSection* nanoSection);
 void MicroModule_removeNanoSection(struct NanoModule* nanoModule, size_t index);
 

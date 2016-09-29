@@ -27,16 +27,14 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 
 struct Element{
-    struct GameEvent* pressedStateEvent;
-    struct TextResource* textResource;
+    struct GameEvent* pressedEvent;
+    struct TextResource* elementResource;
+    struct TextResource* labelResource;
+    struct TextResource* pressedEventResource;
 };
 /*
  * ListBox is an inheritor of the SceneNode.
@@ -47,28 +45,30 @@ struct Element{
  */
 struct ListBox {
     struct SceneNode* sceneNode;
+    struct TextResource* listBoxResource;
+    struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* pressedSoundResource;
     struct Element* elementsList;
-    unsigned char focusedElementIndex;
-    unsigned char pressedElementIndex;
-    unsigned char activeElementIndex;
+    size_t focusedElementIndex;
+    size_t pressedElementIndex;
+    size_t activeElementIndex;
     SDL_Rect* srcRect;
     SDL_Rect* dstRect;
 };
 
 struct ListBox* ListBox_construct(struct ResourceManager* const resourceManager,
-                                          const char* const resId);
+                                          const char* const listBoxResId);
 void ListBox_destruct(struct ListBox* listBox);
 
 void ListBox_addElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                        const char* const resId);
+                        const char* const elementResId);
 void ListBox_removeElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                                  const char* const resId);
+                                  const char* const elementResId);
 void ListBox_save(
         const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const listBoxResId);
 void ListBox_control(struct SceneNode* sceneNode, struct Controller* controller);
 void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ListBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);

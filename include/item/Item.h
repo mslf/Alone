@@ -29,8 +29,6 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/TextResource.h"
 /*
  * Item is an inheritor of the PhysicalSceneNode.
  * You SHOULD include the "struct PhysicalSceneNode* blablaNode;" at the begining of Item struct,
@@ -40,6 +38,9 @@
  */
 struct Item {
     struct PhysicalSceneNode* physicalSceneNode;
+    struct TextResource* itemResource;
+    struct TextResource* usedEventResource;
+    struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct GameEvent* usedEvent;
     size_t currentAnimation;
@@ -48,11 +49,11 @@ struct Item {
     SDL_Rect* dstRect;
 };
 
-struct Item* Item_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Item* Item_construct(struct ResourceManager* const resourceManager, const char* const itemResId);
 void Item_destruct(struct Item* item);
 
 void Item_save(
-        const struct Item* const item, struct ResourceManager* const resourceManager, const char* const resId);
+        const struct Item* const item, struct ResourceManager* const resourceManager, const char* const itemResId);
 void Item_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Item_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Item_render(struct SceneNode* sceneNode, struct Renderer* renderer);

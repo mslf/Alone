@@ -29,7 +29,6 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
 /*
  * Text is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Text struct,
@@ -44,15 +43,13 @@ struct Text {
     SDL_Rect* dstRect;
 };
 
-struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const textResId);
 void Text_destruct(struct Text* text);
 
 void Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
-        const char* const resId);
-// void Text_control(struct SceneNode* sceneNode, struct Controller* controller);
+        const char* const textResId);
 void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer);
-// void Text_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_TEXT_H

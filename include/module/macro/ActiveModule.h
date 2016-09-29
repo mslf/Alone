@@ -23,11 +23,7 @@
 #define ALONE_ACTIVEMODULE_H
 
 #include <SDL2/SDL.h>
-#include "lua.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
-#include "resourceManager/ScriptResource.h"
 #include "module/section/MacroSection.h"
 #include "module/section/MicroSection.h"
 #include "module/section/NanoSection.h"
@@ -38,6 +34,8 @@ struct ActiveModule {
     SDL_Point coordinates;
     double scaleX;
     double scaleY;
+    struct TextResource* activeModuleResource;
+    struct TextResource* spriteResource;
     struct ScriptResource* scriptResource;
     struct TextureResource* textureResource;
     struct SoundResource** soundResourcesList;
@@ -52,13 +50,15 @@ struct ActiveModule {
     size_t currentFrame;
 };
 
-struct ActiveModule* ActiveModule_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct ActiveModule* ActiveModule_construct(struct ResourceManager* const resourceManager,
+                                            const char* const activeModuleResId);
 void ActiveModule_destruct(struct ActiveModule* activeModule);
 
 void ActiveModule_save(
         const struct ActiveModule* const activeModule, struct ResourceManager* const resourceManager,
-        const char* const resId);
-void ActiveModule_addMicroModule(struct ActiveModule* activeModule, const char* const resId, SDL_Point coordinates);
+        const char* const activeModuleResId);
+void ActiveModule_addMicroModule(struct ActiveModule* activeModule, const char* const microModuleResId,
+                                 SDL_Point coordinates);
 void ActiveModule_removeMicroModule(struct ActiveModule* activeModule, SDL_Point coordinates);
 void ActiveModule_addConnection(struct ActiveModule* activeModule, struct MicroConnection);
 void ActiveModule_removeConnection(struct ActiveModule* activeModule, size_t index);

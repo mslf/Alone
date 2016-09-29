@@ -27,12 +27,8 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 /*
  * TextBox is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of TextBox struct,
@@ -42,8 +38,11 @@
  */
 struct TextBox {
     struct SceneNode* sceneNode;
+    struct TextResource* textBoxResource;
+    struct TextResource* textValueResource;
+    struct TextResource* spriteResource;
+    struct TextResource* pressedEventResource;
     struct TextureResource* textureResource;
-    struct TextResource* textResource;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* pressedSoundResource;
     struct GameEvent* pressedEvent;
@@ -51,12 +50,12 @@ struct TextBox {
     SDL_Rect* dstRect;
 };
 
-struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const textBoxResId);
 void TextBox_destruct(struct TextBox* textBox);
 
 void TextBox_save(
         const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const textBoxResId);
 void TextBox_control(struct SceneNode* sceneNode, struct Controller* controller);
 void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void TextBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);

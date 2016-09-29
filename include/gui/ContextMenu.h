@@ -27,16 +27,14 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 
 struct MenuOption {
-    struct GameEvent* pressedStateEvent;
-    struct TextResource* textResource;
+    struct GameEvent* pressedEvent;
+    struct TextResource* elementResource;
+    struct TextResource* labelResource;
+    struct TextResource* pressedEventResource;
 };
 /*
  * ContextMenu is an inheritor of the SceneNode.
@@ -47,27 +45,29 @@ struct MenuOption {
  */
 struct ContextMenu {
     struct SceneNode* sceneNode;
+    struct TextResource* contextMenuResource;
+    struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* pressedSoundResource;
     struct MenuOption* menuOptionsList;
-    unsigned char focusedMenuOptionIndex;
-    unsigned char pressedMenuOptionIndex;
+    size_t focusedMenuOptionIndex;
+    size_t pressedMenuOptionIndex;
     SDL_Rect* srcRect;
     SDL_Rect* dstRect;
 };
 
 struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager,
-                                          const char* const resId);
+                                          const char* const contextMenuResId);
 void ContextMenu_destruct(struct ContextMenu* contextMenu);
 
 void ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                               const char* const resId);
+                               const char* const elementResId);
 void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                                  const char* const resId);
+                                  const char* const elementResId);
 void ContextMenu_save(
         const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const contextMenuResId);
 void ContextMenu_control(struct SceneNode* sceneNode, struct Controller* controller);
 void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ContextMenu_render(struct SceneNode* sceneNode, struct Renderer* renderer);

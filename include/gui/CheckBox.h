@@ -27,12 +27,8 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 /*
  * CheckBox is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of CheckBox struct,
@@ -42,6 +38,9 @@
  */
 struct CheckBox {
     struct SceneNode* sceneNode;
+    struct TextResource* checkBoxResource;
+    struct TextResource* spriteResource;
+    struct TextResource* checkedEventResource;
     struct TextureResource* textureResource;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* checkedSoundResource;
@@ -51,12 +50,12 @@ struct CheckBox {
     SDL_Rect* dstRect;
 };
 
-struct CheckBox* CheckBox_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct CheckBox* CheckBox_construct(struct ResourceManager* const resourceManager, const char* const checkBoxResId);
 void CheckBox_destruct(struct CheckBox* checkBox);
 
 void CheckBox_save(
         const struct CheckBox* const checkBox, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const checkBoxResId);
 void CheckBox_control(struct SceneNode* sceneNode, struct Controller* controller);
 void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void CheckBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);

@@ -27,12 +27,8 @@
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "eventManager/EventManager.h"
-#include "eventManager/GameEvent.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextResource.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
 #include "module/macro/BackgroundModule.h"
 #include "module/macro/ActiveModule.h"
 #include "module/Connections.h"
@@ -45,6 +41,7 @@
  */
 struct  Level {
     struct SceneNode* sceneNode;
+    struct TextResource* levelResource;
     struct BackgroundModule** backgroundModulesList;
     struct ActiveModule** activeModulesList;
     struct MacroConnection* connectionsList;
@@ -53,12 +50,12 @@ struct  Level {
     size_t connectionsNumber;
 };
 
-struct Level* Level_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct Level* Level_construct(struct ResourceManager* const resourceManager, const char* const levelResId);
 void Level_destruct(struct Level* level);
 
 void Level_save(
         const struct Level* const level, struct ResourceManager* const resourceManager,
-        const char* const resId);
+        const char* const levelResId);
 void Level_control(struct SceneNode* sceneNode, struct Controller* controller);
 void Level_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Level_render(struct SceneNode* sceneNode, struct Renderer* renderer);
@@ -66,7 +63,7 @@ void Level_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 void Level_addBackgroundModule(struct Level* level, const char* const textureResId, SDL_Point coordinates);
 void Level_removeBackgroundModule(struct Level* level, SDL_Point coordinates);
-void Level_addActiveModule(struct Level* level, const char* const resId, SDL_Point coordinates);
+void Level_addActiveModule(struct Level* level, const char* const activeModuleResId, SDL_Point coordinates);
 void Level_removeActiveModule(struct Level* level, SDL_Point coordinates);
 void Level_addConnection(struct Level* level, struct MacroConnection);
 void Level_removeConnection(struct Level* level, size_t index);

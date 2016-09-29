@@ -23,11 +23,7 @@
 #define ALONE_MICROMODULE_H
 
 #include <SDL2/SDL.h>
-#include "lua.h"
 #include "resourceManager/ResourceManager.h"
-#include "resourceManager/TextureResource.h"
-#include "resourceManager/SoundResource.h"
-#include "resourceManager/ScriptResource.h"
 #include "module/section/MicroSection.h"
 #include "module/section/NanoSection.h"
 #include "module/NanoModule.h"
@@ -37,6 +33,8 @@ struct MicroModule {
     SDL_Point coordinates;
     double scaleX;
     double scaleY;
+    struct TextResource* microModuleResource;
+    struct TextResource* spriteResource;
     struct ScriptResource* scriptResource;
     struct TextureResource* textureResource;
     struct SoundResource** soundResourcesList;
@@ -51,13 +49,15 @@ struct MicroModule {
     size_t currentFrame;
 };
 
-struct MicroModule* MicroModule_construct(struct ResourceManager* const resourceManager, const char* const resId);
+struct MicroModule* MicroModule_construct(struct ResourceManager* const resourceManager,
+                                          const char* const microModuleResId);
 void MicroModule_destruct(struct MicroModule* microModule);
 
 void MicroModule_save(
         const struct MicroModule* const microModule, struct ResourceManager* const resourceManager,
-        const char* const resId);
-void MicroModule_addNanoModule(struct MicroModule* microModule, const char* const resId, SDL_Point coordinates);
+        const char* const microModuleResId);
+void MicroModule_addNanoModule(struct MicroModule* microModule, const char* const nanoModuleResId,
+                               SDL_Point coordinates);
 void MicroModule_removeNanoModule(struct MicroModule* microModule, SDL_Point coordinates);
 void MicroModule_addConnection(struct MicroModule* microModule, struct NanoConnection);
 void MicroModule_removeConnection(struct MicroModule* microModule, size_t index);
