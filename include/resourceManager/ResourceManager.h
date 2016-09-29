@@ -29,33 +29,32 @@
 #include "ScriptResource.h"
 
 struct ResourceManager {
-    char** textureResourcesIDs;
-    char** textResourcesIDs;
-    char** scriptResourcesIDs;
-    char** soundResourcesIDs;
-    size_t textureResourceCount;
-    size_t textResourcesCount;
-    size_t scriptResourcesCount;
-    size_t soundResourcesCount;
     struct TextureResource** textureResourcesList;
     struct TextResource** textResourcesList;
     struct ScriptResource** scriptResourcesList;
     struct SoundResource** soundResourcesList;
+    char** textureResourcesIds;
+    char** textResourcesIds;
+    char** scriptResourcesIds;
+    char** soundResourcesIds;
+    size_t textureResourceCount;
+    size_t textResourcesCount;
+    size_t scriptResourcesCount;
+    size_t soundResourcesCount;
 };
 
 struct ResourceManager* ResourceManager_construct();
 void ResourceManager_destruct(struct ResourceManager* resourceManager);
 
 struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* resourceManager,
-                                                            const char* const resId);
+                                                            const char* const textureResId);
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* resourceManager,
-                                                            const char* const resId);
+                                                            const char* const textResId, unsigned char unique);
 struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager* resourceManager,
-                                                            const char* const resId);
+                                                            const char* const scriptResId);
 struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* resourceManager,
-                                                            const char* const resId);
-void ResourceManager_saveExistingTextResource(struct ResourceManager* resourceManager, const char* const resId);
-void ResourceManager_saveNewTextResource(struct ResourceManager* resourceManager, struct TextResource* textResource,
-                                         const char* const resId);
+                                                            const char* const soundResId);
+void ResourceManager_saveTextResource(struct ResourceManager* resourceManager,
+                                              struct TextResource* textResource, const char* const textResId);
 
 #endif //ALONE_RESOURCEMANAGER_H
