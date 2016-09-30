@@ -22,7 +22,14 @@
 #ifndef ALONE_TEXTURERESOURCE_H
 #define ALONE_TEXTURERESOURCE_H
 
-struct TextureResource {
+#include <SDL2/SDL_image.h>
+#include "renderer/Renderer.h"
 
+struct TextureResource {
+    SDL_Texture* texture;
 };
+
+struct TextureResource* TextureResource_construct(struct Renderer* renderer, const char* const path);
+void TextureResource_destruct(struct TextureResource* textureResource);
+
 #endif //ALONE_TEXTURERESOURCE_H

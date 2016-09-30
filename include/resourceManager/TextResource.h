@@ -23,6 +23,11 @@
 #define ALONE_TEXTRESOURCE_H
 
 struct TextResource {
-
+    char* text;
 };
+
+struct TextResource* TextResource_construct(const char* const path);
+void TextResource_destruct(struct TextResource* textResource);
+
+void TextResource_save(struct TextResource* textResource, const char* const path);
 #endif //ALONE_TEXTRESOURCE_H

@@ -126,12 +126,21 @@ target_link_libraries(resourceManager               textRes)
 target_link_libraries(resourceManager               soundRes)
 target_link_libraries(resourceManager               scriptRes)
 
-find_package(SDL2 REQUIRED)
+
+include(FindPkgConfig)
+PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
+
+#find_package(SDL2 REQUIRED)
 if(SDL2_FOUND)
     include_directories(${SDL2_INCLUDE_DIR})
     target_link_libraries(Alone ${SDL2_LIBRARIES})
 endif()
-
+#find_package(SDL2_IMAGE REQUIRED >=2.0.0)
+if(SDL2_image_FOUND)
+    include_directories(${SDL2_IMAGE_INCLUDE_DIR})
+    target_link_libraries(Alone ${SDL2_IMAGE_LIBRARIES})
+endif()
 target_link_libraries(scriptRes      liblua.a)
 #target_link_libraries(microModule    liblua.a)
 #target_link_libraries(nanoModule     liblua.a)

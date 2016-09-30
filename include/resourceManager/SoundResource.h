@@ -22,7 +22,13 @@
 #ifndef ALONE_SOUNDRESOURCE_H
 #define ALONE_SOUNDRESOURCE_H
 
-struct SoundResource {
+#include <SDL2/SDL_mixer.h>
 
+struct SoundResource {
+    Mix_Chunk* sound;
 };
+
+struct SoundResource* SoundResource_construct(const char* const path);
+void SoundResource_destruct(struct SoundResource* soundResource);
+
 #endif //ALONE_SOUNDRESOURCE_H

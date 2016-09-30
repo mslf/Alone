@@ -22,8 +22,24 @@
 #ifndef ALONE_SCRIPTRESOURCE_H
 #define ALONE_SCRIPTRESOURCE_H
 
-struct ScriptResource {
+#include "lua.h"
+#include "lauxlib.h"
+#include "lualib.h"
+//#include "module/macro/ActiveModule.h"
 
+struct ScriptResource {
+    lua_State* luaState;
 };
+
+struct ScriptResource* ScriptResource_construct(const char* const path);
+void ScriptResource_destruct(struct ScriptResource* scriptResource);
+
+void ScriptResource_registerActiveModuleFunctions(struct ScriptResource* scriptResource);
+void ScriptResource_registerMicroModuleFunctions(struct ScriptResource* scriptResource);
+void ScriptResource_registerNanoModuleFunctions(struct ScriptResource* scriptResource);
+void ScriptResource_registerEventControllerFunctions(struct ScriptResource* scriptResource);
+//void ScriptResource_updateActiveModule(struct ScriptResource* scriptResource, struct ActiveModule* activeModule);
+//void ScriptResource_updateMicroModule(struct ScriptResource* scriptResource, struct MicroModule* microModule);
+//void ScriptResource_updateNanoModule(struct ScriptResource* scriptResource, struct NanoModule* nanoModule);
 
 #endif //ALONE_SCRIPTRESOURCE_H
