@@ -23,7 +23,7 @@
 #define ALONE_SETTINGS_H
 
 #include <SDL2/SDL.h>
-#include "resourceManager/ResourceManager.h"
+struct ResourceManager;
 
 struct Settings {
     struct TextResource* settingsResource;

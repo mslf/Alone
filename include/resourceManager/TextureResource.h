@@ -23,7 +23,7 @@
 #define ALONE_TEXTURERESOURCE_H
 
 #include <SDL2/SDL_image.h>
-#include "renderer/Renderer.h"
+struct Renderer;
 
 struct TextureResource {
     SDL_Texture* texture;

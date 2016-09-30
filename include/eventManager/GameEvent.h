@@ -22,8 +22,7 @@
 #ifndef ALONE_GAMEEVENT_H
 #define ALONE_GAMEEVENT_H
 
-//#include "scene/SceneNode.h"
-// ^ Circular include ^
+struct SceneNode;
 
 struct GameEvent {
     char* eventChannel;
