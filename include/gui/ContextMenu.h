@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -68,7 +67,7 @@ void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, struct Resour
 void ContextMenu_save(
         const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
         const char* const contextMenuResId);
-void ContextMenu_control(struct SceneNode* sceneNode, struct Controller* controller);
+void ContextMenu_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ContextMenu_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void ContextMenu_sound(struct SceneNode* sceneNode, struct Musican* musican);

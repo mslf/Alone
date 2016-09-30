@@ -23,11 +23,15 @@
 #define ALONE_EVENTMANAGER_H
 
 #include <stddef.h>
+#include <SDL2/SDL.h>
 #include "eventManager/GameEvent.h"
 
 struct EventManager {
     struct GameEvent** gameEventsList;
+    SDL_Event* sdlEventsList;
     size_t gameEventsCount;
+    size_t sdlEventsCount;
+
 };
 
 struct EventManager* EventManager_construct();
@@ -37,5 +41,6 @@ void EventManager_addEvent(struct EventManager* eventManager, struct GameEvent* 
 void EventManager_removeEvent(struct EventManager* eventManager, size_t index);
 const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* eventManager,
                                                             const char* const channel);
+void EventManager_updateSdlEvents(struct EventManager* eventManager);
 
 #endif //ALONE_EVENTMANAGER_H

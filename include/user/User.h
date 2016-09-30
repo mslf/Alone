@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -69,7 +68,7 @@ void User_destruct(struct User* user);
 void User_save(
         const struct User* const user, struct ResourceManager* const resourceManager,
         const char* const userResId);
-void User_control(struct SceneNode* sceneNode, struct Controller* controller);
+void User_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void User_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void User_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void User_sound(struct SceneNode* sceneNode, struct Musican* musican);

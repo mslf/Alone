@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -57,7 +56,7 @@ void Button_destruct(struct Button* button);
 void Button_save(
         const struct Button* const button, struct ResourceManager* const resourceManager,
         const char* const buttonResId);
-void Button_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Button_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void Button_sound(struct SceneNode* sceneNode, struct Musican* musican);

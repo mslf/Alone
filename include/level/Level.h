@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -56,7 +55,7 @@ void Level_destruct(struct Level* level);
 void Level_save(
         const struct Level* const level, struct ResourceManager* const resourceManager,
         const char* const levelResId);
-void Level_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Level_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Level_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Level_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void Level_sound(struct SceneNode* sceneNode, struct Musican* musican);

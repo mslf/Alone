@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -59,7 +58,7 @@ void Slider_destruct(struct Slider* slider);
 void Slider_save(
         const struct Slider* const slider, struct ResourceManager* const resourceManager,
         const char* const sliderResId);
-void Slider_control(struct SceneNode* sceneNode, struct Controller* controller);
+void Slider_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void Slider_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void Slider_sound(struct SceneNode* sceneNode, struct Musican* musican);

@@ -23,7 +23,6 @@
 #define ALONE_GAMEMANAGER_H
 
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
 #include "eventManager/EventManager.h"
@@ -34,7 +33,6 @@ struct GameManager {
     struct EventManager* eventManager;
     struct ResourceManager* resourceManager;
     struct Renderer* renderer;
-    struct Controller* controller;
     struct Musican* musican;
     struct Scene** scnenesStack;
 };

@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "eventManager/EventManager.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "musican/Musican.h"
 
 struct PhysicalSceneNode {
@@ -42,7 +41,7 @@ struct SceneNode {
     double angle;
     double scaleX;
     double scaleY;
-    void (*control)(struct SceneNode* sceneNode, struct Controller* controller);
+    void (*control)(struct SceneNode* sceneNode, struct EventManager* eventManager);
     void (*update)(struct SceneNode* sceneNode, struct EventManager* eventManager);
     void (*render)(struct SceneNode* sceneNode, struct Renderer* renderer);
     void (*sound)(struct SceneNode* sceneNode, struct Musican* musican);

@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -69,7 +68,7 @@ void ListBox_removeElement(struct ListBox* listBox, struct ResourceManager* cons
 void ListBox_save(
         const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
         const char* const listBoxResId);
-void ListBox_control(struct SceneNode* sceneNode, struct Controller* controller);
+void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void ListBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void ListBox_sound(struct SceneNode* sceneNode, struct Musican* musican);

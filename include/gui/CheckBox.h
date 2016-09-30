@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -56,7 +55,7 @@ void CheckBox_destruct(struct CheckBox* checkBox);
 void CheckBox_save(
         const struct CheckBox* const checkBox, struct ResourceManager* const resourceManager,
         const char* const checkBoxResId);
-void CheckBox_control(struct SceneNode* sceneNode, struct Controller* controller);
+void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void CheckBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void CheckBox_sound(struct SceneNode* sceneNode, struct Musican* musican);

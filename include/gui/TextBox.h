@@ -25,7 +25,6 @@
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
-#include "controller/Controller.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -56,7 +55,7 @@ void TextBox_destruct(struct TextBox* textBox);
 void TextBox_save(
         const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
         const char* const textBoxResId);
-void TextBox_control(struct SceneNode* sceneNode, struct Controller* controller);
+void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
 void TextBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void TextBox_sound(struct SceneNode* sceneNode, struct Musican* musican);
