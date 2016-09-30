@@ -22,8 +22,25 @@
 #ifndef ALONE_RENDERER_H
 #define ALONE_RENDERER_H
 
-//TODO Renderer
-struct Renderer {
+#include <SDL2/SDL.h>
+
+struct Settings;
+
+ struct Renderer {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    SDL_Point cameraPosition;
+    SDL_Point virtualScreenSize; // x -- width, y -- heigth
+    /*
+     * All coordinates of SceneNodes and camera position are virtual. They are relativy projected on the real screen.
+     * Also, the camera position is substracted from the rendered SceneNode coordinates.
+     */
 
 };
+
+struct Renderer* Renderer_construct(struct Settings* settings);
+void Renderer_destruct(struct Renderer* renderer);
+
+SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point);
+
 #endif //ALONE_RENDERER_H
