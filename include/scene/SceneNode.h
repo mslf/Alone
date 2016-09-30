@@ -24,7 +24,6 @@
 
 #include <SDL2/SDL.h>
 #include "eventManager/EventManager.h"
-#include "musican/Sound.h"
 #include "renderer/Renderer.h"
 #include "controller/Controller.h"
 #include "musican/Musican.h"

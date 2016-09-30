@@ -22,10 +22,15 @@
 #ifndef ALONE_MUSICAN_H
 #define ALONE_MUSICAN_H
 
-//TODO Musican
-struct Musican {
+#include "resourceManager/SoundResource.h"
 
+struct Musican {
+    unsigned char isInitialized;
 };
 
+struct Musican* Musican_construct();
+void Musican_destruct(struct Musican* musican);
+
+void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops);
 
 #endif //ALONE_MUSICAN_H
