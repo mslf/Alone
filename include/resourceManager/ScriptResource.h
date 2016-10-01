@@ -22,9 +22,9 @@
 #ifndef ALONE_SCRIPTRESOURCE_H
 #define ALONE_SCRIPTRESOURCE_H
 
-#include "lua.h"
-#include "lauxlib.h"
-#include "lualib.h"
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 //#include "module/macro/ActiveModule.h"
 
 struct ScriptResource {
