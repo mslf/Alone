@@ -20,3 +20,25 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "text/Text.h"
+
+struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const textResId) {
+
+}
+
+void Text_destruct(struct Text* text) {
+
+}
+
+void Text_save(
+        const struct  Text* const text, struct ResourceManager* const resourceManager,
+        const char* const textResId) {
+
+}
+
+void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}

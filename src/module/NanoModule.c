@@ -20,3 +20,26 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "module/NanoModule.h"
+
+struct NanoModule* NanoModule_construct(struct ResourceManager* const resourceManager,
+                                        const char* const nanoModuleResId) {
+
+}
+
+void NanoModule_destruct(struct NanoModule* nanoModule) {
+
+}
+
+void NanoModule_save(
+        const struct NanoModule* const nanoModule, struct ResourceManager* const resourceManager,
+        const char* const nanoModuleResId) {
+
+}
+
+void MicroModule_addNanoSection(struct NanoModule* nanoModule, struct NanoSection* nanoSection) {
+
+}
+
+void MicroModule_removeNanoSection(struct NanoModule* nanoModule, size_t index) {
+
+}

@@ -20,3 +20,33 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "gui/CheckBox.h"
+
+struct CheckBox* CheckBox_construct(struct ResourceManager* const resourceManager, const char* const checkBoxResId) {
+
+}
+
+void CheckBox_destruct(struct CheckBox* checkBox) {
+
+}
+
+void CheckBox_save(
+        const struct CheckBox* const checkBox, struct ResourceManager* const resourceManager,
+        const char* const checkBoxResId) {
+
+}
+
+void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void CheckBox_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void CheckBox_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}

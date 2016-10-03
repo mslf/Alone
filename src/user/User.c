@@ -20,3 +20,33 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "user/User.h"
+
+struct User* User_construct(struct ResourceManager* const resourceManager, const char* const userResId) {
+
+}
+
+void User_destruct(struct User* user) {
+
+}
+
+void User_save(
+        const struct User* const user, struct ResourceManager* const resourceManager,
+        const char* const userResId) {
+
+}
+
+void User_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void User_update(struct SceneNode* sceneNode, struct EventManager* eventManager){
+
+}
+
+void User_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void User_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}

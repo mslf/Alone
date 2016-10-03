@@ -64,7 +64,7 @@ void Level_addBackgroundModule(struct Level* level, const char* const textureRes
 void Level_removeBackgroundModule(struct Level* level, SDL_Point coordinates);
 void Level_addActiveModule(struct Level* level, const char* const activeModuleResId, SDL_Point coordinates);
 void Level_removeActiveModule(struct Level* level, SDL_Point coordinates);
-void Level_addConnection(struct Level* level, struct MacroConnection);
+void Level_addConnection(struct Level* level, struct MacroConnection macroConnection);
 void Level_removeConnection(struct Level* level, size_t index);
 
 #endif //ALONE_LEVEL_H

@@ -25,7 +25,7 @@
 int main () {
     int value;
     struct GameManager* gm = NULL;
-    gm = GM_construct();
-    value = GM_main(gm);
+    gm = GameManager_construct();
+    value = GameManager_main(gm);
     return value;
 }

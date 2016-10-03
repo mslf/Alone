@@ -37,10 +37,10 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager, con
 void Scene_destruct (struct Scene* scene);
 
 void Scene_addSceneNode(
-        struct Scene* const, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
+        struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
 void Scene_removeSceneNode(
-        struct Scene* const, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
-struct SceneNode* const * const Scene_getSceneNodesList(struct Scene* const);
+        struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
+struct SceneNode* const * const Scene_getSceneNodesList(struct Scene* const scene);
 void Scene_save(struct ResourceManager* const resourceManager, const char* const sceneResId);
 void Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
                                     const char* const scriptResId);

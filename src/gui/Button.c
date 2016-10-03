@@ -20,3 +20,33 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "gui/Button.h"
+
+struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const buttonResId) {
+
+}
+
+void Button_destruct(struct Button* button) {
+
+}
+
+void Button_save(
+        const struct Button* const button, struct ResourceManager* const resourceManager,
+        const char* const buttonResId) {
+
+}
+
+void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Button_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void Button_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}

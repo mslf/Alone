@@ -20,3 +20,24 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "module/section/MicroSection.h"
+
+struct MicroSection* MicroSection_construct(enum MicroSectionType microSectionType,const char* const pipeResName,
+                                            const char* const name) {
+
+}
+
+void MicroSection_destruct(struct MicroSection* microSection) {
+
+}
+
+void MicroSection_addNanoSection(struct MicroSection* microSection, struct NanoSection* nanoSection) {
+
+}
+
+void MicroSection_removeNanoSection(struct MicroSection* microSection, const char* const name) {
+
+}
+
+void MicroSection_setPipeResource(struct MicroSection* microSection, const char* const pipeResourceName, size_t count) {
+
+}

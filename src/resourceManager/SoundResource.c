@@ -20,3 +20,11 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "resourceManager/SoundResource.h"
+
+struct SoundResource* SoundResource_construct(const char* const path) {
+
+}
+
+void SoundResource_destruct(struct SoundResource* soundResource) {
+
+}

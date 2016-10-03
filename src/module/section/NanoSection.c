@@ -20,3 +20,15 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "module/section/NanoSection.h"
+
+struct NanoSection* NanoSection_construct(enum NanoSectionType nanoSectionType, const char* const name) {
+
+}
+
+void NanoSection_destruct(struct NanoSection* nanoSection) {
+
+}
+
+void NanoSection_setValue(struct NanoSection* nanoSection, const char* const value) {
+
+}

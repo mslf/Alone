@@ -60,7 +60,7 @@ void ActiveModule_save(
 void ActiveModule_addMicroModule(struct ActiveModule* activeModule, const char* const microModuleResId,
                                  SDL_Point coordinates);
 void ActiveModule_removeMicroModule(struct ActiveModule* activeModule, SDL_Point coordinates);
-void ActiveModule_addConnection(struct ActiveModule* activeModule, struct MicroConnection);
+void ActiveModule_addConnection(struct ActiveModule* activeModule, struct MicroConnection microConnection);
 void ActiveModule_removeConnection(struct ActiveModule* activeModule, size_t index);
 void ActiveModule_addMacroSection(struct ActiveModule* activeModule, struct MacroSection* macroSection);
 void ActiveModule_removeMacroSection(struct ActiveModule* activeModule, size_t index);

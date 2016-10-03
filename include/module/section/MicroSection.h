@@ -50,6 +50,6 @@ void MicroSection_destruct(struct MicroSection* microSection);
 
 void MicroSection_addNanoSection(struct MicroSection* microSection, struct NanoSection* nanoSection);
 void MicroSection_removeNanoSection(struct MicroSection* microSection, const char* const name);
-void MicroSection_setPipeResource(struct MicroSection*, const char* const pipeResourceName, size_t count);
+void MicroSection_setPipeResource(struct MicroSection* microSection, const char* const pipeResourceName, size_t count);
 
 #endif //ALONE_MICROSECTION_H

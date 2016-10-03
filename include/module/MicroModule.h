@@ -59,11 +59,11 @@ void MicroModule_save(
 void MicroModule_addNanoModule(struct MicroModule* microModule, const char* const nanoModuleResId,
                                SDL_Point coordinates);
 void MicroModule_removeNanoModule(struct MicroModule* microModule, SDL_Point coordinates);
-void MicroModule_addConnection(struct MicroModule* microModule, struct NanoConnection);
+void MicroModule_addConnection(struct MicroModule* microModule, struct NanoConnection nanoConnection);
 void MicroModule_removeConnection(struct MicroModule* microModule, size_t index);
 void MicroModule_addMicroSection(struct MicroModule* microModule, struct MicroSection* microSection);
 void MicroModule_removeMicroSection(struct MicroModule* microModule, size_t index);
-void MicroModule_addCrossConnection(struct MicroModule*, size_t firstNanoModuleIndex, size_t firstNanoSectionIndex,
+void MicroModule_addCrossConnection(struct MicroModule* microModule, size_t firstNanoModuleIndex, size_t firstNanoSectionIndex,
                                     size_t microSectionIndex);
 void MicroModule_removeCrossConnection(struct MicroModule* microModule, size_t microSectionIndex, size_t index);
 

@@ -20,3 +20,11 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "settings/Settings.h"
+
+struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId) {
+
+}
+
+void Settings_destruct(struct Settings* settings) {
+
+}

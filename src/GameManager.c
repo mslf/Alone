@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include "stdio.h"
 
-struct GameManager* GM_construct() {
+struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
     gm = (struct GameManager*)malloc(sizeof(struct GameManager));
     if (gm) {
@@ -49,7 +49,7 @@ struct GameManager* GM_construct() {
             result++;
         }
         if (result) {
-            GM_destruct(gm);
+            GameManager_destruct(gm);
             return NULL;
         }
         gm->allocatedScenesCount = INITIAL_NUMBER_ALLOCATED_SCENES;
@@ -58,12 +58,12 @@ struct GameManager* GM_construct() {
     return gm;
 }
 
-int GM_main(struct GameManager* gm) {
+int GameManager_main(struct GameManager* gm) {
     printf ("Hello World from C GameManager! \n");
     return 0;
 }
 
-void GM_destruct(struct GameManager* gm) {
+void GameManager_destruct(struct GameManager* gm) {
     int i;
     if (gm->eventManager)
         EventManager_destruct(gm->eventManager);
@@ -81,10 +81,10 @@ void GM_destruct(struct GameManager* gm) {
     free(gm);
 }
 
-void GM_pushScene(struct GameManager* gm, const char* const resId) {
+void GameManager_pushScene(struct GameManager* gm, const char* const resId) {
 
 }
 
-void GM_popScene(struct GameManager* gm) {
+void GameManager_popScene(struct GameManager* gm) {
 
 }

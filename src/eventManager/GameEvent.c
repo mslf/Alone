@@ -20,3 +20,12 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "eventManager/GameEvent.h"
+
+struct GameEvent* GameEvent_construct(const char* const channel, const char* const senderType,
+                                     struct SceneNode* sender, const char* const command, const char* const data) {
+
+}
+
+void GameEvent_destruct(struct GameEvent* gameEvent) {
+
+}

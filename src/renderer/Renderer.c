@@ -20,3 +20,15 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "renderer/Renderer.h"
+
+struct Renderer* Renderer_construct(struct Settings* settings) {
+
+}
+
+void Renderer_destruct(struct Renderer* renderer) {
+
+}
+
+SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point) {
+
+}

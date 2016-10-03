@@ -32,6 +32,7 @@ struct Settings {
     char isFullscreen;
     SDL_DisplayMode displayMode;
 };
+
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId);
 void Settings_destruct(struct Settings* settings);
 

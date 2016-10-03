@@ -20,3 +20,44 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "gui/ListBox.h"
+
+struct ListBox* ListBox_construct(struct ResourceManager* const resourceManager,
+                                  const char* const listBoxResId) {
+
+}
+
+void ListBox_destruct(struct ListBox* listBox) {
+
+}
+
+void ListBox_addElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
+                        const char* const elementResId) {
+
+}
+
+void ListBox_removeElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
+                           const char* const elementResId) {
+
+}
+
+void ListBox_save(
+        const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
+        const char* const listBoxResId) {
+
+}
+
+void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void ListBox_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void ListBox_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}

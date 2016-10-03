@@ -19,3 +19,28 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+#include "resourceManager/ScriptResource.h"
+
+struct ScriptResource* ScriptResource_construct(const char* const path) {
+
+}
+
+void ScriptResource_destruct(struct ScriptResource* scriptResource) {
+
+}
+
+void ScriptResource_registerActiveModuleFunctions(struct ScriptResource* scriptResource) {
+
+}
+
+void ScriptResource_registerMicroModuleFunctions(struct ScriptResource* scriptResource) {
+
+}
+
+void ScriptResource_registerNanoModuleFunctions(struct ScriptResource* scriptResource) {
+
+}
+
+void ScriptResource_registerEventControllerFunctions(struct ScriptResource* scriptResource){
+
+}

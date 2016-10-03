@@ -20,3 +20,44 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "gui/ContextMenu.h"
+
+struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager,
+                                          const char* const contextMenuResId) {
+
+}
+
+void ContextMenu_destruct(struct ContextMenu* contextMenu) {
+
+}
+
+void ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
+                               const char* const elementResId) {
+
+}
+
+void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
+                                  const char* const elementResId) {
+
+}
+
+void ContextMenu_save(
+        const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
+        const char* const contextMenuResId) {
+
+}
+
+void ContextMenu_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void ContextMenu_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void ContextMenu_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}

@@ -21,3 +21,10 @@
 */
 #include "resourceManager/TextureResource.h"
 
+struct TextureResource* TextureResource_construct(struct Renderer* renderer, const char* const path) {
+
+}
+
+void TextureResource_destruct(struct TextureResource* textureResource) {
+
+}

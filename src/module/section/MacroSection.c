@@ -20,3 +20,19 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "module/section/MacroSection.h"
+
+struct MacroSection* MacroSection_construct(enum MacroSectionType macroSectionType, const char* const name) {
+
+}
+
+void MacroSection_destruct(struct MacroSection* macroSection) {
+
+}
+
+void MacroSection_addMicroSection(struct MacroSection* macroSection, struct MicroSection* microSection) {
+
+}
+
+void MacroSection_removeMicroSection(struct MacroSection* macroSection, const char* const name) {
+
+}

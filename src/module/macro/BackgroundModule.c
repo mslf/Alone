@@ -20,3 +20,12 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "module/macro/BackgroundModule.h"
+
+struct BackgroundModule* BackgroundModule_construct(struct ResourceManager* const resourceManager,
+                                                    const char* const * const textureResId, SDL_Point coordinates) {
+
+}
+
+void BackgroundModule_destruct(struct BackgroundModule* backgroundModule) {
+
+}

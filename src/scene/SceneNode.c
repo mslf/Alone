@@ -20,3 +20,11 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "scene/SceneNode.h"
+
+struct SceneNode* SceneNode_construct() {
+
+}
+
+void SceneNode_destruct(struct SceneNode* sceneNode) {
+
+}

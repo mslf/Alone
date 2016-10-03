@@ -20,3 +20,15 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "resourceManager/TextResource.h"
+
+struct TextResource* TextResource_construct(const char* const path) {
+
+}
+
+void TextResource_destruct(struct TextResource* textResource) {
+
+}
+
+void TextResource_save(struct TextResource* textResource, const char* const path) {
+
+}

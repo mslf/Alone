@@ -20,3 +20,33 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "gui/TextBox.h"
+
+struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const textBoxResId) {
+
+}
+
+void TextBox_destruct(struct TextBox* textBox) {
+
+}
+
+void TextBox_save(
+        const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
+        const char* const textBoxResId) {
+
+}
+
+void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void TextBox_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void TextBox_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}

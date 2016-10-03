@@ -41,10 +41,10 @@ struct GameManager {
     size_t scenesCount;
 };
 
-struct GameManager* GM_construct();
-void GM_destruct(struct GameManager* gm);
+struct GameManager* GameManager_construct();
+void GameManager_destruct(struct GameManager* gm);
 
-int GM_main(struct GameManager* gm);
-void GM_pushScene(struct GameManager* gm, const char* const resId);
-void GM_popScene(struct GameManager* gm);
+int GameManager_main(struct GameManager* gm);
+void GameManager_pushScene(struct GameManager* gm, const char* const resId);
+void GameManager_popScene(struct GameManager* gm);
 #endif //ALONE_GAMEMANAGER_H

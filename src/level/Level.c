@@ -20,3 +20,57 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "level/Level.h"
+
+struct Level* Level_construct(struct ResourceManager* const resourceManager, const char* const levelResId) {
+
+}
+
+void Level_destruct(struct Level* level) {
+
+}
+
+void Level_save(
+        const struct Level* const level, struct ResourceManager* const resourceManager,
+        const char* const levelResId) {
+
+}
+
+void Level_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Level_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Level_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
+
+void Level_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+
+}
+
+void Level_addBackgroundModule(struct Level* level, const char* const textureResId, SDL_Point coordinates) {
+
+}
+
+void Level_removeBackgroundModule(struct Level* level, SDL_Point coordinates) {
+
+}
+
+void Level_addActiveModule(struct Level* level, const char* const activeModuleResId, SDL_Point coordinates) {
+
+}
+
+void Level_removeActiveModule(struct Level* level, SDL_Point coordinates) {
+
+}
+
+void Level_addConnection(struct Level* level, struct MacroConnection macroConnection) {
+
+}
+
+void Level_removeConnection(struct Level* level, size_t index) {
+
+}

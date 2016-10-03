@@ -20,3 +20,28 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "item/Item.h"
+
+struct Item* Item_construct(struct ResourceManager* const resourceManager, const char* const itemResId) {
+
+}
+
+void Item_destruct(struct Item* item) {
+
+}
+
+void Item_save(
+        const struct Item* const item, struct ResourceManager* const resourceManager, const char* const itemResId) {
+
+}
+
+void Item_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Item_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Item_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}
