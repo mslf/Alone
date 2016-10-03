@@ -29,12 +29,16 @@
 #include "settings/Settings.h"
 #include "scene/Scene.h"
 
+#define INITIAL_NUMBER_ALLOCATED_SCENES 10
+
 struct GameManager {
     struct EventManager* eventManager;
     struct ResourceManager* resourceManager;
     struct Renderer* renderer;
     struct Musican* musican;
-    struct Scene** scnenesStack;
+    struct Scene** scenesStack;
+    size_t allocatedScenesCount;
+    size_t scenesCount;
 };
 
 struct GameManager* GM_construct();

@@ -26,6 +26,7 @@
 
 struct Musican {
     unsigned char isInitialized;
+    // Actually, this struct is empty. It will contain some other data later, if I need the music.
 };
 
 struct Musican* Musican_construct();

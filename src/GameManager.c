@@ -26,6 +26,35 @@
 struct GameManager* GM_construct() {
     struct GameManager* gm = NULL;
     gm = (struct GameManager*)malloc(sizeof(struct GameManager));
+    if (gm) {
+        unsigned char result = 0;
+        if (!(gm->eventManager = EventManager_construct())) {
+            fprintf(stderr, "EventManager constructing failed!\n");
+            result++;
+        }
+        if (!(gm->resourceManager = ResourceManager_construct())) {
+            fprintf(stderr, "ResourceManager constructing failed!\n");
+            result++;
+        }
+        if (!(gm->musican = Musican_construct())) {
+            fprintf(stderr, "Musican constructing failed!\n");
+            result++;
+        }
+        if (!(gm->renderer = Renderer_construct(NULL))) {
+            fprintf(stderr, "Renderer constructing failed!\n");
+            result++;
+        }
+        if (!(gm->scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * INITIAL_NUMBER_ALLOCATED_SCENES))) {
+            fprintf(stderr, "Scenes stack allocating failed!\n");
+            result++;
+        }
+        if (result) {
+            GM_destruct(gm);
+            return NULL;
+        }
+        gm->allocatedScenesCount = INITIAL_NUMBER_ALLOCATED_SCENES;
+        gm->scenesCount = 0;
+    }
     return gm;
 }
 
@@ -35,5 +64,27 @@ int GM_main(struct GameManager* gm) {
 }
 
 void GM_destruct(struct GameManager* gm) {
-    free (gm);
+    int i;
+    if (gm->eventManager)
+        EventManager_destruct(gm->eventManager);
+    if (gm->resourceManager)
+        ResourceManager_destruct(gm->resourceManager);
+    if (gm->musican)
+        Musican_destruct(gm->musican);
+    if (gm->renderer)
+        Renderer_destruct(gm->renderer);
+    if (gm->scenesStack) {
+        for (i = 0; i < gm->scenesCount; i++)
+            Scene_destruct(gm->scenesStack[i]);
+        free(gm->scenesStack);
+    }
+    free(gm);
+}
+
+void GM_pushScene(struct GameManager* gm, const char* const resId) {
+
+}
+
+void GM_popScene(struct GameManager* gm) {
+
 }

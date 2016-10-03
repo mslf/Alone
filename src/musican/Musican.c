@@ -20,3 +20,36 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "musican/Musican.h"
+#include <SDL2/SDL.h>
+
+struct Musican* Musican_construct() {
+    struct Musican* musican = NULL;
+    musican = (struct Musican*)malloc(sizeof(struct Musican*));
+    if (musican) {
+        musican->isInitialized = 0;
+        if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+            fprintf(stderr, "SDL audio initalizing failed! SDL Error: %s\n", SDL_GetError());
+            Musican_destruct(musican);
+            return NULL;
+        }
+        if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
+            fprintf(stderr, "SDL_mixer initalizing failed! SDL_mixer Error: %s\n", Mix_GetError());
+            Musican_destruct(musican);
+            return NULL;
+        }
+        musican->isInitialized = 1;
+    } else {
+        fprintf(stderr, "Musican initalizing failed!\n");
+        Musican_destruct(musican);
+        return NULL;
+    }
+    return musican;
+}
+
+void Musican_destruct(struct Musican* musican) {
+    free(musican);
+}
+
+void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops) {
+
+}

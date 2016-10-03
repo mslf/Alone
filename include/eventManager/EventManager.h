@@ -26,21 +26,25 @@
 #include <SDL2/SDL.h>
 #include "eventManager/GameEvent.h"
 
+#define INITIAL_NUMBER_ALLOCATED_EVENTS 100
+#define INITIAL_NUMBER_ALLOCATED_SDL_EVENTS 20
+
 struct EventManager {
     struct GameEvent** gameEventsList;
     SDL_Event* sdlEventsList;
     size_t gameEventsCount;
+    size_t allocatedGameEventsCount;
     size_t sdlEventsCount;
-
+    size_t allocatedSdlEventsCount;
 };
 
 struct EventManager* EventManager_construct();
-void EventManager_destruct(struct EventManager* eventManager);
+void EventManager_destruct(struct EventManager* em);
 
-void EventManager_addEvent(struct EventManager* eventManager, struct GameEvent* gameEvent);
-void EventManager_removeEvent(struct EventManager* eventManager, size_t index);
-const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* eventManager,
+void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
+void EventManager_removeEvent(struct EventManager* em, size_t index);
+const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* em,
                                                             const char* const channel);
-void EventManager_updateSdlEvents(struct EventManager* eventManager);
+void EventManager_updateSdlEvents(struct EventManager* em);
 
 #endif //ALONE_EVENTMANAGER_H

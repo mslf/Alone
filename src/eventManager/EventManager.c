@@ -20,3 +20,51 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "eventManager/EventManager.h"
+
+struct EventManager* EventManager_construct() {
+    struct EventManager* em = NULL;
+    em = (struct EventManager*)malloc(sizeof(struct EventManager));
+    if (em) {
+        if (!(em->gameEventsList = (struct GameEvent**)malloc(
+                sizeof(struct GameEvent*) * INITIAL_NUMBER_ALLOCATED_EVENTS))) {
+            fprintf(stderr, "GameEventsList allocating failed!\n");
+            free(em);
+            return NULL;
+        }
+        em->allocatedGameEventsCount = INITIAL_NUMBER_ALLOCATED_EVENTS;
+        em->gameEventsCount = 0;
+        if (!(em->sdlEventsList = (SDL_Event*)malloc(
+                sizeof(SDL_Event) * INITIAL_NUMBER_ALLOCATED_SDL_EVENTS))) {
+            fprintf(stderr, "SDLEventsList allocating failed!\n");
+            free(em->gameEventsList);
+            free(em);
+            return NULL;
+        }
+        em->allocatedSdlEventsCount = INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
+        em->sdlEventsCount = 0;
+    }
+    return em;
+}
+
+void EventManager_destruct(struct EventManager* em) {
+    free(em->gameEventsList);
+    free(em->sdlEventsList);
+    free(em);
+}
+
+void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent) {
+
+}
+
+void EventManager_removeEvent(struct EventManager* em, size_t index) {
+
+}
+
+const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* em,
+                                                                   const char* const channel) {
+
+}
+
+void EventManager_updateSdlEvents(struct EventManager* em) {
+
+}
