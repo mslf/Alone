@@ -51,5 +51,6 @@ void Musican_destruct(struct Musican* musican) {
 }
 
 void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops) {
-
+    if (musican->isInitialized)
+        Mix_PlayChannel(-1, soundResource->sound, loops);
 }

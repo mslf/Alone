@@ -31,9 +31,12 @@
 
 struct EventManager {
     struct GameEvent** gameEventsList;
+    struct GameEvent** customGameEventsList;
     SDL_Event* sdlEventsList;
     size_t gameEventsCount;
     size_t allocatedGameEventsCount;
+    size_t customGameEventsCount;
+    size_t allocatedCustomGameEventsCount;
     size_t sdlEventsCount;
     size_t allocatedSdlEventsCount;
 };
