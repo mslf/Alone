@@ -110,7 +110,7 @@ void EventManager_destruct(struct EventManager* em) {
 void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent) {
     if (em->gameEventsCount >= em->allocatedGameEventsCount)
         EventManager_reallocateGameEventsList(em);
-    // Try reallocating (if needed) and adding gameEvent
+    // Try to reallocate (if needed) and add gameEvent
     if (em->gameEventsCount < em->allocatedGameEventsCount) {
         em->gameEventsList[em->gameEventsCount] = gameEvent;
         em->gameEventsCount++;
@@ -131,7 +131,7 @@ const struct GameEvent* const * const EventManager_getCustomEvents(struct EventM
         if (strcmp(em->gameEventsList[i]->eventChannel, channel) == 0) {
             if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
                 EventManager_reallocateCustomGameEventsList(em);
-            // Try reallocating (if needed) and adding customGameEvent
+            // Try to reallocate (if needed) and add customGameEvent
             if (em->customGameEventsCount < em->allocatedCustomGameEventsCount) {
                 em->customGameEventsList[em->customGameEventsCount] = em->gameEventsList[i];
                 em->customGameEventsCount++;

@@ -24,9 +24,10 @@
 
 struct TextResource {
     char* text;
+    unsigned char isUnique;
 };
 
-struct TextResource* TextResource_construct(const char* const path);
+struct TextResource* TextResource_construct(const char* const path, unsigned char unique);
 void TextResource_destruct(struct TextResource* textResource);
 
 void TextResource_save(struct TextResource* textResource, const char* const path);

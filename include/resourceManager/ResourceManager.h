@@ -38,12 +38,12 @@ struct ResourceManager {
     struct TextResource** textResourcesList;
     struct ScriptResource** scriptResourcesList;
     struct SoundResource** soundResourcesList;
-    char** textureResourcesIds;
-    char** textResourcesIds;
-    char** scriptResourcesIds;
-    char** soundResourcesIds;
+    const char** textureResourcesIds;
+    const char** textResourcesIds;
+    const char** scriptResourcesIds;
+    const char** soundResourcesIds;
     size_t textureResourcesCount;
-    size_t allocatedtextureResourcesCount;
+    size_t allocatedTextureResourcesCount;
     size_t textResourcesCount;
     size_t allocatedTextResourcesCount;
     size_t scriptResourcesCount;
@@ -55,7 +55,7 @@ struct ResourceManager {
 struct ResourceManager* ResourceManager_construct();
 void ResourceManager_destruct(struct ResourceManager* rm);
 
-struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm,
+struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm, struct Renderer* renderer,
                                                             const char* const textureResId);
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,
                                                             const char* const textResId, unsigned char unique);

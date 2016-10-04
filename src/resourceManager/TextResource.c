@@ -21,7 +21,7 @@
 */
 #include "resourceManager/TextResource.h"
 
-struct TextResource* TextResource_construct(const char* const path) {
+struct TextResource* TextResource_construct(const char* const path, unsigned char unique) {
 
 }
 
