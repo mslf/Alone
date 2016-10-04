@@ -25,15 +25,15 @@
 struct SceneNode;
 
 struct GameEvent {
-    char* eventChannel;
-    char* senderType;
+    const char* eventChannel;
+    const char* senderType;
     struct SceneNode* sender;
-    char* command;
-    char* data;
+    const char* command;
+    const char* data;
 };
 
-struct GameEvent* GameEvent_construct(const char* const channel, const char* const senderType,
-                                      struct SceneNode* sender, const char* const command, const char* const data);
+struct GameEvent* GameEvent_construct(const char* channel, const char* senderType,
+                                      struct SceneNode* sender, const char* command, const char* data);
 void GameEvent_destruct(struct GameEvent* gameEvent);
 
 #endif //ALONE_GAMEEVENT_H

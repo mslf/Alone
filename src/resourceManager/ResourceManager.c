@@ -94,7 +94,7 @@ struct ResourceManager* ResourceManager_construct() {
 }
 
 void ResourceManager_destructTextureResourcesMap(struct ResourceManager* rm) {
-    int i;
+    size_t i;
     if (rm->textureResourcesList)
         if (rm->textureResourcesCount > 0) {
             for (i = 0; i < rm->textureResourcesCount; i++)
@@ -110,7 +110,7 @@ void ResourceManager_destructTextureResourcesMap(struct ResourceManager* rm) {
 }
 
 void ResourceManager_destructTextResourcesMap(struct ResourceManager* rm) {
-    int i;
+    size_t i;
     if (rm->textResourcesList)
         if (rm->textResourcesCount > 0) {
             for (i = 0; i < rm->textResourcesCount; i++)
@@ -126,7 +126,7 @@ void ResourceManager_destructTextResourcesMap(struct ResourceManager* rm) {
 }
 
 void ResourceManager_destructScriptResourcesMap(struct ResourceManager* rm) {
-    int i;
+    size_t i;
     if (rm->scriptResourcesList)
         if (rm->scriptResourcesCount > 0) {
             for (i = 0; i < rm->scriptResourcesCount; i++)
@@ -142,7 +142,7 @@ void ResourceManager_destructScriptResourcesMap(struct ResourceManager* rm) {
 }
 
 void ResourceManager_destructSoundResourcesMap(struct ResourceManager* rm) {
-    int i;
+    size_t i;
     if (rm->soundResourcesList)
         if (rm->soundResourcesCount > 0) {
             for (i = 0; i < rm->soundResourcesCount; i++)

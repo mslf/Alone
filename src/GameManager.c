@@ -64,7 +64,7 @@ int GameManager_main(struct GameManager* gm) {
 }
 
 void GameManager_destruct(struct GameManager* gm) {
-    int i;
+    size_t i;
     if (gm->eventManager)
         EventManager_destruct(gm->eventManager);
     if (gm->resourceManager)
