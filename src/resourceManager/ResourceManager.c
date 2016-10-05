@@ -451,6 +451,7 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
 void ResourceManager_saveTextResource(struct ResourceManager* rm,
                                       struct TextResource* textResource, const char* const textResId) {
     size_t i;
+    size_t result = 0;
     unsigned  char found = 0;
     for (i = 0; i < rm->textResourcesCount; i++)
         if (textResource == rm->textResourcesList[i]) {
@@ -469,5 +470,8 @@ void ResourceManager_saveTextResource(struct ResourceManager* rm,
             fprintf(stderr, "Warning: Adding new unique textResource failed!\n"
                     "Destroying unique %s will be impossible!\n", textResId);
     }
-    TextResource_save(textResource, textResId);
+    result = TextResource_save(textResource, textResId);
+    if (result != 0) {
+        fprintf(stderr, "Saving textResource %s failed! Code: %d\n", textResId, result);
+    }
 }

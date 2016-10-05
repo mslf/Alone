@@ -30,5 +30,5 @@ struct TextResource {
 struct TextResource* TextResource_construct(const char* const path, unsigned char unique);
 void TextResource_destruct(struct TextResource* textResource);
 
-void TextResource_save(struct TextResource* textResource, const char* const path);
+unsigned char TextResource_save(struct TextResource* textResource, const char* const path);
 #endif //ALONE_TEXTRESOURCE_H

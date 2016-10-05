@@ -20,15 +20,72 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "resourceManager/TextResource.h"
+#include <SDL2/SDL.h>
 
 struct TextResource* TextResource_construct(const char* const path, unsigned char unique) {
-
+    struct TextResource* textResource = NULL;
+    textResource = (struct TextResource*)malloc(sizeof(struct TextResource));
+    if (textResource) {
+        SDL_RWops* file = SDL_RWFromFile(path, "r");
+        size_t size = 0;
+        size_t totalRead = 0;
+        size_t read = 1;
+        char* bufString;
+        if (!file) {
+            TextResource_destruct(textResource);
+            return  NULL;
+        }
+        size = SDL_RWsize(file);
+        textResource->text = (char*)malloc(sizeof(char) * size);
+        if (!textResource->text) {
+            TextResource_destruct(textResource);
+            SDL_RWclose(file);
+            return NULL;
+        }
+        bufString = textResource->text;
+        while (totalRead < size && read != 0) {
+            read = SDL_RWread(file, bufString, 1, (size - totalRead));
+            totalRead += read;
+            bufString += read;
+        }
+        SDL_RWclose(file);
+        if (!(totalRead -= size)) {
+            TextResource_destruct(textResource);
+            SDL_RWclose(file);
+            return NULL;
+        }
+        textResource->text[totalRead] = '\0';
+        textResource->isUnique = unique;
+    }
+    return textResource;
 }
 
 void TextResource_destruct(struct TextResource* textResource) {
-
+    if (textResource) {
+        if (textResource->text)
+            free(textResource->text);
+        free(textResource);
+    }
 }
 
-void TextResource_save(struct TextResource* textResource, const char* const path) {
-
+unsigned char TextResource_save(struct TextResource* textResource, const char* const path) {
+    if (textResource) {
+        SDL_RWops *file = SDL_RWFromFile(path, "w");
+        if(file) {
+            size_t len = SDL_strlen(textResource->text);
+            if (SDL_RWwrite(file, textResource->text, 1, len) != len) {
+                // Writing error
+                SDL_RWclose(file);
+                return 1;
+            }
+            SDL_RWclose(file);
+        } else {
+            // File openning error
+            return 2;
+        }
+    } else {
+        // NULL pointer to textResource
+        return 3;
+    }
+    return 0;
 }
