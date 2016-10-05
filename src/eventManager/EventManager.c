@@ -58,47 +58,56 @@ struct EventManager* EventManager_construct() {
 }
 
 void EventManager_reallocateGameEventsList(struct EventManager* em) {
-    struct GameEvent** tList = NULL;
-    size_t i;
-    if (!(tList = (struct GameEvent**)malloc(
-            sizeof(struct GameEvent*) * (em->allocatedGameEventsCount + INITIAL_NUMBER_ALLOCATED_EVENTS)))) {
-        fprintf(stderr, "GameEventsList reallocating failed!\n");
-    } else {
-        for (i = 0; i < em->gameEventsCount; i++)
-            tList[i] = em->gameEventsList[i];
-        free(em->gameEventsList);
-        em->gameEventsList = tList;
-        em->allocatedGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
-    }
+    if (em) {
+        struct GameEvent** tList = NULL;
+        size_t i;
+        if (!(tList = (struct GameEvent**)malloc(
+                sizeof(struct GameEvent*) * (em->allocatedGameEventsCount + INITIAL_NUMBER_ALLOCATED_EVENTS)))) {
+            fprintf(stderr, "GameEventsList reallocating failed!\n");
+        } else {
+            for (i = 0; i < em->gameEventsCount; i++)
+                tList[i] = em->gameEventsList[i];
+            free(em->gameEventsList);
+            em->gameEventsList = tList;
+            em->allocatedGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
+        }
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
 void EventManager_reallocateCustomGameEventsList(struct EventManager* em) {
-    struct GameEvent** tList = NULL;
-    size_t i;
-    if (!(tList = (struct GameEvent**)malloc(
-            sizeof(struct GameEvent*) * (em->allocatedCustomGameEventsCount + INITIAL_NUMBER_ALLOCATED_EVENTS)))) {
-        fprintf(stderr, "CustomGameEventsList reallocating failed!\n");
-    } else {
-        for (i = 0; i < em->customGameEventsCount; i++)
-            tList[i] = em->customGameEventsList[i];
-        free(em->customGameEventsList);
-        em->customGameEventsList = tList;
-        em->allocatedCustomGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
-    }
+    if (em) {
+        struct GameEvent **tList = NULL;
+        size_t i;
+        if (!(tList = (struct GameEvent **) malloc(
+                sizeof(struct GameEvent *) * (em->allocatedCustomGameEventsCount + INITIAL_NUMBER_ALLOCATED_EVENTS)))) {
+            fprintf(stderr, "CustomGameEventsList reallocating failed!\n");
+        } else {
+            for (i = 0; i < em->customGameEventsCount; i++)
+                tList[i] = em->customGameEventsList[i];
+            free(em->customGameEventsList);
+            em->customGameEventsList = tList;
+            em->allocatedCustomGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
+        }
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
 void EventManager_reallocateSdlEventsList(struct EventManager* em) {
-    SDL_Event* tList = NULL;
-    size_t i;
-    if (!(tList = (SDL_Event*)malloc(
-            sizeof(SDL_Event) * (em->allocatedSdlEventsCount + INITIAL_NUMBER_ALLOCATED_SDL_EVENTS)))) {
-        fprintf(stderr, "SDLEventsList reallocating failed!\n");
-    } else {
-        for (i = 0; i < em->sdlEventsCount; i++)
-            tList[i] = em->sdlEventsList[i];
-        free(em->sdlEventsList);
-        em->sdlEventsList = tList;
-    }
+    if (em) {
+        SDL_Event *tList = NULL;
+        size_t i;
+        if (!(tList = (SDL_Event *) malloc(
+                sizeof(SDL_Event) * (em->allocatedSdlEventsCount + INITIAL_NUMBER_ALLOCATED_SDL_EVENTS)))) {
+            fprintf(stderr, "SDLEventsList reallocating failed!\n");
+        } else {
+            for (i = 0; i < em->sdlEventsCount; i++)
+                tList[i] = em->sdlEventsList[i];
+            free(em->sdlEventsList);
+            em->sdlEventsList = tList;
+        }
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
 void EventManager_destruct(struct EventManager* em) {
@@ -108,42 +117,63 @@ void EventManager_destruct(struct EventManager* em) {
 }
 
 void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent) {
-    if (em->gameEventsCount >= em->allocatedGameEventsCount)
-        EventManager_reallocateGameEventsList(em);
-    // Try to reallocate (if needed) and add gameEvent
-    if (em->gameEventsCount < em->allocatedGameEventsCount) {
-        em->gameEventsList[em->gameEventsCount] = gameEvent;
-        em->gameEventsCount++;
-    }
+    if (em) {
+        if (gameEvent) {
+            if (em->gameEventsCount >= em->allocatedGameEventsCount)
+                EventManager_reallocateGameEventsList(em);
+            // Try to reallocate (if needed) and add gameEvent
+            if (em->gameEventsCount < em->allocatedGameEventsCount) {
+                em->gameEventsList[em->gameEventsCount] = gameEvent;
+                em->gameEventsCount++;
+            }
+        } else
+            fprintf(stderr, "NULL pointer to GameEvent!\n");
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
 void EventManager_removeEvent(struct EventManager* em, size_t index) {
-    size_t i;
-    em->gameEventsCount--;
-    for (i = index; i < em->gameEventsCount; i++)
-        em->gameEventsList[i] = em->gameEventsList[i+1];
+    if (em) {
+        if (index < em->gameEventsCount) {
+            size_t i;
+            em->gameEventsCount--;
+            for (i = index; i < em->gameEventsCount; i++)
+                em->gameEventsList[i] = em->gameEventsList[i + 1];
+        } else
+            fprintf(stderr, "Removable GameEvent's index out of range!\n");
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
 const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* em,
                                                                    const char* const channel) {
-    size_t i;
-    for (i = 0; i < em->gameEventsCount; i++)
-        if (strcmp(em->gameEventsList[i]->eventChannel, channel) == 0) {
-            if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
-                EventManager_reallocateCustomGameEventsList(em);
-            // Try to reallocate (if needed) and add customGameEvent
-            if (em->customGameEventsCount < em->allocatedCustomGameEventsCount) {
-                em->customGameEventsList[em->customGameEventsCount] = em->gameEventsList[i];
-                em->customGameEventsCount++;
-            }
-        }
+    if (em) {
+        if (channel) {
+            size_t i;
+            for (i = 0; i < em->gameEventsCount; i++)
+                if (strcmp(em->gameEventsList[i]->eventChannel, channel) == 0) {
+                    if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
+                        EventManager_reallocateCustomGameEventsList(em);
+                    // Try to reallocate (if needed) and add customGameEvent
+                    if (em->customGameEventsCount < em->allocatedCustomGameEventsCount) {
+                        em->customGameEventsList[em->customGameEventsCount] = em->gameEventsList[i];
+                        em->customGameEventsCount++;
+                    }
+                }
+        } else
+            fprintf(stderr, "NULL pointer to channel string while getting CustomEvents!\n");
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
 void EventManager_updateSdlEvents(struct EventManager* em) {
-    em->sdlEventsCount = 0;
-    while(SDL_PollEvent(&(em->sdlEventsList[em->sdlEventsCount]))) {
-        em->sdlEventsCount++;
-        if (em->sdlEventsCount >= em->allocatedSdlEventsCount)
-            EventManager_reallocateSdlEventsList(em);
-    }
+    if (em) {
+        em->sdlEventsCount = 0;
+        while(SDL_PollEvent(&(em->sdlEventsList[em->sdlEventsCount]))) {
+            em->sdlEventsCount++;
+            if (em->sdlEventsCount >= em->allocatedSdlEventsCount)
+                EventManager_reallocateSdlEventsList(em);
+        }
+    } else
+        fprintf(stderr, "NULL pointer to EventManager!\n");
 }
