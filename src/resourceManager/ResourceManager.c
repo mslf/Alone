@@ -324,7 +324,7 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
             // Try to reallocate (if needed) and add textureResource to the map
             if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount)
                 ResourceManager_reallocateTextureResourcesMap(rm);
-            if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount) {
+            if (rm->textureResourcesCount < rm->allocatedTextureResourcesCount) {
                 rm->textureResourcesList[rm->textureResourcesCount] = textureResource;
                 rm->textureResourcesIds[rm->textureResourcesCount] = textureResId;
                 rm->textureResourcesCount++;
@@ -362,7 +362,7 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
             // Try to reallocate (if needed) and add textResource to the map
             if (rm->textResourcesCount >= rm->allocatedTextResourcesCount)
                 ResourceManager_reallocateTextResourcesMap(rm);
-            if (rm->textResourcesCount >= rm->allocatedTextResourcesCount) {
+            if (rm->textResourcesCount < rm->allocatedTextResourcesCount) {
                 rm->textResourcesList[rm->textResourcesCount] = textResource;
                 rm->textResourcesIds[rm->textResourcesCount] = textResId;
                 rm->textResourcesCount++;
@@ -398,7 +398,7 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
             // Try to reallocate (if needed) and add scriptResource to the map
             if (rm->scriptResourcesCount >= rm->allocatedScriptResourcesCount)
                 ResourceManager_reallocateScriptResourcesMap(rm);
-            if (rm->scriptResourcesCount >= rm->allocatedScriptResourcesCount) {
+            if (rm->scriptResourcesCount < rm->allocatedScriptResourcesCount) {
                 rm->scriptResourcesList[rm->scriptResourcesCount] = scriptResource;
                 rm->scriptResourcesIds[rm->scriptResourcesCount] = scriptResId;
                 rm->scriptResourcesCount++;
@@ -434,7 +434,7 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
             // Try to reallocate (if needed) and add soundResource to the map
             if (rm->soundResourcesCount >= rm->allocatedSoundResourcesCount)
                 ResourceManager_reallocateSoundResourcesMap(rm);
-            if (rm->soundResourcesCount >= rm->allocatedSoundResourcesCount) {
+            if (rm->soundResourcesCount < rm->allocatedSoundResourcesCount) {
                 rm->soundResourcesList[rm->soundResourcesCount] = soundResource;
                 rm->soundResourcesIds[rm->soundResourcesCount] = soundResId;
                 rm->soundResourcesCount++;

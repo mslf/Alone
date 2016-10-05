@@ -36,7 +36,7 @@ struct TextResource* TextResource_construct(const char* const path, unsigned cha
             return  NULL;
         }
         size = SDL_RWsize(file);
-        textResource->text = (char*)malloc(sizeof(char) * size);
+        textResource->text = (char*)malloc(sizeof(char) * (size + 1));
         if (!textResource->text) {
             TextResource_destruct(textResource);
             SDL_RWclose(file);
@@ -49,9 +49,8 @@ struct TextResource* TextResource_construct(const char* const path, unsigned cha
             bufString += read;
         }
         SDL_RWclose(file);
-        if (!(totalRead -= size)) {
+        if (totalRead != size) {
             TextResource_destruct(textResource);
-            SDL_RWclose(file);
             return NULL;
         }
         textResource->text[totalRead] = '\0';
