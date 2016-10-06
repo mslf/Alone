@@ -20,27 +20,32 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "resourceManager/ScriptResource.h"
+#include <stdlib.h>
 
 struct ScriptResource* ScriptResource_construct(const char* const path) {
-
+    if (!path)
+        return  NULL;
+    struct ScriptResource* scriptResource = NULL;
+    scriptResource = (struct ScriptResource*)malloc(sizeof(struct ScriptResource));
+    if (!scriptResource)
+        return NULL;
+    scriptResource->luaState = luaL_newstate();
+    if (!scriptResource->luaState) {
+        ScriptResource_destruct(scriptResource);
+        return NULL;
+    }
+    luaL_openlibs(scriptResource->luaState);
+    if (luaL_loadfile(scriptResource->luaState, path)) {
+        ScriptResource_destruct(scriptResource);
+        return NULL;
+    }
+    return scriptResource;
 }
 
 void ScriptResource_destruct(struct ScriptResource* scriptResource) {
-
-}
-
-void ScriptResource_registerActiveModuleFunctions(struct ScriptResource* scriptResource) {
-
-}
-
-void ScriptResource_registerMicroModuleFunctions(struct ScriptResource* scriptResource) {
-
-}
-
-void ScriptResource_registerNanoModuleFunctions(struct ScriptResource* scriptResource) {
-
-}
-
-void ScriptResource_registerEventControllerFunctions(struct ScriptResource* scriptResource){
-
+    if (scriptResource) {
+        if (scriptResource->luaState)
+            lua_close(scriptResource->luaState);
+        free(scriptResource);
+    }
 }

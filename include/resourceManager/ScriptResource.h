@@ -25,7 +25,6 @@
 #include <lua.h>
 #include <lauxlib.h>
 #include <lualib.h>
-//#include "module/macro/ActiveModule.h"
 
 struct ScriptResource {
     lua_State* luaState;
@@ -34,12 +33,12 @@ struct ScriptResource {
 struct ScriptResource* ScriptResource_construct(const char* const path);
 void ScriptResource_destruct(struct ScriptResource* scriptResource);
 
-void ScriptResource_registerActiveModuleFunctions(struct ScriptResource* scriptResource);
-void ScriptResource_registerMicroModuleFunctions(struct ScriptResource* scriptResource);
-void ScriptResource_registerNanoModuleFunctions(struct ScriptResource* scriptResource);
-void ScriptResource_registerEventControllerFunctions(struct ScriptResource* scriptResource);
+//void ScriptResource_registerActiveModuleFunctions(struct ScriptResource* scriptResource);
+//void ScriptResource_registerMicroModuleFunctions(struct ScriptResource* scriptResource);
+//void ScriptResource_registerNanoModuleFunctions(struct ScriptResource* scriptResource);
+//void ScriptResource_registerEventControllerFunctions(struct ScriptResource* scriptResource);
 //void ScriptResource_updateActiveModule(struct ScriptResource* scriptResource, struct ActiveModule* activeModule);
 //void ScriptResource_updateMicroModule(struct ScriptResource* scriptResource, struct MicroModule* microModule);
 //void ScriptResource_updateNanoModule(struct ScriptResource* scriptResource, struct NanoModule* nanoModule);
-
+// ^ This will be in other's (ActiveModule's, MicroModule's, etc) code.
 #endif //ALONE_SCRIPTRESOURCE_H

@@ -375,7 +375,7 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         struct TextureResource* textureResource = NULL;
         textureResource = TextureResource_construct(renderer, textureResId);
         if (!textureResource) {
-            fprintf(stderr, "TextureResource constructing failed!\n");
+            fprintf(stderr, "TextureResource constructing failed! ResourceID: %s\n", textureResId);
             TextureResource_destruct(textureResource);
             return NULL;
         }
@@ -422,7 +422,7 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
     struct TextResource* textResource = NULL;
     textResource = TextResource_construct(textResId, unique);
     if (!textResource) {
-        fprintf(stderr, "TextResource constructing failed!\n");
+        fprintf(stderr, "TextResource constructing failed! ResourceID: %s\n", textResId);
         TextResource_destruct(textResource);
         return NULL;
     }
@@ -464,7 +464,7 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
         struct ScriptResource* scriptResource = NULL;
         scriptResource = ScriptResource_construct(scriptResId);
         if (!scriptResource) {
-            fprintf(stderr, "ScriptResource constructing failed!\n");
+            fprintf(stderr, "ScriptResource constructing failed! ResourceId: %s\n", scriptResId);
             ScriptResource_destruct(scriptResource);
             return NULL;
         }
@@ -509,7 +509,8 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
         struct SoundResource* soundResource = NULL;
         soundResource = SoundResource_construct(soundResId);
         if (!soundResource) {
-            fprintf(stderr, "SoundResource constructing failed! SDL_mixer Error: %s\n", Mix_GetError());
+            fprintf(stderr, "SoundResource constructing failed! ResourceID: %s\n"
+                    "SDL_mixer Error: %s\n", soundResId, Mix_GetError());
             SoundResource_destruct(soundResource);
             return NULL;
         }
@@ -566,7 +567,7 @@ void ResourceManager_saveTextResource(struct ResourceManager* rm,
         }
         result = TextResource_save(textResource, textResId);
         if (result != 0) {
-            fprintf(stderr, "Saving textResource %s failed! Code: %d\n", textResId, result);
+            fprintf(stderr, "Saving TextResource failed! ResourceID: %s\nError code: %d\n", textResId, result);
         }
     }
 }
