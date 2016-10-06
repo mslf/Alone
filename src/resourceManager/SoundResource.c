@@ -22,9 +22,22 @@
 #include "resourceManager/SoundResource.h"
 
 struct SoundResource* SoundResource_construct(const char* const path) {
-
+    struct SoundResource* soundResource = NULL;
+    soundResource = (struct SoundResource*)malloc(sizeof(struct SoundResource));
+    if (!soundResource)
+        return NULL;
+    soundResource->sound = Mix_LoadWAV(path);
+    if (!soundResource->sound) {
+        SoundResource_destruct(soundResource);
+        return NULL;
+    }
+    return soundResource;
 }
 
 void SoundResource_destruct(struct SoundResource* soundResource) {
-
+    if(soundResource) {
+        if (soundResource->sound)
+            Mix_FreeChunk(soundResource->sound);
+        free(soundResource);
+    }
 }

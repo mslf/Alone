@@ -512,6 +512,8 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
                         SoundResource_destruct(soundResource);
                         return NULL;
                     }
+                } else {
+                    fprintf(stderr, "Loading soundResource failed! SDL_mixer Error: %s\n", Mix_GetError());
                 }
                 return soundResource;
             }
