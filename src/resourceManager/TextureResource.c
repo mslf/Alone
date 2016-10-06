@@ -19,12 +19,30 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+#include <renderer/Renderer.h>
 #include "resourceManager/TextureResource.h"
 
 struct TextureResource* TextureResource_construct(struct Renderer* renderer, const char* const path) {
-
+    if (!renderer)
+        return NULL;
+    if (!path)
+        return NULL;
+    struct TextureResource* textureResource = NULL;
+    textureResource = (struct TextureResource*)malloc(sizeof(struct TextureResource));
+    if (!textureResource)
+        return  NULL;
+    textureResource->texture = IMG_LoadTexture(renderer->renderer, path);
+    if (!textureResource->texture) {
+        TextureResource_destruct(textureResource);
+        return NULL;
+    }
+    return  textureResource;
 }
 
 void TextureResource_destruct(struct TextureResource* textureResource) {
-
+    if (textureResource) {
+        if (textureResource->texture)
+            SDL_DestroyTexture(textureResource->texture);
+        free(textureResource);
+    }
 }

@@ -47,8 +47,10 @@ struct Musican* Musican_construct() {
 }
 
 void Musican_destruct(struct Musican* musican) {
-    if (musican)
+    if (musican) {
+        Mix_Quit();
         free(musican);
+    }
 }
 
 void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops) {
