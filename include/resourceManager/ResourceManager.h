@@ -65,5 +65,5 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
                                                             const char* const soundResId);
 void ResourceManager_saveTextResource(struct ResourceManager* rm,
                                               struct TextResource* textResource, const char* const textResId);
-
+// TODO: Storing resIDs fully
 #endif //ALONE_RESOURCEMANAGER_H

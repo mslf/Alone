@@ -40,6 +40,7 @@ set(SOURCE_MICROSECTION         src/module/section/MicroSection.c)
 set(SOURCE_NANOSECTION          src/module/section/NanoSection.c)
 set(SOURCE_BACKGROUNDMODULE     src/module/macro/BackgroundModule.c)
 set(SOURCE_ACTIVEMODULE         src/module/macro/ActiveModule.c)
+set(SOURCE_TEXTPARSER           src/textParser/TextParser.c)
 
 add_library(gameManager             STATIC ${SOURCE_GAME_MANAGER})
 add_library(renderer                STATIC ${SOURCE_RENDERER})
@@ -73,6 +74,7 @@ add_library(microSection            STATIC ${SOURCE_MICROSECTION})
 add_library(nanoSection             STATIC ${SOURCE_NANOSECTION})
 add_library(backgroundModule        STATIC ${SOURCE_BACKGROUNDMODULE})
 add_library(activeModule            STATIC ${SOURCE_ACTIVEMODULE})
+add_library(textParser              STATIC ${SOURCE_TEXTPARSER})
 
 add_executable(Alone ${SOURCE_EXUTABLE})
 
@@ -108,6 +110,7 @@ target_link_libraries(resourceManager               textureRes)
 target_link_libraries(resourceManager               textRes)
 target_link_libraries(resourceManager               soundRes)
 target_link_libraries(resourceManager               scriptRes)
+target_link_libraries(Alone                         textParser)
 
 include(FindPkgConfig)
 
