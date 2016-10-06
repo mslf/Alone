@@ -145,25 +145,28 @@ void EventManager_removeEvent(struct EventManager* em, size_t index) {
         fprintf(stderr, "NULL pointer to EventManager!\n");
 }
 
-const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* em,
-                                                                   const char* const channel) {
+unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel) {
     if (em) {
-        if (channel) {
-            size_t i;
-            for (i = 0; i < em->gameEventsCount; i++)
-                if (strcmp(em->gameEventsList[i]->eventChannel, channel) == 0) {
-                    if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
-                        EventManager_reallocateCustomGameEventsList(em);
-                    // Try to reallocate (if needed) and add customGameEvent
-                    if (em->customGameEventsCount < em->allocatedCustomGameEventsCount) {
-                        em->customGameEventsList[em->customGameEventsCount] = em->gameEventsList[i];
-                        em->customGameEventsCount++;
-                    }
-                }
-        } else
-            fprintf(stderr, "NULL pointer to channel string while getting CustomEvents!\n");
-    } else
         fprintf(stderr, "NULL pointer to EventManager!\n");
+        return 1;
+    }
+    if (channel) {
+        fprintf(stderr, "NULL pointer to channel string while getting CustomEvents!\n");
+        return 2;
+    }
+
+    size_t i;
+    for (i = 0; i < em->gameEventsCount; i++)
+        if (strcmp(em->gameEventsList[i]->eventChannel, channel) == 0) {
+            if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
+                EventManager_reallocateCustomGameEventsList(em);
+            // Try to reallocate (if needed) and add customGameEvent
+            if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
+                return 3;
+            em->customGameEventsList[em->customGameEventsCount] = em->gameEventsList[i];
+            em->customGameEventsCount++;
+        }
+    return 0;
 }
 
 void EventManager_updateSdlEvents(struct EventManager* em) {

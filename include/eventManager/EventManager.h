@@ -46,8 +46,7 @@ void EventManager_destruct(struct EventManager* em);
 
 void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
 void EventManager_removeEvent(struct EventManager* em, size_t index);
-const struct GameEvent* const * const EventManager_getCustomEvents(struct EventManager* em,
-                                                            const char* const channel);
+unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel);
 void EventManager_updateSdlEvents(struct EventManager* em);
 
 #endif //ALONE_EVENTMANAGER_H
