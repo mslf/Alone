@@ -26,11 +26,15 @@
 struct ResourceManager;
 
 struct Settings {
+    unsigned char isVsyncActive;
+    unsigned char isMusicActive;
+    unsigned char isSoundActive;
+    unsigned char isFullscreen;
     struct TextResource* settingsResource;
-    char isMusicActive;
-    char isSoundActive;
-    char isFullscreen;
-    SDL_DisplayMode displayMode;
+    size_t w;
+    size_t h;
+    size_t virtualW;
+    size_t virtualH;
 };
 
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId);

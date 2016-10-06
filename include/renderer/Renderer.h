@@ -27,15 +27,15 @@
 struct Settings;
 
  struct Renderer {
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_Point cameraPosition;
-    SDL_Point virtualScreenSize; // x -- width, y -- heigth
-    /*
-     * All coordinates of SceneNodes and camera position are virtual. They are relativy projected on the real screen.
-     * Also, the camera position is substracted from the rendered SceneNode coordinates.
-     */
-
+     SDL_Window* window;
+     SDL_Renderer* renderer;
+     SDL_Point cameraPosition;
+     SDL_Point currentScreenSize;
+     SDL_Point virtualScreenSize; // x -- width, y -- heigth
+     /*
+      * All coordinates of SceneNodes and camera position are virtual. They are relativy projected on the real screen.
+      * Also, the camera position is substracted from the rendered SceneNode coordinates.
+      */
 };
 
 struct Renderer* Renderer_construct(struct Settings* settings);
