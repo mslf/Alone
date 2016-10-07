@@ -38,10 +38,10 @@ struct ResourceManager {
     struct TextResource** textResourcesList;
     struct ScriptResource** scriptResourcesList;
     struct SoundResource** soundResourcesList;
-    const char** textureResourcesIds;
-    const char** textResourcesIds;
-    const char** scriptResourcesIds;
-    const char** soundResourcesIds;
+    char** textureResourcesIds;
+    char** textResourcesIds;
+    char** scriptResourcesIds;
+    char** soundResourcesIds;
     size_t textureResourcesCount;
     size_t allocatedTextureResourcesCount;
     size_t textResourcesCount;
@@ -65,5 +65,4 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
                                                             const char* const soundResId);
 void ResourceManager_saveTextResource(struct ResourceManager* rm,
                                               struct TextResource* textResource, const char* const textResId);
-// TODO: Storing resIDs fully
 #endif //ALONE_RESOURCEMANAGER_H
