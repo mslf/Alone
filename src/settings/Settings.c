@@ -23,6 +23,20 @@
 #include "settings/Settings.h"
 #include "textParser/TextParser.h"
 
+struct Settings* Settings_defaults(struct Settings* settings) {
+    if (settings) {
+        settings->h = SETTINGS_DEFAULT_H;
+        settings->w = SETTINGS_DEFAULT_W;
+        settings->virtualH = SETTINGS_DEFAULT_H;
+        settings->virtualW = SETTINGS_DEFAULT_W;
+        settings->isFullscreen = SETTINGS_DEFAULT_FULLSCREEN;
+        settings->isMusicActive = SETTINGS_DEFAULT_MUSIC;
+        settings->isSoundActive = SETTINGS_DEFAULT_SOUND;
+        settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
+    }
+    return settings;
+}
+
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId) {
     struct Settings* settings = NULL;
     settings = (struct Settings*)malloc(sizeof(struct Settings));
@@ -30,23 +44,39 @@ struct Settings* Settings_construct(struct ResourceManager* resourceManager, con
         return  NULL;
     settings->settingsResource = ResourceManager_loadTextResource(resourceManager, settingsResId, 0);
     if (!settings->settingsResource) {
-        Settings_destruct(settings);
-        return NULL;
+        // Failed to load SettingsResource, so using defaults
+        return Settings_defaults(settings);
     }
     struct TextParser* textParser = NULL;
     textParser = TextParser_construct(settings->settingsResource);
     if (!textParser) {
-        Settings_destruct(settings);
-        return NULL;
+        // Failed to create TextParser, so using defaults
+        return Settings_defaults(settings);
     }
     settings->h = (size_t)TextParser_getInt(textParser, "screenHeight", 0);
+    if (textParser->lastError)
+        settings->h = SETTINGS_DEFAULT_H;
     settings->w = (size_t)TextParser_getInt(textParser, "screenWidth", 0);
+    if (textParser->lastError)
+        settings->w = SETTINGS_DEFAULT_W;
     settings->virtualH = (size_t)TextParser_getInt(textParser, "virtualScreenHeight", 0);
+    if (textParser->lastError)
+        settings->virtualH = SETTINGS_DEFAULT_H;
     settings->virtualW = (size_t)TextParser_getInt(textParser, "virtualScreenWidth", 0);
+    if (textParser->lastError)
+        settings->virtualW = SETTINGS_DEFAULT_W;
     settings->isFullscreen = TextParser_getFlag(textParser, "fullscreen", 0);
+    if (textParser->lastError)
+        settings->isFullscreen = SETTINGS_DEFAULT_FULLSCREEN;
     settings->isMusicActive = TextParser_getFlag(textParser, "music", 0);
+    if (textParser->lastError)
+        settings->isMusicActive = SETTINGS_DEFAULT_MUSIC;
     settings->isSoundActive = TextParser_getFlag(textParser, "sound", 0);
+    if (textParser->lastError)
+        settings->isSoundActive = SETTINGS_DEFAULT_SOUND;
     settings->isVsyncActive = TextParser_getFlag(textParser, "vsync", 0);
+    if (textParser->lastError)
+        settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
     TextParser_destruct(textParser);
     return settings;
 }

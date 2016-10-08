@@ -23,6 +23,14 @@
 #define ALONE_SETTINGS_H
 
 #include <SDL2/SDL.h>
+
+#define SETTINGS_DEFAULT_VSYNC 1
+#define SETTINGS_DEFAULT_MUSIC 1
+#define SETTINGS_DEFAULT_SOUND 1
+#define SETTINGS_DEFAULT_FULLSCREEN 0
+#define SETTINGS_DEFAULT_W 800
+#define SETTINGS_DEFAULT_H 450
+
 struct ResourceManager;
 
 struct Settings {

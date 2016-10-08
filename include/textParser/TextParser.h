@@ -39,10 +39,18 @@ struct Pair {
     struct RightOperand rightOperand;
 };
 
+enum TextParserError {
+    NoError,
+    NoLeftOperandError,
+    ConvertingError,
+    OutOfRangeError
+};
+
 struct TextParser {
     struct Pair* pairsList;
     size_t pairsCount;
     size_t allocatedPairsCount;
+    enum TextParserError lastError;
 };
 
 struct TextParser* TextParser_construct(const struct TextResource* const textResource);
