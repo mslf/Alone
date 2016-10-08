@@ -37,6 +37,7 @@ struct GameManager {
     struct Renderer* renderer;
     struct Musican* musican;
     struct Scene** scenesStack;
+    struct Settings* settings;
     size_t allocatedScenesCount;
     size_t scenesCount;
 };

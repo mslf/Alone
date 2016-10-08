@@ -53,6 +53,7 @@ struct EventManager* EventManager_construct() {
         }
         em->allocatedSdlEventsCount = INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
         em->sdlEventsCount = 0;
+        em->quit = 0;
     }
     return em;
 }
@@ -173,6 +174,8 @@ void EventManager_updateSdlEvents(struct EventManager* em) {
     if (em) {
         em->sdlEventsCount = 0;
         while(SDL_PollEvent(&(em->sdlEventsList[em->sdlEventsCount]))) {
+            if(em->sdlEventsList[em->sdlEventsCount].type == SDL_QUIT)
+                em->quit = 1;
             em->sdlEventsCount++;
             if (em->sdlEventsCount >= em->allocatedSdlEventsCount)
                 EventManager_reallocateSdlEventsList(em);

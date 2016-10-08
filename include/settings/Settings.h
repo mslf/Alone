@@ -30,6 +30,7 @@
 #define SETTINGS_DEFAULT_FULLSCREEN 0
 #define SETTINGS_DEFAULT_W 800
 #define SETTINGS_DEFAULT_H 450
+#define SETTINGS_DEFAULT_MAIN_SCENE "data/main.scene"
 
 struct ResourceManager;
 
@@ -43,6 +44,7 @@ struct Settings {
     size_t h;
     size_t virtualW;
     size_t virtualH;
+    char* mainScene;
 };
 
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId);

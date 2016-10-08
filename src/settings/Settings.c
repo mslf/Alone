@@ -33,6 +33,7 @@ struct Settings* Settings_defaults(struct Settings* settings) {
         settings->isMusicActive = SETTINGS_DEFAULT_MUSIC;
         settings->isSoundActive = SETTINGS_DEFAULT_SOUND;
         settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
+        settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
     }
     return settings;
 }
@@ -77,11 +78,26 @@ struct Settings* Settings_construct(struct ResourceManager* resourceManager, con
     settings->isVsyncActive = TextParser_getFlag(textParser, "vsync", 0);
     if (textParser->lastError)
         settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
+    char* tempString = NULL;
+    tempString = TextParser_getString(textParser, "mainScene", 0);
+    if (textParser->lastError)
+        settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
+    else {
+        settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
+        if (!settings->mainScene) {
+            // Failed to allocate memory for mainScene string, so using defaults
+            return Settings_defaults(settings);
+        }
+        strcpy(settings->mainScene, tempString);
+    }
     TextParser_destruct(textParser);
     return settings;
 }
 
 void Settings_destruct(struct Settings* settings) {
-    if (settings)
+    if (settings) {
+        if (settings->mainScene && settings->mainScene != SETTINGS_DEFAULT_MAIN_SCENE)
+            free(settings->mainScene);
         free(settings);
+    }
 }

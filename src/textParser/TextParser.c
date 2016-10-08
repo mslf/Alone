@@ -29,7 +29,7 @@ void TextParser_destruct(struct TextParser* textParser) {
 
 }
 
-char** TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index) {
+char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index) {
 
 }
 

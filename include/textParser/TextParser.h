@@ -56,7 +56,7 @@ struct TextParser {
 struct TextParser* TextParser_construct(const struct TextResource* const textResource);
 void TextParser_destruct(struct TextParser* textParser);
 
-char** TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index);
+char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index);
 long int TextParser_getInt(struct TextParser* textParser, const char* const leftOperand, size_t index);
 double TextParser_getDouble(struct TextParser* textParser, const char* leftOperand, size_t index);
 unsigned char TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index);

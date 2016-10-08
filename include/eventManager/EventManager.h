@@ -39,6 +39,7 @@ struct EventManager {
     size_t allocatedCustomGameEventsCount;
     size_t sdlEventsCount;
     size_t allocatedSdlEventsCount;
+    unsigned char quit;
 };
 
 struct EventManager* EventManager_construct();

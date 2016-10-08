@@ -31,6 +31,7 @@ struct TextResource* TextResource_construct(const char* const path, unsigned cha
         size_t totalRead = 0;
         size_t read = 1;
         char* bufString;
+        textResource->text = NULL;
         if (!file) {
             TextResource_destruct(textResource);
             return  NULL;

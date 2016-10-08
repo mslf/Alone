@@ -28,6 +28,11 @@ struct GameManager* GameManager_construct() {
     gm = (struct GameManager*)malloc(sizeof(struct GameManager));
     if (gm) {
         unsigned char result = 0;
+        gm->settings = NULL;
+        gm->resourceManager = NULL;
+        gm->renderer = NULL;
+        gm->musican = NULL;
+        gm->eventManager = NULL;
         if (!(gm->eventManager = EventManager_construct())) {
             fprintf(stderr, "EventManager constructing failed!\n");
             result++;
@@ -36,11 +41,13 @@ struct GameManager* GameManager_construct() {
             fprintf(stderr, "ResourceManager constructing failed!\n");
             result++;
         }
-        if (!(gm->musican = Musican_construct())) {
-            fprintf(stderr, "Musican constructing failed!\n");
-            result++;
-        }
-        if (!(gm->renderer = Renderer_construct(NULL))) {
+        gm->settings = Settings_construct(gm->resourceManager, "Alone.settings");
+        if (gm->settings->isSoundActive)
+            if (!(gm->musican = Musican_construct())) {
+                fprintf(stderr, "Musican constructing failed!\n");
+                result++;
+            }
+        if (!(gm->renderer = Renderer_construct(gm->settings))) {
             fprintf(stderr, "Renderer constructing failed!\n");
             result++;
         }
@@ -54,12 +61,23 @@ struct GameManager* GameManager_construct() {
         }
         gm->allocatedScenesCount = INITIAL_NUMBER_ALLOCATED_SCENES;
         gm->scenesCount = 0;
+        GameManager_pushScene(gm, gm->settings->mainScene);
     }
     return gm;
 }
 
 int GameManager_main(struct GameManager* gm) {
-    printf ("Hello World from C GameManager! \n");
+    printf ("***Am I Alone?***\n");
+    while(!gm->eventManager->quit) {
+        EventManager_updateSdlEvents(gm->eventManager);
+        SDL_SetRenderDrawColor(gm->renderer->renderer,
+                               (unsigned char)(rand() % 255),
+                               (unsigned char)(rand() % 255),
+                               (unsigned char)(rand() % 255),
+                               (unsigned char)(rand() % 255));
+        SDL_RenderClear(gm->renderer->renderer);
+        SDL_RenderPresent(gm->renderer->renderer);
+    }
     return 0;
 }
 
@@ -78,6 +96,7 @@ void GameManager_destruct(struct GameManager* gm) {
             Scene_destruct(gm->scenesStack[i]);
         free(gm->scenesStack);
     }
+    Settings_destruct(gm->settings);
     free(gm);
 }
 
