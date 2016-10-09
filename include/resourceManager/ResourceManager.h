@@ -38,17 +38,13 @@ struct ResourceManager {
     struct TextResource** textResourcesList;
     struct ScriptResource** scriptResourcesList;
     struct SoundResource** soundResourcesList;
-    char** textureResourcesIds;
-    char** textResourcesIds;
-    char** scriptResourcesIds;
-    char** soundResourcesIds;
     size_t textureResourcesCount;
-    size_t allocatedTextureResourcesCount;
     size_t textResourcesCount;
-    size_t allocatedTextResourcesCount;
     size_t scriptResourcesCount;
-    size_t allocatedScriptResourcesCount;
     size_t soundResourcesCount;
+    size_t allocatedTextureResourcesCount;
+    size_t allocatedTextResourcesCount;
+    size_t allocatedScriptResourcesCount;
     size_t allocatedSoundResourcesCount;
 };
 
