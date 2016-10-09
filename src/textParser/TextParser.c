@@ -29,6 +29,10 @@ void TextParser_destruct(struct TextParser* textParser) {
 
 }
 
+size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const leftOperand) {
+
+}
+
 char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index) {
 
 }
@@ -42,5 +46,25 @@ double TextParser_getDouble(struct TextParser* textParser, const char* leftOpera
 }
 
 unsigned char TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index){
+
+}
+
+void TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
+
+}
+
+void TextParser_addInt(struct TextParser* textParser, const char* const leftOperand, long int item) {
+
+}
+
+void TextParser_addDouble(struct TextParser* textParser, const char* leftOperand, double item) {
+
+}
+
+void TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, unsigned char item) {
+
+}
+
+char* TextParser_convertToText(struct TextParser* textParser) {
 
 }

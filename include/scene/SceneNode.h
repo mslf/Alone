@@ -35,6 +35,8 @@ struct PhysicalSceneNode {
 };
 
 struct SceneNode {
+    struct TextResource* sceneNodeTextResource;
+    char* type;
     SDL_Point coordinates;
     SDL_Point rotatePointCoordinates;
     SDL_RendererFlip flip;
