@@ -32,6 +32,12 @@ struct TextResource* TextResource_construct(const char* const path, unsigned cha
         size_t read = 1;
         char* bufString;
         textResource->text = NULL;
+        textResource->id = (char*)malloc(sizeof(char) * (strlen(path) + 1));
+        if (!textResource->id) {
+            TextResource_destruct(textResource);
+            return NULL;
+        }
+        strcpy(textResource->id, path);
         if (!file) {
             TextResource_destruct(textResource);
             return  NULL;
@@ -62,6 +68,8 @@ struct TextResource* TextResource_construct(const char* const path, unsigned cha
 
 void TextResource_destruct(struct TextResource* textResource) {
     if (textResource) {
+        if (textResource->id)
+            free(textResource->id);
         if (textResource->text)
             free(textResource->text);
         free(textResource);
@@ -70,7 +78,11 @@ void TextResource_destruct(struct TextResource* textResource) {
 
 unsigned char TextResource_save(struct TextResource* textResource, const char* const path) {
     if (textResource) {
-        SDL_RWops *file = SDL_RWFromFile(path, "w");
+        SDL_RWops *file = NULL;
+        if (path)
+            SDL_RWFromFile(path, "w");
+        else
+            SDL_RWFromFile(textResource->id, "w");
         if(file) {
             size_t len = SDL_strlen(textResource->text);
             if (SDL_RWwrite(file, textResource->text, 1, len) != len) {

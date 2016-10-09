@@ -26,6 +26,7 @@
 struct Renderer;
 
 struct TextureResource {
+    char* id;
     SDL_Texture* texture;
 };
 

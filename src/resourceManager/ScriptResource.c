@@ -21,6 +21,7 @@
 */
 #include "resourceManager/ScriptResource.h"
 #include <stdlib.h>
+#include "string.h"
 
 struct ScriptResource* ScriptResource_construct(const char* const path) {
     if (!path)
@@ -29,6 +30,13 @@ struct ScriptResource* ScriptResource_construct(const char* const path) {
     scriptResource = (struct ScriptResource*)malloc(sizeof(struct ScriptResource));
     if (!scriptResource)
         return NULL;
+    scriptResource->luaState = NULL;
+    scriptResource->id = (char*)malloc(sizeof(char) * (strlen(path) + 1));
+    if (!scriptResource->id) {
+        ScriptResource_destruct(scriptResource);
+        return NULL;
+    }
+    strcpy(scriptResource->id, path);
     scriptResource->luaState = luaL_newstate();
     if (!scriptResource->luaState) {
         ScriptResource_destruct(scriptResource);
@@ -44,6 +52,8 @@ struct ScriptResource* ScriptResource_construct(const char* const path) {
 
 void ScriptResource_destruct(struct ScriptResource* scriptResource) {
     if (scriptResource) {
+        if (scriptResource->id)
+            free(scriptResource->id);
         if (scriptResource->luaState)
             lua_close(scriptResource->luaState);
         free(scriptResource);

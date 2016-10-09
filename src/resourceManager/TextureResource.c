@@ -31,6 +31,13 @@ struct TextureResource* TextureResource_construct(struct Renderer* renderer, con
     textureResource = (struct TextureResource*)malloc(sizeof(struct TextureResource));
     if (!textureResource)
         return  NULL;
+    textureResource->texture = NULL;
+    textureResource->id = (char*)malloc(sizeof(char) * (strlen(path) + 1));
+    if (!textureResource->id) {
+        TextureResource_destruct(textureResource);
+        return NULL;
+    }
+    strcpy(textureResource->id, path);
     textureResource->texture = IMG_LoadTexture(renderer->renderer, path);
     if (!textureResource->texture) {
         TextureResource_destruct(textureResource);
@@ -41,6 +48,8 @@ struct TextureResource* TextureResource_construct(struct Renderer* renderer, con
 
 void TextureResource_destruct(struct TextureResource* textureResource) {
     if (textureResource) {
+        if (textureResource->id)
+            free(textureResource->id);
         if (textureResource->texture)
             SDL_DestroyTexture(textureResource->texture);
         free(textureResource);

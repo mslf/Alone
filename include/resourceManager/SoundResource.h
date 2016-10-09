@@ -25,6 +25,7 @@
 #include <SDL2/SDL_mixer.h>
 
 struct SoundResource {
+    char* id;
     Mix_Chunk* sound;
 };
 

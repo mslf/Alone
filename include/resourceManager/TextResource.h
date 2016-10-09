@@ -23,6 +23,7 @@
 #define ALONE_TEXTRESOURCE_H
 
 struct TextResource {
+    char* id;
     char* text;
     unsigned char isUnique;
 };

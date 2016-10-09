@@ -26,6 +26,13 @@ struct SoundResource* SoundResource_construct(const char* const path) {
     soundResource = (struct SoundResource*)malloc(sizeof(struct SoundResource));
     if (!soundResource)
         return NULL;
+    soundResource->sound = NULL;
+    soundResource->id = (char*)malloc(sizeof(char) * (strlen(path) + 1));
+    if (!soundResource->id) {
+        SoundResource_destruct(soundResource);
+        return NULL;
+    }
+    strcpy(soundResource->id, path);
     soundResource->sound = Mix_LoadWAV(path);
     if (!soundResource->sound) {
         SoundResource_destruct(soundResource);
@@ -36,6 +43,8 @@ struct SoundResource* SoundResource_construct(const char* const path) {
 
 void SoundResource_destruct(struct SoundResource* soundResource) {
     if(soundResource) {
+        if (soundResource->id)
+            free(soundResource->id);
         if (soundResource->sound)
             Mix_FreeChunk(soundResource->sound);
         free(soundResource);
