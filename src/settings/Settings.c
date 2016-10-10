@@ -49,7 +49,7 @@ struct Settings* Settings_construct(struct ResourceManager* resourceManager, con
         return Settings_defaults(settings);
     }
     struct TextParser* textParser = NULL;
-    textParser = TextParser_construct(settings->settingsResource);
+    textParser = TextParser_constructFromTextResource(settings->settingsResource);
     if (!textParser) {
         // Failed to create TextParser, so using defaults
         return Settings_defaults(settings);

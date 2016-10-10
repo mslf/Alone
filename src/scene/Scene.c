@@ -237,7 +237,7 @@ unsigned char Scene_addSceneNode(
     if (!sceneNodeTextResource)
         return 2;
     struct TextParser* sceneNodeTextParser = NULL;
-    sceneNodeTextParser = TextParser_construct(sceneNodeTextResource);
+    sceneNodeTextParser = TextParser_constructFromTextResource(sceneNodeTextResource);
     if (!sceneNodeTextParser)
         return 3;
     char* sceneNodeTypeString = NULL;

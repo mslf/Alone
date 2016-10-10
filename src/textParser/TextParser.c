@@ -21,7 +21,11 @@
 */
 #include "textParser/TextParser.h"
 
-struct TextParser* TextParser_construct(const struct TextResource* const textResource) {
+struct TextParser* TextParser_constructFromTextResource(const struct TextResource* const textResource) {
+
+}
+
+struct TextParser* TextParser_constructEmpty() {
 
 }
 
