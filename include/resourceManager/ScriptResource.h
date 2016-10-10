@@ -27,6 +27,7 @@
 #include <lualib.h>
 
 struct ScriptResource {
+    size_t pointersCount;
     char* id;
     lua_State* luaState;
 };

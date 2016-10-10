@@ -47,6 +47,7 @@ struct ScriptResource* ScriptResource_construct(const char* const path) {
         ScriptResource_destruct(scriptResource);
         return NULL;
     }
+    scriptResource->pointersCount = 1;
     return scriptResource;
 }
 

@@ -22,7 +22,10 @@
 #ifndef ALONE_TEXTRESOURCE_H
 #define ALONE_TEXTRESOURCE_H
 
+#include <stddef.h>
+
 struct TextResource {
+    size_t pointersCount;
     char* id;
     char* text;
     unsigned char isUnique;

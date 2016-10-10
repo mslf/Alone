@@ -63,6 +63,7 @@ struct TextResource* TextResource_construct(const char* const path, unsigned cha
         textResource->text[totalRead] = '\0';
         textResource->isUnique = unique;
     }
+    textResource->pointersCount = 1;
     return textResource;
 }
 

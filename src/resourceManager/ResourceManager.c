@@ -468,3 +468,107 @@ void ResourceManager_saveTextResource(struct ResourceManager* rm,
         }
     }
 }
+
+void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    size_t j;
+    size_t destructedCount = 0;
+    for (i = 0; i < rm->textureResourcesCount; i++)
+        if (rm->textureResourcesList[i]->pointersCount <= 0) {
+            TextureResource_destruct(rm->textureResourcesList[i]);
+            rm->textureResourcesList[i] = NULL;
+            destructedCount++;
+        }
+    i = 0;
+    while (i < rm->textureResourcesCount - 1) {
+        if (rm->textureResourcesList[i] == NULL) {
+            for (j = i + 1; j < rm->textureResourcesCount; j++)
+                if (rm->textureResourcesList[j]) {
+                    rm->textureResourcesList[i] = rm->textureResourcesList[j];
+                    i++;
+                }
+        }
+        i++;
+    }
+    rm->textureResourcesCount -= destructedCount;
+}
+
+void ResourceManager_destructNeedlessTextResources(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    size_t j;
+    size_t destructedCount = 0;
+    for (i = 0; i < rm->textResourcesCount; i++)
+        if (rm->textResourcesList[i]->pointersCount <= 0) {
+            TextResource_destruct(rm->textResourcesList[i]);
+            rm->textResourcesList[i] = NULL;
+            destructedCount++;
+        }
+    i = 0;
+    while (i < rm->textResourcesCount - 1) {
+        if (rm->textResourcesList[i] == NULL) {
+            for (j = i + 1; j < rm->textResourcesCount; j++)
+                if (rm->textResourcesList[j]) {
+                    rm->textResourcesList[i] = rm->textResourcesList[j];
+                    i++;
+                }
+        }
+        i++;
+    }
+    rm->textResourcesCount -= destructedCount;
+}
+
+void ResourceManager_destructNeedlessScriptResources(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    size_t j;
+    size_t destructedCount = 0;
+    for (i = 0; i < rm->scriptResourcesCount; i++)
+        if (rm->scriptResourcesList[i]->pointersCount <= 0) {
+            ScriptResource_destruct(rm->scriptResourcesList[i]);
+            rm->scriptResourcesList[i] = NULL;
+            destructedCount++;
+        }
+    i = 0;
+    while (i < rm->scriptResourcesCount - 1) {
+        if (rm->scriptResourcesList[i] == NULL) {
+            for (j = i + 1; j < rm->scriptResourcesCount; j++)
+                if (rm->scriptResourcesList[j]) {
+                    rm->scriptResourcesList[i] = rm->scriptResourcesList[j];
+                    i++;
+                }
+        }
+        i++;
+    }
+    rm->scriptResourcesCount -= destructedCount;
+}
+
+void ResourceManager_destructNeedlessSoundResources(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    size_t j;
+    size_t destructedCount = 0;
+    for (i = 0; i < rm->soundResourcesCount; i++)
+        if (rm->soundResourcesList[i]->pointersCount <= 0) {
+            SoundResource_destruct(rm->soundResourcesList[i]);
+            rm->soundResourcesList[i] = NULL;
+            destructedCount++;
+        }
+    i = 0;
+    while (i < rm->soundResourcesCount - 1) {
+        if (rm->soundResourcesList[i] == NULL) {
+            for (j = i + 1; j < rm->soundResourcesCount; j++)
+                if (rm->soundResourcesList[j]) {
+                    rm->soundResourcesList[i] = rm->soundResourcesList[j];
+                    i++;
+                }
+        }
+        i++;
+    }
+    rm->soundResourcesCount -= destructedCount;
+}

@@ -59,6 +59,10 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
                                                             const char* const scriptResId);
 struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* rm,
                                                             const char* const soundResId);
+void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm);
+void ResourceManager_destructNeedlessTextResources(struct ResourceManager* rm);
+void ResourceManager_destructNeedlessScriptResources(struct ResourceManager* rm);
+void ResourceManager_destructNeedlessSoundResources(struct ResourceManager* rm);
 void ResourceManager_saveTextResource(struct ResourceManager* rm,
                                               struct TextResource* textResource, const char* const textResId);
 #endif //ALONE_RESOURCEMANAGER_H

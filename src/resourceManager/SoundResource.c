@@ -38,6 +38,7 @@ struct SoundResource* SoundResource_construct(const char* const path) {
         SoundResource_destruct(soundResource);
         return NULL;
     }
+    soundResource->pointersCount = 1;
     return soundResource;
 }
 

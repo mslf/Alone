@@ -26,6 +26,7 @@
 struct Renderer;
 
 struct TextureResource {
+    size_t pointersCount;
     char* id;
     SDL_Texture* texture;
 };

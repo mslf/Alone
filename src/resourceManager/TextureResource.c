@@ -43,6 +43,7 @@ struct TextureResource* TextureResource_construct(struct Renderer* renderer, con
         TextureResource_destruct(textureResource);
         return NULL;
     }
+    textureResource->pointersCount = 1;
     return  textureResource;
 }
 
