@@ -29,6 +29,8 @@
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
 
+#define LIST_BOX_SCENENODE_PARSER_TYPE_STRING "ListBox"
+
 struct Element{
     struct GameEvent* pressedEvent;
     struct TextResource* elementResource;

@@ -28,6 +28,8 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+
+#define ITEM_SCENENODE_PARSER_TYPE_STRING "Item"
 /*
  * Item is an inheritor of the PhysicalSceneNode.
  * You SHOULD include the "struct PhysicalSceneNode* blablaNode;" at the begining of Item struct,

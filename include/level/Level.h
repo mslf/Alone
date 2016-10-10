@@ -31,6 +31,8 @@
 #include "module/macro/BackgroundModule.h"
 #include "module/macro/ActiveModule.h"
 #include "module/Connections.h"
+
+#define LEVEL_SCENENODE_PARSER_TYPE_STRING "Level"
 /*
  * Level is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Level struct,

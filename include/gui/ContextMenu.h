@@ -29,6 +29,8 @@
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
 
+#define CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING "ContextMenu"
+
 struct MenuOption {
     struct GameEvent* pressedEvent;
     struct TextResource* elementResource;

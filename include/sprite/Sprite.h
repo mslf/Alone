@@ -28,6 +28,8 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+
+#define SPRITE_SCENENODE_PARSER_TYPE_STRING "Sprite"
 /*
  * Sprite is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Sprite struct,

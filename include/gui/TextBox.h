@@ -28,6 +28,8 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+
+#define TEXT_BOX_SCENENODE_PARSER_TYPE_STRING "TextBox"
 /*
  * TextBox is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of TextBox struct,

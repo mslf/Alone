@@ -28,6 +28,8 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+
+#define CHECK_BOX_SCENENODE_PARSER_TYPE_STRING "CheckBox"
 /*
  * CheckBox is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of CheckBox struct,

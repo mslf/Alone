@@ -33,6 +33,8 @@
 #include "resourceManager/ScriptResource.h"
 #include "resourceManager/SoundResource.h"
 #include "module/section/MacroSection.h"
+
+#define USER_SCENENODE_PARSER_TYPE_STRING "User"
 /*
  * User is an inheritor of the PhysicalSceneNode.
  * You SHOULD include the "struct PhysicalSceneNode* blablaNode;" at the begining of User struct,

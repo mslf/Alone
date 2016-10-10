@@ -292,7 +292,6 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
         struct SceneNode* sceneNode = NULL;
         //TODO List here:
         /*
-         * Need to move *_SCENENODE_PARSER_TYPE_STRING from Scene.h to the apropriate header files;
          * Need to remove main TextResource from each SceneNode inheritors due to it's (main TextResource)
          * moving to SceneNode;
          */
