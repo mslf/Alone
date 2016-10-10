@@ -49,7 +49,8 @@ unsigned char Scene_addSceneNode(
         struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
 void Scene_removeSceneNode(
         struct Scene* const scene, struct ResourceManager* const resourceManager, size_t index);
-unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneResId);
+unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* const resourceManager,
+                         const char* const sceneResId);
 unsigned char Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
                                     const char* const scriptResId);
 void Scene_removeEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,

@@ -289,11 +289,32 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
         return 3;
     }
     for (i = 0; i < scene->sceneNodesCount; i++) {
-        struct SceneNode* sceneNode = NULL;
+        TextParser_addString(textParser, SCENE_PARSER_SCENE_NODES_STRING,
+                             scene->sceneNodesList[i]->sceneNodeTextResource->id);
+        if (textParser->lastError) {
+            TextParser_destruct(textParser);
+            return 4;
+        }
     }
-
-
-
+    for (i = 0; i < scene->eventControllersCount; i++) {
+        TextParser_addString(textParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, scene->eventControllersList[i]->id);
+        if (textParser->lastError) {
+            TextParser_destruct(textParser);
+            return 5;
+        }
+    }
+    char* newText = NULL;
+    newText = TextParser_convertToText(textParser);
+    if (textParser->lastError) {
+        TextParser_destruct(textParser);
+        return 6;
+    }
+    if (TextResource_updateContent(scene->sceneResource, newText)) {
+        TextParser_destruct(textParser);
+        return 7;
+    }
+    ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId);
+    return 0;
 }
 
 unsigned char Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
@@ -321,18 +342,15 @@ void Scene_removeEventControllerScript(struct Scene* scene, struct ResourceManag
     if (scene && resourceManager && scriptResId) {
         if (scene->eventControllersCount == 0)
             return; // There is no EventControllers
-        // Try to determine the pointer to EventController's ScriptResource
-        struct ScriptResource* scriptResource = ResourceManager_loadScriptResource(resourceManager, scriptResId);
-        if (!scriptResource)
-            return; // This resource isn't loaded and isn't exist at all
         for (i = 0; i < scene->eventControllersCount; i++)
-            if (scene->eventControllersList[i] == scriptResource) {
+            if (strcmp(scene->eventControllersList[i]->id, scriptResId) == 0) {
                 found = 1;
                 foundIndex = i;
                 break;
             }
         if (!found)
             return;
+        // There we need to tell to the ResourceManager that we don't need that Resource here.
         scene->eventControllersList[foundIndex] = NULL;
         scene->eventControllersCount--;
         for (i = foundIndex; i < scene->eventControllersCount; i++)

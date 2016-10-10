@@ -76,10 +76,23 @@ void TextResource_destruct(struct TextResource* textResource) {
     }
 }
 
+unsigned char TextResource_updateContent(struct TextResource* textResource, const char* const text) {
+    if (!textResource || !text)
+        return 1;
+    char* newText = NULL;
+    newText = (char*)malloc(sizeof(char) * (strlen(text) + 1));
+    if (!newText)
+        return 2;
+    strcpy(newText, text);
+    free(textResource->text);
+    textResource->text = newText;
+    return 0;
+}
+
 unsigned char TextResource_save(struct TextResource* textResource, const char* const path) {
     if (textResource) {
         SDL_RWops *file = NULL;
-        if (path)
+        if (path && path != textResource->id)
             SDL_RWFromFile(path, "w");
         else
             SDL_RWFromFile(textResource->id, "w");
