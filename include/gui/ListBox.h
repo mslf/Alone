@@ -46,7 +46,6 @@ struct Element{
  */
 struct ListBox {
     struct SceneNode* sceneNode;
-    struct TextResource* listBoxResource;
     struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct SoundResource* focusedSoundResource;

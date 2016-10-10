@@ -290,11 +290,6 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
     }
     for (i = 0; i < scene->sceneNodesCount; i++) {
         struct SceneNode* sceneNode = NULL;
-        //TODO List here:
-        /*
-         * Need to remove main TextResource from each SceneNode inheritors due to it's (main TextResource)
-         * moving to SceneNode;
-         */
     }
 
 

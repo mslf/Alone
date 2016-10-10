@@ -49,7 +49,6 @@ struct InventoryItem {
 
 struct User {
     struct PhysicalSceneNode* physicalSceneNode;
-    struct TextResource* userResource;
     struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct ScriptResource* scriptResource;

@@ -39,7 +39,6 @@
  */
 struct Sprite {
     struct SceneNode* sceneNode;
-    struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     size_t currentAnimation;
     size_t currentFrame;

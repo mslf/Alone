@@ -39,7 +39,6 @@
  */
 struct Text {
     struct SceneNode* sceneNode;
-    struct TextResource* textResource;
     SDL_Rect* srcRect;
     SDL_Rect* dstRect;
 };

@@ -39,7 +39,6 @@
  */
 struct Item {
     struct PhysicalSceneNode* physicalSceneNode;
-    struct TextResource* itemResource;
     struct TextResource* usedEventResource;
     struct TextResource* spriteResource;
     struct TextureResource* textureResource;

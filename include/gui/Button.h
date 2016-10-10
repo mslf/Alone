@@ -39,7 +39,6 @@
  */
 struct Button {
     struct SceneNode* sceneNode;
-    struct TextResource* buttonResource;
     struct TextResource* labelResource;
     struct TextResource* spriteResource;
     struct TextResource* pressedEventResource;

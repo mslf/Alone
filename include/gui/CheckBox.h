@@ -39,7 +39,6 @@
  */
 struct CheckBox {
     struct SceneNode* sceneNode;
-    struct TextResource* checkBoxResource;
     struct TextResource* spriteResource;
     struct TextResource* checkedEventResource;
     struct TextureResource* textureResource;

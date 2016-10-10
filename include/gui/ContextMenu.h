@@ -46,7 +46,6 @@ struct MenuOption {
  */
 struct ContextMenu {
     struct SceneNode* sceneNode;
-    struct TextResource* contextMenuResource;
     struct TextResource* spriteResource;
     struct TextureResource* textureResource;
     struct SoundResource* focusedSoundResource;

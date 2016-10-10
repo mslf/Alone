@@ -42,7 +42,6 @@
  */
 struct  Level {
     struct SceneNode* sceneNode;
-    struct TextResource* levelResource;
     struct BackgroundModule** backgroundModulesList;
     struct ActiveModule** activeModulesList;
     struct MacroConnection* connectionsList;

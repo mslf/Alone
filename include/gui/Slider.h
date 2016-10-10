@@ -39,7 +39,6 @@
  */
 struct Slider {
     struct SceneNode* sceneNode;
-    struct TextResource* sliderResource;
     struct TextResource* spriteResource;
     struct TextResource* labelResource;
     struct TextResource* pressedEventResource;

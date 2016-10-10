@@ -39,7 +39,6 @@
  */
 struct ProgressBar {
     struct SceneNode* sceneNode;
-    struct TextResource* progressBarResource;
     struct TextResource* spriteResource;
     struct TextResource* labelResource;
     struct TextureResource* textureResource;

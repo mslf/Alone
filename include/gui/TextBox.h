@@ -39,7 +39,6 @@
  */
 struct TextBox {
     struct SceneNode* sceneNode;
-    struct TextResource* textBoxResource;
     struct TextResource* textValueResource;
     struct TextResource* spriteResource;
     struct TextResource* pressedEventResource;
