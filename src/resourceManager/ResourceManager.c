@@ -22,51 +22,61 @@
 #include "resourceManager/ResourceManager.h"
 #include <string.h>
 
-unsigned char ResourceManager_constructTextureResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+const char* const RESOURCE_MANAGER_ERR_ALLOC =
+        "ResourceManager: constructor: allocating memory failed!";
+const char* const RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC =
+        "ResourceManager: constructor: allocating for textureResourcesList failed!";
+const char* const RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC =
+        "ResourceManager: constructor: allocating for textResourcesList failed!";
+const char* const RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC =
+        "ResourceManager: constructor: allocating for scriptResourcesList failed!";
+const char* const RESOURCE_MANAGER_ERR_SOUND_RESOURCES_LIST_ALLOC =
+        "ResourceManager: constructor: allocating for soundResourcesList failed!";
+const char* const RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES =
+        "ResourceManager: TextureResource loader: constructing TextureResource failed!";
+const char* const RESOURCE_MANAGER_ERR_LOAD_TEXT_RES =
+        "ResourceManager: TextResource loader: constructing TextResource failed!";
+const char* const RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES =
+        "ResourceManager: ScriptResource loader: constructing ScriptResource failed!";
+const char* const RESOURCE_MANAGER_ERR_LOAD_SOUND_RES =
+        "ResourceManager: SoundResource loader: constructing SoundResource failed!";
+
+unsigned char ResourceManager_constructTextureResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     rm->textureResourcesList = NULL;
     rm->textureResourcesCount = 0;
     if (!(rm->textureResourcesList = (struct TextureResource**)malloc(
             sizeof(struct TextureResource*) * INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES))) {
-        fprintf(stderr, "TextureResourcesList allocating failed!\n");
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
         return 2;
     }
     rm->allocatedTextureResourcesCount = INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     return 0;
-
 }
 
-unsigned char ResourceManager_constructTextResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+unsigned char ResourceManager_constructTextResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     rm->textResourcesList = NULL;
     rm->textResourcesCount = 0;
     if (!(rm->textResourcesList = (struct TextResource**)malloc(
             sizeof(struct TextResource*) * INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES))) {
-        fprintf(stderr, "TextResourcesList allocating failed!\n");
-        ResourceManager_destruct(rm);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC);
         return  2;
     }
     rm->allocatedTextResourcesCount = INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES;
     return 0;
 }
 
-unsigned char ResourceManager_constructScriptResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+unsigned char ResourceManager_constructScriptResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     rm->scriptResourcesList = NULL;
     rm->scriptResourcesCount = 0;
     if (!(rm->scriptResourcesList = (struct ScriptResource**)malloc(
             sizeof(struct ScriptResource*) * INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES))) {
-        fprintf(stderr, "ScriptResourcesList allocating failed!\n");
-        ResourceManager_destruct(rm);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC);
         return 2;
     }
     rm->allocatedScriptResourcesCount = INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES;
@@ -74,16 +84,13 @@ unsigned char ResourceManager_constructScriptResourcesMap(struct ResourceManager
 }
 
 unsigned char ResourceManager_constructSoundResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+    if (!rm)
         return 1;
-    }
     rm->soundResourcesList = NULL;
     rm->soundResourcesCount = 0;
     if (!(rm->soundResourcesList = (struct SoundResource**)malloc(
             sizeof(struct SoundResource*) * INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES))) {
-        fprintf(stderr, "SoundResourcesList allocating failed!\n");
-        ResourceManager_destruct(rm);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SOUND_RESOURCES_LIST_ALLOC);
         return 2;
     }
     rm->allocatedSoundResourcesCount = INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES;
@@ -93,96 +100,89 @@ unsigned char ResourceManager_constructSoundResourcesMap(struct ResourceManager*
 struct ResourceManager* ResourceManager_construct(struct Logger* logger) {
     struct ResourceManager* rm = NULL;
     rm = (struct ResourceManager*)malloc(sizeof(struct ResourceManager));
-    if (rm) {
-        unsigned char result = 0;
-        result += ResourceManager_constructTextureResourcesMap(rm);
-        result += ResourceManager_constructTextResourcesMap(rm);
-        result += ResourceManager_constructScriptResourcesMap(rm);
-        result += ResourceManager_constructSoundResourcesMap(rm);
-        if (result) {
-            ResourceManager_destruct(rm);
-            return NULL;
-        }
+    if (!rm) {
+        Logger_log(logger, RESOURCE_MANAGER_ERR_ALLOC);
+        return NULL;
     }
     rm->logger = logger;
+    unsigned char result = 0;
+    result += ResourceManager_constructTextureResourcesList(rm);
+    result += ResourceManager_constructTextResourcesList(rm);
+    result += ResourceManager_constructScriptResourcesList(rm);
+    result += ResourceManager_constructSoundResourcesMap(rm);
+    if (result) {
+        ResourceManager_destruct(rm);
+        return NULL;
+    }
     return rm;
 }
 
-void ResourceManager_destructTextureResourcesMap(struct ResourceManager* rm) {
-    if (rm) {
-        size_t i;
-        if (rm->textureResourcesList) {
-            if (rm->textureResourcesCount > 0)
-                for (i = 0; i < rm->textureResourcesCount; i++)
-                    TextureResource_destruct(rm->textureResourcesList[i]);
-            free(rm->textureResourcesList);
-        }
-    } else
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+void ResourceManager_destructTextureResourcesList(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    if (rm->textureResourcesList) {
+        if (rm->textureResourcesCount > 0)
+            for (i = 0; i < rm->textureResourcesCount; i++)
+                TextureResource_destruct(rm->textureResourcesList[i]);
+        free(rm->textureResourcesList);
+    }
 }
 
-void ResourceManager_destructTextResourcesMap(struct ResourceManager* rm) {
-    if (rm) {
-        size_t i;
-        if (rm->textResourcesList) {
-            if (rm->textResourcesCount > 0)
-                for (i = 0; i < rm->textResourcesCount; i++)
-                    TextResource_destruct(rm->textResourcesList[i]);
-            free(rm->textResourcesList);
-        }
-    } else
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+void ResourceManager_destructTextResourcesList(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    if (rm->textResourcesList) {
+        if (rm->textResourcesCount > 0)
+            for (i = 0; i < rm->textResourcesCount; i++)
+                TextResource_destruct(rm->textResourcesList[i]);
+        free(rm->textResourcesList);
+    }
 }
 
-void ResourceManager_destructScriptResourcesMap(struct ResourceManager* rm) {
-    if (rm) {
-        size_t i;
-        if (rm->scriptResourcesList) {
-            if (rm->scriptResourcesCount > 0)
-                for (i = 0; i < rm->scriptResourcesCount; i++)
-                    ScriptResource_destruct(rm->scriptResourcesList[i]);
-            free(rm->scriptResourcesList);
-        }
-    } else
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+void ResourceManager_destructScriptResourcesList(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    if (rm->scriptResourcesList) {
+        if (rm->scriptResourcesCount > 0)
+            for (i = 0; i < rm->scriptResourcesCount; i++)
+                ScriptResource_destruct(rm->scriptResourcesList[i]);
+        free(rm->scriptResourcesList);
+    }
 }
 
-void ResourceManager_destructSoundResourcesMap(struct ResourceManager* rm) {
-    if (rm) {
-        size_t i;
-        if (rm->soundResourcesList) {
-            if (rm->soundResourcesCount > 0)
-                for (i = 0; i < rm->soundResourcesCount; i++)
-                    SoundResource_destruct(rm->soundResourcesList[i]);
-            free(rm->soundResourcesList);
-        }
-    } else
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+void ResourceManager_destructSoundResourcesList(struct ResourceManager* rm) {
+    if (!rm)
+        return;
+    size_t i;
+    if (rm->soundResourcesList) {
+        if (rm->soundResourcesCount > 0)
+            for (i = 0; i < rm->soundResourcesCount; i++)
+                SoundResource_destruct(rm->soundResourcesList[i]);
+        free(rm->soundResourcesList);
+    }
 }
 
 void ResourceManager_destruct(struct ResourceManager* rm) {
-    if (rm) {
-        ResourceManager_destructTextureResourcesMap(rm);
-        ResourceManager_destructTextResourcesMap(rm);
-        ResourceManager_destructScriptResourcesMap(rm);
-        ResourceManager_destructSoundResourcesMap(rm);
-        free(rm);
-    } else
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+    if (!rm)
+        return;
+    ResourceManager_destructTextureResourcesList(rm);
+    ResourceManager_destructTextResourcesList(rm);
+    ResourceManager_destructScriptResourcesList(rm);
+    ResourceManager_destructSoundResourcesList(rm);
+    free(rm);
 }
 
-unsigned char ResourceManager_reallocateTextureResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+unsigned char ResourceManager_reallocateTextureResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     struct TextureResource** textureResourcesList = NULL;
     size_t i;
     size_t newSize = rm->allocatedTextureResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     if (!(textureResourcesList = (struct TextureResource**)malloc(sizeof(struct TextureResource*) * newSize))) {
-        fprintf(stderr, "TextureResourcesMap reallocating failed!\n");
-        if (textureResourcesList)
-            free(textureResourcesList);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
         return 2;
     }
     for (i = 0; i < rm->textureResourcesCount; i++)
@@ -191,21 +191,16 @@ unsigned char ResourceManager_reallocateTextureResourcesMap(struct ResourceManag
     rm->textureResourcesList = textureResourcesList;
     rm->allocatedTextureResourcesCount = newSize;
     return 0;
-        
 }
 
-unsigned char ResourceManager_reallocateTextResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+unsigned char ResourceManager_reallocateTextResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     struct TextResource** textResourcesList = NULL;
     size_t i;
     size_t newSize = rm->allocatedTextResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     if (!(textResourcesList = (struct TextResource**)malloc(sizeof(struct TextResource*) * newSize))) {
-        fprintf(stderr, "TextResourcesMap reallocating failed!\n");
-        if (textResourcesList)
-            free(textResourcesList);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC);
         return 2;
     }
     for (i = 0; i < rm->textResourcesCount; i++)
@@ -216,18 +211,14 @@ unsigned char ResourceManager_reallocateTextResourcesMap(struct ResourceManager*
     return 0;
 }
 
-unsigned char ResourceManager_reallocateScriptResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+unsigned char ResourceManager_reallocateScriptResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     struct ScriptResource** scriptResourcesList = NULL;
     size_t i;
     size_t newSize = rm->allocatedScriptResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     if (!(scriptResourcesList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * newSize))) {
-        fprintf(stderr, "ScriptResourcesMap reallocating failed!\n");
-        if (scriptResourcesList)
-            free(scriptResourcesList);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC);
         return 2;
     }
     for (i = 0; i < rm->scriptResourcesCount; i++)
@@ -238,18 +229,14 @@ unsigned char ResourceManager_reallocateScriptResourcesMap(struct ResourceManage
     return 0;
 }
 
-unsigned char ResourceManager_reallocateSoundResourcesMap(struct ResourceManager* rm) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+unsigned char ResourceManager_reallocateSoundResourcesList(struct ResourceManager* rm) {
+    if (!rm)
         return 1;
-    }
     struct SoundResource** soundResourcesList = NULL;
     size_t i;
     size_t newSize = rm->allocatedSoundResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     if (!(soundResourcesList = (struct SoundResource**)malloc(sizeof(struct SoundResource*) * newSize))) {
-        fprintf(stderr, "SoundResourcesMap reallocating failed!\n");
-        if (soundResourcesList)
-            free(soundResourcesList);
+        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
         return 2;
     }
     for (i = 0; i < rm->soundResourcesCount; i++)
@@ -262,18 +249,8 @@ unsigned char ResourceManager_reallocateSoundResourcesMap(struct ResourceManager
 
 struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm, struct Renderer* renderer,
                                                             const char* const textureResId) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+    if (!rm || !textureResId || !renderer)
         return NULL;
-    }
-    if (!textureResId) {
-        fprintf(stderr, "NULL pointer to TextureResId!\n");
-        return NULL;
-    }
-    if (!renderer) {
-        fprintf(stderr, "NULL pointer to Renderer!\n");
-        return NULL;
-    }
     unsigned  char found = 0;
     size_t foundIndex = 0;
     size_t i;
@@ -289,33 +266,28 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         struct TextureResource* textureResource = NULL;
         textureResource = TextureResource_construct(renderer, textureResId);
         if (!textureResource) {
-            fprintf(stderr, "TextureResource constructing failed! ResourceID: %s\n", textureResId);
+            char tempString[600];
+            sprintf(tempString, "%s ResourceID: %s. SDL_mixer Error: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES,
+                    textureResId, IMG_GetError());
             return NULL;
         }
         // Try to reallocate (if needed) and add textureResource to the list
         if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount)
-            if (ResourceManager_reallocateTextureResourcesMap(rm)) {
+            if (ResourceManager_reallocateTextureResourcesList(rm)) {
                 TextureResource_destruct(textureResource);
                 return NULL;
             }
         rm->textureResourcesList[rm->textureResourcesCount] = textureResource;
         rm->textureResourcesCount++;
         return textureResource;
-
     }
     return rm->textureResourcesList[foundIndex];
 }
 
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,
                                                       const char* const textResId, unsigned char unique) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+    if (!rm || !textResId)
         return NULL;
-    }
-    if (!textResId) {
-        fprintf(stderr, "NULL pointer to textResId!\n");
-        return NULL;
-    }
     unsigned  char found = 0;
     size_t foundIndex = 0;
     size_t i;
@@ -333,12 +305,13 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
     struct TextResource* textResource = NULL;
     textResource = TextResource_construct(textResId, unique);
     if (!textResource) {
-        fprintf(stderr, "TextResource constructing failed! ResourceID: %s\n", textResId);
-        return NULL;
+        char tempString[600];
+        sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXT_RES, textResId);
+        Logger_log(rm->logger, tempString);
     }
     // Try to reallocate (if needed) and add textResource to the list
     if (rm->textResourcesCount >= rm->allocatedTextResourcesCount)
-        if (ResourceManager_reallocateTextResourcesMap(rm)) {
+        if (ResourceManager_reallocateTextResourcesList(rm)) {
             TextResource_destruct(textResource);
             return NULL;
         }
@@ -349,14 +322,8 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
 
 struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager* rm,
                                                           const char* const scriptResId) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+    if (!rm || !scriptResId)
         return NULL;
-    }
-    if (!scriptResId) {
-        fprintf(stderr, "NULL pointer to scriptResId!\n");
-        return NULL;
-    }
     unsigned  char found = 0;
     size_t foundIndex = 0;
     size_t i;
@@ -372,12 +339,13 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
         struct ScriptResource* scriptResource = NULL;
         scriptResource = ScriptResource_construct(scriptResId);
         if (!scriptResource) {
-            fprintf(stderr, "ScriptResource constructing failed! ResourceId: %s\n", scriptResId);
-            return NULL;
+            char tempString[600];
+            sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES, scriptResId);
+            Logger_log(rm->logger, tempString);
         }
         // Try to reallocate (if needed) and add scriptResource to the list
         if (rm->scriptResourcesCount >= rm->allocatedScriptResourcesCount)
-            if (ResourceManager_reallocateScriptResourcesMap(rm)) {
+            if (ResourceManager_reallocateScriptResourcesList(rm)) {
                 ScriptResource_destruct(scriptResource);
                 return NULL;
             }
@@ -390,14 +358,8 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
 
 struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* rm,
                                                         const char* const soundResId) {
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
+    if (!rm || !soundResId)
         return NULL;
-    }
-    if (!soundResId) {
-        fprintf(stderr, "NULL pointer to soundResId!\n");
-        return NULL;
-    }
     unsigned  char found = 0;
     size_t foundIndex = 0;
     size_t i;
@@ -413,13 +375,15 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
         struct SoundResource* soundResource = NULL;
         soundResource = SoundResource_construct(soundResId);
         if (!soundResource) {
-            fprintf(stderr, "SoundResource constructing failed! ResourceID: %s\n"
-                    "SDL_mixer Error: %s\n", soundResId, Mix_GetError());
+            char tempString[600];
+            sprintf(tempString, "%s ResourceID: %s. SDL_mixer Error: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES,
+                    soundResId, Mix_GetError());
+            Logger_log(rm->logger, tempString);
             return NULL;
         }
         // Try to reallocate (if needed) and add soundResource to the list
         if (rm->soundResourcesCount >= rm->allocatedSoundResourcesCount)
-            if (ResourceManager_reallocateSoundResourcesMap(rm)) {
+            if (ResourceManager_reallocateSoundResourcesList(rm)) {
                 SoundResource_destruct(soundResource);
                 return NULL;
             }
@@ -430,44 +394,29 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
     return rm->soundResourcesList[foundIndex];
 }
 
-void ResourceManager_saveTextResource(struct ResourceManager* rm,
+unsigned char ResourceManager_saveTextResource(struct ResourceManager* rm,
                                       struct TextResource* textResource, const char* const textResId) {
+
+    if (!rm || !textResId || !textResource)
+        return 1;
     size_t result = 0;
-    if (!rm) {
-        fprintf(stderr, "NULL pointer to ResourceManager!\n");
-        result++;
-    }
-    if (!textResId) {
-        fprintf(stderr, "NULL pointer to textResId!\n");
-        result++;
-    }
-    if (!textResource) {
-        fprintf(stderr, "NULL pointer to textResource!\n");
-        result++;
-    }
-    if (!result) {
-        size_t i;
-        unsigned  char found = 0;
-        for (i = 0; i < rm->textResourcesCount; i++)
-            if (textResource == rm->textResourcesList[i]) {
-                found = 1;
-                break;
-            }
-        if (!found) {
-            // Try to reallocate (if needed) and add textResource to the list
-            if (rm->textResourcesCount >= rm->allocatedTextResourcesCount)
-                if (!ResourceManager_reallocateTextResourcesMap(rm)) {
-                    rm->textResourcesList[rm->textResourcesCount] = textResource;
-                    rm->textResourcesCount++;
-                } else
-                    fprintf(stderr, "Warning: Adding new unique textResource failed!\n"
-                            "Destroying unique %s will be impossible!\n", textResId);
+    size_t i;
+    unsigned  char found = 0;
+    result = TextResource_save(textResource, textResId);
+    for (i = 0; i < rm->textResourcesCount; i++)
+        if (textResource == rm->textResourcesList[i]) {
+            found = 1;
+            break;
         }
-        result = TextResource_save(textResource, textResId);
-        if (result != 0) {
-            fprintf(stderr, "Saving TextResource failed! ResourceID: %s\nError code: %d\n", textResId, result);
-        }
+    if (!found) {
+        // Try to reallocate (if needed) and add textResource to the list
+        if (rm->textResourcesCount >= rm->allocatedTextResourcesCount)
+            if (ResourceManager_reallocateTextResourcesList(rm))
+                return 2;
+        rm->textResourcesList[rm->textResourcesCount] = textResource;
+        rm->textResourcesCount++;
     }
+    return (result + 2);
 }
 
 void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm) {

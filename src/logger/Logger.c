@@ -24,5 +24,5 @@
 
 void Logger_log(struct Logger* logger, const char* const message) {
     if (logger && message && logger->state == LoggerEnabledToStderr)
-        fprintf(stderr, message);
+        fprintf(stderr, "%s\n", message);
 }

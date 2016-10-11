@@ -29,10 +29,12 @@
 #include "SoundResource.h"
 #include "ScriptResource.h"
 
-#define INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES 10
-#define INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES 100
-#define INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES 10
-#define INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES 10
+enum {
+    INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES = 10,
+    INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES = 100,
+    INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES = 10,
+    INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES = 10
+};
 
 struct ResourceManager {
     struct Logger* logger;
@@ -65,6 +67,6 @@ void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm
 void ResourceManager_destructNeedlessTextResources(struct ResourceManager* rm);
 void ResourceManager_destructNeedlessScriptResources(struct ResourceManager* rm);
 void ResourceManager_destructNeedlessSoundResources(struct ResourceManager* rm);
-void ResourceManager_saveTextResource(struct ResourceManager* rm,
+unsigned char ResourceManager_saveTextResource(struct ResourceManager* rm,
                                               struct TextResource* textResource, const char* const textResId);
 #endif //ALONE_RESOURCEMANAGER_H

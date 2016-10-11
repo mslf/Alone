@@ -23,13 +23,13 @@
 #include "string.h"
 
 const char* const EVENT_MANAGER_ERR_ALLOC =
-        "EventManager: constructor: allocating memory failed!\n";
+        "EventManager: constructor: allocating memory failed!";
 const char* const EVENT_MANAGER_ERR_GAME_EVENTS_LIST_ALLOC =
-        "EventManager: constructor: allocating memory for gameEventsList failed!\n";
+        "EventManager: constructor: allocating memory for gameEventsList failed!";
 const char* const EVENT_MANAGER_ERR_CUSTOM_GAME_EVENTS_LIST_ALLOC =
-        "EventManager: constructor: allocating memory for customGameEventsList failed!\n";
+        "EventManager: constructor: allocating memory for customGameEventsList failed!";
 const char* const EVENT_MANAGER_ERR_SDL_EVENTS_LIST_ALLOC =
-        "EventManager: constructor: allocating memory for sdlEventsList failed!\n";
+        "EventManager: constructor: allocating memory for sdlEventsList failed!";
 
 struct EventManager* EventManager_construct(struct Logger* logger) {
     struct EventManager* em = NULL;

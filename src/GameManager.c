@@ -34,14 +34,10 @@ struct GameManager* GameManager_construct() {
         gm->musican = NULL;
         gm->eventManager = NULL;
         gm->logger.state = LoggerEnabledToStderr;
-        if (!(gm->eventManager = EventManager_construct(&(gm->logger)))) {
-            fprintf(stderr, "EventManager constructing failed!\n");
+        if (!(gm->eventManager = EventManager_construct(&(gm->logger))))
             result++;
-        }
-        if (!(gm->resourceManager = ResourceManager_construct(&(gm->logger)))) {
-            fprintf(stderr, "ResourceManager constructing failed!\n");
+        if (!(gm->resourceManager = ResourceManager_construct(&(gm->logger))))
             result++;
-        }
         gm->settings = Settings_construct(gm->resourceManager, "Alone.settings");
         if (gm->settings->isSoundActive)
             if (!(gm->musican = Musican_construct(&(gm->logger)))) {
