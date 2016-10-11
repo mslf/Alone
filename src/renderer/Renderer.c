@@ -24,7 +24,7 @@
 #include <SDL2/SDL_image.h>
 #include "renderer/Renderer.h"
 
-struct Renderer* Renderer_construct(struct Settings* settings) {
+struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* settings) {
     struct Renderer* renderer = NULL;
     if (!settings) {
         fprintf(stderr, "NULL pointer to Settings!\n");
@@ -66,6 +66,7 @@ struct Renderer* Renderer_construct(struct Settings* settings) {
     renderer->currentScreenSize.y = (int)settings->h;
     renderer->virtualScreenSize.x = (int)settings->virtualW;
     renderer->virtualScreenSize.y = (int)settings->virtualH;
+    renderer->logger = logger;
     return renderer;
 }
 

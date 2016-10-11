@@ -23,6 +23,7 @@
 #define ALONE_RESOURCEMANAGER_H
 
 #include <stddef.h>
+#include "logger/Logger.h"
 #include "TextureResource.h"
 #include "TextResource.h"
 #include "SoundResource.h"
@@ -34,6 +35,7 @@
 #define INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES 10
 
 struct ResourceManager {
+    struct Logger* logger;
     struct TextureResource** textureResourcesList;
     struct TextResource** textResourcesList;
     struct ScriptResource** scriptResourcesList;
@@ -48,7 +50,7 @@ struct ResourceManager {
     size_t allocatedSoundResourcesCount;
 };
 
-struct ResourceManager* ResourceManager_construct();
+struct ResourceManager* ResourceManager_construct(struct Logger* logger);
 void ResourceManager_destruct(struct ResourceManager* rm);
 
 struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm, struct Renderer* renderer,

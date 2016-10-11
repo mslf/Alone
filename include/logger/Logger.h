@@ -1,5 +1,5 @@
 //
-// Created by mslf on 8/10/16.
+// Created by mslf on 10/11/16.
 //
 /*
 	Copyright 2016 Golikov Vitaliy
@@ -19,21 +19,19 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef ALONE_MUSICAN_H
-#define ALONE_MUSICAN_H
+#ifndef ALONE_LOGGER_H
+#define ALONE_LOGGER_H
 
-#include "logger/Logger.h"
-#include "resourceManager/SoundResource.h"
-
-struct Musican {
-    struct Logger* logger;
-    unsigned char isInitialized;
-    // Actually, this struct is empty. It will contain some other data later, if I need the music.
+enum LoggerState {
+    LoggerDisabled,
+    LoggerEnabledToStderr,
+    LoggerEnabledToFile
 };
 
-struct Musican* Musican_construct(struct Logger* logger);
-void Musican_destruct(struct Musican* musican);
+struct Logger {
+    enum LoggerState state;
+};
 
-void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops);
+void Logger_log(struct Logger* logger, const char* const message);
 
-#endif //ALONE_MUSICAN_H
+#endif //ALONE_LOGGER_H

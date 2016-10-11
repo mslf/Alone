@@ -23,10 +23,12 @@
 #define ALONE_RENDERER_H
 
 #include <SDL2/SDL.h>
+#include "logger/Logger.h"
 
 struct Settings;
 
  struct Renderer {
+     struct Logger* logger;
      SDL_Window* window;
      SDL_Renderer* renderer;
      SDL_Point cameraPosition;
@@ -38,7 +40,7 @@ struct Settings;
       */
 };
 
-struct Renderer* Renderer_construct(struct Settings* settings);
+struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* settings);
 void Renderer_destruct(struct Renderer* renderer);
 
 SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point);

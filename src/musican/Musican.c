@@ -22,7 +22,7 @@
 #include "musican/Musican.h"
 #include <SDL2/SDL.h>
 
-struct Musican* Musican_construct() {
+struct Musican* Musican_construct(struct Logger* logger) {
     struct Musican* musican = NULL;
     musican = (struct Musican*)malloc(sizeof(struct Musican*));
     if (musican) {
@@ -43,6 +43,7 @@ struct Musican* Musican_construct() {
         Musican_destruct(musican);
         return NULL;
     }
+    musican->logger = logger;
     return musican;
 }
 

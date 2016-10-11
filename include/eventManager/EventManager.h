@@ -24,12 +24,14 @@
 
 #include <stddef.h>
 #include <SDL2/SDL.h>
+#include "logger/Logger.h"
 #include "eventManager/GameEvent.h"
 
 #define INITIAL_NUMBER_ALLOCATED_EVENTS 100
 #define INITIAL_NUMBER_ALLOCATED_SDL_EVENTS 20
 
 struct EventManager {
+    struct Logger* logger;
     struct GameEvent** gameEventsList;
     struct GameEvent** customGameEventsList;
     SDL_Event* sdlEventsList;
@@ -42,7 +44,7 @@ struct EventManager {
     unsigned char quit;
 };
 
-struct EventManager* EventManager_construct();
+struct EventManager* EventManager_construct(struct Logger* logger);
 void EventManager_destruct(struct EventManager* em);
 
 void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);

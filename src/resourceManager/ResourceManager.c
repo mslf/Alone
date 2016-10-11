@@ -90,7 +90,7 @@ unsigned char ResourceManager_constructSoundResourcesMap(struct ResourceManager*
     return 0;
 }
 
-struct ResourceManager* ResourceManager_construct() {
+struct ResourceManager* ResourceManager_construct(struct Logger* logger) {
     struct ResourceManager* rm = NULL;
     rm = (struct ResourceManager*)malloc(sizeof(struct ResourceManager));
     if (rm) {
@@ -104,6 +104,7 @@ struct ResourceManager* ResourceManager_construct() {
             return NULL;
         }
     }
+    rm->logger = logger;
     return rm;
 }
 

@@ -22,6 +22,7 @@
 #ifndef ALONE_GAMEMANAGER_H
 #define ALONE_GAMEMANAGER_H
 
+#include "logger/Logger.h"
 #include "renderer/Renderer.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
@@ -32,6 +33,7 @@
 #define INITIAL_NUMBER_ALLOCATED_SCENES 10
 
 struct GameManager {
+    struct Logger logger;
     struct EventManager* eventManager;
     struct ResourceManager* resourceManager;
     struct Renderer* renderer;

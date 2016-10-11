@@ -22,7 +22,7 @@
 #include "eventManager/EventManager.h"
 #include "string.h"
 
-struct EventManager* EventManager_construct() {
+struct EventManager* EventManager_construct(struct Logger* logger) {
     struct EventManager* em = NULL;
     em = (struct EventManager*)malloc(sizeof(struct EventManager));
     if (em) {
@@ -55,6 +55,7 @@ struct EventManager* EventManager_construct() {
         em->sdlEventsCount = 0;
         em->quit = 0;
     }
+    em->logger = logger;
     return em;
 }
 
