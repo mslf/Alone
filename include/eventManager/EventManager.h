@@ -27,8 +27,10 @@
 #include "logger/Logger.h"
 #include "eventManager/GameEvent.h"
 
-#define INITIAL_NUMBER_ALLOCATED_EVENTS 100
-#define INITIAL_NUMBER_ALLOCATED_SDL_EVENTS 20
+enum {
+    INITIAL_NUMBER_ALLOCATED_EVENTS = 100,
+    INITIAL_NUMBER_ALLOCATED_SDL_EVENTS = 20
+};
 
 struct EventManager {
     struct Logger* logger;
@@ -47,9 +49,9 @@ struct EventManager {
 struct EventManager* EventManager_construct(struct Logger* logger);
 void EventManager_destruct(struct EventManager* em);
 
-void EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
-void EventManager_removeEvent(struct EventManager* em, size_t index);
+unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
+unsigned char EventManager_removeEvent(struct EventManager* em, size_t index);
 unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel);
-void EventManager_updateSdlEvents(struct EventManager* em);
+unsigned char EventManager_updateSdlEvents(struct EventManager* em);
 
 #endif //ALONE_EVENTMANAGER_H

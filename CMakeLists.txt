@@ -81,7 +81,7 @@ add_library(textParser              STATIC ${SOURCE_TEXTPARSER})
 add_executable(Alone ${SOURCE_EXUTABLE})
 
 target_link_libraries(Alone gameManager)
-target_link_libraries(Alone logger)
+target_link_libraries(gameManager logger)
 target_link_libraries(Alone renderer)
 target_link_libraries(Alone musican)
 target_link_libraries(Alone resourceManager)
