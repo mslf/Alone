@@ -24,6 +24,7 @@
 
 #include <SDL2/SDL.h>
 
+#define SETTINGS_DEFAULT_MAIN_SCENE "data/main.scene"
 enum {
     SETTINGS_DEFAULT_VSYNC = 1,
     SETTINGS_DEFAULT_MUSIC = 1,

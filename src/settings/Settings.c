@@ -24,7 +24,6 @@
 #include "textParser/TextParser.h"
 
 const char* const SETTINGS_PARSER_TYPE_STRING = "Settings";
-const char* const SETTINGS_DEFAULT_MAIN_SCENE = "data/main.scene";
 const char* const SETTINGS_PARSER_SCREEN_HEIGHT = "screenHeight";
 const char* const SETTINGS_PARSER_SCREEN_WIDTH = "screenWidth";
 const char* const SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT = "virtualScreenHeight";

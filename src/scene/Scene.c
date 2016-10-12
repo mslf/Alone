@@ -191,22 +191,26 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager, con
     struct TextParser* sceneTextParser = NULL;
     sceneTextParser = TextParser_constructFromTextResource(scene->sceneResource);
     if (!sceneTextParser) {
+        scene->sceneResource->pointersCount--;
         Scene_destruct(scene);
         return NULL;
     }
     char* sceneTypeString = NULL;
     sceneTypeString = TextParser_getString(sceneTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (sceneTextParser->lastError) {
+        scene->sceneResource->pointersCount--;
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
     if (strcmp(sceneTypeString, SCENE_PARSER_TYPE_STRING) != 0) {
+        scene->sceneResource->pointersCount--;
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
     if (!Scene_init(scene, resourceManager, sceneTextParser)) {
+        scene->sceneResource->pointersCount--;
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
         return NULL;
@@ -224,6 +228,7 @@ void Scene_destruct (struct Scene* scene) {
                 Scene_destructSceneNode(scene->sceneNodesList[i]);
             free(scene->sceneNodesList);
         }
+        scene->sceneResource->pointersCount--;
         free(scene);
     }
 }
