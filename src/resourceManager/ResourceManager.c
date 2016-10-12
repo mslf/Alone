@@ -267,7 +267,7 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         textureResource = TextureResource_construct(renderer, textureResId);
         if (!textureResource) {
             char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s. SDL_image Error: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES,
+            sprintf(tempString, "%s ResourceID: %s. SDL_image error: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES,
                     textureResId, IMG_GetError());
             return NULL;
         }
@@ -376,7 +376,7 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
         soundResource = SoundResource_construct(soundResId);
         if (!soundResource) {
             char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s. SDL_mixer Error: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES,
+            sprintf(tempString, "%s ResourceID: %s. SDL_mixer error: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES,
                     soundResId, Mix_GetError());
             Logger_log(rm->logger, tempString);
             return NULL;

@@ -22,36 +22,43 @@
 #include "musican/Musican.h"
 #include <SDL2/SDL.h>
 
+const char* const MUSICAN_ERR_ALLOC = "Musican: constructor: allocating memory failed!";
+const char* const MUSICAN_ERR_SDL_INIT_AUDIO = "Musican: constructor: SDL_Init audio failed!";
+const char* const MUSICAN_ERR_MIX_OPEN_AUDIO = "Musican: constructor: SDL_mixer opening audio failed!";
+
 struct Musican* Musican_construct(struct Logger* logger) {
     struct Musican* musican = NULL;
     musican = (struct Musican*)malloc(sizeof(struct Musican*));
-    if (musican) {
-        musican->isInitialized = 0;
-        if (SDL_Init(SDL_INIT_AUDIO) < 0) {
-            fprintf(stderr, "SDL audio initalizing failed! SDL Error: %s\n", SDL_GetError());
-            Musican_destruct(musican);
-            return NULL;
-        }
-        if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
-            fprintf(stderr, "SDL_mixer initalizing failed! SDL_mixer Error: %s\n", Mix_GetError());
-            Musican_destruct(musican);
-            return NULL;
-        }
-        musican->isInitialized = 1;
-    } else {
-        fprintf(stderr, "Musican initalizing failed!\n");
+    if (!musican) {
+        Logger_log(logger, MUSICAN_ERR_ALLOC);
         Musican_destruct(musican);
         return NULL;
     }
+    musican->isInitialized = 0;
+    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+        char tempString[600];
+        sprintf(tempString, "%s. SDL error: %s", MUSICAN_ERR_SDL_INIT_AUDIO, SDL_GetError);
+        Logger_log(logger, tempString);
+        Musican_destruct(musican);
+        return NULL;
+    }
+    if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
+        char tempString[600];
+        sprintf(tempString, "%s. SDL_mixer error: %s", MUSICAN_ERR_MIX_OPEN_AUDIO, Mix_GetError);
+        Logger_log(logger, tempString);
+        Musican_destruct(musican);
+        return NULL;
+    }
+    musican->isInitialized = 1;
     musican->logger = logger;
     return musican;
 }
 
 void Musican_destruct(struct Musican* musican) {
-    if (musican) {
-        Mix_Quit();
+    if (musican)
         free(musican);
-    }
+    Mix_Quit();
+    SDL_Quit();
 }
 
 void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops) {
