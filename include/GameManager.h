@@ -30,7 +30,9 @@
 #include "settings/Settings.h"
 #include "scene/Scene.h"
 
-#define INITIAL_NUMBER_ALLOCATED_SCENES 10
+enum {
+    INITIAL_NUMBER_ALLOCATED_SCENES = 10
+};
 
 struct GameManager {
     struct Logger logger;
@@ -48,6 +50,6 @@ struct GameManager* GameManager_construct();
 void GameManager_destruct(struct GameManager* gm);
 
 int GameManager_main(struct GameManager* gm);
-void GameManager_pushScene(struct GameManager* gm, const char* const resId);
+unsigned char GameManager_pushScene(struct GameManager* gm, const char* const resId);
 void GameManager_popScene(struct GameManager* gm);
 #endif //ALONE_GAMEMANAGER_H

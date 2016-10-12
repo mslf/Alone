@@ -23,6 +23,10 @@
 #include <stdlib.h>
 #include "stdio.h"
 
+const char* const GAME_MANAGER_ERR_SCENES_STACK_ALLOC =
+        "GameManager: constructor: allocating memory for scenesStack failed!";
+const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "Alone.settings";
+
 struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
     gm = (struct GameManager*)malloc(sizeof(struct GameManager));
@@ -38,18 +42,14 @@ struct GameManager* GameManager_construct() {
             result++;
         if (!(gm->resourceManager = ResourceManager_construct(&(gm->logger))))
             result++;
-        gm->settings = Settings_construct(gm->resourceManager, "Alone.settings");
+        gm->settings = Settings_construct(gm->resourceManager, GAME_MANAGER_DEFAULT_SETTINGS_PATH);
         if (gm->settings->isSoundActive)
-            if (!(gm->musican = Musican_construct(&(gm->logger)))) {
-                fprintf(stderr, "Musican constructing failed!\n");
+            if (!(gm->musican = Musican_construct(&(gm->logger))))
                 result++;
-            }
-        if (!(gm->renderer = Renderer_construct(&(gm->logger), gm->settings))) {
-            fprintf(stderr, "Renderer constructing failed!\n");
+        if (!(gm->renderer = Renderer_construct(&(gm->logger), gm->settings)))
             result++;
-        }
         if (!(gm->scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * INITIAL_NUMBER_ALLOCATED_SCENES))) {
-            fprintf(stderr, "Scenes stack allocating failed!\n");
+            Logger_log(&(gm->logger), GAME_MANAGER_ERR_SCENES_STACK_ALLOC);
             result++;
         }
         if (result) {
@@ -64,16 +64,36 @@ struct GameManager* GameManager_construct() {
 }
 
 int GameManager_main(struct GameManager* gm) {
-    printf ("***Am I Alone?***\n");
+    Logger_log(&(gm->logger), "***Are You Alone?***");
+    size_t state = 0;
+    unsigned char r = 0;
+    unsigned char g = 0;
+    unsigned char b = 0;
     while(!gm->eventManager->quit) {
         EventManager_updateSdlEvents(gm->eventManager);
-        SDL_SetRenderDrawColor(gm->renderer->renderer,
-                               (unsigned char)(rand() % 255),
-                               (unsigned char)(rand() % 255),
-                               (unsigned char)(rand() % 255),
-                               (unsigned char)(rand() % 255));
+        SDL_SetRenderDrawColor(gm->renderer->renderer, r, g, b, 255);
         SDL_RenderClear(gm->renderer->renderer);
         SDL_RenderPresent(gm->renderer->renderer);
+        if (state == 0)
+            r++;
+        if (state == 1) {
+            r--;
+            g++;
+        }
+        if (state == 2) {
+            g--;
+            b++;
+        }
+        if (state == 3)
+            b--;
+        if (state == 0 && r >= 255)
+            state = 1;
+        if (state == 1 && (g >= 255 || r <= 1))
+            state = 2;
+        if (state == 2 && (b >= 255 || g <= 1))
+            state = 3;
+        if (state == 3 && b <= 1)
+            state = 0;
     }
     return 0;
 }
@@ -96,11 +116,43 @@ void GameManager_destruct(struct GameManager* gm) {
     Settings_destruct(gm->settings);
     free(gm);
 }
+unsigned char GameManager_reallocateSceneNodesList(struct GameManager* gm) {
+    if (!gm)
+        return 1;
+    struct Scene** scenesStack = NULL;
+    size_t i;
+    size_t newSize = gm->allocatedScenesCount + INITIAL_NUMBER_ALLOCATED_SCENES;
+    if (!(scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * newSize))) {
+        free(scenesStack);
+        return 2;
+    }
+    for (i = 0; i < gm->scenesCount; i++)
+        scenesStack[i] = gm->scenesStack[i];
+    free(gm->scenesStack);
+    gm->scenesStack = scenesStack;
+    gm->allocatedScenesCount = newSize;
+    return 0;
+}
 
-void GameManager_pushScene(struct GameManager* gm, const char* const resId) {
-
+unsigned char GameManager_pushScene(struct GameManager* gm, const char* const resId) {
+    if (!gm || !resId)
+        return 1;
+    struct Scene* scene = NULL;
+    scene = Scene_construct(gm->resourceManager, resId);
+    if (!scene)
+        return 2;
+    if (gm->scenesCount >= gm->allocatedScenesCount)
+        if(GameManager_reallocateSceneNodesList(gm)) {
+            Scene_destruct(scene);
+            return 3;
+        }
+    gm->scenesStack[gm->scenesCount]= scene;
+    gm->scenesCount++;
 }
 
 void GameManager_popScene(struct GameManager* gm) {
-
+    if (!gm)
+        return;
+    Scene_destruct(gm->scenesStack[gm->scenesCount - 1]);
+    gm->scenesCount--;
 }
