@@ -24,13 +24,14 @@
 
 #include <SDL2/SDL.h>
 
-#define SETTINGS_DEFAULT_VSYNC 1
-#define SETTINGS_DEFAULT_MUSIC 1
-#define SETTINGS_DEFAULT_SOUND 1
-#define SETTINGS_DEFAULT_FULLSCREEN 0
-#define SETTINGS_DEFAULT_W 800
-#define SETTINGS_DEFAULT_H 450
-#define SETTINGS_DEFAULT_MAIN_SCENE "data/main.scene"
+enum {
+    SETTINGS_DEFAULT_VSYNC = 1,
+    SETTINGS_DEFAULT_MUSIC = 1,
+    SETTINGS_DEFAULT_SOUND = 1,
+    SETTINGS_DEFAULT_FULLSCREEN = 0,
+    SETTINGS_DEFAULT_W = 800,
+    SETTINGS_DEFAULT_H = 450
+};
 
 struct ResourceManager;
 
@@ -49,5 +50,9 @@ struct Settings {
 
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId);
 void Settings_destruct(struct Settings* settings);
+
+unsigned char Settings_updateMainSceneString(struct Settings* settings, const char* const mainScene);
+unsigned char Settings_save(struct Settings* settings, struct ResourceManager* resourceManager,
+                            const char* const settingsResId);
 
 #endif //ALONE_SETTINGS_H

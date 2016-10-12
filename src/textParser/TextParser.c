@@ -53,19 +53,19 @@ unsigned char TextParser_getFlag(struct TextParser* textParser, const char* cons
 
 }
 
-void TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
+unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
 
 }
 
-void TextParser_addInt(struct TextParser* textParser, const char* const leftOperand, long int item) {
+unsigned char TextParser_addInt(struct TextParser* textParser, const char* const leftOperand, long int item) {
 
 }
 
-void TextParser_addDouble(struct TextParser* textParser, const char* leftOperand, double item) {
+unsigned char TextParser_addDouble(struct TextParser* textParser, const char* leftOperand, double item) {
 
 }
 
-void TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, unsigned char item) {
+unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, unsigned char item) {
 
 }
 
