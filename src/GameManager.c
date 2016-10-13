@@ -64,35 +64,35 @@ struct GameManager* GameManager_construct() {
 }
 
 int GameManager_main(struct GameManager* gm) {
-    Logger_log(&(gm->logger), "***Are You Alone?***");
+    Logger_log(&(gm->logger), "***Are We Alone?***");
     size_t state = 0;
-    unsigned char r = 0;
-    unsigned char g = 0;
-    unsigned char b = 0;
+    unsigned char r = 255;
+    unsigned char g = 255;
+    unsigned char b = 255;
     while(!gm->eventManager->quit) {
         EventManager_updateSdlEvents(gm->eventManager);
         SDL_SetRenderDrawColor(gm->renderer->renderer, r, g, b, 255);
         SDL_RenderClear(gm->renderer->renderer);
         SDL_RenderPresent(gm->renderer->renderer);
         if (state == 0)
-            r++;
-        if (state == 1) {
             r--;
-            g++;
+        if (state == 1) {
+            r++;
+            g--;
         }
         if (state == 2) {
-            g--;
-            b++;
+            g++;
+            b--;
         }
         if (state == 3)
-            b--;
-        if (state == 0 && r >= 255)
+            b++;
+        if (state == 0 && r <= 1)
             state = 1;
-        if (state == 1 && (g >= 255 || r <= 1))
+        if (state == 1 && (g <= 1 || r >= 255))
             state = 2;
-        if (state == 2 && (b >= 255 || g <= 1))
+        if (state == 2 && (b <= 1 || g >= 255))
             state = 3;
-        if (state == 3 && b <= 1)
+        if (state == 3 && b >= 255)
             state = 0;
     }
     return 0;

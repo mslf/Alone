@@ -204,7 +204,7 @@ unsigned char TextParser_deleteNonQuotedSpaces(char* rightOperandString, size_t*
     return (quotesCount % 2);
 }
 
-unsigned  char TextParser_addItemToRightOperand(struct Logger* logger, struct Pair* pair, char* itemString,
+unsigned  char TextParser_addItemToRightOperand(struct Logger* logger, struct Pair* pair, const char* const itemString,
                                                 size_t itemStringLength) {
     size_t i = 0;
     if (pair->rightOperand.itemsCount >=
@@ -526,21 +526,116 @@ unsigned char TextParser_getFlag(struct TextParser* textParser, const char* cons
 }
 
 unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
-
+    size_t count = TextParser_getItemsCount(textParser, leftOperand);
+    size_t found = 0;
+    size_t index = 0;
+    size_t i = 0;
+    if (textParser->lastError == NoLeftOperandError) {
+        if (textParser->pairsCount >= textParser->allocatedPairsCount)
+            if (TextParser_reallocatePairsList(NULL, textParser)) {
+                textParser->lastError = MemoryAllocationError;
+                return 1;
+            }
+        char* tempLeftOperandString = NULL;
+        tempLeftOperandString = (char*)malloc(sizeof(char) * (strlen(leftOperand) + 1));
+        if (!tempLeftOperandString) {
+            textParser->lastError = MemoryAllocationError;
+            return 2;
+        }
+        strcpy(tempLeftOperandString, leftOperand);
+        textParser->pairsList[textParser->pairsCount].leftOperand = tempLeftOperandString;
+        index = textParser->pairsCount;
+        textParser->pairsCount++;
+    } else if (textParser->lastError == NoError)
+        for (i = 0; i < textParser->pairsCount; i++)
+            if (strcmp(leftOperand, textParser->pairsList[i].leftOperand) == 0) {
+                found = 1;
+                index = i;
+                break;
+            }
+    if (TextParser_addItemToRightOperand(NULL, &(textParser->pairsList[index]), item, strlen(item))) {
+        textParser->lastError = MemoryAllocationError;
+        if (!found) {
+            free (textParser->pairsList[index].leftOperand);
+            textParser->pairsCount--;
+        }
+        return 3;
+    }
+    textParser->lastError = NoError;
+    return 0;
 }
 
 unsigned char TextParser_addInt(struct TextParser* textParser, const char* const leftOperand, long int item) {
-
+    char tempString[100];
+    sprintf(tempString, "%d", item);
+    return TextParser_addString(textParser, leftOperand, tempString);
 }
 
 unsigned char TextParser_addDouble(struct TextParser* textParser, const char* leftOperand, double item) {
-
+    char tempString[100];
+    sprintf(tempString, "%f", item);
+    return TextParser_addString(textParser, leftOperand, tempString);
 }
 
 unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, unsigned char item) {
+    char tempString[2];
+    if (item)
+        sprintf(tempString, "1");
+    else
+        sprintf(tempString, "0");
+    return TextParser_addString(textParser, leftOperand, tempString);
+}
 
+unsigned char TextParser_checkWroteCounter(struct TextParser* textParser, size_t wrote, size_t* counter,
+                                           size_t* allocatedLength, char** string) {
+    if (wrote > 0)
+        (*counter) += wrote;
+    else {
+        textParser->lastError = ConvertingError;
+        free((*string));
+        return 1;
+    }
+    if ((*counter) >= (*allocatedLength) / 2)
+        if (TextParser_reallocateString(NULL, string, allocatedLength, (*allocatedLength))) {
+            textParser->lastError = MemoryAllocationError;
+            free((*string));
+            return 2;
+        }
+    return 0;
 }
 
 char* TextParser_convertToText(struct TextParser* textParser) {
-
+    char* tempString = NULL;
+    size_t counter = 0;
+    size_t allocatedLength = 5000;
+    size_t i = 0;
+    size_t j = 0;
+    size_t wroteBuf = 0;
+    tempString = (char*)malloc(sizeof(char) * allocatedLength);
+    if (!tempString) {
+        textParser->lastError = MemoryAllocationError;
+        return NULL;
+    }
+    for (i = 0; i < textParser->pairsCount; i++) {
+        wroteBuf = sprintf(&(tempString[counter]), "%s = ", textParser->pairsList[i].leftOperand);
+        if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
+            return  NULL;
+        wroteBuf = sprintf(&(tempString[counter]), "[");
+        if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
+            return  NULL;
+        for (j = 0; j < textParser->pairsList[i].rightOperand.itemsCount; j++) {
+            if (j == 0)
+                wroteBuf = sprintf(&(tempString[counter]), "\"%s\"",
+                                textParser->pairsList[i].rightOperand.rightOperandItemsList[j]);
+            else
+                wroteBuf = sprintf(&(tempString[counter]), ", \"%s\"",
+                                textParser->pairsList[i].rightOperand.rightOperandItemsList[j]);
+            if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
+                return  NULL;
+        }
+        wroteBuf = sprintf(&(tempString[counter]), "];\n");
+        if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
+            return  NULL;
+    }
+    return tempString;
 }

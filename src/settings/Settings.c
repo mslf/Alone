@@ -99,9 +99,17 @@ void Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct Tex
     settings->isVsyncActive = TextParser_getFlag(textParser, SETTINGS_PARSER_VSYNC, 0);
     if (textParser->lastError)
         settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
-    settings->mainScene = TextParser_getString(textParser, SETTINGS_PARSER_MAIN_SCENE, 0);
+    char* tempString = TextParser_getString(textParser, SETTINGS_PARSER_MAIN_SCENE, 0);
     if (textParser->lastError)
         settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
+    else {
+        settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
+        if (!settings->mainScene) {
+            settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
+            return;
+        }
+        strcpy(settings->mainScene, tempString);
+    }
 }
 
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId) {

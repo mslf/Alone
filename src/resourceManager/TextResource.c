@@ -94,9 +94,9 @@ unsigned char TextResource_save(struct TextResource* textResource, const char* c
     if (textResource) {
         SDL_RWops *file = NULL;
         if (path && path != textResource->id)
-            SDL_RWFromFile(path, "w");
+            file = SDL_RWFromFile(path, "w");
         else
-            SDL_RWFromFile(textResource->id, "w");
+            file = SDL_RWFromFile(textResource->id, "w");
         if(file) {
             size_t len = SDL_strlen(textResource->text);
             if (SDL_RWwrite(file, textResource->text, 1, len) != len) {
