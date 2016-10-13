@@ -156,14 +156,12 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     scene->allocatedEventControllersCount = count;
     scene->eventControllersCount = 0;
     char* tempString = NULL;
-    i = 0;
-    while (!sceneTextParser->lastError) {
+    for (i = 0; i < scene->allocatedSceneNodesCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING, i);
         if (tempString)
             Scene_addSceneNode(scene, resourceManager, tempString);
     }
-    i = 0;
-    while (!sceneTextParser->lastError) {
+    for (i = 0; i < scene->allocatedEventControllersCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, i);
         if (tempString)
             Scene_addEventControllerScript(scene, resourceManager, tempString);
@@ -189,7 +187,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager, con
         return NULL;
     }
     struct TextParser* sceneTextParser = NULL;
-    sceneTextParser = TextParser_constructFromTextResource(scene->sceneResource);
+    sceneTextParser = TextParser_constructFromTextResource(resourceManager->logger, scene->sceneResource);
     if (!sceneTextParser) {
         scene->sceneResource->pointersCount--;
         Scene_destruct(scene);
@@ -228,7 +226,8 @@ void Scene_destruct (struct Scene* scene) {
                 Scene_destructSceneNode(scene->sceneNodesList[i]);
             free(scene->sceneNodesList);
         }
-        scene->sceneResource->pointersCount--;
+        if (scene->sceneResource)
+            scene->sceneResource->pointersCount--;
         free(scene);
     }
 }
@@ -242,7 +241,7 @@ unsigned char Scene_addSceneNode(
     if (!sceneNodeTextResource)
         return 2;
     struct TextParser* sceneNodeTextParser = NULL;
-    sceneNodeTextParser = TextParser_constructFromTextResource(sceneNodeTextResource);
+    sceneNodeTextParser = TextParser_constructFromTextResource(resourceManager->logger, sceneNodeTextResource);
     if (!sceneNodeTextParser)
         return 3;
     char* sceneNodeTypeString = NULL;

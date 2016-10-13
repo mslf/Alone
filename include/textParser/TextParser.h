@@ -23,11 +23,15 @@
 #define ALONE_TEXTPARSER_H
 
 #include <stdlib.h>
+#include "logger/Logger.h"
 #include "resourceManager/TextResource.h"
 
 enum {
     INITIAL_NUMBER_ALLOCATED_PAIRS = 10,
-    INITIAL_NUMBER_ALLOCATED_ITEMS = 1
+    INITIAL_NUMBER_ALLOCATED_ITEMS = 1,
+    INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_OPERAND_STRING = 100,
+    INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING = 100,
+    INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING = 100
 };
 #define TEXT_PARSER_TYPE_STRING "type"
 
@@ -43,11 +47,11 @@ struct Pair {
 };
 
 enum TextParserError {
-    NoError,
-    NoLeftOperandError,
-    ConvertingError,
-    OutOfRangeError,
-    MemoryAllocationError
+    NoError = 0,
+    NoLeftOperandError = 1,
+    ConvertingError = 2,
+    OutOfRangeError = 3,
+    MemoryAllocationError =4
 };
 
 struct TextParser {
@@ -57,7 +61,8 @@ struct TextParser {
     enum TextParserError lastError;
 };
 
-struct TextParser* TextParser_constructFromTextResource(const struct TextResource* const textResource);
+struct TextParser* TextParser_constructFromTextResource(struct Logger* logger,
+                                                        const struct TextResource* const textResource);
 struct TextParser* TextParser_constructEmpty();
 void TextParser_destruct(struct TextParser* textParser);
 

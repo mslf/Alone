@@ -115,7 +115,7 @@ struct Settings* Settings_construct(struct ResourceManager* resourceManager, con
         return Settings_defaults(settings);
     }
     struct TextParser *textParser = NULL;
-    textParser = TextParser_constructFromTextResource(settings->settingsResource);
+    textParser = TextParser_constructFromTextResource(resourceManager->logger, settings->settingsResource);
     if (!textParser) {
         Logger_log(resourceManager->logger, SETTINGS_ERR_TEXT_PARSER_CONSTRUCTING);
         Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);

@@ -308,6 +308,7 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
         char tempString[600];
         sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXT_RES, textResId);
         Logger_log(rm->logger, tempString);
+        return NULL;
     }
     // Try to reallocate (if needed) and add textResource to the list
     if (rm->textResourcesCount >= rm->allocatedTextResourcesCount)
@@ -342,6 +343,7 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
             char tempString[600];
             sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES, scriptResId);
             Logger_log(rm->logger, tempString);
+            return NULL;
         }
         // Try to reallocate (if needed) and add scriptResource to the list
         if (rm->scriptResourcesCount >= rm->allocatedScriptResourcesCount)
