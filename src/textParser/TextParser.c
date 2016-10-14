@@ -567,7 +567,7 @@ unsigned char TextParser_addString(struct TextParser* textParser, const char* co
 
 unsigned char TextParser_addInt(struct TextParser* textParser, const char* const leftOperand, long int item) {
     char tempString[100];
-    sprintf(tempString, "%d", item);
+    sprintf(tempString, "%ld", item);
     return TextParser_addString(textParser, leftOperand, tempString);
 }
 

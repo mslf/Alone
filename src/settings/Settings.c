@@ -193,7 +193,7 @@ unsigned char Settings_save(struct Settings* settings, struct ResourceManager* r
 void Settings_destruct(struct Settings* settings) {
     if (!settings)
         return;
-    if (settings->mainScene && settings->mainScene != SETTINGS_DEFAULT_MAIN_SCENE)
+    if (settings->mainScene && strcmp(settings->mainScene,SETTINGS_DEFAULT_MAIN_SCENE))
         free(settings->mainScene);
     free(settings);
 }
