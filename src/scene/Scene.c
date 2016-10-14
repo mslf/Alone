@@ -34,6 +34,9 @@
 #include "text/Text.h"
 #include "user/User.h"
 
+const char* const SCENE_ERR_SCENE_NODE_TYPE_NOT_DETECTED =
+        "Scene_constructSceneNode: suitable SceneNode type haven't detected or constructing SceneNode failed!";
+
 unsigned char Scene_reallocateSceneNodesList(struct Scene* scene) {
     if (!scene)
         return 1;
@@ -74,35 +77,43 @@ unsigned char Scene_reallocateEventControllersList(struct Scene* scene) {
     return 0;
 }
 
-struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManager,
+struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManager, struct Renderer* renderer,
                                            const char* const sceneNodeTypeString, 
                                            const char* const sceneNodeResId) {
+    struct SceneNode* sceneNode = NULL;
     // Typed construction routine here
     if (strcmp(sceneNodeTypeString, BUTTON_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)Button_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Button_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, CHECK_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)CheckBox_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)CheckBox_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)ContextMenu_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)ContextMenu_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, LIST_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)ListBox_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)ListBox_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)ProgressBar_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)ProgressBar_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, SLIDER_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)Slider_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Slider_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, TEXT_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)TextBox_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)TextBox_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, ITEM_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)Item_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Item_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, LEVEL_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)Level_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Level_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)Sprite_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Sprite_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, TEXT_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)Text_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Text_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, USER_SCENENODE_PARSER_TYPE_STRING) == 0)
-        return (struct SceneNode*)User_construct(resourceManager, sceneNodeResId);
-    return NULL;
+        sceneNode = (struct SceneNode*)User_construct(resourceManager, sceneNodeResId);
+    if (!sceneNode) {
+        char tempString[600];
+        sprintf(tempString, "%s ResourceID: %s", SCENE_ERR_SCENE_NODE_TYPE_NOT_DETECTED, sceneNodeResId);
+        Logger_log(resourceManager->logger, tempString);
+        return NULL;
+    }
+
+    return sceneNode;
 }
 
 void Scene_destructSceneNode(struct SceneNode* sceneNode) {
@@ -135,7 +146,7 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
         User_destruct((struct User*)sceneNode);
 }
 
-unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceManager,
+unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceManager, struct Renderer* renderer,
                          struct TextParser* sceneTextParser) {
     size_t i;
     size_t count;
@@ -159,7 +170,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     for (i = 0; i < scene->allocatedSceneNodesCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING, i);
         if (tempString)
-            Scene_addSceneNode(scene, resourceManager, tempString);
+            Scene_addSceneNode(scene, resourceManager, renderer, tempString);
     }
     for (i = 0; i < scene->allocatedEventControllersCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, i);
@@ -169,7 +180,8 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     return 0;
 }
 
-struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const sceneResId) {
+struct Scene* Scene_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+                              const char* const sceneResId) {
     struct Scene* scene = NULL;
     if (!resourceManager)
         return NULL;
@@ -207,7 +219,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager, con
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
-    if (!Scene_init(scene, resourceManager, sceneTextParser)) {
+    if (Scene_init(scene, resourceManager, renderer, sceneTextParser)) {
         scene->sceneResource->pointersCount--;
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
@@ -232,8 +244,8 @@ void Scene_destruct (struct Scene* scene) {
     }
 }
 
-unsigned char Scene_addSceneNode(
-        struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneNodeResId) {
+unsigned char Scene_addSceneNode(struct Scene* const scene, struct ResourceManager* const resourceManager,
+                                 struct Renderer* renderer, const char* const sceneNodeResId) {
     if (!scene || !resourceManager || !sceneNodeResId)
         return 1;
     struct TextResource* sceneNodeTextResource = NULL;
@@ -252,7 +264,7 @@ unsigned char Scene_addSceneNode(
     }
     // Construct, then try to reallocate (if needed) and add sceneNode to the list
     struct SceneNode* sceneNode = NULL;
-    sceneNode = Scene_constructSceneNode(resourceManager, sceneNodeTypeString, sceneNodeResId);
+    sceneNode = Scene_constructSceneNode(resourceManager, renderer, sceneNodeTypeString, sceneNodeResId);
     if(!sceneNode) {
         TextParser_destruct(sceneNodeTextParser);
         return 5;

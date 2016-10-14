@@ -30,23 +30,51 @@
 #include "resourceManager/ResourceManager.h"
 
 #define SPRITE_SCENENODE_PARSER_TYPE_STRING "Sprite"
+#define SPRITE_SCENENODE_PARSER_FRAMES_COUNT "framesCount"
+#define SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION "oneFrameDuration"
+#define SPRITE_SCENENODE_PARSER_FRAME_WIDTH "frameWidth"
+#define SPRITE_SCENENODE_PARSER_FRAME_HEIGHT "frameHeight"
+#define SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH "virtualWidth"
+#define SPRITE_SCENENODE_PARSER_VIRTUAL_HEIGHT "virtualHeight"
+#define SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE "textureResource"
+#define SPRITE_SCENENODE_DEFAULT_TEXTURE "data/default.png"
+
+enum {
+    SPRITE_SCENENODE_DEFAULT_ANIMATIONS_COUNT = 1,
+    SPRITE_SCENENODE_DEFAULT_FRAMES_COUNT = 1,
+    SPRITE_SCENENODE_DEFAULT_ONE_FRAME_DURATION = 0,
+    SPRITE_SCENENODE_DEFAULT_FRAME_WIDTH_DIVIDER = 2,
+    SPRITE_SCENENODE_DEFAULT_FRAME_HEIGHT_DIVIDER = 2,
+};
+
+struct Animation {
+    size_t framesCount;
+    size_t oneFrameDuration;
+};
 /*
  * Sprite is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Sprite struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Sprite struct,
  * if you want code to work with Sprite like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct Sprite {
-    struct SceneNode* sceneNode;
+    struct SceneNode sceneNode;
     struct TextureResource* textureResource;
+    struct Animation* animations;
+    size_t animationsCount;
     size_t currentAnimation;
     size_t currentFrame;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    SDL_Point frameSize;
+    SDL_Point virtualSize;
+    size_t renderingsCounter;
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
 };
 
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, const char* const spriteResId);
+struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+                                const char* const spriteResId);
 void Sprite_destruct(struct Sprite* sprite);
 
 void Sprite_save(

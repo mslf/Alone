@@ -49,7 +49,6 @@ struct SceneNode {
     void (*sound)(struct SceneNode* sceneNode, struct Musican* musican);
 };
 
-struct SceneNode* SceneNode_construct();
-void SceneNode_destruct(struct SceneNode* sceneNode);
+void SceneNode_init(struct SceneNode* sceneNode);
 
 #endif //ALONE_SCENENODE_H

@@ -97,19 +97,19 @@ unsigned char TextParser_reallocateString(struct Logger* logger, char** string, 
     return  0;
 }
 
-unsigned char TextParser_splitExpression(struct Logger* logger, const char* const string, size_t* startIndex, char* leftOperandString,
+unsigned char TextParser_splitExpression(struct Logger* logger, const char* const string, size_t* startIndex, char** leftOperandString,
                                          size_t* leftCounter, size_t* allocatedCharsForLeftOperand,
-                                         char* rightOperandString, size_t* rightCounter,
+                                         char** rightOperandString, size_t* rightCounter,
                                          size_t* allocatedCharsForRightOperand) {
     unsigned char state = 0;
     while ((*startIndex) < strlen(string) && state != 3 && state != 4) {
         char c = string[*startIndex];
         if ((*leftCounter) >= (*allocatedCharsForLeftOperand))
-            if (TextParser_reallocateString(logger, &leftOperandString, allocatedCharsForLeftOperand,
+            if (TextParser_reallocateString(logger, leftOperandString, allocatedCharsForLeftOperand,
                                             INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_OPERAND_STRING))
                 return 5;
         if ((*rightCounter) >= (*allocatedCharsForRightOperand))
-            if (TextParser_reallocateString(logger, &rightOperandString, allocatedCharsForRightOperand,
+            if (TextParser_reallocateString(logger, rightOperandString, allocatedCharsForRightOperand,
                                             INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING))
                 return 6;
         switch (state) {
@@ -120,7 +120,7 @@ unsigned char TextParser_splitExpression(struct Logger* logger, const char* cons
                 }
                 if (c != ' ' && c!= '\t' && c!= '\n') {
                     state = 1;
-                    leftOperandString[*leftCounter] = c;
+                    (*leftOperandString)[*leftCounter] = c;
                     (*leftCounter)++;
                 }
                 break;
@@ -138,7 +138,7 @@ unsigned char TextParser_splitExpression(struct Logger* logger, const char* cons
                     break;
                 }
                 if (c != ' ' && c != '\t') {
-                    leftOperandString[*leftCounter] = c;
+                    (*leftOperandString)[*leftCounter] = c;
                     (*leftCounter)++;
                 }
                 break;
@@ -151,7 +151,7 @@ unsigned char TextParser_splitExpression(struct Logger* logger, const char* cons
                     state = 4;
                     break;
                 }
-                rightOperandString[*rightCounter] = c;
+                (*rightOperandString)[*rightCounter] = c;
                 (*rightCounter)++;
                 break;
             case 3: // end
@@ -374,8 +374,8 @@ unsigned char TextParser_parseTextResource(struct Logger* logger, struct TextPar
     while (i < strlen(textResource->text)) {
         leftCounter = 0;
         rightCounter = 0;
-        state = TextParser_splitExpression(logger, textResource->text, &i, leftOperandString, &leftCounter,
-                                           &allocatedCharsForLeftOperand, rightOperandString, &rightCounter,
+        state = TextParser_splitExpression(logger, textResource->text, &i, &leftOperandString, &leftCounter,
+                                           &allocatedCharsForLeftOperand, &rightOperandString, &rightCounter,
                                            &allocatedCharsForRightOperand);
 
         if (state != 3 && state != 4 && state != 0) {

@@ -25,8 +25,8 @@
 
 const char* const GAME_MANAGER_ERR_SCENES_STACK_ALLOC =
         "GameManager: constructor: allocating memory for scenesStack failed!";
-const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "Alone.settings";
-
+const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "/home/mslf/programs/git/Alone/debugBuild/Alone.settings";
+// !Settings path only for testing purposed on my machine!
 struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
     gm = (struct GameManager*)malloc(sizeof(struct GameManager));
@@ -64,33 +64,39 @@ struct GameManager* GameManager_construct() {
 }
 
 int GameManager_main(struct GameManager* gm) {
-    Logger_log(&(gm->logger), "***Are We Alone?***");
+    Logger_log(&(gm->logger), "***Are We Alive?***");
+    size_t i;
+    size_t j;
     size_t state = 0;
     unsigned char r = 255;
-    unsigned char g = 255;
+    unsigned char g = 0;
     unsigned char b = 255;
     while(!gm->eventManager->quit) {
         EventManager_updateSdlEvents(gm->eventManager);
         SDL_SetRenderDrawColor(gm->renderer->renderer, r, g, b, 255);
         SDL_RenderClear(gm->renderer->renderer);
+        for (i = 0; i < gm->scenesCount; i++)
+            for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++)
+                if (gm->scenesStack[i]->sceneNodesList[j]->render)
+                    gm->scenesStack[i]->sceneNodesList[j]->render(gm->scenesStack[i]->sceneNodesList[j], gm->renderer);
         SDL_RenderPresent(gm->renderer->renderer);
         if (state == 0)
             r--;
         if (state == 1) {
-            r++;
-            g--;
-        }
-        if (state == 2) {
             g++;
             b--;
+        }
+        if (state == 2) {
+            r++;
+            g--;
         }
         if (state == 3)
             b++;
         if (state == 0 && r <= 1)
             state = 1;
-        if (state == 1 && (g <= 1 || r >= 255))
+        if (state == 1 && (b <= 1 || g >= 255))
             state = 2;
-        if (state == 2 && (b <= 1 || g >= 255))
+        if (state == 2 && (g <= 1 || r >= 255))
             state = 3;
         if (state == 3 && b >= 255)
             state = 0;
@@ -100,6 +106,11 @@ int GameManager_main(struct GameManager* gm) {
 
 void GameManager_destruct(struct GameManager* gm) {
     size_t i;
+    if (gm->scenesStack) {
+        for (i = 0; i < gm->scenesCount; i++)
+            Scene_destruct(gm->scenesStack[i]);
+        free(gm->scenesStack);
+    }
     if (gm->eventManager)
         EventManager_destruct(gm->eventManager);
     if (gm->resourceManager)
@@ -108,11 +119,6 @@ void GameManager_destruct(struct GameManager* gm) {
         Musican_destruct(gm->musican);
     if (gm->renderer)
         Renderer_destruct(gm->renderer);
-    if (gm->scenesStack) {
-        for (i = 0; i < gm->scenesCount; i++)
-            Scene_destruct(gm->scenesStack[i]);
-        free(gm->scenesStack);
-    }
     Settings_destruct(gm->settings);
     free(gm);
 }
@@ -138,7 +144,7 @@ unsigned char GameManager_pushScene(struct GameManager* gm, const char* const re
     if (!gm || !resId)
         return 1;
     struct Scene* scene = NULL;
-    scene = Scene_construct(gm->resourceManager, resId);
+    scene = Scene_construct(gm->resourceManager, gm->renderer, resId);
     if (!scene)
         return 2;
     if (gm->scenesCount >= gm->allocatedScenesCount)

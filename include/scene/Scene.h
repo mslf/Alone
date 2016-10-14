@@ -44,11 +44,12 @@ struct Scene {
     size_t eventControllersCount;
 };
 
-struct Scene* Scene_construct(struct ResourceManager* const resourceManager, const char* const sceneResId);
+struct Scene* Scene_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+                              const char* const sceneResId);
 void Scene_destruct (struct Scene* scene);
 
-unsigned char Scene_addSceneNode(
-        struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneNodeResId);
+unsigned char Scene_addSceneNode(struct Scene* const scene, struct ResourceManager* const resourceManager,
+                                 struct Renderer* renderer, const char* const sceneNodeResId);
 void Scene_removeSceneNode(
         struct Scene* const scene, struct ResourceManager* const resourceManager, size_t index);
 unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* const resourceManager,

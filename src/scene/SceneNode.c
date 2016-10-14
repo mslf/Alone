@@ -21,10 +21,19 @@
 */
 #include "scene/SceneNode.h"
 
-struct SceneNode* SceneNode_construct() {
-
-}
-
-void SceneNode_destruct(struct SceneNode* sceneNode) {
-
+void SceneNode_init(struct SceneNode* sceneNode) {
+    sceneNode->angle = 0.0;
+    sceneNode->coordinates.x = 0;
+    sceneNode->coordinates.y = 0;
+    sceneNode->flip = SDL_FLIP_NONE;
+    sceneNode->rotatePointCoordinates.x = 0;
+    sceneNode->rotatePointCoordinates.y = 0;
+    sceneNode->scaleX = 1.0;
+    sceneNode->scaleY = 1.0;
+    sceneNode->type = NULL;
+    sceneNode->control = NULL;
+    sceneNode->render = NULL;
+    sceneNode->update = NULL;
+    sceneNode->sound = NULL;
+    sceneNode->sceneNodeTextResource = NULL;
 }
