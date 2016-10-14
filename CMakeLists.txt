@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.3)
 project(Alone)
 # Project name
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcpp -g -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra -Wpedantic -Wno-unused-variable -Wno-unused-parameter -Wno-return-type")
 
 include_directories(include)
 

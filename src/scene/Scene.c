@@ -109,29 +109,29 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
     if (!sceneNode)
         return;
     // Typed destruction routine here
-    if (sceneNode->type == BUTTON_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, BUTTON_SCENENODE_PARSER_TYPE_STRING))
         Button_destruct((struct Button*)sceneNode);
-    if (sceneNode->type == CHECK_BOX_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, CHECK_BOX_SCENENODE_PARSER_TYPE_STRING))
         CheckBox_destruct((struct CheckBox*)sceneNode);
-    if (sceneNode->type == CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING))
         ContextMenu_destruct((struct ContextMenu*)sceneNode);
-    if (sceneNode->type == LIST_BOX_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, LIST_BOX_SCENENODE_PARSER_TYPE_STRING))
         ListBox_destruct((struct ListBox*)sceneNode);
-    if (sceneNode->type == PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING))
         ProgressBar_destruct((struct ProgressBar*)sceneNode);
-    if (sceneNode->type == SLIDER_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, SLIDER_SCENENODE_PARSER_TYPE_STRING))
         Slider_destruct((struct Slider*)sceneNode);
-    if (sceneNode->type == TEXT_BOX_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, TEXT_BOX_SCENENODE_PARSER_TYPE_STRING))
         TextBox_destruct((struct TextBox*)sceneNode);
-    if (sceneNode->type == ITEM_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, ITEM_SCENENODE_PARSER_TYPE_STRING))
         Item_destruct((struct Item*)sceneNode);
-    if (sceneNode->type == LEVEL_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, LEVEL_SCENENODE_PARSER_TYPE_STRING))
         Level_destruct((struct Level*)sceneNode);
-    if (sceneNode->type == SPRITE_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, SPRITE_SCENENODE_PARSER_TYPE_STRING))
         Sprite_destruct((struct Sprite*)sceneNode);
-    if (sceneNode->type == TEXT_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, TEXT_PARSER_TYPE_STRING))
         Text_destruct((struct Text*)sceneNode);
-    if (sceneNode->type == USER_SCENENODE_PARSER_TYPE_STRING)
+    if (!strcmp(sceneNode->type, USER_SCENENODE_PARSER_TYPE_STRING))
         User_destruct((struct User*)sceneNode);
 }
 
