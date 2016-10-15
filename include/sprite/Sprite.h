@@ -30,8 +30,8 @@
 #include "resourceManager/ResourceManager.h"
 
 #define SPRITE_SCENENODE_PARSER_TYPE_STRING "Sprite"
-#define SPRITE_SCENENODE_PARSER_FRAMES_COUNT "framesCount"
-#define SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION "oneFrameDuration"
+#define SPRITE_SCENENODE_PARSER_FRAMES_COUNT "animationsListFramesCount"
+#define SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION "animationsListOneFrameDuration"
 #define SPRITE_SCENENODE_PARSER_FRAME_WIDTH "frameWidth"
 #define SPRITE_SCENENODE_PARSER_FRAME_HEIGHT "frameHeight"
 #define SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH "virtualWidth"
@@ -77,10 +77,12 @@ struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, s
                                 const char* const spriteResId);
 void Sprite_destruct(struct Sprite* sprite);
 
-void Sprite_save(
+unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct ResourceManager* resourceManager,
+                                           struct Renderer* renderer, const char* const textureResId);
+unsigned char Sprite_save(
         const struct Sprite* const sprite, struct ResourceManager* const resourceManager,
         const char* const spriteResId);
-void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 
 #endif //ALONE_SPRITE_H

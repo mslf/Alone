@@ -209,14 +209,62 @@ void Sprite_destruct(struct Sprite* sprite) {
     free(sprite);
 }
 
-void Sprite_save(
+unsigned char Sprite_save(
         const struct Sprite* const sprite, struct ResourceManager* const resourceManager,
         const char* const spriteResId) {
-
+    if (!sprite || !resourceManager || !spriteResId)
+        return 1;
+    size_t i;
+    unsigned char result = 0;
+    struct TextParser* textParser = TextParser_constructEmpty();
+    if (!textParser)
+        return 2;
+    TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SPRITE_SCENENODE_PARSER_TYPE_STRING);
+    result += textParser->lastError;
+    TextParser_addString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, sprite->textureResource->id);
+    result += textParser->lastError;
+    TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_WIDTH, sprite->frameSize.x);
+    result += textParser->lastError;
+    TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_HEIGHT, sprite->frameSize.y);
+    result += textParser->lastError;
+    TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH, sprite->virtualSize.x);
+    result += textParser->lastError;
+    TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_HEIGHT, sprite->virtualSize.y);
+    result += textParser->lastError;
+    for (i = 0; i < sprite->animationsCount; i++) {
+        TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT, sprite->animations[i].framesCount);
+        result += textParser->lastError;
+        TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION, sprite->animations[i].oneFrameDuration);
+        result += textParser->lastError;
+    }
+    char* tempString = TextParser_convertToText(textParser);
+    if (!tempString)
+        result++;
+    if (TextResource_updateContent(sprite->sceneNode.sceneNodeTextResource, tempString))
+        result++;
+    result += ResourceManager_saveTextResource(resourceManager, sprite->sceneNode.sceneNodeTextResource, spriteResId);
+    if (result) {
+        TextParser_destruct(textParser);
+        return 3;
+    }
+    TextParser_destruct(textParser);
+    return 0;
 }
 
-void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
-
+void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {
+    if (!sceneNode || !renderer)
+        return;
+    struct Sprite* sprite = (struct Sprite*)sceneNode;
+    sprite->srcRect.x = sprite->currentFrame * sprite->frameSize.x;
+    sprite->srcRect.y = sprite->currentAnimation * sprite->frameSize.y;
+    sprite->srcRect.w = sprite->frameSize.x;
+    sprite->srcRect.h = sprite->frameSize.y;
+    SDL_Point coordinates = Renderer_convertCoordinates(renderer, sprite->sceneNode.coordinates);
+    sprite->dstRect.x = coordinates.x;
+    sprite->dstRect.y = coordinates.y;
+    SDL_Point size = Renderer_convertCoordinates(renderer, sprite->virtualSize);
+    sprite->dstRect.w = size.x * sceneNode->scaleX;
+    sprite->dstRect.h = size.y * sceneNode->scaleY;
 }
 
 void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
@@ -229,17 +277,41 @@ void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
     }
     if (sprite->currentFrame > sprite->animations[sprite->currentAnimation].framesCount - 1)
         sprite->currentFrame = 0;
-    sprite->srcRect.x = sprite->currentFrame * sprite->frameSize.x;
-    sprite->srcRect.y = sprite->currentAnimation * sprite->frameSize.y;
-    sprite->srcRect.w = sprite->frameSize.x;
-    sprite->srcRect.h = sprite->frameSize.y;
-    SDL_Point coordinates = Renderer_convertCoordinates(renderer, sprite->sceneNode.coordinates);
-    sprite->dstRect.x = coordinates.x;
-    sprite->dstRect.y = coordinates.y;
-    SDL_Point size = Renderer_convertCoordinates(renderer, sprite->virtualSize);
-    sprite->dstRect.w = size.x * sceneNode->scaleX;
-    sprite->dstRect.h = size.y * sceneNode->scaleY;
     SDL_RenderCopyEx(renderer->renderer, sprite->textureResource->texture, &sprite->srcRect, &sprite->dstRect,
                      sprite->sceneNode.angle, &sprite->sceneNode.rotatePointCoordinates, sprite->sceneNode.flip);
     sprite->renderingsCounter++;
+}
+
+unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct ResourceManager* resourceManager,
+                                           struct Renderer* renderer, const char* const textureResId) {
+    if (!sprite || !resourceManager || !renderer || !textureResId)
+        return 1;
+    struct TextureResource* textureResource = NULL;
+    textureResource = ResourceManager_loadTextureResource(resourceManager, renderer, textureResId);
+    if (!textureResource)
+        return 2;
+    int textureW;
+    int textureH;
+    size_t i;
+    size_t maxFramesCount = 0;
+    if (SDL_QueryTexture(textureResource->texture, NULL, NULL, &textureW, &textureH)) {
+        textureResource->pointersCount--;
+        return 3;
+    }
+    for (i = 0; i < sprite->animationsCount; i++)
+        if (sprite->animations[i].framesCount > maxFramesCount)
+            maxFramesCount = sprite->animations[i].framesCount;
+    if (sprite->frameSize.x * maxFramesCount > (size_t)textureW) {
+        Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_W);
+        textureResource->pointersCount--;
+        return 4;
+    }
+    if (sprite->frameSize.y * sprite->animationsCount > (size_t)textureH) {
+        Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_H);
+        textureResource->pointersCount--;
+        return 5;
+    }
+    sprite->textureResource->pointersCount--;
+    sprite->textureResource = textureResource;
+    return 0;
 }

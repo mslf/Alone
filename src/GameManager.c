@@ -76,9 +76,13 @@ int GameManager_main(struct GameManager* gm) {
         SDL_SetRenderDrawColor(gm->renderer->renderer, r, g, b, 255);
         SDL_RenderClear(gm->renderer->renderer);
         for (i = 0; i < gm->scenesCount; i++)
-            for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++)
+            for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++) {
+                if (gm->scenesStack[i]->sceneNodesList[j]->update)
+                    gm->scenesStack[i]->sceneNodesList[j]->update(gm->scenesStack[i]->sceneNodesList[j],
+                                                                  gm->eventManager, gm->renderer);
                 if (gm->scenesStack[i]->sceneNodesList[j]->render)
                     gm->scenesStack[i]->sceneNodesList[j]->render(gm->scenesStack[i]->sceneNodesList[j], gm->renderer);
+            }
         SDL_RenderPresent(gm->renderer->renderer);
         if (state == 0)
             r--;

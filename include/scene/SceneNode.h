@@ -44,7 +44,7 @@ struct SceneNode {
     double scaleX;
     double scaleY;
     void (*control)(struct SceneNode* sceneNode, struct EventManager* eventManager);
-    void (*update)(struct SceneNode* sceneNode, struct EventManager* eventManager);
+    void (*update)(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
     void (*render)(struct SceneNode* sceneNode, struct Renderer* renderer);
     void (*sound)(struct SceneNode* sceneNode, struct Musican* musican);
 };

@@ -418,7 +418,8 @@ unsigned char ResourceManager_saveTextResource(struct ResourceManager* rm,
         rm->textResourcesList[rm->textResourcesCount] = textResource;
         rm->textResourcesCount++;
     }
-    return (result + 2);
+    if (result)
+        return (result + 2);
 }
 
 void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm) {
