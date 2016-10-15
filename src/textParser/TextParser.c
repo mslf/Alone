@@ -530,7 +530,7 @@ unsigned char TextParser_getFlag(struct TextParser* textParser, const char* cons
 }
 
 unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
-    /* size_t count = TextParser_getItemsCount(textParser, leftOperand); */
+    TextParser_getItemsCount(textParser, leftOperand); // later, we will use textParser->lastError. Don't remove this.
     size_t found = 0;
     size_t index = 0;
     size_t i = 0;
