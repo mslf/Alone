@@ -28,7 +28,7 @@ const char* const MUSICAN_ERR_MIX_OPEN_AUDIO = "Musican: constructor: SDL_mixer 
 
 struct Musican* Musican_construct(struct Logger* logger) {
     struct Musican* musican = NULL;
-    musican = (struct Musican*)malloc(sizeof(struct Musican*));
+    musican = (struct Musican*)malloc(sizeof(struct Musican));
     if (!musican) {
         Logger_log(logger, MUSICAN_ERR_ALLOC);
         Musican_destruct(musican);

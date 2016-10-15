@@ -238,8 +238,10 @@ unsigned char TextParser_parseItemsArrayString(struct Logger* logger, struct Pai
         char c = itemsString[i];
         if (charsCounter >= allocatedCharsForTempItemString)
             if (TextParser_reallocateString(logger, &tempItemString, &allocatedCharsForTempItemString,
-                                            INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING))
+                                            INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING)) {
+                free(tempItemString);
                 return 5;
+            }
         switch (state) {
             case 0: // buildingItemString_NotInQuotes
                 if (c == '\"') {
@@ -294,6 +296,7 @@ unsigned char TextParser_parseItemsArrayString(struct Logger* logger, struct Pai
         }
         i++;
     }
+    free(tempItemString);
     return state;
 }
 
@@ -404,6 +407,7 @@ unsigned char TextParser_parseTextResource(struct Logger* logger, struct TextPar
 
         }
     }
+    TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
     return 0;
 }
 
@@ -526,7 +530,7 @@ unsigned char TextParser_getFlag(struct TextParser* textParser, const char* cons
 }
 
 unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
-    size_t count = TextParser_getItemsCount(textParser, leftOperand);
+    /* size_t count = TextParser_getItemsCount(textParser, leftOperand); */
     size_t found = 0;
     size_t index = 0;
     size_t i = 0;
