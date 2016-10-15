@@ -1,0 +1,6 @@
+type = Scene;
+sceneNodes = [
+	"data/demoSprite1.sprite",
+	"data/demoSprite2.sprite"
+];
+eventControllers = [data/hello.script];

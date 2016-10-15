@@ -25,8 +25,8 @@
 
 const char* const GAME_MANAGER_ERR_SCENES_STACK_ALLOC =
         "GameManager: constructor: allocating memory for scenesStack failed!";
-const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "/home/mslf/programs/git/Alone/debugBuild/Alone.settings";
-// !Settings path only for testing purposed on my machine!
+const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "Alone.settings";
+
 struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
     gm = (struct GameManager*)malloc(sizeof(struct GameManager));

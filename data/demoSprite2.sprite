@@ -1,0 +1,8 @@
+type = Sprite;
+textureResource = data/img2.png;
+frameWidth = 1;
+frameHeight = 100;
+animationsListFramesCount = [96];
+animationsListOneFrameDuration = [0];
+virtualWidth = 700;
+virtualHeight = 300;
