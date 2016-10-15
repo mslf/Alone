@@ -22,6 +22,7 @@
 #include <settings/Settings.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "renderer/Renderer.h"
 
 const char* const RENDERER_ERR_SDL_INIT_VIDEO = "Renderer: constructor: SDL_Init video failed!";
@@ -29,6 +30,7 @@ const char* const RENDERER_ERR_ALLOC = "Renderer: constructor: allocating memory
 const char* const RENDERER_ERR_WINDOW_CREATING = "Renderer: constructor: window creating failed!";
 const char* const RENDERER_ERR_SDL_RENDERER_CREATING = "Renderer: constructor: SDL renderer creating failed!";
 const char* const RENDERER_ERR_IMG_INIT = "Renderer: constructor: IMG_Init failed!";
+const char* const RENDERER_ERR_TTF_INIT = "Renderer: constructor: TTF_Init failed!";
 
 struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* settings) {
     if (!settings)
@@ -65,7 +67,6 @@ struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* sett
         Renderer_destruct(renderer);
         return NULL;
     }
-    SDL_SetRenderDrawColor(renderer->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
         char tempString[600];
         sprintf(tempString, "%s SDL_image error: %s", RENDERER_ERR_IMG_INIT, IMG_GetError());
@@ -73,6 +74,14 @@ struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* sett
         Renderer_destruct(renderer);
         return NULL;
     }
+    if(TTF_Init() == -1) {
+        char tempString[600];
+        sprintf(tempString, "%s SDL_ttf error: %s", RENDERER_ERR_TTF_INIT, TTF_GetError());
+        Logger_log(logger, tempString);
+        Renderer_destruct(renderer);
+        return NULL;
+    }
+    SDL_SetRenderDrawColor(renderer->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     renderer->cameraPosition.x = 0;
     renderer->cameraPosition.y = 0;
     renderer->currentScreenSize.x = (int)settings->w;
@@ -91,13 +100,14 @@ void Renderer_destruct(struct Renderer* renderer) {
             SDL_DestroyWindow(renderer->window);
         free(renderer);
     }
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 }
 
 SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point) {
     SDL_Point newPoint;
-    newPoint.x = renderer->currentScreenSize.x * point.x / renderer->virtualScreenSize.x;
-    newPoint.y = renderer->currentScreenSize.y * point.y / renderer->virtualScreenSize.y;
+    newPoint.x = renderer->currentScreenSize.x * point.x / renderer->virtualScreenSize.x - renderer->cameraPosition.x;
+    newPoint.y = renderer->currentScreenSize.y * point.y / renderer->virtualScreenSize.y - renderer->cameraPosition.y;
     return newPoint;
 }

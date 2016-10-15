@@ -267,8 +267,8 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         textureResource = TextureResource_construct(renderer, textureResId);
         if (!textureResource) {
             char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s. SDL_image error: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES,
-                    textureResId, IMG_GetError());
+            sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
+            Logger_log(rm->logger, tempString);
             return NULL;
         }
         // Try to reallocate (if needed) and add textureResource to the list
@@ -281,6 +281,49 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         rm->textureResourcesCount++;
         return textureResource;
     }
+    return rm->textureResourcesList[foundIndex];
+}
+
+struct TextureResource* ResourceManager_loadTextureResourceFromText(struct ResourceManager* rm,
+                                                                    struct Renderer* renderer, const char* const text,
+                                                                    const char* const fontPath,
+                                                                    int size, SDL_Color color) {
+    if (!rm || !text || !renderer || !fontPath || size <= 0)
+        return NULL;
+    char* textureResId = TextureResource_convertTextParametersToString(text, fontPath, size, color);
+    if (!textureResId)
+        return NULL;
+    unsigned  char found = 0;
+    size_t foundIndex = 0;
+    size_t i;
+    // Firstly, try to find existing textureResource in list and return it.
+    // If no textureResource found, try to load and add new, then return it.
+    for (i = 0; i < rm->textureResourcesCount; i++)
+        if (strcmp(textureResId, rm->textureResourcesList[i]->id) == 0) {
+            found = 1;
+            foundIndex = i;
+            break;
+        }
+    if (!found) {
+        struct TextureResource* textureResource = NULL;
+        textureResource = TextureResource_constructFromText(renderer, text, fontPath, size, color);
+        if (!textureResource) {
+            char tempString[600];
+            sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
+            Logger_log(rm->logger, tempString);
+            return NULL;
+        }
+        // Try to reallocate (if needed) and add textureResource to the list
+        if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount)
+            if (ResourceManager_reallocateTextureResourcesList(rm)) {
+                TextureResource_destruct(textureResource);
+                return NULL;
+            }
+        rm->textureResourcesList[rm->textureResourcesCount] = textureResource;
+        rm->textureResourcesCount++;
+        return textureResource;
+    }
+    free(textureResId);
     return rm->textureResourcesList[foundIndex];
 }
 
@@ -420,6 +463,7 @@ unsigned char ResourceManager_saveTextResource(struct ResourceManager* rm,
     }
     if (result)
         return (result + 2);
+    return 0;
 }
 
 void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm) {

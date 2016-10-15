@@ -57,6 +57,10 @@ void ResourceManager_destruct(struct ResourceManager* rm);
 
 struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm, struct Renderer* renderer,
                                                             const char* const textureResId);
+struct TextureResource* ResourceManager_loadTextureResourceFromText(struct ResourceManager* rm,
+                                                                    struct Renderer* renderer, const char* const text,
+                                                                    const char* const fontPath,
+                                                                    int size, SDL_Color color);
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,
                                                             const char* const textResId, unsigned char unique);
 struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager* rm,

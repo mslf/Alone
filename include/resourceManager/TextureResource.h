@@ -23,6 +23,7 @@
 #define ALONE_TEXTURERESOURCE_H
 
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 struct Renderer;
 
 struct TextureResource {
@@ -32,6 +33,11 @@ struct TextureResource {
 };
 
 struct TextureResource* TextureResource_construct(struct Renderer* renderer, const char* const path);
+struct TextureResource* TextureResource_constructFromText(struct Renderer* renderer, const char* const text,
+                                                          const char* const fontPath, int size, SDL_Color color);
 void TextureResource_destruct(struct TextureResource* textureResource);
+
+char* TextureResource_convertTextParametersToString(const char* const text, const char* const fontPath, int size,
+                                                    SDL_Color color);
 
 #endif //ALONE_TEXTURERESOURCE_H
