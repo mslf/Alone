@@ -102,8 +102,8 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
         sceneNode = (struct SceneNode*)Level_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)Sprite_construct(resourceManager, renderer, sceneNodeResId);
-    if (strcmp(sceneNodeTypeString, TEXT_PARSER_TYPE_STRING) == 0)
-        sceneNode = (struct SceneNode*)Text_construct(resourceManager, sceneNodeResId);
+    if (strcmp(sceneNodeTypeString, TEXT_SCENENODE_PARSER_TYPE_STRING) == 0)
+        sceneNode = (struct SceneNode*)Text_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, USER_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)User_construct(resourceManager, sceneNodeResId);
     if (!sceneNode) {
@@ -112,7 +112,6 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
         Logger_log(resourceManager->logger, tempString);
         return NULL;
     }
-
     return sceneNode;
 }
 
@@ -225,6 +224,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager, str
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
+    TextParser_destruct(sceneTextParser);
     return scene;
 }
 

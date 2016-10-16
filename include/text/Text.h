@@ -30,26 +30,49 @@
 #include "resourceManager/ResourceManager.h"
 
 #define TEXT_SCENENODE_PARSER_TYPE_STRING "Text"
+#define TEXT_SCENENODE_PARSER_FONT_PATH "fontPath"
+#define TEXT_SCENENODE_PARSER_TEXT "text"
+#define TEXT_SCENENODE_PARSER_SIZE "size"
+#define TEXT_SCENENODE_PARSER_COLOR "color"
+#define TEXT_SCENENODE_DEFAULT_FONT_PATH "data/default.ttf"
+#define TEXT_SCENENODE_DEFAULT_TEXT "Sample Text."
+
+enum {
+    TEXT_SCENENODE_DEFAULT_SIZE = 12,
+    TEXT_SCENENODE_DEFAULT_COLOR_R = 0,
+    TEXT_SCENENODE_DEFAULT_COLOR_G = 0,
+    TEXT_SCENENODE_DEFAULT_COLOR_B = 0,
+    TEXT_SCENENODE_DEFAULT_COLOR_A = 0
+};
 /*
  * Text is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Text struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Text struct,
  * if you want code to work with Text like with a SceneNode.
  * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct Text {
-    struct SceneNode* sceneNode;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    struct SceneNode sceneNode;
+    struct TextureResource* textureResource;
+    char* fontPath;
+    char* text;
+    int size;
+    SDL_Color color;
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
 };
 
-struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const textResId);
+struct Text* Text_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+                            const char* const textResId);
 void Text_destruct(struct Text* text);
 
-void Text_save(
+unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager,
+                                     const char* const textString, const char* const fontPath,
+                                     int size, SDL_Color color);
+unsigned char Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
         const char* const textResId);
-void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 
 #endif //ALONE_TEXT_H

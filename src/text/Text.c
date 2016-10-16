@@ -20,25 +20,186 @@
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
 #include "text/Text.h"
+#include "textParser/TextParser.h"
 
-struct Text* Text_construct(struct ResourceManager* const resourceManager, const char* const textResId) {
+const char* const TEXT_SCENENODE_ERR_NO_FONT_PATH =
+        "Text_tryGetSettingsFromTextParser: fontPath string haven't found! Using default.";
+const char* const TEXT_SCENENODE_ERR_NO_TEXT =
+        "Text_tryGetSettingsFromTextParser: text string haven't found! Using default.";
+const char* const TEXT_SCENENODE_ERR_NO_SIZE =
+        "Text_tryGetSettingsFromTextParser: size haven't found! Using default.";
+const char* const TEXT_SCENENODE_ERR_NO_COLOR_R =
+        "Text_tryGetSettingsFromTextParser: color[0] haven't found! Using default.";
+const char* const TEXT_SCENENODE_ERR_NO_COLOR_G =
+        "Text_tryGetSettingsFromTextParser: color[1] haven't found! Using default.";
+const char* const TEXT_SCENENODE_ERR_NO_COLOR_B =
+        "Text_tryGetSettingsFromTextParser: color[2] haven't found! Using default.";
+const char* const TEXT_SCENENODE_ERR_NO_COLOR_A =
+        "Text_tryGetSettingsFromTextParser: color[3] haven't found! Using default.";
 
+unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct ResourceManager* resourceManager,
+                                                struct Renderer* renderer, struct TextParser* textParser,
+                                                unsigned char* logFlag) {
+    char* tempFontPath = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, 0);
+    if (!tempFontPath) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_FONT_PATH);
+        tempFontPath = TEXT_SCENENODE_DEFAULT_FONT_PATH;
+        (*logFlag) = 1;
+    }
+    text->fontPath = (char*)malloc(sizeof(char) * (strlen(tempFontPath) + 1));
+    if (!text->fontPath)
+        return 2;
+    strcpy(text->fontPath, tempFontPath);
+    char* tempTextString = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_TEXT, 0);
+    if (!tempTextString) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_TEXT);
+        tempTextString = TEXT_SCENENODE_DEFAULT_TEXT;
+        (*logFlag) = 1;
+    }
+    text->text = (char*)malloc(sizeof(char) * (strlen(tempTextString) + 1));
+    if (!text->text)
+        return 4;
+    strcpy(text->text, tempTextString);
+    text->size = (int)TextParser_getInt(textParser, TEXT_SCENENODE_PARSER_SIZE, 0);
+    if (text->size <= 0) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_SIZE);
+        text->size = TEXT_SCENENODE_DEFAULT_SIZE;
+        (*logFlag) = 1;
+    }
+    text->color.r = (Uint8)TextParser_getInt(textParser, TEXT_SCENENODE_PARSER_COLOR, 0);
+    if (textParser->lastError) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_COLOR_R);
+        text->color.r = TEXT_SCENENODE_DEFAULT_COLOR_R;
+        (*logFlag) = 1;
+    }
+    text->color.g = (Uint8)TextParser_getInt(textParser, TEXT_SCENENODE_PARSER_COLOR, 1);
+    if (textParser->lastError) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_COLOR_G);
+        text->color.g = TEXT_SCENENODE_DEFAULT_COLOR_G;
+        (*logFlag) = 1;
+    }
+    text->color.b = (Uint8)TextParser_getInt(textParser, TEXT_SCENENODE_PARSER_COLOR, 2);
+    if (textParser->lastError) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_COLOR_B);
+        text->color.b = TEXT_SCENENODE_DEFAULT_COLOR_B;
+        (*logFlag) = 1;
+    }
+    text->color.a = (Uint8)TextParser_getInt(textParser, TEXT_SCENENODE_PARSER_COLOR, 3);
+    if (textParser->lastError) {
+        Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_COLOR_A);
+        text->color.a = TEXT_SCENENODE_DEFAULT_COLOR_A;
+        (*logFlag) = 1;
+    }
+    return 0;
+}
+
+unsigned char Text_generateTexture(struct Text* text, struct ResourceManager* resourceManager,
+                                   struct Renderer* renderer) {
+    text->textureResource = ResourceManager_loadTextureResourceFromText(resourceManager, renderer, text->text,
+                                                                        text->fontPath, text->size,
+                                                                        text->color);
+    if (!text->textureResource)
+        return 1;
+    int textureW;
+    int textureH;
+    if (SDL_QueryTexture(text->textureResource->texture, NULL, NULL, &textureW, &textureH))
+        return 2;
+    text->srcRect.w = textureW;
+    text->srcRect.h = textureH;
+    text->sceneNode.update = Text_update;
+    text->sceneNode.render = Text_render;
+    text->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(TEXT_SCENENODE_PARSER_TYPE_STRING) + 1));
+    if (!text->sceneNode.type)
+        return 3;
+    return 0;
+}
+
+struct Text* Text_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+                            const char* const textResId) {
+    if (!resourceManager || !renderer || !textResId)
+        return NULL;
+    struct Text* text = (struct Text*)calloc(1, sizeof(struct Text));
+    if (!text)
+        return NULL;
+    SceneNode_init(&(text->sceneNode));
+    text->sceneNode.sceneNodeTextResource = ResourceManager_loadTextResource(resourceManager, textResId, 0);
+    if (!text->sceneNode.sceneNodeTextResource) {
+        Text_destruct(text);
+        return NULL;
+    }
+    struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
+                                                                         text->sceneNode.sceneNodeTextResource);
+    if (!textParser) {
+        Text_destruct(text);
+        return NULL;
+    }
+    unsigned char logFlag = 0;
+    if (Text_tryGetSettingsFromTextParser(text, resourceManager, renderer, textParser, &logFlag)) {
+        Text_destruct(text);
+        TextParser_destruct(textParser);
+        return NULL;
+    }
+    if (logFlag) {
+        char tempString[600];
+        sprintf(tempString, "\tin ResourceID: %s", textResId);
+        Logger_log(resourceManager->logger, tempString);
+    }
+    TextParser_destruct(textParser);
+    if (Text_generateTexture(text, resourceManager, renderer)) {
+        Text_destruct(text);
+        return NULL;
+    }
+    strcpy(text->sceneNode.type, TEXT_SCENENODE_PARSER_TYPE_STRING);
+    return text;
 }
 
 void Text_destruct(struct Text* text) {
+    if (!text)
+        return;;
+    if (text->fontPath)
+        free(text->fontPath);
+    if (text->text)
+        free(text->text);
+    if (text->textureResource)
+        text->textureResource->pointersCount--;
+    if (text->sceneNode.sceneNodeTextResource)
+        text->sceneNode.sceneNodeTextResource->pointersCount--;
+    if (text->sceneNode.type)
+        free(text->sceneNode.type);
+    free(text);
+}
+
+unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager,
+                                     const char* const textString, const char* const fontPath,
+                                     int size, SDL_Color color) {
 
 }
 
-void Text_save(
+unsigned char Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
         const char* const textResId) {
 
 }
 
-void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
-
+void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {
+    if (!sceneNode || !renderer)
+        return;
+    struct Text* text = (struct Text*)sceneNode;
+    SDL_Point coordinates = Renderer_convertCoordinates(renderer, text->sceneNode.coordinates);
+    text->dstRect.x = coordinates.x;
+    text->dstRect.y = coordinates.y;
+    SDL_Point size;
+    size.x = text->srcRect.w;
+    size.y = text->srcRect.h;
+    SDL_Point convertedSize = Renderer_convertCoordinates(renderer, size);
+    text->dstRect.w = convertedSize.x * sceneNode->scaleX;
+    text->dstRect.h = convertedSize.y * sceneNode->scaleY;
 }
 
 void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
-
+    if (!sceneNode || !renderer)
+        return;
+    struct Text* text = (struct Text*)sceneNode;
+    SDL_RenderCopyEx(renderer->renderer, text->textureResource->texture, &text->srcRect, &text->dstRect,
+                     text->sceneNode.angle, &text->sceneNode.rotatePointCoordinates, text->sceneNode.flip);
 }
