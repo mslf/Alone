@@ -325,11 +325,16 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
         TextParser_destruct(textParser);
         return 6;
     }
+    TextParser_destruct(textParser);
     if (TextResource_updateContent(scene->sceneResource, newText)) {
-        TextParser_destruct(textParser);
+        free(newText);
         return 7;
     }
-    ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId);
+    if (ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId)) {
+        free(newText);
+        return 8;
+    }
+    free(newText);
     return 0;
 }
 

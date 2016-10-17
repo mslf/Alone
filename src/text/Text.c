@@ -169,16 +169,108 @@ void Text_destruct(struct Text* text) {
     free(text);
 }
 
-unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager,
-                                     const char* const textString, const char* const fontPath,
-                                     int size, SDL_Color color) {
+unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager, struct Renderer* renderer,
+                                     const char* const textString, const char* const fontPath, int size, SDL_Color color) {
+    if (!text || !resourceManager || !renderer || !textString || !fontPath || size <= 0)
+        return 1;
+    struct TextureResource* textureResource = ResourceManager_loadTextureResourceFromText(resourceManager, renderer, 
+                                                                                          textString, fontPath, size, color);
+    if (!textureResource)
+        return 2;
+    int textureW;
+    int textureH;
+    if (SDL_QueryTexture(textureResource->texture, NULL, NULL, &textureW, &textureH)) {
+        textureResource->pointersCount--;
+        return 3;
+    }
+    char* tempTextString = NULL;
+    tempTextString = (char*)malloc(sizeof(char) * (strlen(textString) + 1));
+    if (!tempTextString) {
+        textureResource->pointersCount--;
+        return 4;
+    }
+    char* tempFontPath = NULL;
+    tempFontPath = (char*)malloc(sizeof(char) * (strlen(fontPath) + 1));
+    if (!tempFontPath) {
+        free(tempTextString);
+        textureResource->pointersCount--;
+        return 5;
+    }
+    free(text->text);
+    strcpy(tempTextString, textString);
+    text->text = tempTextString;
+    free(text->fontPath);
+    strcpy(tempFontPath, fontPath);
+    text->fontPath = tempFontPath;
+    text->size = size;
+    text->color = color;
+    text->textureResource->pointersCount--;
+    text->textureResource = textureResource;
+    text->srcRect.w = textureW;
+    text->srcRect.h = textureH;
+    return 0;
+}
 
+unsigned char Text_addSettingsToTextParser(const struct Text* const text, struct TextParser* textParser) {
+    TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TEXT_SCENENODE_PARSER_TYPE_STRING);
+    if (textParser->lastError)
+        return 1;
+    TextParser_addString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, text->fontPath);
+    if (textParser->lastError)
+        return 2;
+    TextParser_addString(textParser, TEXT_SCENENODE_PARSER_TEXT, text->text);
+    if (textParser->lastError)
+        return 3;
+    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_SIZE, (size_t)text->size);
+    if (textParser->lastError)
+        return 4;
+    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.r);
+    if (textParser->lastError)
+        return 5;
+    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.g);
+    if (textParser->lastError)
+        return 6;
+    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.b);
+    if (textParser->lastError)
+        return 7;
+    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.a);
+    if (textParser->lastError)
+        return 8;
+    return 0;
 }
 
 unsigned char Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
         const char* const textResId) {
-
+     if (!text || !resourceManager || !textResId)
+        return 1;
+    struct TextParser* textParser= NULL;
+    size_t i;
+    textParser = TextParser_constructEmpty();
+    if (!textParser)
+        return 2;
+    unsigned char result = Text_addSettingsToTextParser(text, textParser);
+    if (result) {
+        TextParser_destruct(textParser);
+        return 3;
+    }
+    char* newText = NULL;
+    newText = TextParser_convertToText(textParser);
+    if (textParser->lastError) {
+        TextParser_destruct(textParser);
+        return 4;
+    }
+    TextParser_destruct(textParser);
+    if (TextResource_updateContent(text->sceneNode.sceneNodeTextResource, newText)) {
+        free(newText);
+        return 5;
+    }
+    if (ResourceManager_saveTextResource(resourceManager, text->sceneNode.sceneNodeTextResource, textResId)) {
+        free(newText);
+        return 6;
+    }
+    free(newText);
+    return 0;
 }
 
 void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {

@@ -66,9 +66,8 @@ struct Text* Text_construct(struct ResourceManager* const resourceManager, struc
                             const char* const textResId);
 void Text_destruct(struct Text* text);
 
-unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager,
-                                     const char* const textString, const char* const fontPath,
-                                     int size, SDL_Color color);
+unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager, struct Renderer* renderer,
+                                     const char* const textString, const char* const fontPath, int size, SDL_Color color);
 unsigned char Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
         const char* const textResId);
