@@ -421,7 +421,7 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
         soundResource = SoundResource_construct(soundResId);
         if (!soundResource) {
             char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s. SDL_mixer error: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES,
+            sprintf(tempString, "%s ResourceID: %s. SDL_mixer error: %s", RESOURCE_MANAGER_ERR_LOAD_SOUND_RES,
                     soundResId, Mix_GetError());
             Logger_log(rm->logger, tempString);
             return NULL;

@@ -83,7 +83,7 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
     struct SceneNode* sceneNode = NULL;
     // Typed construction routine here
     if (strcmp(sceneNodeTypeString, BUTTON_SCENENODE_PARSER_TYPE_STRING) == 0)
-        sceneNode = (struct SceneNode*)Button_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Button_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, CHECK_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)CheckBox_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING) == 0)
@@ -259,6 +259,7 @@ unsigned char Scene_addSceneNode(struct Scene* const scene, struct ResourceManag
     char* sceneNodeTypeString = NULL;
     sceneNodeTypeString = TextParser_getString(sceneNodeTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (sceneNodeTextParser->lastError) {
+        sceneNodeTextResource->pointersCount--;
         TextParser_destruct(sceneNodeTextParser);
         return 4;
     }
@@ -266,15 +267,19 @@ unsigned char Scene_addSceneNode(struct Scene* const scene, struct ResourceManag
     struct SceneNode* sceneNode = NULL;
     sceneNode = Scene_constructSceneNode(resourceManager, renderer, sceneNodeTypeString, sceneNodeResId);
     if(!sceneNode) {
+        sceneNodeTextResource->pointersCount--;
         TextParser_destruct(sceneNodeTextParser);
         return 5;
     }
     if (scene->sceneNodesCount >= scene->allocatedSceneNodesCount)
         if (Scene_reallocateSceneNodesList(scene)) {
+            sceneNodeTextResource->pointersCount--;
             TextParser_destruct(sceneNodeTextParser);
             Scene_destructSceneNode(sceneNode);
             return 6;
         }
+    TextParser_destruct(sceneNodeTextParser);
+    sceneNodeTextResource->pointersCount--;
     scene->sceneNodesList[scene->sceneNodesCount] = sceneNode;
     scene->sceneNodesCount++;
     return 0;

@@ -22,18 +22,25 @@
 #ifndef ALONE_GAMEEVENT_H
 #define ALONE_GAMEEVENT_H
 
+#include "textParser/TextParser.h"
+
 struct SceneNode;
 
+#define GAME_EVENT_PARSER_TYPE_STRING "GameEvent"
+#define GAME_EVENT_PARSER_CHANNEL_STRING "channel"
+#define GAME_EVENT_PARSER_COMMAND_STRING "command"
+#define GAME_EVENT_PARSER_DATA_STRING "data"
+
 struct GameEvent {
-    const char* eventChannel;
-    const char* senderType;
+    char* eventChannel;
     struct SceneNode* sender;
-    const char* command;
-    const char* data;
+    char* command;
+    char* data;
 };
 
-struct GameEvent* GameEvent_construct(const char* channel, const char* senderType,
-                                      struct SceneNode* sender, const char* command, const char* data);
+struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNode* sender, const char* const command,
+                                      const char* const data);
+struct GameEvent* GameEvent_constructFromTextParser(struct TextParser* textParser, struct SceneNode* sender);
 void GameEvent_destruct(struct GameEvent* gameEvent);
 
 #endif //ALONE_GAMEEVENT_H

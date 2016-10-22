@@ -22,43 +22,64 @@
 #ifndef ALONE_BUTTON_H
 #define ALONE_BUTTON_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "sprite/Sprite.h"
+#include "text/Text.h"
 
 #define BUTTON_SCENENODE_PARSER_TYPE_STRING "Button"
+#define BUTTON_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING "focusedEventResource"
+#define BUTTON_SCENENODE_PARSER_PRESSED_EVENT_RES_STRING "pressedEventResource"
+#define BUTTON_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING "focusedSoundResource"
+#define BUTTON_SCENENODE_PARSER_PRESSED_SOUND_RES_STRING "pressedSoundResource"
+#define BUTTON_SCENENODE_PARSER_SPRITE_RES_STRING "spriteResource"
+#define BUTTON_SCENENODE_PARSER_TEXT_RES_STRING "textResource"
+
+enum ButtonState {
+    Normal,
+    Focused,
+    Pressed
+};
 /*
  * Button is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Button struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Button struct,
  * if you want code to work with Button like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct Button {
-    struct SceneNode* sceneNode;
-    struct TextResource* labelResource;
-    struct TextResource* spriteResource;
-    struct TextResource* pressedEventResource;
-    struct TextureResource* textureResource;
+    struct SceneNode sceneNode;
+    struct Sprite* sprite; // animation: 0 - normal, 1 - focused, 2 - pressed
+    struct Text* label;
     struct SoundResource* focusedSoundResource;
     struct SoundResource* pressedSoundResource;
+    struct TextResource* focusedEventResource;
+    struct TextResource* pressedEventResource;
+    struct GameEvent* focusedEvent;
     struct GameEvent* pressedEvent;
-    unsigned char isPressed;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    bool isGeometryChanged;
+    bool isStateChanged;
+    enum ButtonState state;
 };
 
-struct Button* Button_construct(struct ResourceManager* const resourceManager, const char* const buttonResId);
+struct Button* Button_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+                                const char* const buttonResId);
 void Button_destruct(struct Button* button);
 
-void Button_save(
-        const struct Button* const button, struct ResourceManager* const resourceManager,
-        const char* const buttonResId);
+unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager, 
+                                                const char* const pressedEventResId);
+unsigned char Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager, 
+                                                const char* const focusedEventResId);
+unsigned char Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
+                          const char* const buttonResId);
 void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void Button_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void Button_sound(struct SceneNode* sceneNode, struct Musican* musican);
 

@@ -48,7 +48,8 @@ enum {
  * Text is an inheritor of the SceneNode.
  * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Text struct,
  * if you want code to work with Text like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct Text {
