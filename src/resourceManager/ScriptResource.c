@@ -27,10 +27,9 @@ struct ScriptResource* ScriptResource_construct(const char* const path) {
     if (!path)
         return  NULL;
     struct ScriptResource* scriptResource = NULL;
-    scriptResource = (struct ScriptResource*)malloc(sizeof(struct ScriptResource));
+    scriptResource = (struct ScriptResource*)calloc(1, sizeof(struct ScriptResource));
     if (!scriptResource)
         return NULL;
-    scriptResource->luaState = NULL;
     scriptResource->id = (char*)malloc(sizeof(char) * (strlen(path) + 1));
     if (!scriptResource->id) {
         ScriptResource_destruct(scriptResource);

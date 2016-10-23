@@ -23,20 +23,25 @@
 #include "settings/Settings.h"
 #include "textParser/TextParser.h"
 
-const char* const SETTINGS_PARSER_TYPE_STRING = "Settings";
-const char* const SETTINGS_PARSER_SCREEN_HEIGHT = "screenHeight";
-const char* const SETTINGS_PARSER_SCREEN_WIDTH = "screenWidth";
-const char* const SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT = "virtualScreenHeight";
-const char* const SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH = "virtualScreenWidth";
-const char* const SETTINGS_PARSER_FULLSCREEN = "fullscreen";
-const char* const SETTINGS_PARSER_MUSIC = "music";
-const char* const SETTINGS_PARSER_SOUND = "sound";
-const char* const SETTINGS_PARSER_VSYNC = "vsync";
-const char* const SETTINGS_PARSER_MAIN_SCENE = "mainScene";
+#define SETTINGS_PARSER_TYPE_STRING "Settings"
+#define SETTINGS_PARSER_SCREEN_HEIGHT "screenHeight"
+#define SETTINGS_PARSER_SCREEN_WIDTH "screenWidth"
+#define SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT "virtualScreenHeight"
+#define SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH "virtualScreenWidth"
+#define SETTINGS_PARSER_FULLSCREEN "fullscreen"
+#define SETTINGS_PARSER_MUSIC "music"
+#define SETTINGS_PARSER_SOUND "sound"
+#define SETTINGS_PARSER_VSYNC "vsync"
+#define SETTINGS_PARSER_MAIN_SCENE "mainScene"
 const char* const SETTINGS_PARSER_ERR_NO_TYPE_STRING =
-        "Settings: constructor: TextParser have no suitable type string!";
-const char* const SETTINGS_ERR_TEXT_PARSER_CONSTRUCTING = "Settings: constructor: constructing TextParser failed!";
+        "Settings_construct: TextParser have no type string!";
+const char* const SETTINGS_PARSER_ERR_NOT_MY_TYPE_STRING =
+        "Settings_construct: TextParser have no suitable type string!";
+const char* const SETTINGS_ERR_TEXT_PARSER_CONSTRUCTING = 
+        "Settings_construct: constructing TextParser failed!";
 const char* const SETTINGS_ERR_DEFAULTS = "Settings: constructor: using defaults settings!";
+const char* const SETTINGS_ERR_MAIN_SCENE_STRING_ALLOC = 
+        "Settings_construct: allocating memory for mainScene string failed!";
 
 struct Settings* Settings_defaults(struct Settings* settings) {
     if (settings) {
@@ -48,7 +53,13 @@ struct Settings* Settings_defaults(struct Settings* settings) {
         settings->isMusicActive = SETTINGS_DEFAULT_MUSIC;
         settings->isSoundActive = SETTINGS_DEFAULT_SOUND;
         settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
-        settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
+        char* tempString = SETTINGS_DEFAULT_MAIN_SCENE;
+        settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
+        if (!settings->mainScene) {
+            Settings_destruct(settings);
+            return NULL;
+        }
+        strcpy(settings->mainScene, tempString);
     }
     return settings;
 }
@@ -65,7 +76,7 @@ unsigned char Settings_checkTextResourceType(struct Settings* settings, struct T
         return 1;
     }
     if (strcmp(settingsTypeString, SETTINGS_PARSER_TYPE_STRING) != 0) {
-        Logger_log(resourceManager->logger, SETTINGS_PARSER_ERR_NO_TYPE_STRING);
+        Logger_log(resourceManager->logger, SETTINGS_PARSER_ERR_NOT_MY_TYPE_STRING);
         Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
         settings->settingsResource->pointersCount = 0;
         ResourceManager_destructNeedlessTextResources(resourceManager);
@@ -74,17 +85,17 @@ unsigned char Settings_checkTextResourceType(struct Settings* settings, struct T
     return 0;
 }
 
-void Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
-    settings->h = (size_t) TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_HEIGHT, 0);
+unsigned char Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
+    settings->h = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_HEIGHT, 0);
     if (textParser->lastError)
         settings->h = SETTINGS_DEFAULT_H;
-    settings->w = (size_t) TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_WIDTH, 0);
+    settings->w = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_WIDTH, 0);
     if (textParser->lastError)
         settings->w = SETTINGS_DEFAULT_W;
-    settings->virtualH = (size_t) TextParser_getInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT, 0);
+    settings->virtualH = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT, 0);
     if (textParser->lastError)
         settings->virtualH = SETTINGS_DEFAULT_H;
-    settings->virtualW = (size_t) TextParser_getInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH, 0);
+    settings->virtualW = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH, 0);
     if (textParser->lastError)
         settings->virtualW = SETTINGS_DEFAULT_W;
     settings->isFullscreen = TextParser_getFlag(textParser, SETTINGS_PARSER_FULLSCREEN, 0);
@@ -101,20 +112,19 @@ void Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct Tex
         settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
     char* tempString = TextParser_getString(textParser, SETTINGS_PARSER_MAIN_SCENE, 0);
     if (textParser->lastError)
-        settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
-    else {
-        settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
-        if (!settings->mainScene) {
-            settings->mainScene = SETTINGS_DEFAULT_MAIN_SCENE;
-            return;
-        }
-        strcpy(settings->mainScene, tempString);
-    }
+        tempString = SETTINGS_DEFAULT_MAIN_SCENE;
+    settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
+    if (!settings->mainScene)
+        return 1;
+    strcpy(settings->mainScene, tempString);
+    return 0;
 }
 
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId) {
+    if (!resourceManager || !settingsResId)
+        return NULL;
     struct Settings *settings = NULL;
-    settings = (struct Settings *) malloc(sizeof(struct Settings));
+    settings = (struct Settings *) calloc(1, sizeof(struct Settings));
     if (!settings)
         return NULL;
     settings->settingsResource = ResourceManager_loadTextResource(resourceManager, settingsResId, 0);
@@ -131,9 +141,15 @@ struct Settings* Settings_construct(struct ResourceManager* resourceManager, con
         ResourceManager_destructNeedlessTextResources(resourceManager);
         return Settings_defaults(settings);
     }
-    if (Settings_checkTextResourceType(settings, textParser, resourceManager))
+    if (Settings_checkTextResourceType(settings, textParser, resourceManager)) {
+        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
         return Settings_defaults(settings);
-    Settings_tryGetSettingsFromTextParser(settings, textParser);
+    }
+    if (Settings_tryGetSettingsFromTextParser(settings, textParser)) {
+        Logger_log(resourceManager->logger, SETTINGS_ERR_MAIN_SCENE_STRING_ALLOC);
+        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
+        return Settings_defaults(settings);
+    }
     TextParser_destruct(textParser);
     return settings;
 }
@@ -155,8 +171,7 @@ unsigned char Settings_save(struct Settings* settings, struct ResourceManager* r
                             const char* const settingsResId) {
     if (!settings || !resourceManager || !settingsResId)
         return 1;
-    struct TextParser* textParser= NULL;
-    size_t i;
+    struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;
@@ -183,8 +198,11 @@ unsigned char Settings_save(struct Settings* settings, struct ResourceManager* r
     }
     if (TextResource_updateContent(settings->settingsResource, newText)) {
         TextParser_destruct(textParser);
+        free(newText);
         return 5;
     }
+    TextParser_destruct(textParser);
+    free(newText);
     ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId);
     return 0;
 }
@@ -193,7 +211,7 @@ unsigned char Settings_save(struct Settings* settings, struct ResourceManager* r
 void Settings_destruct(struct Settings* settings) {
     if (!settings)
         return;
-    if (settings->mainScene && strcmp(settings->mainScene,SETTINGS_DEFAULT_MAIN_SCENE))
+    if (settings->mainScene)
         free(settings->mainScene);
     free(settings);
 }

@@ -23,24 +23,25 @@
 #define ALONE_SETTINGS_H
 
 #include <SDL2/SDL.h>
+#include <stdbool.h>
 
 #define SETTINGS_DEFAULT_MAIN_SCENE "data/main.scene"
 enum {
-    SETTINGS_DEFAULT_VSYNC = 1,
-    SETTINGS_DEFAULT_MUSIC = 1,
-    SETTINGS_DEFAULT_SOUND = 1,
-    SETTINGS_DEFAULT_FULLSCREEN = 0,
-    SETTINGS_DEFAULT_W = 800,
-    SETTINGS_DEFAULT_H = 450
+    SETTINGS_DEFAULT_VSYNC = true,
+    SETTINGS_DEFAULT_MUSIC = true,
+    SETTINGS_DEFAULT_SOUND = true,
+    SETTINGS_DEFAULT_FULLSCREEN = false,
+    SETTINGS_DEFAULT_W = 640,
+    SETTINGS_DEFAULT_H = 480
 };
 
 struct ResourceManager;
 
 struct Settings {
-    unsigned char isVsyncActive;
-    unsigned char isMusicActive;
-    unsigned char isSoundActive;
-    unsigned char isFullscreen;
+    bool isVsyncActive;
+    bool isMusicActive;
+    bool isSoundActive;
+    bool isFullscreen;
     struct TextResource* settingsResource;
     size_t w;
     size_t h;

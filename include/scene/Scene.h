@@ -48,7 +48,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager, str
                               const char* const sceneResId);
 void Scene_destruct (struct Scene* scene);
 
-unsigned char Scene_addSceneNode(struct Scene* const scene, struct ResourceManager* const resourceManager,
+unsigned char Scene_addSceneNode(struct Scene* const scene, struct ResourceManager* const resourceManager, 
                                  struct Renderer* renderer, const char* const sceneNodeResId);
 void Scene_removeSceneNode(
         struct Scene* const scene, struct ResourceManager* const resourceManager, size_t index);

@@ -23,9 +23,11 @@
 #define ALONE_TEXTPARSER_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "logger/Logger.h"
 #include "resourceManager/TextResource.h"
 
+#define TEXT_PARSER_TYPE_STRING "type"
 enum {
     INITIAL_NUMBER_ALLOCATED_PAIRS = 10,
     INITIAL_NUMBER_ALLOCATED_ITEMS = 1,
@@ -33,7 +35,6 @@ enum {
     INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING = 100,
     INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING = 100
 };
-#define TEXT_PARSER_TYPE_STRING "type"
 
 struct RightOperand {
     char** rightOperandItemsList;
@@ -70,11 +71,11 @@ size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const
 char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index);
 long int TextParser_getInt(struct TextParser* textParser, const char* const leftOperand, size_t index);
 double TextParser_getDouble(struct TextParser* textParser, const char* leftOperand, size_t index);
-unsigned char TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index);
+bool TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index);
 unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item);
 unsigned char TextParser_addInt(struct TextParser* textParser, const char* const leftOperand, long int item);
 unsigned char TextParser_addDouble(struct TextParser* textParser, const char* leftOperand, double item);
-unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, unsigned char item);
+unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, bool item);
 char* TextParser_convertToText(struct TextParser* textParser);
 
 #endif //ALONE_TEXTPARSER_H

@@ -426,7 +426,7 @@ struct TextParser* TextParser_constructFromTextResource(struct Logger* logger,
 
 struct TextParser* TextParser_constructEmpty() {
     struct TextParser* textParser = NULL;
-    textParser = (struct TextParser*)malloc(sizeof(struct TextParser));
+    textParser = (struct TextParser*)calloc(1, sizeof(struct TextParser));
     if (!textParser)
         return NULL;
     textParser->pairsCount = 0;
@@ -519,7 +519,7 @@ double TextParser_getDouble(struct TextParser* textParser, const char* leftOpera
     return strtod(intString, NULL);
 }
 
-unsigned char TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index){
+bool TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index){
     char* intString = TextParser_getString(textParser, leftOperand, index);
     if (textParser->lastError)
         return 0;
@@ -581,7 +581,7 @@ unsigned char TextParser_addDouble(struct TextParser* textParser, const char* le
     return TextParser_addString(textParser, leftOperand, tempString);
 }
 
-unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, unsigned char item) {
+unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftOperand, bool item) {
     char tempString[2];
     if (item)
         sprintf(tempString, "1");

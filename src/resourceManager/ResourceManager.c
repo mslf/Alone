@@ -44,8 +44,6 @@ const char* const RESOURCE_MANAGER_ERR_LOAD_SOUND_RES =
 unsigned char ResourceManager_constructTextureResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return 1;
-    rm->textureResourcesList = NULL;
-    rm->textureResourcesCount = 0;
     if (!(rm->textureResourcesList = (struct TextureResource**)malloc(
             sizeof(struct TextureResource*) * INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES))) {
         Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
@@ -58,8 +56,6 @@ unsigned char ResourceManager_constructTextureResourcesList(struct ResourceManag
 unsigned char ResourceManager_constructTextResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return 1;
-    rm->textResourcesList = NULL;
-    rm->textResourcesCount = 0;
     if (!(rm->textResourcesList = (struct TextResource**)malloc(
             sizeof(struct TextResource*) * INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES))) {
         Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC);
@@ -72,8 +68,6 @@ unsigned char ResourceManager_constructTextResourcesList(struct ResourceManager*
 unsigned char ResourceManager_constructScriptResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return 1;
-    rm->scriptResourcesList = NULL;
-    rm->scriptResourcesCount = 0;
     if (!(rm->scriptResourcesList = (struct ScriptResource**)malloc(
             sizeof(struct ScriptResource*) * INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES))) {
         Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC);
@@ -86,8 +80,6 @@ unsigned char ResourceManager_constructScriptResourcesList(struct ResourceManage
 unsigned char ResourceManager_constructSoundResourcesMap(struct ResourceManager* rm) {
     if (!rm)
         return 1;
-    rm->soundResourcesList = NULL;
-    rm->soundResourcesCount = 0;
     if (!(rm->soundResourcesList = (struct SoundResource**)malloc(
             sizeof(struct SoundResource*) * INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES))) {
         Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SOUND_RESOURCES_LIST_ALLOC);
@@ -99,7 +91,7 @@ unsigned char ResourceManager_constructSoundResourcesMap(struct ResourceManager*
 
 struct ResourceManager* ResourceManager_construct(struct Logger* logger) {
     struct ResourceManager* rm = NULL;
-    rm = (struct ResourceManager*)malloc(sizeof(struct ResourceManager));
+    rm = (struct ResourceManager*)calloc(1, sizeof(struct ResourceManager));
     if (!rm) {
         Logger_log(logger, RESOURCE_MANAGER_ERR_ALLOC);
         return NULL;

@@ -22,11 +22,12 @@
 #include "resourceManager/SoundResource.h"
 
 struct SoundResource* SoundResource_construct(const char* const path) {
+    if (!path)
+        return NULL;
     struct SoundResource* soundResource = NULL;
-    soundResource = (struct SoundResource*)malloc(sizeof(struct SoundResource));
+    soundResource = (struct SoundResource*)calloc(1, sizeof(struct SoundResource));
     if (!soundResource)
         return NULL;
-    soundResource->sound = NULL;
     soundResource->id = (char*)malloc(sizeof(char) * (strlen(path) + 1));
     if (!soundResource->id) {
         SoundResource_destruct(soundResource);

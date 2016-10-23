@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include "GameManager.h"
 
-int main () {
+int main() {
     int value;
     struct GameManager* gm = NULL;
     gm = GameManager_construct();

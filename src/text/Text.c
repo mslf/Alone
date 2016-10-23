@@ -38,8 +38,7 @@ const char* const TEXT_SCENENODE_ERR_NO_COLOR_A =
         "Text_tryGetSettingsFromTextParser: color[3] haven't found! Using default.";
 
 unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct ResourceManager* resourceManager,
-                                                struct Renderer* renderer, struct TextParser* textParser,
-                                                unsigned char* logFlag) {
+                                                struct TextParser* textParser, unsigned char* logFlag) {
     char* tempFontPath = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, 0);
     if (!tempFontPath) {
         Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_FONT_PATH);
@@ -134,7 +133,7 @@ struct Text* Text_construct(struct ResourceManager* const resourceManager, struc
         return NULL;
     }
     unsigned char logFlag = 0;
-    if (Text_tryGetSettingsFromTextParser(text, resourceManager, renderer, textParser, &logFlag)) {
+    if (Text_tryGetSettingsFromTextParser(text, resourceManager, textParser, &logFlag)) {
         Text_destruct(text);
         TextParser_destruct(textParser);
         return NULL;
@@ -245,7 +244,6 @@ unsigned char Text_save(
      if (!text || !resourceManager || !textResId)
         return 1;
     struct TextParser* textParser= NULL;
-    size_t i;
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;

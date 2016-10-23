@@ -112,11 +112,11 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
 }
 
 void TextureResource_destruct(struct TextureResource* textureResource) {
-    if (textureResource) {
-        if (textureResource->id)
-            free(textureResource->id);
-        if (textureResource->texture)
-            SDL_DestroyTexture(textureResource->texture);
-        free(textureResource);
-    }
+    if (!textureResource)
+        return;
+    if (textureResource->id)
+        free(textureResource->id);
+    if (textureResource->texture)
+        SDL_DestroyTexture(textureResource->texture);
+    free(textureResource);
 }

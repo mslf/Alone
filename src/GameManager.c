@@ -21,7 +21,7 @@
 */
 #include "GameManager.h"
 #include <stdlib.h>
-#include "stdio.h"
+#include <stdio.h>
 
 const char* const GAME_MANAGER_ERR_SCENES_STACK_ALLOC =
         "GameManager: constructor: allocating memory for scenesStack failed!";
@@ -59,6 +59,8 @@ struct GameManager* GameManager_construct() {
 }
 
 int GameManager_main(struct GameManager* gm) {
+    if (!gm)
+        return 1;
     Logger_log(&(gm->logger), "***Are You Alive?***");
     size_t i;
     size_t j;
@@ -113,6 +115,8 @@ int GameManager_main(struct GameManager* gm) {
 
 void GameManager_destruct(struct GameManager* gm) {
     size_t i;
+    if (!gm)
+        return;
     if (gm->scenesStack) {
         for (i = 0; i < gm->scenesCount; i++)
             Scene_destruct(gm->scenesStack[i]);
@@ -129,16 +133,16 @@ void GameManager_destruct(struct GameManager* gm) {
     Settings_destruct(gm->settings);
     free(gm);
 }
+
 unsigned char GameManager_reallocateSceneNodesList(struct GameManager* gm) {
     if (!gm)
         return 1;
     struct Scene** scenesStack = NULL;
     size_t i;
     size_t newSize = gm->allocatedScenesCount + INITIAL_NUMBER_ALLOCATED_SCENES;
-    if (!(scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * newSize))) {
-        free(scenesStack);
+    scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * newSize);
+    if (!scenesStack)
         return 2;
-    }
     for (i = 0; i < gm->scenesCount; i++)
         scenesStack[i] = gm->scenesStack[i];
     free(gm->scenesStack);
