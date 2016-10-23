@@ -22,6 +22,7 @@
 #ifndef ALONE_GAMEEVENT_H
 #define ALONE_GAMEEVENT_H
 
+#include <stdbool.h>
 #include "textParser/TextParser.h"
 
 struct SceneNode;
@@ -36,6 +37,7 @@ struct GameEvent {
     struct SceneNode* sender;
     char* command;
     char* data;
+    bool isNeeded;
 };
 
 struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNode* sender, const char* const command,

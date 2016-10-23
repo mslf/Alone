@@ -29,23 +29,18 @@ const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "Alone.settings";
 
 struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
-    gm = (struct GameManager*)malloc(sizeof(struct GameManager));
+    gm = (struct GameManager*)calloc(1, sizeof(struct GameManager));
     if (gm) {
         unsigned char result = 0;
-        gm->settings = NULL;
-        gm->resourceManager = NULL;
-        gm->renderer = NULL;
-        gm->musican = NULL;
-        gm->eventManager = NULL;
         gm->logger.state = LoggerEnabledToStderr;
         if (!(gm->eventManager = EventManager_construct(&(gm->logger))))
             result++;
         if (!(gm->resourceManager = ResourceManager_construct(&(gm->logger))))
             result++;
         gm->settings = Settings_construct(gm->resourceManager, GAME_MANAGER_DEFAULT_SETTINGS_PATH);
-        if (gm->settings->isSoundActive)
-            if (!(gm->musican = Musican_construct(&(gm->logger))))
-                result++;
+        if (!(gm->musican = Musican_construct(&(gm->logger),
+                                                gm->settings->isMusicActive, gm->settings->isSoundActive)))
+            result++;
         if (!(gm->renderer = Renderer_construct(&(gm->logger), gm->settings)))
             result++;
         if (!(gm->scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * INITIAL_NUMBER_ALLOCATED_SCENES))) {

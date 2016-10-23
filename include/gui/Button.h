@@ -72,9 +72,9 @@ struct Button* Button_construct(struct ResourceManager* const resourceManager, s
                                 const char* const buttonResId);
 void Button_destruct(struct Button* button);
 
-unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager, 
+unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const pressedEventResId);
-unsigned char Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager, 
+unsigned char Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const focusedEventResId);
 unsigned char Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
                           const char* const buttonResId);

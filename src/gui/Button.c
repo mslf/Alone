@@ -163,11 +163,11 @@ void Button_loadEventsResources(struct Button* button, struct ResourceManager* r
                                                           BUTTON_SCENENODE_PARSER_PRESSED_EVENT_RES_STRING, 0);
     if (!tempPresedEventResourceString)
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_PRESSED_GAME_EVENT_RES);
-    Button_changeFocusedEventResource(button, resourceManager, tempFocusedEventResourceString);
-    Button_changePressedEventResource(button, resourceManager, tempPresedEventResourceString);
+    Button_changeFocusedEventResource(button, resourceManager,tempFocusedEventResourceString);
+    Button_changePressedEventResource(button, resourceManager,tempPresedEventResourceString);
 }
 
-unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct ResourceManager* resourceManager,
+unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct ResourceManager* resourceManager, 
                                                   struct Renderer* renderer, struct TextParser* textParser) {
     unsigned char result = 0;
     Button_loadEventsResources(button, resourceManager, textParser);
@@ -233,16 +233,16 @@ void Button_destruct(struct Button* button) {
     if (button->pressedSoundResource)
         button->pressedSoundResource->pointersCount--;
     if (button->focusedEvent)
-        GameEvent_destruct(button->focusedEvent);
+        button->focusedEvent->isNeeded = false;
     if (button->pressedEvent)
-        GameEvent_destruct(button->pressedEvent);
+        button->pressedEvent->isNeeded = false;
     if (button->sceneNode.sceneNodeTextResource)
         button->sceneNode.sceneNodeTextResource->pointersCount--;
     if (button->sceneNode.type)
         free(button->sceneNode.type);
 }
 
-unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager, 
+unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const pressedEventResId) {
     if (!button || !resourceManager || !pressedEventResId)
         return 1;
@@ -263,10 +263,8 @@ unsigned char Button_changePressedEventResource(struct Button* button, struct Re
         TextParser_destruct(textParser);
         return 4;
     }
-    if (button->pressedEvent) {
-         // TODO: EventManager_removeMeFromList(button->pressedEvent);
-        GameEvent_destruct(button->pressedEvent);
-    }
+    if (button->pressedEvent)
+        button->pressedEvent->isNeeded = false;
     if (button->pressedEventResource)
         button->pressedEventResource->pointersCount--;
     button->pressedEventResource = newGameEventTextResource;
@@ -274,7 +272,7 @@ unsigned char Button_changePressedEventResource(struct Button* button, struct Re
     return 0;
 }
 
-unsigned char Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager, 
+unsigned char Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const focusedEventResId) {
     if (!button || !resourceManager || !focusedEventResId)
         return 1;
@@ -295,10 +293,8 @@ unsigned char Button_changeFocusedEventResource(struct Button* button, struct Re
         TextParser_destruct(textParser);
         return 4;
     }
-    if (button->focusedEvent) {
-        // TODO: EventManager_removeMeFromList(button->focusedEvent);
-        GameEvent_destruct(button->focusedEvent);
-    }
+    if (button->focusedEvent)
+        button->focusedEvent->isNeeded = false;
     if (button->focusedEventResource)
         button->focusedEventResource->pointersCount--;
     button->focusedEventResource = newGameEventTextResource;
@@ -308,7 +304,38 @@ unsigned char Button_changeFocusedEventResource(struct Button* button, struct Re
 
 unsigned char Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
                           const char* const buttonResId) {
-
+    if (!button || !resourceManager || !buttonResId)
+        return 1;
+    unsigned char result = 0;
+    struct TextParser* textParser = NULL;
+    textParser = TextParser_constructEmpty();
+    if (!textParser)
+        return 2;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, BUTTON_SCENENODE_PARSER_TYPE_STRING);
+    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_SPRITE_RES_STRING,
+                                   button->sprite->sceneNode.sceneNodeTextResource->id);
+    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_TEXT_RES_STRING,
+                                   button->label->sceneNode.sceneNodeTextResource->id);
+    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING,
+                                   button->focusedEventResource->id);
+    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_PRESSED_EVENT_RES_STRING,
+                                   button->pressedEventResource->id);
+    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING,
+                                   button->focusedSoundResource->id);
+    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_PRESSED_SOUND_RES_STRING,
+                                   button->pressedSoundResource->id);
+    char* tempString = TextParser_convertToText(textParser);
+    if (!tempString)
+        result++;
+    if (TextResource_updateContent(button->sceneNode.sceneNodeTextResource, tempString))
+        result++;
+    result += ResourceManager_saveTextResource(resourceManager, button->sceneNode.sceneNodeTextResource, buttonResId);
+    if (result) {
+        TextParser_destruct(textParser);
+        return 3;
+    }
+    TextParser_destruct(textParser);
+    return 0;
 }
 
 void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
@@ -340,11 +367,14 @@ void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManag
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP) {
                     button->state = Focused;
                     button->isStateChanged = true;
+                    EventManager_removeEvent(eventManager, button->pressedEvent);
                 }
-            } else if (!(button->state == Normal)) {
+            } else 
+                if (!(button->state == Normal)) {
                     button->state = Normal;
                     button->isStateChanged = true;
-            }
+                    EventManager_removeEvent(eventManager, button->focusedEvent);
+                }
         }
 }
 

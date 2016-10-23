@@ -118,15 +118,19 @@ unsigned char EventManager_reallocateSdlEventsList(struct EventManager* em) {
 }
 
 void EventManager_destruct(struct EventManager* em) {
-    if (em) {
-        if (em->gameEventsList)
-            free(em->gameEventsList);
-        if (em->customGameEventsList)
-            free(em->customGameEventsList);
-        if (em->sdlEventsList)
-            free(em->sdlEventsList);
-        free(em);
+    if (!em)
+        return;
+    if (em->gameEventsList) {
+        size_t i;
+        for (i = 0; i < em->gameEventsCount; i++)
+            GameEvent_destruct(em->gameEventsList[i]);
+        free(em->gameEventsList);
     }
+    if (em->customGameEventsList)
+        free(em->customGameEventsList);
+    if (em->sdlEventsList)
+        free(em->sdlEventsList);
+    free(em);
 }
 
 unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent) {
@@ -134,24 +138,39 @@ unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* g
         return 1;
     if (!gameEvent)
         return 2;
-    // Try to reallocate (if needed) and add gameEvent
-    if (em->gameEventsCount >= em->allocatedGameEventsCount)
-        if (EventManager_reallocateGameEventsList(em))
-            return 3;
-    em->gameEventsList[em->gameEventsCount] = gameEvent;
-    em->gameEventsCount++;
+    // Firstly, try to find the same GameEvent in list
+    size_t i;
+    bool found = false;
+    for (i = 0; i < em->gameEventsCount; i++)
+        if (em->gameEventsList[i] == gameEvent)
+            found = true;
+    if (!found) {
+        // Try to reallocate (if needed) and add gameEvent
+        if (em->gameEventsCount >= em->allocatedGameEventsCount)
+            if (EventManager_reallocateGameEventsList(em))
+                return 3;
+        em->gameEventsList[em->gameEventsCount] = gameEvent;
+        em->gameEventsCount++;
+    }
     return 0;
 }
 
-unsigned char EventManager_removeEvent(struct EventManager* em, size_t index) {
-    if (!em)
+unsigned char EventManager_removeEvent(struct EventManager* em, struct GameEvent* gameEvent) {
+    if (!em || !gameEvent)
         return 1;
-    if (index < em->gameEventsCount)
-        return 2;
     size_t i;
-    em->gameEventsCount--;
-    for (i = index; i < em->gameEventsCount; i++)
-        em->gameEventsList[i] = em->gameEventsList[i + 1];
+    bool found = false;
+    size_t foundIndex = 0;
+    for (i = 0; i < em->gameEventsCount; i++)
+        if (em->gameEventsList[i] == gameEvent) {
+            em->gameEventsCount--;
+            found = true;
+            foundIndex = i;
+            break;
+        }
+    if (found)
+        for (i = foundIndex; i < em->gameEventsCount; i++)
+            em->gameEventsList[i] = em->gameEventsList[i + 1];
     return 0;
 }
 
@@ -187,4 +206,16 @@ unsigned char EventManager_updateSdlEvents(struct EventManager* em) {
                 return 2;
     }
     return 0;
+}
+
+void EventManager_destructNeedlesEvents(struct EventManager* em) {
+    size_t i = 0;
+    while (i < em->gameEventsCount) {
+        if (!em->gameEventsList[i]->isNeeded) {
+            EventManager_removeEvent(em, em->gameEventsList[i]);
+            GameEvent_destruct(em->gameEventsList[i]);
+        }
+        else
+            i++;
+    }
 }

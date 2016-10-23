@@ -22,16 +22,18 @@
 #ifndef ALONE_MUSICAN_H
 #define ALONE_MUSICAN_H
 
+#include <stdbool.h>
 #include "logger/Logger.h"
 #include "resourceManager/SoundResource.h"
 
 struct Musican {
     struct Logger* logger;
-    unsigned char isInitialized;
+    bool isSoundActive;
+    bool isMusicActive;
     // Actually, this struct is empty. It will contain some other data later, if I need the music.
 };
 
-struct Musican* Musican_construct(struct Logger* logger);
+struct Musican* Musican_construct(struct Logger* logger, bool sound, bool music);
 void Musican_destruct(struct Musican* musican);
 
 void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops);

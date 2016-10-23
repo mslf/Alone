@@ -48,13 +48,14 @@ struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNod
     }
     strcpy(gameEvent->data, data);
     gameEvent->sender = sender;
+    gameEvent->isNeeded = true;
     return  gameEvent;
 }
 
 struct GameEvent* GameEvent_constructFromTextParser(struct TextParser* textParser, struct SceneNode* sender) {
     if (!textParser || !sender)
         return NULL;
-    char* tempTypeString = TextParser_getString(textParser, GAME_EVENT_PARSER_CHANNEL_STRING, 0);
+    char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!tempTypeString)
         return NULL;
     if (strcmp(tempTypeString, GAME_EVENT_PARSER_TYPE_STRING) != 0)

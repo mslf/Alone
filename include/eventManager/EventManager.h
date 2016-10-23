@@ -50,7 +50,8 @@ struct EventManager* EventManager_construct(struct Logger* logger);
 void EventManager_destruct(struct EventManager* em);
 
 unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
-unsigned char EventManager_removeEvent(struct EventManager* em, size_t index);
+unsigned char EventManager_removeEvent(struct EventManager* em, struct GameEvent* gameEvent);
+void EventManager_destructNeedlesEvents(struct EventManager* em);
 unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel);
 unsigned char EventManager_updateSdlEvents(struct EventManager* em);
 
