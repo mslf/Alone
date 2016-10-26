@@ -1,0 +1,7 @@
+type = Button;
+spriteResource = data/cmd/cmd.sprite;
+textResource = data/cmd/cmd.text;
+focusedEventResource = data/cmd/cmdFocused.gameEvent;
+pressedEventResource = data/cmd/cmdPressed.gameEvent;
+focusedSoundResource = data/cmd/cmdFocused.wav;
+pressedSoundResource = data/cmd/cmdPressed.wav;

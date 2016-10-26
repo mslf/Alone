@@ -1,5 +1,5 @@
 type = Settings;
-screenWidth =900;
+screenWidth = 900;
 screenHeight = 600;
 virtualScreenWidth = 900;
 virtualScreenHeight = 600;

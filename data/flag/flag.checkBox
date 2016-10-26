@@ -1,0 +1,8 @@
+type = CheckBox;
+spriteResource = data/flag/flag.sprite;
+focusedEventResource = data/flag/focused.gameEvent;
+checkedEventResource = data/flag/checked.gameEvent;
+unCheckedEventResource = data/flag/unChecked.gameEvent;
+focusedSoundResource = data/flag/focused.wav;
+checkedSoundResource = data/flag/checked.wav;
+unCheckedSoundResource = data/flag/unChecked.wav;

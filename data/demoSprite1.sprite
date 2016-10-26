@@ -4,5 +4,5 @@ frameWidth = 50;
 frameHeight = 100;
 animationsListFramesCount = [2];
 animationsListOneFrameDuration = [30];
-virtualWidth = 500;
-virtualHeight = 500;
+virtualWidth = 50;
+virtualHeight = 50;
