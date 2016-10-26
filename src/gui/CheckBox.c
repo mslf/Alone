@@ -360,7 +360,6 @@ void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventMan
                 && mouseCoordinates.x <= (checkBox->sprite->dstRect.x + checkBox->sprite->dstRect.w) 
                 && mouseCoordinates.y >= checkBox->sprite->dstRect.y 
                 && mouseCoordinates.y <= (checkBox->sprite->dstRect.y + checkBox->sprite->dstRect.h)) {
-            
                 if (checkBox->state == CheckBoxState_UnChecked) {
                     checkBox->state = CheckBoxState_FocusedUnChecked;
                     checkBox->isStateChanged = true;
@@ -373,35 +372,36 @@ void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventMan
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN) {
                     if (checkBox->state == CheckBoxState_FocusedUnChecked) {
-                        checkBox->state = CheckBoxState_Checked;
+                        checkBox->state = CheckBoxState_Checking;
                         checkBox->isStateChanged = true;
                         EventManager_removeEvent(eventManager, checkBox->unCheckedEvent);
                         EventManager_addEvent(eventManager, checkBox->checkedEvent);
-                    }
-                    if (checkBox->state == CheckBoxState_FocusedChecked) {
-                        checkBox->state = CheckBoxState_UnChecked;
+                    } else if (checkBox->state == CheckBoxState_FocusedChecked) {
+                        checkBox->state = CheckBoxState_UnChecking;
                         checkBox->isStateChanged = true;
+                        
                         EventManager_removeEvent(eventManager, checkBox->checkedEvent);
-                    EventManager_addEvent(eventManager, checkBox->unCheckedEvent);
+                        EventManager_addEvent(eventManager, checkBox->unCheckedEvent);
                     }
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP) {
-                   if (checkBox->state == CheckBoxState_UnChecked) {
+                   if (checkBox->state == CheckBoxState_UnChecking) {
                     checkBox->state = CheckBoxState_FocusedUnChecked;
                     checkBox->isStateChanged = true;
                     EventManager_addEvent(eventManager, checkBox->focusedEvent);
+                    }
+                    if (checkBox->state == CheckBoxState_Checking) {
+                        checkBox->state = CheckBoxState_FocusedChecked;
+                        checkBox->isStateChanged = true;
+                        EventManager_addEvent(eventManager, checkBox->focusedEvent);
+                    }
                 }
-                if (checkBox->state == CheckBoxState_Checked) {
-                    checkBox->state = CheckBoxState_FocusedChecked;
-                    checkBox->isStateChanged = true;
-                    EventManager_addEvent(eventManager, checkBox->focusedEvent);
-                }
-                }
-            } else 
-                if (checkBox->state != CheckBoxState_Checked && checkBox->state != CheckBoxState_UnChecked) {
-                    if (checkBox->state == CheckBoxState_FocusedUnChecked)
+            } else {
+                    if (checkBox->state == CheckBoxState_FocusedUnChecked
+                        || checkBox->state == CheckBoxState_UnChecking)
                         checkBox->state = CheckBoxState_UnChecked;
-                    if (checkBox->state == CheckBoxState_FocusedChecked)
+                    if (checkBox->state == CheckBoxState_FocusedChecked
+                        || checkBox->state == CheckBoxState_Checking)
                         checkBox->state = CheckBoxState_Checked;
                     checkBox->isStateChanged = true;
                     EventManager_removeEvent(eventManager, checkBox->focusedEvent);
@@ -414,11 +414,11 @@ void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventMana
         return;
     struct CheckBox* checkBox = (struct CheckBox*)sceneNode;
     if (checkBox->isStateChanged) {
-        if (checkBox->state == CheckBoxState_UnChecked)
+        if (checkBox->state == CheckBoxState_UnChecked || checkBox->state == CheckBoxState_UnChecking)
             checkBox->sprite->currentAnimation = 0;
         if (checkBox->state == CheckBoxState_FocusedUnChecked)
             checkBox->sprite->currentAnimation = 1;
-        if (checkBox->state == CheckBoxState_Checked)
+        if (checkBox->state == CheckBoxState_Checked || checkBox->state == CheckBoxState_Checking)
             checkBox->sprite->currentAnimation = 2;
         if (checkBox->state == CheckBoxState_FocusedChecked)
             checkBox->sprite->currentAnimation = 3;
@@ -452,9 +452,9 @@ void CheckBox_sound(struct SceneNode* sceneNode, struct Musican* musican){
         if (checkBox->state == CheckBoxState_FocusedUnChecked 
             || checkBox->state == CheckBoxState_FocusedChecked)
             Musican_playSound(musican, checkBox->focusedSoundResource, 0);
-        if (checkBox->state == CheckBoxState_Checked)
+        if (checkBox->state == CheckBoxState_Checking)
             Musican_playSound(musican, checkBox->checkedSoundResource, 0);
-        if (checkBox->state == CheckBoxState_UnChecked)
+        if (checkBox->state == CheckBoxState_UnChecking)
             Musican_playSound(musican, checkBox->unCheckedSoundResource, 0);
     }
 }

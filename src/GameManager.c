@@ -72,21 +72,23 @@ int GameManager_main(struct GameManager* gm) {
         EventManager_updateSdlEvents(gm->eventManager);
         SDL_SetRenderDrawColor(gm->renderer->renderer, r, g, b, 255);
         SDL_RenderClear(gm->renderer->renderer);
-        i = gm->scenesCount - 1;
-        for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++) {
-            if (gm->scenesStack[i]->sceneNodesList[j]->control)
-                gm->scenesStack[i]->sceneNodesList[j]->control(gm->scenesStack[i]->sceneNodesList[j], 
-                                                               gm->eventManager);
-            if (gm->scenesStack[i]->sceneNodesList[j]->update)
-                gm->scenesStack[i]->sceneNodesList[j]->update(gm->scenesStack[i]->sceneNodesList[j], 
-                                                              gm->eventManager, 
-                                                              gm->renderer);
-            if (gm->scenesStack[i]->sceneNodesList[j]->render)
-                gm->scenesStack[i]->sceneNodesList[j]->render(gm->scenesStack[i]->sceneNodesList[j], 
-                                                              gm->renderer);
-            if (gm->scenesStack[i]->sceneNodesList[j]->sound)
-                gm->scenesStack[i]->sceneNodesList[j]->sound(gm->scenesStack[i]->sceneNodesList[j], 
-                                                             gm->musican);
+        if (gm->scenesCount > 0) {
+            i = gm->scenesCount - 1;
+            for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++) {
+                if (gm->scenesStack[i]->sceneNodesList[j]->control)
+                    gm->scenesStack[i]->sceneNodesList[j]->control(gm->scenesStack[i]->sceneNodesList[j], 
+                                                                gm->eventManager);
+                if (gm->scenesStack[i]->sceneNodesList[j]->update)
+                    gm->scenesStack[i]->sceneNodesList[j]->update(gm->scenesStack[i]->sceneNodesList[j], 
+                                                                gm->eventManager, 
+                                                                gm->renderer);
+                if (gm->scenesStack[i]->sceneNodesList[j]->render)
+                    gm->scenesStack[i]->sceneNodesList[j]->render(gm->scenesStack[i]->sceneNodesList[j], 
+                                                                gm->renderer);
+                if (gm->scenesStack[i]->sceneNodesList[j]->sound)
+                    gm->scenesStack[i]->sceneNodesList[j]->sound(gm->scenesStack[i]->sceneNodesList[j], 
+                                                                gm->musican);
+            }
         }
         SDL_RenderPresent(gm->renderer->renderer);
         if (state == 0)

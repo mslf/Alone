@@ -115,6 +115,26 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
     return sceneNode;
 }
 
+unsigned char Scene_initSceneNode(struct Scene* scene, size_t index, struct TextParser* sceneTextParser) {
+    if (!scene || !sceneTextParser || index > scene->sceneNodesCount - 1)
+        return 1;
+    char tempString[100];
+    sprintf(tempString, "%ld", index);
+    TextParser_getItemsCount(sceneTextParser, tempString);
+    if (sceneTextParser->lastError)
+        return 2;
+    // Don't care about errors here, because these setters are optional
+    scene->sceneNodesList[index]->coordinates.x = (int)TextParser_getInt(sceneTextParser, tempString, 0);
+    scene->sceneNodesList[index]->coordinates.y = (int)TextParser_getInt(sceneTextParser, tempString, 1);
+    scene->sceneNodesList[index]->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, tempString, 2);
+    scene->sceneNodesList[index]->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, tempString, 3);
+    scene->sceneNodesList[index]->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, tempString, 4);
+    scene->sceneNodesList[index]->angle = TextParser_getDouble(sceneTextParser, tempString, 5);
+    scene->sceneNodesList[index]->scaleX = TextParser_getDouble(sceneTextParser, tempString, 6);
+    scene->sceneNodesList[index]->scaleY = TextParser_getDouble(sceneTextParser, tempString, 7);
+    return 0;
+}
+
 void Scene_destructSceneNode(struct SceneNode* sceneNode) {
     if (!sceneNode)
         return;
@@ -168,8 +188,10 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     char* tempString = NULL;
     for (i = 0; i < scene->allocatedSceneNodesCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING, i);
-        if (tempString)
-            Scene_addSceneNode(scene, resourceManager, renderer, tempString);
+        if (tempString) {
+            if (Scene_addSceneNode(scene, resourceManager, renderer, tempString) == 0)
+                Scene_initSceneNode(scene, scene->sceneNodesCount - 1, sceneTextParser);
+        }
     }
     for (i = 0; i < scene->allocatedEventControllersCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, i);

@@ -44,7 +44,9 @@ enum CheckBoxState {
     CheckBoxState_UnChecked = 0,
     CheckBoxState_FocusedUnChecked = 1,
     CheckBoxState_Checked = 2,
-    CheckBoxState_FocusedChecked = 3
+    CheckBoxState_FocusedChecked = 3,
+    CheckBoxState_Checking = 4,
+    CheckBoxState_UnChecking = 5
 };
 /*
  * CheckBox is an inheritor of the SceneNode.
