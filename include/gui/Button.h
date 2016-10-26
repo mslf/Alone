@@ -41,9 +41,9 @@
 #define BUTTON_SCENENODE_PARSER_TEXT_RES_STRING "textResource"
 
 enum ButtonState {
-    Normal,
-    Focused,
-    Pressed
+    ButtonState_Normal = 0,
+    ButtonState_Focused = 1,
+    ButtonState_Pressed = 2
 };
 /*
  * Button is an inheritor of the SceneNode.

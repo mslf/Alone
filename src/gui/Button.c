@@ -23,9 +23,9 @@
 #include "textParser/TextParser.h"
 
 const char* const BUTTON_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES = 
-        "Button_loadSoundResources: focusedEventResource string haven't found!";
+        "Button_loadEventsResources: focusedEventResource string haven't found!";
 const char* const BUTTON_SCENENODE_ERR_PRESSED_GAME_EVENT_RES = 
-        "Button_loadSoundResources: pressedEventResource string haven't found!";
+        "Button_loadEventsResources: pressedEventResource string haven't found!";
 const char* const BUTTON_SCENENODE_ERR_CONSTRUCTING_FOCUSED_GAME_EVENT = 
         "Button_changeFocusedEventResource: constructing GameEvent failed!";
 const char* const BUTTON_SCENENODE_ERR_CONSTRUCTING_PRESSED_GAME_EVENT = 
@@ -159,12 +159,12 @@ void Button_loadEventsResources(struct Button* button, struct ResourceManager* r
                                                           BUTTON_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING, 0);
     if (!tempFocusedEventResourceString)
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES);
-    char* tempPresedEventResourceString = TextParser_getString(textParser,
+    char* tempPressedEventResourceString = TextParser_getString(textParser,
                                                           BUTTON_SCENENODE_PARSER_PRESSED_EVENT_RES_STRING, 0);
-    if (!tempPresedEventResourceString)
+    if (!tempPressedEventResourceString)
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_PRESSED_GAME_EVENT_RES);
-    Button_changeFocusedEventResource(button, resourceManager,tempFocusedEventResourceString);
-    Button_changePressedEventResource(button, resourceManager,tempPresedEventResourceString);
+    Button_changeFocusedEventResource(button, resourceManager, tempFocusedEventResourceString);
+    Button_changePressedEventResource(button, resourceManager, tempPressedEventResourceString);
 }
 
 unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct ResourceManager* resourceManager, 
@@ -329,7 +329,8 @@ unsigned char Button_save(const struct Button* const button, struct ResourceMana
         result++;
     if (TextResource_updateContent(button->sceneNode.sceneNodeTextResource, tempString))
         result++;
-    result += ResourceManager_saveTextResource(resourceManager, button->sceneNode.sceneNodeTextResource, buttonResId);
+    result += ResourceManager_saveTextResource(resourceManager,
+                                               button->sceneNode.sceneNodeTextResource, buttonResId);
     if (result) {
         TextParser_destruct(textParser);
         return 3;
@@ -354,24 +355,24 @@ void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManag
                 && mouseCoordinates.x <= (button->sprite->dstRect.x + button->sprite->dstRect.w) 
                 && mouseCoordinates.y >= button->sprite->dstRect.y 
                 && mouseCoordinates.y <= (button->sprite->dstRect.y + button->sprite->dstRect.h)) {
-                if (!(button->state == Focused)) {
-                    button->state = Focused;
+                if (button->state != ButtonState_Focused) {
+                    button->state = ButtonState_Focused;
                     button->isStateChanged = true;
                     EventManager_addEvent(eventManager, button->focusedEvent);
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN) {
-                    button->state = Pressed;
+                    button->state = ButtonState_Pressed;
                     button->isStateChanged = true;
                     EventManager_addEvent(eventManager, button->pressedEvent);
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP) {
-                    button->state = Focused;
+                    button->state = ButtonState_Focused;
                     button->isStateChanged = true;
                     EventManager_removeEvent(eventManager, button->pressedEvent);
                 }
             } else 
-                if (!(button->state == Normal)) {
-                    button->state = Normal;
+                if (button->state != ButtonState_Normal) {
+                    button->state = ButtonState_Normal;
                     button->isStateChanged = true;
                     EventManager_removeEvent(eventManager, button->focusedEvent);
                 }
@@ -383,11 +384,11 @@ void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         return;
     struct Button* button = (struct Button*)sceneNode;
     if (button->isStateChanged) {
-        if (button->state == Normal)
+        if (button->state == ButtonState_Normal)
             button->sprite->currentAnimation = 0;
-        if (button->state == Focused)
+        if (button->state == ButtonState_Focused)
             button->sprite->currentAnimation = 1;
-        if (button->state == Pressed)
+        if (button->state == ButtonState_Pressed)
             button->sprite->currentAnimation = 2;
         button->sprite->currentFrame = 0;
         button->sprite->renderingsCounter = 0;
@@ -424,9 +425,9 @@ void Button_sound(struct SceneNode* sceneNode, struct Musican* musican) {
         return;
     struct Button* button = (struct Button*)sceneNode;
     if (button->isStateChanged) {
-        if (button->state == Focused)
+        if (button->state == ButtonState_Focused)
             Musican_playSound(musican, button->focusedSoundResource, 0);
-        if (button->state == Pressed)
+        if (button->state == ButtonState_Pressed)
             Musican_playSound(musican, button->pressedSoundResource, 0);
     }
 }

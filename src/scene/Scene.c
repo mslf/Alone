@@ -85,7 +85,7 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
     if (strcmp(sceneNodeTypeString, BUTTON_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)Button_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, CHECK_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
-        sceneNode = (struct SceneNode*)CheckBox_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)CheckBox_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)ContextMenu_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, LIST_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
