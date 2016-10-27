@@ -174,6 +174,8 @@ unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct 
     Button_loadSoundResources(button, resourceManager, textParser);
     result += Button_loadSpriteResource(button, resourceManager, renderer, textParser);
     result += Button_loadTextResource(button, resourceManager, renderer, textParser);
+    button->labelOffset.x = (int)TextParser_getInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING, 0);
+    button->labelOffset.y = (int)TextParser_getInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING, 1);
     if (result)
         return result;
     return 0;
@@ -324,6 +326,10 @@ unsigned char Button_save(const struct Button* const button, struct ResourceMana
                                    button->focusedSoundResource->id);
     result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_PRESSED_SOUND_RES_STRING,
                                    button->pressedSoundResource->id);
+    result += TextParser_addInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING,
+                                   button->labelOffset.x);
+    result += TextParser_addInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING,
+                                   button->labelOffset.y);
     char* tempString = TextParser_convertToText(textParser);
     if (!tempString)
         result++;
@@ -401,7 +407,8 @@ void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         button->sprite->sceneNode.scaleX = button->sceneNode.scaleX;
         button->sprite->sceneNode.scaleY = button->sceneNode.scaleY;
         button->label->sceneNode.angle = button->sceneNode.angle;
-        button->label->sceneNode.coordinates = button->sceneNode.coordinates;
+        button->label->sceneNode.coordinates.x = button->sceneNode.coordinates.x + button->labelOffset.x;
+        button->label->sceneNode.coordinates.y = button->sceneNode.coordinates.y + button->labelOffset.y;
         button->label->sceneNode.flip = button->sceneNode.flip;
         button->label->sceneNode.rotatePointCoordinates = button->sceneNode.rotatePointCoordinates;
         button->label->sceneNode.scaleX = button->sceneNode.scaleX;

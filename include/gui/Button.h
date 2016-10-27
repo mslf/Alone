@@ -39,6 +39,7 @@
 #define BUTTON_SCENENODE_PARSER_PRESSED_SOUND_RES_STRING "pressedSoundResource"
 #define BUTTON_SCENENODE_PARSER_SPRITE_RES_STRING "spriteResource"
 #define BUTTON_SCENENODE_PARSER_TEXT_RES_STRING "textResource"
+#define BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING "labelOffset"
 
 enum ButtonState {
     ButtonState_Normal = 0,
@@ -63,6 +64,7 @@ struct Button {
     struct TextResource* pressedEventResource;
     struct GameEvent* focusedEvent;
     struct GameEvent* pressedEvent;
+    SDL_Point labelOffset;
     bool isGeometryChanged;
     bool isStateChanged;
     enum ButtonState state;
