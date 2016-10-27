@@ -25,6 +25,8 @@
 
 const char* const TEXT_PARSER_ERR_OPERANDS_ALLOC =
         "TextParser_parseTextResource: allocating memory for operands failed!";
+const char* const TEXT_PARSER_ERR_SYNTAX_DELETE_COMMENTS =
+        "TextParser_parseTextResource: syntax error or unexpected EOF while deleting comments!";
 const char* const TEXT_PARSER_ERR_UNEXPEXTED_EOF_SPLIT_EXPRESSION =
         "TextParser_parseTextResource: unexpected end of file while splitting expression!";
 const char* const TEXT_PARSER_ERR_SYNTAX_SPLIT_EXPRESSION =
@@ -354,6 +356,56 @@ unsigned char TextParser_addPair(struct Logger* logger, struct TextParser* textP
     return 0;
 }
 
+unsigned char TextParser_deleteComments(char* const srcText, char** dstText) {
+    size_t length = strlen(srcText);
+    *(dstText) = (char*)malloc(sizeof(char) * (length + 1));
+    if (!(*dstText))
+        return 1;
+    unsigned char state = 0;
+    size_t counter = 0;
+    size_t i = 0;
+    while (i < length) {
+        char c = srcText[i];
+        switch (state) {
+            case 0: // normal text
+                if (c == '/') {
+                    state = 1;
+                    break;
+                }
+                (*dstText)[counter] = c;
+                counter++;
+                break;
+            case 1: // on "/" (entering comment block)
+                if (c == '*') {
+                    state = 2;
+                    break;
+                }
+                (*dstText)[counter] = '/';
+                counter++;
+                (*dstText)[counter] = c;
+                counter++;
+                state = 0;
+                break;
+            case 2: // in comment block
+                if (c == '*')
+                    state = 3;
+                if (c == '\n')
+                    state = 0;
+                break;
+            case 3: // on "*" (exiting comment block)
+                if (c == '/') {
+                    state = 0;
+                    break;
+                }
+                state = 2;
+                break;
+        }
+        i++;
+    }
+    (*dstText)[counter] = 0;
+    return state;
+}
+
 unsigned char TextParser_parseTextResource(struct Logger* logger, struct TextParser* textParser,
                                            const struct TextResource* const textResource) {
     char* leftOperandString = NULL;
@@ -374,26 +426,30 @@ unsigned char TextParser_parseTextResource(struct Logger* logger, struct TextPar
     size_t i = 0;
     size_t j = 0;
     unsigned char state = 0;
-    while (i < strlen(textResource->text)) {
+    char* tempText = NULL;
+    if (TextParser_deleteComments(textResource->text, &tempText)) {
+        Logger_log(logger, TEXT_PARSER_ERR_SYNTAX_DELETE_COMMENTS);
+        return 2;
+    }
+    while (i < strlen(tempText)) {
         leftCounter = 0;
         rightCounter = 0;
-        state = TextParser_splitExpression(logger, textResource->text, &i, &leftOperandString, &leftCounter,
+        state = TextParser_splitExpression(logger, tempText, &i, &leftOperandString, &leftCounter,
                                            &allocatedCharsForLeftOperand, &rightOperandString, &rightCounter,
                                            &allocatedCharsForRightOperand);
-
         if (state != 3 && state != 4 && state != 0) {
             char tempString[600];
             sprintf(tempString, "%s ResourceID: %s", TEXT_PARSER_ERR_UNEXPEXTED_EOF_SPLIT_EXPRESSION, textResource->id);
             Logger_log(logger, tempString);
             TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
-            return 2;
+            return 3;
         }
         if (state == 4) {
             char tempString[600];
             sprintf(tempString, "%s ResourceID: %s", TEXT_PARSER_ERR_SYNTAX_SPLIT_EXPRESSION, textResource->id);
             Logger_log(logger, tempString);
             TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
-            return 3;
+            return 4;
         }
         if (state == 3) {
             unsigned char result = TextParser_addPair(logger, textParser, leftOperandString, leftCounter,
@@ -402,11 +458,12 @@ unsigned char TextParser_parseTextResource(struct Logger* logger, struct TextPar
                 char tempString[600];
                 sprintf(tempString, "\t in ResourceID: %s", textResource->id);
                 Logger_log(logger, tempString);
-                return (result + 3);
+                return (result + 4);
             }
 
         }
     }
+    free(tempText);
     TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
     return 0;
 }
