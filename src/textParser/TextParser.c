@@ -389,8 +389,6 @@ unsigned char TextParser_deleteComments(char* const srcText, char** dstText) {
             case 2: // in comment block
                 if (c == '*')
                     state = 3;
-                if (c == '\n')
-                    state = 0;
                 break;
             case 3: // on "*" (exiting comment block)
                 if (c == '/') {
