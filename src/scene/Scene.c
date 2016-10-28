@@ -36,6 +36,8 @@
 
 const char* const SCENE_ERR_SCENE_NODE_TYPE_NOT_DETECTED =
         "Scene_constructSceneNode: suitable SceneNode type haven't detected or constructing SceneNode failed!";
+const char* const SCENE_ERR_SCENE_NODE_DEF =
+        "Scene_init: definition of SceneNode haven't found!";
 
 unsigned char Scene_reallocateSceneNodesList(struct Scene* scene) {
     if (!scene)
@@ -115,23 +117,22 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
     return sceneNode;
 }
 
-unsigned char Scene_initSceneNode(struct Scene* scene, size_t index, struct TextParser* sceneTextParser) {
-    if (!scene || !sceneTextParser || index > scene->sceneNodesCount - 1)
+unsigned char Scene_initSceneNode(struct Scene* scene, const char* const sceneNode, struct TextParser* sceneTextParser) {
+    if (!scene || !sceneTextParser || !sceneNode)
         return 1;
-    char tempString[100];
-    sprintf(tempString, "%ld", index);
-    TextParser_getItemsCount(sceneTextParser, tempString);
+    TextParser_getItemsCount(sceneTextParser, sceneNode);
     if (sceneTextParser->lastError)
         return 2;
+    size_t index = scene->sceneNodesCount - 1;
     // Don't care about errors here, because these setters are optional
-    scene->sceneNodesList[index]->coordinates.x = (int)TextParser_getInt(sceneTextParser, tempString, 0);
-    scene->sceneNodesList[index]->coordinates.y = (int)TextParser_getInt(sceneTextParser, tempString, 1);
-    scene->sceneNodesList[index]->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, tempString, 2);
-    scene->sceneNodesList[index]->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, tempString, 3);
-    scene->sceneNodesList[index]->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, tempString, 4);
-    scene->sceneNodesList[index]->angle = TextParser_getDouble(sceneTextParser, tempString, 5);
-    scene->sceneNodesList[index]->scaleX = TextParser_getDouble(sceneTextParser, tempString, 6);
-    scene->sceneNodesList[index]->scaleY = TextParser_getDouble(sceneTextParser, tempString, 7);
+    scene->sceneNodesList[index]->coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1);
+    scene->sceneNodesList[index]->coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2);
+    scene->sceneNodesList[index]->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
+    scene->sceneNodesList[index]->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
+    scene->sceneNodesList[index]->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 5);
+    scene->sceneNodesList[index]->angle = TextParser_getDouble(sceneTextParser, sceneNode, 6);
+    scene->sceneNodesList[index]->scaleX = TextParser_getDouble(sceneTextParser, sceneNode, 7);
+    scene->sceneNodesList[index]->scaleY = TextParser_getDouble(sceneTextParser, sceneNode, 8);
     return 0;
 }
 
@@ -189,8 +190,15 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     for (i = 0; i < scene->allocatedSceneNodesCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING, i);
         if (tempString) {
-            if (Scene_addSceneNode(scene, resourceManager, renderer, tempString) == 0)
-                Scene_initSceneNode(scene, scene->sceneNodesCount - 1, sceneTextParser);
+            char* tempSceneNodeRes = NULL;
+            tempSceneNodeRes = TextParser_getString(sceneTextParser, tempString, 0);
+            if (!tempSceneNodeRes) {
+                char tempErrString[600];
+                sprintf(tempErrString, "%s Name: <%s>", SCENE_ERR_SCENE_NODE_DEF, tempString);
+                Logger_log(resourceManager->logger, tempErrString);
+            }
+            if (Scene_addSceneNode(scene, resourceManager, renderer, tempSceneNodeRes) == 0)
+                Scene_initSceneNode(scene, tempString, sceneTextParser);
         }
     }
     for (i = 0; i < scene->allocatedEventControllersCount; i++) {

@@ -1,59 +1,74 @@
 /* Demo scene */
 type = Scene;
 sceneNodes = [
-	"data/demoSprite1.sprite",
-	"data/demoSprite2.sprite",
-	"data/cmd/cmd.button",
-	"data/flag/flag.checkBox",
-	"data/demoText.text",
-    "data/bar/bar1.progressBar",
-    "data/bar/bar2.progressBar",
-    "data/bar/bar3.progressBar"
+    sprite_1,
+    sprite_2,
+    cmd,
+    flag,
+    demoText,
+    bar_1,
+    bar_2,
+    bar_3
 ];
 eventControllers = [data/hello.script];
-1 = [           /* data/demoSprite2.sprite */
-    50, 0,      /* x, y */
+sprite_1 = [
+    "data/demoSprite1.sprite",
+    0, 0,      /* x, y */
     25, 25,     /* rotCX, rotCY */
     0,          /* SDL_Flip */
-    45.0,       /* angle */
+    0.0,        /* angle */
     1.0, 1.0    /* scaleX, scaleY */
 ];
-2 = [           /* data/cmd/cmd.button */
+sprite_2 = [
+    "data/demoSprite2.sprite",
+    50, 0,      
+    25, 25,     
+    0,          
+    45.0,       
+    1.0, 1.0
+];
+cmd = [
+    "data/cmd/cmd.button",
     100, 0,
     0, 0,
     0,
     0.0,
     1.0, 1.0
 ];
-3 = [           /* data/flag/flag.checkBox */
+flag = [
+    "data/flag/flag.checkBox",
     150, 0,
     0, 0,
     0,
     0.0,
     1.0, 1.0
 ];
-4 = [           /* data/demoText.text */
+demoText = [
+    "data/demoText.text",
     0, 50,
     0, 0,
     0,
     0.0,
     1.0, 1.0
 ];
-5 = [           /* data/bar/bar1.progressBar */
+bar_1 = [
+    "data/bar/bar1.progressBar",
     200, 0,
     0, 0,
     0,
     0.0,
     1.0, 1.0
 ];
-6 = [           /* data/bar/bar2.progressBar */
+bar_2 = [
+    "data/bar/bar2.progressBar",
     250, 0,
     0, 0,
     0,
     0.0,
     1.0, 1.0
 ];
-7 = [           /* data/bar/bar3.progressBar */
+bar_3 = [
+    "data/bar/bar3.progressBar",
     300, 0,
     0, 0,
     0,
