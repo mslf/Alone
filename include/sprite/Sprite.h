@@ -71,6 +71,7 @@ struct Sprite {
     size_t renderingsCounter;
     SDL_Rect srcRect;
     SDL_Rect dstRect;
+    SDL_Point percentsToRender;
 };
 
 struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,

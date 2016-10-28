@@ -22,39 +22,42 @@
 #ifndef ALONE_PROGRESSBAR_H
 #define ALONE_PROGRESSBAR_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "sprite/Sprite.h"
 
 #define PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING "ProgressBar"
+#define PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING "spriteResource"
+#define PROGRESS_BAR_SCENENODE_PARSER_INIT_VALUE_STRING "value"
 /*
  * ProgressBar is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ProgressBar struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of ProgressBar struct,
  * if you want code to work with ProgressBar like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct ProgressBar {
-    struct SceneNode* sceneNode;
-    struct TextResource* spriteResource;
-    struct TextResource* labelResource;
-    struct TextureResource* textureResource;
+    struct SceneNode sceneNode;
+    struct Sprite* spriteBase; // animation: 0 - base
+    struct Sprite* spriteBar; // animation: 1 - bar
     unsigned char value;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    bool isGeometryChanged;
 };
 
 struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager,
-                                          const char* const progressBarResId);
+                                          struct Renderer* renderer, const char* const progressBarResId);
 void ProgressBar_destruct(struct ProgressBar* progressBar);
 
-void ProgressBar_save(
+unsigned char ProgressBar_save(
         const struct ProgressBar* const progressBar, struct ResourceManager* const resourceManager,
         const char* const progressBarResId);
-void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void ProgressBar_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 
 #endif //ALONE_PROGRESSBAR_H

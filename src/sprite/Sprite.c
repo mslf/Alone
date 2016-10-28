@@ -154,6 +154,8 @@ unsigned char Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite, struct 
     }
     unsigned char result = Sprite_initAnimations(sprite, resourceManager, renderer, textParser,
                                                  usePresentForVirtual, useDefaultTexture);
+    sprite->percentsToRender.x = 100;
+    sprite->percentsToRender.y = 100;
     if (result)
         return result + 1;
     return 0;
@@ -257,14 +259,14 @@ void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManage
     struct Sprite* sprite = (struct Sprite*)sceneNode;
     sprite->srcRect.x = sprite->currentFrame * sprite->frameSize.x;
     sprite->srcRect.y = sprite->currentAnimation * sprite->frameSize.y;
-    sprite->srcRect.w = sprite->frameSize.x;
-    sprite->srcRect.h = sprite->frameSize.y;
+    sprite->srcRect.w = sprite->frameSize.x * sprite->percentsToRender.x / 100;
+    sprite->srcRect.h = sprite->frameSize.y * sprite->percentsToRender.y / 100;
     SDL_Point coordinates = Renderer_convertCoordinates(renderer, sprite->sceneNode.coordinates);
     sprite->dstRect.x = coordinates.x;
     sprite->dstRect.y = coordinates.y;
     SDL_Point size = Renderer_convertCoordinates(renderer, sprite->virtualSize);
-    sprite->dstRect.w = size.x * sceneNode->scaleX;
-    sprite->dstRect.h = size.y * sceneNode->scaleY;
+    sprite->dstRect.w = size.x * sceneNode->scaleX * sprite->percentsToRender.x / 100;
+    sprite->dstRect.h = size.y * sceneNode->scaleY * sprite->percentsToRender.y / 100;
 }
 
 void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
