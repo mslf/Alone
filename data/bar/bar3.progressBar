@@ -1,0 +1,3 @@
+type = ProgressBar;
+spriteResource = data/bar/bar.sprite;
+value = 70;

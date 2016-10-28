@@ -5,7 +5,10 @@ sceneNodes = [
 	"data/demoSprite2.sprite",
 	"data/cmd/cmd.button",
 	"data/flag/flag.checkBox",
-	"data/demoText.text"
+	"data/demoText.text",
+    "data/bar/bar1.progressBar",
+    "data/bar/bar2.progressBar",
+    "data/bar/bar3.progressBar"
 ];
 eventControllers = [data/hello.script];
 1 = [           /* data/demoSprite2.sprite */
@@ -31,6 +34,27 @@ eventControllers = [data/hello.script];
 ];
 4 = [           /* data/demoText.text */
     0, 50,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+5 = [           /* data/bar/bar1.progressBar */
+    200, 0,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+6 = [           /* data/bar/bar2.progressBar */
+    250, 0,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+7 = [           /* data/bar/bar3.progressBar */
+    300, 0,
     0, 0,
     0,
     0.0,
