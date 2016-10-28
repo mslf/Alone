@@ -35,6 +35,8 @@ const char* const TEXT_PARSER_ERR_PAIRS_REALLOC =
         "TextParser_reallocatePairsList: reallocating memory for pairsList failed!";
 const char* const TEXT_PARSER_ERR_ITEMS_REALLOC =
         "TextParser_reallocateItemsList: reallocating memory for itemsList failed!";
+const char* const TEXT_PARSER_ERR_ITEMS_ALLOC =
+        "TextParser_reallocatePairsList: allocating memory for itemsList failed!";
 const char* const TEXT_PARSER_ERR_STRING_REALLOC =
         "TextParser_reallocateString: reallocating memory for string failed!";
 const char* const TEXT_PARSER_ERR_LEFT_OPERAND_STRING_ALLOC =
@@ -50,7 +52,7 @@ const char* const TEXT_PARSER_ERR_ADD_ITEM =
 
 unsigned char TextParser_reallocatePairsList(struct Logger* logger, struct TextParser* textParser) {
     struct Pair* newPairsList = NULL;
-    size_t newSize = textParser->allocatedPairsCount + INITIAL_NUMBER_ALLOCATED_ITEMS;
+    size_t newSize = textParser->allocatedPairsCount + INITIAL_NUMBER_ALLOCATED_PAIRS;
     size_t i;
     newPairsList = (struct Pair*)malloc(sizeof(struct Pair) * newSize);
     if (!newPairsList) {
@@ -59,6 +61,15 @@ unsigned char TextParser_reallocatePairsList(struct Logger* logger, struct TextP
     }
     for (i = 0; i < textParser->pairsCount; i++)
         newPairsList[i] = textParser->pairsList[i];
+    for (i = textParser->allocatedPairsCount; i < newSize; i++){
+        newPairsList[i].rightOperand.itemsCount = 0;
+        if (!(newPairsList[i].rightOperand.rightOperandItemsList =
+                    (char**)malloc(sizeof(char*) * INITIAL_NUMBER_ALLOCATED_ITEMS))) {
+            free(newPairsList);
+            return 2;
+        }
+        newPairsList[i].rightOperand.allocatedItemsCount = INITIAL_NUMBER_ALLOCATED_ITEMS;
+    }
     free(textParser->pairsList);
     textParser->pairsList = newPairsList;
     textParser->allocatedPairsCount = newSize;
