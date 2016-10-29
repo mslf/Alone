@@ -189,6 +189,7 @@ void ContextMenu_destruct(struct ContextMenu* contextMenu) {
 unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
                                            struct Renderer* renderer, size_t index, const char* const newButtonResId) {
     unsigned char result = 0;
+    /* TO FIX: Assigned value can be undefined */
     struct Button* tempCopyFromButton = contextMenu->menuOptionsList[index];
     struct Button* tempButton = Button_construct(resourceManager, renderer, newButtonResId);
     if (!tempButton) {
@@ -228,7 +229,7 @@ unsigned char ContextMenu_realloccateMenuOptionsList(struct ContextMenu* context
     if (!(menuOptionsList = (struct Button**)malloc(sizeof(struct Button*) * newSize)))
         return 2;
     for (i = 0; i < contextMenu->menuOptionsCount; i++)
-        menuOptionsList[i] = contextMenu->menuOptionsList[i];
+        menuOptionsList[i] = contextMenu->menuOptionsList[i]; /* TO FIX: Assigned value can be undefined */
     free(contextMenu->menuOptionsList);
     contextMenu->menuOptionsList = menuOptionsList;
     contextMenu->allocatedMenuOptions = newSize;
