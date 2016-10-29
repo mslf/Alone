@@ -8,7 +8,10 @@ sceneNodes = [
     demoText,
     bar_1,
     bar_2,
-    bar_3
+    bar_3,
+    menu_1,
+    menu_2,
+    menu_3
 ];
 eventControllers = [data/hello.script];
 sprite_1 = [
@@ -70,6 +73,30 @@ bar_2 = [
 bar_3 = [
     "data/bar/bar3.progressBar",
     300, 0,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+menu_1 = [
+    "data/menus/menu1.contextMenu",
+    10, 100,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+menu_2 = [
+    "data/menus/menu2.contextMenu",
+    170, 100,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+menu_3 = [
+    "data/menus/menu3.contextMenu",
+    330, 100,
     0, 0,
     0,
     0.0,

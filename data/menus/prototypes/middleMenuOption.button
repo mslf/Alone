@@ -1,0 +1,8 @@
+type = Button;
+spriteResource = data/menus/prototypes/middleMenuOption.sprite;
+textResource = data/menus/prototypes/defaultText.text;
+focusedEventResource = data/cmd/cmdFocused.gameEvent;
+pressedEventResource = data/cmd/cmdPressed.gameEvent;
+focusedSoundResource = data/cmd/cmdFocused.wav;
+pressedSoundResource = data/cmd/cmdPressed.wav;
+labelOffset = [5, 15];

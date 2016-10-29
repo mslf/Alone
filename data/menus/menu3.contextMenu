@@ -1,0 +1,12 @@
+type = ContextMenu; 
+optionPrototypeButtonResources = [
+    "data/menus/prototypes/onlyOneMenuOption.button"
+];
+menuOptions = [
+    option1
+];
+option1 = [
+    "Option 3:1",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];

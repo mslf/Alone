@@ -1,0 +1,28 @@
+type = ContextMenu; 
+optionPrototypeButtonResources = [
+    "data/menus/prototypes/onlyOneMenuOption.button",
+    "data/menus/prototypes/topMenuOption.button",
+    "data/menus/prototypes/middleMenuOption.button",
+    "data/menus/prototypes/lowerMenuOption.button"
+];
+menuOptions = [
+    option1,
+    option2,
+    option3
+];
+
+option1 = [
+    "Option 1:1",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option2 = [
+    "Option 1:2",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option3 = [
+    "Option 1:3",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
