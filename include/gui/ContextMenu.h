@@ -22,54 +22,54 @@
 #ifndef ALONE_CONTEXTMENU_H
 #define ALONE_CONTEXTMENU_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "gui/Button.h"
 
 #define CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING "ContextMenu"
-
-struct MenuOption {
-    struct GameEvent* pressedEvent;
-    struct TextResource* elementResource;
-    struct TextResource* labelResource;
-    struct TextResource* pressedEventResource;
+#define CONTEXT_MENU_SCENENODE_PARSER_PROTOTYPES "optionPrototypeButtonResources"
+#define CONTEXT_MENU_SCENENODE_PARSER_OPTIONS_LIST "menuOptions"
+enum {
+    CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS = 3
 };
 /*
  * ContextMenu is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ContextMenu struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of ContextMenu struct,
  * if you want code to work with ContextMenu like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct ContextMenu {
-    struct SceneNode* sceneNode;
-    struct TextResource* spriteResource;
-    struct TextureResource* textureResource;
-    struct SoundResource* focusedSoundResource;
-    struct SoundResource* pressedSoundResource;
-    struct MenuOption* menuOptionsList;
-    size_t focusedMenuOptionIndex;
-    size_t pressedMenuOptionIndex;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    struct SceneNode sceneNode;
+    char* onlyOneMenuOptionPrototype;
+    char* topMenuOptionPrototype;
+    char* middleMenuOptionPrototype;
+    char* lowerMenuOptionPrototype;
+    struct Button** menuOptionsList;
+    size_t allocatedMenuOptions;
+    size_t menuOptionsCount;
+    bool isGeometryChanged;
 };
 
-struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager,
+struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
                                           const char* const contextMenuResId);
 void ContextMenu_destruct(struct ContextMenu* contextMenu);
 
-void ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                               const char* const elementResId);
-void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                                  const char* const elementResId);
-void ContextMenu_save(
+unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
+                                        struct Renderer* renderer, const char* const focusedEventRes,
+                                        const char* const pressedEventRes, const char* const labelText);
+void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* const label);
+unsigned char ContextMenu_save(
         const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
         const char* const contextMenuResId);
 void ContextMenu_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void ContextMenu_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void ContextMenu_sound(struct SceneNode* sceneNode, struct Musican* musican);
 

@@ -195,11 +195,14 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
         textureResource->pointersCount--;
         return 5;
     }
-    free(text->text);
+    /*
+     * Order of strcpy and free matters!
+     */
     strcpy(tempTextString, textString);
+    free(text->text);
     text->text = tempTextString;
-    free(text->fontPath);
     strcpy(tempFontPath, fontPath);
+    free(text->fontPath); 
     text->fontPath = tempFontPath;
     text->size = size;
     text->color = color;
