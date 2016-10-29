@@ -115,6 +115,7 @@ unsigned char TextParser_splitExpression(struct Logger* logger, const char* cons
                                          char** rightOperandString, size_t* rightCounter,
                                          size_t* allocatedCharsForRightOperand) {
     unsigned char state = 0;
+    /* TO FIX: check that string is not NULL */
     while ((*startIndex) < strlen(string) && state != 3 && state != 4) {
         char c = string[*startIndex];
         if ((*leftCounter) >= (*allocatedCharsForLeftOperand))
@@ -535,7 +536,7 @@ void TextParser_destruct(struct TextParser* textParser) {
 }
 
 size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const leftOperand) {
-    if (!textParser && !leftOperand)
+    if (!textParser || !leftOperand)
         return 0;
     size_t i = 0;
     for (i = 0; i < textParser->pairsCount; i++)
@@ -548,7 +549,7 @@ size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const
 }
 
 char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index) {
-    if (!textParser && !leftOperand)
+    if (!textParser || !leftOperand)
         return NULL;
     size_t i = 0;
     unsigned char found = 0;

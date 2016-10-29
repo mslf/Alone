@@ -175,9 +175,9 @@ unsigned char EventManager_removeEvent(struct EventManager* em, struct GameEvent
 }
 
 unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel) {
-    if (em)
+    if (!em)
         return 1;
-    if (channel)
+    if (!channel)
         return 2;
     size_t i;
     em->customGameEventsCount = 0;
