@@ -597,6 +597,8 @@ bool TextParser_getFlag(struct TextParser* textParser, const char* const leftOpe
 }
 
 unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftOperand, const char* const item) {
+    if (!textParser || !leftOperand || !item)
+        return 1;
     TextParser_getItemsCount(textParser, leftOperand); // later, we will use textParser->lastError. Don't remove this.
     size_t found = 0;
     size_t index = 0;
@@ -605,13 +607,13 @@ unsigned char TextParser_addString(struct TextParser* textParser, const char* co
         if (textParser->pairsCount >= textParser->allocatedPairsCount)
             if (TextParser_reallocatePairsList(NULL, textParser)) {
                 textParser->lastError = MemoryAllocationError;
-                return 1;
+                return 2;
             }
         char* tempLeftOperandString = NULL;
         tempLeftOperandString = (char*)malloc(sizeof(char) * (strlen(leftOperand) + 1));
         if (!tempLeftOperandString) {
             textParser->lastError = MemoryAllocationError;
-            return 2;
+            return 3;
         }
         strcpy(tempLeftOperandString, leftOperand);
         textParser->pairsList[textParser->pairsCount].leftOperand = tempLeftOperandString;
@@ -630,7 +632,7 @@ unsigned char TextParser_addString(struct TextParser* textParser, const char* co
             free (textParser->pairsList[index].leftOperand);
             textParser->pairsCount--;
         }
-        return 3;
+        return 4;
     }
     textParser->lastError = NoError;
     return 0;

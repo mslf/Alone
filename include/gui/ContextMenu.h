@@ -64,7 +64,9 @@ void ContextMenu_destruct(struct ContextMenu* contextMenu);
 unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
                                         struct Renderer* renderer, const char* const focusedEventRes,
                                         const char* const pressedEventRes, const char* const labelText);
-void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* const label);
+void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* const label,
+                                  struct ResourceManager* const resourceManager,
+                                  struct Renderer* renderer);
 unsigned char ContextMenu_save(
         const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
         const char* const contextMenuResId);
