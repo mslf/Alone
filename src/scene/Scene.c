@@ -82,6 +82,8 @@ unsigned char Scene_reallocateEventControllersList(struct Scene* scene) {
 struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManager, struct Renderer* renderer,
                                            const char* const sceneNodeTypeString, 
                                            const char* const sceneNodeResId) {
+    if (!resourceManager || !renderer || !sceneNodeTypeString || !sceneNodeResId)
+        return NULL;
     struct SceneNode* sceneNode = NULL;
     // Typed construction routine here
     if (strcmp(sceneNodeTypeString, BUTTON_SCENENODE_PARSER_TYPE_STRING) == 0)
@@ -168,22 +170,24 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
 
 unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceManager, struct Renderer* renderer,
                          struct TextParser* sceneTextParser) {
+    if (!scene || !resourceManager || !renderer || !sceneTextParser)
+        return 1;
     size_t i;
     size_t count;
     count = TextParser_getItemsCount(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING);
     if (sceneTextParser->lastError)
-        return 1;
+        return 2;
     scene->sceneNodesList = (struct SceneNode**)malloc(sizeof(struct SceneNode*) * count);
     if(!scene->sceneNodesList)
-        return 2;
+        return 3;
     scene->allocatedSceneNodesCount = count;
     scene->sceneNodesCount = 0;
     count = TextParser_getItemsCount(sceneTextParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING);
     if (sceneTextParser->lastError)
-        return 3;
+        return 4;
     scene->eventControllersList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * count);
     if (!scene->eventControllersList)
-        return 4;
+        return 5;
     scene->allocatedEventControllersCount = count;
     scene->eventControllersCount = 0;
     char* tempString = NULL;
@@ -212,9 +216,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
 struct Scene* Scene_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
                               const char* const sceneResId) {
     struct Scene* scene = NULL;
-    if (!resourceManager)
-        return NULL;
-    if (!sceneResId)
+    if (!resourceManager || !renderer || !sceneResId)
         return NULL;
     scene = (struct Scene*)malloc(sizeof(struct Scene));
     if (!scene)
@@ -329,47 +331,52 @@ void Scene_removeSceneNode(
 unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneResId) {
     if (!scene || !resourceManager || !sceneResId)
         return 1;
-    struct TextParser* textParser= NULL;
+    struct TextParser* textParser = NULL;
     size_t i;
+    unsigned char result = 0;
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;
     TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SCENE_PARSER_TYPE_STRING);
-    if (textParser->lastError) {
-        TextParser_destruct(textParser);
-        return 3;
-    }
+    result += textParser->lastError;
     for (i = 0; i < scene->sceneNodesCount; i++) {
-        TextParser_addString(textParser, SCENE_PARSER_SCENE_NODES_STRING,
-                             scene->sceneNodesList[i]->sceneNodeTextResource->id);
-        if (textParser->lastError) {
-            TextParser_destruct(textParser);
-            return 4;
-        }
+        char tempSceeNodeName[600];
+        sprintf(tempSceeNodeName, "%ld", i);
+        TextParser_addString(textParser, SCENE_PARSER_SCENE_NODES_STRING, tempSceeNodeName);
+        result += textParser->lastError;
+        TextParser_addString(textParser, tempSceeNodeName, scene->sceneNodesList[i]->sceneNodeTextResource->id);
+        result += textParser->lastError;
+        TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.x);
+        result += textParser->lastError;
+        TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.y);
+        result += textParser->lastError;
+        TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->rotatePointCoordinates.x);
+        result += textParser->lastError;
+        TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->rotatePointCoordinates.y);
+        result += textParser->lastError;
+        TextParser_addInt(textParser, tempSceeNodeName, (long)scene->sceneNodesList[i]->flip);
+        result += textParser->lastError;
+        TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->angle);
+        result += textParser->lastError;
+        TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->scaleX);
+        result += textParser->lastError;
+        TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->scaleY);
+        result += textParser->lastError;
     }
     for (i = 0; i < scene->eventControllersCount; i++) {
         TextParser_addString(textParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, scene->eventControllersList[i]->id);
-        if (textParser->lastError) {
-            TextParser_destruct(textParser);
-            return 5;
-        }
+        result += textParser->lastError;
     }
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
-    if (textParser->lastError) {
-        TextParser_destruct(textParser);
-        return 6;
-    }
+    result += textParser->lastError;
+    result += TextResource_updateContent(scene->sceneResource, newText);
+    result += ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId);
     TextParser_destruct(textParser);
-    if (TextResource_updateContent(scene->sceneResource, newText)) {
+    if(newText)
         free(newText);
-        return 7;
-    }
-    if (ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId)) {
-        free(newText);
-        return 8;
-    }
-    free(newText);
+    if (result)
+        return result;
     return 0;
 }
 
