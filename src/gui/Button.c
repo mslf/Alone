@@ -50,97 +50,103 @@ const char* const BUTTON_SCENENODE_ERR_TEXT_TYPE =
         "Button_loadTextResource: suitable Text type string haven't detected!";
         
 
-unsigned char Button_loadTextResource(struct Button* button, struct ResourceManager* resourceManager,
+static unsigned char Button_loadTextResource(struct Button* button, struct ResourceManager* resourceManager,
                                struct Renderer* renderer, struct TextParser* textParser) {
+    if (!button || !resourceManager || !renderer || !textParser)
+        return 1;
     char* tempTextSceneNodeResourceString = TextParser_getString(textParser,
                                                                  BUTTON_SCENENODE_PARSER_TEXT_RES_STRING, 0);
     if (!tempTextSceneNodeResourceString) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_TEXT_RES);
-        return 1;
+        return 2;
     }
     struct TextResource* textSceneNodeTextResource = 
                         ResourceManager_loadTextResource(resourceManager, tempTextSceneNodeResourceString, 0);
     if (!textSceneNodeTextResource)
-       return 2;
+       return 3;
     struct TextParser* textSceneNodeTextParser = TextParser_constructFromTextResource(resourceManager->logger, 
                                                                                       textSceneNodeTextResource);
     if (!textSceneNodeTextParser) {
         textSceneNodeTextResource->pointersCount--;
-        return 3;
+        return 4;
     }
     char* tempTextSceneNodeTypeString = TextParser_getString(textSceneNodeTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!tempTextSceneNodeTypeString) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_TEXT_NO_TYPE);
         textSceneNodeTextResource->pointersCount--;
         TextParser_destruct(textSceneNodeTextParser);
-        return 4;
+        return 5;
     }
     if (strcmp(tempTextSceneNodeTypeString, TEXT_SCENENODE_PARSER_TYPE_STRING) != 0) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_TEXT_TYPE);
         textSceneNodeTextResource->pointersCount--;
         TextParser_destruct(textSceneNodeTextParser);
-        return 5;
+        return 6;
     }
     button->label = Text_construct(resourceManager, renderer, tempTextSceneNodeResourceString);
     if (!button->label) {
         textSceneNodeTextResource->pointersCount--;
         TextParser_destruct(textSceneNodeTextParser);
-        return 6;
+        return 7;
     }
     TextParser_destruct(textSceneNodeTextParser);
     textSceneNodeTextResource->pointersCount--;
     return 0;
 }
 
-unsigned char Button_loadSpriteResource(struct Button* button, struct ResourceManager* resourceManager,
+static unsigned char Button_loadSpriteResource(struct Button* button, struct ResourceManager* resourceManager,
                                struct Renderer* renderer, struct TextParser* textParser) {
+    if (!button || !resourceManager || !renderer || !textParser)
+        return 1;
     char* tempSpriteResourceString = TextParser_getString(textParser, BUTTON_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
     if (!tempSpriteResourceString) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_SPRITE_RES);
-        return 1;
+        return 2;
     }
     struct TextResource* spriteTextResource = ResourceManager_loadTextResource(resourceManager,
                                                                                tempSpriteResourceString, 0);
     if (!spriteTextResource)
-       return 2;
+       return 3;
     struct TextParser* spriteTextParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                                spriteTextResource);
     if (!spriteTextParser) {
         spriteTextResource->pointersCount--;
-        return 3;
+        return 4;
     }
     char* tempSpriteTypeString = TextParser_getString(spriteTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!tempSpriteTypeString) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_SPRITE_NO_TYPE);
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 4;
+        return 5;
     }
     if (strcmp(tempSpriteTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_SPRITE_TYPE);
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 5;
+        return 6;
     }
     button->sprite = Sprite_construct(resourceManager, renderer, tempSpriteResourceString);
     if (!button->sprite) {
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 6;
+        return 7;
     }
     if (button->sprite->animationsCount < 3) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_SPRITE_NO_3_ANIMATIONS);
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 7;
+        return 8;
     }
     TextParser_destruct(spriteTextParser);
     spriteTextResource->pointersCount--;
     return 0;
 }
 
-void Button_loadSoundResources(struct Button* button, struct ResourceManager* resourceManager,
+static void Button_loadSoundResources(struct Button* button, struct ResourceManager* resourceManager,
                                struct TextParser* textParser) {
+    if (!button || !resourceManager || !textParser)
+        return;
     char* tempFocusedSoundResourceString = TextParser_getString(textParser,
                                                                 BUTTON_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING, 0);
     if (!tempFocusedSoundResourceString)
@@ -153,8 +159,10 @@ void Button_loadSoundResources(struct Button* button, struct ResourceManager* re
     button->pressedSoundResource = ResourceManager_loadSoundResource(resourceManager, tempPressedSoundResourceString);
 }
 
-void Button_loadEventsResources(struct Button* button, struct ResourceManager* resourceManager, 
+static void Button_loadEventsResources(struct Button* button, struct ResourceManager* resourceManager, 
                                 struct TextParser* textParser){
+    if (!button || !resourceManager || !textParser)
+        return;
     char* tempFocusedEventResourceString = TextParser_getString(textParser,
                                                           BUTTON_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING, 0);
     if (!tempFocusedEventResourceString)
@@ -167,8 +175,10 @@ void Button_loadEventsResources(struct Button* button, struct ResourceManager* r
     Button_changePressedEventResource(button, resourceManager, tempPressedEventResourceString);
 }
 
-unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct ResourceManager* resourceManager, 
+static unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct ResourceManager* resourceManager, 
                                                   struct Renderer* renderer, struct TextParser* textParser) {
+    if (!button || !resourceManager || !renderer || !textParser)
+        return 1;
     unsigned char result = 0;
     Button_loadEventsResources(button, resourceManager, textParser);
     Button_loadSoundResources(button, resourceManager, textParser);
@@ -176,13 +186,13 @@ unsigned char Button_tryGetSettingsFromTextParser(struct Button* button, struct 
     result += Button_loadTextResource(button, resourceManager, renderer, textParser);
     button->labelOffset.x = (int)TextParser_getInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING, 0);
     button->labelOffset.y = (int)TextParser_getInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING, 1);
-    if (result)
-        return result;
-    return 0;
+    return result;
 }
 
 struct Button* Button_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
                                 const char* const buttonResId) {
+    if (!resourceManager || !renderer || !buttonResId)
+        return NULL;
     struct Button* button = NULL;
     button = (struct Button*)calloc(1, sizeof(struct Button));
     if (!button)
@@ -331,18 +341,14 @@ unsigned char Button_save(const struct Button* const button, struct ResourceMana
     result += TextParser_addInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING,
                                    button->labelOffset.y);
     char* tempString = TextParser_convertToText(textParser);
-    if (!tempString)
-        result++;
-    if (TextResource_updateContent(button->sceneNode.sceneNodeTextResource, tempString))
-        result++;
+    result += textParser->lastError;
+    result += TextResource_updateContent(button->sceneNode.sceneNodeTextResource, tempString);
     result += ResourceManager_saveTextResource(resourceManager,
                                                button->sceneNode.sceneNodeTextResource, buttonResId);
-    if (result) {
-        TextParser_destruct(textParser);
-        return 3;
-    }
     TextParser_destruct(textParser);
-    return 0;
+    if (tempString)
+        free(tempString);
+    return result;
 }
 
 void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {

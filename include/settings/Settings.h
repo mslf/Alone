@@ -25,6 +25,16 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 
+#define SETTINGS_PARSER_TYPE_STRING "Settings"
+#define SETTINGS_PARSER_SCREEN_HEIGHT "screenHeight"
+#define SETTINGS_PARSER_SCREEN_WIDTH "screenWidth"
+#define SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT "virtualScreenHeight"
+#define SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH "virtualScreenWidth"
+#define SETTINGS_PARSER_FULLSCREEN "fullscreen"
+#define SETTINGS_PARSER_MUSIC "music"
+#define SETTINGS_PARSER_SOUND "sound"
+#define SETTINGS_PARSER_VSYNC "vsync"
+#define SETTINGS_PARSER_MAIN_SCENE "mainScene"
 #define SETTINGS_DEFAULT_MAIN_SCENE "data/main.scene"
 enum {
     SETTINGS_DEFAULT_VSYNC = true,

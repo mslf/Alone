@@ -49,55 +49,59 @@ const char* const CHECK_BOX_SCENENODE_ERR_SPRITE_TYPE =
 const char* const CHECK_BOX_SCENENODE_ERR_SPRITE_NO_4_ANIMATIONS = 
         "CheckBox_loadSpriteResource: loaded Sprite doesn't contain 4 animations!";
         
-unsigned char CheckBox_loadSpriteResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
+static unsigned char CheckBox_loadSpriteResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                struct Renderer* renderer, struct TextParser* textParser) {
+    if (!checkBox || !resourceManager || !renderer || !textParser)
+        return 1;
     char* tempSpriteResourceString = TextParser_getString(textParser, CHECK_BOX_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
     if (!tempSpriteResourceString) {
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_RES);
-        return 1;
+        return 2;
     }
     struct TextResource* spriteTextResource = ResourceManager_loadTextResource(resourceManager,
                                                                                tempSpriteResourceString, 0);
     if (!spriteTextResource)
-       return 2;
+       return 3;
     struct TextParser* spriteTextParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                                spriteTextResource);
     if (!spriteTextParser) {
         spriteTextResource->pointersCount--;
-        return 3;
+        return 4;
     }
     char* tempSpriteTypeString = TextParser_getString(spriteTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!tempSpriteTypeString) {
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_NO_TYPE);
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 4;
+        return 5;
     }
     if (strcmp(tempSpriteTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0) {
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_TYPE);
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 5;
+        return 6;
     }
     checkBox->sprite = Sprite_construct(resourceManager, renderer, tempSpriteResourceString);
     if (!checkBox->sprite) {
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 6;
+        return 7;
     }
     if (checkBox->sprite->animationsCount < 4) {
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_NO_4_ANIMATIONS);
         spriteTextResource->pointersCount--;
         TextParser_destruct(spriteTextParser);
-        return 7;
+        return 8;
     }
     TextParser_destruct(spriteTextParser);
     spriteTextResource->pointersCount--;
     return 0;
 }
 
-void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
+static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                struct TextParser* textParser) {
+    if (!checkBox || !resourceManager || !textParser)
+        return;
     char* tempFocusedSoundResourceString = TextParser_getString(textParser,
                                                         CHECK_BOX_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING, 0);
     if (!tempFocusedSoundResourceString)
@@ -118,8 +122,10 @@ void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManag
                                                                          tempUnCheckedSoundResourceString);
 }
 
-void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
+static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
                                 struct TextParser* textParser){
+    if (!checkBox || !resourceManager || !textParser)
+        return;
     char* tempFocusedEventResourceString = TextParser_getString(textParser,
                                                           CHECK_BOX_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING, 0);
     if (!tempFocusedEventResourceString)
@@ -137,19 +143,21 @@ void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct ResourceMana
     CheckBox_changeCheckedEventResource(checkBox, resourceManager, tempUnCheckedEventResourceString);
 }
         
-unsigned char CheckBox_tryGetSettingsFromTextParser(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
+static unsigned char CheckBox_tryGetSettingsFromTextParser(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
                                                   struct Renderer* renderer, struct TextParser* textParser) {
+    if (!checkBox || !resourceManager || !renderer || !textParser)
+        return 1;
     unsigned char result = 0;
     CheckBox_loadEventsResources(checkBox, resourceManager, textParser);
     CheckBox_loadSoundResources(checkBox, resourceManager, textParser);
     result += CheckBox_loadSpriteResource(checkBox, resourceManager, renderer, textParser);
-    if (result)
-        return result;
-    return 0;
+    return result;
 }
         
 struct CheckBox* CheckBox_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
                                 const char* const checkBoxResId) {
+    if (!resourceManager || !renderer || !checkBoxResId)
+        return NULL;
     struct CheckBox* checkBox = NULL;
     checkBox = (struct CheckBox*)calloc(1, sizeof(struct CheckBox));
     if (!checkBox)
@@ -330,18 +338,14 @@ unsigned char CheckBox_save(const struct CheckBox* const checkBox, struct Resour
     result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_UNCHECKED_SOUND_RES_STRING,
                                    checkBox->unCheckedSoundResource->id);
     char* tempString = TextParser_convertToText(textParser);
-    if (!tempString)
-        result++;
-    if (TextResource_updateContent(checkBox->sceneNode.sceneNodeTextResource, tempString))
-        result++;
+    result += textParser->lastError;
+    result += TextResource_updateContent(checkBox->sceneNode.sceneNodeTextResource, tempString);
     result += ResourceManager_saveTextResource(resourceManager,
                                                checkBox->sceneNode.sceneNodeTextResource, checkBoxResId);
-    if (result) {
-        TextParser_destruct(textParser);
-        return 3;
-    }
     TextParser_destruct(textParser);
-    return 0;
+    if (tempString)
+        free(tempString);
+    return result;
 }
 
 void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {

@@ -37,7 +37,7 @@ const char* const TEXT_SCENENODE_ERR_NO_COLOR_B =
 const char* const TEXT_SCENENODE_ERR_NO_COLOR_A =
         "Text_tryGetSettingsFromTextParser: color[3] haven't found! Using default.";
 
-unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct ResourceManager* resourceManager,
+static unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct ResourceManager* resourceManager,
                                                 struct TextParser* textParser, unsigned char* logFlag) {
     char* tempFontPath = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, 0);
     if (!tempFontPath) {
@@ -92,7 +92,7 @@ unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct Resour
     return 0;
 }
 
-unsigned char Text_generateTexture(struct Text* text, struct ResourceManager* resourceManager,
+static unsigned char Text_generateTexture(struct Text* text, struct ResourceManager* resourceManager,
                                    struct Renderer* renderer) {
     text->textureResource = ResourceManager_loadTextureResourceFromText(resourceManager, renderer, text->text,
                                                                         text->fontPath, text->size,
@@ -213,65 +213,33 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
     return 0;
 }
 
-unsigned char Text_addSettingsToTextParser(const struct Text* const text, struct TextParser* textParser) {
-    TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TEXT_SCENENODE_PARSER_TYPE_STRING);
-    if (textParser->lastError)
-        return 1;
-    TextParser_addString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, text->fontPath);
-    if (textParser->lastError)
-        return 2;
-    TextParser_addString(textParser, TEXT_SCENENODE_PARSER_TEXT, text->text);
-    if (textParser->lastError)
-        return 3;
-    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_SIZE, (size_t)text->size);
-    if (textParser->lastError)
-        return 4;
-    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.r);
-    if (textParser->lastError)
-        return 5;
-    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.g);
-    if (textParser->lastError)
-        return 6;
-    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.b);
-    if (textParser->lastError)
-        return 7;
-    TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.a);
-    if (textParser->lastError)
-        return 8;
-    return 0;
-}
-
 unsigned char Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
         const char* const textResId) {
      if (!text || !resourceManager || !textResId)
         return 1;
-    struct TextParser* textParser= NULL;
+    struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;
-    unsigned char result = Text_addSettingsToTextParser(text, textParser);
-    if (result) {
-        TextParser_destruct(textParser);
-        return 3;
-    }
+    unsigned char result = 0;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TEXT_SCENENODE_PARSER_TYPE_STRING);
+    result += TextParser_addString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, text->fontPath);
+    result += TextParser_addString(textParser, TEXT_SCENENODE_PARSER_TEXT, text->text);
+    result += TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_SIZE, (size_t)text->size);
+    result += TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.r);
+    result += TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.g);
+    result += TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.b);
+    result += TextParser_addInt(textParser, TEXT_SCENENODE_PARSER_COLOR, (size_t)text->color.a);
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
-    if (textParser->lastError) {
-        TextParser_destruct(textParser);
-        return 4;
-    }
+    result += textParser->lastError;
+    result += TextResource_updateContent(text->sceneNode.sceneNodeTextResource, newText);
+    result += ResourceManager_saveTextResource(resourceManager, text->sceneNode.sceneNodeTextResource, textResId);
     TextParser_destruct(textParser);
-    if (TextResource_updateContent(text->sceneNode.sceneNodeTextResource, newText)) {
+    if (newText)
         free(newText);
-        return 5;
-    }
-    if (ResourceManager_saveTextResource(resourceManager, text->sceneNode.sceneNodeTextResource, textResId)) {
-        free(newText);
-        return 6;
-    }
-    free(newText);
-    return 0;
+    return result;
 }
 
 void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {

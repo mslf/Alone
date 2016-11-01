@@ -23,16 +23,6 @@
 #include "settings/Settings.h"
 #include "textParser/TextParser.h"
 
-#define SETTINGS_PARSER_TYPE_STRING "Settings"
-#define SETTINGS_PARSER_SCREEN_HEIGHT "screenHeight"
-#define SETTINGS_PARSER_SCREEN_WIDTH "screenWidth"
-#define SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT "virtualScreenHeight"
-#define SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH "virtualScreenWidth"
-#define SETTINGS_PARSER_FULLSCREEN "fullscreen"
-#define SETTINGS_PARSER_MUSIC "music"
-#define SETTINGS_PARSER_SOUND "sound"
-#define SETTINGS_PARSER_VSYNC "vsync"
-#define SETTINGS_PARSER_MAIN_SCENE "mainScene"
 const char* const SETTINGS_PARSER_ERR_NO_TYPE_STRING =
         "Settings_construct: TextParser have no type string!";
 const char* const SETTINGS_PARSER_ERR_NOT_MY_TYPE_STRING =
@@ -64,8 +54,10 @@ struct Settings* Settings_defaults(struct Settings* settings) {
     return settings;
 }
 
-unsigned char Settings_checkTextResourceType(struct Settings* settings, struct TextParser* textParser,
+static unsigned char Settings_checkTextResourceType(struct Settings* settings, struct TextParser* textParser,
                                              struct ResourceManager* resourceManager) {
+    if (!settings || !textParser || !resourceManager)
+        return 1;
     char* settingsTypeString = NULL;
     settingsTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (textParser->lastError) {
@@ -73,19 +65,21 @@ unsigned char Settings_checkTextResourceType(struct Settings* settings, struct T
         Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
         settings->settingsResource->pointersCount = 0;
         ResourceManager_destructNeedlessTextResources(resourceManager);
-        return 1;
+        return 2;
     }
     if (strcmp(settingsTypeString, SETTINGS_PARSER_TYPE_STRING) != 0) {
         Logger_log(resourceManager->logger, SETTINGS_PARSER_ERR_NOT_MY_TYPE_STRING);
         Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
         settings->settingsResource->pointersCount = 0;
         ResourceManager_destructNeedlessTextResources(resourceManager);
-        return 2;
+        return 3;
     }
     return 0;
 }
 
-unsigned char Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
+static unsigned char Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
+    if (!settings || !textParser)
+        return 1;
     settings->h = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_HEIGHT, 0);
     if (textParser->lastError)
         settings->h = SETTINGS_DEFAULT_H;
@@ -115,7 +109,7 @@ unsigned char Settings_tryGetSettingsFromTextParser(struct Settings* settings, s
         tempString = SETTINGS_DEFAULT_MAIN_SCENE;
     settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
     if (!settings->mainScene)
-        return 1;
+        return 2;
     strcpy(settings->mainScene, tempString);
     return 0;
 }
@@ -186,25 +180,15 @@ unsigned char Settings_save(struct Settings* settings, struct ResourceManager* r
     result += TextParser_addFlag(textParser, SETTINGS_PARSER_SOUND, settings->isSoundActive);
     result += TextParser_addFlag(textParser, SETTINGS_PARSER_VSYNC, settings->isVsyncActive);
     result += TextParser_addString(textParser, SETTINGS_PARSER_MAIN_SCENE, settings->mainScene);
-    if (result) {
-        TextParser_destruct(textParser);
-        return 3;
-    }
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
-    if (textParser->lastError) {
-        TextParser_destruct(textParser);
-        return 4;
-    }
-    if (TextResource_updateContent(settings->settingsResource, newText)) {
-        TextParser_destruct(textParser);
-        free(newText);
-        return 5;
-    }
+    result += textParser->lastError;
+    result += TextResource_updateContent(settings->settingsResource, newText);
+    result += ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId);
     TextParser_destruct(textParser);
-    free(newText);
-    ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId);
-    return 0;
+    if (newText)
+        free(newText);
+    return result;
 }
 
 
