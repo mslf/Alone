@@ -8,7 +8,8 @@ optionPrototypeButtonResources = [
 menuOptions = [
     option1,
     option2,
-    option3
+    option3,
+    option4
 ];
 
 option1 = [
@@ -22,7 +23,12 @@ option2 = [
     "data/menus/focusedDefault.gameEvent"
 ];
 option3 = [
-    "Option 1:3",
-    "data/menus/pressedDefault.gameEvent",
+    "Push scene 2",
+    "data/menus/pushSecondScene.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option4 = [
+    "Exit",
+    "data/menus/exit.gameEvent",
     "data/menus/focusedDefault.gameEvent"
 ];

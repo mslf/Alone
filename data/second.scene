@@ -1,0 +1,28 @@
+/* Demo second scene */
+type = Scene;
+sceneNodes = [
+    menu_2,
+    menu_3
+];
+eventControllers = [data/hello.script];
+menu_2 = [
+    "data/menus/menu2.contextMenu",
+    10, 10,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+menu_3 = [
+    "data/menus/menu3.contextMenu",
+    170, 10,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+/* this
+ * is
+ * comment
+ * too
+ */

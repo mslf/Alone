@@ -6,7 +6,7 @@ menuOptions = [
     option1
 ];
 option1 = [
-    "Option 3:1",
-    "data/menus/pressedDefault.gameEvent",
+    "Pop scene",
+    "data/menus/popScene.gameEvent",
     "data/menus/focusedDefault.gameEvent"
 ];

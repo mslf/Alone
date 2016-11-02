@@ -1,4 +1,4 @@
-/* Demo scene */
+/* Demo main scene */
 type = Scene;
 sceneNodes = [
     sprite_1,
@@ -9,9 +9,7 @@ sceneNodes = [
     bar_1,
     bar_2,
     bar_3,
-    menu_1,
-    menu_2,
-    menu_3
+    menu_1
 ];
 eventControllers = [data/hello.script];
 sprite_1 = [
@@ -81,22 +79,6 @@ bar_3 = [
 menu_1 = [
     "data/menus/menu1.contextMenu",
     10, 100,
-    0, 0,
-    0,
-    0.0,
-    1.0, 1.0
-];
-menu_2 = [
-    "data/menus/menu2.contextMenu",
-    170, 100,
-    0, 0,
-    0,
-    0.0,
-    1.0, 1.0
-];
-menu_3 = [
-    "data/menus/menu3.contextMenu",
-    330, 100,
     0, 0,
     0,
     0.0,
