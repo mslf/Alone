@@ -26,6 +26,9 @@
 const char* const GAME_MANAGER_ERR_SCENES_STACK_ALLOC =
         "GameManager: constructor: allocating memory for scenesStack failed!";
 const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "Alone.settings";
+const char* const GAME_MANAGER_COMMAND_EXIT = "GameManager_exit";
+const char* const GAME_MANAGER_COMMAND_PUSH = "GameManager_pushScene";
+const char* const GAME_MANAGER_COMMAND_POP = "GameManager_popScene";
 
 struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
@@ -58,59 +61,69 @@ struct GameManager* GameManager_construct() {
     return gm;
 }
 
+static void GameManager_handleEvents(struct GameManager* gm) {
+    if (!gm)
+        return;
+    if (EventManager_generateCustomEventsList(gm->eventManager, "GameManager"))
+        return;
+    size_t i;
+    for (i = 0; i < gm->eventManager->customGameEventsCount; i++) {
+        if (strcmp(gm->eventManager->customGameEventsList[i]->command, GAME_MANAGER_COMMAND_EXIT) == 0)
+            gm->eventManager->quit = true;
+        if (strcmp(gm->eventManager->customGameEventsList[i]->command, GAME_MANAGER_COMMAND_PUSH) == 0) {
+            GameManager_pushScene(gm, gm->eventManager->customGameEventsList[i]->data);
+            EventManager_removeEvent(gm->eventManager, gm->eventManager->customGameEventsList[i]);
+        }
+        if (strcmp(gm->eventManager->customGameEventsList[i]->command, GAME_MANAGER_COMMAND_POP) == 0) {
+            GameManager_popScene(gm);
+            EventManager_removeEvent(gm->eventManager, gm->eventManager->customGameEventsList[i]);
+        }
+    }
+}
+
 int GameManager_main(struct GameManager* gm) {
     if (!gm)
         return 1;
-    Logger_log(&(gm->logger), "***Are You Alive?***");
+    Logger_log(&(gm->logger), "***Am I Alive?***");
     size_t i;
     size_t j;
-    size_t state = 0;
-    unsigned char r = 255;
-    unsigned char g = 0;
-    unsigned char b = 255;
+    unsigned char state = 0;
+    unsigned char color = 0;
     while(!gm->eventManager->quit) {
         EventManager_updateSdlEvents(gm->eventManager);
-        SDL_SetRenderDrawColor(gm->renderer->renderer, r, g, b, 255);
+        SDL_SetRenderDrawColor(gm->renderer->renderer, (int)(color * 0.8), color,
+                               (int)(color * 0.5), 255);
         SDL_RenderClear(gm->renderer->renderer);
         if (gm->scenesCount > 0) {
             i = gm->scenesCount - 1;
             for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++) {
-                if (gm->scenesStack[i]->sceneNodesList[j]->control)
-                    gm->scenesStack[i]->sceneNodesList[j]->control(gm->scenesStack[i]->sceneNodesList[j], 
-                                                                gm->eventManager);
-                if (gm->scenesStack[i]->sceneNodesList[j]->update)
-                    gm->scenesStack[i]->sceneNodesList[j]->update(gm->scenesStack[i]->sceneNodesList[j], 
-                                                                gm->eventManager, 
-                                                                gm->renderer);
-                if (gm->scenesStack[i]->sceneNodesList[j]->render)
-                    gm->scenesStack[i]->sceneNodesList[j]->render(gm->scenesStack[i]->sceneNodesList[j], 
-                                                                gm->renderer);
-                if (gm->scenesStack[i]->sceneNodesList[j]->sound)
-                    gm->scenesStack[i]->sceneNodesList[j]->sound(gm->scenesStack[i]->sceneNodesList[j], 
-                                                                gm->musican);
+                struct SceneNode* tempSceneNode = gm->scenesStack[i]->sceneNodesList[j];
+                if (tempSceneNode->isActive) {
+                    if (tempSceneNode->control)
+                        tempSceneNode->control(tempSceneNode, gm->eventManager);
+                    if (tempSceneNode->update)
+                        tempSceneNode->update(tempSceneNode, gm->eventManager, gm->renderer);
+                    if (tempSceneNode->render)
+                        tempSceneNode->render(tempSceneNode, gm->renderer);
+                    if (tempSceneNode->sound)
+                        tempSceneNode->sound(tempSceneNode, gm->musican);
+                }
             }
         }
         SDL_RenderPresent(gm->renderer->renderer);
-        if (state == 0)
-            r--;
-        if (state == 1) {
-            g++;
-            b--;
+        GameManager_handleEvents(gm);
+        switch (state) {
+            case 0:
+                color++;
+                if (color >= 255)
+                    state = 1;
+                break;
+            case 1:
+                color--;
+                if (color <= 1)
+                    state = 0;
+                break;
         }
-        if (state == 2) {
-            r++;
-            g--;
-        }
-        if (state == 3)
-            b++;
-        if (state == 0 && r <= 1)
-            state = 1;
-        if (state == 1 && (b <= 1 || g >= 255))
-            state = 2;
-        if (state == 2 && (g <= 1 || r >= 255))
-            state = 3;
-        if (state == 3 && b >= 255)
-            state = 0;
     }
     return 0;
 }
@@ -156,14 +169,18 @@ unsigned char GameManager_reallocateSceneNodesList(struct GameManager* gm) {
 unsigned char GameManager_pushScene(struct GameManager* gm, const char* const resId) {
     if (!gm || !resId)
         return 1;
+    size_t i;
+    for (i = 0; i < gm->scenesCount; i++)
+        if (strcmp(resId, gm->scenesStack[i]->sceneResource->id) == 0)
+            return 2;
     struct Scene* scene = NULL;
     scene = Scene_construct(gm->resourceManager, gm->renderer, resId);
     if (!scene)
-        return 2;
+        return 3;
     if (gm->scenesCount >= gm->allocatedScenesCount)
         if(GameManager_reallocateSceneNodesList(gm)) {
             Scene_destruct(scene);
-            return 3;
+            return 4;
         }
     gm->scenesStack[gm->scenesCount]= scene;
     gm->scenesCount++;

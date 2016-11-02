@@ -22,6 +22,7 @@
 #ifndef ALONE_SCENENODE_H
 #define ALONE_SCENENODE_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "eventManager/EventManager.h"
 #include "renderer/Renderer.h"
@@ -35,6 +36,7 @@ struct PhysicalSceneNode {
 };
 
 struct SceneNode {
+    bool isActive;
     struct TextResource* sceneNodeTextResource;
     char* type;
     SDL_Point coordinates;

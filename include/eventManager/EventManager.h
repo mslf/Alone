@@ -22,7 +22,7 @@
 #ifndef ALONE_EVENTMANAGER_H
 #define ALONE_EVENTMANAGER_H
 
-#include <stddef.h>
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "logger/Logger.h"
 #include "eventManager/GameEvent.h"
@@ -43,7 +43,7 @@ struct EventManager {
     size_t allocatedCustomGameEventsCount;
     size_t sdlEventsCount;
     size_t allocatedSdlEventsCount;
-    unsigned char quit;
+    bool quit;
 };
 
 struct EventManager* EventManager_construct(struct Logger* logger);

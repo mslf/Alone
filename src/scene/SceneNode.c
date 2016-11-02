@@ -22,6 +22,7 @@
 #include "scene/SceneNode.h"
 
 void SceneNode_init(struct SceneNode* sceneNode) {
+    sceneNode->isActive = true;
     sceneNode->angle = 0.0;
     sceneNode->coordinates.x = 0;
     sceneNode->coordinates.y = 0;
