@@ -22,45 +22,62 @@
 #ifndef ALONE_SLIDER_H
 #define ALONE_SLIDER_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "gui/ProgressBar.h"
+#include "gui/Button.h"
 
 #define SLIDER_SCENENODE_PARSER_TYPE_STRING "Slider"
+#define SLIDER_SCENENODE_PARSER_PROGRESS_BAR_RESOURCE_STRING "progressBarResource"
+#define SLIDER_SCENENODE_PARSER_BUTTON_RESOURCE_STRING "buttonResource"
+#define SLIDER_SCENENODE_PARSER_STEP "step"
+#define SLIDER_SCENENODE_PARSER_VALUE "value"
+#define SLIDER_SCENENODE_PARSER_ALLIGN_STRING "allign"
+
+enum AllignX {
+    AllignX_center = 0,
+    AllignX_left = 1,
+    AllignX_right = 2
+};
+
+enum AllignY {
+    AllignY_center = 0,
+    AllignY_top = 1,
+    AllignY_bottom = 2,
+    AllignY_none = 3
+};
 /*
  * Slider is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of Slider struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Slider struct,
  * if you want code to work with Slider like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct Slider {
-    struct SceneNode* sceneNode;
-    struct TextResource* spriteResource;
-    struct TextResource* labelResource;
-    struct TextResource* pressedEventResource;
-    struct TextureResource* textureResource;
-    struct SoundResource* focusedSoundResource;
-    struct SoundResource* pressedSoundResource;
-    struct GameEvent* pressedEvent;
-    unsigned char isPressed;
-    unsigned char value;
-    unsigned char step;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+   struct SceneNode sceneNode;
+   struct ProgressBar* base;
+   struct Button* button;
+   unsigned char step;
+   enum AllignX buttonAllignX;
+   enum AllignY buttonAllignY;
+   bool isGeometryChanged;
 };
 
-struct Slider* Slider_construct(struct ResourceManager* const resourceManager, const char* const sliderResId);
+struct Slider* Slider_construct(struct ResourceManager* const resourceManager,
+                                struct Renderer* renderer, const char* const sliderResId);
 void Slider_destruct(struct Slider* slider);
 
 void Slider_save(
         const struct Slider* const slider, struct ResourceManager* const resourceManager,
         const char* const sliderResId);
 void Slider_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void Slider_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void Slider_sound(struct SceneNode* sceneNode, struct Musican* musican);
 

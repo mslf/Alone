@@ -97,7 +97,7 @@ struct SceneNode* Scene_constructSceneNode(struct ResourceManager* resourceManag
     if (strcmp(sceneNodeTypeString, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)ProgressBar_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, SLIDER_SCENENODE_PARSER_TYPE_STRING) == 0)
-        sceneNode = (struct SceneNode*)Slider_construct(resourceManager, sceneNodeResId);
+        sceneNode = (struct SceneNode*)Slider_construct(resourceManager, renderer, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, TEXT_BOX_SCENENODE_PARSER_TYPE_STRING) == 0)
         sceneNode = (struct SceneNode*)TextBox_construct(resourceManager, sceneNodeResId);
     if (strcmp(sceneNodeTypeString, ITEM_SCENENODE_PARSER_TYPE_STRING) == 0)

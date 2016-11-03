@@ -454,6 +454,7 @@ void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventM
             contextMenu->menuOptionsList[i]->sceneNode.scaleX = contextMenu->sceneNode.scaleX;
             contextMenu->menuOptionsList[i]->sceneNode.scaleY = contextMenu->sceneNode.scaleY;
         }
+        contextMenu->isGeometryChanged = false;
     }
     for (i = 0; i < contextMenu->menuOptionsCount; i++)
         Button_update((struct SceneNode*)contextMenu->menuOptionsList[i], eventManager, renderer);
