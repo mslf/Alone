@@ -30,6 +30,10 @@ const char* const CONTEXT_MENU_SCENENODE_PARSER_ERR_NO_OPTIONS =
             "ContextMenu_constructMenuOptions: menuOptions string haven't found!";
 const char* const CONTEXT_MENU_SCENENODE_PARSER_ERR_NO_OPTION_DEF = 
             "ContextMenu_constructMenuOptions: definition of MenuOption haven't found!";
+const char* const CONTEXT_MENU_SCENENODE_ERR_BUTTON_NO_TYPE = 
+        "ContextMenu_checkButtonType: type string haven't found!";
+const char* const CONTEXT_MENU_SCENENODE_ERR_BUTTON_TYPE = 
+        "ContextMenu_checkButtonType: suitable Button type string haven't detected!";
 const char* const CONTEXT_MENU_SCENENODE_ERR_TRY_DEFAULT_PROTOTYPE = 
             "ContextMenu_addMenuOption: trying onlyOneMenuOptionPrototype!";
 const char* const CONTEXT_MENU_SCENENODE_ERR_EXIST_OPTION = 
@@ -65,6 +69,61 @@ static unsigned char ContextMenu_constructMenuOptions(struct ContextMenu* contex
         ContextMenu_addMenuOption(contextMenu, resourceManager, renderer, tempFocusedResourceString,
                                   tempPressedResourceString, tempLabelString);
     }
+    return 0;
+}
+
+static unsigned char ContextMenu_checkButtonType(const char* const buttonResId, struct ResourceManager* resourceManager) {
+    if (!buttonResId || !resourceManager)
+        return 1;
+    struct TextResource* buttonResource = 
+                        ResourceManager_loadTextResource(resourceManager, buttonResId, 0);
+    if (!buttonResource)
+       return 2;
+    struct TextParser* buttonTextParser = TextParser_constructFromTextResource(resourceManager->logger,
+                                                                               buttonResource);
+    if (!buttonTextParser) {
+        buttonResource->pointersCount--;
+        return 3;
+    }
+    char* buttonTypeString = TextParser_getString(buttonTextParser, TEXT_PARSER_TYPE_STRING, 0);
+    if (!buttonTypeString) {
+        char tempErrString[600];
+        sprintf(tempErrString, "%s in ResourceID: %s", CONTEXT_MENU_SCENENODE_ERR_BUTTON_NO_TYPE, buttonResId);
+        Logger_log(resourceManager->logger, tempErrString);
+        buttonResource->pointersCount--;
+        TextParser_destruct(buttonTextParser);
+        return 4;
+    }
+    if (strcmp(buttonTypeString, BUTTON_SCENENODE_PARSER_TYPE_STRING) != 0) {
+         char tempErrString[600];
+        sprintf(tempErrString, "%s in ResourceID: %s", CONTEXT_MENU_SCENENODE_ERR_BUTTON_TYPE, buttonResId);
+        Logger_log(resourceManager->logger, tempErrString);
+        buttonResource->pointersCount--;
+        TextParser_destruct(buttonTextParser);
+        return 5;
+    }
+    buttonResource->pointersCount--;
+    TextParser_destruct(buttonTextParser);
+    return 0;
+}
+
+static unsigned char ContextMenu_checkButtonPrototypesResourceTypes(struct ContextMenu* contextMenu,
+                                                                    struct ResourceManager* resourceManager) {
+    if (!contextMenu || !resourceManager)
+        return 1;
+    // It is required
+    if (ContextMenu_checkButtonType(contextMenu->onlyOneMenuOptionPrototype, resourceManager))
+        return 2;
+    // But these three are not mandatory, so check only if exist
+    if (contextMenu->topMenuOptionPrototype)
+        if (ContextMenu_checkButtonType(contextMenu->topMenuOptionPrototype, resourceManager))
+            return 3;
+    if (contextMenu->middleMenuOptionPrototype)
+        if (ContextMenu_checkButtonType(contextMenu->middleMenuOptionPrototype, resourceManager))
+            return 4;
+    if (contextMenu->lowerMenuOptionPrototype)
+        if (ContextMenu_checkButtonType(contextMenu->lowerMenuOptionPrototype, resourceManager))
+            return 5;
     return 0;
 }
 
@@ -110,6 +169,8 @@ static unsigned char ContextMenu_loadButtonPrototypes(struct ContextMenu* contex
         else
             Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_PARSER_ERR_MENU_OPTION_PROTOTYPE_ALLOC);
     }
+    if (ContextMenu_checkButtonPrototypesResourceTypes(contextMenu, resourceManager))
+        return 4;
     return 0; 
 }
 
