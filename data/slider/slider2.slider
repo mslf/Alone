@@ -1,0 +1,6 @@
+type = Slider; 
+progressBarResource = data/slider/sliderBar.progressBar;
+buttonResource = data/slider/sliderButton.button;
+step = 50;
+value = 0;
+allign = 0;

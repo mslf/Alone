@@ -1,0 +1,4 @@
+type = GameEvent;
+channel = GameManager;
+command = GameManager_exit;
+data = none;

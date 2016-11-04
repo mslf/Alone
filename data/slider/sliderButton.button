@@ -1,0 +1,8 @@
+type = Button;
+spriteResource = data/slider/sliderButton.sprite;
+textResource = data/slider/sliderButton.text;
+focusedEventResource = data/slider/sliderButtonFocused.gameEvent;
+pressedEventResource = data/slider/sliderButtonPressed.gameEvent;
+focusedSoundResource = data/cmd/cmdFocused.wav;
+pressedSoundResource = data/cmd/cmdPressed.wav;
+labelOffset = [0, 0];
