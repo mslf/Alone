@@ -39,12 +39,6 @@
 #define SLIDER_SCENENODE_PARSER_VALUE "value"
 #define SLIDER_SCENENODE_PARSER_ALLIGN_STRING "allign"
 
-enum AllignX {
-    AllignX_center = 0,
-    AllignX_left = 1,
-    AllignX_right = 2
-};
-
 enum AllignY {
     AllignY_center = 0,
     AllignY_top = 1,
@@ -64,16 +58,17 @@ struct Slider {
    struct ProgressBar* base;
    struct Button* button;
    unsigned char step;
-   enum AllignX buttonAllignX;
    enum AllignY buttonAllignY;
    bool isGeometryChanged;
+   bool isButtonMoving;
+   SDL_Point lastMouseCoordinates;
 };
 
 struct Slider* Slider_construct(struct ResourceManager* const resourceManager,
                                 struct Renderer* renderer, const char* const sliderResId);
 void Slider_destruct(struct Slider* slider);
 
-void Slider_save(
+unsigned char Slider_save(
         const struct Slider* const slider, struct ResourceManager* const resourceManager,
         const char* const sliderResId);
 void Slider_control(struct SceneNode* sceneNode, struct EventManager* eventManager);

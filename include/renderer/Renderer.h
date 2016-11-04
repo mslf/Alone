@@ -44,5 +44,6 @@ struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* sett
 void Renderer_destruct(struct Renderer* renderer);
 
 SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point);
+SDL_Point Renderer_convertCoordinatesBack(struct Renderer* renderer, SDL_Point point);
 
 #endif //ALONE_RENDERER_H
