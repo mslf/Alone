@@ -364,10 +364,10 @@ void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManag
             SDL_Point mouseCoordinates;
             SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
             if (mouseCoordinates.x >= button->sprite->dstRect.x 
-                && mouseCoordinates.x <= (button->sprite->dstRect.x + button->sprite->dstRect.w) 
+                && mouseCoordinates.x < (button->sprite->dstRect.x + button->sprite->dstRect.w) 
                 && mouseCoordinates.y >= button->sprite->dstRect.y 
-                && mouseCoordinates.y <= (button->sprite->dstRect.y + button->sprite->dstRect.h)) {
-                if (button->state != ButtonState_Focused) {
+                && mouseCoordinates.y < (button->sprite->dstRect.y + button->sprite->dstRect.h)) {
+                if (button->state == ButtonState_Normal) {
                     button->state = ButtonState_Focused;
                     button->isStateChanged = true;
                     EventManager_addEvent(eventManager, button->focusedEvent);
@@ -375,19 +375,28 @@ void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManag
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN) {
                     button->state = ButtonState_Pressed;
                     button->isStateChanged = true;
-                    EventManager_addEvent(eventManager, button->pressedEvent);
+                    
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP) {
+                    if (button->state == ButtonState_Pressed)
+                        EventManager_addEvent(eventManager, button->pressedEvent);
                     button->state = ButtonState_Focused;
                     button->isStateChanged = true;
-                    EventManager_removeEvent(eventManager, button->pressedEvent);
                 }
-            } else 
-                if (button->state != ButtonState_Normal) {
+            } else {
+                if (button->state == ButtonState_Focused) {
                     button->state = ButtonState_Normal;
                     button->isStateChanged = true;
                     EventManager_removeEvent(eventManager, button->focusedEvent);
                 }
+                if (button->state == ButtonState_Pressed 
+                    && (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP 
+                        || eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN)) {
+                    button->state = ButtonState_Normal;
+                    button->isStateChanged = true;
+                    EventManager_removeEvent(eventManager, button->focusedEvent);
+                }
+            }
         }
 }
 

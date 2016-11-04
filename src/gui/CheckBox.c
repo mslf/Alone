@@ -361,9 +361,9 @@ void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventMan
             SDL_Point mouseCoordinates;
             SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
             if (mouseCoordinates.x >= checkBox->sprite->dstRect.x 
-                && mouseCoordinates.x <= (checkBox->sprite->dstRect.x + checkBox->sprite->dstRect.w) 
+                && mouseCoordinates.x < (checkBox->sprite->dstRect.x + checkBox->sprite->dstRect.w) 
                 && mouseCoordinates.y >= checkBox->sprite->dstRect.y 
-                && mouseCoordinates.y <= (checkBox->sprite->dstRect.y + checkBox->sprite->dstRect.h)) {
+                && mouseCoordinates.y < (checkBox->sprite->dstRect.y + checkBox->sprite->dstRect.h)) {
                 if (checkBox->state == CheckBoxState_UnChecked) {
                     checkBox->state = CheckBoxState_FocusedUnChecked;
                     checkBox->isStateChanged = true;

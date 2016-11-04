@@ -167,7 +167,7 @@ unsigned char ProgressBar_save(
     result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING);
     result += TextParser_addString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING,
                                    progressBar->spriteBase->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addInt(textParser, PROGRESS_BAR_SCENENODE_PARSER_INIT_VALUE_STRING, progressBar->value);
+    result += TextParser_addInt(textParser, PROGRESS_BAR_SCENENODE_PARSER_INIT_VALUE_STRING, (long)progressBar->value);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
     result += TextResource_updateContent(progressBar->sceneNode.sceneNodeTextResource, tempString);
