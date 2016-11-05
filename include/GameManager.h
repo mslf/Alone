@@ -28,6 +28,7 @@
 #include "resourceManager/ResourceManager.h"
 #include "eventManager/EventManager.h"
 #include "settings/Settings.h"
+#include "scene/SceneNodeTypesRegistrar.h"
 #include "scene/Scene.h"
 
 enum {
@@ -40,6 +41,7 @@ struct GameManager {
     struct ResourceManager* resourceManager;
     struct Renderer* renderer;
     struct Musican* musican;
+    struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar;
     struct Scene** scenesStack;
     struct Settings* settings;
     size_t allocatedScenesCount;

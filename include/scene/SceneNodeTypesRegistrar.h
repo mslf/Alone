@@ -19,6 +19,8 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef ALONE_SCENENODE_TYPES_REGISTRAR_H
+#define ALONE_SCENENODE_TYPES_REGISTRAR_H
 #include "textParser/TextParser.h"
 #include "resourceManager/ResourceManager.h"
 #include "renderer/Renderer.h"
@@ -27,11 +29,12 @@
 enum {
     SCENE_NODE_TYPES_REGISTRAR_TYPES_REALLOCATION_STEP = 20
 };
-
+struct SceneNodeTypesRegistrar;
 struct SceneNodeType {
     char* type;
     struct SceneNode* (*constructor)(struct ResourceManager* const resourceManager, 
-                                    struct Renderer* const renderer, 
+                                    struct Renderer* const renderer,
+                                    struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 
                                     struct TextParser* const textParser);
 };
 
@@ -46,8 +49,10 @@ void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeT
 
 bool SceneNodeTypesRegistrar_registerNewSceneNodeType(const char* const typeString,
                                                       struct SceneNode* (*constructor)(
-                                                          struct ResourceManager* const resourceManager,
+                                                          struct ResourceManager* const resourceManager, 
                                                           struct Renderer* const renderer,
+                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                           struct TextParser* const textParser));
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
                                                              struct Renderer* renderer, const char* const resId);
+#endif //ALONE_SCENENODE_TYPES_REGISTRAR_H

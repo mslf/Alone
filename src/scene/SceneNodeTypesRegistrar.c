@@ -22,7 +22,7 @@
 #include "scene/SceneNodeTypesRegistrar.h"
 
 struct SceneNodeTypesRegistrar* SceneNodeTypesRegistrar_construct() {
-    
+    return NULL;
 }
 
 void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar) {
@@ -31,13 +31,15 @@ void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeT
 
 bool SceneNodeTypesRegistrar_registerNewSceneNodeType(const char* const typeString,
                                                       struct SceneNode* (*constructor)(
-                                                          struct ResourceManager* const resourceManager,
+                                                          struct ResourceManager* const resourceManager, 
                                                           struct Renderer* const renderer,
+                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                           struct TextParser* const textParser)) {
+    return false;
     
 }
 
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
                                                              struct Renderer* renderer, const char* const resId) {
-    
+    return NULL;
 }

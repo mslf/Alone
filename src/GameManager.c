@@ -19,16 +19,64 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#include "GameManager.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "GameManager.h"
+#include "sprite/Sprite.h"
+#include "text/Text.h"
+#include "gui/Button.h"
+#include "gui/CheckBox.h"
+#include "gui/ContextMenu.h"
+#include "gui/ListBox.h"
+#include "gui/ProgressBar.h"
+#include "gui/Slider.h"
+#include "gui/TextBox.h"
+#include "item/Item.h"
+#include "user/User.h"
+#include "level/Level.h"
 
+const char* const GAME_MANAGER_ERR_REGISTRAR_CONSTRUCTING =
+        "GameManager_construct: constructing sceneNodeTypesRegistrar failed!";
+const char* const GAME_MANAGER_ERR_REGISTRAR_REGISTER =
+        "GameManager_construct: registering SceneNode types failed!";
 const char* const GAME_MANAGER_ERR_SCENES_STACK_ALLOC =
-        "GameManager: constructor: allocating memory for scenesStack failed!";
+        "GameManager_construct: allocating memory for scenesStack failed!";
 const char* const GAME_MANAGER_DEFAULT_SETTINGS_PATH = "Alone.settings";
 const char* const GAME_MANAGER_COMMAND_EXIT = "GameManager_exit";
 const char* const GAME_MANAGER_COMMAND_PUSH = "GameManager_pushScene";
 const char* const GAME_MANAGER_COMMAND_POP = "GameManager_popScene";
+
+static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) {
+    /*
+    unsigned char result = 0;
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(SPRITE_SCENENODE_PARSER_TYPE_STRING,
+                                                               Sprite_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(TEXT_SCENENODE_PARSER_TYPE_STRING,
+                                                               Text_constructFromTextParser));
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(BUTTON_SCENENODE_PARSER_TYPE_STRING,
+                                                               Button_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(CHECK_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               CheckBox_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING,
+                                                               ProgressBar_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING,
+                                                               ContextMenu_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(SLIDER_SCENENODE_PARSER_TYPE_STRING,
+                                                               Slider_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               TextBox_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(LIST_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               ListBox_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(ITEM_SCENENODE_PARSER_TYPE_STRING,
+                                                               Item_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(USER_SCENENODE_PARSER_TYPE_STRING,
+                                                               User_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(LEVEL_SCENENODE_PARSER_TYPE_STRING,
+                                                               Level_constructFromTextParser);
+    return result;
+    */
+    return 1;
+}
 
 struct GameManager* GameManager_construct() {
     struct GameManager* gm = NULL;
@@ -46,6 +94,14 @@ struct GameManager* GameManager_construct() {
             result++;
         if (!(gm->renderer = Renderer_construct(&(gm->logger), gm->settings)))
             result++;
+        if (!(gm->sceneNodeTypesRegistrar = SceneNodeTypesRegistrar_construct())) {
+            Logger_log(&(gm->logger), GAME_MANAGER_ERR_REGISTRAR_CONSTRUCTING);
+            result++;
+        }
+        if (GameManager_registerSceneNodeTypes(gm)) {
+            Logger_log(&(gm->logger), GAME_MANAGER_ERR_REGISTRAR_REGISTER);
+            result++;
+        }
         if (!(gm->scenesStack = (struct Scene**)malloc(sizeof(struct Scene*) * INITIAL_NUMBER_ALLOCATED_SCENES))) {
             Logger_log(&(gm->logger), GAME_MANAGER_ERR_SCENES_STACK_ALLOC);
             result++;
@@ -137,6 +193,7 @@ void GameManager_destruct(struct GameManager* gm) {
             Scene_destruct(gm->scenesStack[i]);
         free(gm->scenesStack);
     }
+    Settings_destruct(gm->settings);
     if (gm->eventManager)
         EventManager_destruct(gm->eventManager);
     if (gm->resourceManager)
@@ -145,7 +202,8 @@ void GameManager_destruct(struct GameManager* gm) {
         Musican_destruct(gm->musican);
     if (gm->renderer)
         Renderer_destruct(gm->renderer);
-    Settings_destruct(gm->settings);
+    if (gm->sceneNodeTypesRegistrar)
+        SceneNodeTypesRegistrar_destruct(gm->sceneNodeTypesRegistrar);
     free(gm);
 }
 
@@ -174,7 +232,10 @@ unsigned char GameManager_pushScene(struct GameManager* gm, const char* const re
         if (strcmp(resId, gm->scenesStack[i]->sceneResource->id) == 0)
             return 2;
     struct Scene* scene = NULL;
-    scene = Scene_construct(gm->resourceManager, gm->renderer, resId);
+    scene = Scene_construct(gm->resourceManager,
+                            gm->renderer,
+                            gm->sceneNodeTypesRegistrar,
+                            resId);
     if (!scene)
         return 3;
     if (gm->scenesCount >= gm->allocatedScenesCount)
