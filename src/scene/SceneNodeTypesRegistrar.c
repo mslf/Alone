@@ -40,6 +40,8 @@ bool SceneNodeTypesRegistrar_registerNewSceneNodeType(const char* const typeStri
 }
 
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
-                                                             struct Renderer* renderer, const char* const resId) {
+                                                             struct Renderer* renderer,
+                                                             struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                             const char* const resId) {
     return NULL;
 }

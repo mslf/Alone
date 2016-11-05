@@ -49,6 +49,7 @@ struct SceneNode {
     void (*update)(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
     void (*render)(struct SceneNode* sceneNode, struct Renderer* renderer);
     void (*sound)(struct SceneNode* sceneNode, struct Musican* musican);
+    void (*destruct)(struct SceneNode* sceneNode);
 };
 
 void SceneNode_init(struct SceneNode* sceneNode);

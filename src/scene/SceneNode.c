@@ -36,5 +36,6 @@ void SceneNode_init(struct SceneNode* sceneNode) {
     sceneNode->render = NULL;
     sceneNode->update = NULL;
     sceneNode->sound = NULL;
+    sceneNode->destruct = NULL;
     sceneNode->sceneNodeTextResource = NULL;
 }

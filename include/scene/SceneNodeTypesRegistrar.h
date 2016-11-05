@@ -54,5 +54,7 @@ bool SceneNodeTypesRegistrar_registerNewSceneNodeType(const char* const typeStri
                                                           struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                           struct TextParser* const textParser));
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
-                                                             struct Renderer* renderer, const char* const resId);
+                                                             struct Renderer* renderer,
+                                                             struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                             const char* const resId);
 #endif //ALONE_SCENENODE_TYPES_REGISTRAR_H
