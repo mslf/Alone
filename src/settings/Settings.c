@@ -197,5 +197,7 @@ void Settings_destruct(struct Settings* settings) {
         return;
     if (settings->mainScene)
         free(settings->mainScene);
+    if (settings->settingsResource)
+        settings->settingsResource->pointersCount--;
     free(settings);
 }
