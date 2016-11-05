@@ -47,35 +47,44 @@ const char* const GAME_MANAGER_COMMAND_PUSH = "GameManager_pushScene";
 const char* const GAME_MANAGER_COMMAND_POP = "GameManager_popScene";
 
 static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) {
-    /*
     unsigned char result = 0;
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(SPRITE_SCENENODE_PARSER_TYPE_STRING,
-                                                               Sprite_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(TEXT_SCENENODE_PARSER_TYPE_STRING,
-                                                               Text_constructFromTextParser));
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(BUTTON_SCENENODE_PARSER_TYPE_STRING,
-                                                               Button_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(CHECK_BOX_SCENENODE_PARSER_TYPE_STRING,
-                                                               CheckBox_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING,
-                                                               ProgressBar_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING,
-                                                               ContextMenu_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(SLIDER_SCENENODE_PARSER_TYPE_STRING,
-                                                               Slider_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
-                                                               TextBox_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(LIST_BOX_SCENENODE_PARSER_TYPE_STRING,
-                                                               ListBox_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(ITEM_SCENENODE_PARSER_TYPE_STRING,
-                                                               Item_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(USER_SCENENODE_PARSER_TYPE_STRING,
-                                                               User_constructFromTextParser);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(LEVEL_SCENENODE_PARSER_TYPE_STRING,
-                                                               Level_constructFromTextParser);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+                                                               SPRITE_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+                                                               TEXT_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               BUTTON_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               CHECK_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               SLIDER_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               LIST_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               ITEM_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               USER_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               LEVEL_SCENENODE_PARSER_TYPE_STRING,
+                                                               NULL);
     return result;
-    */
-    return 1;
 }
 
 struct GameManager* GameManager_construct() {

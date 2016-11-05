@@ -32,7 +32,7 @@ enum {
 struct SceneNodeTypesRegistrar;
 struct SceneNodeType {
     char* type;
-    struct SceneNode* (*constructor)(struct ResourceManager* const resourceManager, 
+    struct SceneNode* (*construct)(struct ResourceManager* const resourceManager, 
                                     struct Renderer* const renderer,
                                     struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 
                                     struct TextParser* const textParser);
@@ -47,7 +47,8 @@ struct SceneNodeTypesRegistrar {
 struct SceneNodeTypesRegistrar* SceneNodeTypesRegistrar_construct();
 void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar);
 
-bool SceneNodeTypesRegistrar_registerNewSceneNodeType(const char* const typeString,
+unsigned char SceneNodeTypesRegistrar_registerNewSceneNodeType(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                      const char* const typeString,
                                                       struct SceneNode* (*constructor)(
                                                           struct ResourceManager* const resourceManager, 
                                                           struct Renderer* const renderer,

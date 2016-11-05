@@ -211,43 +211,19 @@ unsigned char Scene_addSceneNode(struct Scene* scene, struct ResourceManager* co
                                  const char* const sceneNodeResId) {
     if (!scene || !resourceManager || !sceneNodeResId)
         return 1;
-    struct TextResource* sceneNodeTextResource = NULL;
-    sceneNodeTextResource = ResourceManager_loadTextResource(resourceManager, sceneNodeResId, 0);
-    if (!sceneNodeTextResource)
-        return 2;
-    struct TextParser* sceneNodeTextParser = NULL;
-    sceneNodeTextParser = TextParser_constructFromTextResource(resourceManager->logger, sceneNodeTextResource);
-    if (!sceneNodeTextParser)
-        return 3;
-    char* sceneNodeTypeString = NULL;
-    sceneNodeTypeString = TextParser_getString(sceneNodeTextParser, TEXT_PARSER_TYPE_STRING, 0);
-    if (sceneNodeTextParser->lastError) {
-        sceneNodeTextResource->pointersCount--;
-        TextParser_destruct(sceneNodeTextParser);
-        return 4;
-    }
     // Construct, then try to reallocate (if needed) and add sceneNode to the list
     struct SceneNode* sceneNode = NULL;
     sceneNode = SceneNodeTypesRegistrar_constructSceneNode(resourceManager, renderer,
                                                                        sceneNodeTypesRegistrar,
                                                                        sceneNodeResId);
     if(!sceneNode) {
-        char tempString[600];
-        sprintf(tempString, "%s ResourceID: %s", SCENE_ERR_SCENE_NODE_TYPE_NOT_DETECTED, sceneNodeResId);
-        Logger_log(resourceManager->logger, tempString);
-        sceneNodeTextResource->pointersCount--;
-        TextParser_destruct(sceneNodeTextParser);
-        return 5;
+        return 2;
     }
     if (scene->sceneNodesCount >= scene->allocatedSceneNodesCount)
         if (Scene_reallocateSceneNodesList(scene)) {
-            sceneNodeTextResource->pointersCount--;
-            TextParser_destruct(sceneNodeTextParser);
             Scene_destructSceneNode(sceneNode);
-            return 6;
+            return 3;
         }
-    TextParser_destruct(sceneNodeTextParser);
-    sceneNodeTextResource->pointersCount--;
     scene->sceneNodesList[scene->sceneNodesCount] = sceneNode;
     scene->sceneNodesCount++;
     return 0;
