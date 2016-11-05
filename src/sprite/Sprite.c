@@ -161,33 +161,22 @@ static unsigned char Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite, 
     return 0;
 }
 
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                                const char* const spriteResId) {
-    if (!resourceManager || !renderer || !spriteResId)
+struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const resourceManager,
+                                                 struct Renderer* const renderer,
+                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                 struct TextParser* const textParser) {
+    // Sprite doesn't need sceneNodeTypesRegistrar, so we ignore it
+    if (!resourceManager || !renderer || !textParser)
         return NULL;
     struct Sprite* sprite = NULL;
     sprite = (struct Sprite*)calloc(1, sizeof(struct Sprite));
     if (!sprite)
         return NULL;
     SceneNode_init(&(sprite->sceneNode));
-    sprite->sceneNode.sceneNodeTextResource = ResourceManager_loadTextResource(resourceManager, spriteResId, 0);
-    if (!sprite->sceneNode.sceneNodeTextResource) {
-        Sprite_destruct(sprite);
-        return NULL;
-    }
-    struct TextParser* textParser = NULL;
-    textParser = TextParser_constructFromTextResource(resourceManager->logger,
-                                                      sprite->sceneNode.sceneNodeTextResource);
-    if (!textParser) {
-        Sprite_destruct(sprite);
-        return NULL;
-    }
     if (Sprite_tryGetSettingsFromTextParser(sprite, resourceManager, renderer, textParser)) {
-        TextParser_destruct(textParser);
         Sprite_destruct(sprite);
         return NULL;
     }
-    TextParser_destruct(textParser);
     sprite->sceneNode.update = Sprite_update;
     sprite->sceneNode.render = Sprite_render;
     sprite->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SPRITE_SCENENODE_PARSER_TYPE_STRING) + 1));
@@ -196,7 +185,35 @@ struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, s
         return NULL;
     }
     strcpy(sprite->sceneNode.type, SPRITE_SCENENODE_PARSER_TYPE_STRING);
-    return sprite;
+    return (struct SceneNode*)sprite;
+}
+
+struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* const renderer,
+                                const char* const spriteResId) {
+    if (!resourceManager || !renderer || !spriteResId)
+        return NULL;
+    struct TextResource* textResource = ResourceManager_loadTextResource(resourceManager, spriteResId, 0);
+    if (!textResource)
+        return NULL;
+    struct TextParser* textParser = NULL;
+    textParser = TextParser_constructFromTextResource(resourceManager->logger, textResource);
+    if (!textParser) {
+        textResource->pointersCount--;
+        return NULL;
+    }
+    char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    if (strcmp(tempTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0) {
+        textResource->pointersCount--;
+        TextParser_destruct(textParser);
+        return NULL;
+    }
+    struct Sprite* tempSprite = (struct Sprite*)Sprite_constructFromTextParser(resourceManager, renderer, NULL, textParser);
+    if (!tempSprite) {
+        textResource->pointersCount--;
+        TextParser_destruct(textParser);
+        return NULL;
+    }
+    return tempSprite;
 }
 
 void Sprite_destruct(struct Sprite* sprite) {

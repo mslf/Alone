@@ -50,8 +50,8 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
     unsigned char result = 0;
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                SPRITE_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+                                                               Sprite_constructFromTextParser);
+    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                TEXT_SCENENODE_PARSER_TYPE_STRING,
                                                                NULL);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
@@ -83,7 +83,7 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
                                                                NULL);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                LEVEL_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
+                                                               NULL);*/
     return result;
 }
 

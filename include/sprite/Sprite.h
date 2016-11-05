@@ -28,6 +28,7 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "scene/SceneNodeTypesRegistrar.h"
 
 #define SPRITE_SCENENODE_PARSER_TYPE_STRING "Sprite"
 #define SPRITE_SCENENODE_PARSER_FRAMES_COUNT "animationsListFramesCount"
@@ -74,8 +75,12 @@ struct Sprite {
     SDL_Point percentsToRender;
 };
 
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
+struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* const renderer,
                                 const char* const spriteResId);
+struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const resourceManager,
+                                                 struct Renderer* const renderer,
+                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                 struct TextParser* const textParser);
 void Sprite_destruct(struct Sprite* sprite);
 
 unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct ResourceManager* resourceManager,

@@ -94,6 +94,7 @@ unsigned char SceneNodeTypesRegistrar_registerNewSceneNodeType(struct SceneNodeT
     strcpy(tempString, typeString);
     sceneNodeTypesRegistrar->sceneNodeTypesList[sceneNodeTypesRegistrar->sceneNodeTypesCount].type = tempString;
     sceneNodeTypesRegistrar->sceneNodeTypesList[sceneNodeTypesRegistrar->sceneNodeTypesCount].construct = constructor;
+    sceneNodeTypesRegistrar->sceneNodeTypesCount++;
     return 0;
 }
 
