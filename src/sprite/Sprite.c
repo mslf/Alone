@@ -174,14 +174,15 @@ struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const r
         return NULL;
     SceneNode_init(&(sprite->sceneNode));
     if (Sprite_tryGetSettingsFromTextParser(sprite, resourceManager, renderer, textParser)) {
-        Sprite_destruct(sprite);
+        Sprite_destruct((struct SceneNode*)sprite);
         return NULL;
     }
     sprite->sceneNode.update = Sprite_update;
     sprite->sceneNode.render = Sprite_render;
+    sprite->sceneNode.destruct = Sprite_destruct;
     sprite->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SPRITE_SCENENODE_PARSER_TYPE_STRING) + 1));
     if (!sprite->sceneNode.type) {
-        Sprite_destruct(sprite);
+        Sprite_destruct((struct SceneNode*)sprite);
         return NULL;
     }
     strcpy(sprite->sceneNode.type, SPRITE_SCENENODE_PARSER_TYPE_STRING);
@@ -213,20 +214,24 @@ struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, s
         TextParser_destruct(textParser);
         return NULL;
     }
+    TextParser_destruct(textParser);
     return tempSprite;
 }
 
-void Sprite_destruct(struct Sprite* sprite) {
+void Sprite_destruct(struct SceneNode* sprite) {
     if (!sprite)
         return;
-    if (sprite->animations)
-        free(sprite->animations);
-    if (sprite->textureResource)
-        sprite->textureResource->pointersCount--;
-    if (sprite->sceneNode.sceneNodeTextResource)
-        sprite->sceneNode.sceneNodeTextResource->pointersCount--;
-    if (sprite->sceneNode.type)
-        free(sprite->sceneNode.type);
+    if (strcmp(sprite->type, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0)
+        return;
+    struct Sprite* tempSprite = (struct Sprite*)sprite;
+    if (tempSprite->animations)
+        free(tempSprite->animations);
+    if (tempSprite->textureResource)
+        tempSprite->textureResource->pointersCount--;
+    if (sprite->sceneNodeTextResource)
+        sprite->sceneNodeTextResource->pointersCount--;
+    if (sprite->type)
+        free(sprite->type);
     free(sprite);
 }
 

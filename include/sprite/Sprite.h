@@ -81,7 +81,7 @@ struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const r
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser);
-void Sprite_destruct(struct Sprite* sprite);
+void Sprite_destruct(struct SceneNode* sprite);
 
 unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct ResourceManager* resourceManager,
                                            struct Renderer* renderer, const char* const textureResId);
