@@ -28,6 +28,7 @@
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "scene/SceneNodeTypesRegistrar.h"
 
 #define TEXT_SCENENODE_PARSER_TYPE_STRING "Text"
 #define TEXT_SCENENODE_PARSER_FONT_PATH "fontPath"
@@ -65,7 +66,11 @@ struct Text {
 
 struct Text* Text_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
                             const char* const textResId);
-void Text_destruct(struct Text* text);
+struct SceneNode* Text_constructFromTextParser(struct ResourceManager* const resourceManager,
+                                                 struct Renderer* const renderer,
+                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                 struct TextParser* const textParser);
+void Text_destruct(struct SceneNode* text);
 
 unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager, struct Renderer* renderer,
                                      const char* const textString, const char* const fontPath, int size, SDL_Color color);

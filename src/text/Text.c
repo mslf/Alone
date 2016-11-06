@@ -107,64 +107,88 @@ static unsigned char Text_generateTexture(struct Text* text, struct ResourceMana
     text->srcRect.h = textureH;
     text->sceneNode.update = Text_update;
     text->sceneNode.render = Text_render;
+    text->sceneNode.destruct = Text_destruct;
     text->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(TEXT_SCENENODE_PARSER_TYPE_STRING) + 1));
     if (!text->sceneNode.type)
         return 3;
     return 0;
 }
 
+struct SceneNode* Text_constructFromTextParser(struct ResourceManager* const resourceManager,
+                                                 struct Renderer* const renderer,
+                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                 struct TextParser* const textParser) {
+    // Text doesn't need sceneNodeTypesRegistrar, so we ignore it
+    if (!resourceManager || !renderer || !textParser)
+        return NULL;
+    struct Text* text = NULL;
+    text = (struct Text*)calloc(1, sizeof(struct Text));
+    if (!text)
+        return NULL;
+    SceneNode_init(&(text->sceneNode));
+    unsigned char logFlag = 0;
+    if (Text_tryGetSettingsFromTextParser(text, resourceManager, textParser, &logFlag)) {
+        Text_destruct((struct SceneNode*)text);
+        return NULL;
+    }
+    if (logFlag) {
+        /*char tempString[600];
+        sprintf(tempString, "\tin ResourceID: %s", textResId);*/
+        // FIXME: correct error message displaying
+        Logger_log(resourceManager->logger, "NOT_ENOUGH_DATA_TO_DISPLAY_ERROR_MESSAGE");
+    }
+    if (Text_generateTexture(text, resourceManager, renderer)) {
+        Text_destruct((struct SceneNode*)text);
+        return NULL;
+    }
+    strcpy(text->sceneNode.type, TEXT_SCENENODE_PARSER_TYPE_STRING);
+    return (struct SceneNode*)text;
+}
+
 struct Text* Text_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
                             const char* const textResId) {
     if (!resourceManager || !renderer || !textResId)
         return NULL;
-    struct Text* text = (struct Text*)calloc(1, sizeof(struct Text));
-    if (!text)
+    struct TextResource* textResource = ResourceManager_loadTextResource(resourceManager, textResId, 0);
+    if (!textResource)
         return NULL;
-    SceneNode_init(&(text->sceneNode));
-    text->sceneNode.sceneNodeTextResource = ResourceManager_loadTextResource(resourceManager, textResId, 0);
-    if (!text->sceneNode.sceneNodeTextResource) {
-        Text_destruct(text);
-        return NULL;
-    }
-    struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
-                                                                         text->sceneNode.sceneNodeTextResource);
+    struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger, textResource);
     if (!textParser) {
-        Text_destruct(text);
+        textResource->pointersCount--;
         return NULL;
     }
-    unsigned char logFlag = 0;
-    if (Text_tryGetSettingsFromTextParser(text, resourceManager, textParser, &logFlag)) {
-        Text_destruct(text);
+    char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    if (strcmp(tempTypeString, TEXT_SCENENODE_PARSER_TYPE_STRING) != 0) {
+        textResource->pointersCount--;
         TextParser_destruct(textParser);
         return NULL;
     }
-    if (logFlag) {
-        char tempString[600];
-        sprintf(tempString, "\tin ResourceID: %s", textResId);
-        Logger_log(resourceManager->logger, tempString);
-    }
-    TextParser_destruct(textParser);
-    if (Text_generateTexture(text, resourceManager, renderer)) {
-        Text_destruct(text);
+    struct Text* tempText = (struct Text*)Text_constructFromTextParser(resourceManager, renderer, NULL, textParser);
+    if (!tempText) {
+        textResource->pointersCount--;
+        TextParser_destruct(textParser);
         return NULL;
     }
-    strcpy(text->sceneNode.type, TEXT_SCENENODE_PARSER_TYPE_STRING);
-    return text;
+    TextParser_destruct(textParser);
+    return tempText;
 }
 
-void Text_destruct(struct Text* text) {
+void Text_destruct(struct SceneNode* text) {
     if (!text)
-        return;;
-    if (text->fontPath)
-        free(text->fontPath);
-    if (text->text)
-        free(text->text);
-    if (text->textureResource)
-        text->textureResource->pointersCount--;
-    if (text->sceneNode.sceneNodeTextResource)
-        text->sceneNode.sceneNodeTextResource->pointersCount--;
-    if (text->sceneNode.type)
-        free(text->sceneNode.type);
+        return;
+    if (strcmp(text->type, TEXT_SCENENODE_PARSER_TYPE_STRING) != 0)
+        return;
+    struct Text* tempText = (struct Text*)text;
+    if (tempText->fontPath)
+        free(tempText->fontPath);
+    if (tempText->text)
+        free(tempText->text);
+    if (tempText->textureResource)
+        tempText->textureResource->pointersCount--;
+    if (text->sceneNodeTextResource)
+        text->sceneNodeTextResource->pointersCount--;
+    if (text->type)
+        free(text->type);
     free(text);
 }
 

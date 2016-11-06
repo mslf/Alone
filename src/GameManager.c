@@ -51,10 +51,10 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                SPRITE_SCENENODE_PARSER_TYPE_STRING,
                                                                Sprite_constructFromTextParser);
-    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                TEXT_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               Text_constructFromTextParser);
+    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                BUTTON_SCENENODE_PARSER_TYPE_STRING,
                                                                NULL);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
