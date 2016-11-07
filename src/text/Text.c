@@ -114,7 +114,7 @@ static unsigned char Text_generateTexture(struct Text* text, struct ResourceMana
     return 0;
 }
 
-struct SceneNode* Text_constructFromTextParser(struct ResourceManager* const resourceManager,
+struct SceneNode* Text_construct(struct ResourceManager* const resourceManager,
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser) {
@@ -143,34 +143,6 @@ struct SceneNode* Text_constructFromTextParser(struct ResourceManager* const res
     }
     strcpy(text->sceneNode.type, TEXT_SCENENODE_PARSER_TYPE_STRING);
     return (struct SceneNode*)text;
-}
-
-struct Text* Text_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                            const char* const textResId) {
-    if (!resourceManager || !renderer || !textResId)
-        return NULL;
-    struct TextResource* textResource = ResourceManager_loadTextResource(resourceManager, textResId, 0);
-    if (!textResource)
-        return NULL;
-    struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger, textResource);
-    if (!textParser) {
-        textResource->pointersCount--;
-        return NULL;
-    }
-    char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
-    if (strcmp(tempTypeString, TEXT_SCENENODE_PARSER_TYPE_STRING) != 0) {
-        textResource->pointersCount--;
-        TextParser_destruct(textParser);
-        return NULL;
-    }
-    struct Text* tempText = (struct Text*)Text_constructFromTextParser(resourceManager, renderer, NULL, textParser);
-    if (!tempText) {
-        textResource->pointersCount--;
-        TextParser_destruct(textParser);
-        return NULL;
-    }
-    TextParser_destruct(textParser);
-    return tempText;
 }
 
 void Text_destruct(struct SceneNode* text) {

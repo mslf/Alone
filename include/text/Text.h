@@ -64,9 +64,7 @@ struct Text {
     SDL_Rect dstRect;
 };
 
-struct Text* Text_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                            const char* const textResId);
-struct SceneNode* Text_constructFromTextParser(struct ResourceManager* const resourceManager,
+struct SceneNode* Text_construct(struct ResourceManager* const resourceManager,
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser);

@@ -161,7 +161,7 @@ static unsigned char Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite, 
     return 0;
 }
 
-struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const resourceManager,
+struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager,
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser) {
@@ -187,35 +187,6 @@ struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const r
     }
     strcpy(sprite->sceneNode.type, SPRITE_SCENENODE_PARSER_TYPE_STRING);
     return (struct SceneNode*)sprite;
-}
-
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* const renderer,
-                                const char* const spriteResId) {
-    if (!resourceManager || !renderer || !spriteResId)
-        return NULL;
-    struct TextResource* textResource = ResourceManager_loadTextResource(resourceManager, spriteResId, 0);
-    if (!textResource)
-        return NULL;
-    struct TextParser* textParser = NULL;
-    textParser = TextParser_constructFromTextResource(resourceManager->logger, textResource);
-    if (!textParser) {
-        textResource->pointersCount--;
-        return NULL;
-    }
-    char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
-    if (strcmp(tempTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0) {
-        textResource->pointersCount--;
-        TextParser_destruct(textParser);
-        return NULL;
-    }
-    struct Sprite* tempSprite = (struct Sprite*)Sprite_constructFromTextParser(resourceManager, renderer, NULL, textParser);
-    if (!tempSprite) {
-        textResource->pointersCount--;
-        TextParser_destruct(textParser);
-        return NULL;
-    }
-    TextParser_destruct(textParser);
-    return tempSprite;
 }
 
 void Sprite_destruct(struct SceneNode* sprite) {

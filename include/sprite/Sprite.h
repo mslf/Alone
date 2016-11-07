@@ -75,9 +75,7 @@ struct Sprite {
     SDL_Point percentsToRender;
 };
 
-struct Sprite* Sprite_construct(struct ResourceManager* const resourceManager, struct Renderer* const renderer,
-                                const char* const spriteResId);
-struct SceneNode* Sprite_constructFromTextParser(struct ResourceManager* const resourceManager,
+struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager,
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser);
