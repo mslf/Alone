@@ -73,9 +73,11 @@ struct CheckBox {
     enum CheckBoxState state;
 };
 
-struct CheckBox* CheckBox_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                                const char* const checkBoxResId);
-void CheckBox_destruct(struct CheckBox* checkBox);
+struct SceneNode* CheckBox_construct(struct ResourceManager* const resourceManager,
+                                     struct Renderer* const renderer,
+                                     struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                     struct TextParser* const textParser);
+void CheckBox_destruct(struct SceneNode* checkBox);
 
 unsigned char CheckBox_changeFocusedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                                 const char* const focusedEventResId);
