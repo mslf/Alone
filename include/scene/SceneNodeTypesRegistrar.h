@@ -57,5 +57,6 @@ unsigned char SceneNodeTypesRegistrar_registerNewSceneNodeType(struct SceneNodeT
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
                                                              struct Renderer* renderer,
                                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
-                                                             const char* const resId);
+                                                             const char* const resId,
+                                                             const char* const requiredTypeString);
 #endif //ALONE_SCENENODE_TYPES_REGISTRAR_H

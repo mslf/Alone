@@ -25,6 +25,8 @@ const char* const SCENENODE_TYPES_REGISTRAR_ERR =
                     "SceneNodeTypesRegistrar_constructSceneNode: constructing SceneNode failed!";
 const char* const SCENENODE_TYPES_REGISTRAR_ERR_NO_TYPE = 
                     "SceneNodeTypesRegistrar_constructSceneNode: suitable SceneNode type haven't detected!";
+const char* const SCENENODE_TYPES_REGISTRAR_ERR_TYPE = 
+                    "SceneNodeTypesRegistrar_constructSceneNode: SceneNode type string doesn't equal to required type string!";
 const char* const SCENENODE_TYPES_REGISTRAR_ERR_NO_REGISTERED_TYPE = 
                     "SceneNodeTypesRegistrar_constructSceneNode: SceneNode type haven't registered!";
 
@@ -101,7 +103,8 @@ unsigned char SceneNodeTypesRegistrar_registerNewSceneNodeType(struct SceneNodeT
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
                                                              struct Renderer* renderer,
                                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
-                                                             const char* const resId) {
+                                                             const char* const resId,
+                                                             const char* const requiredTypeString) {
     if (!resourceManager || !renderer || !sceneNodeTypesRegistrar || !resId)
         return NULL;
     struct TextResource* tempTextResource = ResourceManager_loadTextResource(resourceManager, resId, 0);
@@ -119,6 +122,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR_NO_TYPE, resId);
         Logger_log(renderer->logger, tempErrString);
         tempTextResource->pointersCount--;
+        TextParser_destruct(textParser);
         return NULL;
     }
     size_t i;
@@ -137,7 +141,22 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
         Logger_log(renderer->logger, tempErrString);
         tempTextResource->pointersCount--;
+        TextParser_destruct(textParser);
         return NULL;
+    }
+    // We check 'requiredTypeString' only if it not NULL
+    if (requiredTypeString) {
+        char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+        if (strcmp(tempTypeString, requiredTypeString) != 0) {
+            char tempErrString[600];
+            sprintf(tempErrString, "%s Type: %s", SCENENODE_TYPES_REGISTRAR_ERR_NO_TYPE, typeString);
+            Logger_log(renderer->logger, tempErrString);
+            sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
+            Logger_log(renderer->logger, tempErrString);
+            tempTextResource->pointersCount--;
+            TextParser_destruct(textParser);
+            return NULL;
+        }
     }
     struct SceneNode* tempSceneNode = 
                     sceneNodeTypesRegistrar->sceneNodeTypesList[foundIndex].construct(resourceManager, renderer,
@@ -147,5 +166,6 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         tempTextResource->pointersCount--;
         return NULL;
     }
+    tempSceneNode->sceneNodeTextResource = tempTextResource;
     return tempSceneNode;
 }

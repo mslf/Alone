@@ -70,9 +70,11 @@ struct Button {
     enum ButtonState state;
 };
 
-struct Button* Button_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                                const char* const buttonResId);
-void Button_destruct(struct Button* button);
+struct SceneNode* Button_construct(struct ResourceManager* const resourceManager,
+                                                 struct Renderer* const renderer,
+                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                 struct TextParser* const textParser);
+void Button_destruct(struct SceneNode* button);
 
 unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const pressedEventResId);
