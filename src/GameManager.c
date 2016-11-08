@@ -50,26 +50,26 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
     unsigned char result = 0;
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                SPRITE_SCENENODE_PARSER_TYPE_STRING,
-                                                               Sprite_constructFromTextParser);
+                                                               Sprite_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                TEXT_SCENENODE_PARSER_TYPE_STRING,
-                                                               Text_constructFromTextParser);
-    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               Text_construct);
+    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                BUTTON_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
+                                                               Button_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                CHECK_BOX_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
+                                                               CheckBox_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
+                                                               ProgressBar_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
+                                                               ContextMenu_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                SLIDER_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               Slider_construct);
+    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
                                                                NULL);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
