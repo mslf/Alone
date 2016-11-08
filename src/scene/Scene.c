@@ -213,9 +213,11 @@ unsigned char Scene_addSceneNode(struct Scene* scene, struct ResourceManager* co
         return 1;
     // Construct, then try to reallocate (if needed) and add sceneNode to the list
     struct SceneNode* sceneNode = NULL;
+    // We want to construct every registered SceneNode, so requiredType is NULL
     sceneNode = SceneNodeTypesRegistrar_constructSceneNode(resourceManager, renderer,
-                                                                       sceneNodeTypesRegistrar,
-                                                                       sceneNodeResId);
+                                                           sceneNodeTypesRegistrar,
+                                                           sceneNodeResId,
+                                                           NULL);
     if(!sceneNode) {
         return 2;
     }
