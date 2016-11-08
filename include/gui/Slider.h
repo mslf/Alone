@@ -64,9 +64,11 @@ struct Slider {
    SDL_Point lastMouseCoordinates;
 };
 
-struct Slider* Slider_construct(struct ResourceManager* const resourceManager,
-                                struct Renderer* renderer, const char* const sliderResId);
-void Slider_destruct(struct Slider* slider);
+struct SceneNode* Slider_construct(struct ResourceManager* const resourceManager,
+                                   struct Renderer* const renderer,
+                                   struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                   struct TextParser* const textParser);
+void Slider_destruct(struct SceneNode* slider);
 
 unsigned char Slider_save(
         const struct Slider* const slider, struct ResourceManager* const resourceManager,
