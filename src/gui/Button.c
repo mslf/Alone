@@ -173,8 +173,6 @@ struct SceneNode* Button_construct(struct ResourceManager* const resourceManager
 void Button_destruct(struct SceneNode* button) {
     if (!button)
         return;
-    if (strcmp(button->type, BUTTON_SCENENODE_PARSER_TYPE_STRING) != 0)
-        return;
     struct Button* tempButton = (struct Button*)button;
     if (tempButton->sprite)
         Sprite_destruct((struct SceneNode*)tempButton->sprite);

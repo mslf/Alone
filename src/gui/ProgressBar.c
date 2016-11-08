@@ -115,8 +115,6 @@ struct SceneNode* ProgressBar_construct(struct ResourceManager* const resourceMa
 void ProgressBar_destruct(struct SceneNode* progressBar) {
     if (!progressBar)
         return;
-    if (strcmp(progressBar->type, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING) != 0)
-        return;
     struct ProgressBar* tempProgressBar = (struct ProgressBar*)progressBar;
     if (tempProgressBar->spriteBase)
         Sprite_destruct((struct SceneNode*)tempProgressBar->spriteBase);

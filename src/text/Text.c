@@ -148,8 +148,6 @@ struct SceneNode* Text_construct(struct ResourceManager* const resourceManager,
 void Text_destruct(struct SceneNode* text) {
     if (!text)
         return;
-    if (strcmp(text->type, TEXT_SCENENODE_PARSER_TYPE_STRING) != 0)
-        return;
     struct Text* tempText = (struct Text*)text;
     if (tempText->fontPath)
         free(tempText->fontPath);

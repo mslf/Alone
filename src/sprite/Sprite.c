@@ -192,8 +192,6 @@ struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager
 void Sprite_destruct(struct SceneNode* sprite) {
     if (!sprite)
         return;
-    if (strcmp(sprite->type, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0)
-        return;
     struct Sprite* tempSprite = (struct Sprite*)sprite;
     if (tempSprite->animations)
         free(tempSprite->animations);
