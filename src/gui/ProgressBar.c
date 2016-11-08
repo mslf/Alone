@@ -24,134 +24,108 @@
 
 const char* const PROGRESS_BAR_SCENENODE_ERR_SPRITE_RES = 
         "ProgressBar_loadSpritesResource: spriteResource string haven't found!";
-const char* const PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_TYPE = 
-        "ProgressBar_loadSpritesResource: type string haven't found!";
-const char* const PROGRESS_BAR_SCENENODE_ERR_SPRITE_TYPE = 
-        "ProgressBar_loadSpritesResource: suitable Sprite type string haven't detected!";
 const char* const PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_2_ANIMATIONS = 
         "ProgressBar_loadSpritesResource: loaded Sprite doesn't contain 2 animations!";
 
-static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progressBar, struct ResourceManager* resourceManager,
-                               struct Renderer* renderer, struct TextParser* textParser) {
-    if (!progressBar || !resourceManager || !renderer || !textParser)
+static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progressBar,
+                                                     struct ResourceManager* const resourceManager,
+                                                     struct Renderer* const renderer,
+                                                     struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                     struct TextParser* const textParser) {
+    if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempSpriteResourceString = TextParser_getString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
-    if (!tempSpriteResourceString) {
+    char* tempResId = TextParser_getString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
+    if (!tempResId) {
         Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_RES);
         return 2;
     }
-    struct TextResource* spriteTextResource = ResourceManager_loadTextResource(resourceManager,
-                                                                               tempSpriteResourceString, 0);
-    if (!spriteTextResource)
-       return 3;
-    struct TextParser* spriteTextParser = TextParser_constructFromTextResource(resourceManager->logger,
-                                                                               spriteTextResource);
-    if (!spriteTextParser) {
-        spriteTextResource->pointersCount--;
-        return 4;
-    }
-    char* tempSpriteTypeString = TextParser_getString(spriteTextParser, TEXT_PARSER_TYPE_STRING, 0);
-    if (!tempSpriteTypeString) {
-        Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_TYPE);
-        spriteTextResource->pointersCount--;
-        TextParser_destruct(spriteTextParser);
-        return 5;
-    }
-    if (strcmp(tempSpriteTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0) {
-        Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_TYPE);
-        spriteTextResource->pointersCount--;
-        TextParser_destruct(spriteTextParser);
-        return 6;
-    }
-    progressBar->spriteBase = Sprite_construct(resourceManager, renderer, tempSpriteResourceString);
-    if (!progressBar->spriteBase) {
-        spriteTextResource->pointersCount--;
-        TextParser_destruct(spriteTextParser);
-        return 7;
-    }
+    progressBar->spriteBase = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
+                                                                         renderer,
+                                                                         sceneNodeTypesRegistrar,
+                                                                         tempResId,
+                                                                         SPRITE_SCENENODE_PARSER_TYPE_STRING);
+    if (!progressBar->spriteBase)
+        return 3;
     if (progressBar->spriteBase->animationsCount < 2) {
         Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_2_ANIMATIONS);
-        spriteTextResource->pointersCount--;
-        TextParser_destruct(spriteTextParser);
-        return 8;
+        progressBar->spriteBase->sceneNode.destruct((struct SceneNode*)progressBar->spriteBase);
+        progressBar->spriteBase = NULL;
+        return 4;
     }
-    progressBar->spriteBar = Sprite_construct(resourceManager, renderer, tempSpriteResourceString);
+    progressBar->spriteBar = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
+                                                                         renderer,
+                                                                         sceneNodeTypesRegistrar,
+                                                                         tempResId,
+                                                                         SPRITE_SCENENODE_PARSER_TYPE_STRING);
     if (!progressBar->spriteBar) {
-        spriteTextResource->pointersCount--;
-        TextParser_destruct(spriteTextParser);
-        return 9;
+        progressBar->spriteBase->sceneNode.destruct((struct SceneNode*)progressBar->spriteBase);
+        progressBar->spriteBase = NULL;
+        return 5;
     }
     progressBar->spriteBar->currentAnimation = 1;
-    TextParser_destruct(spriteTextParser);
-    spriteTextResource->pointersCount--;
     return 0;
 }
 
 static unsigned char ProgressBar_tryGetSettingsFromTextParser(struct ProgressBar* progressBar,
-                                                       struct ResourceManager* resourceManager, 
-                                                       struct Renderer* renderer, struct TextParser* textParser) {
-    if (!progressBar || !resourceManager || !renderer || !textParser)
+                                                              struct ResourceManager* const resourceManager,
+                                                              struct Renderer* const renderer,
+                                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                              struct TextParser* const textParser) {
+    if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
     unsigned char result = 0;
     unsigned char value = 0;
-    result += ProgressBar_loadSpritesResource(progressBar, resourceManager, renderer, textParser);
+    result += ProgressBar_loadSpritesResource(progressBar, resourceManager, renderer,
+                                              sceneNodeTypesRegistrar, textParser);
     value = (unsigned char)TextParser_getInt(textParser, PROGRESS_BAR_SCENENODE_PARSER_INIT_VALUE_STRING, 0);
     if (value <= 100)
         progressBar->value = value;
     return result;
 }
 
-struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager,
-                                          struct Renderer* renderer, const char* const progressBarResId) {
-    if (!resourceManager || !renderer || !progressBarResId)
+struct SceneNode* ProgressBar_construct(struct ResourceManager* const resourceManager,
+                                        struct Renderer* const renderer,
+                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                        struct TextParser* const textParser) {
+    if (!resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return NULL;
     struct ProgressBar* progressBar = NULL;
     progressBar = (struct ProgressBar*)calloc(1, sizeof(struct ProgressBar));
     if (!progressBar)
         return NULL;
     SceneNode_init(&(progressBar->sceneNode));
-    progressBar->sceneNode.sceneNodeTextResource = ResourceManager_loadTextResource(resourceManager,
-                                                                                    progressBarResId, 0);
-    if (!progressBar->sceneNode.sceneNodeTextResource) {
-        ProgressBar_destruct(progressBar);
+    if (ProgressBar_tryGetSettingsFromTextParser(progressBar, resourceManager, renderer,
+                                                            sceneNodeTypesRegistrar, textParser)) {
+        ProgressBar_destruct((struct SceneNode*)progressBar);
         return NULL;
     }
-    struct TextParser* textParser = NULL;
-    textParser = TextParser_constructFromTextResource(resourceManager->logger,
-                                                      progressBar->sceneNode.sceneNodeTextResource);
-    if (!textParser) {
-        ProgressBar_destruct(progressBar);
-        return NULL;
-    }
-    if (ProgressBar_tryGetSettingsFromTextParser(progressBar, resourceManager, renderer, textParser)) {
-        TextParser_destruct(textParser);
-        ProgressBar_destruct(progressBar);
-        return NULL;
-    }
-    TextParser_destruct(textParser);
     progressBar->sceneNode.update = ProgressBar_update;
     progressBar->sceneNode.render = ProgressBar_render;
+    progressBar->sceneNode.destruct = ProgressBar_destruct;
     progressBar->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING) + 1));
     if (!progressBar->sceneNode.type) {
-        ProgressBar_destruct(progressBar);
+        ProgressBar_destruct((struct SceneNode*)progressBar);
         return NULL;
     }
     strcpy(progressBar->sceneNode.type, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING);
     progressBar->isGeometryChanged = true;
-    return progressBar;
+    return (struct SceneNode*)progressBar;
 }
 
-void ProgressBar_destruct(struct ProgressBar* progressBar) {
+void ProgressBar_destruct(struct SceneNode* progressBar) {
     if (!progressBar)
         return;
-    if (progressBar->spriteBase)
-        Sprite_destruct(progressBar->spriteBase);
-    if (progressBar->spriteBar)
-        Sprite_destruct(progressBar->spriteBar);
-    if (progressBar->sceneNode.sceneNodeTextResource)
-        progressBar->sceneNode.sceneNodeTextResource->pointersCount--;
-    if (progressBar->sceneNode.type)
-        free(progressBar->sceneNode.type);
+    if (strcmp(progressBar->type, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING) != 0)
+        return;
+    struct ProgressBar* tempProgressBar = (struct ProgressBar*)progressBar;
+    if (tempProgressBar->spriteBase)
+        Sprite_destruct((struct SceneNode*)tempProgressBar->spriteBase);
+    if (tempProgressBar->spriteBar)
+        Sprite_destruct((struct SceneNode*)tempProgressBar->spriteBar);
+    if (progressBar->sceneNodeTextResource)
+        progressBar->sceneNodeTextResource->pointersCount--;
+    if (progressBar->type)
+        free(progressBar->type);
 }
 
 unsigned char ProgressBar_save(

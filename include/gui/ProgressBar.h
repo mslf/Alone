@@ -50,9 +50,11 @@ struct ProgressBar {
     bool isGeometryChanged;
 };
 
-struct ProgressBar* ProgressBar_construct(struct ResourceManager* const resourceManager,
-                                          struct Renderer* renderer, const char* const progressBarResId);
-void ProgressBar_destruct(struct ProgressBar* progressBar);
+struct SceneNode* ProgressBar_construct(struct ResourceManager* const resourceManager,
+                                        struct Renderer* const renderer,
+                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                        struct TextParser* const textParser);
+void ProgressBar_destruct(struct SceneNode* progressBar);
 
 unsigned char ProgressBar_save(
         const struct ProgressBar* const progressBar, struct ResourceManager* const resourceManager,
