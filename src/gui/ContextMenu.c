@@ -30,10 +30,6 @@ const char* const CONTEXT_MENU_SCENENODE_PARSER_ERR_NO_OPTIONS =
             "ContextMenu_constructMenuOptions: menuOptions string haven't found!";
 const char* const CONTEXT_MENU_SCENENODE_PARSER_ERR_NO_OPTION_DEF = 
             "ContextMenu_constructMenuOptions: definition of MenuOption haven't found!";
-const char* const CONTEXT_MENU_SCENENODE_ERR_BUTTON_NO_TYPE = 
-        "ContextMenu_checkButtonType: type string haven't found!";
-const char* const CONTEXT_MENU_SCENENODE_ERR_BUTTON_TYPE = 
-        "ContextMenu_checkButtonType: suitable Button type string haven't detected!";
 const char* const CONTEXT_MENU_SCENENODE_ERR_TRY_DEFAULT_PROTOTYPE = 
             "ContextMenu_addMenuOption: trying onlyOneMenuOptionPrototype!";
 const char* const CONTEXT_MENU_SCENENODE_ERR_EXIST_OPTION = 
@@ -45,8 +41,10 @@ const char* const CONTEXT_MENU_SCENENODE_ERR_UPDATING_OPTION =
 
 static unsigned char ContextMenu_constructMenuOptions(struct ContextMenu* contextMenu,
                                                        struct ResourceManager* resourceManager,
-                                                       struct Renderer* renderer, struct TextParser* textParser) {
-    if (!contextMenu || !resourceManager || !renderer || !textParser)
+                                                       struct Renderer* renderer,
+                                                       struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                       struct TextParser* textParser) {
+    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
     size_t i;
     size_t menuOptionsCount = TextParser_getItemsCount(textParser, CONTEXT_MENU_SCENENODE_PARSER_OPTIONS_LIST);
@@ -66,64 +64,10 @@ static unsigned char ContextMenu_constructMenuOptions(struct ContextMenu* contex
         char* tempLabelString = TextParser_getString(textParser, tempMenuOptionsNameString, 0);
         char* tempPressedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 1);
         char* tempFocusedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 2);
-        ContextMenu_addMenuOption(contextMenu, resourceManager, renderer, tempFocusedResourceString,
+        ContextMenu_addMenuOption(contextMenu, resourceManager, renderer, 
+                                  sceneNodeTypesRegistrar, tempFocusedResourceString,
                                   tempPressedResourceString, tempLabelString);
     }
-    return 0;
-}
-
-static unsigned char ContextMenu_checkButtonType(const char* const buttonResId, struct ResourceManager* resourceManager) {
-    if (!buttonResId || !resourceManager)
-        return 1;
-    struct TextResource* buttonResource = 
-                        ResourceManager_loadTextResource(resourceManager, buttonResId, 0);
-    if (!buttonResource)
-       return 2;
-    struct TextParser* buttonTextParser = TextParser_constructFromTextResource(resourceManager->logger,
-                                                                               buttonResource);
-    if (!buttonTextParser) {
-        buttonResource->pointersCount--;
-        return 3;
-    }
-    char* buttonTypeString = TextParser_getString(buttonTextParser, TEXT_PARSER_TYPE_STRING, 0);
-    if (!buttonTypeString) {
-        char tempErrString[600];
-        sprintf(tempErrString, "%s in ResourceID: %s", CONTEXT_MENU_SCENENODE_ERR_BUTTON_NO_TYPE, buttonResId);
-        Logger_log(resourceManager->logger, tempErrString);
-        buttonResource->pointersCount--;
-        TextParser_destruct(buttonTextParser);
-        return 4;
-    }
-    if (strcmp(buttonTypeString, BUTTON_SCENENODE_PARSER_TYPE_STRING) != 0) {
-         char tempErrString[600];
-        sprintf(tempErrString, "%s in ResourceID: %s", CONTEXT_MENU_SCENENODE_ERR_BUTTON_TYPE, buttonResId);
-        Logger_log(resourceManager->logger, tempErrString);
-        buttonResource->pointersCount--;
-        TextParser_destruct(buttonTextParser);
-        return 5;
-    }
-    buttonResource->pointersCount--;
-    TextParser_destruct(buttonTextParser);
-    return 0;
-}
-
-static unsigned char ContextMenu_checkButtonPrototypesResourceTypes(struct ContextMenu* contextMenu,
-                                                                    struct ResourceManager* resourceManager) {
-    if (!contextMenu || !resourceManager)
-        return 1;
-    // It is required
-    if (ContextMenu_checkButtonType(contextMenu->onlyOneMenuOptionPrototype, resourceManager))
-        return 2;
-    // But these three are not mandatory, so check only if exist
-    if (contextMenu->topMenuOptionPrototype)
-        if (ContextMenu_checkButtonType(contextMenu->topMenuOptionPrototype, resourceManager))
-            return 3;
-    if (contextMenu->middleMenuOptionPrototype)
-        if (ContextMenu_checkButtonType(contextMenu->middleMenuOptionPrototype, resourceManager))
-            return 4;
-    if (contextMenu->lowerMenuOptionPrototype)
-        if (ContextMenu_checkButtonType(contextMenu->lowerMenuOptionPrototype, resourceManager))
-            return 5;
     return 0;
 }
 
@@ -169,95 +113,91 @@ static unsigned char ContextMenu_loadButtonPrototypes(struct ContextMenu* contex
         else
             Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_PARSER_ERR_MENU_OPTION_PROTOTYPE_ALLOC);
     }
-    if (ContextMenu_checkButtonPrototypesResourceTypes(contextMenu, resourceManager))
-        return 4;
     return 0; 
 }
 
 static unsigned char ContextMenu_tryGetSettingsFromTextParser(struct ContextMenu* contextMenu,
                                                        struct ResourceManager* resourceManager,
-                                                       struct Renderer* renderer, struct TextParser* textParser) {
-    if (!contextMenu || !resourceManager || !renderer || !textParser)
+                                                       struct Renderer* renderer,
+                                                       struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                       struct TextParser* textParser) {
+    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
     unsigned char result = 0;
     result += ContextMenu_loadButtonPrototypes(contextMenu, resourceManager, renderer, textParser);
-    result += ContextMenu_constructMenuOptions(contextMenu, resourceManager, renderer, textParser);
+    result += ContextMenu_constructMenuOptions(contextMenu, resourceManager, renderer,
+                                               sceneNodeTypesRegistrar, textParser);
     return result;
 }
 
-struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                                          const char* const contextMenuResId) {
-    if (!resourceManager || !renderer || !contextMenuResId)
+struct SceneNode* ContextMenu_construct(struct ResourceManager* const resourceManager,
+                                        struct Renderer* const renderer,
+                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                        struct TextParser* const textParser) {
+    if (!resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return NULL;
     struct ContextMenu* contextMenu = NULL;
     contextMenu = (struct ContextMenu*)calloc(1, sizeof(struct ContextMenu));
     if (!contextMenu)
         return NULL;
     SceneNode_init(&(contextMenu->sceneNode));
-    contextMenu->sceneNode.sceneNodeTextResource = ResourceManager_loadTextResource(resourceManager, contextMenuResId, 0);
-    if (!contextMenu->sceneNode.sceneNodeTextResource) {
-        ContextMenu_destruct(contextMenu);
-        return NULL;
-    }
     contextMenu->menuOptionsList = (struct Button**)malloc(sizeof(struct Button*) * 
                                                     CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS);
     if (!contextMenu->menuOptionsList) {
-        ContextMenu_destruct(contextMenu);
+        ContextMenu_destruct((struct SceneNode*)contextMenu);
         return NULL;
     }
     contextMenu->allocatedMenuOptions = CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS;
-    struct TextParser* textParser = NULL;
-    textParser = TextParser_constructFromTextResource(resourceManager->logger,
-                                                      contextMenu->sceneNode.sceneNodeTextResource);
-    if (!textParser) {
-        ContextMenu_destruct(contextMenu);
+    if (ContextMenu_tryGetSettingsFromTextParser(contextMenu, resourceManager, renderer,
+                                                    sceneNodeTypesRegistrar, textParser)) {
+        ContextMenu_destruct((struct SceneNode*)contextMenu);
         return NULL;
     }
-    if (ContextMenu_tryGetSettingsFromTextParser(contextMenu, resourceManager, renderer, textParser)) {
-        TextParser_destruct(textParser);
-        ContextMenu_destruct(contextMenu);
-        return NULL;
-    }
-    TextParser_destruct(textParser);
     contextMenu->sceneNode.control = ContextMenu_control;
     contextMenu->sceneNode.update = ContextMenu_update;
     contextMenu->sceneNode.render = ContextMenu_render;
     contextMenu->sceneNode.sound = ContextMenu_sound;
+    contextMenu->sceneNode.destruct = ContextMenu_destruct;
     contextMenu->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING) + 1));
     if (!contextMenu->sceneNode.type) {
-        ContextMenu_destruct(contextMenu);
+        ContextMenu_destruct((struct SceneNode*)contextMenu);
         return NULL;
     }
     strcpy(contextMenu->sceneNode.type, CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING);
-    return contextMenu;
+    return (struct SceneNode*)contextMenu;
 }
 
-void ContextMenu_destruct(struct ContextMenu* contextMenu) {
+void ContextMenu_destruct(struct SceneNode* contextMenu) {
     if (!contextMenu)
         return;
-    if (contextMenu->onlyOneMenuOptionPrototype)
-        free(contextMenu->onlyOneMenuOptionPrototype);
-    if (contextMenu->topMenuOptionPrototype)
-        free(contextMenu->topMenuOptionPrototype);
-    if (contextMenu->middleMenuOptionPrototype)
-        free(contextMenu->middleMenuOptionPrototype);
-    if (contextMenu->lowerMenuOptionPrototype)
-        free(contextMenu->lowerMenuOptionPrototype);
-    if (contextMenu->menuOptionsList) {
+    struct ContextMenu* tempContextMenu = (struct ContextMenu*)contextMenu;
+    if (tempContextMenu->onlyOneMenuOptionPrototype)
+        free(tempContextMenu->onlyOneMenuOptionPrototype);
+    if (tempContextMenu->topMenuOptionPrototype)
+        free(tempContextMenu->topMenuOptionPrototype);
+    if (tempContextMenu->middleMenuOptionPrototype)
+        free(tempContextMenu->middleMenuOptionPrototype);
+    if (tempContextMenu->lowerMenuOptionPrototype)
+        free(tempContextMenu->lowerMenuOptionPrototype);
+    if (tempContextMenu->menuOptionsList) {
         size_t i;
-        for (i = 0; i < contextMenu->menuOptionsCount; i++)
-            Button_destruct(contextMenu->menuOptionsList[i]);
-        free(contextMenu->menuOptionsList);
+        for (i = 0; i < tempContextMenu->menuOptionsCount; i++)
+            tempContextMenu->menuOptionsList[i]->sceneNode.destruct((struct SceneNode*)tempContextMenu->menuOptionsList[i]);
+        free(tempContextMenu->menuOptionsList);
     }
-    if (contextMenu->sceneNode.sceneNodeTextResource)
-        contextMenu->sceneNode.sceneNodeTextResource->pointersCount--;
-    if (contextMenu->sceneNode.type)
-        free(contextMenu->sceneNode.type);
+    if (contextMenu->sceneNodeTextResource)
+        contextMenu->sceneNodeTextResource->pointersCount--;
+    if (contextMenu->type)
+        free(contextMenu->type);
 }
 
-static unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                                           struct Renderer* renderer, size_t index, const char* const newButtonResId) {
-    if (!contextMenu || !resourceManager || !renderer || !newButtonResId)
+static unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMenu,
+                                                  struct ResourceManager* const resourceManager,
+                                                  struct Renderer* renderer,
+                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                  size_t index,
+                                                  const char* const newButtonResId) {
+    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !newButtonResId)
         return 1;
     if (index >= contextMenu->menuOptionsCount)
         return 2;
@@ -265,7 +205,12 @@ static unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMen
     struct Button* tempCopyFromButton = contextMenu->menuOptionsList[index];
     // We won't update menuOption if it already has suitable prototype
     if (strcmp(tempCopyFromButton->sceneNode.sceneNodeTextResource->id, newButtonResId) != 0) {
-        struct Button* tempButton = Button_construct(resourceManager, renderer, newButtonResId);
+        struct Button* tempButton =(struct Button*)SceneNodeTypesRegistrar_constructSceneNode(
+                                                    resourceManager,
+                                                    renderer,
+                                                    sceneNodeTypesRegistrar,
+                                                    newButtonResId,
+                                                    BUTTON_SCENENODE_PARSER_TYPE_STRING);
         if (!tempButton) {
             char tempErrString[600];
             sprintf(tempErrString, "%s MenuOption resource ID: %s",
@@ -283,14 +228,14 @@ static unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMen
                                          tempCopyFromButton->label->size,
                                          tempCopyFromButton->label->color);
         if (result) {
-            Button_destruct(tempButton);
+            Button_destruct((struct SceneNode*)tempButton);
             char tempErrString[600];
             sprintf(tempErrString, "%s MenuOption resource ID: %s",
                     CONTEXT_MENU_SCENENODE_ERR_UPDATING_OPTION, newButtonResId);
             Logger_log(renderer->logger, tempErrString);
             return 4;
         }
-        Button_destruct(tempCopyFromButton);
+        Button_destruct((struct SceneNode*)tempCopyFromButton);
         contextMenu->menuOptionsList[index] = tempButton;
     }
     return 0;
@@ -314,8 +259,9 @@ static unsigned char ContextMenu_realloccateMenuOptionsList(struct ContextMenu* 
 }
 
 static unsigned char CotextMenu_updateMenuOptionsList(struct ContextMenu* contextMenu,
-                                               struct ResourceManager* const resourceManager,
-                                               struct Renderer* renderer) {
+                                                      struct ResourceManager* const resourceManager,
+                                                      struct Renderer* const renderer,
+                                                      struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar) {
     if (!contextMenu || !resourceManager || !renderer)
         return 1;
     size_t i;
@@ -323,40 +269,40 @@ static unsigned char CotextMenu_updateMenuOptionsList(struct ContextMenu* contex
         case 0:
             break;
         case 1:
-            if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, 0,
+            if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, 0,
                                              contextMenu->onlyOneMenuOptionPrototype))
                 return 2;
             break;
         case 2:
-            if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, 0,
+            if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, 0,
                                              contextMenu->topMenuOptionPrototype)) {
                 Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_ERR_TRY_DEFAULT_PROTOTYPE);
-                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, 0,
+                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, 0,
                                              contextMenu->onlyOneMenuOptionPrototype))
                     return 3;
             }
-            if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, 1,
+            if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, 1,
                                              contextMenu->lowerMenuOptionPrototype)) {
                 Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_ERR_TRY_DEFAULT_PROTOTYPE);
-                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, 1,
+                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, 1,
                                              contextMenu->onlyOneMenuOptionPrototype))
                     return 4;
             }
             break;
         default:
             for (i = 1; i < contextMenu->menuOptionsCount - 1; i++)
-                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, i,
+                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, i,
                                              contextMenu->middleMenuOptionPrototype)) {
                     Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_ERR_TRY_DEFAULT_PROTOTYPE);
-                    if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, i,
+                    if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar, i,
                                                 contextMenu->onlyOneMenuOptionPrototype))
                         return 5;
                 }
-             if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer,
+             if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar,
                                              contextMenu->menuOptionsCount - 1,
                                              contextMenu->lowerMenuOptionPrototype)) {
                 Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_ERR_TRY_DEFAULT_PROTOTYPE);
-                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer,
+                if (ContextMenu_updateMenuOption(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar,
                                              contextMenu->menuOptionsCount - 1,
                                              contextMenu->onlyOneMenuOptionPrototype))
                     return 6;
@@ -366,11 +312,15 @@ static unsigned char CotextMenu_updateMenuOptionsList(struct ContextMenu* contex
     return 0;
 }
 
-unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                                        struct Renderer* renderer, const char* const focusedEventRes,
-                                        const char* const pressedEventRes, const char* const labelText) {
+unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu,
+                                        struct ResourceManager* const resourceManager,
+                                        struct Renderer* const renderer,
+                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                        const char* const focusedEventRes,
+                                        const char* const pressedEventRes,
+                                        const char* const labelText) {
     // Don't care about NULL *EventRes and label strings, because we can add default menuOption
-    if (!contextMenu || !resourceManager)
+    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar)
         return 1;
     if (contextMenu->menuOptionsCount >= contextMenu->allocatedMenuOptions)
         if (ContextMenu_realloccateMenuOptionsList(contextMenu))
@@ -378,7 +328,11 @@ unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct 
     size_t i;
     unsigned char result = 0;
     struct Button* tempButtonToAdd = NULL;
-    tempButtonToAdd = Button_construct(resourceManager, renderer, contextMenu->onlyOneMenuOptionPrototype);
+    tempButtonToAdd = (struct Button*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
+                                                                            renderer,
+                                                                            sceneNodeTypesRegistrar,
+                                                                            contextMenu->onlyOneMenuOptionPrototype,
+                                                                            BUTTON_SCENENODE_PARSER_TYPE_STRING);
     if (!tempButtonToAdd)
         return 3;
     result += Button_changeFocusedEventResource(tempButtonToAdd, resourceManager, focusedEventRes);
@@ -394,24 +348,26 @@ unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct 
             sprintf(tempErrString, "%s Label: <%s>", CONTEXT_MENU_SCENENODE_ERR_EXIST_OPTION,
                     tempButtonToAdd->label->text);
             Logger_log(renderer->logger, tempErrString);
-            Button_destruct(tempButtonToAdd);
+            Button_destruct((struct SceneNode*)tempButtonToAdd);
             return 4;
         }
     contextMenu->isGeometryChanged = true;
     contextMenu->menuOptionsList[contextMenu->menuOptionsCount] = tempButtonToAdd;
     contextMenu->menuOptionsCount++;
-    if (CotextMenu_updateMenuOptionsList(contextMenu, resourceManager, renderer)) {
-        Button_destruct(contextMenu->menuOptionsList[contextMenu->menuOptionsCount - 1]);
+    if (CotextMenu_updateMenuOptionsList(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar)) {
+        Button_destruct((struct SceneNode*)contextMenu->menuOptionsList[contextMenu->menuOptionsCount - 1]);
         contextMenu->menuOptionsCount--;
         return 5;
     }
     return 0;
 }
 
-void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* const label,
+void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu,
                                   struct ResourceManager* const resourceManager,
-                                  struct Renderer* renderer) {
-    if (!contextMenu || !label || !resourceManager || !renderer)
+                                  struct Renderer* const renderer,
+                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                  const char* const label) {
+    if (!contextMenu || !label || !resourceManager || !renderer || !sceneNodeTypesRegistrar)
         return;
     size_t i;
     bool found = false;
@@ -428,7 +384,7 @@ void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* c
     for (i = foundIndex; i < contextMenu->menuOptionsCount - 1; i++)
         contextMenu->menuOptionsList[i] = contextMenu->menuOptionsList[i + 1];
     contextMenu->menuOptionsCount--;
-    if (CotextMenu_updateMenuOptionsList(contextMenu, resourceManager, renderer)) {
+    if (CotextMenu_updateMenuOptionsList(contextMenu, resourceManager, renderer, sceneNodeTypesRegistrar)) {
         // Reverting all menuOptions back
         for (i = contextMenu->menuOptionsCount; i > foundIndex; i--)
             contextMenu->menuOptionsList[i] = contextMenu->menuOptionsList[i - 1];
@@ -436,7 +392,7 @@ void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* c
         contextMenu->menuOptionsCount++;
         return;
     }
-    Button_destruct(tempButton);
+    Button_destruct((struct SceneNode*)tempButton);
 }
 
 unsigned char ContextMenu_save(

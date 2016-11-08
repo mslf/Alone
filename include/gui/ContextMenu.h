@@ -57,16 +57,24 @@ struct ContextMenu {
     bool isGeometryChanged;
 };
 
-struct ContextMenu* ContextMenu_construct(struct ResourceManager* const resourceManager, struct Renderer* renderer,
-                                          const char* const contextMenuResId);
-void ContextMenu_destruct(struct ContextMenu* contextMenu);
+struct SceneNode* ContextMenu_construct(struct ResourceManager* const resourceManager,
+                                        struct Renderer* const renderer,
+                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                        struct TextParser* const textParser);
+void ContextMenu_destruct(struct SceneNode* contextMenu);
 
-unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu, struct ResourceManager* const resourceManager,
-                                        struct Renderer* renderer, const char* const focusedEventRes,
-                                        const char* const pressedEventRes, const char* const labelText);
-void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu, const char* const label,
+unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu,
+                                        struct ResourceManager* const resourceManager,
+                                        struct Renderer* const renderer,
+                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                        const char* const focusedEventRes,
+                                        const char* const pressedEventRes,
+                                        const char* const labelText);
+void ContextMenu_removeMenuOption(struct ContextMenu* contextMenu,
                                   struct ResourceManager* const resourceManager,
-                                  struct Renderer* renderer);
+                                  struct Renderer* const renderer,
+                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                  const char* const label);
 unsigned char ContextMenu_save(
         const struct ContextMenu* const contextMenu, struct ResourceManager* const resourceManager,
         const char* const contextMenuResId);
