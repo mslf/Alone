@@ -280,43 +280,57 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
                                                                     struct Renderer* renderer, const char* const text,
                                                                     const char* const fontPath,
                                                                     int size, SDL_Color color) {
-    if (!rm || !text || !renderer || !fontPath || size <= 0)
+    if (!text || !renderer || !fontPath || size <= 0)
         return NULL;
-    char* textureResId = TextureResource_convertTextParametersToString(text, fontPath, size, color);
-    if (!textureResId)
-        return NULL;
-    unsigned  char found = 0;
-    size_t foundIndex = 0;
-    size_t i;
-    // Firstly, try to find existing textureResource in list and return it.
-    // If no textureResource found, try to load and add new, then return it.
-    for (i = 0; i < rm->textureResourcesCount; i++)
-        if (strcmp(textureResId, rm->textureResourcesList[i]->id) == 0) {
-            found = 1;
-            foundIndex = i;
-            break;
+    if (rm) {
+        char* textureResId = TextureResource_convertTextParametersToString(text, fontPath, size, color);
+        if (!textureResId)
+            return NULL;
+        unsigned  char found = 0;
+        size_t foundIndex = 0;
+        size_t i;
+        // Firstly, try to find existing textureResource in list and return it.
+        // If no textureResource found, try to load and add new, then return it.
+        for (i = 0; i < rm->textureResourcesCount; i++)
+            if (strcmp(textureResId, rm->textureResourcesList[i]->id) == 0) {
+                found = 1;
+                foundIndex = i;
+                break;
+            }
+        if (!found) {
+            struct TextureResource* textureResource = NULL;
+            textureResource = TextureResource_constructFromText(renderer, text, fontPath, size, color);
+            if (!textureResource) {
+                char tempString[600];
+                sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
+                Logger_log(rm->logger, tempString);
+                free(textureResId);
+                return NULL;
+            }
+            // Try to reallocate (if needed) and add textureResource to the list
+            if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount)
+                if (ResourceManager_reallocateTextureResourcesList(rm)) {
+                    TextureResource_destruct(textureResource);
+                    free(textureResId);
+                    return NULL;
+                }
+            rm->textureResourcesList[rm->textureResourcesCount] = textureResource;
+            rm->textureResourcesCount++;
+            free(textureResId);
+            return textureResource;
         }
-    if (!found) {
+        free(textureResId);
+        return rm->textureResourcesList[foundIndex];
+    } else { // If we don't want to cache text texture (WARNING! You SHOULD destruct this textureResource by yourself!)
         struct TextureResource* textureResource = NULL;
         textureResource = TextureResource_constructFromText(renderer, text, fontPath, size, color);
         if (!textureResource) {
-            char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
-            Logger_log(rm->logger, tempString);
+            Logger_log(NULL, "ResourceManager_loadTextureResourceFromText: Failed constructng non-cached texture!");
             return NULL;
         }
-        // Try to reallocate (if needed) and add textureResource to the list
-        if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount)
-            if (ResourceManager_reallocateTextureResourcesList(rm)) {
-                TextureResource_destruct(textureResource);
-                return NULL;
-            }
-        rm->textureResourcesList[rm->textureResourcesCount] = textureResource;
-        rm->textureResourcesCount++;
         return textureResource;
     }
-    free(textureResId);
-    return rm->textureResourcesList[foundIndex];
+    
 }
 
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,

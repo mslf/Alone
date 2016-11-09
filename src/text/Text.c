@@ -164,7 +164,8 @@ void Text_destruct(struct SceneNode* text) {
 
 unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager, struct Renderer* renderer,
                                      const char* const textString, const char* const fontPath, int size, SDL_Color color) {
-    if (!text || !resourceManager || !renderer || !textString || !fontPath || size <= 0)
+    // Don't check resourceManager to NULL, because it's okey
+    if (!text || !renderer || !textString || !fontPath || size <= 0)
         return 1;
     struct TextureResource* textureResource = ResourceManager_loadTextureResourceFromText(resourceManager, renderer, 
                                                                                           textString, fontPath, size, color);
@@ -201,6 +202,9 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
     text->size = size;
     text->color = color;
     text->textureResource->pointersCount--;
+    // See WARNING in 'ResourceManager_loadTextureResourceFromText'
+    if (!resourceManager && text->textureResource->pointersCount == 0)
+        TextureResource_destruct(text->textureResource);
     text->textureResource = textureResource;
     text->srcRect.w = textureW;
     text->srcRect.h = textureH;
