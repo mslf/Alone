@@ -22,42 +22,53 @@
 #ifndef ALONE_TEXTBOX_H
 #define ALONE_TEXTBOX_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "gui/Button.h"
 
 #define TEXT_BOX_SCENENODE_PARSER_TYPE_STRING "TextBox"
+#define TEXT_BOX_SCENENODE_PARSER_BUTTON_RES_STRING "buttonResource"
+#define TEXT_BOX_SCENENODE_PARSER_MAX_LENGTH "maxLength"
+enum {
+    TEXT_BOX_SCENENODE_REALLOC_STRING_LENGTH_STEP = 500,
+    TEXT_BOX_SCEENODE_MAX_LENGTH = 10
+};
 /*
  * TextBox is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of TextBox struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of TextBox struct,
  * if you want code to work with TextBox like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct TextBox {
-    struct SceneNode* sceneNode;
-    struct TextResource* textValueResource;
-    struct TextResource* spriteResource;
-    struct TextResource* pressedEventResource;
-    struct TextureResource* textureResource;
-    struct SoundResource* focusedSoundResource;
-    struct SoundResource* pressedSoundResource;
-    struct GameEvent* pressedEvent;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    struct SceneNode sceneNode;
+    struct Button* box;
+    char* string;
+    size_t allocatedChars;
+    size_t stringLength;
+    size_t maxLength;
+    bool haveFocus;
+    bool isGeometryChanged;
+    bool isStringChanged;
 };
 
-struct TextBox* TextBox_construct(struct ResourceManager* const resourceManager, const char* const textBoxResId);
-void TextBox_destruct(struct TextBox* textBox);
+struct SceneNode* TextBox_construct(struct ResourceManager* const resourceManager,
+                                    struct Renderer* const renderer,
+                                    struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                    struct TextParser* const textParser);
+void TextBox_destruct(struct SceneNode* textBox);
 
-void TextBox_save(
+unsigned char TextBox_save(
         const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
         const char* const textBoxResId);
 void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void TextBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void TextBox_sound(struct SceneNode* sceneNode, struct Musican* musican);
 

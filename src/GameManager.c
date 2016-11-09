@@ -69,10 +69,10 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                SLIDER_SCENENODE_PARSER_TYPE_STRING,
                                                                Slider_construct);
-    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
-                                                               TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
+                                                               TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
+                                                               TextBox_construct);
+    /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                LIST_BOX_SCENENODE_PARSER_TYPE_STRING,
                                                                NULL);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
