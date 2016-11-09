@@ -511,7 +511,7 @@ struct TextParser* TextParser_constructFromTextResource(struct Logger* logger,
         return NULL;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
-    if (!textParser || !textResource)
+    if (!textParser)
         return NULL;
     if (TextParser_parseTextResource(logger, textParser, textResource)) {
         TextParser_destruct(textParser);
@@ -552,9 +552,10 @@ void TextParser_destruct(struct TextParser* textParser) {
     if (textParser->pairsList) {
         size_t i;
         size_t j;
-        for (i = 0; i < textParser->pairsCount; i++){
-            free(textParser->pairsList[i].leftOperand);
-            if (textParser->pairsList[i].rightOperand.rightOperandItemsList)
+        for (i = 0; i < textParser->allocatedPairsCount; i++){
+            if (i < textParser->pairsCount)
+                free(textParser->pairsList[i].leftOperand);
+            if (i < textParser->pairsCount)
                 for (j = 0; j < textParser->pairsList[i].rightOperand.itemsCount; j++)
                     free(textParser->pairsList[i].rightOperand.rightOperandItemsList[j]);
             free(textParser->pairsList[i].rightOperand.rightOperandItemsList);
