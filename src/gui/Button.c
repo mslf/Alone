@@ -85,8 +85,6 @@ static unsigned char Button_loadSpriteResource(struct Button* button,
         return 3;
     if (button->sprite->animationsCount < 3) {
         Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_SPRITE_NO_3_ANIMATIONS);
-        button->sprite->sceneNode.destruct((struct SceneNode*)button->sprite);
-        button->sprite = NULL;
         return 4;
     }
     return 0;
@@ -194,6 +192,7 @@ void Button_destruct(struct SceneNode* button) {
         button->sceneNodeTextResource->pointersCount--;
     if (button->type)
         free(button->type);
+    free(button);
 }
 
 unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,

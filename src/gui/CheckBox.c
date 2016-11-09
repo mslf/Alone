@@ -67,8 +67,6 @@ static unsigned char CheckBox_loadSpriteResource(struct CheckBox* checkBox,
         return 3;
     if (checkBox->sprite->animationsCount < 4) {
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_NO_4_ANIMATIONS);
-        checkBox->sprite->sceneNode.destruct((struct SceneNode*)checkBox->sprite);
-        checkBox->sprite = NULL;
         return 4;
     }
     return 0;
@@ -193,6 +191,7 @@ void CheckBox_destruct(struct SceneNode* checkBox) {
         checkBox->sceneNodeTextResource->pointersCount--;
     if (checkBox->type)
         free(checkBox->type);
+    free(checkBox);
 }
 
 unsigned char CheckBox_changeFocusedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,

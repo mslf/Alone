@@ -189,6 +189,7 @@ void ContextMenu_destruct(struct SceneNode* contextMenu) {
         contextMenu->sceneNodeTextResource->pointersCount--;
     if (contextMenu->type)
         free(contextMenu->type);
+    free(contextMenu);
 }
 
 static unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMenu,

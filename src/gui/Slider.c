@@ -137,6 +137,7 @@ void Slider_destruct(struct SceneNode* slider) {
         slider->sceneNodeTextResource->pointersCount--;
     if (slider->type)
         free(slider->type);
+    free(slider);
 }
 
 unsigned char Slider_save(

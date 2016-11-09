@@ -48,8 +48,6 @@ static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progres
         return 3;
     if (progressBar->spriteBase->animationsCount < 2) {
         Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_2_ANIMATIONS);
-        progressBar->spriteBase->sceneNode.destruct((struct SceneNode*)progressBar->spriteBase);
-        progressBar->spriteBase = NULL;
         return 4;
     }
     progressBar->spriteBar = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
@@ -57,11 +55,8 @@ static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progres
                                                                          sceneNodeTypesRegistrar,
                                                                          tempResId,
                                                                          SPRITE_SCENENODE_PARSER_TYPE_STRING);
-    if (!progressBar->spriteBar) {
-        progressBar->spriteBase->sceneNode.destruct((struct SceneNode*)progressBar->spriteBase);
-        progressBar->spriteBase = NULL;
+    if (!progressBar->spriteBar)
         return 5;
-    }
     progressBar->spriteBar->currentAnimation = 1;
     return 0;
 }
@@ -124,6 +119,7 @@ void ProgressBar_destruct(struct SceneNode* progressBar) {
         progressBar->sceneNodeTextResource->pointersCount--;
     if (progressBar->type)
         free(progressBar->type);
+    free(progressBar);
 }
 
 unsigned char ProgressBar_save(
