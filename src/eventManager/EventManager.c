@@ -114,6 +114,7 @@ unsigned char EventManager_reallocateSdlEventsList(struct EventManager* em) {
         tList[i] = em->sdlEventsList[i];
     free(em->sdlEventsList);
     em->sdlEventsList = tList;
+    em->allocatedSdlEventsCount += INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
     return 0;
 }
 

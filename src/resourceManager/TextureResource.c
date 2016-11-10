@@ -86,7 +86,7 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
         TextureResource_destruct(textureResource);
         return  NULL;
     }
-    SDL_Surface* textSurface = TTF_RenderText_Blended(font, text, color);
+    SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, text, color);
     if (!textSurface) {
         char tempString[600];
         sprintf(tempString, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_RENDERING_TEXT, TTF_GetError());
@@ -106,6 +106,7 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
         return  NULL;
     }
     textureResource->id = TextureResource_convertTextParametersToString(text, fontPath, size, color);
+    textureResource->pointersCount = 1;
     TTF_CloseFont(font);
     SDL_FreeSurface(textSurface);
     return textureResource;
