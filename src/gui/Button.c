@@ -216,6 +216,7 @@ unsigned char Button_changePressedEventResource(struct Button* button, struct Re
         TextParser_destruct(textParser);
         return 4;
     }
+    TextParser_destruct(textParser);
     if (button->pressedEvent)
         button->pressedEvent->isNeeded = false;
     if (button->pressedEventResource)
@@ -246,6 +247,7 @@ unsigned char Button_changeFocusedEventResource(struct Button* button, struct Re
         TextParser_destruct(textParser);
         return 4;
     }
+    TextParser_destruct(textParser);
     if (button->focusedEvent)
         button->focusedEvent->isNeeded = false;
     if (button->focusedEventResource)
