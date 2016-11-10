@@ -152,6 +152,21 @@ static unsigned char TextBox_reallocateString(struct TextBox* textBox, size_t re
     return 0;
 }
 
+unsigned char TextBox_changeString (struct TextBox* textBox, const char* const newString) {
+    if (!textBox || !newString)
+        return 1;
+    if (strlen(newString) <= textBox->maxLength) {
+        if (strlen(newString) >= textBox->allocatedChars)
+            if (TextBox_reallocateString(textBox, strlen(newString)))
+                return 2;
+        strcpy(textBox->string, newString);
+        textBox->string[strlen(newString)] = 0;
+        textBox->stringLength = strlen(newString);
+        textBox->isStringChanged = true;
+    }
+    return 0;
+}
+
 void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
     if (!sceneNode || !eventManager)
         return;
@@ -176,6 +191,7 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
                 }
             }
     if (textBox->haveFocus) {
+        textBox->box->state = ButtonState_Focused;
         for (i = 0; i < eventManager->sdlEventsCount; i++)
             if (eventManager->sdlEventsList[i].type == SDL_KEYDOWN) {
                 if (eventManager->sdlEventsList[i].key.keysym.sym == SDLK_BACKSPACE && textBox->stringLength > 0) {
@@ -192,15 +208,11 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
                             && SDL_GetModState() & KMOD_CTRL) {
                     char* tempString = SDL_GetClipboardText();
                     if (strlen(tempString) <= textBox->maxLength) {
-                        if (strlen(tempString) >= textBox->allocatedChars)
-                            if (TextBox_reallocateString(textBox, strlen(tempString))) {
-                                SDL_free(tempString);
-                                return;
-                            }
-                        strcpy(textBox->string, tempString);
-                        textBox->stringLength = strlen(tempString);
+                        if (TextBox_changeString(textBox, tempString)) {
+                            SDL_free(tempString);
+                            return;
+                        }
                         SDL_free(tempString);
-                        textBox->isStringChanged = true;
                     }
                 }
             } else if(eventManager->sdlEventsList[i].type == SDL_TEXTINPUT) {

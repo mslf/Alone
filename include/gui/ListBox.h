@@ -22,55 +22,50 @@
 #ifndef ALONE_LISTBOX_H
 #define ALONE_LISTBOX_H
 
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
 #include "eventManager/EventManager.h"
 #include "musican/Musican.h"
 #include "resourceManager/ResourceManager.h"
+#include "gui/TextBox.h"
+#include "gui/Button.h"
+#include "gui/ContextMenu.h"
 
 #define LIST_BOX_SCENENODE_PARSER_TYPE_STRING "ListBox"
-
-struct Element{
-    struct GameEvent* pressedEvent;
-    struct TextResource* elementResource;
-    struct TextResource* labelResource;
-    struct TextResource* pressedEventResource;
-};
+#define LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING "textBoxResource"
+#define LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING "buttonResource"
+#define LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING "contextMenuResource"
 /*
  * ListBox is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode* blablaNode;" at the begining of ListBox struct,
+ * You SHOULD include the "struct SceneNode blablaNode;" at the begining of ListBox struct,
  * if you want code to work with ListBox like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL or to your function implementation.
+ * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
+ * or to your function implementation.
  * Don't forget to add this warning comment to your own new SceneNode inheritors.
  */
 struct ListBox {
-    struct SceneNode* sceneNode;
-    struct TextResource* spriteResource;
-    struct TextureResource* textureResource;
-    struct SoundResource* focusedSoundResource;
-    struct SoundResource* pressedSoundResource;
-    struct Element* elementsList;
-    size_t focusedElementIndex;
-    size_t pressedElementIndex;
-    size_t activeElementIndex;
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
+    struct SceneNode sceneNode;
+    struct TextBox* textBox;
+    struct Button* button;
+    struct ContextMenu* contextMenu;
+    bool isContextMenuShown;
+    bool isGeometryChanged;
+    bool isStringExistInList;
 };
 
-struct ListBox* ListBox_construct(struct ResourceManager* const resourceManager,
-                                          const char* const listBoxResId);
-void ListBox_destruct(struct ListBox* listBox);
+struct SceneNode* ListBox_construct(struct ResourceManager* const resourceManager,
+                                    struct Renderer* const renderer,
+                                    struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                    struct TextParser* const textParser);
+void ListBox_destruct(struct SceneNode* listBox);
 
-void ListBox_addElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                        const char* const elementResId);
-void ListBox_removeElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                                  const char* const elementResId);
 void ListBox_save(
         const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
         const char* const listBoxResId);
 void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 void ListBox_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 void ListBox_sound(struct SceneNode* sceneNode, struct Musican* musican);
 

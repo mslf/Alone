@@ -21,23 +21,137 @@
 */
 #include "gui/ListBox.h"
 
-struct ListBox* ListBox_construct(struct ResourceManager* const resourceManager,
-                                  const char* const listBoxResId) {
+const char* const LIST_BOX_SCENENODE_ERR_TEXT_BOX_RES = 
+        "Button_loadTextBoxResource: textBoxResource string haven't found!";
+const char* const LIST_BOX_SCENENODE_ERR_BUTTON_RES = 
+        "Button_loadTextBoxResource: buttonResource string haven't found!";
+const char* const LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_RES = 
+        "Button_loadTextBoxResource: contextMenuResource string haven't found!";
 
+static unsigned char Button_loadContextMenuResource(struct ListBox* listBox,
+                                               struct ResourceManager* resourceManager,
+                                               struct Renderer* renderer,
+                                               struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                               struct TextParser* textParser) {
+    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
+        return 1;
+    char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING, 0);
+    if (!tempResId) {
+        Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_RES);
+        return 2;
+    }
+    listBox->contextMenu = (struct ContextMenu*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
+                                                                renderer,
+                                                                sceneNodeTypesRegistrar,
+                                                                tempResId,
+                                                                CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING);
+    if (!listBox->contextMenu)
+        return 3;
+    return 0;
+}            
+
+static unsigned char Button_loadButtonResource(struct ListBox* listBox,
+                                               struct ResourceManager* resourceManager,
+                                               struct Renderer* renderer,
+                                               struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                               struct TextParser* textParser) {
+    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
+        return 1;
+    char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
+    if (!tempResId) {
+        Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_BUTTON_RES);
+        return 2;
+    }
+    listBox->button = (struct Button*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
+                                                                renderer,
+                                                                sceneNodeTypesRegistrar,
+                                                                tempResId,
+                                                                BUTTON_SCENENODE_PARSER_TYPE_STRING);
+    if (!listBox->button)
+        return 3;
+    return 0;
+}        
+        
+static unsigned char Button_loadTextBoxResource(struct ListBox* listBox,
+                                               struct ResourceManager* resourceManager,
+                                               struct Renderer* renderer,
+                                               struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                               struct TextParser* textParser) {
+    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
+        return 1;
+    char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING, 0);
+    if (!tempResId) {
+        Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_TEXT_BOX_RES);
+        return 2;
+    }
+    listBox->textBox = (struct TextBox*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
+                                                                renderer,
+                                                                sceneNodeTypesRegistrar,
+                                                                tempResId,
+                                                                TEXT_BOX_SCENENODE_PARSER_TYPE_STRING);
+    if (!listBox->textBox)
+        return 3;
+    return 0;
 }
 
-void ListBox_destruct(struct ListBox* listBox) {
-
+static unsigned char ListBox_tryGetSettingsFromTextParser(struct ListBox* listBox,
+                                                struct ResourceManager* resourceManager, struct Renderer* renderer,
+                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                struct TextParser* textParser) {
+    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
+        return 1;
+    unsigned char result = 0;
+    result += Button_loadTextBoxResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    result += Button_loadButtonResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    result += Button_loadContextMenuResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    return result;
 }
 
-void ListBox_addElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                        const char* const elementResId) {
-
+struct SceneNode* ListBox_construct(struct ResourceManager* const resourceManager,
+                                    struct Renderer* const renderer,
+                                    struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                    struct TextParser* const textParser) {
+    if (!resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
+        return NULL;
+    struct ListBox* listBox = NULL;
+    listBox = (struct ListBox*)calloc(1, sizeof(struct ListBox));
+    if (!listBox)
+        return NULL;
+    SceneNode_init(&(listBox->sceneNode));
+    if (ListBox_tryGetSettingsFromTextParser(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser)) {
+        ListBox_destruct((struct SceneNode*)listBox);
+        return NULL;
+    }
+    listBox->sceneNode.control = ListBox_control;
+    listBox->sceneNode.update = ListBox_update;
+    listBox->sceneNode.render = ListBox_render;
+    listBox->sceneNode.sound = ListBox_sound;
+    listBox->sceneNode.destruct = ListBox_destruct;
+    listBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(LIST_BOX_SCENENODE_PARSER_TYPE_STRING) + 1));
+    if (!listBox->sceneNode.type) {
+        ListBox_destruct((struct SceneNode*)listBox);
+        return NULL;
+    }
+    strcpy(listBox->sceneNode.type, LIST_BOX_SCENENODE_PARSER_TYPE_STRING);
+    listBox->isGeometryChanged = true;
+    return (struct SceneNode*)listBox;
 }
 
-void ListBox_removeElement(struct ListBox* listBox, struct ResourceManager* const resourceManager,
-                           const char* const elementResId) {
-
+void ListBox_destruct(struct SceneNode* listBox) {
+    if (!listBox)
+        return;
+    struct ListBox* tempListBox = (struct ListBox*)listBox;
+    if (tempListBox->textBox)
+        TextBox_destruct((struct SceneNode*)tempListBox->textBox);
+    if (tempListBox->button)
+        Button_destruct((struct SceneNode*)tempListBox->button);
+    if (tempListBox->button)
+        ContextMenu_destruct((struct SceneNode*)tempListBox->contextMenu);
+    if (listBox->sceneNodeTextResource)
+        listBox->sceneNodeTextResource->pointersCount--;
+    if (listBox->type)
+        free(listBox->type);
+    free(listBox);
 }
 
 void ListBox_save(
@@ -47,17 +161,114 @@ void ListBox_save(
 }
 
 void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
-
+    if (!sceneNode || !eventManager || !eventManager)
+        return;
+    size_t i;
+    struct ListBox* listBox = (struct ListBox*)sceneNode;
+    TextBox_control((struct SceneNode*)listBox->textBox, eventManager);
+    if (listBox->textBox->isStringChanged) {
+        bool found = false;
+        for (i = 0; i < listBox->contextMenu->menuOptionsCount; i++)
+            if (strcmp(listBox->textBox->string, listBox->contextMenu->menuOptionsList[i]->label->text) == 0) {
+                listBox->isStringExistInList = true;
+                found = true;
+                break;
+            }
+        if (!found) {
+            listBox->isStringExistInList = false;
+        }
+    }
+    if (listBox->textBox->haveFocus) {
+        if (listBox->isStringExistInList) {
+            listBox->textBox->box->state = ButtonState_Pressed;
+            listBox->textBox->box->isStateChanged = true;
+        }
+        else {
+            listBox->textBox->box->state = ButtonState_Focused;
+            listBox->textBox->box->isStateChanged = true;
+        }
+    }
+    if (listBox->isContextMenuShown) {
+        ContextMenu_control((struct SceneNode*)listBox->contextMenu, eventManager);
+        SDL_Point mouseCoordinates;
+        SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
+        for (i = 0; i < listBox->contextMenu->menuOptionsCount; i++)
+            if (listBox->contextMenu->menuOptionsList[i]->isStateChanged
+                && listBox->contextMenu->menuOptionsList[i]->state == ButtonState_Pressed) {
+                char* newString = listBox->contextMenu->menuOptionsList[i]->label->text;
+                if (TextBox_changeString(listBox->textBox, newString))
+                    TextBox_changeString(listBox->textBox, "Err");
+                    // FIXME Add checking ContextMenu's options labels length
+                break;
+            }
+        for (i = 0; i < eventManager->sdlEventsCount; i++)
+            // FIXME Rewrite this shit
+            if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN && listBox->contextMenu->menuOptionsCount > 0) {
+                if (!(mouseCoordinates.x >= listBox->contextMenu->menuOptionsList[0]->sprite->dstRect.x
+                    && mouseCoordinates.x < (listBox->contextMenu->menuOptionsList[0]->sprite->dstRect.x 
+                                                        + listBox->contextMenu->menuOptionsList[0]->sprite->dstRect.w) 
+                    && mouseCoordinates.y >= listBox->contextMenu->menuOptionsList[0]->sprite->dstRect.y 
+                    && mouseCoordinates.y < (listBox->contextMenu->menuOptionsList[0]->sprite->dstRect.x
+                                                                + listBox->contextMenu->menuOptionsList[0]->sprite->dstRect.h 
+                                                                            * (int)listBox->contextMenu->menuOptionsCount))) {
+                    listBox->isContextMenuShown = false;
+                }
+            }
+    }
+    Button_control((struct SceneNode*)listBox->button, eventManager);
+    if (listBox->button->isStateChanged && listBox->button->state == ButtonState_Pressed) {
+        if (listBox->isContextMenuShown)
+            listBox->isContextMenuShown = false;
+        else
+            listBox->isContextMenuShown = true;
+    }
 }
 
-void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
-
+void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {
+    if (!sceneNode || !eventManager || !renderer)
+        return;
+    struct ListBox* listBox = (struct ListBox*)sceneNode;
+    if (listBox->isGeometryChanged) {
+        listBox->textBox->sceneNode.coordinates = listBox->sceneNode.coordinates;
+        listBox->textBox->sceneNode.flip = listBox->sceneNode.flip;
+        listBox->textBox->sceneNode.scaleX = listBox->sceneNode.scaleX;
+        listBox->textBox->sceneNode.scaleY = listBox->sceneNode.scaleY;
+        listBox->textBox->isGeometryChanged = true;
+        listBox->button->sceneNode.coordinates = listBox->sceneNode.coordinates;
+        listBox->button->sceneNode.coordinates.x += listBox->textBox->box->sprite->virtualSize.x;
+        listBox->button->sceneNode.flip = listBox->sceneNode.flip;
+        listBox->button->sceneNode.scaleX = listBox->sceneNode.scaleX;
+        listBox->button->sceneNode.scaleY = listBox->sceneNode.scaleY;
+        listBox->button->isGeometryChanged = true;
+        listBox->contextMenu->sceneNode.coordinates = listBox->sceneNode.coordinates;
+        listBox->contextMenu->sceneNode.coordinates.y += listBox->textBox->box->sprite->virtualSize.y;
+        listBox->contextMenu->sceneNode.flip = listBox->sceneNode.flip;
+        listBox->contextMenu->sceneNode.scaleX = listBox->sceneNode.scaleX;
+        listBox->contextMenu->sceneNode.scaleY = listBox->sceneNode.scaleY;
+        listBox->contextMenu->isGeometryChanged = true;
+        listBox->isGeometryChanged = false;
+    }
+    TextBox_update((struct SceneNode*)listBox->textBox, eventManager, renderer);
+    Button_update((struct SceneNode*)listBox->button, eventManager, renderer);
+    ContextMenu_update((struct SceneNode*)listBox->contextMenu, eventManager, renderer);
 }
 
 void ListBox_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
-
+    if (!sceneNode || !renderer)
+        return;
+    struct ListBox* listBox = (struct ListBox*)sceneNode;
+    TextBox_render((struct SceneNode*)listBox->textBox, renderer);
+    Button_render((struct SceneNode*)listBox->button, renderer);
+    if (listBox->isContextMenuShown)
+        ContextMenu_render((struct SceneNode*)listBox->contextMenu, renderer);
 }
 
 void ListBox_sound(struct SceneNode* sceneNode, struct Musican* musican) {
-
+    if (!sceneNode || !musican)
+        return;
+    struct ListBox* listBox = (struct ListBox*)sceneNode;
+    TextBox_sound((struct SceneNode*)listBox->textBox, musican);
+    Button_sound((struct SceneNode*)listBox->button, musican);
+    if (listBox->isContextMenuShown)
+        ContextMenu_sound((struct SceneNode*)listBox->contextMenu, musican);
 }

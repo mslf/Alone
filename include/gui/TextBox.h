@@ -64,6 +64,7 @@ struct SceneNode* TextBox_construct(struct ResourceManager* const resourceManage
                                     struct TextParser* const textParser);
 void TextBox_destruct(struct SceneNode* textBox);
 
+unsigned char TextBox_changeString (struct TextBox* textBox, const char* const newString);
 unsigned char TextBox_save(
         const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
         const char* const textBoxResId);
