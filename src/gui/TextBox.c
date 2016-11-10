@@ -175,7 +175,8 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
     SDL_Point mouseCoordinates;
     SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
     if (textBox->box->state == ButtonState_Pressed) {
-        SDL_StartTextInput();
+        //SDL_StartTextInput();
+        // FIXME Need to find properly place for that
         textBox->haveFocus = true;
     }
     size_t i;
@@ -187,7 +188,8 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
                     && mouseCoordinates.y >= textBox->box->sprite->dstRect.y 
                     && mouseCoordinates.y < (textBox->box->sprite->dstRect.y + textBox->box->sprite->dstRect.h))) {
                     textBox->haveFocus = false;
-                    SDL_StopTextInput();
+                    //SDL_StopTextInput();
+                    // FIXME Need to find properly place for that
                 }
             }
     if (textBox->haveFocus) {

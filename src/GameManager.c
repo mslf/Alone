@@ -154,6 +154,7 @@ int GameManager_main(struct GameManager* gm) {
     size_t j;
     unsigned char state = 0;
     unsigned char color = 0;
+    SDL_StartTextInput();
     while(!gm->eventManager->quit) {
         EventManager_updateSdlEvents(gm->eventManager);
         SDL_SetRenderDrawColor(gm->renderer->renderer, (int)(color * 0.8), color,
@@ -190,6 +191,7 @@ int GameManager_main(struct GameManager* gm) {
                 break;
         }
     }
+    SDL_StopTextInput();
     return 0;
 }
 
