@@ -1,0 +1,5 @@
+type = Text;
+fontPath = ["data/good times rg.ttf"];
+text = ["^"];
+size = 20;
+color = [0,0,0,0];

@@ -1,0 +1,4 @@
+type = ListBox;
+textBoxResource = data/listBoxes/listBox.textBox;
+buttonResource = data/listBoxes/listBox.button;
+contextMenuResource = data/listBoxes/list1.contextMenu;

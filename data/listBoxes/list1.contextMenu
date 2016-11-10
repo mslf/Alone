@@ -1,0 +1,37 @@
+type = ContextMenu; 
+optionPrototypeButtonResources = [
+    "data/listBoxes/prototype/listBox_ContextMenu.button"
+];
+menuOptions = [
+    option1,
+    option2,
+    option3,
+    option4,
+    option5
+];
+
+option1 = [
+    "Sample",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option2 = [
+    "Data",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option3 = [
+    "For",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option4 = [
+    "List",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];
+option5 = [
+    "Box",
+    "data/menus/pressedDefault.gameEvent",
+    "data/menus/focusedDefault.gameEvent"
+];

@@ -7,7 +7,9 @@ sceneNodes = [
     slider_2,
     slider_3,
     box_1,
-    box_2
+    box_2,
+    listBox_1,
+    listBox_2
 ];
 eventControllers = [data/hello.script];
 menu_2 = [
@@ -61,6 +63,22 @@ box_1 = [
 box_2 = [
     "data/textBoxes/box1.textBox",
     170, 126,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+listBox_1 = [
+    "data/listBoxes/list1.listBox",
+    10, 300,
+    0, 0,
+    0,
+    0.0,
+    1.0, 1.0
+];
+listBox_2 = [
+    "data/listBoxes/list2.listBox",
+    250, 300,
     0, 0,
     0,
     0.0,
