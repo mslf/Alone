@@ -185,9 +185,11 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
                     else
                         textBox->string[textBox->stringLength] = 0;
                     textBox->isStringChanged = true;
-                } else if (eventManager->sdlEventsList[i].key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL) {
+                } else if (eventManager->sdlEventsList[i].key.keysym.scancode == SDL_SCANCODE_C
+                            && SDL_GetModState() & KMOD_CTRL) {
                     SDL_SetClipboardText(textBox->string);
-                } else if (eventManager->sdlEventsList[i].key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL) {
+                } else if (eventManager->sdlEventsList[i].key.keysym.scancode == SDL_SCANCODE_V
+                            && SDL_GetModState() & KMOD_CTRL) {
                     char* tempString = SDL_GetClipboardText();
                     if (strlen(tempString) <= textBox->maxLength) {
                         if (strlen(tempString) >= textBox->allocatedChars)

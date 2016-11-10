@@ -203,10 +203,8 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
     text->color = color;
     text->textureResource->pointersCount--;
     // See WARNING in 'ResourceManager_loadTextureResourceFromText'
-    //if (!resourceManager && text->textureResource->pointersCount == 0)
-    //    TextureResource_destruct(text->textureResource);
-    // FIXME Need to fix destruct managing.
-    // memory leak!
+    if (!text->textureResource->isCreatedWithResourceManager)
+        TextureResource_destruct(text->textureResource);
     text->textureResource = textureResource;
     text->srcRect.w = textureW;
     text->srcRect.h = textureH;

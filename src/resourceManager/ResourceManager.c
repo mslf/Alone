@@ -307,6 +307,7 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
                 free(textureResId);
                 return NULL;
             }
+            textureResource->isCreatedWithResourceManager = true;
             // Try to reallocate (if needed) and add textureResource to the list
             if (rm->textureResourcesCount >= rm->allocatedTextureResourcesCount)
                 if (ResourceManager_reallocateTextureResourcesList(rm)) {

@@ -24,12 +24,14 @@
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <stdbool.h>
 struct Renderer;
 
 struct TextureResource {
+    SDL_Texture* texture;
     size_t pointersCount;
     char* id;
-    SDL_Texture* texture;
+    bool isCreatedWithResourceManager;
 };
 
 struct TextureResource* TextureResource_construct(struct Renderer* renderer, const char* const path);
