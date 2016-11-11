@@ -61,7 +61,7 @@ struct SceneNode* ListBox_construct(struct ResourceManager* const resourceManage
                                     struct TextParser* const textParser);
 void ListBox_destruct(struct SceneNode* listBox);
 
-void ListBox_save(
+unsigned char ListBox_save(
         const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
         const char* const listBoxResId);
 void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager);

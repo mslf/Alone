@@ -22,13 +22,15 @@
 #include "gui/ListBox.h"
 
 const char* const LIST_BOX_SCENENODE_ERR_TEXT_BOX_RES = 
-        "Button_loadTextBoxResource: textBoxResource string haven't found!";
+        "ListBox_loadTextBoxResource: textBoxResource string haven't found!";
 const char* const LIST_BOX_SCENENODE_ERR_BUTTON_RES = 
-        "Button_loadTextBoxResource: buttonResource string haven't found!";
+        "ListBox_loadButtonResource: buttonResource string haven't found!";
 const char* const LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_RES = 
-        "Button_loadTextBoxResource: contextMenuResource string haven't found!";
+        "ListBox_loadContextMenuResource: contextMenuResource string haven't found!";
+const char* const LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_LENGTH_RES = 
+        "ListBox_loadContextMenuResource: menuOption string length in created ContextMenu > max string length in created TextBox!";
 
-static unsigned char Button_loadContextMenuResource(struct ListBox* listBox,
+static unsigned char ListBox_loadContextMenuResource(struct ListBox* listBox,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -47,10 +49,22 @@ static unsigned char Button_loadContextMenuResource(struct ListBox* listBox,
                                                                 CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING);
     if (!listBox->contextMenu)
         return 3;
+    if (listBox->textBox) {
+        size_t i;
+        for (i = 0; i < listBox->contextMenu->menuOptionsCount; i++)
+            if (strlen(listBox->contextMenu->menuOptionsList[i]->label->text) > listBox->textBox->maxLength) {
+                char tempErrString[600];
+                sprintf(tempErrString, "%s MenuOption string: %s",
+                        LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_LENGTH_RES,
+                        listBox->contextMenu->menuOptionsList[i]->label->text);
+                Logger_log(renderer->logger, tempErrString);
+                return 4;
+            }
+    }
     return 0;
 }            
 
-static unsigned char Button_loadButtonResource(struct ListBox* listBox,
+static unsigned char ListBox_loadButtonResource(struct ListBox* listBox,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -72,7 +86,7 @@ static unsigned char Button_loadButtonResource(struct ListBox* listBox,
     return 0;
 }        
         
-static unsigned char Button_loadTextBoxResource(struct ListBox* listBox,
+static unsigned char ListBox_loadTextBoxResource(struct ListBox* listBox,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -101,9 +115,9 @@ static unsigned char ListBox_tryGetSettingsFromTextParser(struct ListBox* listBo
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
     unsigned char result = 0;
-    result += Button_loadTextBoxResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    result += Button_loadButtonResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    result += Button_loadContextMenuResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    result += ListBox_loadTextBoxResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    result += ListBox_loadButtonResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    result += ListBox_loadContextMenuResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
     return result;
 }
 
@@ -154,10 +168,32 @@ void ListBox_destruct(struct SceneNode* listBox) {
     free(listBox);
 }
 
-void ListBox_save(
+unsigned char ListBox_save(
         const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
         const char* const listBoxResId) {
-
+    if (!listBox || !resourceManager || !listBoxResId)
+        return 1;
+    unsigned char result = 0;
+    struct TextParser* textParser = NULL;
+    textParser = TextParser_constructEmpty();
+    if (!textParser)
+        return 2;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, LIST_BOX_SCENENODE_PARSER_TYPE_STRING);
+    result += TextParser_addString(textParser, LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING,
+                                   listBox->textBox->sceneNode.sceneNodeTextResource->id);
+    result += TextParser_addString(textParser, LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING,
+                                   listBox->button->sceneNode.sceneNodeTextResource->id);
+    result += TextParser_addString(textParser, LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING,
+                                   listBox->contextMenu->sceneNode.sceneNodeTextResource->id);
+    char* tempString = TextParser_convertToText(textParser);
+    result += textParser->lastError;
+    result += TextResource_updateContent(listBox->sceneNode.sceneNodeTextResource, tempString);
+    result += ResourceManager_saveTextResource(resourceManager,
+                                               listBox->sceneNode.sceneNodeTextResource, listBoxResId);
+    TextParser_destruct(textParser);
+    if (tempString)
+        free(tempString);
+    return result;
 }
 
 void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
