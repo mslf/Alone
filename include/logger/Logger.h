@@ -22,6 +22,7 @@
 #ifndef ALONE_LOGGER_H
 #define ALONE_LOGGER_H
 
+//? caps?
 enum LoggerState {
     LoggerDisabled,
     LoggerEnabledToStderr,

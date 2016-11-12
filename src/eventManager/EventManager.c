@@ -67,6 +67,8 @@ struct EventManager* EventManager_construct(struct Logger* logger) {
     return em;
 }
 
+
+//? perharps you want to use realloc ? Also returning 0 1 or 2 is pretty lame, enums exist for a reason
 unsigned char EventManager_reallocateGameEventsList(struct EventManager* em) {
     if (!em)
         return 1;
@@ -83,7 +85,7 @@ unsigned char EventManager_reallocateGameEventsList(struct EventManager* em) {
     em->allocatedGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
     return 0;
 }
-
+//? Same thing, consider `realloc()`
 unsigned EventManager_reallocateCustomGameEventsList(struct EventManager* em) {
     if (!em)
         return 1;

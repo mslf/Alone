@@ -102,6 +102,7 @@ static unsigned char TextParser_reallocateItemsList(struct Logger* logger, struc
     return  0;
 }
 
+//? consider using asserts maybe
 static unsigned char TextParser_reallocateString(struct Logger* logger, char** string, size_t* oldLength, size_t step) {
     if (!string || !oldLength || !step)
         return 1;
@@ -140,6 +141,9 @@ static unsigned char TextParser_splitExpression(struct Logger* logger, const cha
             if (TextParser_reallocateString(logger, rightOperandString, allocatedCharsForRightOperand,
                                             INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING))
                 return 6;
+
+
+        //? You can use goto with case labels.
         switch (state) {
             case 0: // start
                 if (c == ';'){
