@@ -43,7 +43,7 @@
  * Don't forget to add this warning comment to your own new PhysicalSceneNode inheritors.
  */
 struct InventoryItem {
-    char* name;
+    char* name;   //? const maybe
     size_t count;
 };
 

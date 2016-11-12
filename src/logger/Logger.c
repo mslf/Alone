@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include "logger/Logger.h"
 
+//? Consider making a version with varargs, you won't have to allocate an array and use sprintf all the time
 void Logger_log(struct Logger* logger, const char* const message) {
     if (logger && message && logger->state == LoggerEnabledToStderr)
         fprintf(stderr, "%s\n", message);

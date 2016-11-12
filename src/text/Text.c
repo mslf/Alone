@@ -37,6 +37,8 @@ const char* const TEXT_SCENENODE_ERR_NO_COLOR_B =
 const char* const TEXT_SCENENODE_ERR_NO_COLOR_A =
         "Text_tryGetSettingsFromTextParser: color[3] haven't found! Using default.";
 
+//? Unsigned char again ffs 
+//? Also, try to refactor
 static unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct ResourceManager* resourceManager,
                                                 struct TextParser* textParser, unsigned char* logFlag) {
     char* tempFontPath = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, 0);
@@ -161,7 +163,7 @@ void Text_destruct(struct SceneNode* text) {
         free(text->type);
     free(text);
 }
-
+//? try to refactor
 unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* resourceManager, struct Renderer* renderer,
                                      const char* const textString, const char* const fontPath, int size, SDL_Color color) {
     // Don't check resourceManager to NULL, because it's okey
@@ -211,6 +213,7 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
     return 0;
 }
 
+//?unsigned char again, wtf
 unsigned char Text_save(
         const struct  Text* const text, struct ResourceManager* const resourceManager,
         const char* const textResId) {

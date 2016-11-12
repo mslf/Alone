@@ -100,6 +100,8 @@ unsigned char SceneNodeTypesRegistrar_registerNewSceneNodeType(struct SceneNodeT
     return 0;
 }
 
+//? Messy. Refactor.
+// Remember you can create some static functions and call them with 0 overhead.
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
                                                              struct Renderer* renderer,
                                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,

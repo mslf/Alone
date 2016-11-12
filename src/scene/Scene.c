@@ -27,6 +27,7 @@ const char* const SCENE_ERR_SCENE_NODE_TYPE_NOT_DETECTED =
 const char* const SCENE_ERR_SCENE_NODE_DEF =
         "Scene_init: definition of SceneNode haven't found!";
 
+//? Again returning 0 1 2 is bad
 unsigned char Scene_reallocateSceneNodesList(struct Scene* scene) {
     if (!scene)
         return 1;
@@ -75,6 +76,7 @@ unsigned char Scene_initSceneNode(struct Scene* scene, const char* const sceneNo
         return 2;
     size_t index = scene->sceneNodesCount - 1;
     // Don't care about errors here, because these setters are optional
+    //? You could make a code easier to read if you use C99 struct initializers 
     scene->sceneNodesList[index]->coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1);
     scene->sceneNodesList[index]->coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2);
     scene->sceneNodesList[index]->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
@@ -94,12 +96,14 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
     sceneNode->destruct(sceneNode);
 }
 
+
+//? Refactor this. Make it smaller (see also: comments for Logger_log).
 unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceManager,
                          struct Renderer* renderer, struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 
                          struct TextParser* sceneTextParser) {
     if (!scene || !resourceManager || !renderer || !sceneTextParser)
         return 1;
-    size_t i;
+    size_t i;    //? As you are using C99+, go ahead, create it in `for`
     size_t count;
     count = TextParser_getItemsCount(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING);
     if (sceneTextParser->lastError)
@@ -140,6 +144,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     return 0;
 }
 
+//? Refactor this. Bodies of `if`are very much alike
 struct Scene* Scene_construct(struct ResourceManager* const resourceManager,
                               struct Renderer* renderer,
                               struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 

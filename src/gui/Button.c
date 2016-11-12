@@ -22,6 +22,10 @@
 #include "gui/Button.h"
 #include "textParser/TextParser.h"
 
+
+//? If you do a const static structure with these elements, you can pollute global namespace less
+//? Also, making them static is probably wise
+//? Check other files for similar stuff
 const char* const BUTTON_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES = 
         "Button_loadEventsResources: focusedEventResource string haven't found!";
 const char* const BUTTON_SCENENODE_ERR_PRESSED_GAME_EVENT_RES = 
@@ -94,6 +98,7 @@ static void Button_loadSoundResources(struct Button* button, struct ResourceMana
                                struct TextParser* textParser) {
     if (!button || !resourceManager || !textParser)
         return;
+    //? char const maybe?
     char* tempFocusedSoundResourceString = TextParser_getString(textParser,
                                                                 BUTTON_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING, 0);
     if (!tempFocusedSoundResourceString)
@@ -122,6 +127,7 @@ static void Button_loadEventsResources(struct Button* button, struct ResourceMan
     Button_changePressedEventResource(button, resourceManager, tempPressedEventResourceString);
 }
 
+//? Returning integers like this is kind of zashkwar
 static unsigned char Button_tryGetSettingsFromTextParser(struct Button* button,
                                                          struct ResourceManager* resourceManager, struct Renderer* renderer,
                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -176,6 +182,8 @@ void Button_destruct(struct SceneNode* button) {
         Sprite_destruct((struct SceneNode*)tempButton->sprite);
     if (tempButton->label)
         Text_destruct((struct SceneNode*)tempButton->label);
+
+    //? dec_if_not_zero( & tempButton-> focusedEventResource-> pointersCount )
     if (tempButton->focusedEventResource)
         tempButton->focusedEventResource->pointersCount--;
     if (tempButton->focusedSoundResource)

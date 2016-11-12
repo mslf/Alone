@@ -36,6 +36,9 @@
 #define SETTINGS_PARSER_VSYNC "vsync"
 #define SETTINGS_PARSER_MAIN_SCENE "mainScene"
 #define SETTINGS_DEFAULT_MAIN_SCENE "data/main.scene"
+
+//? Now that's how you should NOT do things :D 
+//? How about creating a  const structure with default values?
 enum {
     SETTINGS_DEFAULT_VSYNC = true,
     SETTINGS_DEFAULT_MUSIC = true,
