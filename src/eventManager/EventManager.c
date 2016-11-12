@@ -23,101 +23,83 @@
 #include "string.h"
 
 const char* const EVENT_MANAGER_ERR_ALLOC =
-        "EventManager: constructor: allocating memory failed!";
+        "EventManager_construct: allocating memory failed!";
 const char* const EVENT_MANAGER_ERR_GAME_EVENTS_LIST_ALLOC =
-        "EventManager: constructor: allocating memory for gameEventsList failed!";
+        "EventManager_construct: allocating memory for gameEventsList failed!";
 const char* const EVENT_MANAGER_ERR_CUSTOM_GAME_EVENTS_LIST_ALLOC =
-        "EventManager: constructor: allocating memory for customGameEventsList failed!";
+        "EventManager_construct: allocating memory for customGameEventsList failed!";
 const char* const EVENT_MANAGER_ERR_SDL_EVENTS_LIST_ALLOC =
-        "EventManager: constructor: allocating memory for sdlEventsList failed!";
+        "EventManager_construct: allocating memory for sdlEventsList failed!";
 
 struct EventManager* EventManager_construct(struct Logger* logger) {
     struct EventManager* em = NULL;
-    em = (struct EventManager*)malloc(sizeof(struct EventManager));
+    em = (struct EventManager*)calloc(1, sizeof(struct EventManager));
     if (!em) {
         Logger_log(logger, EVENT_MANAGER_ERR_ALLOC);
         return NULL;
     }
     if (!(em->gameEventsList = (struct GameEvent**)malloc(
-            sizeof(struct GameEvent*) * INITIAL_NUMBER_ALLOCATED_EVENTS))) {
+            sizeof(struct GameEvent*) * EM_INITIAL_NUMBER_ALLOCATED_EVENTS))) {
         Logger_log(logger, EVENT_MANAGER_ERR_GAME_EVENTS_LIST_ALLOC);
         EventManager_destruct(em);
         return NULL;
     }
-    em->allocatedGameEventsCount = INITIAL_NUMBER_ALLOCATED_EVENTS;
-    em->gameEventsCount = 0;
+    em->allocatedGameEventsCount = EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
     if (!(em->customGameEventsList = (struct GameEvent**)malloc(
-            sizeof(struct GameEvent*) * INITIAL_NUMBER_ALLOCATED_EVENTS))) {
+            sizeof(struct GameEvent*) * EM_INITIAL_NUMBER_ALLOCATED_EVENTS))) {
         Logger_log(logger, EVENT_MANAGER_ERR_CUSTOM_GAME_EVENTS_LIST_ALLOC);
         EventManager_destruct(em);
         return NULL;
     }
-    em->allocatedCustomGameEventsCount = INITIAL_NUMBER_ALLOCATED_EVENTS;
-    em->customGameEventsCount = 0;
+    em->allocatedCustomGameEventsCount = EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
     if (!(em->sdlEventsList = (SDL_Event*)malloc(
-            sizeof(SDL_Event) * INITIAL_NUMBER_ALLOCATED_SDL_EVENTS))) {
+            sizeof(SDL_Event) * EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS))) {
         Logger_log(logger, EVENT_MANAGER_ERR_SDL_EVENTS_LIST_ALLOC);
         EventManager_destruct(em);
         return NULL;
     }
-    em->allocatedSdlEventsCount = INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
-    em->sdlEventsCount = 0;
-    em->quit = 0;
+    em->allocatedSdlEventsCount = EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
     em->logger = logger;
     return em;
 }
 
-
-//? perharps you want to use realloc ? Also returning 0 1 or 2 is pretty lame, enums exist for a reason
-unsigned char EventManager_reallocateGameEventsList(struct EventManager* em) {
+static enum EventManager_errors EventManager_reallocateGameEventsList(struct EventManager* em) {
     if (!em)
-        return 1;
+        return EM_ERR_NULL_ARGUMENT;
     struct GameEvent** tList = NULL;
-    size_t i;
-    if (!(tList = (struct GameEvent**)malloc(
-            sizeof(struct GameEvent*) * (em->allocatedGameEventsCount + INITIAL_NUMBER_ALLOCATED_EVENTS)))) {
-        return 2;
-    }
-    for (i = 0; i < em->gameEventsCount; i++)
-        tList[i] = em->gameEventsList[i];
-    free(em->gameEventsList);
+    size_t newSize = em->allocatedGameEventsCount + EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
+    tList = (struct GameEvent**)realloc(em->gameEventsList, sizeof(struct GameEvent*) * newSize);
+    if (!tList)
+        return EM_ERR_REALLOC_GAME_EVENTS_LIST;
     em->gameEventsList = tList;
-    em->allocatedGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
-    return 0;
-}
-//? Same thing, consider `realloc()`
-unsigned EventManager_reallocateCustomGameEventsList(struct EventManager* em) {
-    if (!em)
-        return 1;
-    struct GameEvent** tList = NULL;
-    size_t i;
-    if (!(tList = (struct GameEvent**)malloc(
-            sizeof(struct GameEvent*) * (em->allocatedGameEventsCount + INITIAL_NUMBER_ALLOCATED_EVENTS)))) {
-        return 2;
-    }
-    for (i = 0; i < em->customGameEventsCount; i++)
-        tList[i] = em->customGameEventsList[i];
-    free(em->customGameEventsList);
-    em->customGameEventsList = tList;
-    em->allocatedCustomGameEventsCount += INITIAL_NUMBER_ALLOCATED_EVENTS;
-    return 0;
+    em->allocatedGameEventsCount = newSize;
+    return EM_NO_ERRORS;
 }
 
-unsigned char EventManager_reallocateSdlEventsList(struct EventManager* em) {
+static enum EventManager_errors EventManager_reallocateCustomGameEventsList(struct EventManager* em) {
     if (!em)
-        return 1;
-    SDL_Event *tList = NULL;
-    size_t i;
-    if (!(tList = (SDL_Event *) malloc(
-            sizeof(SDL_Event) * (em->allocatedSdlEventsCount + INITIAL_NUMBER_ALLOCATED_SDL_EVENTS)))) {
-        return 2;
-    }
-    for (i = 0; i < em->sdlEventsCount; i++)
-        tList[i] = em->sdlEventsList[i];
-    free(em->sdlEventsList);
+        return EM_ERR_NULL_ARGUMENT;
+    struct GameEvent** tList = NULL;
+    size_t newSize = em->allocatedGameEventsCount + EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
+    tList = (struct GameEvent**)realloc(em->customGameEventsList, sizeof(struct GameEvent*) * newSize);
+    if (!tList)
+        return EM_ERR_REALLOC_CUSTOM_GAME_EVENTS_LIST;
+    em->customGameEventsList = tList;
+    em->allocatedCustomGameEventsCount = newSize;
+    return EM_NO_ERRORS;
+}
+
+static enum EventManager_errors EventManager_reallocateSdlEventsList(struct EventManager* em) {
+    if (!em)
+        return EM_ERR_NULL_ARGUMENT;
+    SDL_Event* tList = NULL;
+    size_t newSize = em->allocatedSdlEventsCount + EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
+    tList = (SDL_Event*)realloc(em->sdlEventsList, sizeof(SDL_Event) * newSize);
+    if (!tList)
+        return EM_ERR_REALLOC_SDL_EVENTS_LIST;
     em->sdlEventsList = tList;
-    em->allocatedSdlEventsCount += INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
-    return 0;
+    em->allocatedSdlEventsCount = newSize;
+    return EM_NO_ERRORS;
 }
 
 void EventManager_destruct(struct EventManager* em) {
@@ -136,11 +118,9 @@ void EventManager_destruct(struct EventManager* em) {
     free(em);
 }
 
-unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent) {
-    if (!em)
-        return 1;
-    if (!gameEvent)
-        return 2;
+enum EventManager_errors EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent) {
+    if (!em || !gameEvent)
+        return EM_ERR_NULL_ARGUMENT;
     // Firstly, try to find the same GameEvent in list
     size_t i;
     bool found = false;
@@ -151,16 +131,16 @@ unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* g
         // Try to reallocate (if needed) and add gameEvent
         if (em->gameEventsCount >= em->allocatedGameEventsCount)
             if (EventManager_reallocateGameEventsList(em))
-                return 3;
+                return EM_ERR_REALLOC_GAME_EVENTS_LIST;
         em->gameEventsList[em->gameEventsCount] = gameEvent;
         em->gameEventsCount++;
     }
-    return 0;
+    return EM_NO_ERRORS;
 }
 
-unsigned char EventManager_removeEvent(struct EventManager* em, struct GameEvent* gameEvent) {
+enum EventManager_errors EventManager_removeEvent(struct EventManager* em, struct GameEvent* gameEvent) {
     if (!em || !gameEvent)
-        return 1;
+        return EM_ERR_NULL_ARGUMENT;
     size_t i;
     bool found = false;
     size_t foundIndex = 0;
@@ -174,14 +154,12 @@ unsigned char EventManager_removeEvent(struct EventManager* em, struct GameEvent
     if (found)
         for (i = foundIndex; i < em->gameEventsCount; i++)
             em->gameEventsList[i] = em->gameEventsList[i + 1];
-    return 0;
+    return EM_NO_ERRORS;
 }
 
-unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel) {
-    if (!em)
-        return 1;
-    if (!channel)
-        return 2;
+enum EventManager_errors EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel) {
+    if (!em || !channel)
+        return EM_ERR_NULL_ARGUMENT;
     size_t i;
     em->customGameEventsCount = 0;
     for (i = 0; i < em->gameEventsCount; i++)
@@ -189,26 +167,26 @@ unsigned char EventManager_generateCustomEventsList(struct EventManager* em, con
             // Try to reallocate (if needed) and add customGameEvent
             if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
                 if (EventManager_reallocateCustomGameEventsList(em))
-                    return 3;
+                    return EM_ERR_REALLOC_CUSTOM_GAME_EVENTS_LIST;
             em->customGameEventsList[em->customGameEventsCount] = em->gameEventsList[i];
             em->customGameEventsCount++;
         }
-    return 0;
+    return EM_NO_ERRORS;
 }
 
-unsigned char EventManager_updateSdlEvents(struct EventManager* em) {
+enum EventManager_errors EventManager_updateSdlEvents(struct EventManager* em) {
     if (!em)
-        return 1;
+        return EM_ERR_NULL_ARGUMENT;
     em->sdlEventsCount = 0;
     while(SDL_PollEvent(&(em->sdlEventsList[em->sdlEventsCount]))) {
         if(em->sdlEventsList[em->sdlEventsCount].type == SDL_QUIT)
-            em->quit = 1;
+            em->quit = true;
         em->sdlEventsCount++;
         if (em->sdlEventsCount >= em->allocatedSdlEventsCount)
             if (EventManager_reallocateSdlEventsList(em))
-                return 2;
+                return EM_ERR_REALLOC_SDL_EVENTS_LIST;
     }
-    return 0;
+    return EM_NO_ERRORS;
 }
 
 void EventManager_destructNeedlesEvents(struct EventManager* em) {

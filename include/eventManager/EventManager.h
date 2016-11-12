@@ -27,9 +27,17 @@
 #include "logger/Logger.h"
 #include "eventManager/GameEvent.h"
 
-enum {
-    INITIAL_NUMBER_ALLOCATED_EVENTS = 100,
-    INITIAL_NUMBER_ALLOCATED_SDL_EVENTS = 20
+enum EventManager_constants{
+    EM_INITIAL_NUMBER_ALLOCATED_EVENTS = 100,
+    EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS = 20
+};
+
+enum EventManager_errors {
+    EM_NO_ERRORS = 0,
+    EM_ERR_NULL_ARGUMENT = 1,
+    EM_ERR_REALLOC_SDL_EVENTS_LIST = 2,
+    EM_ERR_REALLOC_GAME_EVENTS_LIST = 3,
+    EM_ERR_REALLOC_CUSTOM_GAME_EVENTS_LIST = 4
 };
 
 struct EventManager {
@@ -38,10 +46,10 @@ struct EventManager {
     struct GameEvent** customGameEventsList;
     SDL_Event* sdlEventsList;
     size_t gameEventsCount;
-    size_t allocatedGameEventsCount;
     size_t customGameEventsCount;
-    size_t allocatedCustomGameEventsCount;
     size_t sdlEventsCount;
+    size_t allocatedGameEventsCount;
+    size_t allocatedCustomGameEventsCount;
     size_t allocatedSdlEventsCount;
     bool quit;
 };
@@ -49,10 +57,10 @@ struct EventManager {
 struct EventManager* EventManager_construct(struct Logger* logger);
 void EventManager_destruct(struct EventManager* em);
 
-unsigned char EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
-unsigned char EventManager_removeEvent(struct EventManager* em, struct GameEvent* gameEvent);
+enum EventManager_errors EventManager_addEvent(struct EventManager* em, struct GameEvent* gameEvent);
+enum EventManager_errors EventManager_removeEvent(struct EventManager* em, struct GameEvent* gameEvent);
 void EventManager_destructNeedlesEvents(struct EventManager* em);
-unsigned char EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel);
-unsigned char EventManager_updateSdlEvents(struct EventManager* em);
+enum EventManager_errors EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel);
+enum EventManager_errors EventManager_updateSdlEvents(struct EventManager* em);
 
 #endif //ALONE_EVENTMANAGER_H
