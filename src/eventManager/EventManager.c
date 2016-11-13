@@ -26,54 +26,47 @@
 #include "string.h"
 
 /**
- * @brief Error message string for EventManager_construct().
- * Will be displayed when EventManager_construct() fails to allocate memory for the #EventManager.
+ * @brief Error message strings for #EventManager.
  */
-const char* const EVENT_MANAGER_ERR_ALLOC =
-        "EventManager_construct: allocating memory failed!";
-/**
- * @brief Error message string for EventManager_construct().
- * Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#gameEventsList.
- */
-const char* const EVENT_MANAGER_ERR_GAME_EVENTS_LIST_ALLOC =
-        "EventManager_construct: allocating memory for gameEventsList failed!";
-/**
- * @brief Error message string for EventManager_construct().
- * Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#customGameEventsList.
- */
-const char* const EVENT_MANAGER_ERR_CUSTOM_GAME_EVENTS_LIST_ALLOC =
-        "EventManager_construct: allocating memory for customGameEventsList failed!";
-/**
- * @brief Error message string for EventManager_construct().
- * Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#sdlEventsList.
- */
-const char* const EVENT_MANAGER_ERR_SDL_EVENTS_LIST_ALLOC =
-        "EventManager_construct: allocating memory for sdlEventsList failed!";
+static const struct EventManager_errorMessages{
+    const char* const errAlloc;
+    /**< Will be displayed when EventManager_construct() fails to allocate memory for the #EventManager. */
+    const char* const errGameEventsListAlloc;
+    /**< Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#gameEventsList. */
+    const char* const errCustomGameEventsListAlloc;
+    /**< Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#customGameEventsList. */
+    const char* const errSdlEventsListAlloc;
+    /**< Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#sdlEventsList. */
+}EventManager_errorMessages = {
+    "EventManager_construct: allocating memory failed!",
+    "EventManager_construct: allocating memory for gameEventsList failed!",
+    "EventManager_construct: allocating memory for customGameEventsList failed!",
+    "EventManager_construct: allocating memory for sdlEventsList failed!"};
 
 struct EventManager* EventManager_construct(struct Logger* logger) {
     struct EventManager* em = NULL;
     em = (struct EventManager*)calloc(1, sizeof(struct EventManager));
     if (!em) {
-        Logger_log(logger, EVENT_MANAGER_ERR_ALLOC);
+        Logger_log(logger, EventManager_errorMessages.errAlloc);
         return NULL;
     }
     if (!(em->gameEventsList = (struct GameEvent**)malloc(
             sizeof(struct GameEvent*) * EM_INITIAL_NUMBER_ALLOCATED_EVENTS))) {
-        Logger_log(logger, EVENT_MANAGER_ERR_GAME_EVENTS_LIST_ALLOC);
+        Logger_log(logger, EventManager_errorMessages.errGameEventsListAlloc);
         EventManager_destruct(em);
         return NULL;
     }
     em->allocatedGameEventsCount = EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
     if (!(em->customGameEventsList = (struct GameEvent**)malloc(
             sizeof(struct GameEvent*) * EM_INITIAL_NUMBER_ALLOCATED_EVENTS))) {
-        Logger_log(logger, EVENT_MANAGER_ERR_CUSTOM_GAME_EVENTS_LIST_ALLOC);
+        Logger_log(logger, EventManager_errorMessages.errCustomGameEventsListAlloc);
         EventManager_destruct(em);
         return NULL;
     }
     em->allocatedCustomGameEventsCount = EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
     if (!(em->sdlEventsList = (SDL_Event*)malloc(
             sizeof(SDL_Event) * EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS))) {
-        Logger_log(logger, EVENT_MANAGER_ERR_SDL_EVENTS_LIST_ALLOC);
+        Logger_log(logger, EventManager_errorMessages.errSdlEventsListAlloc);
         EventManager_destruct(em);
         return NULL;
     }

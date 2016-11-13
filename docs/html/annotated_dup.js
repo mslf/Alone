@@ -7,6 +7,7 @@ var annotated_dup =
     [ "CheckBox", "struct_check_box.html", "struct_check_box" ],
     [ "ContextMenu", "struct_context_menu.html", "struct_context_menu" ],
     [ "EventManager", "struct_event_manager.html", "struct_event_manager" ],
+    [ "EventManager_errorMessages", "struct_event_manager__error_messages.html", "struct_event_manager__error_messages" ],
     [ "GameEvent", "struct_game_event.html", "struct_game_event" ],
     [ "GameManager", "struct_game_manager.html", "struct_game_manager" ],
     [ "InventoryItem", "struct_inventory_item.html", "struct_inventory_item" ],
