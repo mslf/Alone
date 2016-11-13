@@ -78,13 +78,13 @@ struct EventManager {
  * @brief Constructs #EventManager and inits it.
  * @param logger #Logger struct to set the same in the #EventManager. Can be NULL.
  * @return Pointer to a innitialized #EventManager, or NULL if failed.
+ * @see #EventManager_constants
  */
 struct EventManager* EventManager_construct(struct Logger* logger);
 
 /**
  * @brief Destructs #EventManager and frees memory, used by it.
  * @param em Pointer to a #EventManager. Can be not fully initialized. Can be NULL.
- * @see #EventManager_constants
  * @see #Logger
  */
 void EventManager_destruct(struct EventManager* em);

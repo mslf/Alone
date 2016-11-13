@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/10/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,15 +16,37 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file EventManager.c
+ * @author mslf
+ * @date 10 Aug 2016
+ * @brief File containing implementation of #EventManager.
+ */
 #include "eventManager/EventManager.h"
 #include "string.h"
 
+/**
+ * @brief Error message string for EventManager_construct().
+ * Will be displayed when EventManager_construct() fails to allocate memory for the #EventManager.
+ */
 const char* const EVENT_MANAGER_ERR_ALLOC =
         "EventManager_construct: allocating memory failed!";
+/**
+ * @brief Error message string for EventManager_construct().
+ * Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#gameEventsList.
+ */
 const char* const EVENT_MANAGER_ERR_GAME_EVENTS_LIST_ALLOC =
         "EventManager_construct: allocating memory for gameEventsList failed!";
+/**
+ * @brief Error message string for EventManager_construct().
+ * Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#customGameEventsList.
+ */
 const char* const EVENT_MANAGER_ERR_CUSTOM_GAME_EVENTS_LIST_ALLOC =
         "EventManager_construct: allocating memory for customGameEventsList failed!";
+/**
+ * @brief Error message string for EventManager_construct().
+ * Will be displayed when EventManager_construct() fails to allocate memory for the EventManager#sdlEventsList.
+ */
 const char* const EVENT_MANAGER_ERR_SDL_EVENTS_LIST_ALLOC =
         "EventManager_construct: allocating memory for sdlEventsList failed!";
 
@@ -63,6 +82,13 @@ struct EventManager* EventManager_construct(struct Logger* logger) {
     return em;
 }
 
+/**
+ * @brief Reallocates memory for the EventManager#gameEventsList.
+ * EventManager#allocatedGameEventsCount will be increased by #EM_INITIAL_NUMBER_ALLOCATED_EVENTS.
+ * @param em Pointer to a #EventManager. Can be NULL.
+ * @return #EventManager_errors value.
+ * @see #EventManager_errors
+ */
 static enum EventManager_errors EventManager_reallocateGameEventsList(struct EventManager* em) {
     if (!em)
         return EM_ERR_NULL_ARGUMENT;
@@ -76,6 +102,13 @@ static enum EventManager_errors EventManager_reallocateGameEventsList(struct Eve
     return EM_NO_ERRORS;
 }
 
+/**
+ * @brief Reallocates memory for the EventManager#customGameEventsList.
+ * EventManager#allocatedCustomGameEventsCount will be increased by #EM_INITIAL_NUMBER_ALLOCATED_EVENTS.
+ * @param em Pointer to a #EventManager. Can be NULL.
+ * @return #EventManager_errors value.
+ * @see #EventManager_errors
+ */
 static enum EventManager_errors EventManager_reallocateCustomGameEventsList(struct EventManager* em) {
     if (!em)
         return EM_ERR_NULL_ARGUMENT;
@@ -89,6 +122,13 @@ static enum EventManager_errors EventManager_reallocateCustomGameEventsList(stru
     return EM_NO_ERRORS;
 }
 
+/**
+ * @brief Reallocates memory for the EventManager#sdlEventsList.
+ * EventManager#allocatedSdlEventsCount will be increased by #EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS.
+ * @param em Pointer to a #EventManager. Can be NULL.
+ * @return #EventManager_errors value.
+ * @see #EventManager_errors
+ */
 static enum EventManager_errors EventManager_reallocateSdlEventsList(struct EventManager* em) {
     if (!em)
         return EM_ERR_NULL_ARGUMENT;
