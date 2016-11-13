@@ -1,0 +1,5 @@
+<map id="SceneNodeTypesRegistrar" name="SceneNodeTypesRegistrar">
+<area shape="rect" id="node2" href="$struct_scene_node_type.html" title="SceneNodeType" alt="" coords="36,184,165,211"/>
+<area shape="rect" id="node3" href="$struct_scene_node.html" title="SceneNode" alt="" coords="53,95,149,121"/>
+<area shape="rect" id="node4" href="$struct_text_resource.html" title="TextResource" alt="" coords="46,5,155,32"/>
+</map>

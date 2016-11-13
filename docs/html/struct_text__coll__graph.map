@@ -1,0 +1,5 @@
+<map id="Text" name="Text">
+<area shape="rect" id="node2" href="$struct_texture_resource.html" title="TextureResource" alt="" coords="5,95,135,121"/>
+<area shape="rect" id="node3" href="$struct_scene_node.html" title="SceneNode" alt="" coords="159,95,255,121"/>
+<area shape="rect" id="node4" href="$struct_text_resource.html" title="TextResource" alt="" coords="153,5,262,32"/>
+</map>

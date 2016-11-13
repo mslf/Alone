@@ -1,0 +1,9 @@
+<map id="CheckBox" name="CheckBox">
+<area shape="rect" id="node2" href="$struct_text_resource.html" title="TextResource" alt="" coords="5,5,115,32"/>
+<area shape="rect" id="node6" href="$struct_scene_node.html" title="SceneNode" alt="" coords="164,95,260,121"/>
+<area shape="rect" id="node3" href="$struct_sprite.html" title="Sprite" alt="" coords="406,213,463,240"/>
+<area shape="rect" id="node4" href="$struct_texture_resource.html" title="TextureResource" alt="" coords="367,95,497,121"/>
+<area shape="rect" id="node5" href="$struct_animation.html" title="Animation" alt="" coords="527,95,609,121"/>
+<area shape="rect" id="node8" href="$struct_game_event.html" title="GameEvent" alt="" coords="287,213,382,240"/>
+<area shape="rect" id="node7" href="$struct_sound_resource.html" title="SoundResource" alt="" coords="488,213,611,240"/>
+</map>
