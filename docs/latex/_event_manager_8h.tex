@@ -36,15 +36,15 @@ enum \hyperlink{_event_manager_8h_a4252c823e742ecff41a34c5d31b082e7}{Event\+Mana
 struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$ \hyperlink{_event_manager_8h_ab29e0486e59b74a74b8bd7832bbe573b}{Event\+Manager\+\_\+construct} (struct \hyperlink{struct_logger}{Logger} $\ast$logger)
 \begin{DoxyCompactList}\small\item\em Constructs \hyperlink{struct_event_manager}{Event\+Manager} and inits it. \end{DoxyCompactList}\item 
 void \hyperlink{_event_manager_8h_a1e8d2656ecf6f66dab04808823a19162}{Event\+Manager\+\_\+destruct} (struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$em)
-\begin{DoxyCompactList}\small\item\em Destructs \hyperlink{struct_event_manager}{Event\+Manager} and frees memory, used by it. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Destructs \hyperlink{struct_event_manager}{Event\+Manager} and frees memory, used by it. Use this funcrion in pair with \hyperlink{_event_manager_8h_ab29e0486e59b74a74b8bd7832bbe573b}{Event\+Manager\+\_\+construct()}. \end{DoxyCompactList}\item 
 enum \hyperlink{_event_manager_8h_a4252c823e742ecff41a34c5d31b082e7}{Event\+Manager\+\_\+errors} \hyperlink{_event_manager_8h_a60679d027720a51b56306e7530e7e29e}{Event\+Manager\+\_\+add\+Event} (struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$em, struct \hyperlink{struct_game_event}{Game\+Event} $\ast$game\+Event)
 \begin{DoxyCompactList}\small\item\em Adds \hyperlink{struct_game_event}{Game\+Event} to a \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List} if it is unique. Also, increases \hyperlink{struct_event_manager_ae586848fac4574f9c630a1b66a3b8c6c}{Event\+Manager\+::game\+Events\+Count} and tryies to reallocate memory if needed. \end{DoxyCompactList}\item 
 enum \hyperlink{_event_manager_8h_a4252c823e742ecff41a34c5d31b082e7}{Event\+Manager\+\_\+errors} \hyperlink{_event_manager_8h_a7ad22143850473c64ac3ec6bad066542}{Event\+Manager\+\_\+remove\+Event} (struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$em, struct \hyperlink{struct_game_event}{Game\+Event} $\ast$game\+Event)
 \begin{DoxyCompactList}\small\item\em Removes \hyperlink{struct_game_event}{Game\+Event} from a \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List}. Also, decreases \hyperlink{struct_event_manager_ae586848fac4574f9c630a1b66a3b8c6c}{Event\+Manager\+::game\+Events\+Count} and shifts \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List} to the left. \end{DoxyCompactList}\item 
 void \hyperlink{_event_manager_8h_aaafd98d1d23c448932787624e72f3f20}{Event\+Manager\+\_\+destruct\+Needles\+Events} (struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$em)
-\begin{DoxyCompactList}\small\item\em Removes and destructs Game\+Events in the \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List} if Game\+Event\+::is\+Needed == false. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Removes and destructs Game\+Events in the \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List} if \hyperlink{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c}{Game\+Event\+::is\+Needed} == false. \end{DoxyCompactList}\item 
 enum \hyperlink{_event_manager_8h_a4252c823e742ecff41a34c5d31b082e7}{Event\+Manager\+\_\+errors} \hyperlink{_event_manager_8h_af11d3e3f3b5693bdf71ddc988d46d5d1}{Event\+Manager\+\_\+generate\+Custom\+Events\+List} (struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$em, const char $\ast$const channel)
-\begin{DoxyCompactList}\small\item\em Adds \hyperlink{struct_game_event}{Game\+Event} to a \hyperlink{struct_event_manager_a72dc8ad68e1875aed6c94372ff3a51ce}{Event\+Manager\+::custom\+Game\+Events\+List} if Game\+Event\+::channel == channel. Adds Game\+Events from \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List}. Also, increases \hyperlink{struct_event_manager_a44bc521b94d679d4a5566cd59866c259}{Event\+Manager\+::custom\+Game\+Events\+Count} and tryies to reallocate memory if needed. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Adds \hyperlink{struct_game_event}{Game\+Event} to a \hyperlink{struct_event_manager_a72dc8ad68e1875aed6c94372ff3a51ce}{Event\+Manager\+::custom\+Game\+Events\+List} if Game\+Event\+::channel == channel. Also adds \hyperlink{struct_game_event}{Game\+Event} if it is broadcasting. Adds Game\+Events from \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List}. Also, increases \hyperlink{struct_event_manager_a44bc521b94d679d4a5566cd59866c259}{Event\+Manager\+::custom\+Game\+Events\+Count} and tryies to reallocate memory if needed. \end{DoxyCompactList}\item 
 enum \hyperlink{_event_manager_8h_a4252c823e742ecff41a34c5d31b082e7}{Event\+Manager\+\_\+errors} \hyperlink{_event_manager_8h_a20e7401bfdda0c31264dcfb33c992d09}{Event\+Manager\+\_\+update\+Sdl\+Events} (struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$em)
 \begin{DoxyCompactList}\small\item\em Updates \hyperlink{struct_event_manager_ac563054d2cefbd8d20b1daf70eb35d78}{Event\+Manager\+::sdl\+Events\+List}. Also, increases \hyperlink{struct_event_manager_a2ef8242634939408c466f0f3f221b1cb}{Event\+Manager\+::sdl\+Events\+Count} and tryies to reallocate memory if needed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -157,7 +157,7 @@ Constructs \hyperlink{struct_event_manager}{Event\+Manager} and inits it.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Pointer to a innitialized \hyperlink{struct_event_manager}{Event\+Manager}, or N\+U\+LL if failed. 
+Pointer to an initialized \hyperlink{struct_event_manager}{Event\+Manager}, or N\+U\+LL if constructing failed. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}
 \hyperlink{_event_manager_8h_acb5ddf0662e99c234f1960098c20d285}{Event\+Manager\+\_\+constants} 
@@ -170,7 +170,7 @@ Pointer to a innitialized \hyperlink{struct_event_manager}{Event\+Manager}, or N
 
 
 
-Destructs \hyperlink{struct_event_manager}{Event\+Manager} and frees memory, used by it. 
+Destructs \hyperlink{struct_event_manager}{Event\+Manager} and frees memory, used by it. Use this funcrion in pair with \hyperlink{_event_manager_8h_ab29e0486e59b74a74b8bd7832bbe573b}{Event\+Manager\+\_\+construct()}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -178,7 +178,7 @@ Destructs \hyperlink{struct_event_manager}{Event\+Manager} and frees memory, use
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{struct_logger}{Logger} 
+\hyperlink{_event_manager_8h_ab29e0486e59b74a74b8bd7832bbe573b}{Event\+Manager\+\_\+construct()} 
 \end{DoxySeeAlso}
 \hypertarget{_event_manager_8h_aaafd98d1d23c448932787624e72f3f20}{}\label{_event_manager_8h_aaafd98d1d23c448932787624e72f3f20} 
 \index{Event\+Manager.\+h@{Event\+Manager.\+h}!Event\+Manager\+\_\+destruct\+Needles\+Events@{Event\+Manager\+\_\+destruct\+Needles\+Events}}
@@ -188,7 +188,7 @@ Destructs \hyperlink{struct_event_manager}{Event\+Manager} and frees memory, use
 
 
 
-Removes and destructs Game\+Events in the \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List} if Game\+Event\+::is\+Needed == false. 
+Removes and destructs Game\+Events in the \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List} if \hyperlink{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c}{Game\+Event\+::is\+Needed} == false. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -209,13 +209,13 @@ Function doesn\textquotesingle{}t removes \hyperlink{struct_game_event}{Game\+Ev
 
 
 
-Adds \hyperlink{struct_game_event}{Game\+Event} to a \hyperlink{struct_event_manager_a72dc8ad68e1875aed6c94372ff3a51ce}{Event\+Manager\+::custom\+Game\+Events\+List} if Game\+Event\+::channel == channel. Adds Game\+Events from \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List}. Also, increases \hyperlink{struct_event_manager_a44bc521b94d679d4a5566cd59866c259}{Event\+Manager\+::custom\+Game\+Events\+Count} and tryies to reallocate memory if needed. 
+Adds \hyperlink{struct_game_event}{Game\+Event} to a \hyperlink{struct_event_manager_a72dc8ad68e1875aed6c94372ff3a51ce}{Event\+Manager\+::custom\+Game\+Events\+List} if Game\+Event\+::channel == channel. Also adds \hyperlink{struct_game_event}{Game\+Event} if it is broadcasting. Adds Game\+Events from \hyperlink{struct_event_manager_aa2b0ad79c0a87b310b5adf8feaf9ffd4}{Event\+Manager\+::game\+Events\+List}. Also, increases \hyperlink{struct_event_manager_a44bc521b94d679d4a5566cd59866c259}{Event\+Manager\+::custom\+Game\+Events\+Count} and tryies to reallocate memory if needed. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em em} & Pointer to a \hyperlink{struct_event_manager}{Event\+Manager}. Can be N\+U\+LL. \\
 \hline
-{\em channel} & Pointer to a const channel string. Can be N\+U\+LL. Game\+Events with the same channel string will be added to \hyperlink{struct_event_manager_a72dc8ad68e1875aed6c94372ff3a51ce}{Event\+Manager\+::custom\+Game\+Events\+List}. \\
+{\em channel} & Pointer to a const channel string. Can be N\+U\+LL. Game\+Events with the same channel string and with N\+U\+LL channel (broadcasting) will be added to \hyperlink{struct_event_manager_a72dc8ad68e1875aed6c94372ff3a51ce}{Event\+Manager\+::custom\+Game\+Events\+List}. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -223,6 +223,8 @@ Adds \hyperlink{struct_game_event}{Game\+Event} to a \hyperlink{struct_event_man
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}
 \hyperlink{struct_game_event}{Game\+Event} 
+
+\hyperlink{_game_event_8h_a17dd4ecf8a47610f392bb3b4e95921c8}{Game\+Event\+\_\+construct()} 
 
 \hyperlink{_event_manager_8h_a4252c823e742ecff41a34c5d31b082e7}{Event\+Manager\+\_\+errors} 
 \end{DoxySeeAlso}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quit',['quit',['../struct_event_manager.html#ac746fa6ad48d19984a159f14bec028a3',1,'EventManager']]]
+  ['isneeded',['isNeeded',['../struct_game_event.html#a1c2e66c0da32aeb6b56a788ad2beee8c',1,'GameEvent']]]
 ];

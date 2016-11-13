@@ -1,25 +1,70 @@
 \hypertarget{struct_game_event}{}\section{Game\+Event Struct Reference}
 \label{struct_game_event}\index{Game\+Event@{Game\+Event}}
+
+
+Standart structure for \hyperlink{struct_scene_node}{Scene\+Node} communication and more.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Event.\+h$>$}
+
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{struct_game_event_a7dda51a2020c9e6ea2d284527a6c0a3c}{}\label{struct_game_event_a7dda51a2020c9e6ea2d284527a6c0a3c} 
-char $\ast$ {\bfseries event\+Channel}
+char $\ast$ \hyperlink{struct_game_event_a7dda51a2020c9e6ea2d284527a6c0a3c}{event\+Channel}
 \item 
-\hypertarget{struct_game_event_a66ff5dae3a3a9fa193714623f219c11d}{}\label{struct_game_event_a66ff5dae3a3a9fa193714623f219c11d} 
-struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$ {\bfseries sender}
+struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$ \hyperlink{struct_game_event_a66ff5dae3a3a9fa193714623f219c11d}{sender}
 \item 
-\hypertarget{struct_game_event_ade9cba72805fe52685a1deea307a8e82}{}\label{struct_game_event_ade9cba72805fe52685a1deea307a8e82} 
-char $\ast$ {\bfseries command}
+char $\ast$ \hyperlink{struct_game_event_ade9cba72805fe52685a1deea307a8e82}{command}
 \item 
-\hypertarget{struct_game_event_a91a70b77df95bd8b0830b49a094c2acb}{}\label{struct_game_event_a91a70b77df95bd8b0830b49a094c2acb} 
-char $\ast$ {\bfseries data}
+char $\ast$ \hyperlink{struct_game_event_a91a70b77df95bd8b0830b49a094c2acb}{data}
 \item 
-\hypertarget{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c}{}\label{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c} 
-bool {\bfseries is\+Needed}
+bool \hyperlink{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c}{is\+Needed}
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Standart structure for \hyperlink{struct_scene_node}{Scene\+Node} communication and more. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_event_manager}{Event\+Manager} 
+\end{DoxySeeAlso}
+
+
+\subsection{Field Documentation}
+\hypertarget{struct_game_event_ade9cba72805fe52685a1deea307a8e82}{}\label{struct_game_event_ade9cba72805fe52685a1deea307a8e82} 
+\index{Game\+Event@{Game\+Event}!command@{command}}
+\index{command@{command}!Game\+Event@{Game\+Event}}
+\subsubsection{\texorpdfstring{command}{command}}
+{\footnotesize\ttfamily char$\ast$ command}
+
+String with some command. \hypertarget{struct_game_event_a91a70b77df95bd8b0830b49a094c2acb}{}\label{struct_game_event_a91a70b77df95bd8b0830b49a094c2acb} 
+\index{Game\+Event@{Game\+Event}!data@{data}}
+\index{data@{data}!Game\+Event@{Game\+Event}}
+\subsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily char$\ast$ data}
+
+String with some data about \hyperlink{struct_game_event}{Game\+Event}. \hypertarget{struct_game_event_a7dda51a2020c9e6ea2d284527a6c0a3c}{}\label{struct_game_event_a7dda51a2020c9e6ea2d284527a6c0a3c} 
+\index{Game\+Event@{Game\+Event}!event\+Channel@{event\+Channel}}
+\index{event\+Channel@{event\+Channel}!Game\+Event@{Game\+Event}}
+\subsubsection{\texorpdfstring{event\+Channel}{eventChannel}}
+{\footnotesize\ttfamily char$\ast$ event\+Channel}
+
+String, which describes in what \char`\"{}channel\char`\"{} that \hyperlink{struct_game_event}{Game\+Event} happend. \hypertarget{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c}{}\label{struct_game_event_a1c2e66c0da32aeb6b56a788ad2beee8c} 
+\index{Game\+Event@{Game\+Event}!is\+Needed@{is\+Needed}}
+\index{is\+Needed@{is\+Needed}!Game\+Event@{Game\+Event}}
+\subsubsection{\texorpdfstring{is\+Needed}{isNeeded}}
+{\footnotesize\ttfamily bool is\+Needed}
+
+Flag, which indicates actuality of \hyperlink{struct_game_event}{Game\+Event}. \hypertarget{struct_game_event_a66ff5dae3a3a9fa193714623f219c11d}{}\label{struct_game_event_a66ff5dae3a3a9fa193714623f219c11d} 
+\index{Game\+Event@{Game\+Event}!sender@{sender}}
+\index{sender@{sender}!Game\+Event@{Game\+Event}}
+\subsubsection{\texorpdfstring{sender}{sender}}
+{\footnotesize\ttfamily struct \hyperlink{struct_scene_node}{Scene\+Node}$\ast$ sender}
+
+Pointer to a sender \hyperlink{struct_scene_node}{Scene\+Node}. 
+
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-include/event\+Manager/Game\+Event.\+h\end{DoxyCompactItemize}
+include/event\+Manager/\hyperlink{_game_event_8h}{Game\+Event.\+h}\end{DoxyCompactItemize}

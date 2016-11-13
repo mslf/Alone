@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['gameeventscount',['gameEventsCount',['../struct_event_manager.html#ae586848fac4574f9c630a1b66a3b8c6c',1,'EventManager']]],
-  ['gameeventslist',['gameEventsList',['../struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4',1,'EventManager']]]
+  ['erralloc',['errAlloc',['../struct_event_manager__error_messages.html#a0e28ceae89fe4b66ac6df69bbc36690e',1,'EventManager_errorMessages']]],
+  ['errcustomgameeventslistalloc',['errCustomGameEventsListAlloc',['../struct_event_manager__error_messages.html#a37b2753fbfa3245a819e59edc3c65161',1,'EventManager_errorMessages']]],
+  ['errgameeventslistalloc',['errGameEventsListAlloc',['../struct_event_manager__error_messages.html#a46f0603004a3be0585c1f4294307140e',1,'EventManager_errorMessages']]],
+  ['errsdleventslistalloc',['errSdlEventsListAlloc',['../struct_event_manager__error_messages.html#a9a9cd78acd092348d638117c5b717278',1,'EventManager_errorMessages']]],
+  ['eventchannel',['eventChannel',['../struct_game_event.html#a7dda51a2020c9e6ea2d284527a6c0a3c',1,'GameEvent']]]
 ];

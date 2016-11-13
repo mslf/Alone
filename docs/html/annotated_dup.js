@@ -9,6 +9,7 @@ var annotated_dup =
     [ "EventManager", "struct_event_manager.html", "struct_event_manager" ],
     [ "EventManager_errorMessages", "struct_event_manager__error_messages.html", "struct_event_manager__error_messages" ],
     [ "GameEvent", "struct_game_event.html", "struct_game_event" ],
+    [ "GameEvent_parserStrings", "struct_game_event__parser_strings.html", "struct_game_event__parser_strings" ],
     [ "GameManager", "struct_game_manager.html", "struct_game_manager" ],
     [ "InventoryItem", "struct_inventory_item.html", "struct_inventory_item" ],
     [ "Item", "struct_item.html", "struct_item" ],

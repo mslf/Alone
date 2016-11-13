@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['readme',['README',['../md__r_e_a_d_m_e.html',1,'']]],
-  ['renderer',['Renderer',['../struct_renderer.html',1,'']]],
-  ['resourcemanager',['ResourceManager',['../struct_resource_manager.html',1,'']]],
-  ['rightoperand',['RightOperand',['../struct_right_operand.html',1,'']]]
+  ['quit',['quit',['../struct_event_manager.html#ac746fa6ad48d19984a159f14bec028a3',1,'EventManager']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pair',['Pair',['../struct_pair.html',1,'']]],
-  ['physicalscenenode',['PhysicalSceneNode',['../struct_physical_scene_node.html',1,'']]],
-  ['progressbar',['ProgressBar',['../struct_progress_bar.html',1,'']]]
+  ['nanoconnection',['NanoConnection',['../struct_nano_connection.html',1,'']]],
+  ['nanomodule',['NanoModule',['../struct_nano_module.html',1,'']]],
+  ['nanosection',['NanoSection',['../struct_nano_section.html',1,'']]]
 ];
