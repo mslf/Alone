@@ -191,12 +191,19 @@ enum EventManager_errors EventManager_removeEvent(struct EventManager* em, struc
 }
 
 enum EventManager_errors EventManager_generateCustomEventsList(struct EventManager* em, const char* const channel) {
-    if (!em || !channel)
+    if (!em)
         return EM_ERR_NULL_ARGUMENT;
     size_t i;
     em->customGameEventsCount = 0;
     for (i = 0; i < em->gameEventsCount; i++)
-        if (strcmp(em->gameEventsList[i]->eventChannel, channel) == 0) {
+        /* If GameEvent is broadcasting
+         * or if GameEvent is broadcasting and we want only broadcasting (channel == NULL) GameEvents in our list
+         * or if strings channel and GameEvent->eventChannel are equal (and they are not NULL)
+         */
+        if (em->gameEventsList[i]->eventChannel == NULL
+            || (em->gameEventsList[i]->eventChannel == NULL && channel == NULL) 
+            || (em->gameEventsList[i]->eventChannel && channel 
+                && strcmp(em->gameEventsList[i]->eventChannel, channel) == 0)) {
             // Try to reallocate (if needed) and add customGameEvent
             if (em->customGameEventsCount >= em->allocatedCustomGameEventsCount)
                 if (EventManager_reallocateCustomGameEventsList(em))

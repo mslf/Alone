@@ -69,13 +69,13 @@ struct GameEvent {
  * If data is NULL, then we think that #GameEvent don't need any data.
  * May be useful for commands without arguments.
  * @return Pointer to an initialized #GameEvent, or NULL if constructing failed.
- * @note Only one (command or data) string can be NULL.
+ * @note Only one (command or data) string can be NULL at one time.
  */
 struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNode* sender, const char* const command,
                                       const char* const data);
 
 /**
- * @brief Constructs #GameEvent and inits it from a #TexetParser.
+ * @brief Constructs #GameEvent and inits it from a #TextParser.
  * @param textParser Pointer to #TextParser with data strings for initializing #GameEvent. Can be NULL.
  * @param sender Pointer to a #SceneNode which sends that #GameEvent. Can be NULL.
  * If sender is NULL, then we think, that there is no specific sender, or it's jsut not a #SceneNode.

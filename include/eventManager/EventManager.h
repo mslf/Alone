@@ -123,13 +123,16 @@ void EventManager_destructNeedlesEvents(struct EventManager* em);
 
 /**
  * @brief Adds #GameEvent to a EventManager#customGameEventsList if GameEvent#channel == channel.
+ * Also adds #GameEvent if it is broadcasting.
  * Adds GameEvents from EventManager#gameEventsList. Also, increases EventManager#customGameEventsCount
  * and tryies to reallocate memory if needed.
  * @param em Pointer to a #EventManager. Can be NULL.
  * @param channel Pointer to a const channel string. Can be NULL.
- * GameEvents with the same channel string will be added to EventManager#customGameEventsList.
+ * GameEvents with the same channel string and with NULL channel (broadcasting) 
+ * will be added to EventManager#customGameEventsList.
  * @return #EventManager_errors value.
  * @see #GameEvent
+ * @see GameEvent_construct()
  * @see #EventManager_errors
  * @note Last changes in EventManager#customGameEventsList will be lost!
  * @note Function firstly reset EventManager#customGameEventsCount to a 0.
