@@ -20,7 +20,7 @@
  * @file EventManager.h
  * @author mslf
  * @date 10 Aug 2016
- * @brief File containing #EventManager and it's stuff
+ * @brief File containing #EventManager and it's stuff.
  */
 #ifndef ALONE_EVENTMANAGER_H
 #define ALONE_EVENTMANAGER_H
@@ -31,7 +31,7 @@
 #include "eventManager/GameEvent.h"
 
 /**
- * @brief Some initial constants for #EventManager
+ * @brief Some initial constants for #EventManager.
  */
 enum EventManager_constants{
     EM_INITIAL_NUMBER_ALLOCATED_EVENTS = 100,
@@ -41,7 +41,7 @@ enum EventManager_constants{
 };
 
 /**
- * @brief Error codes for EventManager
+ * @brief Error codes for EventManager.
  */
 enum EventManager_errors {
     EM_NO_ERRORS = 0, /**< All right, no errors. */
@@ -77,22 +77,22 @@ struct EventManager {
 /**
  * @brief Constructs #EventManager and inits it.
  * @param logger #Logger struct to set the same in the #EventManager. Can be NULL.
- * @return Pointer to a innitialized #EventManager, or NULL if failed.
+ * @return Pointer to an initialized #EventManager, or NULL if constructing  failed.
  * @see #EventManager_constants
  */
 struct EventManager* EventManager_construct(struct Logger* logger);
 
 /**
  * @brief Destructs #EventManager and frees memory, used by it.
+ * Use this funcrion in pair with EventManager_construct().
  * @param em Pointer to a #EventManager. Can be not fully initialized. Can be NULL.
- * @see #Logger
+ * @see EventManager_construct()
  */
 void EventManager_destruct(struct EventManager* em);
 
 /**
  * @brief Adds #GameEvent to a EventManager#gameEventsList if it is unique.
- * Also, increases EventManager#gameEventsCount and tryies to reallocate memory
- * if needed.
+ * Also, increases EventManager#gameEventsCount and tryies to reallocate memory if needed.
  * @param em Pointer to a #EventManager. Can be NULL.
  * @param gameEvent Pointer to a #GameEvent to add. Can be NULL.
  * @return #EventManager_errors value.

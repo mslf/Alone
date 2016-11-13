@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/12/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,37 +16,51 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file GameEvent.c
+ * @author mslf
+ * @date 12 Aug 2016
+ * @brief File containing implementation of #GameEvent.
+ */
 #include <stdlib.h>
 #include <string.h>
 #include "eventManager/GameEvent.h"
 
 struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNode* sender, const char* const command,
                                       const char* const data) {
+    if (!command && !data)
+        return NULL;
     struct GameEvent* gameEvent = NULL;
     gameEvent = (struct GameEvent*)calloc(1, sizeof(struct GameEvent));
     if (!gameEvent)
         return NULL;
-    gameEvent->eventChannel = (char*)malloc(sizeof(char) * (strlen(channel) + 1));
-    if (!gameEvent->eventChannel) {
-        GameEvent_destruct(gameEvent);
-        return NULL;
+    if (channel) {
+        gameEvent->eventChannel = (char*)malloc(sizeof(char) * (strlen(channel) + 1));
+        if (!gameEvent->eventChannel) {
+            GameEvent_destruct(gameEvent);
+            return NULL;
+        }
+        strcpy(gameEvent->eventChannel, channel);
     }
-    strcpy(gameEvent->eventChannel, channel);
-    gameEvent->command = (char*)malloc(sizeof(char) * (strlen(command) + 1));
-    if (!gameEvent->command) {
-        GameEvent_destruct(gameEvent);
-        return NULL;
+    if (command) {
+        gameEvent->command = (char*)malloc(sizeof(char) * (strlen(command) + 1));
+        if (!gameEvent->command) {
+            GameEvent_destruct(gameEvent);
+            return NULL;
+        }
+        strcpy(gameEvent->command, command);
     }
-    strcpy(gameEvent->command, command);
-    gameEvent->data = (char*)malloc(sizeof(char) * (strlen(data) + 1));
-    if (!gameEvent->data) {
-        GameEvent_destruct(gameEvent);
-        return NULL;
+    if (data) {
+        gameEvent->data = (char*)malloc(sizeof(char) * (strlen(data) + 1));
+        if (!gameEvent->data) {
+            GameEvent_destruct(gameEvent);
+            return NULL;
+        }
+        strcpy(gameEvent->data, data);
     }
-    strcpy(gameEvent->data, data);
     gameEvent->sender = sender;
     gameEvent->isNeeded = true;
-    return  gameEvent;
+    return gameEvent;
 }
 
 struct GameEvent* GameEvent_constructFromTextParser(struct TextParser* textParser, struct SceneNode* sender) {
@@ -58,15 +69,15 @@ struct GameEvent* GameEvent_constructFromTextParser(struct TextParser* textParse
     char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!tempTypeString)
         return NULL;
-    if (strcmp(tempTypeString, GAME_EVENT_PARSER_TYPE_STRING) != 0)
+    if (strcmp(tempTypeString, GamaEvent_parserStrings.type) != 0)
         return NULL;
-    char* tempChannelString = TextParser_getString(textParser, GAME_EVENT_PARSER_CHANNEL_STRING, 0);
+    char* tempChannelString = TextParser_getString(textParser, GamaEvent_parserStrings.channel, 0);
     if (!tempChannelString)
         return NULL;
-    char* tempCommandString = TextParser_getString(textParser, GAME_EVENT_PARSER_COMMAND_STRING, 0);
+    char* tempCommandString = TextParser_getString(textParser, GamaEvent_parserStrings.command, 0);
     if (!tempCommandString)
         return NULL;
-    char* tempDataString = TextParser_getString(textParser, GAME_EVENT_PARSER_DATA_STRING, 0);
+    char* tempDataString = TextParser_getString(textParser, GamaEvent_parserStrings.data, 0);
     if (!tempDataString)
         return NULL;
     return GameEvent_construct(tempChannelString, sender, tempCommandString, tempDataString);
