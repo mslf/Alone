@@ -1,0 +1,455 @@
+\hypertarget{_button_8h}{}\section{include/gui/\+Button.h File Reference}
+\label{_button_8h}\index{include/gui/\+Button.\+h@{include/gui/\+Button.\+h}}
+
+
+File containing \hyperlink{struct_button}{Button} and it\textquotesingle{}s stuff.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}scene/\+Scene\+Node.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}renderer/\+Renderer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}event\+Manager/\+Event\+Manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}musican/\+Musican.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}resource\+Manager/\+Resource\+Manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sprite/\+Sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/\+Text.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings}
+\begin{DoxyCompactList}\small\item\em Strings which are used for constructing \hyperlink{struct_button}{Button} from \hyperlink{struct_text_parser}{Text\+Parser}. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_button}{Button}
+\begin{DoxyCompactList}\small\item\em Standart Gui element to be clicked without holding it\textquotesingle{}s state through the frames. Has some text on itself, focused and pressed \hyperlink{struct_game_event}{Game\+Event} and \hyperlink{struct_sound_resource}{Sound\+Resource}. \hyperlink{struct_user}{User} can click the \hyperlink{struct_button}{Button}, and some things will happen (such a \hyperlink{struct_game_event}{Game\+Event} or sound playing). Also it\textquotesingle{}s useful for other Gui elements, which are needed to be clicked without saving state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \{ \newline
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a8d34ee57856dfad6702aa1a0317cdf81}{B\+U\+T\+T\+O\+N\+\_\+\+N\+O\+\_\+\+E\+R\+R\+O\+RS} = 0, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a35aa4c7a82612ea1172e5d7002214b57}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+U\+L\+L\+\_\+\+A\+R\+G\+U\+M\+E\+NT} = 1, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541ae84de1fc45be966b8584dae700456540}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+S\+P\+R\+I\+T\+E\+\_\+\+R\+ES} = 2, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541ade3209bc63b0a416a6f81f090cce00bd}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+S\+P\+R\+I\+TE} = 3, 
+\newline
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a7459f38d8e5acea97e95bfa968f0f9db}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+T\+\_\+\+E\+N\+O\+U\+G\+H\+\_\+\+A\+N\+I\+M\+A\+T\+I\+O\+NS} = 4, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a1a129c4a474132b09d1e4350f356b6a0}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+T\+E\+X\+T\+\_\+\+R\+ES} = 5, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a23f6cc8e710922f78084ac7bfd188398}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+XT} = 6, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a4943c2d78434d807bb0c4d1b9a6ae9ba}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+L\+O\+A\+D\+I\+N\+G\+\_\+\+S\+E\+T\+T\+I\+N\+GS} = 7, 
+\newline
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a6f5ff8a22de27dadac2f87df9f2b6a6f}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES} = 8, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a76bbad36ff06055ddb3111c9ac0a47e8}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES} = 9, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a7de8f3bf9838582d53ee571e40ca4e53}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+NT} = 10, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a9c2549d82bd346f5bcec701a0bf0512b}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+NT} = 11, 
+\newline
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a5722a222eddcd221d7e46100140907e6}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+X\+T\+\_\+\+P\+A\+R\+S\+ER} = 12, 
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a2c57e661704d0a28013172d49d0661ec}{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+S\+A\+V\+I\+NG} = 13
+ \}\begin{DoxyCompactList}\small\item\em Error codes for \hyperlink{struct_button}{Button}. \end{DoxyCompactList}
+\item 
+enum \hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657}{Button\+State} \{ \hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a05af63e3fef20bdf01d69e62e52a4eb5}{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+N\+O\+R\+M\+AL} = 0, 
+\hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a8bd638a5c2b3a097886e58ca8d26c9f3}{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+O\+C\+U\+S\+ED} = 1, 
+\hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a7f2090435434c8307247141ed8ce118c}{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+E\+S\+S\+ED} = 2
+ \}\begin{DoxyCompactList}\small\item\em Possible \hyperlink{struct_button}{Button} states. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$ \hyperlink{_button_8h_af75cacaf53085bfb94b9c70c6b10caed}{Button\+\_\+construct} (struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const resource\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$const renderer, struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$scene\+Node\+Types\+Registrar, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$const text\+Parser)
+\begin{DoxyCompactList}\small\item\em Constructs \hyperlink{struct_button}{Button} and inits it from a \hyperlink{struct_text_parser}{Text\+Parser}. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8h_a088a0c517db01f25bbdeea23240861fa}{Button\+\_\+destruct} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Destructs \hyperlink{struct_button}{Button} and frees memory, used by it. Pointer to that function should be at Button\+::scene\+Node\+::destruct. \end{DoxyCompactList}\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8h_a7489d676d6290b5c03cb146ebf56e5a6}{Button\+\_\+change\+Focused\+Event\+Resource} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, const char $\ast$const focused\+Event\+Res\+Id)
+\begin{DoxyCompactList}\small\item\em Changes \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} and \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event}. Sets old Button\+::focused\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::focused\+Event\+Resource\+::pointers\+Count if exists. \end{DoxyCompactList}\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8h_a9ebc2f888e3123690008a8b820677826}{Button\+\_\+change\+Pressed\+Event\+Resource} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, const char $\ast$const pressed\+Event\+Res\+Id)
+\begin{DoxyCompactList}\small\item\em Changes \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource} and \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. Sets old Button\+::pressed\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::pressed\+Event\+Resource\+::pointers\+Count if exists. \end{DoxyCompactList}\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8h_a36e464cd7fac8f1646dd3571f990e11b}{Button\+\_\+save} (const struct \hyperlink{struct_button}{Button} $\ast$const button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const resource\+Manager, const char $\ast$const button\+Res\+Id)
+\begin{DoxyCompactList}\small\item\em Saves \hyperlink{struct_button}{Button} to the filesystem via \hyperlink{struct_resource_manager}{Resource\+Manager}. Before saving, it updates Button\+::scene\+Node\+::scene\+Node\+Text\+Resource with the latest changes in \hyperlink{struct_button}{Button}. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8h_a4626fc067a7a183e59ef37786d4045b2}{Button\+\_\+control} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$event\+Manager)
+\begin{DoxyCompactList}\small\item\em Function to control user input events to \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::control. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8h_aae2f164ac9b21ea87759eecbda20c9d4}{Button\+\_\+update} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$event\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Function to update \hyperlink{struct_button}{Button} and interacting with \hyperlink{struct_event_manager}{Event\+Manager}. Pointer to that function should be at Button\+::scene\+Node\+::update. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8h_a73a6d23a2809dc26d9cd8711f0c4e113}{Button\+\_\+render} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Function to render \hyperlink{struct_button}{Button} on the screen. Pointer to that function should be at Button\+::scene\+Node\+::render. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8h_a445315add3d495f1a1712b1f38313d50}{Button\+\_\+sound} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_musican}{Musican} $\ast$musican)
+\begin{DoxyCompactList}\small\item\em Function to play sounds of a \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const struct \hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} {\bfseries Button\+Scene\+Node\+\_\+parser\+Strings}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File containing \hyperlink{struct_button}{Button} and it\textquotesingle{}s stuff. 
+
+\begin{DoxyAuthor}{Author}
+mslf 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13 Aug 2016 
+\end{DoxyDate}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541} 
+\index{Button.\+h@{Button.\+h}!Button\+Scene\+Node\+\_\+errors@{Button\+Scene\+Node\+\_\+errors}}
+\index{Button\+Scene\+Node\+\_\+errors@{Button\+Scene\+Node\+\_\+errors}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+Scene\+Node\+\_\+errors}{ButtonSceneNode\_errors}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors}}
+
+
+
+Error codes for \hyperlink{struct_button}{Button}. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+N\+O\+\_\+\+E\+R\+R\+O\+RS@{B\+U\+T\+T\+O\+N\+\_\+\+N\+O\+\_\+\+E\+R\+R\+O\+RS}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+N\+O\+\_\+\+E\+R\+R\+O\+RS@{B\+U\+T\+T\+O\+N\+\_\+\+N\+O\+\_\+\+E\+R\+R\+O\+RS}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a8d34ee57856dfad6702aa1a0317cdf81}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a8d34ee57856dfad6702aa1a0317cdf81} 
+B\+U\+T\+T\+O\+N\+\_\+\+N\+O\+\_\+\+E\+R\+R\+O\+RS&All right, no errors. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+U\+L\+L\+\_\+\+A\+R\+G\+U\+M\+E\+NT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+U\+L\+L\+\_\+\+A\+R\+G\+U\+M\+E\+NT}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+U\+L\+L\+\_\+\+A\+R\+G\+U\+M\+E\+NT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+U\+L\+L\+\_\+\+A\+R\+G\+U\+M\+E\+NT}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a35aa4c7a82612ea1172e5d7002214b57}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a35aa4c7a82612ea1172e5d7002214b57} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+U\+L\+L\+\_\+\+A\+R\+G\+U\+M\+E\+NT&Some of function\textquotesingle{}s arguments are N\+U\+LL. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+S\+P\+R\+I\+T\+E\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+S\+P\+R\+I\+T\+E\+\_\+\+R\+ES}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+S\+P\+R\+I\+T\+E\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+S\+P\+R\+I\+T\+E\+\_\+\+R\+ES}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541ae84de1fc45be966b8584dae700456540}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541ae84de1fc45be966b8584dae700456540} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+S\+P\+R\+I\+T\+E\+\_\+\+R\+ES&No \hyperlink{struct_button_scene_node__parser_strings_a008090dd7a5af169656ea5a85a437385}{Button\+Scene\+Node\+\_\+parser\+Strings\+::sprite\+Res} string found in \hyperlink{struct_text_parser}{Text\+Parser}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+S\+P\+R\+I\+TE@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+S\+P\+R\+I\+TE}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+S\+P\+R\+I\+TE@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+S\+P\+R\+I\+TE}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541ade3209bc63b0a416a6f81f090cce00bd}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541ade3209bc63b0a416a6f81f090cce00bd} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+S\+P\+R\+I\+TE&Constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+T\+\_\+\+E\+N\+O\+U\+G\+H\+\_\+\+A\+N\+I\+M\+A\+T\+I\+O\+NS@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+T\+\_\+\+E\+N\+O\+U\+G\+H\+\_\+\+A\+N\+I\+M\+A\+T\+I\+O\+NS}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+T\+\_\+\+E\+N\+O\+U\+G\+H\+\_\+\+A\+N\+I\+M\+A\+T\+I\+O\+NS@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+T\+\_\+\+E\+N\+O\+U\+G\+H\+\_\+\+A\+N\+I\+M\+A\+T\+I\+O\+NS}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a7459f38d8e5acea97e95bfa968f0f9db}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a7459f38d8e5acea97e95bfa968f0f9db} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+T\+\_\+\+E\+N\+O\+U\+G\+H\+\_\+\+A\+N\+I\+M\+A\+T\+I\+O\+NS&Constructed \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} doesn\textquotesingle{}t have enough animations. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+T\+E\+X\+T\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+T\+E\+X\+T\+\_\+\+R\+ES}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+T\+E\+X\+T\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+T\+E\+X\+T\+\_\+\+R\+ES}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a1a129c4a474132b09d1e4350f356b6a0}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a1a129c4a474132b09d1e4350f356b6a0} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+T\+E\+X\+T\+\_\+\+R\+ES&No \hyperlink{struct_button_scene_node__parser_strings_ab8666a8039b6fdab629c3e0853421c3c}{Button\+Scene\+Node\+\_\+parser\+Strings\+::text\+Res} string found in \hyperlink{struct_text_parser}{Text\+Parser}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+XT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+XT}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+XT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+XT}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a23f6cc8e710922f78084ac7bfd188398}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a23f6cc8e710922f78084ac7bfd188398} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+XT&Constructing \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+L\+O\+A\+D\+I\+N\+G\+\_\+\+S\+E\+T\+T\+I\+N\+GS@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+L\+O\+A\+D\+I\+N\+G\+\_\+\+S\+E\+T\+T\+I\+N\+GS}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+L\+O\+A\+D\+I\+N\+G\+\_\+\+S\+E\+T\+T\+I\+N\+GS@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+L\+O\+A\+D\+I\+N\+G\+\_\+\+S\+E\+T\+T\+I\+N\+GS}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a4943c2d78434d807bb0c4d1b9a6ae9ba}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a4943c2d78434d807bb0c4d1b9a6ae9ba} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+L\+O\+A\+D\+I\+N\+G\+\_\+\+S\+E\+T\+T\+I\+N\+GS&Loading required settings from \hyperlink{struct_text_parser}{Text\+Parser} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a6f5ff8a22de27dadac2f87df9f2b6a6f}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a6f5ff8a22de27dadac2f87df9f2b6a6f} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES&Loading new \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} from \hyperlink{struct_resource_manager}{Resource\+Manager} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a76bbad36ff06055ddb3111c9ac0a47e8}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a76bbad36ff06055ddb3111c9ac0a47e8} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+N\+O\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+R\+ES&Loading new \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource} from \hyperlink{struct_resource_manager}{Resource\+Manager} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+NT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+NT}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+NT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+NT}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a7de8f3bf9838582d53ee571e40ca4e53}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a7de8f3bf9838582d53ee571e40ca4e53} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+F\+O\+C\+U\+S\+E\+D\+\_\+\+E\+V\+E\+NT&Constructing new \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+NT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+NT}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+NT@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+NT}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a9c2549d82bd346f5bcec701a0bf0512b}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a9c2549d82bd346f5bcec701a0bf0512b} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+P\+R\+E\+S\+S\+E\+D\+\_\+\+E\+V\+E\+NT&Constructing new \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event} failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+X\+T\+\_\+\+P\+A\+R\+S\+ER@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+X\+T\+\_\+\+P\+A\+R\+S\+ER}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+X\+T\+\_\+\+P\+A\+R\+S\+ER@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+X\+T\+\_\+\+P\+A\+R\+S\+ER}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a5722a222eddcd221d7e46100140907e6}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a5722a222eddcd221d7e46100140907e6} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+I\+G\+\_\+\+T\+E\+X\+T\+\_\+\+P\+A\+R\+S\+ER&Constructing new \hyperlink{struct_text_parser}{Text\+Parser} for some required reason failed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+S\+A\+V\+I\+NG@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+S\+A\+V\+I\+NG}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+S\+A\+V\+I\+NG@{B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+S\+A\+V\+I\+NG}}}\hypertarget{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a2c57e661704d0a28013172d49d0661ec}{}\label{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541a2c57e661704d0a28013172d49d0661ec} 
+B\+U\+T\+T\+O\+N\+\_\+\+E\+R\+R\+\_\+\+S\+A\+V\+I\+NG&Saving \hyperlink{struct_button}{Button} failed due to internal reason. \\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{_button_8h_aa46074d34fe2d6631c6bd9dc74633657}{}\label{_button_8h_aa46074d34fe2d6631c6bd9dc74633657} 
+\index{Button.\+h@{Button.\+h}!Button\+State@{Button\+State}}
+\index{Button\+State@{Button\+State}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+State}{ButtonState}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657}{Button\+State}}
+
+
+
+Possible \hyperlink{struct_button}{Button} states. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{_button_8h_a4626fc067a7a183e59ef37786d4045b2}{Button\+\_\+control()} 
+
+\hyperlink{_button_8h_aae2f164ac9b21ea87759eecbda20c9d4}{Button\+\_\+update()} 
+
+\hyperlink{_button_8h_a73a6d23a2809dc26d9cd8711f0c4e113}{Button\+\_\+render()} 
+
+\hyperlink{_button_8h_a445315add3d495f1a1712b1f38313d50}{Button\+\_\+sound()} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+N\+O\+R\+M\+AL@{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+N\+O\+R\+M\+AL}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+N\+O\+R\+M\+AL@{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+N\+O\+R\+M\+AL}}}\hypertarget{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a05af63e3fef20bdf01d69e62e52a4eb5}{}\label{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a05af63e3fef20bdf01d69e62e52a4eb5} 
+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+N\+O\+R\+M\+AL&\hyperlink{struct_button}{Button} in normal state. No one tryies to iteract with it. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+O\+C\+U\+S\+ED@{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+O\+C\+U\+S\+ED}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+O\+C\+U\+S\+ED@{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+O\+C\+U\+S\+ED}}}\hypertarget{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a8bd638a5c2b3a097886e58ca8d26c9f3}{}\label{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a8bd638a5c2b3a097886e58ca8d26c9f3} 
+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+O\+C\+U\+S\+ED&\hyperlink{struct_button}{Button} now have a focus. \hyperlink{struct_user}{User} moves cursor on it. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+E\+S\+S\+ED@{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+E\+S\+S\+ED}!Button.\+h@{Button.\+h}}\index{Button.\+h@{Button.\+h}!B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+E\+S\+S\+ED@{B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+E\+S\+S\+ED}}}\hypertarget{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a7f2090435434c8307247141ed8ce118c}{}\label{_button_8h_aa46074d34fe2d6631c6bd9dc74633657a7f2090435434c8307247141ed8ce118c} 
+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+E\+S\+S\+ED&\hyperlink{struct_button}{Button} have been pressed and still holds. \hyperlink{struct_user}{User} clicked on it and holds mouse button. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\hypertarget{_button_8h_a7489d676d6290b5c03cb146ebf56e5a6}{}\label{_button_8h_a7489d676d6290b5c03cb146ebf56e5a6} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+change\+Focused\+Event\+Resource@{Button\+\_\+change\+Focused\+Event\+Resource}}
+\index{Button\+\_\+change\+Focused\+Event\+Resource@{Button\+\_\+change\+Focused\+Event\+Resource}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+change\+Focused\+Event\+Resource()}{Button\_changeFocusedEventResource()}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+change\+Focused\+Event\+Resource (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{const char $\ast$const}]{focused\+Event\+Res\+Id }\end{DoxyParamCaption})}
+
+
+
+Changes \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} and \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event}. Sets old Button\+::focused\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::focused\+Event\+Resource\+::pointers\+Count if exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to load new \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource}. Can be N\+U\+LL. \\
+\hline
+{\em focused\+Event\+Res\+Id} & String with ID of new \hyperlink{struct_game_event}{Game\+Event} to load via \hyperlink{struct_resource_manager}{Resource\+Manager}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_game_event}{Game\+Event} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8h_a9ebc2f888e3123690008a8b820677826}{}\label{_button_8h_a9ebc2f888e3123690008a8b820677826} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+change\+Pressed\+Event\+Resource@{Button\+\_\+change\+Pressed\+Event\+Resource}}
+\index{Button\+\_\+change\+Pressed\+Event\+Resource@{Button\+\_\+change\+Pressed\+Event\+Resource}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+change\+Pressed\+Event\+Resource()}{Button\_changePressedEventResource()}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+change\+Pressed\+Event\+Resource (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{const char $\ast$const}]{pressed\+Event\+Res\+Id }\end{DoxyParamCaption})}
+
+
+
+Changes \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource} and \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. Sets old Button\+::pressed\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::pressed\+Event\+Resource\+::pointers\+Count if exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to load new \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource}. Can be N\+U\+LL. \\
+\hline
+{\em pressed\+Event\+Res\+Id} & String with ID of new \hyperlink{struct_game_event}{Game\+Event} to load via \hyperlink{struct_resource_manager}{Resource\+Manager}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_game_event}{Game\+Event} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8h_af75cacaf53085bfb94b9c70c6b10caed}{}\label{_button_8h_af75cacaf53085bfb94b9c70c6b10caed} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+construct@{Button\+\_\+construct}}
+\index{Button\+\_\+construct@{Button\+\_\+construct}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+construct()}{Button\_construct()}}
+{\footnotesize\ttfamily struct \hyperlink{struct_scene_node}{Scene\+Node}$\ast$ Button\+\_\+construct (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const}]{resource\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$const}]{renderer,  }\item[{struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$}]{scene\+Node\+Types\+Registrar,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$const}]{text\+Parser }\end{DoxyParamCaption})}
+
+
+
+Constructs \hyperlink{struct_button}{Button} and inits it from a \hyperlink{struct_text_parser}{Text\+Parser}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to load additional resources, needed for \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} which is used to construct \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} and \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em scene\+Node\+Types\+Registrar} & Pointer to a \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} which is used to construct \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} and \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser} with data strings for initializing \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to an initialized \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}, or N\+U\+LL if constructing failed. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Use only \hyperlink{_button_8h_a088a0c517db01f25bbdeea23240861fa}{Button\+\_\+destruct()} or Button\+::scene\+Node\+::destruct() to destruct returned \hyperlink{struct_scene_node}{Scene\+Node}. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_renderer}{Renderer} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8h_a4626fc067a7a183e59ef37786d4045b2}{}\label{_button_8h_a4626fc067a7a183e59ef37786d4045b2} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+control@{Button\+\_\+control}}
+\index{Button\+\_\+control@{Button\+\_\+control}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+control()}{Button\_control()}}
+{\footnotesize\ttfamily void Button\+\_\+control (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$}]{event\+Manager }\end{DoxyParamCaption})}
+
+
+
+Function to control user input events to \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em event\+Manager} & Pointer to an \hyperlink{struct_event_manager}{Event\+Manager}, where that function will get user input events. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\hypertarget{_button_8h_a088a0c517db01f25bbdeea23240861fa}{}\label{_button_8h_a088a0c517db01f25bbdeea23240861fa} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+destruct@{Button\+\_\+destruct}}
+\index{Button\+\_\+destruct@{Button\+\_\+destruct}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+destruct()}{Button\_destruct()}}
+{\footnotesize\ttfamily void Button\+\_\+destruct (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Destructs \hyperlink{struct_button}{Button} and frees memory, used by it. Pointer to that function should be at Button\+::scene\+Node\+::destruct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be not fully initialized. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Use this function only in pair with \hyperlink{_button_8h_af75cacaf53085bfb94b9c70c6b10caed}{Button\+\_\+construct()}! 
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{_button_8h_af75cacaf53085bfb94b9c70c6b10caed}{Button\+\_\+construct()} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8h_a73a6d23a2809dc26d9cd8711f0c4e113}{}\label{_button_8h_a73a6d23a2809dc26d9cd8711f0c4e113} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+render@{Button\+\_\+render}}
+\index{Button\+\_\+render@{Button\+\_\+render}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+render()}{Button\_render()}}
+{\footnotesize\ttfamily void Button\+\_\+render (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Function to render \hyperlink{struct_button}{Button} on the screen. Pointer to that function should be at Button\+::scene\+Node\+::render. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for drawing \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\hypertarget{_button_8h_a36e464cd7fac8f1646dd3571f990e11b}{}\label{_button_8h_a36e464cd7fac8f1646dd3571f990e11b} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+save@{Button\+\_\+save}}
+\index{Button\+\_\+save@{Button\+\_\+save}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+save()}{Button\_save()}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+save (\begin{DoxyParamCaption}\item[{const struct \hyperlink{struct_button}{Button} $\ast$const}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const}]{resource\+Manager,  }\item[{const char $\ast$const}]{button\+Res\+Id }\end{DoxyParamCaption})}
+
+
+
+Saves \hyperlink{struct_button}{Button} to the filesystem via \hyperlink{struct_resource_manager}{Resource\+Manager}. Before saving, it updates Button\+::scene\+Node\+::scene\+Node\+Text\+Resource with the latest changes in \hyperlink{struct_button}{Button}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} which will be saved. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to save Button\+::scene\+Node\+::scene\+Node\+Text\+Resource. Can be N\+U\+LL. \\
+\hline
+{\em button\+Res\+Id} & Path string, where \hyperlink{struct_resource_manager}{Resource\+Manager} will save Button\+::scene\+Node\+::scene\+Node\+Text\+Resource. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_scene_node}{Scene\+Node} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8h_a445315add3d495f1a1712b1f38313d50}{}\label{_button_8h_a445315add3d495f1a1712b1f38313d50} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+sound@{Button\+\_\+sound}}
+\index{Button\+\_\+sound@{Button\+\_\+sound}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+sound()}{Button\_sound()}}
+{\footnotesize\ttfamily void Button\+\_\+sound (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_musican}{Musican} $\ast$}]{musican }\end{DoxyParamCaption})}
+
+
+
+Function to play sounds of a \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em musican} & Pointer to a \hyperlink{struct_musican}{Musican} for playing audio of a \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\hypertarget{_button_8h_aae2f164ac9b21ea87759eecbda20c9d4}{}\label{_button_8h_aae2f164ac9b21ea87759eecbda20c9d4} 
+\index{Button.\+h@{Button.\+h}!Button\+\_\+update@{Button\+\_\+update}}
+\index{Button\+\_\+update@{Button\+\_\+update}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+\_\+update()}{Button\_update()}}
+{\footnotesize\ttfamily void Button\+\_\+update (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$}]{event\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Function to update \hyperlink{struct_button}{Button} and interacting with \hyperlink{struct_event_manager}{Event\+Manager}. Pointer to that function should be at Button\+::scene\+Node\+::update. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em event\+Manager} & Pointer to an \hyperlink{struct_event_manager}{Event\+Manager}, where that function will place it\textquotesingle{}s events. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for screen-\/depend coordinater converting. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t use this function for drawing. 
+\end{DoxyNote}
+
+
+\subsection{Variable Documentation}
+\hypertarget{_button_8h_aa89cd92826c4c472ece151be68656454}{}\label{_button_8h_aa89cd92826c4c472ece151be68656454} 
+\index{Button.\+h@{Button.\+h}!Button\+Scene\+Node\+\_\+parser\+Strings@{Button\+Scene\+Node\+\_\+parser\+Strings}}
+\index{Button\+Scene\+Node\+\_\+parser\+Strings@{Button\+Scene\+Node\+\_\+parser\+Strings}!Button.\+h@{Button.\+h}}
+\subsubsection{\texorpdfstring{Button\+Scene\+Node\+\_\+parser\+Strings}{ButtonSceneNode\_parserStrings}}
+{\footnotesize\ttfamily const struct \hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} \hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    \textcolor{stringliteral}{"Button"},
+    \textcolor{stringliteral}{"focusedEventResource"},
+    \textcolor{stringliteral}{"pressedEventResource"},
+    \textcolor{stringliteral}{"focusedSoundResource"},
+    \textcolor{stringliteral}{"pressedSoundResource"},
+    \textcolor{stringliteral}{"spriteResource"},
+    \textcolor{stringliteral}{"textResource"},
+    \textcolor{stringliteral}{"labelOffset"}\}
+\end{DoxyCode}
