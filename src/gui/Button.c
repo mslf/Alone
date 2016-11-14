@@ -71,7 +71,7 @@ static const struct ButtonSceneNode_errorMessages {
  * @see #Button
  * @see #Text
  * @see #ResourceManager
- * @see #Renerer
+ * @see #Renderer
  * @see SceneNodeTypesRegistrar
  * @see TextParser
  * @see #ButtonSceneNode_parserStrings
@@ -112,7 +112,7 @@ static enum ButtonSceneNode_errors Button_loadTextResource(struct Button* button
  * @see #Button
  * @see #Sprite
  * @see #ResourceManager
- * @see #Renerer
+ * @see #Renderer
  * @see SceneNodeTypesRegistrar
  * @see TextParser
  * @see #ButtonSceneNode_parserStrings

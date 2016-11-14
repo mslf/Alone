@@ -134,7 +134,7 @@ struct Button {
     struct SceneNode sceneNode;
     /**< Inheritance stuff. */
     struct Sprite* sprite;
-    //*< #Sprite to be displayed on the screen. Should have 3 animations (normal, focused, pressed). */
+    /**< #Sprite to be displayed on the screen. Should have 3 animations (normal, focused, pressed). */
     struct Text* label;
     /**< Some #Text to be displayed on the screen as a label of the #Button. */
     struct SoundResource* focusedSoundResource;
