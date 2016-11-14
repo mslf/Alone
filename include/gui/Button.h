@@ -70,7 +70,7 @@ static const struct ButtonSceneNode_parserStrings {
 /**
  * @brief Error codes for #Button.
  */
-enum Button_errors {
+enum ButtonSceneNode_errors {
     BUTTON_NO_ERRORS = 0,
     /**< All right, no errors. */
     BUTTON_ERR_NULL_ARGUMENT = 1,
@@ -86,11 +86,11 @@ enum Button_errors {
     BUTTON_ERR_CONSTRUCTIG_TEXT = 6,
     /**< Constructing Button#label failed. */
     BUTTON_ERR_LOADING_SETTINGS = 7,
-    /** Loading required settings from #TextParser failed. */
+    /**< Loading required settings from #TextParser failed. */
     BUTTON_ERR_NO_FOCUSED_EVENT_RES = 8,
-    /**< Loading new Button#focusedEventResource from #ResouceManager failed. */
+    /**< Loading new Button#focusedEventResource from #ResourceManager failed. */
     BUTTON_ERR_NO_PRESSED_EVENT_RES = 9,
-    /**< Loading new Button#pressedEventResource from #ResouceManager failed. */
+    /**< Loading new Button#pressedEventResource from #ResourceManager failed. */
     BUTTON_ERR_CONSTRUCTIG_FOCUSED_EVENT = 10,
     /**< Constructing new Button#focusedEvent failed. */
     BUTTON_ERR_CONSTRUCTIG_PRESSED_EVENT = 11,
@@ -197,14 +197,14 @@ void Button_destruct(struct SceneNode* button);
  * @param button Pointer to a #Button. Can be NULL.
  * @param resourceManager Pointer to a #ResourceManager which is used to load 
  * new Button#focusedEventResource. Can be NULL.
- * @param focusedEventResId String with ID of new #GameEvent to load via #ResouceManager. Can be NULL.
- * @return #Button_errors value.
+ * @param focusedEventResId String with ID of new #GameEvent to load via #ResourceManager. Can be NULL.
+ * @return #ButtonSceneNode_errors value.
  * @see #Button
  * @see #GameEvent
  * @see #ResourceManager
- * @see #Button_errors
+ * @see #ButtonSceneNode_errors
  */
-enum Button_errors Button_changeFocusedEventResource(struct Button* button,
+enum ButtonSceneNode_errors Button_changeFocusedEventResource(struct Button* button,
                                                      struct ResourceManager* resourceManager,
                                                      const char* const focusedEventResId);
 
@@ -215,14 +215,14 @@ enum Button_errors Button_changeFocusedEventResource(struct Button* button,
  * @param button Pointer to a #Button. Can be NULL.
  * @param resourceManager Pointer to a #ResourceManager which is used to load 
  * new Button#pressedEventResource. Can be NULL.
- * @param pressedEventResId String with ID of new #GameEvent to load via #ResouceManager. Can be NULL.
- * @return #Button_errors value.
+ * @param pressedEventResId String with ID of new #GameEvent to load via #ResourceManager. Can be NULL.
+ * @return #ButtonSceneNode_errors value.
  * @see #Button
  * @see #GameEvent
  * @see #ResourceManager
- * @see #Button_errors
+ * @see #ButtonSceneNode_errors
  */
-enum Button_errors Button_changePressedEventResource(struct Button* button,
+enum ButtonSceneNode_errors Button_changePressedEventResource(struct Button* button,
                                                      struct ResourceManager* resourceManager,
                                                      const char* const pressedEventResId);
 
@@ -234,13 +234,13 @@ enum Button_errors Button_changePressedEventResource(struct Button* button,
  * save Button#sceneNode#sceneNodeTextResource. Can be NULL.
  * @param buttonResId Path string, where #ResourceManager will 
  * save Button#sceneNode#sceneNodeTextResource. Can be NULL.
- * @return #Button_errors value.
+ * @return #ButtonSceneNode_errors value.
  * @see #Button
  * @see #SceneNode
  * @see #ResourceManager
- * @see #Button_errors
+ * @see #ButtonSceneNode_errors
  */
-enum Button_errors Button_save(const struct Button* const button,
+enum ButtonSceneNode_errors Button_save(const struct Button* const button,
                                struct ResourceManager* const resourceManager,
                                const char* const buttonResId);
 

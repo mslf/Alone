@@ -58,7 +58,26 @@ static const struct ButtonSceneNode_errorMessages {
     "Button_loadSpriteResource: loaded Sprite doesn't contain 3 animations!",
     "Button_loadTextResource: textResource string haven't found!"};
 
-static enum Button_errors Button_loadTextResource(struct Button* button,
+/**
+ * @brief Function for loading and constructing Button#label.
+ * @param button Pointer to a #Button where to construct Button#label. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Text resource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing Button#label. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing Button#label. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * ButtonSceneNode_parserStrings#textRes. Can be NULL.
+ * @return #ButtonSceneNode_errors value.
+ * @see #Button
+ * @see #Text
+ * @see #ResourceManager
+ * @see #Renerer
+ * @see SceneNodeTypesRegistrar
+ * @see TextParser
+ * @see #ButtonSceneNode_parserStrings
+ * @see #ButtonSceneNode_errors
+ */
+static enum ButtonSceneNode_errors Button_loadTextResource(struct Button* button,
                                              struct ResourceManager* resourceManager,
                                              struct Renderer* renderer,
                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -80,7 +99,26 @@ static enum Button_errors Button_loadTextResource(struct Button* button,
     return BUTTON_NO_ERRORS;
 }
 
-static enum Button_errors Button_loadSpriteResource(struct Button* button,
+/**
+ * @brief Function for loading and constructing Button#sprite.
+ * @param button Pointer to a #Button where to construct Button#sprite. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing Button#sprite. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing Button#sprite. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * ButtonSceneNode_parserStrings#spriteRes. Can be NULL.
+ * @return #ButtonSceneNode_errors value.
+ * @see #Button
+ * @see #Sprite
+ * @see #ResourceManager
+ * @see #Renerer
+ * @see SceneNodeTypesRegistrar
+ * @see TextParser
+ * @see #ButtonSceneNode_parserStrings
+ * @see #ButtonSceneNode_errors
+ */
+static enum ButtonSceneNode_errors Button_loadSpriteResource(struct Button* button,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -106,8 +144,23 @@ static enum Button_errors Button_loadSpriteResource(struct Button* button,
     return BUTTON_NO_ERRORS;
 }
 
-static void Button_loadSoundResources(struct Button* button, struct ResourceManager* resourceManager,
-                               struct TextParser* textParser) {
+/**
+ * @brief Function for loading and constructing Button#focusedSoundResource and Button#pressedSoundResource.
+ * @param button Pointer to a #Button where to construct Button#focusedSoundResource 
+ * and Button#pressedSoundResource. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading sound resources. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * ButtonSceneNode_parserStrings#focusedSoundRes 
+ * and ButtonSceneNode_parserStrings#pressedSoundRes. Can be NULL.
+ * @see #Button
+ * @see #SoundResource
+ * @see #ResourceManager
+ * @see TextParser
+ * @see #ButtonSceneNode_parserStrings
+ */
+static void Button_loadSoundResources(struct Button* button,
+                                      struct ResourceManager* resourceManager,
+                                      struct TextParser* textParser) {
     if (!button || !resourceManager || !textParser)
         return;
     const char* const tempFocusedSoundResourceString = TextParser_getString(textParser,
@@ -122,8 +175,23 @@ static void Button_loadSoundResources(struct Button* button, struct ResourceMana
     button->pressedSoundResource = ResourceManager_loadSoundResource(resourceManager, tempPressedSoundResourceString);
 }
 
-static void Button_loadEventsResources(struct Button* button, struct ResourceManager* resourceManager, 
-                                struct TextParser* textParser){
+/**
+ * @brief Function for loading and constructing Button#focusedEvent and Button#pressedEvent.
+ * Also, it will update Button#focusedEventResource and Button#pressedEventResource.
+ * @param button Pointer to a #Button where to construct events. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #GameEvent resources. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * ButtonSceneNode_parserStrings#focusedEventRes
+ * and ButtonSceneNode_parserStrings#pressedEventRes. Can be NULL.
+ * @see #Button
+ * @see #GameEvent
+ * @see #ResourceManager
+ * @see TextParser
+ * @see #ButtonSceneNode_parserStrings
+ */
+static void Button_loadEventsResources(struct Button* button,
+                                       struct ResourceManager* resourceManager,
+                                       struct TextParser* textParser){
     if (!button || !resourceManager || !textParser)
         return;
     const char* const tempFocusedEventResourceString = TextParser_getString(textParser,
@@ -138,15 +206,32 @@ static void Button_loadEventsResources(struct Button* button, struct ResourceMan
     Button_changePressedEventResource(button, resourceManager, tempPressedEventResourceString);
 }
 
-static enum Button_errors Button_tryGetSettingsFromTextParser(struct Button* button,
+/**
+ * @brief Function for loading settings and initializing #Button from #TextParser.
+ * @param button Pointer to a #Button which will be initialized. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing Button#sprite and Button#label. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing Button#sprite and Button#label. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #ButtonSceneNode_errors value.
+ * @see #Button
+ * @see #SceneNodeTypesRegistrar
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see TextParser
+ * @see #ButtonSceneNode_parserStrings
+ * @see #ButtonSceneNode_errors
+ */
+static enum ButtonSceneNode_errors Button_tryGetSettingsFromTextParser(struct Button* button,
                                                          struct ResourceManager* resourceManager,
                                                          struct Renderer* renderer,
                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                          struct TextParser* textParser) {
     if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return BUTTON_ERR_NULL_ARGUMENT;
-    enum Button_errors loadingSpriteResult = BUTTON_NO_ERRORS;
-    enum Button_errors loadingTextResult = BUTTON_NO_ERRORS;
+    enum ButtonSceneNode_errors loadingSpriteResult = BUTTON_NO_ERRORS;
+    enum ButtonSceneNode_errors loadingTextResult = BUTTON_NO_ERRORS;
     Button_loadEventsResources(button, resourceManager, textParser);
     Button_loadSoundResources(button, resourceManager, textParser);
     loadingSpriteResult = Button_loadSpriteResource(button, resourceManager, renderer,
@@ -219,7 +304,7 @@ void Button_destruct(struct SceneNode* button) {
     free(button);
 }
 
-enum Button_errors Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
+enum ButtonSceneNode_errors Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const pressedEventResId) {
     if (!button || !resourceManager || !pressedEventResId)
         return BUTTON_ERR_NULL_ARGUMENT;
@@ -250,7 +335,7 @@ enum Button_errors Button_changePressedEventResource(struct Button* button, stru
     return BUTTON_NO_ERRORS;
 }
 
-enum Button_errors Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager,
+enum ButtonSceneNode_errors Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const focusedEventResId) {
     if (!button || !resourceManager || !focusedEventResId)
         return BUTTON_ERR_NULL_ARGUMENT;
@@ -281,7 +366,7 @@ enum Button_errors Button_changeFocusedEventResource(struct Button* button, stru
     return BUTTON_NO_ERRORS;
 }
 
-enum Button_errors Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
+enum ButtonSceneNode_errors Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
                           const char* const buttonResId) {
     if (!button || !resourceManager || !buttonResId)
         return BUTTON_ERR_NULL_ARGUMENT;
