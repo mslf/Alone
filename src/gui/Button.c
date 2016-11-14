@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,44 +16,59 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Button.c
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing implementation of #Button.
+ */
 #include "gui/Button.h"
 #include "textParser/TextParser.h"
 
+/**
+ * @brief Error message strings for #Button.
+ */
+static const struct ButtonSceneNode_errorMessages {
+    const char* const errFocusedGameEventRes;
+    /**< Will be displayed when #TextParser have no ButtonSceneNode_parserStrings#focusedEventRes. */
+    const char* const errPressedGameEventRes;
+    /**< Will be displayed when #TextParser have no ButtonSceneNode_parserStrings#pressedEventRes. */
+    const char* const errConstructingFocusedGameEvent;
+    /**< Will be displayed when constructing Button#focusedEvent failed. */
+    const char* const errConstructingPressedGameEvent;
+    /**< Will be displayed when constructing Button#pressedEvent failed. */
+    const char* const errFocusedSoundRes;
+    /**< Will be displayed when #TextParser have no ButtonSceneNode_parserStrings#focusedSoundRes. */
+    const char* const errPressedSoundRes;
+    /**< Will be displayed when #TextParser have no ButtonSceneNode_parserStrings#presedSoundRes. */
+    const char* const errSpriteRes;
+    /**< Will be displayed when #TextParser have no ButtonSceneNode_parserStrings#spriteRes. */
+    const char* const errSpriteNoEnoughAnimations;
+    /**< Will be displayed when constructed #Sprite doesn't have enough animations for #Button. */
+    const char* const errTextRes;
+    /**< Will be displayed when #TextParser have no ButtonSceneNode_parserStrings#textRes. */
+}ButtonSceneNode_errorMessages = {
+    "Button_loadEventsResources: focusedEventResource string haven't found!",
+    "Button_loadEventsResources: pressedEventResource string haven't found!",
+    "Button_changeFocusedEventResource: constructing GameEvent failed!",
+    "Button_changePressedEventResource: constructing GameEvent failed!",
+    "Button_loadSoundResources: focusedSoundResource string haven't found!",
+    "Button_loadSoundResources: pressedSoundResource string haven't found!",
+    "Button_loadSpriteResource: spriteResource string haven't found!",
+    "Button_loadSpriteResource: loaded Sprite doesn't contain 3 animations!",
+    "Button_loadTextResource: textResource string haven't found!"};
 
-//? If you do a const static structure with these elements, you can pollute global namespace less
-//? Also, making them static is probably wise
-//? Check other files for similar stuff
-const char* const BUTTON_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES = 
-        "Button_loadEventsResources: focusedEventResource string haven't found!";
-const char* const BUTTON_SCENENODE_ERR_PRESSED_GAME_EVENT_RES = 
-        "Button_loadEventsResources: pressedEventResource string haven't found!";
-const char* const BUTTON_SCENENODE_ERR_CONSTRUCTING_FOCUSED_GAME_EVENT = 
-        "Button_changeFocusedEventResource: constructing GameEvent failed!";
-const char* const BUTTON_SCENENODE_ERR_CONSTRUCTING_PRESSED_GAME_EVENT = 
-        "Button_changePressedEventResource: constructing GameEvent failed!";
-const char* const BUTTON_SCENENODE_ERR_FOCUSED_SOUND_RES = 
-        "Button_loadSoundResources: focusedSoundResource string haven't found!";
-const char* const BUTTON_SCENENODE_ERR_PRESSED_SOUND_RES = 
-        "Button_loadSoundResources: pressedSoundResource string haven't found!";
-const char* const BUTTON_SCENENODE_ERR_SPRITE_RES = 
-        "Button_loadSpriteResource: spriteResource string haven't found!";
-const char* const BUTTON_SCENENODE_ERR_SPRITE_NO_3_ANIMATIONS = 
-        "Button_loadSpriteResource: loaded Sprite doesn't contain 3 animations!";
-const char* const BUTTON_SCENENODE_ERR_TEXT_RES = 
-        "Button_loadTextResource: textResource string haven't found!";
-        
-
-static unsigned char Button_loadTextResource(struct Button* button,
+static enum Button_errors Button_loadTextResource(struct Button* button,
                                              struct ResourceManager* resourceManager,
                                              struct Renderer* renderer,
                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                              struct TextParser* textParser) {
     if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    char* tempResId = TextParser_getString(textParser, BUTTON_SCENENODE_PARSER_TEXT_RES_STRING, 0);
+        return BUTTON_ERR_NULL_ARGUMENT;
+    const char* const tempResId = TextParser_getString(textParser, ButtonSceneNode_parserStrings.textRes, 0);
     if (!tempResId) {
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_TEXT_RES);
-        return 2;
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errTextRes);
+        return BUTTON_ERR_NO_TEXT_RES;
     }
     button->label = (struct Text*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                renderer,
@@ -64,21 +76,21 @@ static unsigned char Button_loadTextResource(struct Button* button,
                                                                tempResId,
                                                                TEXT_SCENENODE_PARSER_TYPE_STRING);
     if (!button->label)
-        return 3;
-    return 0;
+        return BUTTON_ERR_CONSTRUCTIG_TEXT;
+    return BUTTON_NO_ERRORS;
 }
 
-static unsigned char Button_loadSpriteResource(struct Button* button,
+static enum Button_errors Button_loadSpriteResource(struct Button* button,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
     if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    char* tempResId = TextParser_getString(textParser, BUTTON_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
+        return BUTTON_ERR_NULL_ARGUMENT;
+    const char* const tempResId = TextParser_getString(textParser, ButtonSceneNode_parserStrings.spriteRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, BUTTON_SCENENODE_ERR_SPRITE_RES);
-        return 2;
+        Logger_log(renderer->logger, ButtonSceneNode_errorMessages.errSpriteRes);
+        return BUTTON_ERR_NO_SPRITE_RES;
     }
     button->sprite = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                 renderer,
@@ -86,28 +98,27 @@ static unsigned char Button_loadSpriteResource(struct Button* button,
                                                                 tempResId,
                                                                 SPRITE_SCENENODE_PARSER_TYPE_STRING);
     if (!button->sprite)
-        return 3;
+        return BUTTON_ERR_CONSTRUCTIG_SPRITE;
     if (button->sprite->animationsCount < 3) {
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_SPRITE_NO_3_ANIMATIONS);
-        return 4;
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errSpriteNoEnoughAnimations);
+        return BUTTON_ERR_NOT_ENOUGH_ANIMATIONS;
     }
-    return 0;
+    return BUTTON_NO_ERRORS;
 }
 
 static void Button_loadSoundResources(struct Button* button, struct ResourceManager* resourceManager,
                                struct TextParser* textParser) {
     if (!button || !resourceManager || !textParser)
         return;
-    //? char const maybe?
-    char* tempFocusedSoundResourceString = TextParser_getString(textParser,
-                                                                BUTTON_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING, 0);
+    const char* const tempFocusedSoundResourceString = TextParser_getString(textParser,
+                                                                ButtonSceneNode_parserStrings.focusedSoundRes, 0);
     if (!tempFocusedSoundResourceString)
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_FOCUSED_SOUND_RES);
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errFocusedSoundRes);
     button->focusedSoundResource = ResourceManager_loadSoundResource(resourceManager, tempFocusedSoundResourceString);
-    char* tempPressedSoundResourceString = TextParser_getString(textParser,
-                                                                BUTTON_SCENENODE_PARSER_PRESSED_SOUND_RES_STRING, 0);
+    const char* const tempPressedSoundResourceString = TextParser_getString(textParser,
+                                                                ButtonSceneNode_parserStrings.pressedSoundRes, 0);
     if (!tempPressedSoundResourceString)
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_PRESSED_SOUND_RES);
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errPressedSoundRes);
     button->pressedSoundResource = ResourceManager_loadSoundResource(resourceManager, tempPressedSoundResourceString);
 }
 
@@ -115,33 +126,38 @@ static void Button_loadEventsResources(struct Button* button, struct ResourceMan
                                 struct TextParser* textParser){
     if (!button || !resourceManager || !textParser)
         return;
-    char* tempFocusedEventResourceString = TextParser_getString(textParser,
-                                                          BUTTON_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING, 0);
+    const char* const tempFocusedEventResourceString = TextParser_getString(textParser,
+                                                          ButtonSceneNode_parserStrings.focusedEventRes, 0);
     if (!tempFocusedEventResourceString)
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES);
-    char* tempPressedEventResourceString = TextParser_getString(textParser,
-                                                          BUTTON_SCENENODE_PARSER_PRESSED_EVENT_RES_STRING, 0);
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errFocusedGameEventRes);
+    const char* const tempPressedEventResourceString = TextParser_getString(textParser,
+                                                          ButtonSceneNode_parserStrings.pressedEventRes, 0);
     if (!tempPressedEventResourceString)
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_PRESSED_GAME_EVENT_RES);
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errPressedGameEventRes);
     Button_changeFocusedEventResource(button, resourceManager, tempFocusedEventResourceString);
     Button_changePressedEventResource(button, resourceManager, tempPressedEventResourceString);
 }
 
-//? Returning integers like this is kind of zashkwar
-static unsigned char Button_tryGetSettingsFromTextParser(struct Button* button,
-                                                         struct ResourceManager* resourceManager, struct Renderer* renderer,
+static enum Button_errors Button_tryGetSettingsFromTextParser(struct Button* button,
+                                                         struct ResourceManager* resourceManager,
+                                                         struct Renderer* renderer,
                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                          struct TextParser* textParser) {
     if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    unsigned char result = 0;
+        return BUTTON_ERR_NULL_ARGUMENT;
+    enum Button_errors loadingSpriteResult = BUTTON_NO_ERRORS;
+    enum Button_errors loadingTextResult = BUTTON_NO_ERRORS;
     Button_loadEventsResources(button, resourceManager, textParser);
     Button_loadSoundResources(button, resourceManager, textParser);
-    result += Button_loadSpriteResource(button, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    result += Button_loadTextResource(button, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    button->labelOffset.x = (int)TextParser_getInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING, 0);
-    button->labelOffset.y = (int)TextParser_getInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING, 1);
-    return result;
+    loadingSpriteResult = Button_loadSpriteResource(button, resourceManager, renderer,
+                                                    sceneNodeTypesRegistrar, textParser);
+    loadingTextResult = Button_loadTextResource(button, resourceManager, renderer,
+                                                sceneNodeTypesRegistrar, textParser);
+    button->labelOffset.x = (int)TextParser_getInt(textParser, ButtonSceneNode_parserStrings.labelOffset, 0);
+    button->labelOffset.y = (int)TextParser_getInt(textParser, ButtonSceneNode_parserStrings.labelOffset, 1);
+    if (loadingSpriteResult || loadingTextResult)
+        return BUTTON_ERR_LOADING_SETTINGS;
+    return BUTTON_NO_ERRORS;
 }
 
 struct SceneNode* Button_construct(struct ResourceManager* const resourceManager,
@@ -164,12 +180,12 @@ struct SceneNode* Button_construct(struct ResourceManager* const resourceManager
     button->sceneNode.render = Button_render;
     button->sceneNode.sound = Button_sound;
     button->sceneNode.destruct = Button_destruct;
-    button->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(BUTTON_SCENENODE_PARSER_TYPE_STRING) + 1));
+    button->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(ButtonSceneNode_parserStrings.type) + 1));
     if (!button->sceneNode.type) {
         Button_destruct((struct SceneNode*)button);
         return NULL;
     }
-    strcpy(button->sceneNode.type, BUTTON_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(button->sceneNode.type, ButtonSceneNode_parserStrings.type);
     button->isGeometryChanged = true;
     return (struct SceneNode*)button;
 }
@@ -203,26 +219,26 @@ void Button_destruct(struct SceneNode* button) {
     free(button);
 }
 
-unsigned char Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
+enum Button_errors Button_changePressedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const pressedEventResId) {
     if (!button || !resourceManager || !pressedEventResId)
-        return 1;
+        return BUTTON_ERR_NULL_ARGUMENT;
     struct TextResource* newGameEventTextResource = ResourceManager_loadTextResource(resourceManager,
                                                                                      pressedEventResId, 0);
     if (!newGameEventTextResource)
-        return 2;
+        return BUTTON_ERR_NO_PRESSED_EVENT_RES;
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
         newGameEventTextResource->pointersCount--;
-        return 3;
+        return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)button);
     if (!newGameEvent) {
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_CONSTRUCTING_PRESSED_GAME_EVENT);
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errConstructingPressedGameEvent);
         newGameEventTextResource->pointersCount--;
         TextParser_destruct(textParser);
-        return 4;
+        return BUTTON_ERR_CONSTRUCTIG_PRESSED_EVENT;
     }
     TextParser_destruct(textParser);
     if (button->pressedEvent)
@@ -231,29 +247,29 @@ unsigned char Button_changePressedEventResource(struct Button* button, struct Re
         button->pressedEventResource->pointersCount--;
     button->pressedEventResource = newGameEventTextResource;
     button->pressedEvent = newGameEvent;
-    return 0;
+    return BUTTON_NO_ERRORS;
 }
 
-unsigned char Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager,
+enum Button_errors Button_changeFocusedEventResource(struct Button* button, struct ResourceManager* resourceManager,
                                                 const char* const focusedEventResId) {
     if (!button || !resourceManager || !focusedEventResId)
-        return 1;
+        return BUTTON_ERR_NULL_ARGUMENT;
     struct TextResource* newGameEventTextResource = ResourceManager_loadTextResource(resourceManager,
                                                                                      focusedEventResId, 0);
     if (!newGameEventTextResource)
-        return 2;
+        return BUTTON_ERR_NO_FOCUSED_EVENT_RES;
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
         newGameEventTextResource->pointersCount--;
-        return 3;
+        return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)button);
     if (!newGameEvent) {
-        Logger_log(resourceManager->logger, BUTTON_SCENENODE_ERR_CONSTRUCTING_FOCUSED_GAME_EVENT);
+        Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errConstructingFocusedGameEvent);
         newGameEventTextResource->pointersCount--;
         TextParser_destruct(textParser);
-        return 4;
+        return BUTTON_ERR_CONSTRUCTIG_FOCUSED_EVENT;
     }
     TextParser_destruct(textParser);
     if (button->focusedEvent)
@@ -262,34 +278,34 @@ unsigned char Button_changeFocusedEventResource(struct Button* button, struct Re
         button->focusedEventResource->pointersCount--;
     button->focusedEventResource = newGameEventTextResource;
     button->focusedEvent = newGameEvent;
-    return 0;
+    return BUTTON_NO_ERRORS;
 }
 
-unsigned char Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
+enum Button_errors Button_save(const struct Button* const button, struct ResourceManager* const resourceManager, 
                           const char* const buttonResId) {
     if (!button || !resourceManager || !buttonResId)
-        return 1;
+        return BUTTON_ERR_NULL_ARGUMENT;
     unsigned char result = 0;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, BUTTON_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_SPRITE_RES_STRING,
+        return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ButtonSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.spriteRes,
                                    button->sprite->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_TEXT_RES_STRING,
+    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.textRes,
                                    button->label->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING,
+    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedEventRes,
                                    button->focusedEventResource->id);
-    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_PRESSED_EVENT_RES_STRING,
+    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedEventRes,
                                    button->pressedEventResource->id);
-    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING,
+    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedSoundRes,
                                    button->focusedSoundResource->id);
-    result += TextParser_addString(textParser, BUTTON_SCENENODE_PARSER_PRESSED_SOUND_RES_STRING,
+    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedSoundRes,
                                    button->pressedSoundResource->id);
-    result += TextParser_addInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING,
+    result += TextParser_addInt(textParser, ButtonSceneNode_parserStrings.labelOffset,
                                    button->labelOffset.x);
-    result += TextParser_addInt(textParser, BUTTON_SCENENODE_PARSER_LABEL_OFFSET_STRING,
+    result += TextParser_addInt(textParser, ButtonSceneNode_parserStrings.labelOffset,
                                    button->labelOffset.y);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
@@ -299,7 +315,9 @@ unsigned char Button_save(const struct Button* const button, struct ResourceMana
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return BUTTON_ERR_SAVING;
+    return BUTTON_NO_ERRORS;
 }
 
 void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
@@ -318,32 +336,32 @@ void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManag
                 && mouseCoordinates.x < (button->sprite->dstRect.x + button->sprite->dstRect.w) 
                 && mouseCoordinates.y >= button->sprite->dstRect.y 
                 && mouseCoordinates.y < (button->sprite->dstRect.y + button->sprite->dstRect.h)) {
-                if (button->state == ButtonState_Normal) {
-                    button->state = ButtonState_Focused;
+                if (button->state == BUTTON_STATE_NORMAL) {
+                    button->state = BUTTON_STATE_FOCUSED;
                     button->isStateChanged = true;
                     EventManager_addEvent(eventManager, button->focusedEvent);
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN) {
-                    button->state = ButtonState_Pressed;
+                    button->state = BUTTON_STATE_PRESSED;
                     button->isStateChanged = true;
                     
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP) {
-                    if (button->state == ButtonState_Pressed)
+                    if (button->state == BUTTON_STATE_PRESSED)
                         EventManager_addEvent(eventManager, button->pressedEvent);
-                    button->state = ButtonState_Focused;
+                    button->state = BUTTON_STATE_FOCUSED;
                     button->isStateChanged = true;
                 }
             } else {
-                if (button->state == ButtonState_Focused) {
-                    button->state = ButtonState_Normal;
+                if (button->state == BUTTON_STATE_FOCUSED) {
+                    button->state = BUTTON_STATE_NORMAL;
                     button->isStateChanged = true;
                     EventManager_removeEvent(eventManager, button->focusedEvent);
                 }
-                if (button->state == ButtonState_Pressed 
+                if (button->state == BUTTON_STATE_PRESSED 
                     && (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP 
                         || eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN)) {
-                    button->state = ButtonState_Normal;
+                    button->state = BUTTON_STATE_NORMAL;
                     button->isStateChanged = true;
                     EventManager_removeEvent(eventManager, button->focusedEvent);
                 }
@@ -356,11 +374,11 @@ void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         return;
     struct Button* button = (struct Button*)sceneNode;
     if (button->isStateChanged) {
-        if (button->state == ButtonState_Normal)
+        if (button->state == BUTTON_STATE_NORMAL)
             button->sprite->currentAnimation = 0;
-        if (button->state == ButtonState_Focused)
+        if (button->state == BUTTON_STATE_FOCUSED)
             button->sprite->currentAnimation = 1;
-        if (button->state == ButtonState_Pressed)
+        if (button->state == BUTTON_STATE_PRESSED)
             button->sprite->currentAnimation = 2;
         button->sprite->currentFrame = 0;
         button->sprite->renderingsCounter = 0;
@@ -398,9 +416,9 @@ void Button_sound(struct SceneNode* sceneNode, struct Musican* musican) {
         return;
     struct Button* button = (struct Button*)sceneNode;
     if (button->isStateChanged) {
-        if (button->state == ButtonState_Focused)
+        if (button->state == BUTTON_STATE_FOCUSED)
             Musican_playSound(musican, button->focusedSoundResource, 0);
-        if (button->state == ButtonState_Pressed)
+        if (button->state == BUTTON_STATE_PRESSED)
             Musican_playSound(musican, button->pressedSoundResource, 0);
     }
 }
