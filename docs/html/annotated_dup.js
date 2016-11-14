@@ -4,6 +4,8 @@ var annotated_dup =
     [ "Animation", "struct_animation.html", "struct_animation" ],
     [ "BackgroundModule", "struct_background_module.html", "struct_background_module" ],
     [ "Button", "struct_button.html", "struct_button" ],
+    [ "ButtonSceneNode_errorMessages", "struct_button_scene_node__error_messages.html", "struct_button_scene_node__error_messages" ],
+    [ "ButtonSceneNode_parserStrings", "struct_button_scene_node__parser_strings.html", "struct_button_scene_node__parser_strings" ],
     [ "CheckBox", "struct_check_box.html", "struct_check_box" ],
     [ "ContextMenu", "struct_context_menu.html", "struct_context_menu" ],
     [ "EventManager", "struct_event_manager.html", "struct_event_manager" ],
