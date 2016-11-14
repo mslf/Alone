@@ -68,7 +68,7 @@ struct TextParser* TextParser_constructEmpty();
 void TextParser_destruct(struct TextParser* textParser);
 
 size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const leftOperand);
-char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index);
+const char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index);
 long int TextParser_getInt(struct TextParser* textParser, const char* const leftOperand, size_t index);
 double TextParser_getDouble(struct TextParser* textParser, const char* leftOperand, size_t index);
 bool TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index);

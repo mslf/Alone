@@ -41,7 +41,7 @@ const char* const TEXT_SCENENODE_ERR_NO_COLOR_A =
 //? Also, try to refactor
 static unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct ResourceManager* resourceManager,
                                                 struct TextParser* textParser, unsigned char* logFlag) {
-    char* tempFontPath = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, 0);
+    const char* tempFontPath = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_FONT_PATH, 0);
     if (!tempFontPath) {
         Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_FONT_PATH);
         tempFontPath = TEXT_SCENENODE_DEFAULT_FONT_PATH;
@@ -51,7 +51,7 @@ static unsigned char Text_tryGetSettingsFromTextParser(struct Text* text, struct
     if (!text->fontPath)
         return 2;
     strcpy(text->fontPath, tempFontPath);
-    char* tempTextString = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_TEXT, 0);
+    const char* tempTextString = TextParser_getString(textParser, TEXT_SCENENODE_PARSER_TEXT, 0);
     if (!tempTextString) {
         Logger_log(resourceManager->logger, TEXT_SCENENODE_ERR_NO_TEXT);
         tempTextString = TEXT_SCENENODE_DEFAULT_TEXT;

@@ -34,7 +34,7 @@ static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progres
                                                      struct TextParser* const textParser) {
     if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = TextParser_getString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
+    const char* const tempResId = TextParser_getString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
     if (!tempResId) {
         Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_RES);
         return 2;

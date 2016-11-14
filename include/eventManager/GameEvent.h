@@ -38,7 +38,7 @@ static const struct GameEvent_parserStrings {
     const char* const type; /**< Type string, which used to distinquish #GameEvent resource from others. */
     const char* const channel; /**< Channel string, which used to set GameEvent#channel from #TextParser. */
     const char* const command; /**< Command string, which used to set GameEvent#command from #TextParser. */
-    const char* const data; /**< Data stringm which used to set GameEvent#data from #TextParser. */
+    const char* const data; /**< Data string which used to set GameEvent#data from #TextParser. */
 }GamaEvent_parserStrings = {
     "GameEvent",
     "channel",

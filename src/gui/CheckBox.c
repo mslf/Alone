@@ -52,7 +52,7 @@ static unsigned char CheckBox_loadSpriteResource(struct CheckBox* checkBox,
                                                  struct TextParser* const textParser) {
     if (!checkBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = TextParser_getString(textParser, CHECK_BOX_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
+    const char* tempResId = TextParser_getString(textParser, CHECK_BOX_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
     if (!tempResId) {
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_RES);
         return 2;
@@ -76,19 +76,19 @@ static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct Resour
                                struct TextParser* textParser) {
     if (!checkBox || !resourceManager || !textParser)
         return;
-    char* tempFocusedSoundResourceString = TextParser_getString(textParser,
+    const char* tempFocusedSoundResourceString = TextParser_getString(textParser,
                                                         CHECK_BOX_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING, 0);
     if (!tempFocusedSoundResourceString)
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_FOCUSED_SOUND_RES);
     checkBox->focusedSoundResource = ResourceManager_loadSoundResource(resourceManager,
                                                                        tempFocusedSoundResourceString);
-    char* tempCheckedSoundResourceString = TextParser_getString(textParser,
+    const char* tempCheckedSoundResourceString = TextParser_getString(textParser,
                                                         CHECK_BOX_SCENENODE_PARSER_CHECKED_SOUND_RES_STRING, 0);
     if (!tempCheckedSoundResourceString)
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CHECKED_SOUND_RES);
     checkBox->checkedSoundResource = ResourceManager_loadSoundResource(resourceManager,
                                                                        tempCheckedSoundResourceString);
-    char* tempUnCheckedSoundResourceString = TextParser_getString(textParser,
+    const char* tempUnCheckedSoundResourceString = TextParser_getString(textParser,
                                                         CHECK_BOX_SCENENODE_PARSER_UNCHECKED_SOUND_RES_STRING, 0);
     if (!tempUnCheckedSoundResourceString)
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_UNCHECKED_SOUND_RES);
@@ -100,15 +100,15 @@ static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct Resou
                                 struct TextParser* textParser){
     if (!checkBox || !resourceManager || !textParser)
         return;
-    char* tempFocusedEventResourceString = TextParser_getString(textParser,
+    const char* tempFocusedEventResourceString = TextParser_getString(textParser,
                                                           CHECK_BOX_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING, 0);
     if (!tempFocusedEventResourceString)
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES);
-    char* tempCheckedEventResourceString = TextParser_getString(textParser,
+    const char* tempCheckedEventResourceString = TextParser_getString(textParser,
                                                           CHECK_BOX_SCENENODE_PARSER_CHECKED_EVENT_RES_STRING, 0);
     if (!tempCheckedEventResourceString)
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CHECKED_GAME_EVENT_RES);
-    char* tempUnCheckedEventResourceString = TextParser_getString(textParser,
+    const char* tempUnCheckedEventResourceString = TextParser_getString(textParser,
                                                           CHECK_BOX_SCENENODE_PARSER_UNCHECKED_EVENT_RES_STRING, 0);
     if (!tempUnCheckedEventResourceString)
         Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_UNCHECKED_GAME_EVENT_RES);

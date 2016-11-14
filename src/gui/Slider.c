@@ -33,7 +33,7 @@ static unsigned char Slider_loadBase(struct Slider* slider,
                                      struct TextParser* const textParser) {
     if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = NULL;
+    const char* tempResId = NULL;
     tempResId = TextParser_getString(textParser, SLIDER_SCENENODE_PARSER_PROGRESS_BAR_RESOURCE_STRING, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, SLIDER_SCENENODE_PARSER_ERR_NO_PROGRESS_BAR);
@@ -62,7 +62,7 @@ static unsigned char Slider_loadButton(struct Slider* slider,
                                        struct TextParser* const textParser) {
     if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = NULL;
+    const char* tempResId = NULL;
     tempResId = TextParser_getString(textParser, SLIDER_SCENENODE_PARSER_BUTTON_RESOURCE_STRING, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, SLIDER_SCENENODE_PARSER_ERR_NO_BUTTON);
@@ -72,7 +72,7 @@ static unsigned char Slider_loadButton(struct Slider* slider,
                                                                                 renderer,
                                                                                 sceneNodeTypesRegistrar,
                                                                                 tempResId,
-                                                                                BUTTON_SCENENODE_PARSER_TYPE_STRING);
+                                                                                ButtonSceneNode_parserStrings.type);
     if (!slider->button)
         return 3;
     slider->buttonAllignY = (enum AllignY)TextParser_getInt(textParser, SLIDER_SCENENODE_PARSER_ALLIGN_STRING, 0);
@@ -173,7 +173,7 @@ void Slider_control(struct SceneNode* sceneNode, struct EventManager* eventManag
         return;
     struct Slider* slider = (struct Slider*)sceneNode;
     Button_control((struct SceneNode*)slider->button, eventManager);
-    if (slider->button->state == ButtonState_Pressed) {
+    if (slider->button->state == BUTTON_STATE_PRESSED) {
         SDL_Point mouseCoordinates;
         SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
         int leftBorder = slider->base->spriteBase->dstRect.x;

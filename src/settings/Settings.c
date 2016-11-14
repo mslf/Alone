@@ -58,7 +58,7 @@ static unsigned char Settings_checkTextResourceType(struct Settings* settings, s
                                              struct ResourceManager* resourceManager) {
     if (!settings || !textParser || !resourceManager)
         return 1;
-    char* settingsTypeString = NULL;
+    const char* settingsTypeString = NULL;
     settingsTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (textParser->lastError) {
         Logger_log(resourceManager->logger, SETTINGS_PARSER_ERR_NO_TYPE_STRING);
@@ -104,7 +104,7 @@ static unsigned char Settings_tryGetSettingsFromTextParser(struct Settings* sett
     settings->isVsyncActive = TextParser_getFlag(textParser, SETTINGS_PARSER_VSYNC, 0);
     if (textParser->lastError)
         settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
-    char* tempString = TextParser_getString(textParser, SETTINGS_PARSER_MAIN_SCENE, 0);
+    const char* tempString = TextParser_getString(textParser, SETTINGS_PARSER_MAIN_SCENE, 0);
     if (textParser->lastError)
         tempString = SETTINGS_DEFAULT_MAIN_SCENE;
     settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));

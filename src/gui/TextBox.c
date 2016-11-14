@@ -32,7 +32,7 @@ static unsigned char TextBox_tryGetSettingsFromTextParser(struct TextBox* textBo
                                                          struct TextParser* textParser) {
     if (!textBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = TextParser_getString(textParser, TEXT_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
+    const char* tempResId = TextParser_getString(textParser, TEXT_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, TEXT_BOX_SCENENODE_ERR_BUTTON_RES);
         return 2;
@@ -41,7 +41,7 @@ static unsigned char TextBox_tryGetSettingsFromTextParser(struct TextBox* textBo
                                                                 renderer,
                                                                 sceneNodeTypesRegistrar,
                                                                 tempResId,
-                                                                BUTTON_SCENENODE_PARSER_TYPE_STRING);
+                                                                ButtonSceneNode_parserStrings.type);
     if (!textBox->box)
         return 3;
     if (strlen(textBox->box->label->text) > TEXT_BOX_SCEENODE_MAX_LENGTH) {
@@ -174,13 +174,13 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
     Button_control((struct SceneNode*)textBox->box, eventManager);
     SDL_Point mouseCoordinates;
     SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
-    if (textBox->box->state == ButtonState_Pressed) {
+    if (textBox->box->state == BUTTON_STATE_PRESSED) {
         //SDL_StartTextInput();
         // FIXME Need to find properly place for that
         textBox->haveFocus = true;
     }
     size_t i;
-    if (textBox->box->state == ButtonState_Normal)
+    if (textBox->box->state == BUTTON_STATE_NORMAL)
         for (i = 0; i < eventManager->sdlEventsCount; i++)
             if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN ) {
                 if (!(mouseCoordinates.x >= textBox->box->sprite->dstRect.x 
@@ -193,7 +193,7 @@ void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
                 }
             }
     if (textBox->haveFocus) {
-        textBox->box->state = ButtonState_Focused;
+        textBox->box->state = BUTTON_STATE_FOCUSED;
         for (i = 0; i < eventManager->sdlEventsCount; i++)
             if (eventManager->sdlEventsList[i].type == SDL_KEYDOWN) {
                 if (eventManager->sdlEventsList[i].key.keysym.sym == SDLK_BACKSPACE && textBox->stringLength > 0) {

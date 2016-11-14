@@ -53,7 +53,7 @@ static unsigned char ContextMenu_constructMenuOptions(struct ContextMenu* contex
         return 2;
     }
     for (i = 0; i < menuOptionsCount; i++) {
-        char* tempMenuOptionsNameString = TextParser_getString(textParser,
+        const char* tempMenuOptionsNameString = TextParser_getString(textParser,
                                                                CONTEXT_MENU_SCENENODE_PARSER_OPTIONS_LIST, i);
         if (TextParser_getItemsCount(textParser, tempMenuOptionsNameString) == 0) {
             char tempErrString[600];
@@ -61,9 +61,9 @@ static unsigned char ContextMenu_constructMenuOptions(struct ContextMenu* contex
                     tempMenuOptionsNameString);
             Logger_log(resourceManager->logger, tempErrString);
         }
-        char* tempLabelString = TextParser_getString(textParser, tempMenuOptionsNameString, 0);
-        char* tempPressedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 1);
-        char* tempFocusedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 2);
+        const char* tempLabelString = TextParser_getString(textParser, tempMenuOptionsNameString, 0);
+        const char* tempPressedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 1);
+        const char* tempFocusedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 2);
         ContextMenu_addMenuOption(contextMenu, resourceManager, renderer, 
                                   sceneNodeTypesRegistrar, tempFocusedResourceString,
                                   tempPressedResourceString, tempLabelString);
@@ -76,7 +76,7 @@ static unsigned char ContextMenu_loadButtonPrototypes(struct ContextMenu* contex
                                                        struct Renderer* renderer, struct TextParser* textParser) {
     if (!contextMenu || !resourceManager || !renderer || !textParser)
         return 1;
-    char* tempString = NULL;
+    const char* tempString = NULL;
     tempString = TextParser_getString(textParser, CONTEXT_MENU_SCENENODE_PARSER_PROTOTYPES, 0);
     if (!tempString) {
         Logger_log(renderer->logger, CONTEXT_MENU_SCENENODE_PARSER_ERR_NO_PROTOTYPES);
@@ -211,7 +211,7 @@ static unsigned char ContextMenu_updateMenuOption(struct ContextMenu* contextMen
                                                     renderer,
                                                     sceneNodeTypesRegistrar,
                                                     newButtonResId,
-                                                    BUTTON_SCENENODE_PARSER_TYPE_STRING);
+                                                    ButtonSceneNode_parserStrings.type);
         if (!tempButton) {
             char tempErrString[600];
             sprintf(tempErrString, "%s MenuOption resource ID: %s",
@@ -333,7 +333,7 @@ unsigned char ContextMenu_addMenuOption(struct ContextMenu* contextMenu,
                                                                             renderer,
                                                                             sceneNodeTypesRegistrar,
                                                                             contextMenu->onlyOneMenuOptionPrototype,
-                                                                            BUTTON_SCENENODE_PARSER_TYPE_STRING);
+                                                                            ButtonSceneNode_parserStrings.type);
     if (!tempButtonToAdd)
         return 3;
     result += Button_changeFocusedEventResource(tempButtonToAdd, resourceManager, focusedEventRes);

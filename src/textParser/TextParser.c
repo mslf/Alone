@@ -582,7 +582,7 @@ size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const
     return 0;
 }
 
-char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index) {
+const char* TextParser_getString(struct TextParser* textParser, const char* const leftOperand, size_t index) {
     if (!textParser)
         return NULL;
     if (!leftOperand) {

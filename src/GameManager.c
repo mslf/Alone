@@ -55,7 +55,7 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
                                                                TEXT_SCENENODE_PARSER_TYPE_STRING,
                                                                Text_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
-                                                               BUTTON_SCENENODE_PARSER_TYPE_STRING,
+                                                               ButtonSceneNode_parserStrings.type,
                                                                Button_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                CHECK_BOX_SCENENODE_PARSER_TYPE_STRING,

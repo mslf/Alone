@@ -37,7 +37,7 @@ static unsigned char ListBox_loadContextMenuResource(struct ListBox* listBox,
                                                struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING, 0);
+    const char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_RES);
         return 2;
@@ -71,7 +71,7 @@ static unsigned char ListBox_loadButtonResource(struct ListBox* listBox,
                                                struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
+    const char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_BUTTON_RES);
         return 2;
@@ -80,7 +80,7 @@ static unsigned char ListBox_loadButtonResource(struct ListBox* listBox,
                                                                 renderer,
                                                                 sceneNodeTypesRegistrar,
                                                                 tempResId,
-                                                                BUTTON_SCENENODE_PARSER_TYPE_STRING);
+                                                                ButtonSceneNode_parserStrings.type);
     if (!listBox->button)
         return 3;
     return 0;
@@ -93,7 +93,7 @@ static unsigned char ListBox_loadTextBoxResource(struct ListBox* listBox,
                                                struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return 1;
-    char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING, 0);
+    const char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_TEXT_BOX_RES);
         return 2;
@@ -216,11 +216,11 @@ void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
     }
     if (listBox->textBox->haveFocus) {
         if (listBox->isStringExistInList) {
-            listBox->textBox->box->state = ButtonState_Pressed;
+            listBox->textBox->box->state = BUTTON_STATE_PRESSED;
             listBox->textBox->box->isStateChanged = true;
         }
         else {
-            listBox->textBox->box->state = ButtonState_Focused;
+            listBox->textBox->box->state = BUTTON_STATE_FOCUSED;
             listBox->textBox->box->isStateChanged = true;
         }
     }
@@ -230,7 +230,7 @@ void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
         SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
         for (i = 0; i < listBox->contextMenu->menuOptionsCount; i++)
             if (listBox->contextMenu->menuOptionsList[i]->isStateChanged
-                && listBox->contextMenu->menuOptionsList[i]->state == ButtonState_Pressed) {
+                && listBox->contextMenu->menuOptionsList[i]->state == BUTTON_STATE_PRESSED) {
                 char* newString = listBox->contextMenu->menuOptionsList[i]->label->text;
                 if (TextBox_changeString(listBox->textBox, newString))
                     TextBox_changeString(listBox->textBox, "Err");
@@ -252,7 +252,7 @@ void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventMana
             }
     }
     Button_control((struct SceneNode*)listBox->button, eventManager);
-    if (listBox->button->isStateChanged && listBox->button->state == ButtonState_Pressed) {
+    if (listBox->button->isStateChanged && listBox->button->state == BUTTON_STATE_PRESSED) {
         if (listBox->isContextMenuShown)
             listBox->isContextMenuShown = false;
         else
