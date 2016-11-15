@@ -1,4 +1,0 @@
-type = GameEvent;
-channel = Gui;
-command = StateChanged;
-data = Checked;

@@ -1,8 +1,0 @@
-type = Sprite;
-textureResource = data/slider/sliderBar.png;
-frameWidth = 300;
-frameHeight = 50;
-animationsListFramesCount = [1, 1];
-animationsListOneFrameDuration = [0, 0];
-virtualWidth = 150;
-virtualHeight = 25;

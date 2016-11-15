@@ -1,8 +1,0 @@
-type = Sprite;
-textureResource = data/img3.png;
-frameWidth = 100;
-frameHeight = 100;
-animationsListFramesCount = [1, 1];
-animationsListOneFrameDuration = [0, 0];
-virtualWidth = 50;
-virtualHeight = 50;

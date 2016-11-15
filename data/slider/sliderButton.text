@@ -1,5 +1,0 @@
-type = Text;
-fontPath = ["data/good times rg.ttf"];
-text = [" "];
-size = 5;
-color = [50, 50, 50, 0];

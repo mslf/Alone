@@ -1,3 +1,0 @@
-type = ProgressBar;
-spriteResource = data/bar/bar.sprite;
-value = 25;

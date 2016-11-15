@@ -1,3 +1,0 @@
-type = TextBox; 
-buttonResource = data/textBoxes/textBox.button;
-maxLength = 25;

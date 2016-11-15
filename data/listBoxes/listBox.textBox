@@ -1,3 +1,0 @@
-type = TextBox; 
-buttonResource = data/listBoxes/prototype/listBox_ContextMenu.button;
-maxLength = 10;

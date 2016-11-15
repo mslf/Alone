@@ -1,8 +1,0 @@
-type = Button;
-spriteResource = data/listBoxes/listBoxButton.sprite;
-textResource = data/listBoxes/listBox.text;
-focusedEventResource = data/cmd/cmdFocused.gameEvent;
-pressedEventResource = data/cmd/cmdPressed.gameEvent;
-focusedSoundResource = data/cmd/cmdFocused.wav;
-pressedSoundResource = data/cmd/cmdPressed.wav;
-labelOffset = [5, 0];
