@@ -1,0 +1,512 @@
+\hypertarget{_button_8c}{}\section{/home/mslf/programs/git/\+Alone/src/gui/\+Button.c File Reference}
+\label{_button_8c}\index{/home/mslf/programs/git/\+Alone/src/gui/\+Button.\+c@{/home/mslf/programs/git/\+Alone/src/gui/\+Button.\+c}}
+
+
+File containing implementation of \hyperlink{struct_button}{Button}.  
+
+
+{\ttfamily \#include \char`\"{}gui/\+Button.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text\+Parser/\+Text\+Parser.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_button_scene_node__error_messages}{Button\+Scene\+Node\+\_\+error\+Messages}
+\begin{DoxyCompactList}\small\item\em Error message strings for \hyperlink{struct_button}{Button}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8c_a4a1b447eeb17af7bcf5e1bf94eea7205}{Button\+\_\+load\+Text\+Resource} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer, struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$scene\+Node\+Types\+Registrar, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$text\+Parser)
+\begin{DoxyCompactList}\small\item\em Function for loading and constructing \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. \end{DoxyCompactList}\item 
+static enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8c_a92bac31b0d05d1366e580d2ca0fe0f37}{Button\+\_\+load\+Sprite\+Resource} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer, struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$scene\+Node\+Types\+Registrar, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$text\+Parser)
+\begin{DoxyCompactList}\small\item\em Function for loading and constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite}. \end{DoxyCompactList}\item 
+static void \hyperlink{_button_8c_a99d39199cddc7aca41aeaeaf12eb937b}{Button\+\_\+load\+Sound\+Resources} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$text\+Parser)
+\begin{DoxyCompactList}\small\item\em Function for loading and constructing \hyperlink{struct_button_a8848ee5b886f588a966fc6c3ff0270df}{Button\+::focused\+Sound\+Resource} and \hyperlink{struct_button_a9d6a7ab6b4708d54a3e7da0a665609b2}{Button\+::pressed\+Sound\+Resource}. \end{DoxyCompactList}\item 
+static void \hyperlink{_button_8c_afcaa8cdaa0953a0a0fe79f9545219424}{Button\+\_\+load\+Events\+Resources} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$text\+Parser)
+\begin{DoxyCompactList}\small\item\em Function for loading and constructing \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event} and \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. Also, it will update \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} and \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource}. \end{DoxyCompactList}\item 
+static enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8c_ad26f3066922ef66804b37ea8f0c11869}{Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer, struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$scene\+Node\+Types\+Registrar, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$text\+Parser)
+\begin{DoxyCompactList}\small\item\em Function for loading settings and initializing \hyperlink{struct_button}{Button} from \hyperlink{struct_text_parser}{Text\+Parser}. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$ \hyperlink{_button_8c_af75cacaf53085bfb94b9c70c6b10caed}{Button\+\_\+construct} (struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const resource\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$const renderer, struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$scene\+Node\+Types\+Registrar, struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$const text\+Parser)
+\begin{DoxyCompactList}\small\item\em Constructs \hyperlink{struct_button}{Button} and inits it from a \hyperlink{struct_text_parser}{Text\+Parser}. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8c_a088a0c517db01f25bbdeea23240861fa}{Button\+\_\+destruct} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Destructs \hyperlink{struct_button}{Button} and frees memory, used by it. Pointer to that function should be at Button\+::scene\+Node\+::destruct. \end{DoxyCompactList}\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8c_a9ebc2f888e3123690008a8b820677826}{Button\+\_\+change\+Pressed\+Event\+Resource} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, const char $\ast$const pressed\+Event\+Res\+Id)
+\begin{DoxyCompactList}\small\item\em Changes \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource} and \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. Sets old Button\+::pressed\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::pressed\+Event\+Resource\+::pointers\+Count if exists. \end{DoxyCompactList}\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8c_a7489d676d6290b5c03cb146ebf56e5a6}{Button\+\_\+change\+Focused\+Event\+Resource} (struct \hyperlink{struct_button}{Button} $\ast$button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$resource\+Manager, const char $\ast$const focused\+Event\+Res\+Id)
+\begin{DoxyCompactList}\small\item\em Changes \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} and \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event}. Sets old Button\+::focused\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::focused\+Event\+Resource\+::pointers\+Count if exists. \end{DoxyCompactList}\item 
+enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} \hyperlink{_button_8c_a36e464cd7fac8f1646dd3571f990e11b}{Button\+\_\+save} (const struct \hyperlink{struct_button}{Button} $\ast$const button, struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const resource\+Manager, const char $\ast$const button\+Res\+Id)
+\begin{DoxyCompactList}\small\item\em Saves \hyperlink{struct_button}{Button} to the filesystem via \hyperlink{struct_resource_manager}{Resource\+Manager}. Before saving, it updates Button\+::scene\+Node\+::scene\+Node\+Text\+Resource with the latest changes in \hyperlink{struct_button}{Button}. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8c_a4626fc067a7a183e59ef37786d4045b2}{Button\+\_\+control} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$event\+Manager)
+\begin{DoxyCompactList}\small\item\em Function to control user input events to \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::control. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8c_aae2f164ac9b21ea87759eecbda20c9d4}{Button\+\_\+update} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$event\+Manager, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Function to update \hyperlink{struct_button}{Button} and interacting with \hyperlink{struct_event_manager}{Event\+Manager}. Pointer to that function should be at Button\+::scene\+Node\+::update. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8c_a73a6d23a2809dc26d9cd8711f0c4e113}{Button\+\_\+render} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_renderer}{Renderer} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Function to render \hyperlink{struct_button}{Button} on the screen. Pointer to that function should be at Button\+::scene\+Node\+::render. \end{DoxyCompactList}\item 
+void \hyperlink{_button_8c_a445315add3d495f1a1712b1f38313d50}{Button\+\_\+sound} (struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$scene\+Node, struct \hyperlink{struct_musican}{Musican} $\ast$musican)
+\begin{DoxyCompactList}\small\item\em Function to play sounds of a \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const struct \hyperlink{struct_button_scene_node__error_messages}{Button\+Scene\+Node\+\_\+error\+Messages} {\bfseries Button\+Scene\+Node\+\_\+error\+Messages}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File containing implementation of \hyperlink{struct_button}{Button}. 
+
+\begin{DoxyAuthor}{Author}
+mslf 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13 Aug 2016 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{_button_8c_a7489d676d6290b5c03cb146ebf56e5a6}{}\label{_button_8c_a7489d676d6290b5c03cb146ebf56e5a6} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+change\+Focused\+Event\+Resource@{Button\+\_\+change\+Focused\+Event\+Resource}}
+\index{Button\+\_\+change\+Focused\+Event\+Resource@{Button\+\_\+change\+Focused\+Event\+Resource}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+change\+Focused\+Event\+Resource()}{Button\_changeFocusedEventResource()}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+change\+Focused\+Event\+Resource (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{const char $\ast$const}]{focused\+Event\+Res\+Id }\end{DoxyParamCaption})}
+
+
+
+Changes \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} and \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event}. Sets old Button\+::focused\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::focused\+Event\+Resource\+::pointers\+Count if exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to load new \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource}. Can be N\+U\+LL. \\
+\hline
+{\em focused\+Event\+Res\+Id} & String with ID of new \hyperlink{struct_game_event}{Game\+Event} to load via \hyperlink{struct_resource_manager}{Resource\+Manager}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_game_event}{Game\+Event} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a9ebc2f888e3123690008a8b820677826}{}\label{_button_8c_a9ebc2f888e3123690008a8b820677826} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+change\+Pressed\+Event\+Resource@{Button\+\_\+change\+Pressed\+Event\+Resource}}
+\index{Button\+\_\+change\+Pressed\+Event\+Resource@{Button\+\_\+change\+Pressed\+Event\+Resource}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+change\+Pressed\+Event\+Resource()}{Button\_changePressedEventResource()}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+change\+Pressed\+Event\+Resource (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{const char $\ast$const}]{pressed\+Event\+Res\+Id }\end{DoxyParamCaption})}
+
+
+
+Changes \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource} and \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. Sets old Button\+::pressed\+Event\+::is\+Needed to false, if exists. Decreases old Button\+::pressed\+Event\+Resource\+::pointers\+Count if exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to load new \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource}. Can be N\+U\+LL. \\
+\hline
+{\em pressed\+Event\+Res\+Id} & String with ID of new \hyperlink{struct_game_event}{Game\+Event} to load via \hyperlink{struct_resource_manager}{Resource\+Manager}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_game_event}{Game\+Event} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_af75cacaf53085bfb94b9c70c6b10caed}{}\label{_button_8c_af75cacaf53085bfb94b9c70c6b10caed} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+construct@{Button\+\_\+construct}}
+\index{Button\+\_\+construct@{Button\+\_\+construct}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+construct()}{Button\_construct()}}
+{\footnotesize\ttfamily struct \hyperlink{struct_scene_node}{Scene\+Node}$\ast$ Button\+\_\+construct (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const}]{resource\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$const}]{renderer,  }\item[{struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$}]{scene\+Node\+Types\+Registrar,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$const}]{text\+Parser }\end{DoxyParamCaption})}
+
+
+
+Constructs \hyperlink{struct_button}{Button} and inits it from a \hyperlink{struct_text_parser}{Text\+Parser}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to load additional resources, needed for \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} which is used to construct \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} and \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em scene\+Node\+Types\+Registrar} & Pointer to a \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} which is used to construct \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} and \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser} with data strings for initializing \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to an initialized \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}, or N\+U\+LL if constructing failed. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Use only \hyperlink{_button_8h_a088a0c517db01f25bbdeea23240861fa}{Button\+\_\+destruct()} or Button\+::scene\+Node\+::destruct() to destruct returned \hyperlink{struct_scene_node}{Scene\+Node}. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_renderer}{Renderer} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a4626fc067a7a183e59ef37786d4045b2}{}\label{_button_8c_a4626fc067a7a183e59ef37786d4045b2} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+control@{Button\+\_\+control}}
+\index{Button\+\_\+control@{Button\+\_\+control}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+control()}{Button\_control()}}
+{\footnotesize\ttfamily void Button\+\_\+control (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$}]{event\+Manager }\end{DoxyParamCaption})}
+
+
+
+Function to control user input events to \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em event\+Manager} & Pointer to an \hyperlink{struct_event_manager}{Event\+Manager}, where that function will get user input events. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\hypertarget{_button_8c_a088a0c517db01f25bbdeea23240861fa}{}\label{_button_8c_a088a0c517db01f25bbdeea23240861fa} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+destruct@{Button\+\_\+destruct}}
+\index{Button\+\_\+destruct@{Button\+\_\+destruct}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+destruct()}{Button\_destruct()}}
+{\footnotesize\ttfamily void Button\+\_\+destruct (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Destructs \hyperlink{struct_button}{Button} and frees memory, used by it. Pointer to that function should be at Button\+::scene\+Node\+::destruct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be not fully initialized. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Use this function only in pair with \hyperlink{_button_8h_af75cacaf53085bfb94b9c70c6b10caed}{Button\+\_\+construct()}! 
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{_button_8h_af75cacaf53085bfb94b9c70c6b10caed}{Button\+\_\+construct()} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_afcaa8cdaa0953a0a0fe79f9545219424}{}\label{_button_8c_afcaa8cdaa0953a0a0fe79f9545219424} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+load\+Events\+Resources@{Button\+\_\+load\+Events\+Resources}}
+\index{Button\+\_\+load\+Events\+Resources@{Button\+\_\+load\+Events\+Resources}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+load\+Events\+Resources()}{Button\_loadEventsResources()}}
+{\footnotesize\ttfamily static void Button\+\_\+load\+Events\+Resources (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$}]{text\+Parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for loading and constructing \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event} and \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. Also, it will update \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{Button\+::focused\+Event\+Resource} and \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{Button\+::pressed\+Event\+Resource}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} where to construct events. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} for loading \hyperlink{struct_game_event}{Game\+Event} resources. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser}, where function will get \hyperlink{struct_button_scene_node__parser_strings_aab416a914f7b3b4514bd5cf98c4558a8}{Button\+Scene\+Node\+\_\+parser\+Strings\+::focused\+Event\+Res} and \hyperlink{struct_button_scene_node__parser_strings_aa63f78ed02ab8fb2518965ba94954854}{Button\+Scene\+Node\+\_\+parser\+Strings\+::pressed\+Event\+Res}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_game_event}{Game\+Event} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a99d39199cddc7aca41aeaeaf12eb937b}{}\label{_button_8c_a99d39199cddc7aca41aeaeaf12eb937b} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+load\+Sound\+Resources@{Button\+\_\+load\+Sound\+Resources}}
+\index{Button\+\_\+load\+Sound\+Resources@{Button\+\_\+load\+Sound\+Resources}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+load\+Sound\+Resources()}{Button\_loadSoundResources()}}
+{\footnotesize\ttfamily static void Button\+\_\+load\+Sound\+Resources (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$}]{text\+Parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for loading and constructing \hyperlink{struct_button_a8848ee5b886f588a966fc6c3ff0270df}{Button\+::focused\+Sound\+Resource} and \hyperlink{struct_button_a9d6a7ab6b4708d54a3e7da0a665609b2}{Button\+::pressed\+Sound\+Resource}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} where to construct \hyperlink{struct_button_a8848ee5b886f588a966fc6c3ff0270df}{Button\+::focused\+Sound\+Resource} and \hyperlink{struct_button_a9d6a7ab6b4708d54a3e7da0a665609b2}{Button\+::pressed\+Sound\+Resource}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} for loading sound resources. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser}, where function will get \hyperlink{struct_button_scene_node__parser_strings_a657d14ed5cdb24ab74adbd963640824b}{Button\+Scene\+Node\+\_\+parser\+Strings\+::focused\+Sound\+Res} and \hyperlink{struct_button_scene_node__parser_strings_a5257ecd9dcd85813b88cb459d9bd8a81}{Button\+Scene\+Node\+\_\+parser\+Strings\+::pressed\+Sound\+Res}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_sound_resource}{Sound\+Resource} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a92bac31b0d05d1366e580d2ca0fe0f37}{}\label{_button_8c_a92bac31b0d05d1366e580d2ca0fe0f37} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+load\+Sprite\+Resource@{Button\+\_\+load\+Sprite\+Resource}}
+\index{Button\+\_\+load\+Sprite\+Resource@{Button\+\_\+load\+Sprite\+Resource}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+load\+Sprite\+Resource()}{Button\_loadSpriteResource()}}
+{\footnotesize\ttfamily static enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+load\+Sprite\+Resource (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer,  }\item[{struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$}]{scene\+Node\+Types\+Registrar,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$}]{text\+Parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for loading and constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} where to construct \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} for loading \hyperlink{struct_sprite}{Sprite} resource. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite}. Can be N\+U\+LL. \\
+\hline
+{\em scene\+Node\+Types\+Registrar} & Pointer to a \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} for constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite}. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser}, where function will get \hyperlink{struct_button_scene_node__parser_strings_a008090dd7a5af169656ea5a85a437385}{Button\+Scene\+Node\+\_\+parser\+Strings\+::sprite\+Res}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_sprite}{Sprite} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_renderer}{Renderer} 
+
+\hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a4a1b447eeb17af7bcf5e1bf94eea7205}{}\label{_button_8c_a4a1b447eeb17af7bcf5e1bf94eea7205} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+load\+Text\+Resource@{Button\+\_\+load\+Text\+Resource}}
+\index{Button\+\_\+load\+Text\+Resource@{Button\+\_\+load\+Text\+Resource}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+load\+Text\+Resource()}{Button\_loadTextResource()}}
+{\footnotesize\ttfamily static enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+load\+Text\+Resource (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer,  }\item[{struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$}]{scene\+Node\+Types\+Registrar,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$}]{text\+Parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for loading and constructing \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} where to construct \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} for loading \hyperlink{struct_text}{Text} resource. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for constructing \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em scene\+Node\+Types\+Registrar} & Pointer to a \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} for constructing \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser}, where function will get \hyperlink{struct_button_scene_node__parser_strings_ab8666a8039b6fdab629c3e0853421c3c}{Button\+Scene\+Node\+\_\+parser\+Strings\+::text\+Res}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_text}{Text} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_renderer}{Renderer} 
+
+\hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a73a6d23a2809dc26d9cd8711f0c4e113}{}\label{_button_8c_a73a6d23a2809dc26d9cd8711f0c4e113} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+render@{Button\+\_\+render}}
+\index{Button\+\_\+render@{Button\+\_\+render}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+render()}{Button\_render()}}
+{\footnotesize\ttfamily void Button\+\_\+render (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Function to render \hyperlink{struct_button}{Button} on the screen. Pointer to that function should be at Button\+::scene\+Node\+::render. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for drawing \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\hypertarget{_button_8c_a36e464cd7fac8f1646dd3571f990e11b}{}\label{_button_8c_a36e464cd7fac8f1646dd3571f990e11b} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+save@{Button\+\_\+save}}
+\index{Button\+\_\+save@{Button\+\_\+save}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+save()}{Button\_save()}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+save (\begin{DoxyParamCaption}\item[{const struct \hyperlink{struct_button}{Button} $\ast$const}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$const}]{resource\+Manager,  }\item[{const char $\ast$const}]{button\+Res\+Id }\end{DoxyParamCaption})}
+
+
+
+Saves \hyperlink{struct_button}{Button} to the filesystem via \hyperlink{struct_resource_manager}{Resource\+Manager}. Before saving, it updates Button\+::scene\+Node\+::scene\+Node\+Text\+Resource with the latest changes in \hyperlink{struct_button}{Button}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} which will be saved. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} which is used to save Button\+::scene\+Node\+::scene\+Node\+Text\+Resource. Can be N\+U\+LL. \\
+\hline
+{\em button\+Res\+Id} & Path string, where \hyperlink{struct_resource_manager}{Resource\+Manager} will save Button\+::scene\+Node\+::scene\+Node\+Text\+Resource. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_scene_node}{Scene\+Node} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_a445315add3d495f1a1712b1f38313d50}{}\label{_button_8c_a445315add3d495f1a1712b1f38313d50} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+sound@{Button\+\_\+sound}}
+\index{Button\+\_\+sound@{Button\+\_\+sound}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+sound()}{Button\_sound()}}
+{\footnotesize\ttfamily void Button\+\_\+sound (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_musican}{Musican} $\ast$}]{musican }\end{DoxyParamCaption})}
+
+
+
+Function to play sounds of a \hyperlink{struct_button}{Button}. Pointer to that function should be at Button\+::scene\+Node\+::sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em musican} & Pointer to a \hyperlink{struct_musican}{Musican} for playing audio of a \hyperlink{struct_button}{Button}. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\hypertarget{_button_8c_ad26f3066922ef66804b37ea8f0c11869}{}\label{_button_8c_ad26f3066922ef66804b37ea8f0c11869} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser@{Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser}}
+\index{Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser@{Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser()}{Button\_tryGetSettingsFromTextParser()}}
+{\footnotesize\ttfamily static enum \hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} Button\+\_\+try\+Get\+Settings\+From\+Text\+Parser (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_button}{Button} $\ast$}]{button,  }\item[{struct \hyperlink{struct_resource_manager}{Resource\+Manager} $\ast$}]{resource\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer,  }\item[{struct \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} $\ast$}]{scene\+Node\+Types\+Registrar,  }\item[{struct \hyperlink{struct_text_parser}{Text\+Parser} $\ast$}]{text\+Parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function for loading settings and initializing \hyperlink{struct_button}{Button} from \hyperlink{struct_text_parser}{Text\+Parser}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to a \hyperlink{struct_button}{Button} which will be initialized. Can be N\+U\+LL. \\
+\hline
+{\em resource\+Manager} & Pointer to a \hyperlink{struct_resource_manager}{Resource\+Manager} for loading required resources. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} and \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em scene\+Node\+Types\+Registrar} & Pointer to a \hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} for constructing \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{Button\+::sprite} and \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label}. Can be N\+U\+LL. \\
+\hline
+{\em text\+Parser} & Pointer to a \hyperlink{struct_text_parser}{Text\+Parser} with data strings. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_button}{Button} 
+
+\hyperlink{struct_scene_node_types_registrar}{Scene\+Node\+Types\+Registrar} 
+
+\hyperlink{struct_resource_manager}{Resource\+Manager} 
+
+\hyperlink{struct_renderer}{Renderer} 
+
+\hyperlink{struct_text_parser}{Text\+Parser} 
+
+\hyperlink{struct_button_scene_node__parser_strings}{Button\+Scene\+Node\+\_\+parser\+Strings} 
+
+\hyperlink{_button_8h_a56aa7ab9e56ca13f0d24a2aa90746541}{Button\+Scene\+Node\+\_\+errors} 
+\end{DoxySeeAlso}
+\hypertarget{_button_8c_aae2f164ac9b21ea87759eecbda20c9d4}{}\label{_button_8c_aae2f164ac9b21ea87759eecbda20c9d4} 
+\index{Button.\+c@{Button.\+c}!Button\+\_\+update@{Button\+\_\+update}}
+\index{Button\+\_\+update@{Button\+\_\+update}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+\_\+update()}{Button\_update()}}
+{\footnotesize\ttfamily void Button\+\_\+update (\begin{DoxyParamCaption}\item[{struct \hyperlink{struct_scene_node}{Scene\+Node} $\ast$}]{scene\+Node,  }\item[{struct \hyperlink{struct_event_manager}{Event\+Manager} $\ast$}]{event\+Manager,  }\item[{struct \hyperlink{struct_renderer}{Renderer} $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Function to update \hyperlink{struct_button}{Button} and interacting with \hyperlink{struct_event_manager}{Event\+Manager}. Pointer to that function should be at Button\+::scene\+Node\+::update. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Node} & Pointer to a \hyperlink{struct_button}{Button}, casted to \hyperlink{struct_scene_node}{Scene\+Node}. Can be N\+U\+LL. \\
+\hline
+{\em event\+Manager} & Pointer to an \hyperlink{struct_event_manager}{Event\+Manager}, where that function will place it\textquotesingle{}s events. Can be N\+U\+LL. \\
+\hline
+{\em renderer} & Pointer to a \hyperlink{struct_renderer}{Renderer} for screen-\/depend coordinater converting. Can be N\+U\+LL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Passing \hyperlink{struct_scene_node}{Scene\+Node} inheritors, which is not \hyperlink{struct_button}{Button} is not accepted! 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t use this function for drawing. 
+\end{DoxyNote}
+
+
+\subsection{Variable Documentation}
+\hypertarget{_button_8c_a97392410d022645ef07ba199e7922cfc}{}\label{_button_8c_a97392410d022645ef07ba199e7922cfc} 
+\index{Button.\+c@{Button.\+c}!Button\+Scene\+Node\+\_\+error\+Messages@{Button\+Scene\+Node\+\_\+error\+Messages}}
+\index{Button\+Scene\+Node\+\_\+error\+Messages@{Button\+Scene\+Node\+\_\+error\+Messages}!Button.\+c@{Button.\+c}}
+\subsubsection{\texorpdfstring{Button\+Scene\+Node\+\_\+error\+Messages}{ButtonSceneNode\_errorMessages}}
+{\footnotesize\ttfamily const struct \hyperlink{struct_button_scene_node__error_messages}{Button\+Scene\+Node\+\_\+error\+Messages} \hyperlink{struct_button_scene_node__error_messages}{Button\+Scene\+Node\+\_\+error\+Messages}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    \textcolor{stringliteral}{"Button\_loadEventsResources: focusedEventResource string haven't found!"},
+    \textcolor{stringliteral}{"Button\_loadEventsResources: pressedEventResource string haven't found!"},
+    \textcolor{stringliteral}{"Button\_changeFocusedEventResource: constructing GameEvent failed!"},
+    \textcolor{stringliteral}{"Button\_changePressedEventResource: constructing GameEvent failed!"},
+    \textcolor{stringliteral}{"Button\_loadSoundResources: focusedSoundResource string haven't found!"},
+    \textcolor{stringliteral}{"Button\_loadSoundResources: pressedSoundResource string haven't found!"},
+    \textcolor{stringliteral}{"Button\_loadSpriteResource: spriteResource string haven't found!"},
+    \textcolor{stringliteral}{"Button\_loadSpriteResource: loaded Sprite doesn't contain 3 animations!"},
+    \textcolor{stringliteral}{"Button\_loadTextResource: textResource string haven't found!"}\}
+\end{DoxyCode}

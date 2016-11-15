@@ -1,0 +1,134 @@
+\hypertarget{struct_button}{}\section{Button Struct Reference}
+\label{struct_button}\index{Button@{Button}}
+
+
+Standart Gui element to be clicked without holding it\textquotesingle{}s state through the frames. Has some text on itself, focused and pressed \hyperlink{struct_game_event}{Game\+Event} and \hyperlink{struct_sound_resource}{Sound\+Resource}. \hyperlink{struct_user}{User} can click the \hyperlink{struct_button}{Button}, and some things will happen (such a \hyperlink{struct_game_event}{Game\+Event} or sound playing). Also it\textquotesingle{}s useful for other Gui elements, which are needed to be clicked without saving state.  
+
+
+
+
+{\ttfamily \#include $<$Button.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_scene_node}{Scene\+Node} \hyperlink{struct_button_aca8025f56fb4ce20b974ec9a3292a9e4}{scene\+Node}
+\item 
+struct \hyperlink{struct_sprite}{Sprite} $\ast$ \hyperlink{struct_button_a1128327f94baacb1570a98fca0591108}{sprite}
+\item 
+struct \hyperlink{struct_text}{Text} $\ast$ \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{label}
+\item 
+struct \hyperlink{struct_sound_resource}{Sound\+Resource} $\ast$ \hyperlink{struct_button_a8848ee5b886f588a966fc6c3ff0270df}{focused\+Sound\+Resource}
+\item 
+struct \hyperlink{struct_sound_resource}{Sound\+Resource} $\ast$ \hyperlink{struct_button_a9d6a7ab6b4708d54a3e7da0a665609b2}{pressed\+Sound\+Resource}
+\item 
+struct \hyperlink{struct_text_resource}{Text\+Resource} $\ast$ \hyperlink{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{focused\+Event\+Resource}
+\item 
+struct \hyperlink{struct_text_resource}{Text\+Resource} $\ast$ \hyperlink{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{pressed\+Event\+Resource}
+\item 
+struct \hyperlink{struct_game_event}{Game\+Event} $\ast$ \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{focused\+Event}
+\item 
+struct \hyperlink{struct_game_event}{Game\+Event} $\ast$ \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{pressed\+Event}
+\item 
+S\+D\+L\+\_\+\+Point \hyperlink{struct_button_ac8658f1193098d53c4bd1bdcab7df6af}{label\+Offset}
+\item 
+bool \hyperlink{struct_button_a8ea7e8ac3e3330830aa7a4309390f3ac}{is\+Geometry\+Changed}
+\item 
+bool \hyperlink{struct_button_abbe46dfeadc7ca8af4ccd6a1e60fa560}{is\+State\+Changed}
+\item 
+enum \hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657}{Button\+State} \hyperlink{struct_button_a98525fefb11846bc0e1ee154b0a106d4}{state}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Standart Gui element to be clicked without holding it\textquotesingle{}s state through the frames. Has some text on itself, focused and pressed \hyperlink{struct_game_event}{Game\+Event} and \hyperlink{struct_sound_resource}{Sound\+Resource}. \hyperlink{struct_user}{User} can click the \hyperlink{struct_button}{Button}, and some things will happen (such a \hyperlink{struct_game_event}{Game\+Event} or sound playing). Also it\textquotesingle{}s useful for other Gui elements, which are needed to be clicked without saving state. 
+
+\begin{DoxyWarning}{Warning}
+\hyperlink{struct_button}{Button} is an inheritor of the \hyperlink{struct_scene_node}{Scene\+Node}. It means, that other code is use {\bfseries pointer casting} to \hyperlink{struct_button}{Button} from \hyperlink{struct_scene_node}{Scene\+Node} and vise versa. You {\bfseries S\+H\+O\+U\+LD} include the {\ttfamily struct \hyperlink{struct_scene_node}{Scene\+Node} blabla\+Node;} at the begining of \hyperlink{struct_button}{Button} struct, if you want code to work with \hyperlink{struct_button}{Button} like with a \hyperlink{struct_scene_node}{Scene\+Node}. More, you {\bfseries S\+H\+O\+U\+LD} initialize function pointers in {\ttfamily blabla\+Node} to N\+U\+LL (by calling Scene\+Node\+\_\+init()) or to your function implementation. Don\textquotesingle{}t forget to add this warning comment to your own new \hyperlink{struct_scene_node}{Scene\+Node} inheritors. 
+\end{DoxyWarning}
+
+
+\subsection{Field Documentation}
+\hypertarget{struct_button_af8909553495b609dc7c9efd469ffc31d}{}\label{struct_button_af8909553495b609dc7c9efd469ffc31d} 
+\index{Button@{Button}!focused\+Event@{focused\+Event}}
+\index{focused\+Event@{focused\+Event}!Button@{Button}}
+\subsubsection{\texorpdfstring{focused\+Event}{focusedEvent}}
+{\footnotesize\ttfamily struct \hyperlink{struct_game_event}{Game\+Event}$\ast$ focused\+Event}
+
+\hyperlink{struct_game_event}{Game\+Event} to be added to the \hyperlink{struct_event_manager}{Event\+Manager} when the \hyperlink{struct_button}{Button} receives focus. \hypertarget{struct_button_aff7dcf845e86b8d62077ceec6094f3e3}{}\label{struct_button_aff7dcf845e86b8d62077ceec6094f3e3} 
+\index{Button@{Button}!focused\+Event\+Resource@{focused\+Event\+Resource}}
+\index{focused\+Event\+Resource@{focused\+Event\+Resource}!Button@{Button}}
+\subsubsection{\texorpdfstring{focused\+Event\+Resource}{focusedEventResource}}
+{\footnotesize\ttfamily struct \hyperlink{struct_text_resource}{Text\+Resource}$\ast$ focused\+Event\+Resource}
+
+\hyperlink{struct_text_resource}{Text\+Resource} to construct \hyperlink{struct_button_af8909553495b609dc7c9efd469ffc31d}{Button\+::focused\+Event}. \hypertarget{struct_button_a8848ee5b886f588a966fc6c3ff0270df}{}\label{struct_button_a8848ee5b886f588a966fc6c3ff0270df} 
+\index{Button@{Button}!focused\+Sound\+Resource@{focused\+Sound\+Resource}}
+\index{focused\+Sound\+Resource@{focused\+Sound\+Resource}!Button@{Button}}
+\subsubsection{\texorpdfstring{focused\+Sound\+Resource}{focusedSoundResource}}
+{\footnotesize\ttfamily struct \hyperlink{struct_sound_resource}{Sound\+Resource}$\ast$ focused\+Sound\+Resource}
+
+Sound to be played when the \hyperlink{struct_button}{Button} receives focus. \hypertarget{struct_button_a8ea7e8ac3e3330830aa7a4309390f3ac}{}\label{struct_button_a8ea7e8ac3e3330830aa7a4309390f3ac} 
+\index{Button@{Button}!is\+Geometry\+Changed@{is\+Geometry\+Changed}}
+\index{is\+Geometry\+Changed@{is\+Geometry\+Changed}!Button@{Button}}
+\subsubsection{\texorpdfstring{is\+Geometry\+Changed}{isGeometryChanged}}
+{\footnotesize\ttfamily bool is\+Geometry\+Changed}
+
+Flag, which is need to be changed when someone tried to move \hyperlink{struct_button}{Button}, or update Button\+::\+Scene\+Node. \hypertarget{struct_button_abbe46dfeadc7ca8af4ccd6a1e60fa560}{}\label{struct_button_abbe46dfeadc7ca8af4ccd6a1e60fa560} 
+\index{Button@{Button}!is\+State\+Changed@{is\+State\+Changed}}
+\index{is\+State\+Changed@{is\+State\+Changed}!Button@{Button}}
+\subsubsection{\texorpdfstring{is\+State\+Changed}{isStateChanged}}
+{\footnotesize\ttfamily bool is\+State\+Changed}
+
+Flag, which is need to be changed when someone tried to change \hyperlink{struct_button_a98525fefb11846bc0e1ee154b0a106d4}{Button\+::state}. \hypertarget{struct_button_ab278201aa1758916bc9e825b3833e31b}{}\label{struct_button_ab278201aa1758916bc9e825b3833e31b} 
+\index{Button@{Button}!label@{label}}
+\index{label@{label}!Button@{Button}}
+\subsubsection{\texorpdfstring{label}{label}}
+{\footnotesize\ttfamily struct \hyperlink{struct_text}{Text}$\ast$ label}
+
+Some \hyperlink{struct_text}{Text} to be displayed on the screen as a label of the \hyperlink{struct_button}{Button}. \hypertarget{struct_button_ac8658f1193098d53c4bd1bdcab7df6af}{}\label{struct_button_ac8658f1193098d53c4bd1bdcab7df6af} 
+\index{Button@{Button}!label\+Offset@{label\+Offset}}
+\index{label\+Offset@{label\+Offset}!Button@{Button}}
+\subsubsection{\texorpdfstring{label\+Offset}{labelOffset}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Point label\+Offset}
+
+Offset to draw the \hyperlink{struct_button_ab278201aa1758916bc9e825b3833e31b}{Button\+::label} in properly place. \hypertarget{struct_button_a6c6350ebecb76824f44acd4af5310894}{}\label{struct_button_a6c6350ebecb76824f44acd4af5310894} 
+\index{Button@{Button}!pressed\+Event@{pressed\+Event}}
+\index{pressed\+Event@{pressed\+Event}!Button@{Button}}
+\subsubsection{\texorpdfstring{pressed\+Event}{pressedEvent}}
+{\footnotesize\ttfamily struct \hyperlink{struct_game_event}{Game\+Event}$\ast$ pressed\+Event}
+
+\hyperlink{struct_game_event}{Game\+Event} to be added to the \hyperlink{struct_event_manager}{Event\+Manager} when the \hyperlink{struct_button}{Button} clicked. \hypertarget{struct_button_a4f009b181e2d1679d58eeb638c79f1f7}{}\label{struct_button_a4f009b181e2d1679d58eeb638c79f1f7} 
+\index{Button@{Button}!pressed\+Event\+Resource@{pressed\+Event\+Resource}}
+\index{pressed\+Event\+Resource@{pressed\+Event\+Resource}!Button@{Button}}
+\subsubsection{\texorpdfstring{pressed\+Event\+Resource}{pressedEventResource}}
+{\footnotesize\ttfamily struct \hyperlink{struct_text_resource}{Text\+Resource}$\ast$ pressed\+Event\+Resource}
+
+\hyperlink{struct_text_resource}{Text\+Resource} to construct \hyperlink{struct_button_a6c6350ebecb76824f44acd4af5310894}{Button\+::pressed\+Event}. \hypertarget{struct_button_a9d6a7ab6b4708d54a3e7da0a665609b2}{}\label{struct_button_a9d6a7ab6b4708d54a3e7da0a665609b2} 
+\index{Button@{Button}!pressed\+Sound\+Resource@{pressed\+Sound\+Resource}}
+\index{pressed\+Sound\+Resource@{pressed\+Sound\+Resource}!Button@{Button}}
+\subsubsection{\texorpdfstring{pressed\+Sound\+Resource}{pressedSoundResource}}
+{\footnotesize\ttfamily struct \hyperlink{struct_sound_resource}{Sound\+Resource}$\ast$ pressed\+Sound\+Resource}
+
+Sound to be played when the \hyperlink{struct_button}{Button} clicked. \hypertarget{struct_button_aca8025f56fb4ce20b974ec9a3292a9e4}{}\label{struct_button_aca8025f56fb4ce20b974ec9a3292a9e4} 
+\index{Button@{Button}!scene\+Node@{scene\+Node}}
+\index{scene\+Node@{scene\+Node}!Button@{Button}}
+\subsubsection{\texorpdfstring{scene\+Node}{sceneNode}}
+{\footnotesize\ttfamily struct \hyperlink{struct_scene_node}{Scene\+Node} scene\+Node}
+
+Inheritance stuff. \hypertarget{struct_button_a1128327f94baacb1570a98fca0591108}{}\label{struct_button_a1128327f94baacb1570a98fca0591108} 
+\index{Button@{Button}!sprite@{sprite}}
+\index{sprite@{sprite}!Button@{Button}}
+\subsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily struct \hyperlink{struct_sprite}{Sprite}$\ast$ sprite}
+
+\hyperlink{struct_sprite}{Sprite} to be displayed on the screen. Should have 3 animations (normal, focused, pressed). \hypertarget{struct_button_a98525fefb11846bc0e1ee154b0a106d4}{}\label{struct_button_a98525fefb11846bc0e1ee154b0a106d4} 
+\index{Button@{Button}!state@{state}}
+\index{state@{state}!Button@{Button}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily enum \hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657}{Button\+State} state}
+
+Curent \hyperlink{_button_8h_aa46074d34fe2d6631c6bd9dc74633657}{Button\+State}. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/mslf/programs/git/\+Alone/include/gui/\hyperlink{_button_8h}{Button.\+h}\end{DoxyCompactItemize}
