@@ -118,7 +118,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         tempTextResource->pointersCount--;
         return NULL;
     }
-    char* typeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    const char* typeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!typeString) {
         char tempErrString[600];
         sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR_NO_TYPE, resId);
@@ -150,7 +150,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
     }
     // We check 'requiredTypeString' only if it not NULL
     if (requiredTypeString) {
-        char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+        const char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
         if (strcmp(tempTypeString, requiredTypeString) != 0) {
             char tempErrString[600];
             sprintf(tempErrString, "%s Type: %s", SCENENODE_TYPES_REGISTRAR_ERR_TYPE, typeString);

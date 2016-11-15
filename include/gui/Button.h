@@ -162,7 +162,7 @@ struct Button {
 /**
  * @brief Constructs #Button and inits it from a #TextParser.
  * @param resourceManager Pointer to a #ResourceManager which is used to load additional 
- * resources, needed for #Button.  Can be NULL.
+ * resources, needed for #Button. Can be NULL.
  * @param renderer Pointer to a #Renderer which is used to construct Button#sprite and Button#label.  Can be NULL.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar which is used to 
  * construct Button#sprite and Button#label. Can be NULL.
@@ -248,7 +248,7 @@ enum ButtonSceneNode_errors Button_save(const struct Button* const button,
  * @brief Function to control user input events to #Button.
  * Pointer to that function should be at Button#sceneNode#control.
  * @param sceneNode Pointer to a #Button, casted to #SceneNode. Can be NULL.
- * @param eventManager Pointer to an #EventManager, where that function will get user input events.  Can be NULL.
+ * @param eventManager Pointer to an #EventManager, where that function will get user input events. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #Button is not accepted!
  */
 void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
@@ -257,8 +257,8 @@ void Button_control(struct SceneNode* sceneNode, struct EventManager* eventManag
  * @brief Function to update #Button and interacting with #EventManager.
  * Pointer to that function should be at Button#sceneNode#update.
  * @param sceneNode Pointer to a #Button, casted to #SceneNode. Can be NULL.
- * @param eventManager Pointer to an #EventManager, where that function will place it's events.  Can be NULL.
- * @param renderer Pointer to a #Renderer for screen-depend coordinater converting.  Can be NULL.
+ * @param eventManager Pointer to an #EventManager, where that function will place it's events. Can be NULL.
+ * @param renderer Pointer to a #Renderer for screen-depend coordinates converting. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #Button is not accepted!
  * @note Don't use this function for drawing.
  */

@@ -611,21 +611,21 @@ const char* TextParser_getString(struct TextParser* textParser, const char* cons
 }
 
 long int TextParser_getInt(struct TextParser* textParser, const char* const leftOperand, size_t index) {
-    char* intString = TextParser_getString(textParser, leftOperand, index);
+    const char* intString = TextParser_getString(textParser, leftOperand, index);
     if (textParser->lastError)
         return 0;
     return strtol(intString, NULL, 10);
 }
 
 double TextParser_getDouble(struct TextParser* textParser, const char* leftOperand, size_t index) {
-    char* intString = TextParser_getString(textParser, leftOperand, index);
+    const char* intString = TextParser_getString(textParser, leftOperand, index);
     if (textParser->lastError)
         return 0.0;
     return strtod(intString, NULL);
 }
 
 bool TextParser_getFlag(struct TextParser* textParser, const char* const leftOperand, size_t index){
-    char* intString = TextParser_getString(textParser, leftOperand, index);
+    const char* intString = TextParser_getString(textParser, leftOperand, index);
     if (textParser->lastError)
         return false;
     if (strtol(intString, NULL, 10))

@@ -140,7 +140,7 @@ static unsigned char Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite, 
         Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_VIRTUAL_SIZE_NOT_FOUND);
         usePresentForVirtual = 1;
     }
-    char* tempTextureResourceId = TextParser_getString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, 0);
+    const char* tempTextureResourceId = TextParser_getString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, 0);
     sprite->textureResource = ResourceManager_loadTextureResource(resourceManager, renderer, tempTextureResourceId);
     if (!sprite->textureResource) {
         Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_TEXTURE_RES_NOT_FOUND);

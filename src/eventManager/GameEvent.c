@@ -66,18 +66,18 @@ struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNod
 struct GameEvent* GameEvent_constructFromTextParser(struct TextParser* textParser, struct SceneNode* sender) {
     if (!textParser || !sender)
         return NULL;
-    char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    const char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (!tempTypeString)
         return NULL;
     if (strcmp(tempTypeString, GamaEvent_parserStrings.type) != 0)
         return NULL;
-    char* tempChannelString = TextParser_getString(textParser, GamaEvent_parserStrings.channel, 0);
+    const char* tempChannelString = TextParser_getString(textParser, GamaEvent_parserStrings.channel, 0);
     if (!tempChannelString)
         return NULL;
-    char* tempCommandString = TextParser_getString(textParser, GamaEvent_parserStrings.command, 0);
+    const char* tempCommandString = TextParser_getString(textParser, GamaEvent_parserStrings.command, 0);
     if (!tempCommandString)
         return NULL;
-    char* tempDataString = TextParser_getString(textParser, GamaEvent_parserStrings.data, 0);
+    const char* tempDataString = TextParser_getString(textParser, GamaEvent_parserStrings.data, 0);
     if (!tempDataString)
         return NULL;
     return GameEvent_construct(tempChannelString, sender, tempCommandString, tempDataString);

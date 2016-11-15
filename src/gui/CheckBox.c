@@ -22,54 +22,55 @@
 #include "gui/CheckBox.h"
 #include "textParser/TextParser.h"
 
-const char* const CHECK_BOX_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES = 
-        "CheckBox_loadEventsResources: focusedEventResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_CHECKED_GAME_EVENT_RES = 
-        "CheckBox_loadEventsResources: checkedEventResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_UNCHECKED_GAME_EVENT_RES = 
-        "CheckBox_loadEventsResources: unCheckedEventResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_CONSTRUCTING_FOCUSED_GAME_EVENT = 
-        "CheckBox_changeFocusedEventResource: constructing GameEvent failed!";
-const char* const CHECK_BOX_SCENENODE_ERR_CONSTRUCTING_CHECKED_GAME_EVENT = 
-        "CheckBox_changeCheckedEventResource: constructing GameEvent failed!";
-const char* const CHECK_BOX_SCENENODE_ERR_CONSTRUCTING_UNCHECKED_GAME_EVENT = 
-        "CheckBox_changeUnCheckedEventResource: constructing GameEvent failed!";
-const char* const CHECK_BOX_SCENENODE_ERR_FOCUSED_SOUND_RES = 
-        "CheckBox_loadSoundResources: focusedSoundResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_CHECKED_SOUND_RES = 
-        "CheckBox_loadSoundResources: checkedSoundResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_UNCHECKED_SOUND_RES = 
-        "CheckBox_loadSoundResources: unCheckedSoundResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_SPRITE_RES = 
-        "CheckBox_loadSpriteResource: spriteResource string haven't found!";
-const char* const CHECK_BOX_SCENENODE_ERR_SPRITE_NO_4_ANIMATIONS = 
-        "CheckBox_loadSpriteResource: loaded Sprite doesn't contain 4 animations!";
-        
-static unsigned char CheckBox_loadSpriteResource(struct CheckBox* checkBox,
+static const struct CheckBoxSceneNode_errorMessages {
+    const char* const errFocusedGameEventRes;
+    const char* const errCheckedGameEventRes;
+    const char* const errUnCheckedGameEventRes;
+    const char* const errConstructingFocusedGameEvent;
+    const char* const errConstructingCheckedGameEvent;
+    const char* const errConstructingUnCheckedGameEvent;
+    const char* const errFocusedSoundRes;
+    const char* const errCheckedSoundRes;
+    const char* const errUnCheckedSoundRes;
+    const char* const errSpriteRes;
+    const char* const errSpriteNoEnoughAnimations;
+}CheckBoxSceneNode_errorMessages = {
+    "CheckBox_loadEventsResources: focusedEventResource string haven't found!",
+    "CheckBox_loadEventsResources: checkedEventResource string haven't found!",
+    "CheckBox_loadEventsResources: unCheckedEventResource string haven't found!",
+    "CheckBox_changeFocusedEventResource: constructing GameEvent failed!",
+    "CheckBox_changeCheckedEventResource: constructing GameEvent failed!",
+    "CheckBox_changeUnCheckedEventResource: constructing GameEvent failed!",
+    "CheckBox_loadSoundResources: focusedSoundResource string haven't found!",
+    "CheckBox_loadSoundResources: checkedSoundResource string haven't found!",
+    "CheckBox_loadSoundResources: unCheckedSoundResource string haven't found!",
+    "CheckBox_loadSpriteResource: spriteResource string haven't found!",
+    "CheckBox_loadSpriteResource: loaded Sprite doesn't contain 4 animations!"};
+
+static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox* checkBox,
                                                  struct ResourceManager* const resourceManager,
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser) {
     if (!checkBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    const char* tempResId = TextParser_getString(textParser, CHECK_BOX_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
+        return CHECK_BOX_ERR_NULL_ARGUMENT;
+    const char* tempResId = TextParser_getString(textParser, CheckBoxSceneNode_parserString.spriteRes, 0);
     if (!tempResId) {
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_RES);
-        return 2;
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errSpriteRes);
+        return CHECK_BOX_ERR_NO_SPRITE_RES;
     }
-    
     checkBox->sprite = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                                   renderer,
                                                                                   sceneNodeTypesRegistrar,
                                                                                   tempResId,
                                                                                   SPRITE_SCENENODE_PARSER_TYPE_STRING);
     if (!checkBox->sprite)
-        return 3;
+        return CHECK_BOX_ERR_CONSTRUCTIG_SPRITE;
     if (checkBox->sprite->animationsCount < 4) {
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_SPRITE_NO_4_ANIMATIONS);
-        return 4;
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errSpriteNoEnoughAnimations);
+        return CHECK_BOX_ERR_NOT_ENOUGH_ANIMATIONS;
     }
-    return 0;
+    return CHECK_BOX_NO_ERRORS;
 }
 
 static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
@@ -77,21 +78,21 @@ static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct Resour
     if (!checkBox || !resourceManager || !textParser)
         return;
     const char* tempFocusedSoundResourceString = TextParser_getString(textParser,
-                                                        CHECK_BOX_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING, 0);
+                                                        CheckBoxSceneNode_parserString.focusedSoundRes, 0);
     if (!tempFocusedSoundResourceString)
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_FOCUSED_SOUND_RES);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errFocusedSoundRes);
     checkBox->focusedSoundResource = ResourceManager_loadSoundResource(resourceManager,
                                                                        tempFocusedSoundResourceString);
     const char* tempCheckedSoundResourceString = TextParser_getString(textParser,
-                                                        CHECK_BOX_SCENENODE_PARSER_CHECKED_SOUND_RES_STRING, 0);
+                                                        CheckBoxSceneNode_parserString.checkedSoundRes, 0);
     if (!tempCheckedSoundResourceString)
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CHECKED_SOUND_RES);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errCheckedSoundRes);
     checkBox->checkedSoundResource = ResourceManager_loadSoundResource(resourceManager,
                                                                        tempCheckedSoundResourceString);
     const char* tempUnCheckedSoundResourceString = TextParser_getString(textParser,
-                                                        CHECK_BOX_SCENENODE_PARSER_UNCHECKED_SOUND_RES_STRING, 0);
+                                                        CheckBoxSceneNode_parserString.unCheckedSoundRes, 0);
     if (!tempUnCheckedSoundResourceString)
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_UNCHECKED_SOUND_RES);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errUnCheckedSoundRes);
     checkBox->unCheckedSoundResource = ResourceManager_loadSoundResource(resourceManager,
                                                                          tempUnCheckedSoundResourceString);
 }
@@ -101,35 +102,33 @@ static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct Resou
     if (!checkBox || !resourceManager || !textParser)
         return;
     const char* tempFocusedEventResourceString = TextParser_getString(textParser,
-                                                          CHECK_BOX_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING, 0);
+                                                          CheckBoxSceneNode_parserString.focusedEventRes, 0);
     if (!tempFocusedEventResourceString)
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_FOCUSED_GAME_EVENT_RES);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errFocusedGameEventRes);
     const char* tempCheckedEventResourceString = TextParser_getString(textParser,
-                                                          CHECK_BOX_SCENENODE_PARSER_CHECKED_EVENT_RES_STRING, 0);
+                                                          CheckBoxSceneNode_parserString.checkedEventRes, 0);
     if (!tempCheckedEventResourceString)
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CHECKED_GAME_EVENT_RES);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errCheckedGameEventRes);
     const char* tempUnCheckedEventResourceString = TextParser_getString(textParser,
-                                                          CHECK_BOX_SCENENODE_PARSER_UNCHECKED_EVENT_RES_STRING, 0);
+                                                          CheckBoxSceneNode_parserString.unCheckedEventRes, 0);
     if (!tempUnCheckedEventResourceString)
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_UNCHECKED_GAME_EVENT_RES);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errUnCheckedGameEventRes);
     CheckBox_changeFocusedEventResource(checkBox, resourceManager, tempFocusedEventResourceString);
     CheckBox_changeCheckedEventResource(checkBox, resourceManager, tempCheckedEventResourceString);
     CheckBox_changeCheckedEventResource(checkBox, resourceManager, tempUnCheckedEventResourceString);
 }
         
-static unsigned char CheckBox_tryGetSettingsFromTextParser(struct CheckBox* checkBox,
+static enum CheckBoxSceneNode_errors CheckBox_tryGetSettingsFromTextParser(struct CheckBox* checkBox,
                                                            struct ResourceManager* const resourceManager,
                                                            struct Renderer* const renderer,
                                                            struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                            struct TextParser* const textParser) {
     if (!checkBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    unsigned char result = 0;
+        return CHECK_BOX_ERR_NULL_ARGUMENT;
     CheckBox_loadEventsResources(checkBox, resourceManager, textParser);
     CheckBox_loadSoundResources(checkBox, resourceManager, textParser);
-    result += CheckBox_loadSpriteResource(checkBox, resourceManager, renderer,
+    return CheckBox_loadSpriteResource(checkBox, resourceManager, renderer,
                                           sceneNodeTypesRegistrar, textParser);
-    return result;
 }
         
 struct SceneNode* CheckBox_construct(struct ResourceManager* const resourceManager,
@@ -153,12 +152,12 @@ struct SceneNode* CheckBox_construct(struct ResourceManager* const resourceManag
     checkBox->sceneNode.render = CheckBox_render;
     checkBox->sceneNode.sound = CheckBox_sound;
     checkBox->sceneNode.destruct = CheckBox_destruct;
-    checkBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(CHECK_BOX_SCENENODE_PARSER_TYPE_STRING) + 1));
+    checkBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(CheckBoxSceneNode_parserString.type) + 1));
     if (!checkBox->sceneNode.type) {
         CheckBox_destruct((struct SceneNode*)checkBox);
         return NULL;
     }
-    strcpy(checkBox->sceneNode.type, CHECK_BOX_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(checkBox->sceneNode.type, CheckBoxSceneNode_parserString.type);
     checkBox->isGeometryChanged = true;
     return (struct SceneNode*)checkBox;
 }
@@ -194,26 +193,26 @@ void CheckBox_destruct(struct SceneNode* checkBox) {
     free(checkBox);
 }
 
-unsigned char CheckBox_changeFocusedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
+enum CheckBoxSceneNode_errors CheckBox_changeFocusedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                                 const char* const focusedEventResId) {
     if (!checkBox || !resourceManager || !focusedEventResId)
-        return 1;
+        return CHECK_BOX_ERR_NULL_ARGUMENT;
     struct TextResource* newGameEventTextResource = ResourceManager_loadTextResource(resourceManager,
                                                                                      focusedEventResId, 0);
     if (!newGameEventTextResource)
-        return 2;
+        return CHECK_BOX_ERR_NO_FOCUSED_EVENT_RES;
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
         newGameEventTextResource->pointersCount--;
-        return 3;
+        return CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)checkBox);
     if (!newGameEvent) {
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CONSTRUCTING_FOCUSED_GAME_EVENT);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errFocusedGameEventRes);
         newGameEventTextResource->pointersCount--;
         TextParser_destruct(textParser);
-        return 4;
+        return CHECK_BOX_ERR_CONSTRUCTIG_FOCUSED_EVENT;
     }
     if (checkBox->focusedEvent)
         checkBox->focusedEvent->isNeeded = false;
@@ -221,29 +220,29 @@ unsigned char CheckBox_changeFocusedEventResource(struct CheckBox* checkBox, str
         checkBox->focusedEventResource->pointersCount--;
     checkBox->focusedEventResource = newGameEventTextResource;
     checkBox->focusedEvent = newGameEvent;
-    return 0;
+    return CHECK_BOX_NO_ERRORS;
 }
 
-unsigned char CheckBox_changeCheckedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
+enum CheckBoxSceneNode_errors CheckBox_changeCheckedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                                 const char* const checkedEventResId) {
     if (!checkBox || !resourceManager || !checkedEventResId)
-        return 1;
+        return CHECK_BOX_ERR_NULL_ARGUMENT;
     struct TextResource* newGameEventTextResource = ResourceManager_loadTextResource(resourceManager,
                                                                                      checkedEventResId, 0);
     if (!newGameEventTextResource)
-        return 2;
+        return CHECK_BOX_ERR_NO_CHECKED_EVENT_RES;
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
         newGameEventTextResource->pointersCount--;
-        return 3;
+        return CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)checkBox);
     if (!newGameEvent) {
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CONSTRUCTING_CHECKED_GAME_EVENT);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errCheckedGameEventRes);
         newGameEventTextResource->pointersCount--;
         TextParser_destruct(textParser);
-        return 4;
+        return CHECK_BOX_ERR_CONSTRUCTIG_CHECKED_EVENT;
     }
     if (checkBox->checkedEvent)
         checkBox->checkedEvent->isNeeded = false;
@@ -251,17 +250,17 @@ unsigned char CheckBox_changeCheckedEventResource(struct CheckBox* checkBox, str
         checkBox->checkedEventResource->pointersCount--;
     checkBox->checkedEventResource = newGameEventTextResource;
     checkBox->checkedEvent = newGameEvent;
-    return 0;
+    return CHECK_BOX_NO_ERRORS;
 }
 
-unsigned char CheckBox_changeUnCheckedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
-                                                const char* const unCheckeEventResId) {
-    if (!checkBox || !resourceManager || !unCheckeEventResId)
-        return 1;
+enum CheckBoxSceneNode_errors CheckBox_changeUnCheckedEventResource(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
+                                                const char* const unCheckedEventResId) {
+    if (!checkBox || !resourceManager || !unCheckedEventResId)
+        return CHECK_BOX_ERR_NULL_ARGUMENT;
     struct TextResource* newGameEventTextResource = ResourceManager_loadTextResource(resourceManager,
-                                                                                     unCheckeEventResId, 0);
+                                                                                     unCheckedEventResId, 0);
     if (!newGameEventTextResource)
-        return 2;
+        return CHECK_BOX_ERR_NO_UNCHECKED_EVENT_RES;
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
@@ -270,7 +269,7 @@ unsigned char CheckBox_changeUnCheckedEventResource(struct CheckBox* checkBox, s
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)checkBox);
     if (!newGameEvent) {
-        Logger_log(resourceManager->logger, CHECK_BOX_SCENENODE_ERR_CONSTRUCTING_UNCHECKED_GAME_EVENT);
+        Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errConstructingUnCheckedGameEvent);
         newGameEventTextResource->pointersCount--;
         TextParser_destruct(textParser);
         return 4;
@@ -281,32 +280,32 @@ unsigned char CheckBox_changeUnCheckedEventResource(struct CheckBox* checkBox, s
         checkBox->unCheckedEventResource->pointersCount--;
     checkBox->unCheckedEventResource = newGameEventTextResource;
     checkBox->unCheckedEvent = newGameEvent;
-    return 0;
+    return CHECK_BOX_NO_ERRORS;
 }
 
-unsigned char CheckBox_save(const struct CheckBox* const checkBox, struct ResourceManager* const resourceManager, 
+enum CheckBoxSceneNode_errors CheckBox_save(const struct CheckBox* const checkBox, struct ResourceManager* const resourceManager, 
                           const char* const checkBoxResId) {
     if (!checkBox || !resourceManager || !checkBoxResId)
-        return 1;
+        return CHECK_BOX_ERR_NULL_ARGUMENT;
     unsigned char result = 0;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, CHECK_BOX_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_SPRITE_RES_STRING,
+        return CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, CheckBoxSceneNode_parserString.type);
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.spriteRes,
                                    checkBox->sprite->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING,
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedEventRes,
                                    checkBox->focusedEventResource->id);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_CHECKED_EVENT_RES_STRING,
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedEventRes,
                                    checkBox->checkedEventResource->id);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_UNCHECKED_EVENT_RES_STRING,
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.unCheckedEventRes,
                                    checkBox->unCheckedEventResource->id);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING,
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedSoundRes,
                                    checkBox->focusedSoundResource->id);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_CHECKED_SOUND_RES_STRING,
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedSoundRes,
                                    checkBox->checkedSoundResource->id);
-    result += TextParser_addString(textParser, CHECK_BOX_SCENENODE_PARSER_UNCHECKED_SOUND_RES_STRING,
+    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.unCheckedSoundRes,
                                    checkBox->unCheckedSoundResource->id);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
@@ -316,7 +315,9 @@ unsigned char CheckBox_save(const struct CheckBox* const checkBox, struct Resour
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return CHECK_BOX_ERR_SAVING;
+    return CHECK_BOX_NO_ERRORS;
 }
 
 void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
@@ -335,24 +336,24 @@ void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventMan
                 && mouseCoordinates.x < (checkBox->sprite->dstRect.x + checkBox->sprite->dstRect.w) 
                 && mouseCoordinates.y >= checkBox->sprite->dstRect.y 
                 && mouseCoordinates.y < (checkBox->sprite->dstRect.y + checkBox->sprite->dstRect.h)) {
-                if (checkBox->state == CheckBoxState_UnChecked) {
-                    checkBox->state = CheckBoxState_FocusedUnChecked;
+                if (checkBox->state == CHECK_BOX_STATE_UNCHECKED) {
+                    checkBox->state = CHECK_BOX_STATE_FOCUSED_UNCHEKED;
                     checkBox->isStateChanged = true;
                     EventManager_addEvent(eventManager, checkBox->focusedEvent);
                 }
-                if (checkBox->state == CheckBoxState_Checked) {
-                    checkBox->state = CheckBoxState_FocusedChecked;
+                if (checkBox->state == CHECK_BOX_STATE_CHECKED) {
+                    checkBox->state = CHECK_BOX_STATE_FOCUSED_CHECKED;
                     checkBox->isStateChanged = true;
                     EventManager_addEvent(eventManager, checkBox->focusedEvent);
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONDOWN) {
-                    if (checkBox->state == CheckBoxState_FocusedUnChecked) {
-                        checkBox->state = CheckBoxState_Checking;
+                    if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED) {
+                        checkBox->state = CHECK_BOX_STATE_CHECKING;
                         checkBox->isStateChanged = true;
                         EventManager_removeEvent(eventManager, checkBox->unCheckedEvent);
                         EventManager_addEvent(eventManager, checkBox->checkedEvent);
-                    } else if (checkBox->state == CheckBoxState_FocusedChecked) {
-                        checkBox->state = CheckBoxState_UnChecking;
+                    } else if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED) {
+                        checkBox->state = CHECK_BOX_STATE_UNCHECKING;
                         checkBox->isStateChanged = true;
                         
                         EventManager_removeEvent(eventManager, checkBox->checkedEvent);
@@ -360,24 +361,24 @@ void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventMan
                     }
                 }
                 if (eventManager->sdlEventsList[i].type == SDL_MOUSEBUTTONUP) {
-                   if (checkBox->state == CheckBoxState_UnChecking) {
-                    checkBox->state = CheckBoxState_FocusedUnChecked;
+                   if (checkBox->state == CHECK_BOX_STATE_UNCHECKING) {
+                    checkBox->state = CHECK_BOX_STATE_FOCUSED_UNCHEKED;
                     checkBox->isStateChanged = true;
                     EventManager_addEvent(eventManager, checkBox->focusedEvent);
                     }
-                    if (checkBox->state == CheckBoxState_Checking) {
-                        checkBox->state = CheckBoxState_FocusedChecked;
+                    if (checkBox->state == CHECK_BOX_STATE_CHECKING) {
+                        checkBox->state = CHECK_BOX_STATE_FOCUSED_CHECKED;
                         checkBox->isStateChanged = true;
                         EventManager_addEvent(eventManager, checkBox->focusedEvent);
                     }
                 }
             } else {
-                    if (checkBox->state == CheckBoxState_FocusedUnChecked
-                        || checkBox->state == CheckBoxState_UnChecking)
-                        checkBox->state = CheckBoxState_UnChecked;
-                    if (checkBox->state == CheckBoxState_FocusedChecked
-                        || checkBox->state == CheckBoxState_Checking)
-                        checkBox->state = CheckBoxState_Checked;
+                    if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED
+                        || checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED)
+                        checkBox->state = CHECK_BOX_STATE_FOCUSED_UNCHEKED;
+                    if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED
+                        || checkBox->state == CHECK_BOX_STATE_CHECKING)
+                        checkBox->state = CHECK_BOX_STATE_FOCUSED_CHECKED;
                     checkBox->isStateChanged = true;
                     EventManager_removeEvent(eventManager, checkBox->focusedEvent);
                 }
@@ -389,13 +390,13 @@ void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventMana
         return;
     struct CheckBox* checkBox = (struct CheckBox*)sceneNode;
     if (checkBox->isStateChanged) {
-        if (checkBox->state == CheckBoxState_UnChecked || checkBox->state == CheckBoxState_UnChecking)
+        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED || checkBox->state == CHECK_BOX_STATE_UNCHECKING)
             checkBox->sprite->currentAnimation = 0;
-        if (checkBox->state == CheckBoxState_FocusedUnChecked)
+        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED)
             checkBox->sprite->currentAnimation = 1;
-        if (checkBox->state == CheckBoxState_Checked || checkBox->state == CheckBoxState_Checking)
+        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED || checkBox->state == CHECK_BOX_STATE_CHECKING)
             checkBox->sprite->currentAnimation = 2;
-        if (checkBox->state == CheckBoxState_FocusedChecked)
+        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED)
             checkBox->sprite->currentAnimation = 3;
         checkBox->sprite->currentFrame = 0;
         checkBox->sprite->renderingsCounter = 0;
@@ -424,12 +425,12 @@ void CheckBox_sound(struct SceneNode* sceneNode, struct Musican* musican){
         return;
     struct CheckBox* checkBox = (struct CheckBox*)sceneNode;
     if (checkBox->isStateChanged) {
-        if (checkBox->state == CheckBoxState_FocusedUnChecked 
-            || checkBox->state == CheckBoxState_FocusedChecked)
+        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED 
+            || checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED)
             Musican_playSound(musican, checkBox->focusedSoundResource, 0);
-        if (checkBox->state == CheckBoxState_Checking)
+        if (checkBox->state == CHECK_BOX_STATE_CHECKING)
             Musican_playSound(musican, checkBox->checkedSoundResource, 0);
-        if (checkBox->state == CheckBoxState_UnChecking)
+        if (checkBox->state == CHECK_BOX_STATE_UNCHECKING)
             Musican_playSound(musican, checkBox->unCheckedSoundResource, 0);
     }
 }

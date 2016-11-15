@@ -121,11 +121,11 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
         return 5;
     scene->allocatedEventControllersCount = count;
     scene->eventControllersCount = 0;
-    char* tempString = NULL;
+    const char* tempString = NULL;
     for (i = 0; i < scene->allocatedSceneNodesCount; i++) {
         tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING, i);
         if (tempString) {
-            char* tempSceneNodeRes = NULL;
+            const char* tempSceneNodeRes = NULL;
             tempSceneNodeRes = TextParser_getString(sceneTextParser, tempString, 0);
             if (!tempSceneNodeRes) {
                 char tempErrString[600];
@@ -170,7 +170,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager,
         Scene_destruct(scene);
         return NULL;
     }
-    char* sceneTypeString = NULL;
+    const char* sceneTypeString = NULL;
     sceneTypeString = TextParser_getString(sceneTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (sceneTextParser->lastError) {
         scene->sceneResource->pointersCount--;
