@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,6 +16,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file CheckBox.h
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing CheckBox and it's stuff.
+ */
 #ifndef ALONE_CHECKBOX_H
 #define ALONE_CHECKBOX_H
 
@@ -31,30 +34,74 @@
 #include "resourceManager/ResourceManager.h"
 #include "sprite/Sprite.h"
 
-#define CHECK_BOX_SCENENODE_PARSER_TYPE_STRING "CheckBox"
-#define CHECK_BOX_SCENENODE_PARSER_FOCUSED_EVENT_RES_STRING "focusedEventResource"
-#define CHECK_BOX_SCENENODE_PARSER_CHECKED_EVENT_RES_STRING "checkedEventResource"
-#define CHECK_BOX_SCENENODE_PARSER_UNCHECKED_EVENT_RES_STRING "unCheckedEventResource"
-#define CHECK_BOX_SCENENODE_PARSER_FOCUSED_SOUND_RES_STRING "focusedSoundResource"
-#define CHECK_BOX_SCENENODE_PARSER_CHECKED_SOUND_RES_STRING "checkedSoundResource"
-#define CHECK_BOX_SCENENODE_PARSER_UNCHECKED_SOUND_RES_STRING "unCheckedSoundResource"
-#define CHECK_BOX_SCENENODE_PARSER_SPRITE_RES_STRING "spriteResource"
+/**
+ * @brief Strings which are used for constructing #CheckBox from #TextParser.
+ * @see CheckBox_construct
+ * @note CheckBox#sprite, constructed from CheckBoxSceneNode_parserString#spriteRes should have 4 animations.
+ */
+static const struct CheckBoxSceneNode_parserString {
+    const char* const type;
+    /**< Type string, which is used to distinquish #CheckBox resource from other. */
+    const char* const focusedEventRes;
+    /**< Focused #GameEvent resource string, which is used to construct CheckBox#focusedEvent. */
+    const char* const checkedEventRes;
+    /**< Focused #GameEvent resource string, which is used to construct CheckBox#checkedEvent. */
+    const char* const unCheckedEventRes;
+    /**< Focused #GameEvent resource string, which is used to construct CheckBox#unChecedEvent. */
+    const char* const focusedSoundRes;
+    /**< Focused #SoundResource string, which is used to construct CheckBox#focusedSoundResource. */
+    const char* const checkedSoundRes;
+    /**< Focused #SoundResource string, which is used to construct CheckBox#checkedSoundResource. */
+    const char* const unCheckedSoundRes;
+    /**< Focused #SoundResource string, which is used to construct CheckBox#unCheckedSoundResource. */
+    const char* const spriteRes;
+    /**< #Sprite resource string, which is used to construct CheckBox#sprite. */
+}CheckBoxSceneNode_parserString = {
+    "CheckBox",
+    "focusedEventResource",
+    "checkedEventResource",
+    "unCheckedEventResource",
+    "focusedSoundResource",
+    "checkedSoundResource",
+    "unCheckedSoundResource",
+    "spriteResource"};
 
+/**
+ * @brief Possible CheckBox states.
+ * @see CheckBox_control()
+ * @see CheckBox_update()
+ * @see CheckBox_render()
+ * @see CheckBox_sound()
+ */
 enum CheckBoxState {
-    CheckBoxState_UnChecked = 0,
-    CheckBoxState_FocusedUnChecked = 1,
-    CheckBoxState_Checked = 2,
-    CheckBoxState_FocusedChecked = 3,
-    CheckBoxState_Checking = 4,
-    CheckBoxState_UnChecking = 5
+    CHECK_BOX_STATE_UNCHECKED = 0,
+    /**< #CheckBox is unchecked. */
+    CHECK_BOX_STATE_FOCUSED_UNCHEKED = 1,
+    /**< #CheckBox is unchecked and user moves cursor on it. */
+    CHECK_BOX_STATE_CHECKED = 2,
+    /**< #CheckBox is checked. */
+    CHECK_BOX_STATE_FOCUSED_CHECKED = 3,
+    /**< #CheckBox is checked and user moves cursor on it. */
+    CHECK_BOX_STATE_CHECKING = 4,
+    /**< User presses mouse button on the #CheckBox while it
+     * was CheckBoxState#CHECK_BOX_STATE_UNCHECKED and still holds it. */
+    CHECK_BOX_STATE_UNCHECKING = 5
+    /**< User presses mouse button on the #CheckBox while it
+     * was CheckBoxState#CHECK_BOX_STATE_CHECKED and still holds it. */
 };
-/*
- * CheckBox is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode blablaNode;" at the begining of CheckBox struct,
- * if you want code to work with CheckBox like with a SceneNode.
- * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
- * or to your function implementation.
- * Don't forget to add this warning comment to your own new SceneNode inheritors.
+
+/**
+ * @brief Standart Gui element to be clicked with holding it's state through the frames.
+ * Has focused, checked and unCHecked #GameEvent and #SoundResource.
+ * User can click the #CheckBox, and some things will happen (such a #GameEvent or sound playing).
+ * Also it's useful for other Gui elements, which are needed to be clicked with saving state.
+ * @warning #CheckBox is an inheritor of the SceneNode.
+ * It means, that other code is use <B>pointer casting</B> to #CheckBox from #SceneNode and vise versa.
+ * You <B>SHOULD</B> include the <tt>struct SceneNode blablaNode;</tt> at the begining of #CheckBox struct, 
+ * if you want code to work with #CheckBox like with a #SceneNode. 
+ * More, you <B>SHOULD</B> initialize function pointers in <tt>blablaNode</tt> to NULL (by calling SceneNode_init()) 
+ * or to your function implementation. 
+ * Don't forget to add this warning comment to your own new #SceneNode inheritors.
  */
 struct CheckBox {
     struct SceneNode sceneNode;

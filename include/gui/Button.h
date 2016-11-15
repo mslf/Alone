@@ -44,9 +44,9 @@ static const struct ButtonSceneNode_parserStrings {
     const char* const type;
     /**< Type string, which is used to distinquish #Button resource from others. */
     const char* const focusedEventRes;
-    /**< Focused #GameEvent resource string, which is used to construct Button#focusedEventResource. */
+    /**< Focused #GameEvent resource string, which is used to construct Button#focusedEvent. */
     const char* const pressedEventRes;
-    /**< Pressed #GameEvent resource string, which is used to construct Button#pressedEventResource. */
+    /**< Pressed #GameEvent resource string, which is used to construct Button#pressedEvent. */
     const char* const focusedSoundRes;
     /**< Focused #SoundResource string, which is used to construct Button#focusedSoundResource. */
     const char* const pressedSoundRes;
@@ -122,7 +122,7 @@ enum ButtonState {
  * Has some text on itself, focused and pressed #GameEvent and #SoundResource.
  * User can click the #Button, and some things will happen (such a #GameEvent or sound playing).
  * Also it's useful for other Gui elements, which are needed to be clicked without saving state.
- * @warning Button is an inheritor of the SceneNode.
+ * @warning #Button is an inheritor of the SceneNode.
  * It means, that other code is use <B>pointer casting</B> to #Button from #SceneNode and vise versa.
  * You <B>SHOULD</B> include the <tt>struct SceneNode blablaNode;</tt> at the begining of #Button struct, 
  * if you want code to work with #Button like with a #SceneNode. 
