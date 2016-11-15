@@ -86,52 +86,260 @@ $(document).ready(function(){initNavTree('struct_check_box.html','');});
 <div class="title">CheckBox Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Standart Gui element to be clicked with holding it's state through the frames. Has focused, checked and unChecked <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> and <a class="el" href="struct_sound_resource.html">SoundResource</a>. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing). Also it's useful for other Gui elements, which are needed to be clicked with saving state.  
+ <a href="struct_check_box.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_check_box_8h_source.html">CheckBox.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memItemLeft" align="right" valign="top"><a id="aca8025f56fb4ce20b974ec9a3292a9e4"></a>
-struct <a class="el" href="struct_scene_node.html">SceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNode</b></td></tr>
+<tr class="memitem:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#aca8025f56fb4ce20b974ec9a3292a9e4">sceneNode</a></td></tr>
 <tr class="separator:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1128327f94baacb1570a98fca0591108"><td class="memItemLeft" align="right" valign="top"><a id="a1128327f94baacb1570a98fca0591108"></a>
-struct <a class="el" href="struct_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sprite</b></td></tr>
+<tr class="memitem:a1128327f94baacb1570a98fca0591108"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">sprite</a></td></tr>
 <tr class="separator:a1128327f94baacb1570a98fca0591108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8848ee5b886f588a966fc6c3ff0270df"><td class="memItemLeft" align="right" valign="top"><a id="a8848ee5b886f588a966fc6c3ff0270df"></a>
-struct <a class="el" href="struct_sound_resource.html">SoundResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>focusedSoundResource</b></td></tr>
+<tr class="memitem:a8848ee5b886f588a966fc6c3ff0270df"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sound_resource.html">SoundResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#a8848ee5b886f588a966fc6c3ff0270df">focusedSoundResource</a></td></tr>
 <tr class="separator:a8848ee5b886f588a966fc6c3ff0270df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6c8715d0371c2a1d98681db939c703c"><td class="memItemLeft" align="right" valign="top"><a id="ac6c8715d0371c2a1d98681db939c703c"></a>
-struct <a class="el" href="struct_sound_resource.html">SoundResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>checkedSoundResource</b></td></tr>
+<tr class="memitem:ac6c8715d0371c2a1d98681db939c703c"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sound_resource.html">SoundResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#ac6c8715d0371c2a1d98681db939c703c">checkedSoundResource</a></td></tr>
 <tr class="separator:ac6c8715d0371c2a1d98681db939c703c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f2f9e6f5ef31b187c2da989b179d151"><td class="memItemLeft" align="right" valign="top"><a id="a1f2f9e6f5ef31b187c2da989b179d151"></a>
-struct <a class="el" href="struct_sound_resource.html">SoundResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>unCheckedSoundResource</b></td></tr>
+<tr class="memitem:a1f2f9e6f5ef31b187c2da989b179d151"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sound_resource.html">SoundResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#a1f2f9e6f5ef31b187c2da989b179d151">unCheckedSoundResource</a></td></tr>
 <tr class="separator:a1f2f9e6f5ef31b187c2da989b179d151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff7dcf845e86b8d62077ceec6094f3e3"><td class="memItemLeft" align="right" valign="top"><a id="aff7dcf845e86b8d62077ceec6094f3e3"></a>
-struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>focusedEventResource</b></td></tr>
+<tr class="memitem:aff7dcf845e86b8d62077ceec6094f3e3"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#aff7dcf845e86b8d62077ceec6094f3e3">focusedEventResource</a></td></tr>
 <tr class="separator:aff7dcf845e86b8d62077ceec6094f3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a141e6071f8fcb7d05f669cb32022bdc3"><td class="memItemLeft" align="right" valign="top"><a id="a141e6071f8fcb7d05f669cb32022bdc3"></a>
-struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>checkedEventResource</b></td></tr>
+<tr class="memitem:a141e6071f8fcb7d05f669cb32022bdc3"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#a141e6071f8fcb7d05f669cb32022bdc3">checkedEventResource</a></td></tr>
 <tr class="separator:a141e6071f8fcb7d05f669cb32022bdc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae214e71201e1e7a27db408e05f019cbd"><td class="memItemLeft" align="right" valign="top"><a id="ae214e71201e1e7a27db408e05f019cbd"></a>
-struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>unCheckedEventResource</b></td></tr>
+<tr class="memitem:ae214e71201e1e7a27db408e05f019cbd"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#ae214e71201e1e7a27db408e05f019cbd">unCheckedEventResource</a></td></tr>
 <tr class="separator:ae214e71201e1e7a27db408e05f019cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8909553495b609dc7c9efd469ffc31d"><td class="memItemLeft" align="right" valign="top"><a id="af8909553495b609dc7c9efd469ffc31d"></a>
-struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>focusedEvent</b></td></tr>
+<tr class="memitem:af8909553495b609dc7c9efd469ffc31d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#af8909553495b609dc7c9efd469ffc31d">focusedEvent</a></td></tr>
 <tr class="separator:af8909553495b609dc7c9efd469ffc31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addbf2597e636bf2937b48b86c2fc02a4"><td class="memItemLeft" align="right" valign="top"><a id="addbf2597e636bf2937b48b86c2fc02a4"></a>
-struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>checkedEvent</b></td></tr>
+<tr class="memitem:addbf2597e636bf2937b48b86c2fc02a4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#addbf2597e636bf2937b48b86c2fc02a4">checkedEvent</a></td></tr>
 <tr class="separator:addbf2597e636bf2937b48b86c2fc02a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee6e54d35d8850022093412d674007da"><td class="memItemLeft" align="right" valign="top"><a id="aee6e54d35d8850022093412d674007da"></a>
-struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>unCheckedEvent</b></td></tr>
+<tr class="memitem:aee6e54d35d8850022093412d674007da"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#aee6e54d35d8850022093412d674007da">unCheckedEvent</a></td></tr>
 <tr class="separator:aee6e54d35d8850022093412d674007da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memItemLeft" align="right" valign="top"><a id="a8ea7e8ac3e3330830aa7a4309390f3ac"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isGeometryChanged</b></td></tr>
+<tr class="memitem:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac">isGeometryChanged</a></td></tr>
 <tr class="separator:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbe46dfeadc7ca8af4ccd6a1e60fa560"><td class="memItemLeft" align="right" valign="top"><a id="abbe46dfeadc7ca8af4ccd6a1e60fa560"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isStateChanged</b></td></tr>
+<tr class="memitem:abbe46dfeadc7ca8af4ccd6a1e60fa560"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#abbe46dfeadc7ca8af4ccd6a1e60fa560">isStateChanged</a></td></tr>
 <tr class="separator:abbe46dfeadc7ca8af4ccd6a1e60fa560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4838c2cc38726ce534b297b6df5ec9fe"><td class="memItemLeft" align="right" valign="top"><a id="a4838c2cc38726ce534b297b6df5ec9fe"></a>
-enum CheckBoxState&#160;</td><td class="memItemRight" valign="bottom"><b>state</b></td></tr>
+<tr class="memitem:a4838c2cc38726ce534b297b6df5ec9fe"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665f">CheckBoxState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html#a4838c2cc38726ce534b297b6df5ec9fe">state</a></td></tr>
 <tr class="separator:a4838c2cc38726ce534b297b6df5ec9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Standart Gui element to be clicked with holding it's state through the frames. Has focused, checked and unChecked <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> and <a class="el" href="struct_sound_resource.html">SoundResource</a>. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing). Also it's useful for other Gui elements, which are needed to be clicked with saving state. </p>
+<dl class="section warning"><dt>Warning</dt><dd><a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> is an inheritor of the <a class="el" href="struct_scene_node.html">SceneNode</a>. It means, that other code is use <b>pointer casting</b> to <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> from <a class="el" href="struct_scene_node.html">SceneNode</a> and vise versa. You <b>SHOULD</b> include the <code>struct <a class="el" href="struct_scene_node.html">SceneNode</a> blablaNode;</code> at the begining of <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> struct, if you want code to work with <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> like with a <a class="el" href="struct_scene_node.html">SceneNode</a>. More, you <b>SHOULD</b> initialize function pointers in <code>blablaNode</code> to NULL (by calling SceneNode_init()) or to your function implementation. Don't forget to add this warning comment to your own new <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors. </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="addbf2597e636bf2937b48b86c2fc02a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addbf2597e636bf2937b48b86c2fc02a4">&sect;&nbsp;</a></span>checkedEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_game_event.html">GameEvent</a>* checkedEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to be added to the <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> when the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> checked. </p>
+
+</div>
+</div>
+<a id="a141e6071f8fcb7d05f669cb32022bdc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141e6071f8fcb7d05f669cb32022bdc3">&sect;&nbsp;</a></span>checkedEventResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>* checkedEventResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_text_resource.html">TextResource</a> to construct <a class="el" href="struct_check_box.html#addbf2597e636bf2937b48b86c2fc02a4">CheckBox::checkedEvent</a>. </p>
+
+</div>
+</div>
+<a id="ac6c8715d0371c2a1d98681db939c703c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6c8715d0371c2a1d98681db939c703c">&sect;&nbsp;</a></span>checkedSoundResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_sound_resource.html">SoundResource</a>* checkedSoundResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sound to be played when the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> checked. </p>
+
+</div>
+</div>
+<a id="af8909553495b609dc7c9efd469ffc31d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8909553495b609dc7c9efd469ffc31d">&sect;&nbsp;</a></span>focusedEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_game_event.html">GameEvent</a>* focusedEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to be added to the <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> when the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> receives focus. </p>
+
+</div>
+</div>
+<a id="aff7dcf845e86b8d62077ceec6094f3e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff7dcf845e86b8d62077ceec6094f3e3">&sect;&nbsp;</a></span>focusedEventResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>* focusedEventResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_text_resource.html">TextResource</a> to construct <a class="el" href="struct_check_box.html#af8909553495b609dc7c9efd469ffc31d">CheckBox::focusedEvent</a>. </p>
+
+</div>
+</div>
+<a id="a8848ee5b886f588a966fc6c3ff0270df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8848ee5b886f588a966fc6c3ff0270df">&sect;&nbsp;</a></span>focusedSoundResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_sound_resource.html">SoundResource</a>* focusedSoundResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sound to be played when the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> receives focus. </p>
+
+</div>
+</div>
+<a id="a8ea7e8ac3e3330830aa7a4309390f3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea7e8ac3e3330830aa7a4309390f3ac">&sect;&nbsp;</a></span>isGeometryChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isGeometryChanged</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag, which is need to be changed when someone tried to move <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>, or update CheckBox::SceneNode. </p>
+
+</div>
+</div>
+<a id="abbe46dfeadc7ca8af4ccd6a1e60fa560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbe46dfeadc7ca8af4ccd6a1e60fa560">&sect;&nbsp;</a></span>isStateChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isStateChanged</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag, which is need to be changed when someone tried to change <a class="el" href="struct_check_box.html#a4838c2cc38726ce534b297b6df5ec9fe">CheckBox::state</a>. </p>
+
+</div>
+</div>
+<a id="aca8025f56fb4ce20b974ec9a3292a9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca8025f56fb4ce20b974ec9a3292a9e4">&sect;&nbsp;</a></span>sceneNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_scene_node.html">SceneNode</a> sceneNode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inheritance stuff. </p>
+
+</div>
+</div>
+<a id="a1128327f94baacb1570a98fca0591108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1128327f94baacb1570a98fca0591108">&sect;&nbsp;</a></span>sprite</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_sprite.html">Sprite</a>* sprite</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_sprite.html">Sprite</a> to be displayed on the screen. Should have 4 animations (unchecked, focusedUnchecked, checked, focusedChecked). </p>
+
+</div>
+</div>
+<a id="a4838c2cc38726ce534b297b6df5ec9fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4838c2cc38726ce534b297b6df5ec9fe">&sect;&nbsp;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665f">CheckBoxState</a> state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> state. </p>
+
+</div>
+</div>
+<a id="aee6e54d35d8850022093412d674007da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee6e54d35d8850022093412d674007da">&sect;&nbsp;</a></span>unCheckedEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_game_event.html">GameEvent</a>* unCheckedEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to be added to the <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> when the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> unchecked. </p>
+
+</div>
+</div>
+<a id="ae214e71201e1e7a27db408e05f019cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae214e71201e1e7a27db408e05f019cbd">&sect;&nbsp;</a></span>unCheckedEventResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>* unCheckedEventResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_text_resource.html">TextResource</a> to construct <a class="el" href="struct_check_box.html#aee6e54d35d8850022093412d674007da">CheckBox::unCheckedEvent</a>. </p>
+
+</div>
+</div>
+<a id="a1f2f9e6f5ef31b187c2da989b179d151"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f2f9e6f5ef31b187c2da989b179d151">&sect;&nbsp;</a></span>unCheckedSoundResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_sound_resource.html">SoundResource</a>* unCheckedSoundResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sound to be played when the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> unchecked. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="_check_box_8h_source.html">CheckBox.h</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
