@@ -22,18 +22,32 @@
 #include "gui/CheckBox.h"
 #include "textParser/TextParser.h"
 
+/**
+ * @brief Error message strings for #CheckBox.
+ */
 static const struct CheckBoxSceneNode_errorMessages {
     const char* const errFocusedGameEventRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#focusedEventRes. */
     const char* const errCheckedGameEventRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#checkhedEventRes. */
     const char* const errUnCheckedGameEventRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#unCheckedEventRes. */
     const char* const errConstructingFocusedGameEvent;
+    /**< Will be displayed when constructing CheckBox#focusedEvent failed. */
     const char* const errConstructingCheckedGameEvent;
+    /**< Will be displayed when constructing CheckBox#checkedEvent failed. */
     const char* const errConstructingUnCheckedGameEvent;
+    /**< Will be displayed when constructing CheckBox#unCheckedEvent failed. */
     const char* const errFocusedSoundRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#focusedSoundRes. */
     const char* const errCheckedSoundRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#checkedSoundRes. */
     const char* const errUnCheckedSoundRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#unCheckedSoundRes. */
     const char* const errSpriteRes;
+    /**< Will be displayed when #TextParser have no CheckBoxSceneNode_parserStrings#spriteRes. */
     const char* const errSpriteNoEnoughAnimations;
+    /**< Will be displayed when constructed #Sprite doesn't have enough animations for #CheckBox. */
 }CheckBoxSceneNode_errorMessages = {
     "CheckBox_loadEventsResources: focusedEventResource string haven't found!",
     "CheckBox_loadEventsResources: checkedEventResource string haven't found!",
@@ -47,6 +61,26 @@ static const struct CheckBoxSceneNode_errorMessages {
     "CheckBox_loadSpriteResource: spriteResource string haven't found!",
     "CheckBox_loadSpriteResource: loaded Sprite doesn't contain 4 animations!"};
 
+    
+/**
+ * @brief Function for loading and constructing CheckBox#sprite.
+ * @param checkBox Pointer to a #CheckBox where to construct CheckBox#sprite. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing CheckBox#sprite. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing CheckBox#sprite. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * CheckBoxSceneNode_parserStrings#spriteRes. Can be NULL.
+ * @return #CheckBoxSceneNode_errors value.
+ * @see #CheckBox
+ * @see #Sprite
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see SceneNodeTypesRegistrar
+ * @see TextParser
+ * @see #CheckBoxSceneNode_parserStrings
+ * @see #CheckBoxSceneNode_errors
+ */
 static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox* checkBox,
                                                  struct ResourceManager* const resourceManager,
                                                  struct Renderer* const renderer,
@@ -73,6 +107,21 @@ static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox
     return CHECK_BOX_NO_ERRORS;
 }
 
+/**
+ * @brief Function for loading and constructing CheckBox#focusedSoundResource,
+ * CheckBox#checkedSoundResource and CheckBox#unCheckedSoundResource.
+ * @param checkBox Pointer to a #CheckBox where to construct sound resources. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading sound resources. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * CheckBoxSceneNode_parserStrings#focusedSoundRes, 
+ * CheckBoxSceneNode_parserStrings#checkedSoundRes and 
+ * CheckBoxSceneNode_parserStrings#unCheckedSoundRes. Can be NULL.
+ * @see #CheckBox
+ * @see #SoundResource
+ * @see #ResourceManager
+ * @see TextParser
+ * @see #CheckBoxSceneNode_parserStrings
+ */
 static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                struct TextParser* textParser) {
     if (!checkBox || !resourceManager || !textParser)
@@ -97,6 +146,23 @@ static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct Resour
                                                                          tempUnCheckedSoundResourceString);
 }
 
+/**
+ * @brief Function for loading and constructing CheckBox#focusedEvent, 
+ * CheckBox#checkedEvent and CheckBox#unChecnedEvent.
+ * Also, it will update CheckBox#focusedEventResource, CheckBox#checkedEventResource 
+ * and CheckBox#unCheckedEventResource.
+ * @param checkBox Pointer to a #CheckBox where to construct events. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #GameEvent resources. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * CheckBoxSceneNode_parserStrings#focusedEventRes, 
+ * CheckBoxSceneNode_parserStrings#checkedEventRes 
+ * and CheckBoxSceneNode_parserStrings#unCheckedEventRes. Can be NULL.
+ * @see #CheckBox
+ * @see #GameEvent
+ * @see #ResourceManager
+ * @see TextParser
+ * @see #CheckBoxSceneNode_parserStrings
+ */
 static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
                                 struct TextParser* textParser){
     if (!checkBox || !resourceManager || !textParser)
@@ -117,7 +183,24 @@ static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct Resou
     CheckBox_changeCheckedEventResource(checkBox, resourceManager, tempCheckedEventResourceString);
     CheckBox_changeCheckedEventResource(checkBox, resourceManager, tempUnCheckedEventResourceString);
 }
-        
+
+/**
+ * @brief Function for loading settings and initializing #CheckBox from #TextParser.
+ * @param checkBox Pointer to a #CheckBox which will be initialized. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing CheckBox#sprite. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing CheckBox#sprite. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #CheckBoxSceneNode_errors value.
+ * @see #CheckBox
+ * @see #SceneNodeTypesRegistrar
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see TextParser
+ * @see #CheckBoxSceneNode_parserStrings
+ * @see #CheckBoxSceneNode_errors
+ */
 static enum CheckBoxSceneNode_errors CheckBox_tryGetSettingsFromTextParser(struct CheckBox* checkBox,
                                                            struct ResourceManager* const resourceManager,
                                                            struct Renderer* const renderer,

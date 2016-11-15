@@ -124,7 +124,7 @@ enum CheckBoxState {
 
 /**
  * @brief Standart Gui element to be clicked with holding it's state through the frames.
- * Has focused, checked and unCHecked #GameEvent and #SoundResource.
+ * Has focused, checked and unChecked #GameEvent and #SoundResource.
  * User can click the #CheckBox, and some things will happen (such a #GameEvent or sound playing).
  * Also it's useful for other Gui elements, which are needed to be clicked with saving state.
  * @warning #CheckBox is an inheritor of the SceneNode.
@@ -138,9 +138,9 @@ enum CheckBoxState {
 struct CheckBox {
     struct SceneNode sceneNode;
     /**< Inheritance stuff. */
-    struct Sprite* sprite; // animation: 0 - normal, 1 - focusedNormal, 2 - checked, 3 - focusedChecked
+    struct Sprite* sprite;
     /**< #Sprite to be displayed on the screen. 
-     *Should have 4 animations (unchecked, focusedUnchecked, checked, focusedChecked). */
+     * Should have 4 animations (unchecked, focusedUnchecked, checked, focusedChecked). */
     struct SoundResource* focusedSoundResource;
     /**< Sound to be played when the #CheckBox receives focus. */
     struct SoundResource* checkedSoundResource;
