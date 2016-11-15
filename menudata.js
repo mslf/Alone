@@ -30,17 +30,4 @@ var menudata={children:[
 {text:'p',url:'functions_vars.html#index_p'},
 {text:'q',url:'functions_vars.html#index_q'},
 {text:'s',url:'functions_vars.html#index_s'},
-{text:'t',url:'functions_vars.html#index_t'}]}]}]},
-{text:'Files',url:'files.html',children:[
-{text:'File List',url:'files.html'},
-{text:'Globals',url:'globals.html',children:[
-{text:'All',url:'globals.html',children:[
-{text:'b',url:'globals.html#index_b'},
-{text:'e',url:'globals.html#index_e'},
-{text:'g',url:'globals.html#index_g'}]},
-{text:'Functions',url:'globals_func.html',children:[
-{text:'b',url:'globals_func.html#index_b'},
-{text:'e',url:'globals_func.html#index_e'},
-{text:'g',url:'globals_func.html#index_g'}]},
-{text:'Enumerations',url:'globals_enum.html'},
-{text:'Enumerator',url:'globals_eval.html'}]}]}]}
+{text:'t',url:'functions_vars.html#index_t'}]}]}]}]}
