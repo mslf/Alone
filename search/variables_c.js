@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['uncheckedevent',['unCheckedEvent',['../struct_check_box.html#aee6e54d35d8850022093412d674007da',1,'CheckBox']]],
-  ['uncheckedeventres',['unCheckedEventRes',['../struct_check_box_scene_node__parser_string.html#a3d50ad389fc49f64470d73106507e29a',1,'CheckBoxSceneNode_parserString']]],
-  ['uncheckedeventresource',['unCheckedEventResource',['../struct_check_box.html#ae214e71201e1e7a27db408e05f019cbd',1,'CheckBox']]],
-  ['uncheckedsoundres',['unCheckedSoundRes',['../struct_check_box_scene_node__parser_string.html#aecd321541d48f8c7cb880aabdd330640',1,'CheckBoxSceneNode_parserString']]],
-  ['uncheckedsoundresource',['unCheckedSoundResource',['../struct_check_box.html#a1f2f9e6f5ef31b187c2da989b179d151',1,'CheckBox']]]
+  ['scenenode',['sceneNode',['../struct_button.html#aca8025f56fb4ce20b974ec9a3292a9e4',1,'Button::sceneNode()'],['../struct_check_box.html#aca8025f56fb4ce20b974ec9a3292a9e4',1,'CheckBox::sceneNode()'],['../struct_context_menu.html#aca8025f56fb4ce20b974ec9a3292a9e4',1,'ContextMenu::sceneNode()']]],
+  ['sdleventscount',['sdlEventsCount',['../struct_event_manager.html#a2ef8242634939408c466f0f3f221b1cb',1,'EventManager']]],
+  ['sdleventslist',['sdlEventsList',['../struct_event_manager.html#ac563054d2cefbd8d20b1daf70eb35d78',1,'EventManager']]],
+  ['sender',['sender',['../struct_game_event.html#a66ff5dae3a3a9fa193714623f219c11d',1,'GameEvent']]],
+  ['sprite',['sprite',['../struct_button.html#a1128327f94baacb1570a98fca0591108',1,'Button::sprite()'],['../struct_check_box.html#a1128327f94baacb1570a98fca0591108',1,'CheckBox::sprite()']]],
+  ['spriteres',['spriteRes',['../struct_button_scene_node__parser_strings.html#a008090dd7a5af169656ea5a85a437385',1,'ButtonSceneNode_parserStrings::spriteRes()'],['../struct_check_box_scene_node__parser_string.html#a008090dd7a5af169656ea5a85a437385',1,'CheckBoxSceneNode_parserString::spriteRes()']]],
+  ['state',['state',['../struct_button.html#a98525fefb11846bc0e1ee154b0a106d4',1,'Button::state()'],['../struct_check_box.html#a4838c2cc38726ce534b297b6df5ec9fe',1,'CheckBox::state()']]]
 ];

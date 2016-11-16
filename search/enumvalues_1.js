@@ -18,5 +18,19 @@ var searchData=
   ['check_5fbox_5fstate_5ffocused_5fchecked',['CHECK_BOX_STATE_FOCUSED_CHECKED',['../_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665fa5c67ce5d958dc904118b7d6859839d70',1,'CheckBox.h']]],
   ['check_5fbox_5fstate_5ffocused_5funcheked',['CHECK_BOX_STATE_FOCUSED_UNCHEKED',['../_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665fa16988c6ca22bc5f261ebf9329581876f',1,'CheckBox.h']]],
   ['check_5fbox_5fstate_5funchecked',['CHECK_BOX_STATE_UNCHECKED',['../_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665faaf90f41ea64306e741611dd143c04da4',1,'CheckBox.h']]],
-  ['check_5fbox_5fstate_5funchecking',['CHECK_BOX_STATE_UNCHECKING',['../_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665fab74eb0bd97d14b35eaf9dff83f20fd00',1,'CheckBox.h']]]
+  ['check_5fbox_5fstate_5funchecking',['CHECK_BOX_STATE_UNCHECKING',['../_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665fab74eb0bd97d14b35eaf9dff83f20fd00',1,'CheckBox.h']]],
+  ['context_5fmenu_5ferr_5falloc_5fprototype_5fstring',['CONTEXT_MENU_ERR_ALLOC_PROTOTYPE_STRING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a362e8951ef5fd2e327151b654e9e4e25',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fbutton_5fconstructing',['CONTEXT_MENU_ERR_BUTTON_CONSTRUCTING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a8f2c19cbad97e3cd26a6b28fc7629b68',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5findex_5fout_5fof_5frange',['CONTEXT_MENU_ERR_INDEX_OUT_OF_RANGE',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42afa5afeef19378e3f23e13a8e26965189',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5flist_5fupdating',['CONTEXT_MENU_ERR_LIST_UPDATING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a69d4c8c9128eb5387dfda213c89f8c44',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5floading_5fsettings',['CONTEXT_MENU_ERR_LOADING_SETTINGS',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42acf1a659cf4b39581a079605cc785f1f0',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fmenu_5foption_5fupdating',['CONTEXT_MENU_ERR_MENU_OPTION_UPDATING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a53dc290338262665adaf6181602a5cfe',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fno_5foptions',['CONTEXT_MENU_ERR_NO_OPTIONS',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a78b7508f4f814027d756da1351bf8c77',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fno_5fprototypes',['CONTEXT_MENU_ERR_NO_PROTOTYPES',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42af2a69b72318619705e8f1b2555220fba',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fnull_5fargument',['CONTEXT_MENU_ERR_NULL_ARGUMENT',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a4d9749edca22ed7781006bc4564d6a4d',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5frealloc',['CONTEXT_MENU_ERR_REALLOC',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42ae0af39a84f249e8c99d7a544c4d78d2e',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fsame_5flabel_5fexists',['CONTEXT_MENU_ERR_SAME_LABEL_EXISTS',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a9d84c31e15632ef37b476028f062faa0',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fsaving',['CONTEXT_MENU_ERR_SAVING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42afe98c1e2cbc75a45e9966f90feedfae4',1,'ContextMenu.h']]],
+  ['context_5fmenu_5fno_5ferrors',['CONTEXT_MENU_NO_ERRORS',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a551ab361cb3ccf31056e51c8140126f7',1,'ContextMenu.h']]],
+  ['context_5fmenu_5fscenenode_5finitial_5fnumber_5fallocated_5fmenu_5foptions',['CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS',['../_context_menu_8h.html#a5563443b3aaf48165248ef7a4c34d7c7afdb84753fabd3f980438ed83972f3257',1,'ContextMenu.h']]]
 ];

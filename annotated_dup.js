@@ -10,6 +10,8 @@ var annotated_dup =
     [ "CheckBoxSceneNode_errorMessages", "struct_check_box_scene_node__error_messages.html", "struct_check_box_scene_node__error_messages" ],
     [ "CheckBoxSceneNode_parserString", "struct_check_box_scene_node__parser_string.html", "struct_check_box_scene_node__parser_string" ],
     [ "ContextMenu", "struct_context_menu.html", "struct_context_menu" ],
+    [ "ContextMenuSceneNode_parserString", "struct_context_menu_scene_node__parser_string.html", "struct_context_menu_scene_node__parser_string" ],
+    [ "ContextMenuScenNode_errorMessages", "struct_context_menu_scen_node__error_messages.html", "struct_context_menu_scen_node__error_messages" ],
     [ "EventManager", "struct_event_manager.html", "struct_event_manager" ],
     [ "EventManager_errorMessages", "struct_event_manager__error_messages.html", "struct_event_manager__error_messages" ],
     [ "GameEvent", "struct_game_event.html", "struct_game_event" ],

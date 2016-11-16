@@ -86,37 +86,179 @@ $(document).ready(function(){initNavTree('struct_context_menu.html','');});
 <div class="title">ContextMenu Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Standart Gui element for drawing menu, builded from <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. All menuOptions are have the similar to theirs prototypes design, but events and labels can be unique for each menuOption. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing in appropriate <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>).  
+ <a href="struct_context_menu.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_context_menu_8h_source.html">ContextMenu.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memItemLeft" align="right" valign="top"><a id="aca8025f56fb4ce20b974ec9a3292a9e4"></a>
-struct <a class="el" href="struct_scene_node.html">SceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNode</b></td></tr>
+<tr class="memitem:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#aca8025f56fb4ce20b974ec9a3292a9e4">sceneNode</a></td></tr>
 <tr class="separator:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6389251f1af7286c5aaa578e346c5dd"><td class="memItemLeft" align="right" valign="top"><a id="aa6389251f1af7286c5aaa578e346c5dd"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>onlyOneMenuOptionPrototype</b></td></tr>
+<tr class="memitem:aa6389251f1af7286c5aaa578e346c5dd"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#aa6389251f1af7286c5aaa578e346c5dd">onlyOneMenuOptionPrototype</a></td></tr>
 <tr class="separator:aa6389251f1af7286c5aaa578e346c5dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a489cbefce04ee974ad3a4e58b0a0d081"><td class="memItemLeft" align="right" valign="top"><a id="a489cbefce04ee974ad3a4e58b0a0d081"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>topMenuOptionPrototype</b></td></tr>
+<tr class="memitem:a489cbefce04ee974ad3a4e58b0a0d081"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#a489cbefce04ee974ad3a4e58b0a0d081">topMenuOptionPrototype</a></td></tr>
 <tr class="separator:a489cbefce04ee974ad3a4e58b0a0d081"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8ee24ce84177029e35240a5d6fbac0"><td class="memItemLeft" align="right" valign="top"><a id="a0a8ee24ce84177029e35240a5d6fbac0"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>middleMenuOptionPrototype</b></td></tr>
+<tr class="memitem:a0a8ee24ce84177029e35240a5d6fbac0"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#a0a8ee24ce84177029e35240a5d6fbac0">middleMenuOptionPrototype</a></td></tr>
 <tr class="separator:a0a8ee24ce84177029e35240a5d6fbac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87a9f87725ed2420c45d02d2eb15a77b"><td class="memItemLeft" align="right" valign="top"><a id="a87a9f87725ed2420c45d02d2eb15a77b"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>lowerMenuOptionPrototype</b></td></tr>
+<tr class="memitem:a87a9f87725ed2420c45d02d2eb15a77b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#a87a9f87725ed2420c45d02d2eb15a77b">lowerMenuOptionPrototype</a></td></tr>
 <tr class="separator:a87a9f87725ed2420c45d02d2eb15a77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab97fe0e08e073e863f4fd62197738747"><td class="memItemLeft" align="right" valign="top"><a id="ab97fe0e08e073e863f4fd62197738747"></a>
-struct <a class="el" href="struct_button.html">Button</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>menuOptionsList</b></td></tr>
+<tr class="memitem:ab97fe0e08e073e863f4fd62197738747"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_button.html">Button</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#ab97fe0e08e073e863f4fd62197738747">menuOptionsList</a></td></tr>
 <tr class="separator:ab97fe0e08e073e863f4fd62197738747"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bae963e7309ae68621dd9a07f7d31d6"><td class="memItemLeft" align="right" valign="top"><a id="a1bae963e7309ae68621dd9a07f7d31d6"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedMenuOptions</b></td></tr>
+<tr class="memitem:a1bae963e7309ae68621dd9a07f7d31d6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#a1bae963e7309ae68621dd9a07f7d31d6">allocatedMenuOptions</a></td></tr>
 <tr class="separator:a1bae963e7309ae68621dd9a07f7d31d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cf8669d42fec7e69b5d299de9c30b5a"><td class="memItemLeft" align="right" valign="top"><a id="a3cf8669d42fec7e69b5d299de9c30b5a"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>menuOptionsCount</b></td></tr>
+<tr class="memitem:a3cf8669d42fec7e69b5d299de9c30b5a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#a3cf8669d42fec7e69b5d299de9c30b5a">menuOptionsCount</a></td></tr>
 <tr class="separator:a3cf8669d42fec7e69b5d299de9c30b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memItemLeft" align="right" valign="top"><a id="a8ea7e8ac3e3330830aa7a4309390f3ac"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isGeometryChanged</b></td></tr>
+<tr class="memitem:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_context_menu.html#a8ea7e8ac3e3330830aa7a4309390f3ac">isGeometryChanged</a></td></tr>
 <tr class="separator:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Standart Gui element for drawing menu, builded from <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. All menuOptions are have the similar to theirs prototypes design, but events and labels can be unique for each menuOption. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing in appropriate <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>). </p>
+<dl class="section warning"><dt>Warning</dt><dd><a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a> is an inheritor of the <a class="el" href="struct_scene_node.html">SceneNode</a>. It means, that other code is use <b>pointer casting</b> to <a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a> from <a class="el" href="struct_scene_node.html">SceneNode</a> and vise versa. You <b>SHOULD</b> include the <code>struct <a class="el" href="struct_scene_node.html">SceneNode</a> blablaNode;</code> at the begining of <a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a> struct, if you want code to work with <a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a> like with a <a class="el" href="struct_scene_node.html">SceneNode</a>. More, you <b>SHOULD</b> initialize function pointers in <code>blablaNode</code> to NULL (by calling SceneNode_init()) or to your function implementation. Don't forget to add this warning comment to your own new <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_context_menu_8h.html#a78ed1be432eb533a15ac079968d7d57e" title="Function to control user input events to ContextMenu. Pointer to that function should be at ContextMe...">ContextMenu_control()</a> </dd>
+<dd>
+<a class="el" href="_context_menu_8h.html#acaeeb7628ae49848a651f14ab938325d" title="Function to update ContextMenu and interacting with EventManager. Pointer to that function should be ...">ContextMenu_update()</a> </dd>
+<dd>
+<a class="el" href="_context_menu_8h.html#a4c55c515818c278ecfbb9e507be6aa50" title="Function to render ContextMenu on the screen. Pointer to that function should be at ContextMenu::scen...">ContextMenu_render()</a> </dd>
+<dd>
+<a class="el" href="_context_menu_8h.html#a0dc6fea527a43dd6c5fec8871c4df442" title="Function to play sounds of a ContextMenu. Pointer to that function should be at ContextMenu::sceneNod...">ContextMenu_sound()</a> </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a1bae963e7309ae68621dd9a07f7d31d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bae963e7309ae68621dd9a07f7d31d6">&sect;&nbsp;</a></span>allocatedMenuOptions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedMenuOptions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> in the <a class="el" href="struct_context_menu.html#ab97fe0e08e073e863f4fd62197738747">ContextMenu::menuOptionsList</a>. </p>
+
+</div>
+</div>
+<a id="a8ea7e8ac3e3330830aa7a4309390f3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea7e8ac3e3330830aa7a4309390f3ac">&sect;&nbsp;</a></span>isGeometryChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isGeometryChanged</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag, which is need to be changed when someone tried to move <a class="el" href="struct_context_menu.html" title="Standart Gui element for drawing menu, builded from Button. All menuOptions are have the similar to t...">ContextMenu</a>, update <a class="el" href="struct_context_menu.html#aca8025f56fb4ce20b974ec9a3292a9e4">ContextMenu::sceneNode</a> or change <a class="el" href="struct_context_menu.html#ab97fe0e08e073e863f4fd62197738747">ContextMenu::menuOptionsList</a>. </p>
+
+</div>
+</div>
+<a id="a87a9f87725ed2420c45d02d2eb15a77b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87a9f87725ed2420c45d02d2eb15a77b">&sect;&nbsp;</a></span>lowerMenuOptionPrototype</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* lowerMenuOptionPrototype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Path string to the lower <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> resource. </p>
+
+</div>
+</div>
+<a id="a3cf8669d42fec7e69b5d299de9c30b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cf8669d42fec7e69b5d299de9c30b5a">&sect;&nbsp;</a></span>menuOptionsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t menuOptionsCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> in the <a class="el" href="struct_context_menu.html#ab97fe0e08e073e863f4fd62197738747">ContextMenu::menuOptionsList</a> </p>
+
+</div>
+</div>
+<a id="ab97fe0e08e073e863f4fd62197738747"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab97fe0e08e073e863f4fd62197738747">&sect;&nbsp;</a></span>menuOptionsList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_button.html">Button</a>** menuOptionsList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>List of <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>, which are represents menuOptions. </p>
+
+</div>
+</div>
+<a id="a0a8ee24ce84177029e35240a5d6fbac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a8ee24ce84177029e35240a5d6fbac0">&sect;&nbsp;</a></span>middleMenuOptionPrototype</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* middleMenuOptionPrototype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Path string to the middle <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> resource. </p>
+
+</div>
+</div>
+<a id="aa6389251f1af7286c5aaa578e346c5dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6389251f1af7286c5aaa578e346c5dd">&sect;&nbsp;</a></span>onlyOneMenuOptionPrototype</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* onlyOneMenuOptionPrototype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Path string to the only one menuOption (alone) <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> resource. </p>
+
+</div>
+</div>
+<a id="aca8025f56fb4ce20b974ec9a3292a9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca8025f56fb4ce20b974ec9a3292a9e4">&sect;&nbsp;</a></span>sceneNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_scene_node.html">SceneNode</a> sceneNode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inheritance stuff. </p>
+
+</div>
+</div>
+<a id="a489cbefce04ee974ad3a4e58b0a0d081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a489cbefce04ee974ad3a4e58b0a0d081">&sect;&nbsp;</a></span>topMenuOptionPrototype</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* topMenuOptionPrototype</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Path string to the top <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> resource. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_context_menu_8h_source.html">ContextMenu.h</a></li>
 </ul>
