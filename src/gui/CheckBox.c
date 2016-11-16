@@ -460,11 +460,11 @@ void CheckBox_control(struct SceneNode* sceneNode, struct EventManager* eventMan
                 }
             } else {
                     if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED
-                        || checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED)
-                        checkBox->state = CHECK_BOX_STATE_FOCUSED_UNCHEKED;
+                        || checkBox->state == CHECK_BOX_STATE_UNCHECKING)
+                        checkBox->state = CHECK_BOX_STATE_UNCHECKED;
                     if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED
                         || checkBox->state == CHECK_BOX_STATE_CHECKING)
-                        checkBox->state = CHECK_BOX_STATE_FOCUSED_CHECKED;
+                        checkBox->state = CHECK_BOX_STATE_CHECKED;
                     checkBox->isStateChanged = true;
                     EventManager_removeEvent(eventManager, checkBox->focusedEvent);
                 }
@@ -476,11 +476,11 @@ void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventMana
         return;
     struct CheckBox* checkBox = (struct CheckBox*)sceneNode;
     if (checkBox->isStateChanged) {
-        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED || checkBox->state == CHECK_BOX_STATE_UNCHECKING)
+        if (checkBox->state == CHECK_BOX_STATE_UNCHECKED || checkBox->state == CHECK_BOX_STATE_UNCHECKING)
             checkBox->sprite->currentAnimation = 0;
         if (checkBox->state == CHECK_BOX_STATE_FOCUSED_UNCHEKED)
             checkBox->sprite->currentAnimation = 1;
-        if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED || checkBox->state == CHECK_BOX_STATE_CHECKING)
+        if (checkBox->state == CHECK_BOX_STATE_CHECKED || checkBox->state == CHECK_BOX_STATE_CHECKING)
             checkBox->sprite->currentAnimation = 2;
         if (checkBox->state == CHECK_BOX_STATE_FOCUSED_CHECKED)
             checkBox->sprite->currentAnimation = 3;
