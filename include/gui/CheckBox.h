@@ -20,7 +20,7 @@
  * @file CheckBox.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing CheckBox and it's stuff.
+ * @brief File containing #CheckBox and it's stuff.
  */
 #ifndef ALONE_CHECKBOX_H
 #define ALONE_CHECKBOX_H
@@ -134,6 +134,10 @@ enum CheckBoxState {
  * More, you <B>SHOULD</B> initialize function pointers in <tt>blablaNode</tt> to NULL (by calling SceneNode_init()) 
  * or to your function implementation. 
  * Don't forget to add this warning comment to your own new #SceneNode inheritors.
+ * @see CheckBox_control()
+ * @see CheckBox_update()
+ * @see CheckBox_render()
+ * @see CheckBox_sound()
  */
 struct CheckBox {
     struct SceneNode sceneNode;

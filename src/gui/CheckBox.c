@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,6 +16,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file CheckBox.c
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing implementation of #CheckBox.
+ */
 #include "gui/CheckBox.h"
 #include "textParser/TextParser.h"
 
@@ -76,8 +79,8 @@ static const struct CheckBoxSceneNode_errorMessages {
  * @see #Sprite
  * @see #ResourceManager
  * @see #Renderer
- * @see SceneNodeTypesRegistrar
- * @see TextParser
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
  * @see #CheckBoxSceneNode_parserStrings
  * @see #CheckBoxSceneNode_errors
  */
@@ -119,7 +122,7 @@ static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox
  * @see #CheckBox
  * @see #SoundResource
  * @see #ResourceManager
- * @see TextParser
+ * @see #TextParser
  * @see #CheckBoxSceneNode_parserStrings
  */
 static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
@@ -160,7 +163,7 @@ static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct Resour
  * @see #CheckBox
  * @see #GameEvent
  * @see #ResourceManager
- * @see TextParser
+ * @see #TextParser
  * @see #CheckBoxSceneNode_parserStrings
  */
 static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
@@ -197,7 +200,7 @@ static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct Resou
  * @see #SceneNodeTypesRegistrar
  * @see #ResourceManager
  * @see #Renderer
- * @see TextParser
+ * @see #TextParser
  * @see #CheckBoxSceneNode_parserStrings
  * @see #CheckBoxSceneNode_errors
  */

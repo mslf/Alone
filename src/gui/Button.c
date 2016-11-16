@@ -72,8 +72,8 @@ static const struct ButtonSceneNode_errorMessages {
  * @see #Text
  * @see #ResourceManager
  * @see #Renderer
- * @see SceneNodeTypesRegistrar
- * @see TextParser
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
  * @see #ButtonSceneNode_parserStrings
  * @see #ButtonSceneNode_errors
  */
@@ -113,8 +113,8 @@ static enum ButtonSceneNode_errors Button_loadTextResource(struct Button* button
  * @see #Sprite
  * @see #ResourceManager
  * @see #Renderer
- * @see SceneNodeTypesRegistrar
- * @see TextParser
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
  * @see #ButtonSceneNode_parserStrings
  * @see #ButtonSceneNode_errors
  */
@@ -155,7 +155,7 @@ static enum ButtonSceneNode_errors Button_loadSpriteResource(struct Button* butt
  * @see #Button
  * @see #SoundResource
  * @see #ResourceManager
- * @see TextParser
+ * @see #TextParser
  * @see #ButtonSceneNode_parserStrings
  */
 static void Button_loadSoundResources(struct Button* button,
@@ -186,7 +186,7 @@ static void Button_loadSoundResources(struct Button* button,
  * @see #Button
  * @see #GameEvent
  * @see #ResourceManager
- * @see TextParser
+ * @see #TextParser
  * @see #ButtonSceneNode_parserStrings
  */
 static void Button_loadEventsResources(struct Button* button,
@@ -219,7 +219,7 @@ static void Button_loadEventsResources(struct Button* button,
  * @see #SceneNodeTypesRegistrar
  * @see #ResourceManager
  * @see #Renderer
- * @see TextParser
+ * @see #TextParser
  * @see #ButtonSceneNode_parserStrings
  * @see #ButtonSceneNode_errors
  */

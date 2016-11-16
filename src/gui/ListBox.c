@@ -46,7 +46,7 @@ static unsigned char ListBox_loadContextMenuResource(struct ListBox* listBox,
                                                                 renderer,
                                                                 sceneNodeTypesRegistrar,
                                                                 tempResId,
-                                                                CONTEXT_MENU_SCENENODE_PARSER_TYPE_STRING);
+                                                                ContextMenuSceneNode_parserString.type);
     if (!listBox->contextMenu)
         return 3;
     if (listBox->textBox) {

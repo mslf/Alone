@@ -129,6 +129,10 @@ enum ButtonState {
  * More, you <B>SHOULD</B> initialize function pointers in <tt>blablaNode</tt> to NULL (by calling SceneNode_init()) 
  * or to your function implementation. 
  * Don't forget to add this warning comment to your own new #SceneNode inheritors.
+ * @see Button_control()
+ * @see Button_update()
+ * @see Button_render()
+ * @see Button_sound()
  */
 struct Button {
     struct SceneNode sceneNode;
