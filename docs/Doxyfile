@@ -51,7 +51,7 @@ PROJECT_BRIEF          = "2D side-scroller, platformer, arcade simulator with el
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = 
+PROJECT_LOGO           = /home/mslf/programs/git/Alone/data/AloneLogo_70x70.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
