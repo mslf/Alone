@@ -155,10 +155,8 @@ void Text_destruct(struct SceneNode* text) {
         free(tempText->fontPath);
     if (tempText->text)
         free(tempText->text);
-    if (tempText->textureResource)
-        tempText->textureResource->pointersCount--;
-    if (text->sceneNodeTextResource)
-        text->sceneNodeTextResource->pointersCount--;
+    TextureResource_decreasePointersCounter(tempText->textureResource);
+    TextResource_decreasePointersCounter(text->sceneNodeTextResource);
     if (text->type)
         free(text->type);
     free(text);
@@ -176,20 +174,20 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
     int textureW;
     int textureH;
     if (SDL_QueryTexture(textureResource->texture, NULL, NULL, &textureW, &textureH)) {
-        textureResource->pointersCount--;
+        TextureResource_decreasePointersCounter(textureResource);
         return 3;
     }
     char* tempTextString = NULL;
     tempTextString = (char*)malloc(sizeof(char) * (strlen(textString) + 1));
     if (!tempTextString) {
-        textureResource->pointersCount--;
+        TextureResource_decreasePointersCounter(textureResource);
         return 4;
     }
     char* tempFontPath = NULL;
     tempFontPath = (char*)malloc(sizeof(char) * (strlen(fontPath) + 1));
     if (!tempFontPath) {
         free(tempTextString);
-        textureResource->pointersCount--;
+        TextureResource_decreasePointersCounter(textureResource);
         return 5;
     }
     /*
@@ -203,7 +201,7 @@ unsigned char Text_regenerateTexture(struct Text* text, struct ResourceManager* 
     text->fontPath = tempFontPath;
     text->size = size;
     text->color = color;
-    text->textureResource->pointersCount--;
+    TextureResource_decreasePointersCounter(text->textureResource);
     // See WARNING in 'ResourceManager_loadTextureResourceFromText'
     if (!text->textureResource->isCreatedWithResourceManager)
         TextureResource_destruct(text->textureResource);

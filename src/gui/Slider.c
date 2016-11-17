@@ -133,8 +133,7 @@ void Slider_destruct(struct SceneNode* slider) {
         ProgressBar_destruct((struct SceneNode*)tempSlider->base);
     if (tempSlider->button)
         Button_destruct((struct SceneNode*)tempSlider->button);
-    if (slider->sceneNodeTextResource)
-        slider->sceneNodeTextResource->pointersCount--;
+    TextResource_decreasePointersCounter(slider->sceneNodeTextResource);
     if (slider->type)
         free(slider->type);
     free(slider);

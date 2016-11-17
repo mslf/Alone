@@ -195,10 +195,8 @@ void Sprite_destruct(struct SceneNode* sprite) {
     struct Sprite* tempSprite = (struct Sprite*)sprite;
     if (tempSprite->animations)
         free(tempSprite->animations);
-    if (tempSprite->textureResource)
-        tempSprite->textureResource->pointersCount--;
-    if (sprite->sceneNodeTextResource)
-        sprite->sceneNodeTextResource->pointersCount--;
+    TextureResource_decreasePointersCounter(tempSprite->textureResource);
+    TextResource_decreasePointersCounter(sprite->sceneNodeTextResource);
     if (sprite->type)
         free(sprite->type);
     free(sprite);
@@ -280,7 +278,7 @@ unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct Resourc
     size_t i;
     size_t maxFramesCount = 0;
     if (SDL_QueryTexture(textureResource->texture, NULL, NULL, &textureW, &textureH)) {
-        textureResource->pointersCount--;
+        TextureResource_decreasePointersCounter(textureResource);
         return 3;
     }
     for (i = 0; i < sprite->animationsCount; i++)
@@ -288,15 +286,15 @@ unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct Resourc
             maxFramesCount = sprite->animations[i].framesCount;
     if (sprite->frameSize.x * maxFramesCount > (size_t)textureW) {
         Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_W);
-        textureResource->pointersCount--;
+        TextureResource_decreasePointersCounter(textureResource);
         return 4;
     }
     if (sprite->frameSize.y * sprite->animationsCount > (size_t)textureH) {
         Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_H);
-        textureResource->pointersCount--;
+        TextureResource_decreasePointersCounter(textureResource);
         return 5;
     }
-    sprite->textureResource->pointersCount--;
+    TextureResource_decreasePointersCounter(sprite->textureResource);
     sprite->textureResource = textureResource;
     return 0;
 }

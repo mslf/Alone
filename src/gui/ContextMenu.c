@@ -254,8 +254,7 @@ void ContextMenu_destruct(struct SceneNode* contextMenu) {
             tempContextMenu->menuOptionsList[i]->sceneNode.destruct((struct SceneNode*)tempContextMenu->menuOptionsList[i]);
         free(tempContextMenu->menuOptionsList);
     }
-    if (contextMenu->sceneNodeTextResource)
-        contextMenu->sceneNodeTextResource->pointersCount--;
+    TextResource_decreasePointersCounter(contextMenu->sceneNodeTextResource);
     if (contextMenu->type)
         free(contextMenu->type);
     free(contextMenu);

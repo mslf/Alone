@@ -115,8 +115,7 @@ void ProgressBar_destruct(struct SceneNode* progressBar) {
         Sprite_destruct((struct SceneNode*)tempProgressBar->spriteBase);
     if (tempProgressBar->spriteBar)
         Sprite_destruct((struct SceneNode*)tempProgressBar->spriteBar);
-    if (progressBar->sceneNodeTextResource)
-        progressBar->sceneNodeTextResource->pointersCount--;
+    TextResource_decreasePointersCounter(progressBar->sceneNodeTextResource);
     if (progressBar->type)
         free(progressBar->type);
     free(progressBar);

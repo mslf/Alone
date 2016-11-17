@@ -166,26 +166,26 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager,
     struct TextParser* sceneTextParser = NULL;
     sceneTextParser = TextParser_constructFromTextResource(resourceManager->logger, scene->sceneResource);
     if (!sceneTextParser) {
-        scene->sceneResource->pointersCount--;
+        TextResource_decreasePointersCounter(scene->sceneResource);
         Scene_destruct(scene);
         return NULL;
     }
     const char* sceneTypeString = NULL;
     sceneTypeString = TextParser_getString(sceneTextParser, TEXT_PARSER_TYPE_STRING, 0);
     if (sceneTextParser->lastError) {
-        scene->sceneResource->pointersCount--;
+        TextResource_decreasePointersCounter(scene->sceneResource);
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
     if (strcmp(sceneTypeString, SCENE_PARSER_TYPE_STRING) != 0) {
-        scene->sceneResource->pointersCount--;
+        TextResource_decreasePointersCounter(scene->sceneResource);
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
     if (Scene_init(scene, resourceManager, renderer, sceneNodeTypesRegistrar, sceneTextParser)) {
-        scene->sceneResource->pointersCount--;
+        TextResource_decreasePointersCounter(scene->sceneResource);
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
         return NULL;
@@ -204,8 +204,7 @@ void Scene_destruct (struct Scene* scene) {
                 Scene_destructSceneNode(scene->sceneNodesList[i]);
             free(scene->sceneNodesList);
         }
-        if (scene->sceneResource)
-            scene->sceneResource->pointersCount--;
+        TextResource_decreasePointersCounter(scene->sceneResource);
         free(scene);
     }
 }

@@ -283,22 +283,15 @@ void Button_destruct(struct SceneNode* button) {
         Sprite_destruct((struct SceneNode*)tempButton->sprite);
     if (tempButton->label)
         Text_destruct((struct SceneNode*)tempButton->label);
-
-    //? dec_if_not_zero( & tempButton-> focusedEventResource-> pointersCount )
-    if (tempButton->focusedEventResource)
-        tempButton->focusedEventResource->pointersCount--;
-    if (tempButton->focusedSoundResource)
-        tempButton->focusedSoundResource->pointersCount--;
-    if (tempButton->pressedEventResource)
-        tempButton->pressedEventResource->pointersCount--;
-    if (tempButton->pressedSoundResource)
-        tempButton->pressedSoundResource->pointersCount--;
+    TextResource_decreasePointersCounter(tempButton->focusedEventResource);
+    SoundResource_decreasePointersCounter(tempButton->focusedSoundResource);
+    TextResource_decreasePointersCounter(tempButton->pressedEventResource);
+    SoundResource_decreasePointersCounter(tempButton->pressedSoundResource);
     if (tempButton->focusedEvent)
         tempButton->focusedEvent->isNeeded = false;
     if (tempButton->pressedEvent)
         tempButton->pressedEvent->isNeeded = false;
-    if (button->sceneNodeTextResource)
-        button->sceneNodeTextResource->pointersCount--;
+    TextResource_decreasePointersCounter(button->sceneNodeTextResource);
     if (button->type)
         free(button->type);
     free(button);
@@ -315,21 +308,20 @@ enum ButtonSceneNode_errors Button_changePressedEventResource(struct Button* but
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
-        newGameEventTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(newGameEventTextResource);
         return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)button);
     if (!newGameEvent) {
         Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errConstructingPressedGameEvent);
-        newGameEventTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(newGameEventTextResource);
         TextParser_destruct(textParser);
         return BUTTON_ERR_CONSTRUCTIG_PRESSED_EVENT;
     }
     TextParser_destruct(textParser);
     if (button->pressedEvent)
         button->pressedEvent->isNeeded = false;
-    if (button->pressedEventResource)
-        button->pressedEventResource->pointersCount--;
+    TextResource_decreasePointersCounter(button->pressedEventResource);
     button->pressedEventResource = newGameEventTextResource;
     button->pressedEvent = newGameEvent;
     return BUTTON_NO_ERRORS;
@@ -346,21 +338,20 @@ enum ButtonSceneNode_errors Button_changeFocusedEventResource(struct Button* but
     struct TextParser* textParser = TextParser_constructFromTextResource(resourceManager->logger,
                                                                          newGameEventTextResource);
     if (!textParser) {
-        newGameEventTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(newGameEventTextResource);
         return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
     }
     struct GameEvent* newGameEvent = GameEvent_constructFromTextParser(textParser, (struct SceneNode*)button);
     if (!newGameEvent) {
         Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errConstructingFocusedGameEvent);
-        newGameEventTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(newGameEventTextResource);
         TextParser_destruct(textParser);
         return BUTTON_ERR_CONSTRUCTIG_FOCUSED_EVENT;
     }
     TextParser_destruct(textParser);
     if (button->focusedEvent)
         button->focusedEvent->isNeeded = false;
-    if (button->focusedEventResource)
-        button->focusedEventResource->pointersCount--;
+    TextResource_decreasePointersCounter(button->focusedEventResource);
     button->focusedEventResource = newGameEventTextResource;
     button->focusedEvent = newGameEvent;
     return BUTTON_NO_ERRORS;

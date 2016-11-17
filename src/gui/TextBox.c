@@ -101,8 +101,7 @@ void TextBox_destruct(struct SceneNode* textBox) {
         Button_destruct((struct SceneNode*)tempTextBox->box);
     if (tempTextBox->string)
         free(tempTextBox->string);
-    if (textBox->sceneNodeTextResource)
-        textBox->sceneNodeTextResource->pointersCount--;
+    TextResource_decreasePointersCounter(textBox->sceneNodeTextResource);
     if (textBox->type)
         free(textBox->type);
     free(textBox);

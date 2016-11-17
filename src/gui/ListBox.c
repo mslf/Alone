@@ -161,8 +161,7 @@ void ListBox_destruct(struct SceneNode* listBox) {
         Button_destruct((struct SceneNode*)tempListBox->button);
     if (tempListBox->button)
         ContextMenu_destruct((struct SceneNode*)tempListBox->contextMenu);
-    if (listBox->sceneNodeTextResource)
-        listBox->sceneNodeTextResource->pointersCount--;
+    TextResource_decreasePointersCounter(listBox->sceneNodeTextResource);
     if (listBox->type)
         free(listBox->type);
     free(listBox);

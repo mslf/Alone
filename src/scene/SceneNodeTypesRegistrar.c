@@ -115,7 +115,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructFromTextResource(resourceManager->logger, tempTextResource);
     if (!textParser) {
-        tempTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(tempTextResource);
         return NULL;
     }
     const char* typeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
@@ -125,7 +125,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         Logger_log(renderer->logger, tempErrString);
         sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
         Logger_log(renderer->logger, tempErrString);
-        tempTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(tempTextResource);
         TextParser_destruct(textParser);
         return NULL;
     }
@@ -144,7 +144,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         Logger_log(renderer->logger, tempErrString);
         sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
         Logger_log(renderer->logger, tempErrString);
-        tempTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(tempTextResource);
         TextParser_destruct(textParser);
         return NULL;
     }
@@ -157,7 +157,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
             Logger_log(renderer->logger, tempErrString);
             sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
             Logger_log(renderer->logger, tempErrString);
-            tempTextResource->pointersCount--;
+            TextResource_decreasePointersCounter(tempTextResource);
             TextParser_destruct(textParser);
             return NULL;
         }
@@ -167,7 +167,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
                                                                              sceneNodeTypesRegistrar, textParser);
     TextParser_destruct(textParser);
     if (!tempSceneNode) {
-        tempTextResource->pointersCount--;
+        TextResource_decreasePointersCounter(tempTextResource);
         char tempErrString[600];
         sprintf(tempErrString, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
         Logger_log(renderer->logger, tempErrString);
