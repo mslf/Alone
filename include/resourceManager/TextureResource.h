@@ -39,6 +39,14 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
                                                           const char* const fontPath, int size, SDL_Color color);
 void TextureResource_destruct(struct TextureResource* textureResource);
 
+/**
+ * @brief Decreases TextureResource#pointersCount.
+ * Useful for deffered resource managment by #ResourceManager.
+ * @param textureResource Pointer to a #TextureResource. Can be NULL.
+ * @see #ResourceManager
+ */
+void TextureResource_decreasePointersCounter(struct TextureResource* textureResource);
+
 char* TextureResource_convertTextParametersToString(const char* const text, const char* const fontPath, int size,
                                                     SDL_Color color);
 

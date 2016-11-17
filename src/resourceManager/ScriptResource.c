@@ -59,3 +59,8 @@ void ScriptResource_destruct(struct ScriptResource* scriptResource) {
         free(scriptResource);
     }
 }
+
+void ScriptResource_decreasePointersCounter(struct ScriptResource* scriptResource) {
+    if (scriptResource && scriptResource->pointersCount > 0)
+        scriptResource->pointersCount--;
+}

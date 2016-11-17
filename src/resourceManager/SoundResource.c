@@ -52,3 +52,8 @@ void SoundResource_destruct(struct SoundResource* soundResource) {
         free(soundResource);
     }
 }
+
+void SoundResource_decreasePointersCounter(struct SoundResource* soundResource) {
+    if (soundResource && soundResource->pointersCount > 0)
+        soundResource->pointersCount--;
+}

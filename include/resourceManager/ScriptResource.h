@@ -35,6 +35,13 @@ struct ScriptResource {
 struct ScriptResource* ScriptResource_construct(const char* const path);
 void ScriptResource_destruct(struct ScriptResource* scriptResource);
 
+/**
+ * @brief Decreases ScriptResource#pointersCount.
+ * Useful for deffered resource managment by #ResourceManager.
+ * @param scriptResource Pointer to a #ScriptResource. Can be NULL.
+ * @see #ResourceManager
+ */
+void ScriptResource_decreasePointersCounter(struct ScriptResource* scriptResource);
 //void ScriptResource_registerActiveModuleFunctions(struct ScriptResource* scriptResource);
 //void ScriptResource_registerMicroModuleFunctions(struct ScriptResource* scriptResource);
 //void ScriptResource_registerNanoModuleFunctions(struct ScriptResource* scriptResource);

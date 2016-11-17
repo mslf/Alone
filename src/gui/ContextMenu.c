@@ -167,7 +167,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
 
 /**
  * @brief Function for loading settings and initializing #ContextMenu from #TextParser.
- * @param ContextMenu Pointer to a #ContextMenu which will be initialized. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu which will be initialized. Can be NULL.
  * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
  * @param renderer Pointer to a #Renderer for constructing #Button for menuOptions. Can be NULL.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 

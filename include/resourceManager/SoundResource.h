@@ -33,4 +33,12 @@ struct SoundResource {
 struct SoundResource* SoundResource_construct(const char* const path);
 void SoundResource_destruct(struct SoundResource* soundResource);
 
+/**
+ * @brief Decreases SoundResource#pointersCount.
+ * Useful for deffered resource managment by #ResourceManager.
+ * @param soundResource Pointer to a #SoundResource. Can be NULL.
+ * @see #ResourceManager
+ */
+void SoundResource_decreasePointersCounter(struct SoundResource* soundResource);
+
 #endif //ALONE_SOUNDRESOURCE_H

@@ -78,6 +78,11 @@ void TextResource_destruct(struct TextResource* textResource) {
     free(textResource);
 }
 
+void TextResource_decreasePointersCounter(struct TextResource* textResource) {
+    if (textResource && textResource->pointersCount > 0)
+        textResource->pointersCount--;
+}
+
 unsigned char TextResource_updateContent(struct TextResource* textResource, const char* const text) {
     if (!textResource || !text)
         return 1;

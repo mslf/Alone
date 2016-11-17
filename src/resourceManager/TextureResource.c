@@ -121,3 +121,8 @@ void TextureResource_destruct(struct TextureResource* textureResource) {
         SDL_DestroyTexture(textureResource->texture);
     free(textureResource);
 }
+
+void TextureResource_decreasePointersCounter(struct TextureResource* textureResource) {
+    if (textureResource && textureResource->pointersCount > 0)
+        textureResource->pointersCount--;
+}
