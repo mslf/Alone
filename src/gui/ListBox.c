@@ -69,7 +69,7 @@ static enum ListBoxSceneNode_errors ListBox_loadContextMenuResource(struct ListB
                                                                 renderer,
                                                                 sceneNodeTypesRegistrar,
                                                                 tempResId,
-                                                                ContextMenuSceneNode_parserString.type);
+                                                                ContextMenuSceneNode_parserStrings.type);
     if (!listBox->contextMenu)
         return LIST_BOX_ERR_CONTEXT_MENU_CONSTRUCTING;
     if (listBox->textBox) {

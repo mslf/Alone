@@ -38,11 +38,11 @@
  * @brief Strings which are used for constructing #ContextMenu from #TextParser.
  * @see ContextMenu_construct()
  * @see ContextMenu_constructMenuOptions()
- * @note ContextMenuSceneNode_parserString#optionsList doesn't contain actual 
+ * @note ContextMenuSceneNode_parserStrings#optionsList doesn't contain actual 
  * settings (label text, focusedEventRes, pressedEventRes) of the constructed #Button for new menuOption.
  * It contains array of menuOption names, which will be found in #TextParser, so they will contain actual data. 
  */
-static const struct ContextMenuSceneNode_parserString {
+static const struct ContextMenuSceneNode_parserStrings {
     const char* const type;
     /**< Type string, which is used to distinquish #ContextMenu resource from other. */
     const char* const prototypes;
@@ -52,7 +52,7 @@ static const struct ContextMenuSceneNode_parserString {
      * third - for middle menuOption (between top and lower) and fourth - for lower menuOption. */
     const char* const optionsList;
     /**< List of strings with name of menuOptions, which #ContextMenu will find in #TextParser. */
-}ContextMenuSceneNode_parserString = {
+}ContextMenuSceneNode_parserStrings = {
     "ContextMenu",
     "optionPrototypeButtonResources",
     "menuOptions"};
@@ -68,7 +68,7 @@ enum ContextMenuSceneNode_errors {
     CONTEXT_MENU_ERR_LOADING_SETTINGS = 2,
     /**< Loading required settings from #TextParser failed. */
     CONTEXT_MENU_ERR_NO_PROTOTYPES = 3,
-    /**< No ContextMenuSceneNode_parserString#prototypes string found in #TextParser. */
+    /**< No ContextMenuSceneNode_parserStrings#prototypes string found in #TextParser. */
     CONTEXT_MENU_ERR_ALLOC_PROTOTYPE_STRING = 4,
     /**< Allocating memory for ContextMenu#onlyOneMenuOptionPrototype string failed. */
     CONTEXT_MENU_ERR_SAVING = 5,
@@ -87,7 +87,7 @@ enum ContextMenuSceneNode_errors {
     CONTEXT_MENU_ERR_INDEX_OUT_OF_RANGE = 11,
     /**< Some index, needed by function is out of range. */
     CONTEXT_MENU_ERR_NO_OPTIONS = 12,
-    /**< No ContextMenuSceneNode_parserString#optionsList string found in #TextParser. */
+    /**< No ContextMenuSceneNode_parserStrings#optionsList string found in #TextParser. */
     CONTEXT_MENU_ERR_CONSTRUCTIG_TEXT_PARSER = 13
     /**< Constructing new #TextParser for some required reason failed. */
 };
@@ -155,7 +155,7 @@ struct ContextMenu {
  * @see #ResourceManager
  * @see #Renderer
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserString
+ * @see #ContextMenuSceneNode_parserStrings
  */
 struct SceneNode* ContextMenu_construct(struct ResourceManager* const resourceManager,
                                         struct Renderer* const renderer,

@@ -30,13 +30,13 @@
  */
 static const struct ContextMenuScenNode_errorMessages {
     const char* const errNoPrototypes;
-    /**< Will be displayed when #TextParser have no ContextMenuSceneNode_parserStrings#prototypes. */
+    /**< Will be displayed when #TextParser have no ContextMenuSceneNode_parserStringss#prototypes. */
     const char* const errAllocPrototypeString;
     /**< Will be displayed when allocating memory for menuOptionPrototype string failed. */
     const char* const errNoOptions;
-    /**< Will be displayed when #TextParser have no ContextMenuSceneNode_parserStrings#optionsList. */
+    /**< Will be displayed when #TextParser have no ContextMenuSceneNode_parserStringss#optionsList. */
     const char* const errNoOptionDefinition;
-    /**< Will be displayed when #TextParser have no string, specified in ContextMenuSceneNode_parserStrings#optionsList. */
+    /**< Will be displayed when #TextParser have no string, specified in ContextMenuSceneNode_parserStringss#optionsList. */
     const char* const warnTryingDefault;
     /**< Will be displayed when constructing #Button with required prototype (top, middlem lower) failed.
      * Now, #ContextMenu will try to construct #Button with ContxextMenu#onlyOneMenuOptionPrototype. */
@@ -70,7 +70,7 @@ static const struct ContextMenuScenNode_errorMessages {
  * @see #Renderer
  * @see #SceneNodeTypesRegistrar
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserStrings
+ * @see #ContextMenuSceneNode_parserStringss
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct ContextMenu* contextMenu,
@@ -81,14 +81,14 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
     if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
         return CONTEXT_MENU_ERR_NULL_ARGUMENT;
     size_t i;
-    size_t menuOptionsCount = TextParser_getItemsCount(textParser, ContextMenuSceneNode_parserString.optionsList);
+    size_t menuOptionsCount = TextParser_getItemsCount(textParser, ContextMenuSceneNode_parserStrings.optionsList);
     if (textParser->lastError) {
         Logger_log(renderer->logger, ContextMenuScenNode_errorMessages.errNoOptions);
         return CONTEXT_MENU_ERR_NO_OPTIONS;
     }
     for (i = 0; i < menuOptionsCount; i++) {
         const char* tempMenuOptionsNameString = TextParser_getString(textParser,
-                                                               ContextMenuSceneNode_parserString.optionsList, i);
+                                                               ContextMenuSceneNode_parserStrings.optionsList, i);
         if (TextParser_getItemsCount(textParser, tempMenuOptionsNameString) == 0) {
             char tempErrString[600];
             sprintf(tempErrString, "%s Name: <%s>", ContextMenuScenNode_errorMessages.errNoOptionDefinition,
@@ -116,7 +116,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
  * @see #ContextMenu
  * @see #Logger
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserStrings
+ * @see #ContextMenuSceneNode_parserStringss
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct ContextMenu* contextMenu,
@@ -126,7 +126,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
     if (!contextMenu || !textParser)
         return CONTEXT_MENU_ERR_NULL_ARGUMENT;
     const char* tempString = NULL;
-    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserString.prototypes, 0);
+    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserStrings.prototypes, 0);
     if (!tempString) {
         Logger_log(logger, ContextMenuScenNode_errorMessages.errNoPrototypes);
         return CONTEXT_MENU_ERR_NO_PROTOTYPES;
@@ -138,7 +138,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
     }
     strcpy (contextMenu->onlyOneMenuOptionPrototype, tempString);
     // Other menuOptionPrototypes are not mandatory, so we will ignore errors
-    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserString.prototypes, 1);
+    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserStrings.prototypes, 1);
     if (tempString) {
         contextMenu->topMenuOptionPrototype = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
         if (contextMenu->topMenuOptionPrototype)
@@ -146,7 +146,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
         else
             Logger_log(logger, ContextMenuScenNode_errorMessages.errAllocPrototypeString);
     }
-    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserString.prototypes, 2);
+    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserStrings.prototypes, 2);
     if (tempString) {
         contextMenu->middleMenuOptionPrototype = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
         if (contextMenu->middleMenuOptionPrototype)
@@ -154,7 +154,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
         else
             Logger_log(logger, ContextMenuScenNode_errorMessages.errAllocPrototypeString);
     }
-    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserString.prototypes, 3);
+    tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserStrings.prototypes, 3);
     if (tempString) {
         contextMenu->lowerMenuOptionPrototype = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
         if (contextMenu->lowerMenuOptionPrototype)
@@ -180,7 +180,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
  * @see #ResourceManager
  * @see #Renderer
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserStrings
+ * @see #ContextMenuSceneNode_parserStringss
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_tryGetSettingsFromTextParser(struct ContextMenu* contextMenu,
@@ -227,12 +227,12 @@ struct SceneNode* ContextMenu_construct(struct ResourceManager* const resourceMa
     contextMenu->sceneNode.render = ContextMenu_render;
     contextMenu->sceneNode.sound = ContextMenu_sound;
     contextMenu->sceneNode.destruct = ContextMenu_destruct;
-    contextMenu->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(ContextMenuSceneNode_parserString.type) + 1));
+    contextMenu->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(ContextMenuSceneNode_parserStrings.type) + 1));
     if (!contextMenu->sceneNode.type) {
         ContextMenu_destruct((struct SceneNode*)contextMenu);
         return NULL;
     }
-    strcpy(contextMenu->sceneNode.type, ContextMenuSceneNode_parserString.type);
+    strcpy(contextMenu->sceneNode.type, ContextMenuSceneNode_parserStrings.type);
     return (struct SceneNode*)contextMenu;
 }
 
@@ -277,7 +277,7 @@ void ContextMenu_destruct(struct SceneNode* contextMenu) {
  * @see #SceneNodeTypesRegistrar
  * @see #ResourceManager
  * @see #Renderer
- * @see #ContextMenuSceneNode_parserStrings
+ * @see #ContextMenuSceneNode_parserStringss
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct ContextMenu* contextMenu,
@@ -372,7 +372,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_realloccateMenuOptionsList(s
  * @see #ResourceManager
  * @see #Renderer
  * @see ContextMenu_updateMenuOption()
- * @see #ContextMenuSceneNode_parserStrings
+ * @see #ContextMenuSceneNode_parserStringss
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors CotextMenu_updateMenuOptionsList(struct ContextMenu* contextMenu,
@@ -532,23 +532,23 @@ enum ContextMenuSceneNode_errors ContextMenu_save(
     if (!textParser)
         return CONTEXT_MENU_ERR_CONSTRUCTIG_TEXT_PARSER;
     result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING,
-                                   ContextMenuSceneNode_parserString.type);
-    result += TextParser_addString(textParser, ContextMenuSceneNode_parserString.prototypes,
+                                   ContextMenuSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
                          contextMenu->onlyOneMenuOptionPrototype);
     if (contextMenu->topMenuOptionPrototype 
         && contextMenu->middleMenuOptionPrototype 
         && contextMenu->lowerMenuOptionPrototype) {
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserString.prototypes,
+        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
                             contextMenu->topMenuOptionPrototype);
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserString.prototypes,
+        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
                             contextMenu->middleMenuOptionPrototype);
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserString.prototypes,
+        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
                             contextMenu->lowerMenuOptionPrototype);
     }
     for (i = 0; i < contextMenu->menuOptionsCount; i++) {
         char tempMenuOptionName[600];
         sprintf(tempMenuOptionName, "%ld", i);
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserString.optionsList, tempMenuOptionName);
+        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.optionsList, tempMenuOptionName);
         result += TextParser_addString(textParser, tempMenuOptionName, contextMenu->menuOptionsList[i]->label->text);
         if (contextMenu->menuOptionsList[i]->pressedEventResource->id) {
             result += TextParser_addString(textParser, tempMenuOptionName,

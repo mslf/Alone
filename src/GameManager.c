@@ -64,7 +64,7 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
                                                                PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING,
                                                                ProgressBar_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
-                                                               ContextMenuSceneNode_parserString.type,
+                                                               ContextMenuSceneNode_parserStrings.type,
                                                                ContextMenu_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                SLIDER_SCENENODE_PARSER_TYPE_STRING,
