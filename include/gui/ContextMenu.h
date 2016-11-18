@@ -86,8 +86,10 @@ enum ContextMenuSceneNode_errors {
     /**< Updating one #Button from ContextMenu#menuOptionsList failed. */
     CONTEXT_MENU_ERR_INDEX_OUT_OF_RANGE = 11,
     /**< Some index, needed by function is out of range. */
-    CONTEXT_MENU_ERR_NO_OPTIONS = 12
+    CONTEXT_MENU_ERR_NO_OPTIONS = 12,
     /**< No ContextMenuSceneNode_parserString#optionsList string found in #TextParser. */
+    CONTEXT_MENU_ERR_CONSTRUCTIG_TEXT_PARSER = 13
+    /**< Constructing new #TextParser for some required reason failed. */
 };
     
 /**

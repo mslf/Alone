@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,28 +16,54 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file ListBox.c
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing implementation of #ListBox.
+ */
 #include "gui/ListBox.h"
 
-const char* const LIST_BOX_SCENENODE_ERR_TEXT_BOX_RES = 
-        "ListBox_loadTextBoxResource: textBoxResource string haven't found!";
-const char* const LIST_BOX_SCENENODE_ERR_BUTTON_RES = 
-        "ListBox_loadButtonResource: buttonResource string haven't found!";
-const char* const LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_RES = 
-        "ListBox_loadContextMenuResource: contextMenuResource string haven't found!";
-const char* const LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_LENGTH_RES = 
-        "ListBox_loadContextMenuResource: menuOption string length in created ContextMenu > max string length in created TextBox!";
+static const struct ListBoxSceneNode_errorMessages {
+    const char* const errNoTextBoxRes;
+    const char* const errNoButtonRes;
+    const char* const errNoContextMenuRes;
+    const char* const errLabelLengthAboveMax;
+}ListBoxSceneNode_errorMessages = {
+    "ListBox_loadTextBoxResource: textBoxResource string haven't found!",
+    "ListBox_loadButtonResource: buttonResource string haven't found!",
+    "ListBox_loadContextMenuResource: contextMenuResource string haven't found!",
+    "ListBox_loadContextMenuResource: menuOption string length in created ContextMenu > max string length in created TextBox!"};
 
-static unsigned char ListBox_loadContextMenuResource(struct ListBox* listBox,
+    
+/**
+ * @brief Function for loading and constructing ListBox#contextMenu from #TextParser.
+ * @param listBox Pointer to a #ListBox, where to construct #ContextMenu. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #ContextMenu resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #ContextMenu. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #ContextMenu. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #ListBoxSceneNode_errors value.
+ * @see #ListBox
+ * @see #ContextMenu
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
+ * @see #ListBoxSceneNode_parserStrings
+ * @see #ListBoxSceneNode_errors
+ */
+static enum ListBoxSceneNode_errors ListBox_loadContextMenuResource(struct ListBox* listBox,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    const char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING, 0);
+        return LIST_BOX_ERR_NULL_ARGUMENT;
+    const char* tempResId = TextParser_getString(textParser, ListBoxSceneNode_parserStrings.contextMenuRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_RES);
-        return 2;
+        Logger_log(renderer->logger, ListBoxSceneNode_errorMessages.errNoContextMenuRes);
+        return LIST_BOX_ERR_NO_CONTEXT_MENU_RES;
     }
     listBox->contextMenu = (struct ContextMenu*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                 renderer,
@@ -48,33 +71,50 @@ static unsigned char ListBox_loadContextMenuResource(struct ListBox* listBox,
                                                                 tempResId,
                                                                 ContextMenuSceneNode_parserString.type);
     if (!listBox->contextMenu)
-        return 3;
+        return LIST_BOX_ERR_CONTEXT_MENU_CONSTRUCTING;
     if (listBox->textBox) {
         size_t i;
         for (i = 0; i < listBox->contextMenu->menuOptionsCount; i++)
             if (strlen(listBox->contextMenu->menuOptionsList[i]->label->text) > listBox->textBox->maxLength) {
                 char tempErrString[600];
                 sprintf(tempErrString, "%s MenuOption string: %s",
-                        LIST_BOX_SCENENODE_ERR_CONTEXT_MENU_LENGTH_RES,
+                        ListBoxSceneNode_errorMessages.errLabelLengthAboveMax,
                         listBox->contextMenu->menuOptionsList[i]->label->text);
                 Logger_log(renderer->logger, tempErrString);
-                return 4;
+                return LIST_BOX_ERR_CONTEXT_MENU_LABEL_LENGTH_ABOVE_MAX;
             }
     }
-    return 0;
+    return LIST_BOX_NO_ERRORS;
 }            
 
-static unsigned char ListBox_loadButtonResource(struct ListBox* listBox,
+/**
+ * @brief Function for loading and constructing ListBox#button from #TextParser.
+ * @param listBox Pointer to a #ListBox, where to construct #Button. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Button resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #Button. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #ListBoxSceneNode_errors value.
+ * @see #ListBox
+ * @see #Button
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
+ * @see #ListBoxSceneNode_parserStrings
+ * @see #ListBoxSceneNode_errors
+ */
+static enum ListBoxSceneNode_errors ListBox_loadButtonResource(struct ListBox* listBox,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    const char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
+        return LIST_BOX_ERR_NULL_ARGUMENT;
+    const char* tempResId = TextParser_getString(textParser, ListBoxSceneNode_parserStrings.buttonRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_BUTTON_RES);
-        return 2;
+        Logger_log(renderer->logger, ListBoxSceneNode_errorMessages.errNoButtonRes);
+        return LIST_BOX_ERR_NO_BUTTON_RES;
     }
     listBox->button = (struct Button*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                 renderer,
@@ -82,21 +122,38 @@ static unsigned char ListBox_loadButtonResource(struct ListBox* listBox,
                                                                 tempResId,
                                                                 ButtonSceneNode_parserStrings.type);
     if (!listBox->button)
-        return 3;
-    return 0;
+        return LIST_BOX_ERR_BUTTON_CONSTRUCTING;
+    return LIST_BOX_NO_ERRORS;
 }        
-        
-static unsigned char ListBox_loadTextBoxResource(struct ListBox* listBox,
+
+/**
+ * @brief Function for loading and constructing ListBox#textBox from #TextParser.
+ * @param listBox Pointer to a #ListBox, where to construct #TextBox. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #TextBox resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #TextBox. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #TextBox. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #ListBoxSceneNode_errors value.
+ * @see #ListBox
+ * @see #TextBox
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
+ * @see #ListBoxSceneNode_parserStrings
+ * @see #ListBoxSceneNode_errors
+ */
+static enum ListBoxSceneNode_errors ListBox_loadTextBoxResource(struct ListBox* listBox,
                                                struct ResourceManager* resourceManager,
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    const char* tempResId = TextParser_getString(textParser, LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING, 0);
+        return LIST_BOX_ERR_NULL_ARGUMENT;
+    const char* tempResId = TextParser_getString(textParser, ListBoxSceneNode_parserStrings.textBoxRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, LIST_BOX_SCENENODE_ERR_TEXT_BOX_RES);
-        return 2;
+        Logger_log(renderer->logger, ListBoxSceneNode_errorMessages.errNoTextBoxRes);
+        return LIST_BOX_ERR_NO_TEXT_BOX_RES;
     }
     listBox->textBox = (struct TextBox*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                 renderer,
@@ -104,21 +161,49 @@ static unsigned char ListBox_loadTextBoxResource(struct ListBox* listBox,
                                                                 tempResId,
                                                                 TEXT_BOX_SCENENODE_PARSER_TYPE_STRING);
     if (!listBox->textBox)
-        return 3;
-    return 0;
+        return LIST_BOX_ERR_TEXT_BOX_CONSTRUCTING;
+    return LIST_BOX_NO_ERRORS;
 }
 
-static unsigned char ListBox_tryGetSettingsFromTextParser(struct ListBox* listBox,
+/**
+ * @brief Function for loading settings and initializing #ListBox from #TextParser.
+ * @param listBox Pointer to a #ListBox which will be initialized. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing ListBox#button, ListBox#textBox 
+ * and ListBox#contextMenu. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing ListBox#button, ListBox#textBox and ListBox#contextMenu. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #ListBoxSceneNode_errors value.
+ * @see #ListBox
+ * @see #Button
+ * @see #TextBox
+ * @see #ContextMenu
+ * @see #SceneNodeTypesRegistrar
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #TextParser
+ * @see #ListBoxSceneNode_parserStrings
+ * @see #ListBoxSceneNode_errors
+ */
+static enum ListBoxSceneNode_errors ListBox_tryGetSettingsFromTextParser(struct ListBox* listBox,
                                                 struct ResourceManager* resourceManager, struct Renderer* renderer,
                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                 struct TextParser* textParser) {
     if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    unsigned char result = 0;
-    result += ListBox_loadTextBoxResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    result += ListBox_loadButtonResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    result += ListBox_loadContextMenuResource(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    return result;
+        return LIST_BOX_ERR_NULL_ARGUMENT;
+    enum ListBoxSceneNode_errors resultLoadingTextBox = LIST_BOX_NO_ERRORS;
+    enum ListBoxSceneNode_errors resultLoadingButton = LIST_BOX_NO_ERRORS;
+    enum ListBoxSceneNode_errors resultLoadingContextMenu = LIST_BOX_NO_ERRORS;
+    resultLoadingTextBox = ListBox_loadTextBoxResource(listBox, resourceManager,
+                                                       renderer, sceneNodeTypesRegistrar, textParser);
+    resultLoadingButton = ListBox_loadButtonResource(listBox, resourceManager,
+                                                     renderer, sceneNodeTypesRegistrar, textParser);
+    resultLoadingContextMenu = ListBox_loadContextMenuResource(listBox, resourceManager,
+                                                               renderer, sceneNodeTypesRegistrar, textParser);
+    if (resultLoadingTextBox || resultLoadingButton || resultLoadingContextMenu)
+        return LIST_BOX_ERR_LOADING_SETTINGS;
+    return LIST_BOX_NO_ERRORS;
 }
 
 struct SceneNode* ListBox_construct(struct ResourceManager* const resourceManager,
@@ -141,12 +226,12 @@ struct SceneNode* ListBox_construct(struct ResourceManager* const resourceManage
     listBox->sceneNode.render = ListBox_render;
     listBox->sceneNode.sound = ListBox_sound;
     listBox->sceneNode.destruct = ListBox_destruct;
-    listBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(LIST_BOX_SCENENODE_PARSER_TYPE_STRING) + 1));
+    listBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(ListBoxSceneNode_parserStrings.type) + 1));
     if (!listBox->sceneNode.type) {
         ListBox_destruct((struct SceneNode*)listBox);
         return NULL;
     }
-    strcpy(listBox->sceneNode.type, LIST_BOX_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(listBox->sceneNode.type, ListBoxSceneNode_parserStrings.type);
     listBox->isGeometryChanged = true;
     return (struct SceneNode*)listBox;
 }
@@ -167,22 +252,22 @@ void ListBox_destruct(struct SceneNode* listBox) {
     free(listBox);
 }
 
-unsigned char ListBox_save(
-        const struct ListBox* const listBox, struct ResourceManager* const resourceManager,
-        const char* const listBoxResId) {
+enum ListBoxSceneNode_errors ListBox_save(const struct ListBox* const listBox,
+                                          struct ResourceManager* const resourceManager,
+                                          const char* const listBoxResId) {
     if (!listBox || !resourceManager || !listBoxResId)
-        return 1;
-    unsigned char result = 0;
+        return LIST_BOX_ERR_NULL_ARGUMENT;
+    enum ListBoxSceneNode_errors result = 0;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, LIST_BOX_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, LIST_BOX_SCENENODE_PARSER_TEXT_BOX_RES_STRING,
+        return LIST_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ListBoxSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.textBoxRes,
                                    listBox->textBox->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, LIST_BOX_SCENENODE_PARSER_BUTTON_RES_STRING,
+    result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.buttonRes,
                                    listBox->button->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, LIST_BOX_SCENENODE_PARSER_CONTEXT_MENU_RES_STRING,
+    result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.contextMenuRes,
                                    listBox->contextMenu->sceneNode.sceneNodeTextResource->id);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
@@ -192,7 +277,9 @@ unsigned char ListBox_save(
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return LIST_BOX_ERR_SAVING;
+    return LIST_BOX_NO_ERRORS;
 }
 
 void ListBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
