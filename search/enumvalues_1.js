@@ -21,6 +21,7 @@ var searchData=
   ['check_5fbox_5fstate_5funchecking',['CHECK_BOX_STATE_UNCHECKING',['../_check_box_8h.html#a332bacc7b96a99c3acaca94f7bad665fab74eb0bd97d14b35eaf9dff83f20fd00',1,'CheckBox.h']]],
   ['context_5fmenu_5ferr_5falloc_5fprototype_5fstring',['CONTEXT_MENU_ERR_ALLOC_PROTOTYPE_STRING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a362e8951ef5fd2e327151b654e9e4e25',1,'ContextMenu.h']]],
   ['context_5fmenu_5ferr_5fbutton_5fconstructing',['CONTEXT_MENU_ERR_BUTTON_CONSTRUCTING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a8f2c19cbad97e3cd26a6b28fc7629b68',1,'ContextMenu.h']]],
+  ['context_5fmenu_5ferr_5fconstructig_5ftext_5fparser',['CONTEXT_MENU_ERR_CONSTRUCTIG_TEXT_PARSER',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a20b6ff8f399cda7bc706aa5355878c60',1,'ContextMenu.h']]],
   ['context_5fmenu_5ferr_5findex_5fout_5fof_5frange',['CONTEXT_MENU_ERR_INDEX_OUT_OF_RANGE',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42afa5afeef19378e3f23e13a8e26965189',1,'ContextMenu.h']]],
   ['context_5fmenu_5ferr_5flist_5fupdating',['CONTEXT_MENU_ERR_LIST_UPDATING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a69d4c8c9128eb5387dfda213c89f8c44',1,'ContextMenu.h']]],
   ['context_5fmenu_5ferr_5floading_5fsettings',['CONTEXT_MENU_ERR_LOADING_SETTINGS',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42acf1a659cf4b39581a079605cc785f1f0',1,'ContextMenu.h']]],
