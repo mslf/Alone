@@ -7,6 +7,8 @@ var searchData=
   ['scriptresource',['ScriptResource',['../struct_script_resource.html',1,'']]],
   ['settings',['Settings',['../struct_settings.html',1,'']]],
   ['slider',['Slider',['../struct_slider.html',1,'']]],
+  ['sliderscenenode_5ferrormessages',['SliderSceneNode_errorMessages',['../struct_slider_scene_node__error_messages.html',1,'']]],
+  ['sliderscenenode_5fparserstrings',['SliderSceneNode_parserStrings',['../struct_slider_scene_node__parser_strings.html',1,'']]],
   ['soundresource',['SoundResource',['../struct_sound_resource.html',1,'']]],
   ['sprite',['Sprite',['../struct_sprite.html',1,'']]]
 ];

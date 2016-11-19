@@ -1,7 +1,8 @@
 var searchData=
 [
   ['backgroundmodule',['BackgroundModule',['../struct_background_module.html',1,'']]],
-  ['button',['Button',['../struct_button.html',1,'Button'],['../struct_list_box.html#ae7aee5d2fea3fa9c160fcb9341275053',1,'ListBox::button()']]],
+  ['base',['base',['../struct_slider.html#a686905c1a3f09ace5f334088ada4ee71',1,'Slider']]],
+  ['button',['Button',['../struct_button.html',1,'Button'],['../struct_list_box.html#ae7aee5d2fea3fa9c160fcb9341275053',1,'ListBox::button()'],['../struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053',1,'Slider::button()']]],
   ['button_2ec',['Button.c',['../_button_8c.html',1,'']]],
   ['button_2eh',['Button.h',['../_button_8h.html',1,'']]],
   ['button_5fchangefocusedeventresource',['Button_changeFocusedEventResource',['../_button_8h.html#a7489d676d6290b5c03cb146ebf56e5a6',1,'Button_changeFocusedEventResource(struct Button *button, struct ResourceManager *resourceManager, const char *const focusedEventResId):&#160;Button.c'],['../_button_8c.html#a7489d676d6290b5c03cb146ebf56e5a6',1,'Button_changeFocusedEventResource(struct Button *button, struct ResourceManager *resourceManager, const char *const focusedEventResId):&#160;Button.c']]],
@@ -35,7 +36,8 @@ var searchData=
   ['button_5fstate_5fpressed',['BUTTON_STATE_PRESSED',['../_button_8h.html#aa46074d34fe2d6631c6bd9dc74633657a7f2090435434c8307247141ed8ce118c',1,'Button.h']]],
   ['button_5ftrygetsettingsfromtextparser',['Button_tryGetSettingsFromTextParser',['../_button_8c.html#ad26f3066922ef66804b37ea8f0c11869',1,'Button.c']]],
   ['button_5fupdate',['Button_update',['../_button_8h.html#aae2f164ac9b21ea87759eecbda20c9d4',1,'Button_update(struct SceneNode *sceneNode, struct EventManager *eventManager, struct Renderer *renderer):&#160;Button.c'],['../_button_8c.html#aae2f164ac9b21ea87759eecbda20c9d4',1,'Button_update(struct SceneNode *sceneNode, struct EventManager *eventManager, struct Renderer *renderer):&#160;Button.c']]],
-  ['buttonres',['buttonRes',['../struct_list_box_scene_node__parser_strings.html#af942454af88828d7fe271c065a40b6ca',1,'ListBoxSceneNode_parserStrings']]],
+  ['buttonalligny',['buttonAllignY',['../struct_slider.html#aecaafa8a17379cb534a6dcefab9938f8',1,'Slider']]],
+  ['buttonres',['buttonRes',['../struct_list_box_scene_node__parser_strings.html#af942454af88828d7fe271c065a40b6ca',1,'ListBoxSceneNode_parserStrings::buttonRes()'],['../struct_slider_scene_node__parser_strings.html#af942454af88828d7fe271c065a40b6ca',1,'SliderSceneNode_parserStrings::buttonRes()']]],
   ['buttonscenenode_5ferrormessages',['ButtonSceneNode_errorMessages',['../struct_button_scene_node__error_messages.html',1,'']]],
   ['buttonscenenode_5ferrors',['ButtonSceneNode_errors',['../_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541',1,'Button.h']]],
   ['buttonscenenode_5fparserstrings',['ButtonSceneNode_parserStrings',['../struct_button_scene_node__parser_strings.html',1,'']]],

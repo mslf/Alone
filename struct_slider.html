@@ -87,34 +87,162 @@ $(document).ready(function(){initNavTree('struct_slider.html','');});
 <div class="title">Slider Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Standart Gui element with some possible states. Based on <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. <a class="el" href="struct_user.html">User</a> can click and move <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> across the <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and it will indicates current state (if possible). As user releases <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> then <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> will stops on last possible state.  
+ <a href="struct_slider.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_slider_8h_source.html">Slider.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memItemLeft" align="right" valign="top"><a id="aca8025f56fb4ce20b974ec9a3292a9e4"></a>
-struct <a class="el" href="struct_scene_node.html">SceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNode</b></td></tr>
+<tr class="memitem:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#aca8025f56fb4ce20b974ec9a3292a9e4">sceneNode</a></td></tr>
 <tr class="separator:aca8025f56fb4ce20b974ec9a3292a9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a686905c1a3f09ace5f334088ada4ee71"><td class="memItemLeft" align="right" valign="top"><a id="a686905c1a3f09ace5f334088ada4ee71"></a>
-struct <a class="el" href="struct_progress_bar.html">ProgressBar</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>base</b></td></tr>
+<tr class="memitem:a686905c1a3f09ace5f334088ada4ee71"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_progress_bar.html">ProgressBar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">base</a></td></tr>
 <tr class="separator:a686905c1a3f09ace5f334088ada4ee71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7aee5d2fea3fa9c160fcb9341275053"><td class="memItemLeft" align="right" valign="top"><a id="ae7aee5d2fea3fa9c160fcb9341275053"></a>
-struct <a class="el" href="struct_button.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>button</b></td></tr>
+<tr class="memitem:ae7aee5d2fea3fa9c160fcb9341275053"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_button.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">button</a></td></tr>
 <tr class="separator:ae7aee5d2fea3fa9c160fcb9341275053"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3ee46455ae318e5d8b789e5b47d2d58"><td class="memItemLeft" align="right" valign="top"><a id="ae3ee46455ae318e5d8b789e5b47d2d58"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>step</b></td></tr>
+<tr class="memitem:ae3ee46455ae318e5d8b789e5b47d2d58"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#ae3ee46455ae318e5d8b789e5b47d2d58">step</a></td></tr>
 <tr class="separator:ae3ee46455ae318e5d8b789e5b47d2d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc6bbbef7fde96fcba69e9befa298799"><td class="memItemLeft" align="right" valign="top"><a id="acc6bbbef7fde96fcba69e9befa298799"></a>
-enum AllignY&#160;</td><td class="memItemRight" valign="bottom"><b>buttonAllignY</b></td></tr>
-<tr class="separator:acc6bbbef7fde96fcba69e9befa298799"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memItemLeft" align="right" valign="top"><a id="a8ea7e8ac3e3330830aa7a4309390f3ac"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isGeometryChanged</b></td></tr>
+<tr class="memitem:aecaafa8a17379cb534a6dcefab9938f8"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_slider_8h.html#adc43c42e96f20e667dab21d62b376c79">SliderSceneNode_buttonAllignY</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#aecaafa8a17379cb534a6dcefab9938f8">buttonAllignY</a></td></tr>
+<tr class="separator:aecaafa8a17379cb534a6dcefab9938f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#a8ea7e8ac3e3330830aa7a4309390f3ac">isGeometryChanged</a></td></tr>
 <tr class="separator:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5046816c8ca0b6b9c5948de82c1cbc44"><td class="memItemLeft" align="right" valign="top"><a id="a5046816c8ca0b6b9c5948de82c1cbc44"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isButtonMoving</b></td></tr>
+<tr class="memitem:a5046816c8ca0b6b9c5948de82c1cbc44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#a5046816c8ca0b6b9c5948de82c1cbc44">isButtonMoving</a></td></tr>
 <tr class="separator:a5046816c8ca0b6b9c5948de82c1cbc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a521d68392d4b01394621624b94ce06f7"><td class="memItemLeft" align="right" valign="top"><a id="a521d68392d4b01394621624b94ce06f7"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>lastMouseCoordinates</b></td></tr>
+<tr class="memitem:a521d68392d4b01394621624b94ce06f7"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slider.html#a521d68392d4b01394621624b94ce06f7">lastMouseCoordinates</a></td></tr>
 <tr class="separator:a521d68392d4b01394621624b94ce06f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Standart Gui element with some possible states. Based on <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. <a class="el" href="struct_user.html">User</a> can click and move <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> across the <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and it will indicates current state (if possible). As user releases <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> then <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> will stops on last possible state. </p>
+<dl class="section warning"><dt>Warning</dt><dd><a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> is an inheritor of the <a class="el" href="struct_scene_node.html">SceneNode</a>. It means, that other code is use <b>pointer casting</b> to <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> from <a class="el" href="struct_scene_node.html">SceneNode</a> and vise versa. You <b>SHOULD</b> include the <code>struct <a class="el" href="struct_scene_node.html">SceneNode</a> blablaNode;</code> at the begining of <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> struct, if you want code to work with <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> like with a <a class="el" href="struct_scene_node.html">SceneNode</a>. More, you <b>SHOULD</b> initialize function pointers in <code>blablaNode</code> to NULL (by calling SceneNode_init()) or to your function implementation. Don't forget to add this warning comment to your own new <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_slider_8h.html#af35fe782449cd68c54767022a44fdb62" title="Function to control user input events to Slider. Pointer to that function should be at Slider::sceneN...">Slider_control()</a> </dd>
+<dd>
+<a class="el" href="_slider_8h.html#a9da42e10b23bca537a797520c7f5996b" title="Function to update Slider and interacting with EventManager. Pointer to that function should be at Sl...">Slider_update()</a> </dd>
+<dd>
+<a class="el" href="_slider_8h.html#a8908bdf4389c18ecdac7261241b71939" title="Function to render Slider on the screen. Pointer to that function should be at Slider::sceneNode::ren...">Slider_render()</a> </dd>
+<dd>
+<a class="el" href="_slider_8h.html#adcddd721404f9583200d6e345e9e600a" title="Function to play sounds of a Slider. Pointer to that function should be at Slider::sceneNode::sound. ">Slider_sound()</a> </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a686905c1a3f09ace5f334088ada4ee71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a686905c1a3f09ace5f334088ada4ee71">&sect;&nbsp;</a></span>base</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_progress_bar.html">ProgressBar</a>* base</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> which will indicates current state. </p>
+
+</div>
+</div>
+<a id="ae7aee5d2fea3fa9c160fcb9341275053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7aee5d2fea3fa9c160fcb9341275053">&sect;&nbsp;</a></span>button</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_button.html">Button</a>* button</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> to be clicked by user for changing Slider::base::value in possible states. </p>
+
+</div>
+</div>
+<a id="aecaafa8a17379cb534a6dcefab9938f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecaafa8a17379cb534a6dcefab9938f8">&sect;&nbsp;</a></span>buttonAllignY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_slider_8h.html#adc43c42e96f20e667dab21d62b376c79">SliderSceneNode_buttonAllignY</a> buttonAllignY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enumeration which is sets position of <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a> over the <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a>. </p>
+
+</div>
+</div>
+<a id="a5046816c8ca0b6b9c5948de82c1cbc44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5046816c8ca0b6b9c5948de82c1cbc44">&sect;&nbsp;</a></span>isButtonMoving</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isButtonMoving</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag, which is answers "Are we moving Slider#button right now?". </p>
+
+</div>
+</div>
+<a id="a8ea7e8ac3e3330830aa7a4309390f3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea7e8ac3e3330830aa7a4309390f3ac">&sect;&nbsp;</a></span>isGeometryChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isGeometryChanged</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag, which is need to be changed when someone tried to move (or change) <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>, or <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a> sceneNodes. </p>
+
+</div>
+</div>
+<a id="a521d68392d4b01394621624b94ce06f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a521d68392d4b01394621624b94ce06f7">&sect;&nbsp;</a></span>lastMouseCoordinates</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point lastMouseCoordinates</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Temporary place to store mouse coordinates. It is here only because we can't convert screen-based coordinates in <a class="el" href="_slider_8h.html#af35fe782449cd68c54767022a44fdb62" title="Function to control user input events to Slider. Pointer to that function should be at Slider::sceneN...">Slider_control()</a> function. May be need to be fixed. </p>
+
+</div>
+</div>
+<a id="aca8025f56fb4ce20b974ec9a3292a9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca8025f56fb4ce20b974ec9a3292a9e4">&sect;&nbsp;</a></span>sceneNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_scene_node.html">SceneNode</a> sceneNode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inheritance stuff. </p>
+
+</div>
+</div>
+<a id="ae3ee46455ae318e5d8b789e5b47d2d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3ee46455ae318e5d8b789e5b47d2d58">&sect;&nbsp;</a></span>step</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char step</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Number which is indicates how many states would have <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. e.g. if <a class="el" href="struct_slider.html#ae3ee46455ae318e5d8b789e5b47d2d58">Slider::step</a> == 100, then only two (0 and 100) states will be available. if <a class="el" href="struct_slider.html#ae3ee46455ae318e5d8b789e5b47d2d58">Slider::step</a> == 50, then only three (0, 50 and 100) states will be available. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_slider_8h_source.html">Slider.h</a></li>
 </ul>

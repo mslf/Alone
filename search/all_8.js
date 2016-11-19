@@ -2,6 +2,7 @@ var searchData=
 [
   ['label',['label',['../struct_button.html#ab278201aa1758916bc9e825b3833e31b',1,'Button']]],
   ['labeloffset',['labelOffset',['../struct_button_scene_node__parser_strings.html#ae4be9330e3ecb371dd29fe7c0851c565',1,'ButtonSceneNode_parserStrings::labelOffset()'],['../struct_button.html#ac8658f1193098d53c4bd1bdcab7df6af',1,'Button::labelOffset()']]],
+  ['lastmousecoordinates',['lastMouseCoordinates',['../struct_slider.html#a521d68392d4b01394621624b94ce06f7',1,'Slider']]],
   ['level',['Level',['../struct_level.html',1,'']]],
   ['list_5fbox_5ferr_5fbutton_5fconstructing',['LIST_BOX_ERR_BUTTON_CONSTRUCTING',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735ab060a39e75c0b722b5a175e9740c75ee',1,'ListBox.h']]],
   ['list_5fbox_5ferr_5fconstructig_5ftext_5fparser',['LIST_BOX_ERR_CONSTRUCTIG_TEXT_PARSER',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735ae419fc6e913a326ec3dc92cceac9bb3d',1,'ListBox.h']]],
