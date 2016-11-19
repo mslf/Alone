@@ -167,7 +167,7 @@ struct Button {
  * @brief Constructs #Button and inits it from a #TextParser.
  * @param resourceManager Pointer to a #ResourceManager which is used to load additional 
  * resources, needed for #Button. Can be NULL.
- * @param renderer Pointer to a #Renderer which is used to construct Button#sprite and Button#label.  Can be NULL.
+ * @param renderer Pointer to a #Renderer which is used to construct Button#sprite and Button#label. Can be NULL.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar which is used to 
  * construct Button#sprite and Button#label. Can be NULL.
  * @param textParser Pointer to a #TextParser with data strings for initializing #Button. Can be NULL.

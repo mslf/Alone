@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,25 +16,59 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file ProgressBar.c
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing implementation of #ProgressBar.
+ */
 #include "gui/ProgressBar.h"
 #include "textParser/TextParser.h"
 
-const char* const PROGRESS_BAR_SCENENODE_ERR_SPRITE_RES = 
-        "ProgressBar_loadSpritesResource: spriteResource string haven't found!";
-const char* const PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_2_ANIMATIONS = 
-        "ProgressBar_loadSpritesResource: loaded Sprite doesn't contain 2 animations!";
+/**
+ * @brief Error message strings for #ProgressBar.
+ */
+static const struct ProgressBarSceneNode_errorMessages {
+    const char* const errNoSpriteRes;
+     /**< Will be displayed when #TextParser have no ProgressBarSceneNode_parserStrings#spriteRes. */
+    const char* const errNoEnoughAnimations;
+    /**< Will be displayed when constructed #Sprite doesn't have enough animations for #ProgressBar. */
+}ProgressBarSceneNode_errorMessages = {
+    "ProgressBar_loadSpritesResource: spriteResource string haven't found!",
+    "ProgressBar_loadSpritesResource: loaded Sprite doesn't contain 2 animations!"};
 
-static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progressBar,
+/**
+ * @brief Function for loading and constructing ProgressBar#spriteBase and ProgressBar#spriteBar.
+ * @param progressBar Pointer to a #ProgressBar where to construct ProgressBar#spriteBase 
+ * and ProgressBar#spriteBar. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing ProgressBar#spriteBase 
+ * and ProgressBar#spriteBar. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing ProgressBar#spriteBase and ProgressBar#spriteBar. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * ProgressBarSceneNode_parserStrings#spriteRes. Can be NULL.
+ * @return #ProgressBarSceneNode_errors value.
+ * @see #ProgressBar
+ * @see #Sprite
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
+ * @see #ProgressBarSceneNode_parserStrings
+ * @see #ProgressBarSceneNode_errors
+ */
+static enum ProgressBarSceneNode_errors ProgressBar_loadSpritesResource(struct ProgressBar* progressBar,
                                                      struct ResourceManager* const resourceManager,
                                                      struct Renderer* const renderer,
                                                      struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                      struct TextParser* const textParser) {
     if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    const char* const tempResId = TextParser_getString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING, 0);
+        return PROGRESS_BAR_ERR_NULL_ARGUMENT;
+    const char* const tempResId = TextParser_getString(textParser, ProgressBarSceneNode_parserStrings.spriteRes, 0);
     if (!tempResId) {
-        Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_RES);
-        return 2;
+        Logger_log(resourceManager->logger, ProgressBarSceneNode_errorMessages.errNoSpriteRes);
+        return PROGRESS_BAR_ERR_NO_SPRITE_RES;
     }
     progressBar->spriteBase = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                          renderer,
@@ -45,10 +76,10 @@ static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progres
                                                                          tempResId,
                                                                          SPRITE_SCENENODE_PARSER_TYPE_STRING);
     if (!progressBar->spriteBase)
-        return 3;
+        return PROGRESS_BAR_ERR_CONSTRUCTIG_SPRITE;
     if (progressBar->spriteBase->animationsCount < 2) {
-        Logger_log(resourceManager->logger, PROGRESS_BAR_SCENENODE_ERR_SPRITE_NO_2_ANIMATIONS);
-        return 4;
+        Logger_log(resourceManager->logger, ProgressBarSceneNode_errorMessages.errNoEnoughAnimations);
+        return PROGRESS_BAR_ERR_NOT_ENOUGH_ANIMATIONS;
     }
     progressBar->spriteBar = (struct Sprite*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                          renderer,
@@ -56,26 +87,43 @@ static unsigned char ProgressBar_loadSpritesResource(struct ProgressBar* progres
                                                                          tempResId,
                                                                          SPRITE_SCENENODE_PARSER_TYPE_STRING);
     if (!progressBar->spriteBar)
-        return 5;
+        return PROGRESS_BAR_ERR_CONSTRUCTIG_SPRITE;
     progressBar->spriteBar->currentAnimation = 1;
-    return 0;
+    return PROGRESS_BAR_NO_ERRORS;
 }
 
-static unsigned char ProgressBar_tryGetSettingsFromTextParser(struct ProgressBar* progressBar,
+/**
+ * @brief Function for loading settings and initializing #ProgressBar from #TextParser.
+ * @param progressBar Pointer to a #ProgressBar which will be initialized. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing ProgressBar#spriteBase 
+ * and ProgressBar#spriteBar. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing ProgressBar#spriteBase and ProgressBar#spriteBar. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #ProgressBarSceneNode_errors value.
+ * @see #ProgressBar
+ * @see #Sprite
+ * @see #SceneNodeTypesRegistrar
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #TextParser
+ * @see #ProgressBarSceneNode_parserStrings
+ * @see #ProgressBarSceneNode_errors
+ */
+static enum ProgressBarSceneNode_errors ProgressBar_tryGetSettingsFromTextParser(struct ProgressBar* progressBar,
                                                               struct ResourceManager* const resourceManager,
                                                               struct Renderer* const renderer,
                                                               struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                               struct TextParser* const textParser) {
     if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    unsigned char result = 0;
+        return PROGRESS_BAR_ERR_NULL_ARGUMENT;
     unsigned char value = 0;
-    result += ProgressBar_loadSpritesResource(progressBar, resourceManager, renderer,
-                                              sceneNodeTypesRegistrar, textParser);
-    value = (unsigned char)TextParser_getInt(textParser, PROGRESS_BAR_SCENENODE_PARSER_INIT_VALUE_STRING, 0);
+    value = (unsigned char)TextParser_getInt(textParser, ProgressBarSceneNode_parserStrings.value, 0);
     if (value <= 100)
         progressBar->value = value;
-    return result;
+    return (ProgressBar_loadSpritesResource(progressBar, resourceManager, renderer,
+                                             sceneNodeTypesRegistrar, textParser));
 }
 
 struct SceneNode* ProgressBar_construct(struct ResourceManager* const resourceManager,
@@ -97,12 +145,12 @@ struct SceneNode* ProgressBar_construct(struct ResourceManager* const resourceMa
     progressBar->sceneNode.update = ProgressBar_update;
     progressBar->sceneNode.render = ProgressBar_render;
     progressBar->sceneNode.destruct = ProgressBar_destruct;
-    progressBar->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING) + 1));
+    progressBar->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(ProgressBarSceneNode_parserStrings.type) + 1));
     if (!progressBar->sceneNode.type) {
         ProgressBar_destruct((struct SceneNode*)progressBar);
         return NULL;
     }
-    strcpy(progressBar->sceneNode.type, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(progressBar->sceneNode.type, ProgressBarSceneNode_parserStrings.type);
     progressBar->isGeometryChanged = true;
     return (struct SceneNode*)progressBar;
 }
@@ -121,20 +169,20 @@ void ProgressBar_destruct(struct SceneNode* progressBar) {
     free(progressBar);
 }
 
-unsigned char ProgressBar_save(
-        const struct ProgressBar* const progressBar, struct ResourceManager* const resourceManager,
-        const char* const progressBarResId) {
+enum ProgressBarSceneNode_errors ProgressBar_save(const struct ProgressBar* const progressBar, 
+                                                  struct ResourceManager* const resourceManager,
+                                                  const char* const progressBarResId) {
     if (!progressBar || !resourceManager || !progressBarResId)
-        return 1;
+        return PROGRESS_BAR_ERR_NULL_ARGUMENT;
     unsigned char result = 0;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, PROGRESS_BAR_SCENENODE_PARSER_SPRITE_RES_STRING,
+        return PROGRESS_BAR_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ProgressBarSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, ProgressBarSceneNode_parserStrings.spriteRes,
                                    progressBar->spriteBase->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addInt(textParser, PROGRESS_BAR_SCENENODE_PARSER_INIT_VALUE_STRING, (long)progressBar->value);
+    result += TextParser_addInt(textParser, ProgressBarSceneNode_parserStrings.value, (long)progressBar->value);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
     result += TextResource_updateContent(progressBar->sceneNode.sceneNodeTextResource, tempString);
@@ -143,7 +191,9 @@ unsigned char ProgressBar_save(
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return PROGRESS_BAR_ERR_SAVING;
+    return PROGRESS_BAR_NO_ERRORS;
 }
 
 void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {

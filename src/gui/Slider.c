@@ -43,7 +43,7 @@ static unsigned char Slider_loadBase(struct Slider* slider,
                                                                             renderer,
                                                                             sceneNodeTypesRegistrar,
                                                                             tempResId,
-                                                                            PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING);
+                                                                            ProgressBarSceneNode_parserStrings.type);
     if (!slider->base)
         return 3;
     slider->base->value = (unsigned char)TextParser_getInt(textParser, SLIDER_SCENENODE_PARSER_VALUE, 0);

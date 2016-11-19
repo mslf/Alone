@@ -61,7 +61,7 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
                                                                CheckBoxSceneNode_parserString.type,
                                                                CheckBox_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
-                                                               PROGRESS_BAR_SCENENODE_PARSER_TYPE_STRING,
+                                                               ProgressBarSceneNode_parserStrings.type,
                                                                ProgressBar_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                ContextMenuSceneNode_parserStrings.type,
