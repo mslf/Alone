@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,25 +16,59 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Slider.c
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing implementation of #Slider.
+ */
 #include "gui/Slider.h"
 
-const char* const SLIDER_SCENENODE_PARSER_ERR_NO_BUTTON = 
-            "Slider_loadButton: buttonResource string haven't found!";
-const char* const SLIDER_SCENENODE_PARSER_ERR_NO_PROGRESS_BAR =
-            "Slider_loadBase: progressBarResource string haven't found!";
+/**
+ * @brief Error message strings for #Slider.
+ */
+static const struct SliderSceneNode_errorMessages {
+    const char* const errNoButtonRes;
+    /**< Will be displayed when #TextParser have no SliderSceneNode_parserStrings#buttonRes. */
+    const char* const errNoProgressBarRes;
+    /**< Will be displayed when #TextParser have no SliderSceneNode_parserStrings#progressBarRes. */
+}SliderSceneNode_errorMessages = {
+    "Slider_loadButton: buttonResource string haven't found!",
+    "Slider_loadBase: progressBarResource string haven't found!"};
 
-static unsigned char Slider_loadBase(struct Slider* slider,
+/**
+ * @brief Function for loading and constructing Slider#base.
+ * Also sets Slider#step and Slider#base#value from #TextParser.
+ * @param slider Pointer to a #Slider where to construct Slider#base. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #ProgressBar resource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing Slider#base. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing Slider#base. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * SliderSceneNode_parserStrings#progressBarRes, SliderSceneNode_parserStrings#value 
+ * and SliderSceneNode_parserStrings#step. Can be NULL.
+ * @return #SliderSceneNode_errors value.
+ * @see #Slider
+ * @see #Button
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
+ * @see #SliderSceneNode_parserStrings
+ * @see #SliderSceneNode_errors
+ */
+static enum SliderSceneNode_errors Slider_loadBase(struct Slider* slider,
                                      struct ResourceManager* const resourceManager,
                                      struct Renderer* const renderer,
                                      struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                      struct TextParser* const textParser) {
     if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
+        return SLIDER_ERR_NULL_ARGUMENT;
     const char* tempResId = NULL;
-    tempResId = TextParser_getString(textParser, SLIDER_SCENENODE_PARSER_PROGRESS_BAR_RESOURCE_STRING, 0);
+    tempResId = TextParser_getString(textParser, SliderSceneNode_parserStrings.progressBarRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, SLIDER_SCENENODE_PARSER_ERR_NO_PROGRESS_BAR);
-        return 2;
+        Logger_log(renderer->logger, SliderSceneNode_errorMessages.errNoProgressBarRes);
+        return SLIDER_ERR_NO_PROGRESS_BAR_RES;
     }
     slider->base = (struct ProgressBar*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                             renderer,
@@ -45,28 +76,49 @@ static unsigned char Slider_loadBase(struct Slider* slider,
                                                                             tempResId,
                                                                             ProgressBarSceneNode_parserStrings.type);
     if (!slider->base)
-        return 3;
-    slider->base->value = (unsigned char)TextParser_getInt(textParser, SLIDER_SCENENODE_PARSER_VALUE, 0);
+        return SLIDER_ERR_CONSTRUCTIG_PROGRESS_BAR;
+    slider->base->value = (unsigned char)TextParser_getInt(textParser, SliderSceneNode_parserStrings.value, 0);
     if (slider->base->value > 100)
         slider->base->value = 100;
-    slider->step = (unsigned char)TextParser_getInt(textParser, SLIDER_SCENENODE_PARSER_STEP, 0);
+    slider->step = (unsigned char)TextParser_getInt(textParser, SliderSceneNode_parserStrings.step, 0);
     if (slider->step > 100 || slider->step == 0)
         slider->step = 100;
-    return 0;
+    return SLIDER_NO_ERRORS;
 }
 
-static unsigned char Slider_loadButton(struct Slider* slider,
+/**
+ * @brief Function for loading and constructing Slider#button.
+ * Also sets Slider#buttonAllignY from #TextParser.
+ * @param slider Pointer to a #Slider where to construct Slider#button. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Button resource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing Slider#button. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing Slider#button. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where function will get 
+ * SliderSceneNode_parserStrings#buttonRes and SliderSceneNode_parserStrings#allign. Can be NULL.
+ * @return #SliderSceneNode_errors value.
+ * @see #Slider
+ * @see #SliderSceneNode_buttonAllignY
+ * @see #Button
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #SceneNodeTypesRegistrar
+ * @see #TextParser
+ * @see #SliderSceneNode_parserStrings
+ * @see #SliderSceneNode_errors
+ */
+static enum SliderSceneNode_errors Slider_loadButton(struct Slider* slider,
                                        struct ResourceManager* const resourceManager,
                                        struct Renderer* const renderer,
                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                        struct TextParser* const textParser) {
     if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
+        return SLIDER_ERR_NULL_ARGUMENT;
     const char* tempResId = NULL;
-    tempResId = TextParser_getString(textParser, SLIDER_SCENENODE_PARSER_BUTTON_RESOURCE_STRING, 0);
+    tempResId = TextParser_getString(textParser, SliderSceneNode_parserStrings.buttonRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, SLIDER_SCENENODE_PARSER_ERR_NO_BUTTON);
-        return 2;
+        Logger_log(renderer->logger, SliderSceneNode_errorMessages.errNoButtonRes);
+        return SLIDER_ERR_NO_BUTTON_RES;
     }
     slider->button = (struct Button*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                                 renderer,
@@ -74,25 +126,48 @@ static unsigned char Slider_loadButton(struct Slider* slider,
                                                                                 tempResId,
                                                                                 ButtonSceneNode_parserStrings.type);
     if (!slider->button)
-        return 3;
-    slider->buttonAllignY = (enum AllignY)TextParser_getInt(textParser, SLIDER_SCENENODE_PARSER_ALLIGN_STRING, 0);
-    if (slider->buttonAllignY > (enum AllignY)3)
-        slider->buttonAllignY = AllignY_center;
-    return 0; 
+        return SLIDER_ERR_CONSTRUCTIG_BUTTON;
+    slider->buttonAllignY = (enum SliderSceneNode_buttonAllignY)TextParser_getInt(textParser,
+                                                                                  SliderSceneNode_parserStrings.allign, 0);
+    if (slider->buttonAllignY > (enum SliderSceneNode_buttonAllignY)3)
+        slider->buttonAllignY = SLIDER_ALLIGN_Y_CENTER;
+    return SLIDER_NO_ERRORS; 
 }
 
-static unsigned char Slider_tryGetSettingsFromTextParser(struct Slider* slider,
+/**
+ * @brief Function for loading settings and initializing #Slider from #TextParser.
+ * @param slider Pointer to a #Slider which will be initialized. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing Slider#base and Slider#button. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing Slider#base and Slider#button. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #SliderSceneNode_errors value.
+ * @see #Slider
+ * @see #Button
+ * @see #ProgressBar
+ * @see #SceneNodeTypesRegistrar
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #TextParser
+ * @see #SliderSceneNode_parserStrings
+ * @see #SliderSceneNode_errors
+ */
+static enum SliderSceneNode_errors Slider_tryGetSettingsFromTextParser(struct Slider* slider,
                                        struct ResourceManager* const resourceManager,
                                        struct Renderer* const renderer,
                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                        struct TextParser* const textParser) {
     if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    unsigned char result = 0;
-    result += Slider_loadButton(slider, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
-    result += Slider_loadBase(slider, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+        return SLIDER_ERR_NULL_ARGUMENT;
+    enum SliderSceneNode_errors loadingButtonResult = SLIDER_NO_ERRORS;
+    enum SliderSceneNode_errors loadingBaseResult = SLIDER_NO_ERRORS;
+    loadingButtonResult = Slider_loadButton(slider, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
+    loadingBaseResult = Slider_loadBase(slider, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);
     slider->isGeometryChanged = true;
-    return result;
+    if (loadingBaseResult || loadingButtonResult)
+        return SLIDER_ERR_LOADING_SETTINGS;
+    return SLIDER_NO_ERRORS;
 }
 
 struct SceneNode* Slider_construct(struct ResourceManager* const resourceManager,
@@ -116,12 +191,12 @@ struct SceneNode* Slider_construct(struct ResourceManager* const resourceManager
     slider->sceneNode.render = Slider_render;
     slider->sceneNode.sound = Slider_sound;
     slider->sceneNode.destruct = Slider_destruct;
-    slider->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SLIDER_SCENENODE_PARSER_TYPE_STRING) + 1));
+    slider->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SliderSceneNode_parserStrings.type) + 1));
     if (!slider->sceneNode.type) {
         Slider_destruct((struct SceneNode*)slider);
         return NULL;
     }
-    strcpy(slider->sceneNode.type, SLIDER_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(slider->sceneNode.type, SliderSceneNode_parserStrings.type);
     return (struct SceneNode*)slider;
 }
 
@@ -139,23 +214,24 @@ void Slider_destruct(struct SceneNode* slider) {
     free(slider);
 }
 
-unsigned char Slider_save(
-        const struct Slider* const slider, struct ResourceManager* const resourceManager,
-        const char* const sliderResId) {
+enum SliderSceneNode_errors Slider_save(const struct Slider* const slider,
+                                        struct ResourceManager* const resourceManager,
+                                        const char* const sliderResId) {
     if (!slider || !resourceManager || !sliderResId)
-        return 1;
+        return SLIDER_ERR_NULL_ARGUMENT;
     unsigned char result = 0;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SLIDER_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, SLIDER_SCENENODE_PARSER_PROGRESS_BAR_RESOURCE_STRING,
+        return SLIDER_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SliderSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, SliderSceneNode_parserStrings.progressBarRes,
                                    slider->base->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, SLIDER_SCENENODE_PARSER_BUTTON_RESOURCE_STRING,
+    result += TextParser_addString(textParser, SliderSceneNode_parserStrings.buttonRes,
                                    slider->button->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addInt(textParser, SLIDER_SCENENODE_PARSER_STEP, (long)slider->step);
-    result += TextParser_addInt(textParser, SLIDER_SCENENODE_PARSER_VALUE, (long)slider->base->value);
+    result += TextParser_addInt(textParser, SliderSceneNode_parserStrings.step, (long)slider->step);
+    result += TextParser_addInt(textParser, SliderSceneNode_parserStrings.value, (long)slider->base->value);
+    result += TextParser_addInt(textParser, SliderSceneNode_parserStrings.allign, (long)slider->buttonAllignY);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
     result += TextResource_updateContent(slider->sceneNode.sceneNodeTextResource, tempString);
@@ -164,7 +240,9 @@ unsigned char Slider_save(
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return SLIDER_ERR_SAVING;
+    return SLIDER_NO_ERRORS;
 }
 
 void Slider_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
@@ -223,17 +301,17 @@ void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         }
         slider->button->sceneNode.coordinates.x -= slider->button->sprite->virtualSize.x / 2;
             switch (slider->buttonAllignY) {
-                case AllignY_center:
+                case SLIDER_ALLIGN_Y_CENTER:
                     slider->button->sceneNode.coordinates.y -= slider->button->sprite->virtualSize.y / 2;
                     slider->button->sceneNode.coordinates.y += slider->base->spriteBase->virtualSize.y / 2;
                     break;
-                case AllignY_top:
+                case SLIDER_ALLIGN_Y_TOP:
                     slider->button->sceneNode.coordinates.y += slider->base->spriteBase->virtualSize.y;
                     break;
-                case AllignY_bottom:
+                case SLIDER_ALLIGN_Y_BOTTOM:
                     slider->button->sceneNode.coordinates.y -= slider->button->sprite->virtualSize.y;
                     break;
-                case AllignY_none:
+                case SLIDER_ALLIGN_Y_NONE:
                     break;
             }
         slider->button->sceneNode.flip = slider->sceneNode.flip;

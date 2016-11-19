@@ -67,7 +67,7 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
                                                                ContextMenuSceneNode_parserStrings.type,
                                                                ContextMenu_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
-                                                               SLIDER_SCENENODE_PARSER_TYPE_STRING,
+                                                               SliderSceneNode_parserStrings.type,
                                                                Slider_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                TEXT_BOX_SCENENODE_PARSER_TYPE_STRING,
