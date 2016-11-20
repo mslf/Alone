@@ -54,6 +54,8 @@ var annotated_dup =
     [ "Sprite", "struct_sprite.html", "struct_sprite" ],
     [ "Text", "struct_text.html", "struct_text" ],
     [ "TextBox", "struct_text_box.html", "struct_text_box" ],
+    [ "TextBoxSceneNode_errorMessages", "struct_text_box_scene_node__error_messages.html", "struct_text_box_scene_node__error_messages" ],
+    [ "TextBoxSceneNode_parserStrings", "struct_text_box_scene_node__parser_strings.html", "struct_text_box_scene_node__parser_strings" ],
     [ "TextParser", "struct_text_parser.html", "struct_text_parser" ],
     [ "TextResource", "struct_text_resource.html", "struct_text_resource" ],
     [ "TextureResource", "struct_texture_resource.html", "struct_texture_resource" ],
