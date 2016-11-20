@@ -92,7 +92,7 @@ struct GameManager* GameManager_construct() {
     gm = (struct GameManager*)calloc(1, sizeof(struct GameManager));
     if (gm) {
         unsigned char result = 0;
-        gm->logger.state = LoggerEnabledToStderr;
+        gm->logger.state = LOGGER_ENABLED_STDERR;
         if (!(gm->eventManager = EventManager_construct(&(gm->logger))))
             result++;
         if (!(gm->resourceManager = ResourceManager_construct(&(gm->logger))))

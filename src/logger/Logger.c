@@ -1,6 +1,3 @@
-//
-// Created by mslf on 10/11/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,11 +16,22 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Logger.c
+ * @author mslf
+ * @date 11 Oct 2016
+ * @brief File containing implementation of #Button.
+ */
 #include <stdio.h>
+#include <stdarg.h>
 #include "logger/Logger.h"
 
-//? Consider making a version with varargs, you won't have to allocate an array and use sprintf all the time
-void Logger_log(struct Logger* logger, const char* const message) {
-    if (logger && message && logger->state == LoggerEnabledToStderr)
-        fprintf(stderr, "%s\n", message);
+void Logger_log(struct Logger* logger, const char* const format, ...) {
+    if (logger && format && logger->state == LOGGER_ENABLED_STDERR) {
+        va_list argptr;
+        va_start(argptr, format);
+        vfprintf(stderr, format, argptr);
+        va_end(argptr);
+        fprintf(stderr, "\n");
+    }
 }
