@@ -48,7 +48,7 @@ static const struct SliderSceneNode_parserStrings {
     const char* const progressBarRes;
     /**< #ProgressBar resource string, which is used to construct Slider#base. */
     const char* const buttonRes;
-    /**< #ProgressBar resource string, which is used to construct Slider#button. */
+    /**< #Button resource string, which is used to construct Slider#button. */
     const char* const step;
     /**< String with number to set Slider#step. */
     const char* const value;

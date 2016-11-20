@@ -159,7 +159,7 @@ static enum ListBoxSceneNode_errors ListBox_loadTextBoxResource(struct ListBox* 
                                                                 renderer,
                                                                 sceneNodeTypesRegistrar,
                                                                 tempResId,
-                                                                TEXT_BOX_SCENENODE_PARSER_TYPE_STRING);
+                                                                TextBoxSceneNode_parserStrings.type);
     if (!listBox->textBox)
         return LIST_BOX_ERR_TEXT_BOX_CONSTRUCTING;
     return LIST_BOX_NO_ERRORS;

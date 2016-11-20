@@ -70,7 +70,7 @@ static const struct ContextMenuScenNode_errorMessages {
  * @see #Renderer
  * @see #SceneNodeTypesRegistrar
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserStringss
+ * @see #ContextMenuSceneNode_parserStrings
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct ContextMenu* contextMenu,
@@ -116,7 +116,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
  * @see #ContextMenu
  * @see #Logger
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserStringss
+ * @see #ContextMenuSceneNode_parserStrings
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct ContextMenu* contextMenu,
@@ -180,7 +180,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
  * @see #ResourceManager
  * @see #Renderer
  * @see #TextParser
- * @see #ContextMenuSceneNode_parserStringss
+ * @see #ContextMenuSceneNode_parserStrings
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_tryGetSettingsFromTextParser(struct ContextMenu* contextMenu,
@@ -277,7 +277,7 @@ void ContextMenu_destruct(struct SceneNode* contextMenu) {
  * @see #SceneNodeTypesRegistrar
  * @see #ResourceManager
  * @see #Renderer
- * @see #ContextMenuSceneNode_parserStringss
+ * @see #ContextMenuSceneNode_parserStrings
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct ContextMenu* contextMenu,
@@ -372,7 +372,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_realloccateMenuOptionsList(s
  * @see #ResourceManager
  * @see #Renderer
  * @see ContextMenu_updateMenuOption()
- * @see #ContextMenuSceneNode_parserStringss
+ * @see #ContextMenuSceneNode_parserStrings
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors CotextMenu_updateMenuOptionsList(struct ContextMenu* contextMenu,

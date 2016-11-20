@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/13/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,23 +16,55 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file TextBox.c
+ * @author mslf
+ * @date 13 Aug 2016
+ * @brief File containing implementation of #TextBox.
+ */
 #include "gui/TextBox.h"
 
-const char* const TEXT_BOX_SCENENODE_ERR_BUTTON_RES = 
-        "TextBox_tryGetSettingsFromTextParser: buttonResource string haven't found!";
-const char* const TEXT_BOX_SCENENODE_ERR_LENGTH = 
-        "TextBox_tryGetSettingsFromTextParser: default string length > MAX_LENGTH!";
+/**
+ * @brief Error message strings for #TextBox.
+ */
+static const struct TextBoxSceneNode_errorMessages {
+    const char* const errNoButtonRes;
+    /**< Will be displayed when #TextParser have no string, specified in TextBoxSceneNode_parserStrings#buttonRes. */
+    const char* const errDefButtonLabelStringLengthAboveMax;
+    /**< Will be displayed when TextBox#box#label#text string length is more than length, 
+     *specified in ContextMenuSceneNode_parserStringss#maxLength. */
+}TextBoxSceneNode_errorMessages = {
+    "TextBox_tryGetSettingsFromTextParser: buttonResource string haven't found!",
+    "TextBox_tryGetSettingsFromTextParser: default label string length > MAX_LENGTH!"};
 
-static unsigned char TextBox_tryGetSettingsFromTextParser(struct TextBox* textBox,
+/**
+ * @brief Function for loading settings and initializing #TextBox from #TextParser.
+ * @param textBox Pointer to a #TextBox which will be initialized. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing TextBox#box. Can be NULL.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
+ * for constructing TextBox#box. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @return #TextBoxSceneNode_errors value.
+ * @see #TextBox
+ * @see #Button
+ * @see #SceneNodeTypesRegistrar
+ * @see #ResourceManager
+ * @see #Renderer
+ * @see #TextParser
+ * @see #TextBoxSceneNode_parserStrings
+ * @see #TextBoxSceneNode_errors
+ */
+static enum TextBoxSceneNode_errors TextBox_tryGetSettingsFromTextParser(struct TextBox* textBox,
                                                          struct ResourceManager* resourceManager, struct Renderer* renderer,
                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                          struct TextParser* textParser) {
     if (!textBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return 1;
-    const char* tempResId = TextParser_getString(textParser, TEXT_BOX_SCENENODE_PARSER_BUTTON_RES_STRING, 0);
+        return TEXT_BOX_ERR_NULL_ARGUMENT;
+    const char* tempResId = TextParser_getString(textParser, TextBoxSceneNode_parserStrings.buttonRes, 0);
     if (!tempResId) {
-        Logger_log(renderer->logger, TEXT_BOX_SCENENODE_ERR_BUTTON_RES);
-        return 2;
+        Logger_log(renderer->logger, TextBoxSceneNode_errorMessages.errNoButtonRes);
+        return TEXT_BOX_ERR_NO_BUTTON_RES;
     }
     textBox->box = (struct Button*)SceneNodeTypesRegistrar_constructSceneNode(resourceManager,
                                                                 renderer,
@@ -43,24 +72,24 @@ static unsigned char TextBox_tryGetSettingsFromTextParser(struct TextBox* textBo
                                                                 tempResId,
                                                                 ButtonSceneNode_parserStrings.type);
     if (!textBox->box)
-        return 3;
-    if (strlen(textBox->box->label->text) > TEXT_BOX_SCEENODE_MAX_LENGTH) {
-        Logger_log(renderer->logger, TEXT_BOX_SCENENODE_ERR_LENGTH);
-        return 4;
-    }
-    textBox->maxLength = TextParser_getInt(textParser, TEXT_BOX_SCENENODE_PARSER_MAX_LENGTH, 0);
+        return TEXT_BOX_ERR_CONSTRUCTIG_BUTTON;
+    textBox->maxLength = TextParser_getInt(textParser, TextBoxSceneNode_parserStrings.maxLength, 0);
     if (textBox->maxLength == 0)
-        textBox->maxLength = TEXT_BOX_SCEENODE_MAX_LENGTH;
+        textBox->maxLength = TEXT_BOX_SCENENODE_MAX_LENGTH;
+     if (strlen(textBox->box->label->text) > textBox->maxLength) {
+        Logger_log(renderer->logger, TextBoxSceneNode_errorMessages.errDefButtonLabelStringLengthAboveMax);
+        return TEXT_BOX_ERR_LENGTH_ABOVE_MAX;
+    }
     if (strlen(textBox->box->label->text) < textBox->maxLength) {
         textBox->string = (char*)malloc(sizeof(char) * (strlen(textBox->box->label->text) + 1));
         if (!textBox->string) {
-            return 5;
+            return TEXT_BOX_ERR_ALLOC_STRING;
         }
         textBox->allocatedChars = strlen(textBox->box->label->text) + 1;
         strcpy(textBox->string, textBox->box->label->text);
         textBox->stringLength = strlen(textBox->box->label->text);
     }
-    return 0;
+    return TEXT_BOX_NO_ERRORS;
 }
 
 struct SceneNode* TextBox_construct(struct ResourceManager* const resourceManager,
@@ -83,12 +112,12 @@ struct SceneNode* TextBox_construct(struct ResourceManager* const resourceManage
     textBox->sceneNode.render = TextBox_render;
     textBox->sceneNode.sound = TextBox_sound;
     textBox->sceneNode.destruct = TextBox_destruct;
-    textBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(TEXT_BOX_SCENENODE_PARSER_TYPE_STRING) + 1));
+    textBox->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(TextBoxSceneNode_parserStrings.type) + 1));
     if (!textBox->sceneNode.type) {
         TextBox_destruct((struct SceneNode*)textBox);
         return NULL;
     }
-    strcpy(textBox->sceneNode.type, TEXT_BOX_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(textBox->sceneNode.type, TextBoxSceneNode_parserStrings.type);
     textBox->isGeometryChanged = true;
     return (struct SceneNode*)textBox;
 }
@@ -107,20 +136,20 @@ void TextBox_destruct(struct SceneNode* textBox) {
     free(textBox);
 }
 
-unsigned char TextBox_save(
+enum TextBoxSceneNode_errors TextBox_save(
         const struct TextBox* const textBox, struct ResourceManager* const resourceManager,
         const char* const textBoxResId) {
     if (!textBox || !resourceManager || !textBoxResId)
-        return 1;
+        return TEXT_BOX_ERR_NULL_ARGUMENT;
     unsigned char result = 0;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TEXT_BOX_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, TEXT_BOX_SCENENODE_PARSER_BUTTON_RES_STRING,
+        return TEXT_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TextBoxSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextBoxSceneNode_parserStrings.buttonRes,
                                    textBox->box->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addInt(textParser, TEXT_BOX_SCENENODE_PARSER_MAX_LENGTH, textBox->maxLength);
+    result += TextParser_addInt(textParser, TextBoxSceneNode_parserStrings.maxLength, textBox->maxLength);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
     result += TextResource_updateContent(textBox->sceneNode.sceneNodeTextResource, tempString);
@@ -129,12 +158,25 @@ unsigned char TextBox_save(
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return TEXT_BOX_ERR_SAVING;
+    return TEXT_BOX_NO_ERRORS;
 }
 
-static unsigned char TextBox_reallocateString(struct TextBox* textBox, size_t requiredLength) {
+/**
+ * @brief Reallocates TextBox#string and sets TextBox#allocatedChars.
+ * If requiredLength specified (not 0) then TextBox#allocatedCharsh will be it.
+ * Else, TextBox#allocatedChars will be sum of old TextBox#allocatedChars 
+ * and #TEXT_BOX_SCENENODE_REALLOC_STRING_LENGTH_STEP.
+ * @param textBox Pointer to a #TextBox, where string will be reallocated. Can be NULL.
+ * @param requiredLength Nes size of TextBox#string.
+ * @return TextBoxSceneNode_errors value.
+ * @see #TextBoxSceneNode_errors
+ * @see #TextBoxSceneNode_constants.
+ */
+static enum TextBoxSceneNode_errors TextBox_reallocateString(struct TextBox* textBox, size_t requiredLength) {
     if (!textBox)
-        return 1;
+        return TEXT_BOX_ERR_NULL_ARGUMENT;
     char* newText = NULL;
     size_t newSize;
     if (requiredLength)
@@ -143,27 +185,27 @@ static unsigned char TextBox_reallocateString(struct TextBox* textBox, size_t re
         newSize = textBox->allocatedChars + TEXT_BOX_SCENENODE_REALLOC_STRING_LENGTH_STEP;
     newText = (char*)malloc(sizeof(char) * (newSize + 1));
     if (!newText)
-        return 2;
+        return TEXT_BOX_ERR_ALLOC_STRING;
     strcpy(newText, textBox->string);
     free(textBox->string);
     textBox->string = newText;
     textBox->allocatedChars = newSize;
-    return 0;
+    return TEXT_BOX_NO_ERRORS;
 }
 
-unsigned char TextBox_changeString (struct TextBox* textBox, const char* const newString) {
+enum TextBoxSceneNode_errors TextBox_changeString (struct TextBox* textBox, const char* const newString) {
     if (!textBox || !newString)
-        return 1;
+        return TEXT_BOX_ERR_NULL_ARGUMENT;
     if (strlen(newString) <= textBox->maxLength) {
         if (strlen(newString) >= textBox->allocatedChars)
             if (TextBox_reallocateString(textBox, strlen(newString)))
-                return 2;
+                return TEXT_BOX_ERR_ALLOC_STRING;
         strcpy(textBox->string, newString);
         textBox->string[strlen(newString)] = 0;
         textBox->stringLength = strlen(newString);
         textBox->isStringChanged = true;
     }
-    return 0;
+    return TEXT_BOX_NO_ERRORS;
 }
 
 void TextBox_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
