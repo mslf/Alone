@@ -454,9 +454,7 @@ static unsigned char TextParser_parseTextResource(struct Logger* logger, struct 
     leftOperandString = (char*)malloc(sizeof(char) * INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_OPERAND_STRING);
     rightOperandString = (char*)malloc(sizeof(char) * INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING);
     if (!leftOperandString || !rightOperandString) {
-        char tempString[600];
-        sprintf(tempString, "%s ResourceID: %s", TEXT_PARSER_ERR_OPERANDS_ALLOC, textResource->id);
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s ResourceID: %s", TEXT_PARSER_ERR_OPERANDS_ALLOC, textResource->id);
         TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
         return 2;
     }
@@ -479,16 +477,12 @@ static unsigned char TextParser_parseTextResource(struct Logger* logger, struct 
                                            &allocatedCharsForLeftOperand, &rightOperandString, &rightCounter,
                                            &allocatedCharsForRightOperand);
         if (state != 3 && state != 4 && state != 0) {
-            char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s", TEXT_PARSER_ERR_UNEXPEXTED_EOF_SPLIT_EXPRESSION, textResource->id);
-            Logger_log(logger, tempString);
+            Logger_log(logger, "%s ResourceID: %s", TEXT_PARSER_ERR_UNEXPEXTED_EOF_SPLIT_EXPRESSION, textResource->id);
             TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
             return 4;
         }
         if (state == 4) {
-            char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s", TEXT_PARSER_ERR_SYNTAX_SPLIT_EXPRESSION, textResource->id);
-            Logger_log(logger, tempString);
+            Logger_log(logger, "%s ResourceID: %s", TEXT_PARSER_ERR_SYNTAX_SPLIT_EXPRESSION, textResource->id);
             TextParser_destructTempOperandStrings(leftOperandString, rightOperandString);
             return 5;
         }
@@ -496,9 +490,7 @@ static unsigned char TextParser_parseTextResource(struct Logger* logger, struct 
             unsigned char result = TextParser_addPair(logger, textParser, leftOperandString, leftCounter,
                                                       rightOperandString, rightCounter);
             if (result) {
-                char tempString[600];
-                sprintf(tempString, "\t in ResourceID: %s", textResource->id);
-                Logger_log(logger, tempString);
+                Logger_log(logger, "\t in ResourceID: %s", textResource->id);
                 return (result + 5);
             }
 

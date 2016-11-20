@@ -35,16 +35,12 @@ struct Musican* Musican_construct(struct Logger* logger, bool sound, bool music)
         return NULL;
     }
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
-        char tempString[600];
-        sprintf(tempString, "%s. SDL error: %s", MUSICAN_ERR_SDL_INIT_AUDIO, SDL_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s. SDL error: %s", MUSICAN_ERR_SDL_INIT_AUDIO, SDL_GetError());
         Musican_destruct(musican);
         return NULL;
     }
     if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
-        char tempString[600];
-        sprintf(tempString, "%s. SDL_mixer error: %s", MUSICAN_ERR_MIX_OPEN_AUDIO, Mix_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s. SDL_mixer error: %s", MUSICAN_ERR_MIX_OPEN_AUDIO, Mix_GetError());
         Musican_destruct(musican);
         return NULL;
     }

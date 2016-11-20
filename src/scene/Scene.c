@@ -97,7 +97,7 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
 }
 
 
-//? Refactor this. Make it smaller (see also: comments for Logger_log).
+//? Refactor this. Make it smaller.
 unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceManager,
                          struct Renderer* renderer, struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 
                          struct TextParser* sceneTextParser) {
@@ -128,9 +128,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
             const char* tempSceneNodeRes = NULL;
             tempSceneNodeRes = TextParser_getString(sceneTextParser, tempString, 0);
             if (!tempSceneNodeRes) {
-                char tempErrString[600];
-                sprintf(tempErrString, "%s Name: <%s>", SCENE_ERR_SCENE_NODE_DEF, tempString);
-                Logger_log(resourceManager->logger, tempErrString);
+                Logger_log(resourceManager->logger, "%s Name: <%s>", SCENE_ERR_SCENE_NODE_DEF, tempString);
             }
             if (Scene_addSceneNode(scene, resourceManager, renderer, sceneNodeTypesRegistrar, tempSceneNodeRes) == 0)
                 Scene_initSceneNode(scene, tempString, sceneTextParser);

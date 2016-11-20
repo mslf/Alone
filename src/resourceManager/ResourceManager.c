@@ -258,9 +258,7 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         struct TextureResource* textureResource = NULL;
         textureResource = TextureResource_construct(renderer, textureResId);
         if (!textureResource) {
-            char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
-            Logger_log(rm->logger, tempString);
+            Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
             return NULL;
         }
         // Try to reallocate (if needed) and add textureResource to the list
@@ -301,9 +299,7 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
             struct TextureResource* textureResource = NULL;
             textureResource = TextureResource_constructFromText(renderer, text, fontPath, size, color);
             if (!textureResource) {
-                char tempString[600];
-                sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
-                Logger_log(rm->logger, tempString);
+                Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
                 free(textureResId);
                 return NULL;
             }
@@ -355,9 +351,7 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
     struct TextResource* textResource = NULL;
     textResource = TextResource_construct(textResId, unique);
     if (!textResource) {
-        char tempString[600];
-        sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXT_RES, textResId);
-        Logger_log(rm->logger, tempString);
+        Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXT_RES, textResId);
         return NULL;
     }
     // Try to reallocate (if needed) and add textResource to the list
@@ -390,9 +384,7 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
         struct ScriptResource* scriptResource = NULL;
         scriptResource = ScriptResource_construct(scriptResId);
         if (!scriptResource) {
-            char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES, scriptResId);
-            Logger_log(rm->logger, tempString);
+            Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES, scriptResId);
             return NULL;
         }
         // Try to reallocate (if needed) and add scriptResource to the list
@@ -427,10 +419,10 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
         struct SoundResource* soundResource = NULL;
         soundResource = SoundResource_construct(soundResId);
         if (!soundResource) {
-            char tempString[600];
-            sprintf(tempString, "%s ResourceID: %s. SDL_mixer error: %s", RESOURCE_MANAGER_ERR_LOAD_SOUND_RES,
-                    soundResId, Mix_GetError());
-            Logger_log(rm->logger, tempString);
+            Logger_log(rm->logger, "%s ResourceID: %s. SDL_mixer error: %s",
+                       RESOURCE_MANAGER_ERR_LOAD_SOUND_RES,
+                       soundResId,
+                       Mix_GetError());
             return NULL;
         }
         // Try to reallocate (if needed) and add soundResource to the list

@@ -47,9 +47,9 @@ struct TextureResource* TextureResource_construct(struct Renderer* renderer, con
     strcpy(textureResource->id, path);
     textureResource->texture = IMG_LoadTexture(renderer->renderer, path);
     if (!textureResource->texture) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL_image error: %s", TEXTURE_RESOURCE_ERR_IMG_LOADING_TEXTURE, IMG_GetError());
-        Logger_log(renderer->logger, tempString);
+        Logger_log(renderer->logger, "%s SDL_image error: %s",
+                   TEXTURE_RESOURCE_ERR_IMG_LOADING_TEXTURE,
+                   IMG_GetError());
         TextureResource_destruct(textureResource);
         return NULL;
     }
@@ -80,26 +80,22 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
         return  NULL;
     TTF_Font* font = TTF_OpenFont(fontPath, size);
     if (!font) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_OPENING_FONT, TTF_GetError());
-        Logger_log(renderer->logger, tempString);
+        Logger_log(renderer->logger, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_OPENING_FONT, TTF_GetError());
         TextureResource_destruct(textureResource);
         return  NULL;
     }
     SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, text, color);
     if (!textSurface) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_RENDERING_TEXT, TTF_GetError());
-        Logger_log(renderer->logger, tempString);
+        Logger_log(renderer->logger, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_RENDERING_TEXT, TTF_GetError());
         TextureResource_destruct(textureResource);
         TTF_CloseFont(font);
         return  NULL;
     }
     textureResource->texture = SDL_CreateTextureFromSurface(renderer->renderer, textSurface);
     if (!textureResource->texture) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL error: %s", TEXTURE_RESOURCE_ERR_CREATING_TEXTURE_FROM_SURFACE, SDL_GetError());
-        Logger_log(renderer->logger, tempString);
+        Logger_log(renderer->logger, "%s SDL error: %s",
+                   TEXTURE_RESOURCE_ERR_CREATING_TEXTURE_FROM_SURFACE,
+                   SDL_GetError());
         TextureResource_destruct(textureResource);
         TTF_CloseFont(font);
         SDL_FreeSurface(textSurface);

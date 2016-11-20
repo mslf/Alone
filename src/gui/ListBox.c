@@ -76,11 +76,9 @@ static enum ListBoxSceneNode_errors ListBox_loadContextMenuResource(struct ListB
         size_t i;
         for (i = 0; i < listBox->contextMenu->menuOptionsCount; i++)
             if (strlen(listBox->contextMenu->menuOptionsList[i]->label->text) > listBox->textBox->maxLength) {
-                char tempErrString[600];
-                sprintf(tempErrString, "%s MenuOption string: %s",
-                        ListBoxSceneNode_errorMessages.errLabelLengthAboveMax,
-                        listBox->contextMenu->menuOptionsList[i]->label->text);
-                Logger_log(renderer->logger, tempErrString);
+                Logger_log(renderer->logger, "%s MenuOption string: %s",
+                           ListBoxSceneNode_errorMessages.errLabelLengthAboveMax,
+                           listBox->contextMenu->menuOptionsList[i]->label->text);
                 return LIST_BOX_ERR_CONTEXT_MENU_LABEL_LENGTH_ABOVE_MAX;
             }
     }

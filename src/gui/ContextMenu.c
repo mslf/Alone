@@ -90,10 +90,9 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
         const char* tempMenuOptionsNameString = TextParser_getString(textParser,
                                                                ContextMenuSceneNode_parserStrings.optionsList, i);
         if (TextParser_getItemsCount(textParser, tempMenuOptionsNameString) == 0) {
-            char tempErrString[600];
-            sprintf(tempErrString, "%s Name: <%s>", ContextMenuScenNode_errorMessages.errNoOptionDefinition,
-                    tempMenuOptionsNameString);
-            Logger_log(resourceManager->logger, tempErrString);
+            Logger_log(resourceManager->logger, "%s Name: <%s>",
+                       ContextMenuScenNode_errorMessages.errNoOptionDefinition,
+                       tempMenuOptionsNameString);
         }
         const char* tempLabelString = TextParser_getString(textParser, tempMenuOptionsNameString, 0);
         const char* tempPressedResourceString = TextParser_getString(textParser, tempMenuOptionsNameString, 1);
@@ -301,10 +300,9 @@ static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct Cont
                                                     newButtonResId,
                                                     ButtonSceneNode_parserStrings.type);
         if (!tempButton) {
-            char tempErrString[600];
-            sprintf(tempErrString, "%s MenuOption resource ID: %s",
-                    ContextMenuScenNode_errorMessages.errConstructingMenuOption, newButtonResId);
-            Logger_log(renderer->logger, tempErrString);
+            Logger_log(renderer->logger, "%s MenuOption resource ID: %s",
+                       ContextMenuScenNode_errorMessages.errConstructingMenuOption,
+                       newButtonResId);
             return CONTEXT_MENU_ERR_BUTTON_CONSTRUCTING;
         }
         result += Button_changeFocusedEventResource(tempButton, resourceManager,
@@ -318,10 +316,9 @@ static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct Cont
                                          tempCopyFromButton->label->color);
         if (result) {
             Button_destruct((struct SceneNode*)tempButton);
-            char tempErrString[600];
-            sprintf(tempErrString, "%s MenuOption resource ID: %s",
-                    ContextMenuScenNode_errorMessages.errUpdatingOption, newButtonResId);
-            Logger_log(renderer->logger, tempErrString);
+            Logger_log(renderer->logger, "%s MenuOption resource ID: %s",
+                       ContextMenuScenNode_errorMessages.errUpdatingOption,
+                       newButtonResId);
             return CONTEXT_MENU_ERR_MENU_OPTION_UPDATING;
         }
         Button_destruct((struct SceneNode*)tempCopyFromButton);
@@ -470,10 +467,9 @@ enum ContextMenuSceneNode_errors ContextMenu_addMenuOption(struct ContextMenu* c
         Logger_log(renderer->logger, ContextMenuScenNode_errorMessages.errUpdatingOption);
     for (i = 0; i < contextMenu->menuOptionsCount; i++)
         if (strcmp(tempButtonToAdd->label->text, contextMenu->menuOptionsList[i]->label->text) == 0) {
-            char tempErrString[600];
-            sprintf(tempErrString, "%s Label: <%s>", ContextMenuScenNode_errorMessages.errSameLabelExists,
-                    tempButtonToAdd->label->text);
-            Logger_log(renderer->logger, tempErrString);
+            Logger_log(renderer->logger, "%s Label: <%s>",
+                       ContextMenuScenNode_errorMessages.errSameLabelExists,
+                       tempButtonToAdd->label->text);
             Button_destruct((struct SceneNode*)tempButtonToAdd);
             return CONTEXT_MENU_ERR_SAME_LABEL_EXISTS;
         }

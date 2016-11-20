@@ -36,9 +36,7 @@ struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* sett
     if (!settings)
         return NULL;
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL error: %s", RENDERER_ERR_SDL_INIT_VIDEO, SDL_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s SDL error: %s", RENDERER_ERR_SDL_INIT_VIDEO, SDL_GetError());
         return NULL;
     }
     struct Renderer* renderer = NULL;
@@ -52,32 +50,24 @@ struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* sett
                                         (int)settings->w, (int)settings->h,
                                         (Uint32)settings->isFullscreen * SDL_WINDOW_FULLSCREEN);
     if (!renderer->window) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL error: %s", RENDERER_ERR_WINDOW_CREATING, SDL_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s SDL error: %s", RENDERER_ERR_WINDOW_CREATING, SDL_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
     renderer->renderer = SDL_CreateRenderer(renderer->window, -1, SDL_RENDERER_ACCELERATED |
             (Uint32)settings->isVsyncActive * SDL_RENDERER_PRESENTVSYNC);
     if (!renderer->renderer) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL error: %s", RENDERER_ERR_SDL_RENDERER_CREATING, SDL_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s SDL error: %s", RENDERER_ERR_SDL_RENDERER_CREATING, SDL_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
     if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL_image error: %s", RENDERER_ERR_IMG_INIT, IMG_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s SDL_image error: %s", RENDERER_ERR_IMG_INIT, IMG_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
     if(TTF_Init() == -1) {
-        char tempString[600];
-        sprintf(tempString, "%s SDL_ttf error: %s", RENDERER_ERR_TTF_INIT, TTF_GetError());
-        Logger_log(logger, tempString);
+        Logger_log(logger, "%s SDL_ttf error: %s", RENDERER_ERR_TTF_INIT, TTF_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
