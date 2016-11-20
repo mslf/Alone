@@ -35,10 +35,14 @@ struct SceneNode;
  * @see GameEvent_constructFromTextParser().
  */
 static const struct GameEvent_parserStrings {
-    const char* const type; /**< Type string, which used to distinquish #GameEvent resource from others. */
-    const char* const channel; /**< Channel string, which used to set GameEvent#channel from #TextParser. */
-    const char* const command; /**< Command string, which used to set GameEvent#command from #TextParser. */
-    const char* const data; /**< Data string which used to set GameEvent#data from #TextParser. */
+    const char* const type;
+    /**< Type string, which used to distinquish #GameEvent resource from others. */
+    const char* const channel;
+    /**< Channel string, which used to set GameEvent#channel from #TextParser. */
+    const char* const command;
+    /**< Command string, which used to set GameEvent#command from #TextParser. */
+    const char* const data;
+    /**< Data string which used to set GameEvent#data from #TextParser. */
 }GamaEvent_parserStrings = {
     "GameEvent",
     "channel",
@@ -50,11 +54,16 @@ static const struct GameEvent_parserStrings {
  * @see #EventManager
  */
 struct GameEvent {
-    char* eventChannel; /**< String, which describes in what "channel" that #GameEvent happend. */
-    struct SceneNode* sender; /**< Pointer to a sender #SceneNode. */
-    char* command; /**< String with some command. */
-    char* data; /**< String with some data about #GameEvent. */
-    bool isNeeded; /**< Flag, which indicates actuality of #GameEvent. */
+    char* eventChannel;
+    /**< String, which describes in what "channel" that #GameEvent happend. */
+    struct SceneNode* sender;
+    /**< Pointer to a sender #SceneNode. */
+    char* command;
+    /**< String with some command. */
+    char* data;
+    /**< String with some data about #GameEvent. */
+    bool isNeeded;
+    /**< Flag, which indicates actuality of #GameEvent. */
 };
 
 /**

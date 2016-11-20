@@ -44,16 +44,20 @@ enum EventManager_constants{
  * @brief Error codes for EventManager.
  */
 enum EventManager_errors {
-    EM_NO_ERRORS = 0, /**< All right, no errors. */
-    EM_ERR_NULL_ARGUMENT = 1, /**< Some of function's argument is NULL. */
-    EM_ERR_REALLOC_SDL_EVENTS_LIST = 2, /**< Reallocating memory for EventManager#sdlEventsList failed. */
-    EM_ERR_REALLOC_GAME_EVENTS_LIST = 3, /**< Reallocating memory for EventManager#gameEventsList failed. */
-    EM_ERR_REALLOC_CUSTOM_GAME_EVENTS_LIST = 4 /**< Reallocating memory for EventManager#customGameEventsList failed. */
+    EM_NO_ERRORS = 0,
+    /**< All right, no errors. */
+    EM_ERR_NULL_ARGUMENT = 1,
+    /**< Some of function's argument is NULL. */
+    EM_ERR_REALLOC_SDL_EVENTS_LIST = 2,
+    /**< Reallocating memory for EventManager#sdlEventsList failed. */
+    EM_ERR_REALLOC_GAME_EVENTS_LIST = 3,
+    /**< Reallocating memory for EventManager#gameEventsList failed. */
+    EM_ERR_REALLOC_CUSTOM_GAME_EVENTS_LIST = 4
+    /**< Reallocating memory for EventManager#customGameEventsList failed. */
 };
 
 /**
  * @brief Event subsystem.
- * 
  * #EventManager provide access to the list with SDL_Events via EventManager#sdlEventsList.
  * Also, #EventManager provide access to the list with GameEvents and custom GameEvents
  * via (EventManager#gameEventsList and EventManager#customGameEventsList).
@@ -61,22 +65,33 @@ enum EventManager_errors {
  * EventManager#customGameEventsList contain sorted by channel GameEvents via EventManager_generateCustomEventsList.
  */
 struct EventManager {
-    struct Logger* logger; /**< Provides logging ability to someone, who have pointer to a #EventManager. */ 
-    struct GameEvent** gameEventsList; /**< List of unique GameEvents. */
-    struct GameEvent** customGameEventsList; /**< List of sorted by channel GameEvents. */
-    SDL_Event* sdlEventsList; /**< SDL_Events list. */
-    size_t gameEventsCount; /**< Current number of existing GameEvents in the EventManager#gameEventsList. */
-    size_t customGameEventsCount; /**< Current number of existing GameEvents in the EventManager#customGameEventsList. */
-    size_t sdlEventsCount; /**< Current number of existing SDL_Events in the EventManager#sdlEventsList. */
-    size_t allocatedGameEventsCount; /**< Allocated number of GameEvents in the EventManager#gameEventsList. */
-    size_t allocatedCustomGameEventsCount; /**< Allocated number of GameEvents in the EventManager#customGameEventsList. */
-    size_t allocatedSdlEventsCount; /**< Allocated number of SDL_Events in the EventManager#sdlEventsList. */
-    bool quit; /**< Quiting flag. Will be true, if user will try to exit the application. */
+    struct Logger* logger;
+    /**< Provides logging ability to someone, who have pointer to a #EventManager. */ 
+    struct GameEvent** gameEventsList;
+    /**< List of unique GameEvents. */
+    struct GameEvent** customGameEventsList;
+    /**< List of sorted by channel GameEvents. */
+    SDL_Event* sdlEventsList;
+    /**< SDL_Events list. */
+    size_t gameEventsCount;
+    /**< Current number of existing GameEvents in the EventManager#gameEventsList. */
+    size_t customGameEventsCount;
+    /**< Current number of existing GameEvents in the EventManager#customGameEventsList. */
+    size_t sdlEventsCount;
+    /**< Current number of existing SDL_Events in the EventManager#sdlEventsList. */
+    size_t allocatedGameEventsCount;
+    /**< Allocated number of GameEvents in the EventManager#gameEventsList. */
+    size_t allocatedCustomGameEventsCount;
+    /**< Allocated number of GameEvents in the EventManager#customGameEventsList. */
+    size_t allocatedSdlEventsCount;
+    /**< Allocated number of SDL_Events in the EventManager#sdlEventsList. */
+    bool quit;
+    /**< Quiting flag. Will be true, if user will try to exit the application. */
 };
 
 /**
  * @brief Constructs #EventManager and inits it.
- * @param logger #Logger struct to set the same in the #EventManager. Can be NULL.
+ * @param logger #Logger struct to set the EventManager#logger. Can be NULL.
  * @return Pointer to an initialized #EventManager, or NULL if constructing  failed.
  * @see #EventManager_constants
  */
@@ -84,8 +99,8 @@ struct EventManager* EventManager_construct(struct Logger* logger);
 
 /**
  * @brief Destructs #EventManager and frees memory, used by it.
- * Use this funcrion in pair with EventManager_construct().
  * @param em Pointer to a #EventManager. Can be not fully initialized. Can be NULL.
+ * @note Use this funcrion in pair with EventManager_construct().
  * @see EventManager_construct()
  */
 void EventManager_destruct(struct EventManager* em);

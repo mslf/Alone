@@ -81,7 +81,7 @@ enum TextBoxSceneNode_constants{
     TEXT_BOX_SCENENODE_REALLOC_STRING_LENGTH_STEP = 500,
     /**< Init alocating number and reallocating step for TextBox#string. */
     TEXT_BOX_SCENENODE_MAX_LENGTH = 10
-    /**< Defailt TextBox#maxLength. */
+    /**< Default TextBox#maxLength. */
 };
 
 /**
@@ -157,7 +157,7 @@ void TextBox_destruct(struct SceneNode* textBox);
 
 /**
  * @brief Changes TextBox#string, sets TextBox#isStringChanged and reallocates #TextBox#string, if needed.
- * @param textBox Pointer to a #TextBox, casted to #SceneNode. Can be not fully initialized. Can be NULL.
+ * @param textBox Pointer to a #TextBox, casted to #SceneNode. Can be NULL.
  * @param newString String, which will be setted to TextBox#string. Can be NULL.
  * @return #TextBoxSceneNode_errors value.
  * @see #TextBox

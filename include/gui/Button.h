@@ -20,7 +20,7 @@
  * @file Button.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing Button and it's stuff.
+ * @brief File containing #Button and it's stuff.
  */
 #ifndef ALONE_BUTTON_H
 #define ALONE_BUTTON_H
@@ -56,7 +56,7 @@ static const struct ButtonSceneNode_parserStrings {
     const char* const textRes;
     /**< #Text resource string, which is used to construct Button#label. */
     const char* const labelOffset;
-    /**< Offset string, which is used to set offsets in X and Y for Button#label. */
+    /**< Offset string, which is used to set Y offset for Button#label. */
 }ButtonSceneNode_parserStrings = {
     "Button",
     "focusedEventResource",
