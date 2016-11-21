@@ -33,7 +33,7 @@ var searchData=
   ['listboxscenenode_5ferrormessages',['ListBoxSceneNode_errorMessages',['../struct_list_box_scene_node__error_messages.html',1,'']]],
   ['listboxscenenode_5ferrors',['ListBoxSceneNode_errors',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735',1,'ListBox.h']]],
   ['listboxscenenode_5fparserstrings',['ListBoxSceneNode_parserStrings',['../struct_list_box_scene_node__parser_strings.html',1,'']]],
-  ['logger',['Logger',['../struct_logger.html',1,'Logger'],['../struct_event_manager.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'EventManager::logger()']]],
+  ['logger',['Logger',['../struct_logger.html',1,'Logger'],['../struct_event_manager.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'EventManager::logger()'],['../struct_musican.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'Musican::logger()'],['../struct_renderer.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'Renderer::logger()']]],
   ['logger_2ec',['Logger.c',['../_logger_8c.html',1,'']]],
   ['logger_2eh',['Logger.h',['../_logger_8h.html',1,'']]],
   ['logger_5fdisabled',['LOGGER_DISABLED',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7a42d3e20acc16eae698865e09c334cae0',1,'Logger.h']]],

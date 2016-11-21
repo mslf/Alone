@@ -5,5 +5,6 @@ var searchData=
   ['microconnection',['MicroConnection',['../struct_micro_connection.html',1,'']]],
   ['micromodule',['MicroModule',['../struct_micro_module.html',1,'']]],
   ['microsection',['MicroSection',['../struct_micro_section.html',1,'']]],
-  ['musican',['Musican',['../struct_musican.html',1,'']]]
+  ['musican',['Musican',['../struct_musican.html',1,'']]],
+  ['musican_5ferrormessages',['Musican_errorMessages',['../struct_musican__error_messages.html',1,'']]]
 ];

@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('_event_manager_8c.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>File containing implementation of <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>.  
+<p>File containing implementation of <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
 <code>#include &quot;string.h&quot;</code><br />
@@ -98,13 +98,13 @@ $(document).ready(function(){initNavTree('_event_manager_8c.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_event_manager__error_messages.html">EventManager_errorMessages</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error message strings for <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>.  <a href="struct_event_manager__error_messages.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error message strings for <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>.  <a href="struct_event_manager__error_messages.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ab29e0486e59b74a74b8bd7832bbe573b"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_event_manager.html">EventManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_manager_8c.html#ab29e0486e59b74a74b8bd7832bbe573b">EventManager_construct</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger)</td></tr>
-<tr class="memdesc:ab29e0486e59b74a74b8bd7832bbe573b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> and inits it.  <a href="#ab29e0486e59b74a74b8bd7832bbe573b">More...</a><br /></td></tr>
+<tr class="memdesc:ab29e0486e59b74a74b8bd7832bbe573b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a> and inits it.  <a href="#ab29e0486e59b74a74b8bd7832bbe573b">More...</a><br /></td></tr>
 <tr class="separator:ab29e0486e59b74a74b8bd7832bbe573b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7c0501b97a78632baafc04805a068c8"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_event_manager_8h.html#a4252c823e742ecff41a34c5d31b082e7">EventManager_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_manager_8c.html#ab7c0501b97a78632baafc04805a068c8">EventManager_reallocateGameEventsList</a> (struct <a class="el" href="struct_event_manager.html">EventManager</a> *em)</td></tr>
 <tr class="memdesc:ab7c0501b97a78632baafc04805a068c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocates memory for the <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a>. <a class="el" href="struct_event_manager.html#a621a8cfb46dee22293a680cf51bc01e4">EventManager::allocatedGameEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a7c2180cec40b2488c4891f76d7c87fb8">EM_INITIAL_NUMBER_ALLOCATED_EVENTS</a>.  <a href="#ab7c0501b97a78632baafc04805a068c8">More...</a><br /></td></tr>
@@ -116,7 +116,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a93a2c96eda39eb3e9212236d0fce7d2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocates memory for the <a class="el" href="struct_event_manager.html#ac563054d2cefbd8d20b1daf70eb35d78">EventManager::sdlEventsList</a>. <a class="el" href="struct_event_manager.html#a94a2584717ebaf6d143148d5c8b5bf7e">EventManager::allocatedSdlEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a94ee922abfc0c456eded72d6380e1712">EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS</a>.  <a href="#a93a2c96eda39eb3e9212236d0fce7d2d">More...</a><br /></td></tr>
 <tr class="separator:a93a2c96eda39eb3e9212236d0fce7d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e8d2656ecf6f66dab04808823a19162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_manager_8c.html#a1e8d2656ecf6f66dab04808823a19162">EventManager_destruct</a> (struct <a class="el" href="struct_event_manager.html">EventManager</a> *em)</td></tr>
-<tr class="memdesc:a1e8d2656ecf6f66dab04808823a19162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> and frees memory, used by it. Use this funcrion in pair with <a class="el" href="_event_manager_8h.html#ab29e0486e59b74a74b8bd7832bbe573b" title="Constructs EventManager and inits it. ">EventManager_construct()</a>.  <a href="#a1e8d2656ecf6f66dab04808823a19162">More...</a><br /></td></tr>
+<tr class="memdesc:a1e8d2656ecf6f66dab04808823a19162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a> and frees memory, used by it.  <a href="#a1e8d2656ecf6f66dab04808823a19162">More...</a><br /></td></tr>
 <tr class="separator:a1e8d2656ecf6f66dab04808823a19162"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60679d027720a51b56306e7530e7e29e"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_event_manager_8h.html#a4252c823e742ecff41a34c5d31b082e7">EventManager_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_manager_8c.html#a60679d027720a51b56306e7530e7e29e">EventManager_addEvent</a> (struct <a class="el" href="struct_event_manager.html">EventManager</a> *em, struct <a class="el" href="struct_game_event.html">GameEvent</a> *gameEvent)</td></tr>
 <tr class="memdesc:a60679d027720a51b56306e7530e7e29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to a <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a> if it is unique. Also, increases <a class="el" href="struct_event_manager.html#ae586848fac4574f9c630a1b66a3b8c6c">EventManager::gameEventsCount</a> and tryies to reallocate memory if needed.  <a href="#a60679d027720a51b56306e7530e7e29e">More...</a><br /></td></tr>
@@ -140,7 +140,7 @@ Variables</h2></td></tr>
 <tr class="separator:ae3994bb15971643597db44bf6089410b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>File containing implementation of <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. </p>
+<div class="textblock"><p>File containing implementation of <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>mslf </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10 Aug 2016 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -173,7 +173,7 @@ Variables</h2></td></tr>
 <p>Adds <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to a <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a> if it is unique. Also, increases <a class="el" href="struct_event_manager.html#ae586848fac4574f9c630a1b66a3b8c6c">EventManager::gameEventsCount</a> and tryies to reallocate memory if needed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">gameEvent</td><td>Pointer to a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to add. Can be NULL. </td></tr>
   </table>
   </dd>
@@ -201,14 +201,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> and inits it. </p>
+<p>Constructs <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a> and inits it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">logger</td><td><a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> struct to set the same in the <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">logger</td><td><a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> struct to set the <a class="el" href="struct_event_manager.html#af4d650f26e6e1a4b53c751abc1eff45e">EventManager::logger</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to an initialized <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>, or NULL if constructing failed. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to an initialized <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>, or NULL if constructing failed. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285" title="Some initial constants for EventManager. ">EventManager_constants</a> </dd></dl>
 
 </div>
@@ -229,13 +229,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destructs <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a> and frees memory, used by it. Use this funcrion in pair with <a class="el" href="_event_manager_8h.html#ab29e0486e59b74a74b8bd7832bbe573b" title="Constructs EventManager and inits it. ">EventManager_construct()</a>. </p>
+<p>Destructs <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a> and frees memory, used by it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be not fully initialized. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be not fully initialized. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Use this funcrion in pair with <a class="el" href="_event_manager_8h.html#ab29e0486e59b74a74b8bd7832bbe573b" title="Constructs EventManager and inits it. ">EventManager_construct()</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_event_manager_8h.html#ab29e0486e59b74a74b8bd7832bbe573b" title="Constructs EventManager and inits it. ">EventManager_construct()</a> </dd></dl>
 
 </div>
@@ -259,7 +260,7 @@ Variables</h2></td></tr>
 <p>Removes and destructs GameEvents in the <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a> if <a class="el" href="struct_game_event.html#a1c2e66c0da32aeb6b56a788ad2beee8c">GameEvent::isNeeded</a> == false. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -297,7 +298,7 @@ Variables</h2></td></tr>
 <p>Adds <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to a <a class="el" href="struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce">EventManager::customGameEventsList</a> if GameEvent::channel == channel. Also adds <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> if it is broadcasting. Adds GameEvents from <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a>. Also, increases <a class="el" href="struct_event_manager.html#a44bc521b94d679d4a5566cd59866c259">EventManager::customGameEventsCount</a> and tryies to reallocate memory if needed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">channel</td><td>Pointer to a const channel string. Can be NULL. GameEvents with the same channel string and with NULL channel (broadcasting) will be added to <a class="el" href="struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce">EventManager::customGameEventsList</a>. </td></tr>
   </table>
   </dd>
@@ -341,7 +342,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Reallocates memory for the <a class="el" href="struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce">EventManager::customGameEventsList</a>. <a class="el" href="struct_event_manager.html#a274ca9e47ebe07804dc743b3cd3db162">EventManager::allocatedCustomGameEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a7c2180cec40b2488c4891f76d7c87fb8">EM_INITIAL_NUMBER_ALLOCATED_EVENTS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -377,7 +378,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Reallocates memory for the <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a>. <a class="el" href="struct_event_manager.html#a621a8cfb46dee22293a680cf51bc01e4">EventManager::allocatedGameEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a7c2180cec40b2488c4891f76d7c87fb8">EM_INITIAL_NUMBER_ALLOCATED_EVENTS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -413,7 +414,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Reallocates memory for the <a class="el" href="struct_event_manager.html#ac563054d2cefbd8d20b1daf70eb35d78">EventManager::sdlEventsList</a>. <a class="el" href="struct_event_manager.html#a94a2584717ebaf6d143148d5c8b5bf7e">EventManager::allocatedSdlEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a94ee922abfc0c456eded72d6380e1712">EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -451,7 +452,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Removes <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> from a <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a>. Also, decreases <a class="el" href="struct_event_manager.html#ae586848fac4574f9c630a1b66a3b8c6c">EventManager::gameEventsCount</a> and shifts <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a> to the left. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">gameEvent</td><td>Pointer to a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> in the <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a>. Can be NULL. </td></tr>
   </table>
   </dd>
@@ -483,7 +484,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Updates <a class="el" href="struct_event_manager.html#ac563054d2cefbd8d20b1daf70eb35d78">EventManager::sdlEventsList</a>. Also, increases <a class="el" href="struct_event_manager.html#a2ef8242634939408c466f0f3f221b1cb">EventManager::sdlEventsCount</a> and tryies to reallocate memory if needed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>

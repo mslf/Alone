@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['slider_2ec',['Slider.c',['../_slider_8c.html',1,'']]],
-  ['slider_2eh',['Slider.h',['../_slider_8h.html',1,'']]]
+  ['progressbar_2ec',['ProgressBar.c',['../_progress_bar_8c.html',1,'']]],
+  ['progressbar_2eh',['ProgressBar.h',['../_progress_bar_8h.html',1,'']]]
 ];

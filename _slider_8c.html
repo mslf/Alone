@@ -124,7 +124,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:af35fe782449cd68c54767022a44fdb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to control user input events to <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Pointer to that function should be at Slider::sceneNode::control.  <a href="#af35fe782449cd68c54767022a44fdb62">More...</a><br /></td></tr>
 <tr class="separator:af35fe782449cd68c54767022a44fdb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9da42e10b23bca537a797520c7f5996b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_slider_8c.html#a9da42e10b23bca537a797520c7f5996b">Slider_update</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
-<tr class="memdesc:a9da42e10b23bca537a797520c7f5996b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to update <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Pointer to that function should be at Slider::sceneNode::update.  <a href="#a9da42e10b23bca537a797520c7f5996b">More...</a><br /></td></tr>
+<tr class="memdesc:a9da42e10b23bca537a797520c7f5996b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to update <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Pointer to that function should be at Slider::sceneNode::update.  <a href="#a9da42e10b23bca537a797520c7f5996b">More...</a><br /></td></tr>
 <tr class="separator:a9da42e10b23bca537a797520c7f5996b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8908bdf4389c18ecdac7261241b71939"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_slider_8c.html#a8908bdf4389c18ecdac7261241b71939">Slider_render</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
 <tr class="memdesc:a8908bdf4389c18ecdac7261241b71939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to render <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> on the screen. Pointer to that function should be at Slider::sceneNode::render.  <a href="#a8908bdf4389c18ecdac7261241b71939">More...</a><br /></td></tr>
@@ -185,7 +185,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> which is used to construct <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
   </table>
@@ -203,7 +203,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
 <dd>
-<a class="el" href="struct_renderer.html">Renderer</a> </dd>
+<a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
@@ -241,7 +241,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>, where that function will get user input events. Can be NULL. </td></tr>
+    <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>, where that function will get user input events. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -334,7 +334,7 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">slider</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> where to construct <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> resource. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for constructing <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a>, where function will get <a class="el" href="struct_slider_scene_node__parser_strings.html#afb4161ba63170320cc6c3a593b768778">SliderSceneNode_parserStrings::progressBarRes</a>, <a class="el" href="struct_slider_scene_node__parser_strings.html#a2f6ac1714c34743067351b0d2a64162b">SliderSceneNode_parserStrings::value</a> and <a class="el" href="struct_slider_scene_node__parser_strings.html#a6ff6c4d2047898f82939255005490b57">SliderSceneNode_parserStrings::step</a>. Can be NULL. </td></tr>
   </table>
@@ -347,7 +347,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
 <dd>
-<a class="el" href="struct_renderer.html">Renderer</a> </dd>
+<a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
@@ -416,7 +416,7 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">slider</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> where to construct <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> resource. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for constructing <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a>, where function will get <a class="el" href="struct_slider_scene_node__parser_strings.html#af942454af88828d7fe271c065a40b6ca">SliderSceneNode_parserStrings::buttonRes</a> and <a class="el" href="struct_slider_scene_node__parser_strings.html#ae9999a1186d6b643292d043537287c61">SliderSceneNode_parserStrings::allign</a>. Can be NULL. </td></tr>
   </table>
@@ -431,7 +431,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
 <dd>
-<a class="el" href="struct_renderer.html">Renderer</a> </dd>
+<a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
@@ -473,7 +473,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for drawing <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for drawing <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -563,7 +563,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">musican</td><td>Pointer to a <a class="el" href="struct_musican.html">Musican</a> for playing audio of a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">musican</td><td>Pointer to a <a class="el" href="struct_musican.html" title="Music subsystem. ">Musican</a> for playing audio of a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -628,7 +628,7 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">slider</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> which will be initialized. Can be NULL. </td></tr>
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading required resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for constructing <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings. Can be NULL. </td></tr>
   </table>
@@ -645,7 +645,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
 <dd>
-<a class="el" href="struct_renderer.html">Renderer</a> </dd>
+<a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
@@ -687,12 +687,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to update <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Pointer to that function should be at Slider::sceneNode::update. </p>
+<p>Function to update <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Pointer to that function should be at Slider::sceneNode::update. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>, where that function will place it's events. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for screen-depend coordinates converting. Can be NULL. </td></tr>
+    <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>, where that function will place it's events. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for screen-depend coordinates converting. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>

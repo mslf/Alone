@@ -96,9 +96,9 @@ $(document).ready(function(){initNavTree('_progress_bar_8h.html','');});
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &quot;scene/SceneNode.h&quot;</code><br />
-<code>#include &quot;renderer/Renderer.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_renderer_8h_source.html">renderer/Renderer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
-<code>#include &quot;musican/Musican.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_musican_8h_source.html">musican/Musican.h</a>&quot;</code><br />
 <code>#include &quot;resourceManager/ResourceManager.h&quot;</code><br />
 <code>#include &quot;sprite/Sprite.h&quot;</code><br />
 </div>
@@ -141,7 +141,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0ef80ac4057fe275ab569bf421c3cc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates ProgressBar::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>.  <a href="#a0ef80ac4057fe275ab569bf421c3cc59">More...</a><br /></td></tr>
 <tr class="separator:a0ef80ac4057fe275ab569bf421c3cc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc598fdb848507dec1f457c7c3d75b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_progress_bar_8h.html#abbc598fdb848507dec1f457c7c3d75b5">ProgressBar_update</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
-<tr class="memdesc:abbc598fdb848507dec1f457c7c3d75b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to update <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Pointer to that function should be at ProgressBar::sceneNode::update.  <a href="#abbc598fdb848507dec1f457c7c3d75b5">More...</a><br /></td></tr>
+<tr class="memdesc:abbc598fdb848507dec1f457c7c3d75b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to update <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Pointer to that function should be at ProgressBar::sceneNode::update.  <a href="#abbc598fdb848507dec1f457c7c3d75b5">More...</a><br /></td></tr>
 <tr class="separator:abbc598fdb848507dec1f457c7c3d75b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00863f37b5eca9cc5d2794a36c61a69c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_progress_bar_8h.html#a00863f37b5eca9cc5d2794a36c61a69c">ProgressBar_render</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
 <tr class="memdesc:a00863f37b5eca9cc5d2794a36c61a69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to render <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> on the screen. Pointer to that function should be at ProgressBar::sceneNode::render.  <a href="#a00863f37b5eca9cc5d2794a36c61a69c">More...</a><br /></td></tr>
@@ -232,7 +232,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> which is used to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
   </table>
@@ -248,7 +248,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
 <dd>
-<a class="el" href="struct_renderer.html">Renderer</a> </dd>
+<a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
@@ -314,7 +314,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for drawing <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for drawing <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -406,12 +406,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to update <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>. Pointer to that function should be at ProgressBar::sceneNode::update. </p>
+<p>Function to update <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Pointer to that function should be at ProgressBar::sceneNode::update. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. ">EventManager</a>, where that function will place it's events. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html">Renderer</a> for screen-depend coordinates converting. Can be NULL. </td></tr>
+    <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>, where that function will place it's events. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for screen-depend coordinates converting. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>

@@ -87,28 +87,121 @@ $(document).ready(function(){initNavTree('struct_renderer.html','');});
 <div class="title">Renderer Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Rendering subsystem.  
+ <a href="struct_renderer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_renderer_8h_source.html">Renderer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:af4d650f26e6e1a4b53c751abc1eff45e"><td class="memItemLeft" align="right" valign="top"><a id="af4d650f26e6e1a4b53c751abc1eff45e"></a>
-struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>logger</b></td></tr>
+<tr class="memitem:af4d650f26e6e1a4b53c751abc1eff45e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer.html#af4d650f26e6e1a4b53c751abc1eff45e">logger</a></td></tr>
 <tr class="separator:af4d650f26e6e1a4b53c751abc1eff45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa8e409e04dcf575ef63fd5fb3db06f9"><td class="memItemLeft" align="right" valign="top"><a id="aaa8e409e04dcf575ef63fd5fb3db06f9"></a>
-SDL_Window *&#160;</td><td class="memItemRight" valign="bottom"><b>window</b></td></tr>
+<tr class="memitem:aaa8e409e04dcf575ef63fd5fb3db06f9"><td class="memItemLeft" align="right" valign="top">SDL_Window *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer.html#aaa8e409e04dcf575ef63fd5fb3db06f9">window</a></td></tr>
 <tr class="separator:aaa8e409e04dcf575ef63fd5fb3db06f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
-SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top">SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer.html#a966da7a60c4ea3ba301e26ccc5efe452">renderer</a></td></tr>
 <tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a100180e2e1f4392fe765aa7e5b800215"><td class="memItemLeft" align="right" valign="top"><a id="a100180e2e1f4392fe765aa7e5b800215"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>cameraPosition</b></td></tr>
+<tr class="memitem:a100180e2e1f4392fe765aa7e5b800215"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer.html#a100180e2e1f4392fe765aa7e5b800215">cameraPosition</a></td></tr>
 <tr class="separator:a100180e2e1f4392fe765aa7e5b800215"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5fcda74f70efa26b808237cba88d273"><td class="memItemLeft" align="right" valign="top"><a id="aa5fcda74f70efa26b808237cba88d273"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>currentScreenSize</b></td></tr>
+<tr class="memitem:aa5fcda74f70efa26b808237cba88d273"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer.html#aa5fcda74f70efa26b808237cba88d273">currentScreenSize</a></td></tr>
 <tr class="separator:aa5fcda74f70efa26b808237cba88d273"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43723e61c3f9430011b1fee41436e6ae"><td class="memItemLeft" align="right" valign="top"><a id="a43723e61c3f9430011b1fee41436e6ae"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>virtualScreenSize</b></td></tr>
+<tr class="memitem:a43723e61c3f9430011b1fee41436e6ae"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">virtualScreenSize</a></td></tr>
 <tr class="separator:a43723e61c3f9430011b1fee41436e6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Rendering subsystem. </p>
+<dl class="section note"><dt>Note</dt><dd>All coordinates of <a class="el" href="struct_scene_node.html">SceneNode</a> and camera position are virtual (in Upixels). They are relativy projected on the real screen using <a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">Renderer::virtualScreenSize</a> by <a class="el" href="_renderer_8h.html#a6c226dd4e1388e2ce96aeb8cd4533b20" title="Converts Upixels absolute coordinates to the real pixels, based on Renderer::virtualScreenSize, Renderer::currentScreenSize and Renderer::cameraPosition. ">Renderer_convertCoordinates()</a>. </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a100180e2e1f4392fe765aa7e5b800215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a100180e2e1f4392fe765aa7e5b800215">&sect;&nbsp;</a></span>cameraPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point cameraPosition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current camera position for relative moving all #SceneNodes and theirs graphic. </p>
+
+</div>
+</div>
+<a id="aa5fcda74f70efa26b808237cba88d273"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5fcda74f70efa26b808237cba88d273">&sect;&nbsp;</a></span>currentScreenSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point currentScreenSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current physical display size in pixels. </p>
+
+</div>
+</div>
+<a id="af4d650f26e6e1a4b53c751abc1eff45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d650f26e6e1a4b53c751abc1eff45e">&sect;&nbsp;</a></span>logger</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_logger.html">Logger</a>* logger</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. </p>
+
+</div>
+</div>
+<a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a966da7a60c4ea3ba301e26ccc5efe452">&sect;&nbsp;</a></span>renderer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Renderer* renderer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SDL_Renderer for drawing and creating textures. </p>
+
+</div>
+</div>
+<a id="a43723e61c3f9430011b1fee41436e6ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43723e61c3f9430011b1fee41436e6ae">&sect;&nbsp;</a></span>virtualScreenSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point virtualScreenSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current virtual display size in Upixels (unit pixels). </p>
+
+</div>
+</div>
+<a id="aaa8e409e04dcf575ef63fd5fb3db06f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa8e409e04dcf575ef63fd5fb3db06f9">&sect;&nbsp;</a></span>window</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Window* window</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Represents a SDL_Window, where all graphic things will happen. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_renderer_8h_source.html">Renderer.h</a></li>
 </ul>

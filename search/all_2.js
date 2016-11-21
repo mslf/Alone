@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['cameraposition',['cameraPosition',['../struct_renderer.html#a100180e2e1f4392fe765aa7e5b800215',1,'Renderer']]],
   ['channel',['channel',['../struct_game_event__parser_strings.html#aac0fef3e3be17a5117b8e17ed55e33ec',1,'GameEvent_parserStrings']]],
   ['check_5fbox_5ferr_5fconstructig_5fchecked_5fevent',['CHECK_BOX_ERR_CONSTRUCTIG_CHECKED_EVENT',['../_check_box_8h.html#a15b393afbe508250113a293413c35f7faefe7161826180af876b8c04775642bdf',1,'CheckBox.h']]],
   ['check_5fbox_5ferr_5fconstructig_5ffocused_5fevent',['CHECK_BOX_ERR_CONSTRUCTIG_FOCUSED_EVENT',['../_check_box_8h.html#a15b393afbe508250113a293413c35f7fa7f51c9f591e9517429ed00f27a13d531',1,'CheckBox.h']]],
@@ -85,6 +86,7 @@ var searchData=
   ['contextmenuscenenode_5fparserstrings',['ContextMenuSceneNode_parserStrings',['../struct_context_menu_scene_node__parser_strings.html',1,'']]],
   ['contextmenuscennode_5ferrormessages',['ContextMenuScenNode_errorMessages',['../struct_context_menu_scen_node__error_messages.html',1,'']]],
   ['cotextmenu_5fupdatemenuoptionslist',['CotextMenu_updateMenuOptionsList',['../_context_menu_8c.html#a28a37c3762fea3e59f242734087792f6',1,'ContextMenu.c']]],
+  ['currentscreensize',['currentScreenSize',['../struct_renderer.html#aa5fcda74f70efa26b808237cba88d273',1,'Renderer']]],
   ['customgameeventscount',['customGameEventsCount',['../struct_event_manager.html#a44bc521b94d679d4a5566cd59866c259',1,'EventManager']]],
   ['customgameeventslist',['customGameEventsList',['../struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce',1,'EventManager']]]
 ];
