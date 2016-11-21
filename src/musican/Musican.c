@@ -25,10 +25,16 @@
 #include "musican/Musican.h"
 #include <SDL2/SDL.h>
 
+/**
+ * @brief Error message strings for #Musican.
+ */
 static const struct Musican_errorMessages {
     const char* const errAlloc;
+    /**< Will be displayed when allocating memory for #Musican failed. */
     const char* const errSdlInit;
+    /**< Will be displayed when initalizing SDL audio subsystem failed. */
     const char* const errMixOpening;
+    /**< Will be displayed when initializing SDL_mixer failed. */
 }Musican_errorMessages = {
     "Musican_construct: allocating memory failed!",
     "Musican_construct: SDL_Init audio failed!",
@@ -47,7 +53,7 @@ struct Musican* Musican_construct(struct Logger* logger, bool sound, bool music)
         Musican_destruct(musican);
         return NULL;
     }
-    if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
         Logger_log(logger, "%s. SDL_mixer error: %s", Musican_errorMessages.errMixOpening, Mix_GetError());
         Musican_destruct(musican);
         return NULL;

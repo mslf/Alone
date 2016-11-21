@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/10/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,30 +16,53 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Renderer.c
+ * @author mslf
+ * @date 10 Aug 2016
+ * @brief File containing implementation of #Renderer.
+ */
 #include <settings/Settings.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "renderer/Renderer.h"
 
-const char* const RENDERER_ERR_SDL_INIT_VIDEO = "Renderer: constructor: SDL_Init video failed!";
-const char* const RENDERER_ERR_ALLOC = "Renderer: constructor: allocating memory failed!";
-const char* const RENDERER_ERR_WINDOW_CREATING = "Renderer: constructor: window creating failed!";
-const char* const RENDERER_ERR_SDL_RENDERER_CREATING = "Renderer: constructor: SDL renderer creating failed!";
-const char* const RENDERER_ERR_IMG_INIT = "Renderer: constructor: IMG_Init failed!";
-const char* const RENDERER_ERR_TTF_INIT = "Renderer: constructor: TTF_Init failed!";
+/**
+ * @brief Error message strings for #Renderer.
+ */
+static const struct Renderer_errorMessages {
+    const char* const errSdlInitializingVideo;
+    /**< Will be displayed when initializing SDL video subsystem failed. */
+    const char* const errAlloc;
+    /**< Will be displayed when allocating memory for #Renderer failed. */
+    const char* const errCreatingWindow;
+    /**< Will be displayed when creating Renderer#window failed. */
+    const char* const errSdlRendererCreating;
+    /**< Will be displayed when creating Renderer#renderer failed. */
+    const char* const errSdlImgInitializing;
+    /**< Will be displayed when initializing SDL_image failed. */
+    const char* const errSdlTtfInitializing;
+    /**< Will be displayed when initializing SDL_ttf failed. */
+}Renderer_errorMessages = {
+    "Renderer_construct: SDL_Init video failed!",
+    "Renderer_construct: allocating memory failed!",
+    "Renderer_construct: window creating failed!",
+    "Renderer_construct: SDL renderer creating failed!",
+    "Renderer_construct: IMG_Init failed!",
+    "Renderer_construct: TTF_Init failed!"};
 
 struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* settings) {
     if (!settings)
         return NULL;
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        Logger_log(logger, "%s SDL error: %s", RENDERER_ERR_SDL_INIT_VIDEO, SDL_GetError());
+        Logger_log(logger, "%s SDL error: %s", Renderer_errorMessages.errSdlInitializingVideo, SDL_GetError());
         return NULL;
     }
     struct Renderer* renderer = NULL;
     renderer = (struct Renderer*)malloc(sizeof(struct Renderer));
     if (!renderer) {
-        Logger_log(logger, RENDERER_ERR_ALLOC);
+        Logger_log(logger, Renderer_errorMessages.errAlloc);
         Renderer_destruct(renderer);
         return NULL;
     }
@@ -50,24 +70,24 @@ struct Renderer* Renderer_construct(struct Logger* logger, struct Settings* sett
                                         (int)settings->w, (int)settings->h,
                                         (Uint32)settings->isFullscreen * SDL_WINDOW_FULLSCREEN);
     if (!renderer->window) {
-        Logger_log(logger, "%s SDL error: %s", RENDERER_ERR_WINDOW_CREATING, SDL_GetError());
+        Logger_log(logger, "%s SDL error: %s", Renderer_errorMessages.errCreatingWindow, SDL_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
     renderer->renderer = SDL_CreateRenderer(renderer->window, -1, SDL_RENDERER_ACCELERATED |
             (Uint32)settings->isVsyncActive * SDL_RENDERER_PRESENTVSYNC);
     if (!renderer->renderer) {
-        Logger_log(logger, "%s SDL error: %s", RENDERER_ERR_SDL_RENDERER_CREATING, SDL_GetError());
+        Logger_log(logger, "%s SDL error: %s", Renderer_errorMessages.errSdlRendererCreating, SDL_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
     if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-        Logger_log(logger, "%s SDL_image error: %s", RENDERER_ERR_IMG_INIT, IMG_GetError());
+        Logger_log(logger, "%s SDL_image error: %s", Renderer_errorMessages.errSdlImgInitializing, IMG_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }
     if(TTF_Init() == -1) {
-        Logger_log(logger, "%s SDL_ttf error: %s", RENDERER_ERR_TTF_INIT, TTF_GetError());
+        Logger_log(logger, "%s SDL_ttf error: %s", Renderer_errorMessages.errSdlTtfInitializing, TTF_GetError());
         Renderer_destruct(renderer);
         return NULL;
     }

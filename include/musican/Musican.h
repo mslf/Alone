@@ -49,6 +49,7 @@ struct Musican {
  * @param music Flag to set Musican#isMusicActive.
  * @return Pointer to an initialized #Musican or NULL, if constructing #Musican or 
  * initializing SDL audio or SDL_mixer failed.
+ * @note Use this function in pair with Musican_destruct().
  */
 struct Musican* Musican_construct(struct Logger* logger, bool sound, bool music);
 
