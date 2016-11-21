@@ -20,7 +20,7 @@
  * @file Logger.c
  * @author mslf
  * @date 11 Oct 2016
- * @brief File containing implementation of #Button.
+ * @brief File containing implementation of #Logger.
  */
 #include <stdio.h>
 #include <stdarg.h>

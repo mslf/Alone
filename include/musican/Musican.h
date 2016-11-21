@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/10/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,6 +16,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Musican.h
+ * @author mslf
+ * @date 10 Aug 2016
+ * @brief File containing #Musican and it's stuff.
+ */
 #ifndef ALONE_MUSICAN_H
 #define ALONE_MUSICAN_H
 
@@ -26,16 +29,41 @@
 #include "logger/Logger.h"
 #include "resourceManager/SoundResource.h"
 
+/**
+ * @brief Music subsystem.
+ * @note Music playing is not implemented yet.
+ */
 struct Musican {
     struct Logger* logger;
+    /**< Pointer to a #Logger for logging purpose. */
     bool isSoundActive;
+    /**< Flag indicates are we need to play sounds or not. */
     bool isMusicActive;
-    // Actually, this struct is empty. It will contain some other data later, if I need the music.
+    /**< Flag indicates are we need to play musics or not. */
 };
 
+/**
+ * @brief Constructs #Musican and inits SDL audio subsystem and SDL_mixer.
+ * @param logger Pointer to a #Logger to set Musican#logger. Can be NULL.
+ * @param sound Flag to set Musican#isSoundActive.
+ * @param music Flag to set Musican#isMusicActive.
+ * @return Pointer to an initialized #Musican or NULL, if constructing #Musican or 
+ * initializing SDL audio or SDL_mixer failed.
+ */
 struct Musican* Musican_construct(struct Logger* logger, bool sound, bool music);
+
+/**
+ * @brief Destructs #Musican and frees memory, used by it.
+ * @param musican Pointer to a #Musican. Can be NULL. Can be not fully initialized.
+ */
 void Musican_destruct(struct Musican* musican);
 
+/**
+ * @brief Function for playing sound.
+ * @param musican Pointer to a #Musican. Can be NULL.
+ * @param soundResource Pointer to a #SoundResource to be played. Can be NULL.
+ * @param loops Number of playing sound loops.
+ */
 void Musican_playSound(struct Musican* musican, struct SoundResource* soundResource, int loops);
 
 #endif //ALONE_MUSICAN_H
