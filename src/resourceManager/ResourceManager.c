@@ -331,7 +331,7 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
 }
 
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,
-                                                      const char* const textResId, unsigned char unique) {
+                                                      const char* const textResId, bool unique) {
     if (!rm || !textResId)
         return NULL;
     unsigned  char found = 0;
@@ -438,7 +438,7 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
     return rm->soundResourcesList[foundIndex];
 }
 
-unsigned char ResourceManager_saveTextResource(struct ResourceManager* rm,
+enum ResourceManager_errors ResourceManager_saveTextResource(struct ResourceManager* rm,
                                       struct TextResource* textResource, const char* const textResId) {
 
     if (!rm || !textResId || !textResource)

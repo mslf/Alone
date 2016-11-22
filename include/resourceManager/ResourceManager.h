@@ -26,6 +26,7 @@
 #define ALONE_RESOURCEMANAGER_H
 
 #include <stddef.h>
+#include <stdbool.h>
 #include "logger/Logger.h"
 #include "TextureResource.h"
 #include "TextResource.h"
@@ -35,7 +36,7 @@
 /**
  * @brief Some initial constants for #ResourceManager.
  */
-enum ResourceManager_constants{
+enum ResourceManager_constants {
     INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES = 10,
     /**< Init alocating number and reallocating step for ResourceManager#textureResourcesList. */
     INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES = 100,
@@ -44,6 +45,16 @@ enum ResourceManager_constants{
     /**< Init alocating number and reallocating step for ResourceManager#scriptResourcesList. */
     INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES = 10
     /**< Init alocating number and reallocating step for ResourceManager#soundResourcesList. */
+};
+
+/**
+ * @brief Error codes for #ResourceManager.
+ */
+enum ResourceManager_errors {
+    RM_NO_ERRORS = 0,
+    /**< All right, no errors. */
+    RM_ERR_NULL_ARGUMENT = 1
+    /**< Some of function's argument is NULL. */
 };
 
 /**
@@ -93,25 +104,161 @@ struct ResourceManager {
     /**< Allocated number of #SoundResource in the ResourceManager#soundResourcesList. */
 };
 
+/**
+ * @brief Constructs #ResourceManager and inits it.
+ * @param logger Pointer to a logger to set ResourceManager#logger. Can be NULL.
+ * @see #ResourceManager_constants
+ */
 struct ResourceManager* ResourceManager_construct(struct Logger* logger);
+
+/**
+ * @brief Destructs #ResourceManager and frees memory, used by it.
+ * @note #ResourceManager will destruct <B>all</B> #TextureResource in ResourceManager#textureResourcesList,
+ * #TextResource in the ResourceManager#textResourcesList, #ScriptResource in the ResourceManager#scriptResourcesList
+ * and #SoundResource in the ResourceManager#soundResourcesList.
+ */
 void ResourceManager_destruct(struct ResourceManager* rm);
 
-struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm, struct Renderer* renderer,
+/**
+ * @brief Loads #TextureResource from filesystem and adds it to the ResourceManager#textureResourcesList 
+ * or finds already exsisting the same #TextureResource in ResourceManager#textureResourcesList 
+ * (and increases its TextureResource#pointersCount).
+ * Also, ResourceManager#textureResourcesCount will be increased and 
+ * ResourceManager#allocatedTextureResourcesCount (if needed), if new #TextureResource loaded.
+ * @param rm Pointer to a #ResourceManager where to store #TextureResource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #TextureResource. Can be NULL.
+ * @param textureResId String with a path to the #TextureResource file in filesystem. Can be NULL.
+ * @return Pointer to a #TextureResource from ResourceManager#textureResourcesList, or NULL if something failed.
+ * @see #TextureResource
+ * @note Please, don't try to destruct returned #TextureResource.
+ */
+struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm,
+                                                            struct Renderer* renderer,
                                                             const char* const textureResId);
+
+/**
+ * @brief Generates #TextureResource from text and adds it to the ResourceManager#textureResourcesList 
+ * or finds already exsisting the same #TextureResource in ResourceManager#textureResourcesList 
+ * (and increases its TextureResource#pointersCount).
+ * Also, ResourceManager#textureResourcesCount will be increased and 
+ * ResourceManager#allocatedTextureResourcesCount (if needed), if new #TextureResource loaded.
+ * @param rm Pointer to a #ResourceManager where to store #TextureResource. Can be NULL.
+ * If you pass NULL here, then function will generates #TextureResource without saving it 
+ * in ResourceManager#textureResourcesList!
+ * So, you <B>should</B> destruct it by yourself.
+ * @param renderer Pointer to a #Renderer for constructing #TextureResource. Can be NULL.
+ * @param text String to be rendered in the #TextureResource. Can be NULL.
+ * @param fontPath String with a path to the ttf font in the filesystem. Can be NULL.
+ * @param size Vertical size of text in #TextureResource in Upixels.
+ * @param color SDL_Color of text in #TextureResource.
+ * @return Pointer to a #TextureResource from ResourceManager#textureResourcesList, or NULL if something failed.
+ * @see #TextureResource
+ * @note Please, don't try to destruct returned #TextureResource (with exeption).
+ * @warning Passing NULL #ResourceManager changes behaviour of the function.
+ * All returned #TextureResource, generated with NULL #ResourceManager, <B>should</B> be destructed by you.
+ */
 struct TextureResource* ResourceManager_loadTextureResourceFromText(struct ResourceManager* rm,
-                                                                    struct Renderer* renderer, const char* const text,
+                                                                    struct Renderer* renderer,
+                                                                    const char* const text,
                                                                     const char* const fontPath,
                                                                     int size, SDL_Color color);
+
+/**
+ * @brief Loads #TextResource from filesystem and adds it to the ResourceManager#textResourcesList 
+ * or finds already exsisting the same #TextResource in ResourceManager#textResourcesList 
+ * (and increases its TextResource#pointersCount).
+ * Also, ResourceManager#textResourcesCount will be increased and 
+ * ResourceManager#allocatedTextResourcesCount (if needed), if new #TextResource loaded.
+ * @param rm Pointer to a #ResourceManager where to store #TextResource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #TextResource. Can be NULL.
+ * @param textResId String with a path to the #TextResource file in filesystem. Can be NULL.
+ * @param unique Flag to load #TextResource twice and more from filesystem, even it exists in ResourceManager#textResourcesList.
+ * @return Pointer to a #TextResource from ResourceManager#textResourcesList, or NULL if something failed.
+ * @see #TextResource
+ * @note Please, don't try to destruct returned #TextResource.
+ * @note This function will find non-unique #TextResource in ResourceManager#textResourcesList only 
+ * if you've passed false unique flag. If unique flag is true or #TextResource is unique, then nothing will be found.
+ * So, you can't access unique #TextResource from outside world, if someone who loaded this #TextResource is 
+ * not you (or not in your scope right now).
+ */
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,
-                                                            const char* const textResId, unsigned char unique);
+                                                      const char* const textResId,
+                                                      bool unique);
+
+/**
+ * @brief Loads #ScriptResource from filesystem and adds it to the ResourceManager#scriptResourcesList 
+ * or finds already exsisting the same #ScriptResource in ResourceManager#scriptResourcesList 
+ * (and increases its ScriptResource#pointersCount).
+ * Also, ResourceManager#scriptResourcesCount will be increased and 
+ * ResourceManager#allocatedScriptResourcesCount (if needed), if new #ScriptResource loaded.
+ * @param rm Pointer to a #ResourceManager where to store #ScriptResource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #ScriptResource. Can be NULL.
+ * @param scriptResId String with a path to the #ScriptResource file in filesystem. Can be NULL.
+ * @return Pointer to a #ScriptResource from ResourceManager#scriptResourcesList, or NULL if something failed.
+ * @see #ScriptResource
+ * @note Please, don't try to destruct returned #ScriptResource.
+ */
 struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager* rm,
-                                                            const char* const scriptResId);
+                                                          const char* const scriptResId);
+
+/**
+ * @brief Loads #SoundResource from filesystem and adds it to the ResourceManager#soundResourcesList 
+ * or finds already exsisting the same #SoundResource in ResourceManager#soundResourcesList 
+ * (and increases its SoundResource#pointersCount).
+ * Also, ResourceManager#soundResourcesCount will be increased and 
+ * ResourceManager#allocatedSoundResourcesCount (if needed), if new #SoundResource loaded.
+ * @param rm Pointer to a #ResourceManager where to store #SoundResource. Can be NULL.
+ * @param renderer Pointer to a #Renderer for constructing #SoundResource. Can be NULL.
+ * @param soundResId String with a path to the #SoundResource file in filesystem. Can be NULL.
+ * @return Pointer to a #SoundResource from ResourceManager#soundResourcesList, or NULL if something failed.
+ * @see #SoundResource
+ * @note Please, don't try to destruct returned #SoundResource.
+ */
 struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* rm,
-                                                            const char* const soundResId);
+                                                        const char* const soundResId);
+
+/**
+ * @brief Function for deferred removing and destruction needless 
+ * (if TextureResource#pointersCount is 0) #TextureResource in ResourceManager#textureResourcesList.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @see #TextureResource
+ */
 void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm);
+
+/**
+ * @brief Function for deferred removing and destruction needless 
+ * (if TextResource#pointersCount is 0) #TextResource in ResourceManager#textResourcesList.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @see #TextResource
+ */
 void ResourceManager_destructNeedlessTextResources(struct ResourceManager* rm);
+
+/**
+ * @brief Function for deferred removing and destruction needless 
+ * (if ScriptResource#pointersCount is 0) #ScriptResource in ResourceManager#scriptResourcesList.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @see #ScriptResource
+ */
 void ResourceManager_destructNeedlessScriptResources(struct ResourceManager* rm);
+
+/**
+ * @brief Function for deferred removing and destruction needless 
+ * (if SoundResource#pointersCount is 0) #SoundResource in ResourceManager#soundResourcesList.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @see #SoundResource
+ */
 void ResourceManager_destructNeedlessSoundResources(struct ResourceManager* rm);
-unsigned char ResourceManager_saveTextResource(struct ResourceManager* rm,
-                                              struct TextResource* textResource, const char* const textResId);
+
+/**
+ * @brief Saves #TextResource in the filesystem.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @param textResource Pointer to a #TextResource, which will be saved. Can be NULL.
+ * @param textResId String with a path, where to save #TextResource. Can be NULL.
+ * @return #ResourceManager_errors value.
+ * @see #TextResource
+ * @see #ResourceManager_errors
+ */
+enum ResourceManager_errors ResourceManager_saveTextResource(struct ResourceManager* rm,
+                                                             struct TextResource* textResource,
+                                                             const char* const textResId);
 #endif //ALONE_RESOURCEMANAGER_H
