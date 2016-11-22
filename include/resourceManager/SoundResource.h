@@ -1,6 +1,3 @@
-//
-// Created by mslf on 9/22/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,18 +16,40 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file SoundResource.h
+ * @author mslf
+ * @date 22 Sep 2016
+ * @brief File containing #SoundResource and it's stuff.
+ */
 #ifndef ALONE_SOUNDRESOURCE_H
 #define ALONE_SOUNDRESOURCE_H
 
 #include <SDL2/SDL_mixer.h>
 
+/**
+ * @brief Resource, which is represents playable sound (not music!).
+ */
 struct SoundResource {
     size_t pointersCount;
+    /**< Count of pointers to this resource. */
     char* id;
+    /**< ID (path) string of this resource. */
     Mix_Chunk* sound;
+    /**< SDL_mixer sound. */
 };
 
+/**
+ * @brief Constructs #SoundResource and inits it.
+ * @param path String with path to the wav sound file.
+ * @return Pointer to a #SoundResource or NULL, if something failed.
+ */
 struct SoundResource* SoundResource_construct(const char* const path);
+
+/**
+ * @brief Destructs #SoundResource and frees memory, used by it.
+ * @param soundResource Pointer to a #SoundResource. Can be NULL. Can be not fully initialized.
+ */
 void SoundResource_destruct(struct SoundResource* soundResource);
 
 /**
