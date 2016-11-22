@@ -41,7 +41,7 @@ struct SoundResource {
 
 /**
  * @brief Constructs #SoundResource and inits it.
- * @param path String with path to the wav sound file.
+ * @param path String with path to the wav sound file. Can be NULL.
  * @return Pointer to a #SoundResource or NULL, if something failed.
  */
 struct SoundResource* SoundResource_construct(const char* const path);

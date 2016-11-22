@@ -61,7 +61,7 @@ struct TextResource {
 
 /**
  * @brief Constructs #TextResource and inits it.
- * @param path String with path to the wav sound file.
+ * @param path String with path to the plain text file. Can be NULL.
  * @param unique Flag to set TextResource#unique.
  * @return Pointer to a #TextResource or NULL, if something failed.
  */

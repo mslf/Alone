@@ -1,6 +1,3 @@
-//
-// Created by mslf on 9/22/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,17 +16,33 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file TextureResource.c
+ * @author mslf
+ * @date 22 Sep 2016
+ * @brief File containing implementation of #TextureResource.
+ */
 #include <renderer/Renderer.h>
 #include <SDL2/SDL_ttf.h>
 #include "resourceManager/TextureResource.h"
 
-const char* const TEXTURE_RESOURCE_ERR_IMG_LOADING_TEXTURE =
-        "TextureResource_construct: loading texture failed!";
-const char* const TEXTURE_RESOURCE_ERR_OPENING_FONT = "TextureResource_constructFromText: loading font failed!";
-const char* const TEXTURE_RESOURCE_ERR_RENDERING_TEXT =
-        "TextureResource_constructFromText: rendering text to surface failed!";
-const char* const TEXTURE_RESOURCE_ERR_CREATING_TEXTURE_FROM_SURFACE =
-        "TextureResource_constructFromText: creating texture from surface failed!";
+/**
+ * @brief Error message strings for #TextureResource.
+ */
+static const struct TextureResource_errorMessages {
+    const char* const errImgLoading;
+    /**< Will be displayed when loading texture from file failed. */
+    const char* const errOpeningFont;
+    /**< Will be displayed when loading ttf font file failed. */
+    const char* const errRenderingText;
+    /**< Will be displayed when rendering text to the texture failed. */
+    const char* const errCreatingTextureFromSurface;
+    /**< Will be displayed when creatinf texture from SDL surface failed. */
+}TextureResource_errorMessages = {
+    "TextureResource_construct: loading texture failed!",
+    "TextureResource_constructFromText: loading font failed!",
+    "TextureResource_constructFromText: rendering text to surface failed!",
+    "TextureResource_constructFromText: creating texture from surface failed!"};
 
 struct TextureResource* TextureResource_construct(struct Renderer* renderer, const char* const path) {
     if (!renderer || !path)
@@ -48,7 +61,7 @@ struct TextureResource* TextureResource_construct(struct Renderer* renderer, con
     textureResource->texture = IMG_LoadTexture(renderer->renderer, path);
     if (!textureResource->texture) {
         Logger_log(renderer->logger, "%s SDL_image error: %s",
-                   TEXTURE_RESOURCE_ERR_IMG_LOADING_TEXTURE,
+                   TextureResource_errorMessages.errImgLoading,
                    IMG_GetError());
         TextureResource_destruct(textureResource);
         return NULL;
@@ -80,13 +93,13 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
         return  NULL;
     TTF_Font* font = TTF_OpenFont(fontPath, size);
     if (!font) {
-        Logger_log(renderer->logger, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_OPENING_FONT, TTF_GetError());
+        Logger_log(renderer->logger, "%s SDL_ttf error: %s", TextureResource_errorMessages.errOpeningFont, TTF_GetError());
         TextureResource_destruct(textureResource);
         return  NULL;
     }
     SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, text, color);
     if (!textSurface) {
-        Logger_log(renderer->logger, "%s SDL_ttf error: %s", TEXTURE_RESOURCE_ERR_RENDERING_TEXT, TTF_GetError());
+        Logger_log(renderer->logger, "%s SDL_ttf error: %s", TextureResource_errorMessages.errRenderingText, TTF_GetError());
         TextureResource_destruct(textureResource);
         TTF_CloseFont(font);
         return  NULL;
@@ -94,7 +107,7 @@ struct TextureResource* TextureResource_constructFromText(struct Renderer* rende
     textureResource->texture = SDL_CreateTextureFromSurface(renderer->renderer, textSurface);
     if (!textureResource->texture) {
         Logger_log(renderer->logger, "%s SDL error: %s",
-                   TEXTURE_RESOURCE_ERR_CREATING_TEXTURE_FROM_SURFACE,
+                   TextureResource_errorMessages.errCreatingTextureFromSurface,
                    SDL_GetError());
         TextureResource_destruct(textureResource);
         TTF_CloseFont(font);
