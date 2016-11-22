@@ -1,6 +1,3 @@
-//
-// Created by mslf on 9/22/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,10 +16,16 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file TextResource.c
+ * @author mslf
+ * @date 22 Sep 2016
+ * @brief File containing implementation of #TextResource.
+ */
 #include "resourceManager/TextResource.h"
 #include <SDL2/SDL.h>
 
-struct TextResource* TextResource_construct(const char* const path, unsigned char unique) {
+struct TextResource* TextResource_construct(const char* const path, bool unique) {
     if (!path)
         return NULL;
     struct TextResource* textResource = NULL;
@@ -83,34 +86,34 @@ void TextResource_decreasePointersCounter(struct TextResource* textResource) {
         textResource->pointersCount--;
 }
 
-unsigned char TextResource_updateContent(struct TextResource* textResource, const char* const text) {
+enum TextResource_errors TextResource_updateContent(struct TextResource* textResource, const char* const text) {
     if (!textResource || !text)
-        return 1;
+        return TEXT_RESOURCE_ERR_NULL_ARGUMENT;
     char* newText = NULL;
     newText = (char*)malloc(sizeof(char) * (strlen(text) + 1));
     if (!newText)
-        return 2;
+        return TEXT_RESOURCE_ERR_ALLOC;
     strcpy(newText, text);
     free(textResource->text);
     textResource->text = newText;
-    return 0;
+    return TEXT_RESOURCE_NO_ERRORS;
 }
 
-unsigned char TextResource_save(struct TextResource* textResource, const char* const path) {
+enum TextResource_errors TextResource_save(struct TextResource* textResource, const char* const path) {
     if (!textResource)
-        return 1;
+        return TEXT_RESOURCE_ERR_NULL_ARGUMENT;
     SDL_RWops *file = NULL;
     if (path && strcmp(path,textResource->id) != 0)
         file = SDL_RWFromFile(path, "w");
     else
         file = SDL_RWFromFile(textResource->id, "w");
     if(!file)
-        return 2;
+        return TEXT_RESOURCE_ERR_OPENNING;
     size_t len = SDL_strlen(textResource->text);
     if (SDL_RWwrite(file, textResource->text, 1, len) != len) {
         SDL_RWclose(file);
-        return 3;
+        return TEXT_RESOURCE_ERR_WRITING;
     }
     SDL_RWclose(file);
-    return 0;
+    return TEXT_RESOURCE_NO_ERRORS;
 }

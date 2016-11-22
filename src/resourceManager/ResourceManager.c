@@ -545,7 +545,7 @@ enum ResourceManager_errors ResourceManager_saveTextResource(struct ResourceMana
 
     if (!rm || !textResId || !textResource)
         return RM_ERR_NULL_ARGUMENT;
-    size_t result = 0;
+    enum TextResource_errors result = TEXT_RESOURCE_NO_ERRORS;
     bool found = false;
     result = TextResource_save(textResource, textResId);
     for (size_t i = 0; i < rm->textResourcesCount; i++)
