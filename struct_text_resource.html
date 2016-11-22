@@ -87,22 +87,86 @@ $(document).ready(function(){initNavTree('struct_text_resource.html','');});
 <div class="title">TextResource Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Resource, which is represents changeable string. Also, you can save it back to the filesystem using <a class="el" href="_text_resource_8h.html#a0254da33f7e29ae5c317260c09cf75cc" title="Writes TextResource::text to the file in the filesystem. ">TextResource_save()</a>.  
+ <a href="struct_text_resource.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_text_resource_8h_source.html">TextResource.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aa058e87a17f5f5079be31c1631ed5f50"><td class="memItemLeft" align="right" valign="top"><a id="aa058e87a17f5f5079be31c1631ed5f50"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pointersCount</b></td></tr>
+<tr class="memitem:aa058e87a17f5f5079be31c1631ed5f50"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_resource.html#aa058e87a17f5f5079be31c1631ed5f50">pointersCount</a></td></tr>
 <tr class="separator:aa058e87a17f5f5079be31c1631ed5f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb3b0d045ada529257a2fbf8f829599"><td class="memItemLeft" align="right" valign="top"><a id="aecb3b0d045ada529257a2fbf8f829599"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memitem:aecb3b0d045ada529257a2fbf8f829599"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_resource.html#aecb3b0d045ada529257a2fbf8f829599">id</a></td></tr>
 <tr class="separator:aecb3b0d045ada529257a2fbf8f829599"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5633b1433389cec21ade3811bbe9ca5b"><td class="memItemLeft" align="right" valign="top"><a id="a5633b1433389cec21ade3811bbe9ca5b"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>text</b></td></tr>
+<tr class="memitem:a5633b1433389cec21ade3811bbe9ca5b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_resource.html#a5633b1433389cec21ade3811bbe9ca5b">text</a></td></tr>
 <tr class="separator:a5633b1433389cec21ade3811bbe9ca5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0473d732b3400461ba1f14e08fc16cd2"><td class="memItemLeft" align="right" valign="top"><a id="a0473d732b3400461ba1f14e08fc16cd2"></a>
-unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>isUnique</b></td></tr>
-<tr class="separator:a0473d732b3400461ba1f14e08fc16cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bf1b6bebe561b86cd3d6b5dbf54be1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_resource.html#a1bf1b6bebe561b86cd3d6b5dbf54be1c">isUnique</a></td></tr>
+<tr class="separator:a1bf1b6bebe561b86cd3d6b5dbf54be1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Resource, which is represents changeable string. Also, you can save it back to the filesystem using <a class="el" href="_text_resource_8h.html#a0254da33f7e29ae5c317260c09cf75cc" title="Writes TextResource::text to the file in the filesystem. ">TextResource_save()</a>. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="aecb3b0d045ada529257a2fbf8f829599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb3b0d045ada529257a2fbf8f829599">&sect;&nbsp;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ID (path) string of this resource. </p>
+
+</div>
+</div>
+<a id="a1bf1b6bebe561b86cd3d6b5dbf54be1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bf1b6bebe561b86cd3d6b5dbf54be1c">&sect;&nbsp;</a></span>isUnique</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isUnique</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag indicates uniqueness of this <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>. </p>
+
+</div>
+</div>
+<a id="aa058e87a17f5f5079be31c1631ed5f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa058e87a17f5f5079be31c1631ed5f50">&sect;&nbsp;</a></span>pointersCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t pointersCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Count of pointers to this resource. </p>
+
+</div>
+</div>
+<a id="a5633b1433389cec21ade3811bbe9ca5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5633b1433389cec21ade3811bbe9ca5b">&sect;&nbsp;</a></span>text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* text</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Containing text string. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_text_resource_8h_source.html">TextResource.h</a></li>
 </ul>

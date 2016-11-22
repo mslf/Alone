@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('_slider_8h.html','');});
 <code>#include &quot;<a class="el" href="_renderer_8h_source.html">renderer/Renderer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_musican_8h_source.html">musican/Musican.h</a>&quot;</code><br />
-<code>#include &quot;resourceManager/ResourceManager.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_resource_manager_8h_source.html">resourceManager/ResourceManager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_progress_bar_8h_source.html">gui/ProgressBar.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_button_8h_source.html">gui/Button.h</a>&quot;</code><br />
 </div>
@@ -149,7 +149,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ae84198b1509108b7ae7c08ce9d24883d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> and frees memory, used by it. Pointer to that function should be at Slider::sceneNode::destruct.  <a href="#ae84198b1509108b7ae7c08ce9d24883d">More...</a><br /></td></tr>
 <tr class="separator:ae84198b1509108b7ae7c08ce9d24883d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c4070b3d225d59e743d46a3f40003d6"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_slider_8h.html#af9ea8b03d6825c39fa05fa624e6b5f77">SliderSceneNode_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_slider_8h.html#a2c4070b3d225d59e743d46a3f40003d6">Slider_save</a> (const struct <a class="el" href="struct_slider.html">Slider</a> *const slider, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, const char *const sliderResId)</td></tr>
-<tr class="memdesc:a2c4070b3d225d59e743d46a3f40003d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates Slider::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>.  <a href="#a2c4070b3d225d59e743d46a3f40003d6">More...</a><br /></td></tr>
+<tr class="memdesc:a2c4070b3d225d59e743d46a3f40003d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates Slider::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>.  <a href="#a2c4070b3d225d59e743d46a3f40003d6">More...</a><br /></td></tr>
 <tr class="separator:a2c4070b3d225d59e743d46a3f40003d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af35fe782449cd68c54767022a44fdb62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_slider_8h.html#af35fe782449cd68c54767022a44fdb62">Slider_control</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td></tr>
 <tr class="memdesc:af35fe782449cd68c54767022a44fdb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to control user input events to <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Pointer to that function should be at Slider::sceneNode::control.  <a href="#af35fe782449cd68c54767022a44fdb62">More...</a><br /></td></tr>
@@ -278,7 +278,7 @@ Variables</h2></td></tr>
 <p>Constructs <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_slider.html#a686905c1a3f09ace5f334088ada4ee71">Slider::base</a> and <a class="el" href="struct_slider.html#ae7aee5d2fea3fa9c160fcb9341275053">Slider::button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. Can be NULL. </td></tr>
@@ -295,7 +295,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
@@ -441,12 +441,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Saves <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates Slider::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. </p>
+<p>Saves <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates Slider::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">slider</td><td>Pointer to a <a class="el" href="struct_slider.html" title="Standart Gui element with some possible states. Based on ProgressBar and Button. User can click and m...">Slider</a> which will be saved. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to save Slider::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
-    <tr><td class="paramname">sliderResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html">ResourceManager</a> will save Slider::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to save Slider::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">sliderResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> will save Slider::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -455,7 +455,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_slider_8h.html#af9ea8b03d6825c39fa05fa624e6b5f77" title="Error codes for Slider. ">SliderSceneNode_errors</a> </dd></dl>
 

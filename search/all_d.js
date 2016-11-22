@@ -2,6 +2,7 @@ var searchData=
 [
   ['pair',['Pair',['../struct_pair.html',1,'']]],
   ['physicalscenenode',['PhysicalSceneNode',['../struct_physical_scene_node.html',1,'']]],
+  ['pointerscount',['pointersCount',['../struct_script_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'ScriptResource::pointersCount()'],['../struct_sound_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'SoundResource::pointersCount()'],['../struct_text_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'TextResource::pointersCount()'],['../struct_texture_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'TextureResource::pointersCount()']]],
   ['pressedevent',['pressedEvent',['../struct_button.html#a6c6350ebecb76824f44acd4af5310894',1,'Button']]],
   ['pressedeventres',['pressedEventRes',['../struct_button_scene_node__parser_strings.html#aa63f78ed02ab8fb2518965ba94954854',1,'ButtonSceneNode_parserStrings']]],
   ['pressedeventresource',['pressedEventResource',['../struct_button.html#a4f009b181e2d1679d58eeb638c79f1f7',1,'Button']]],

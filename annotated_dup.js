@@ -42,6 +42,7 @@ var annotated_dup =
     [ "Renderer", "struct_renderer.html", "struct_renderer" ],
     [ "Renderer_errorMessages", "struct_renderer__error_messages.html", "struct_renderer__error_messages" ],
     [ "ResourceManager", "struct_resource_manager.html", "struct_resource_manager" ],
+    [ "ResourceManager_errorMessages", "struct_resource_manager__error_messages.html", "struct_resource_manager__error_messages" ],
     [ "RightOperand", "struct_right_operand.html", "struct_right_operand" ],
     [ "Scene", "struct_scene.html", "struct_scene" ],
     [ "SceneNode", "struct_scene_node.html", "struct_scene_node" ],
@@ -61,5 +62,6 @@ var annotated_dup =
     [ "TextParser", "struct_text_parser.html", "struct_text_parser" ],
     [ "TextResource", "struct_text_resource.html", "struct_text_resource" ],
     [ "TextureResource", "struct_texture_resource.html", "struct_texture_resource" ],
+    [ "TextureResource_errorMessages", "struct_texture_resource__error_messages.html", "struct_texture_resource__error_messages" ],
     [ "User", "struct_user.html", "struct_user" ]
 ];

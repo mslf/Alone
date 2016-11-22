@@ -116,7 +116,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ac150bc4c4a6b818f29e16bacbd308c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and frees memory, used by it. Pointer to that function should be at ProgressBar::sceneNode::destruct.  <a href="#ac150bc4c4a6b818f29e16bacbd308c6d">More...</a><br /></td></tr>
 <tr class="separator:ac150bc4c4a6b818f29e16bacbd308c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ef80ac4057fe275ab569bf421c3cc59"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258">ProgressBarSceneNode_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_progress_bar_8c.html#a0ef80ac4057fe275ab569bf421c3cc59">ProgressBar_save</a> (const struct <a class="el" href="struct_progress_bar.html">ProgressBar</a> *const progressBar, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, const char *const progressBarResId)</td></tr>
-<tr class="memdesc:a0ef80ac4057fe275ab569bf421c3cc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates ProgressBar::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>.  <a href="#a0ef80ac4057fe275ab569bf421c3cc59">More...</a><br /></td></tr>
+<tr class="memdesc:a0ef80ac4057fe275ab569bf421c3cc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates ProgressBar::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>.  <a href="#a0ef80ac4057fe275ab569bf421c3cc59">More...</a><br /></td></tr>
 <tr class="separator:a0ef80ac4057fe275ab569bf421c3cc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc598fdb848507dec1f457c7c3d75b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_progress_bar_8c.html#abbc598fdb848507dec1f457c7c3d75b5">ProgressBar_update</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
 <tr class="memdesc:abbc598fdb848507dec1f457c7c3d75b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to update <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Pointer to that function should be at ProgressBar::sceneNode::update.  <a href="#abbc598fdb848507dec1f457c7c3d75b5">More...</a><br /></td></tr>
@@ -176,7 +176,7 @@ Variables</h2></td></tr>
 <p>Constructs <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. Can be NULL. </td></tr>
@@ -191,7 +191,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
@@ -285,7 +285,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> where to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading <a class="el" href="struct_sprite.html">Sprite</a> resource. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading <a class="el" href="struct_sprite.html">Sprite</a> resource. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a>, where function will get <a class="el" href="struct_progress_bar_scene_node__parser_strings.html#a008090dd7a5af169656ea5a85a437385">ProgressBarSceneNode_parserStrings::spriteRes</a>. Can be NULL. </td></tr>
@@ -297,7 +297,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_sprite.html">Sprite</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
@@ -381,12 +381,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Saves <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates ProgressBar::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. </p>
+<p>Saves <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates ProgressBar::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> which will be saved. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to save ProgressBar::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
-    <tr><td class="paramname">progressBarResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html">ResourceManager</a> will save ProgressBar::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to save ProgressBar::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">progressBarResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> will save ProgressBar::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -395,7 +395,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258" title="Error codes for ProgressBar. ">ProgressBarSceneNode_errors</a> </dd></dl>
 
@@ -457,7 +457,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> which will be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading required resources. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading required resources. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings. Can be NULL. </td></tr>
@@ -471,7 +471,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>

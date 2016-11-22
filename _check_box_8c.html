@@ -131,7 +131,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:adb15d1b3d6fab1262a90db8add812088"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes <a class="el" href="struct_check_box.html#ae214e71201e1e7a27db408e05f019cbd">CheckBox::unCheckedEventResource</a> and <a class="el" href="struct_check_box.html#aee6e54d35d8850022093412d674007da">CheckBox::unCheckedEvent</a>. Sets old CheckBox::unCheckedEvent::isNeeded to false, if exists. Decreases old CheckBox::unCheckedEventResource::pointersCount if exists.  <a href="#adb15d1b3d6fab1262a90db8add812088">More...</a><br /></td></tr>
 <tr class="separator:adb15d1b3d6fab1262a90db8add812088"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f3a4c57a49c72bd1a02761fddac8520"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_check_box_8h.html#a15b393afbe508250113a293413c35f7f">CheckBoxSceneNode_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_check_box_8c.html#a2f3a4c57a49c72bd1a02761fddac8520">CheckBox_save</a> (const struct <a class="el" href="struct_check_box.html">CheckBox</a> *const checkBox, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, const char *const checkBoxResId)</td></tr>
-<tr class="memdesc:a2f3a4c57a49c72bd1a02761fddac8520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates CheckBox::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>.  <a href="#a2f3a4c57a49c72bd1a02761fddac8520">More...</a><br /></td></tr>
+<tr class="memdesc:a2f3a4c57a49c72bd1a02761fddac8520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates CheckBox::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>.  <a href="#a2f3a4c57a49c72bd1a02761fddac8520">More...</a><br /></td></tr>
 <tr class="separator:a2f3a4c57a49c72bd1a02761fddac8520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8832f9b1854e4fc8a4edc7351d35cbd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_check_box_8c.html#a8832f9b1854e4fc8a4edc7351d35cbd5">CheckBox_control</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td></tr>
 <tr class="memdesc:a8832f9b1854e4fc8a4edc7351d35cbd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to control user input events to <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Pointer to that function should be at CheckBox::sceneNode::control.  <a href="#a8832f9b1854e4fc8a4edc7351d35cbd5">More...</a><br /></td></tr>
@@ -192,8 +192,8 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load new <a class="el" href="struct_check_box.html#a141e6071f8fcb7d05f669cb32022bdc3">CheckBox::checkedEventResource</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">checkedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load new <a class="el" href="struct_check_box.html#a141e6071f8fcb7d05f669cb32022bdc3">CheckBox::checkedEventResource</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">checkedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -202,7 +202,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_check_box_8h.html#a15b393afbe508250113a293413c35f7f" title="Error codes for CheckBox. ">CheckBoxSceneNode_errors</a> </dd></dl>
 
@@ -244,8 +244,8 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load new <a class="el" href="struct_check_box.html#aff7dcf845e86b8d62077ceec6094f3e3">CheckBox::focusedEventResource</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">focusedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load new <a class="el" href="struct_check_box.html#aff7dcf845e86b8d62077ceec6094f3e3">CheckBox::focusedEventResource</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">focusedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -254,7 +254,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_check_box_8h.html#a15b393afbe508250113a293413c35f7f" title="Error codes for CheckBox. ">CheckBoxSceneNode_errors</a> </dd></dl>
 
@@ -296,8 +296,8 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load new <a class="el" href="struct_check_box.html#ae214e71201e1e7a27db408e05f019cbd">CheckBox::unCheckedEventResource</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">unCheckedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load new <a class="el" href="struct_check_box.html#ae214e71201e1e7a27db408e05f019cbd">CheckBox::unCheckedEventResource</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">unCheckedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -306,7 +306,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_check_box_8h.html#a15b393afbe508250113a293413c35f7f" title="Error codes for CheckBox. ">CheckBoxSceneNode_errors</a> </dd></dl>
 
@@ -353,7 +353,7 @@ Variables</h2></td></tr>
 <p>Constructs <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
@@ -366,7 +366,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
@@ -486,7 +486,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> where to construct events. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> resources. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> resources. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a>, where function will get CheckBoxSceneNode_parserStrings::focusedEventRes, CheckBoxSceneNode_parserStrings::checkedEventRes and CheckBoxSceneNode_parserStrings::unCheckedEventRes. Can be NULL. </td></tr>
   </table>
   </dd>
@@ -495,7 +495,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
@@ -547,16 +547,16 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> where to construct sound resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading sound resources. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading sound resources. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a>, where function will get CheckBoxSceneNode_parserStrings::focusedSoundRes, CheckBoxSceneNode_parserStrings::checkedSoundRes and CheckBoxSceneNode_parserStrings::unCheckedSoundRes. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> </dd>
 <dd>
-<a class="el" href="struct_sound_resource.html">SoundResource</a> </dd>
+<a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
@@ -620,7 +620,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> where to construct <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading <a class="el" href="struct_sprite.html">Sprite</a> resource. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading <a class="el" href="struct_sprite.html">Sprite</a> resource. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a>, where function will get CheckBoxSceneNode_parserStrings::spriteRes. Can be NULL. </td></tr>
@@ -632,7 +632,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_sprite.html">Sprite</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
@@ -716,12 +716,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Saves <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates CheckBox::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. </p>
+<p>Saves <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates CheckBox::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> which will be saved. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to save CheckBox::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
-    <tr><td class="paramname">checkBoxResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html">ResourceManager</a> will save CheckBox::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to save CheckBox::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">checkBoxResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> will save CheckBox::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -730,7 +730,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_check_box_8h.html#a15b393afbe508250113a293413c35f7f" title="Error codes for CheckBox. ">CheckBoxSceneNode_errors</a> </dd></dl>
 
@@ -830,7 +830,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">checkBox</td><td>Pointer to a <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> which will be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> for loading required resources. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading required resources. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings. Can be NULL. </td></tr>
@@ -842,7 +842,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>

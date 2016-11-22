@@ -87,22 +87,86 @@ $(document).ready(function(){initNavTree('struct_texture_resource.html','');});
 <div class="title">TextureResource Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Resource, which is represents drawable texture.  
+ <a href="struct_texture_resource.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_texture_resource_8h_source.html">TextureResource.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a859b8efbf9abe8e82757ee5c75a0c97c"><td class="memItemLeft" align="right" valign="top"><a id="a859b8efbf9abe8e82757ee5c75a0c97c"></a>
-SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>texture</b></td></tr>
+<tr class="memitem:a859b8efbf9abe8e82757ee5c75a0c97c"><td class="memItemLeft" align="right" valign="top">SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_resource.html#a859b8efbf9abe8e82757ee5c75a0c97c">texture</a></td></tr>
 <tr class="separator:a859b8efbf9abe8e82757ee5c75a0c97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa058e87a17f5f5079be31c1631ed5f50"><td class="memItemLeft" align="right" valign="top"><a id="aa058e87a17f5f5079be31c1631ed5f50"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pointersCount</b></td></tr>
+<tr class="memitem:aa058e87a17f5f5079be31c1631ed5f50"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_resource.html#aa058e87a17f5f5079be31c1631ed5f50">pointersCount</a></td></tr>
 <tr class="separator:aa058e87a17f5f5079be31c1631ed5f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb3b0d045ada529257a2fbf8f829599"><td class="memItemLeft" align="right" valign="top"><a id="aecb3b0d045ada529257a2fbf8f829599"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memitem:aecb3b0d045ada529257a2fbf8f829599"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_resource.html#aecb3b0d045ada529257a2fbf8f829599">id</a></td></tr>
 <tr class="separator:aecb3b0d045ada529257a2fbf8f829599"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcd8ef68b8cee94150537c32674888ce"><td class="memItemLeft" align="right" valign="top"><a id="adcd8ef68b8cee94150537c32674888ce"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isCreatedWithResourceManager</b></td></tr>
+<tr class="memitem:adcd8ef68b8cee94150537c32674888ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_texture_resource.html#adcd8ef68b8cee94150537c32674888ce">isCreatedWithResourceManager</a></td></tr>
 <tr class="separator:adcd8ef68b8cee94150537c32674888ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Resource, which is represents drawable texture. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="aecb3b0d045ada529257a2fbf8f829599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb3b0d045ada529257a2fbf8f829599">&sect;&nbsp;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ID (path or special path if generated from text) string of this resource. </p>
+
+</div>
+</div>
+<a id="adcd8ef68b8cee94150537c32674888ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcd8ef68b8cee94150537c32674888ce">&sect;&nbsp;</a></span>isCreatedWithResourceManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isCreatedWithResourceManager</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag which is says us "Did this <a class="el" href="struct_texture_resource.html" title="Resource, which is represents drawable texture. ">TextureResource</a> were created with <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> or not. </p>
+
+</div>
+</div>
+<a id="aa058e87a17f5f5079be31c1631ed5f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa058e87a17f5f5079be31c1631ed5f50">&sect;&nbsp;</a></span>pointersCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t pointersCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Count of pointers to this resource. </p>
+
+</div>
+</div>
+<a id="a859b8efbf9abe8e82757ee5c75a0c97c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a859b8efbf9abe8e82757ee5c75a0c97c">&sect;&nbsp;</a></span>texture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* texture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SDL texture. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_texture_resource_8h_source.html">TextureResource.h</a></li>
 </ul>

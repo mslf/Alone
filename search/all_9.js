@@ -33,7 +33,7 @@ var searchData=
   ['listboxscenenode_5ferrormessages',['ListBoxSceneNode_errorMessages',['../struct_list_box_scene_node__error_messages.html',1,'']]],
   ['listboxscenenode_5ferrors',['ListBoxSceneNode_errors',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735',1,'ListBox.h']]],
   ['listboxscenenode_5fparserstrings',['ListBoxSceneNode_parserStrings',['../struct_list_box_scene_node__parser_strings.html',1,'']]],
-  ['logger',['Logger',['../struct_logger.html',1,'Logger'],['../struct_event_manager.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'EventManager::logger()'],['../struct_musican.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'Musican::logger()'],['../struct_renderer.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'Renderer::logger()']]],
+  ['logger',['Logger',['../struct_logger.html',1,'Logger'],['../struct_event_manager.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'EventManager::logger()'],['../struct_musican.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'Musican::logger()'],['../struct_renderer.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'Renderer::logger()'],['../struct_resource_manager.html#af4d650f26e6e1a4b53c751abc1eff45e',1,'ResourceManager::logger()']]],
   ['logger_2ec',['Logger.c',['../_logger_8c.html',1,'']]],
   ['logger_2eh',['Logger.h',['../_logger_8h.html',1,'']]],
   ['logger_5fdisabled',['LOGGER_DISABLED',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7a42d3e20acc16eae698865e09c334cae0',1,'Logger.h']]],
@@ -41,5 +41,6 @@ var searchData=
   ['logger_5fenabled_5fstderr',['LOGGER_ENABLED_STDERR',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7af15daa08850e7b3258fff985bdf1d436',1,'Logger.h']]],
   ['logger_5flog',['Logger_log',['../_logger_8h.html#ad2bb1379bcb87c38f97e542afd7d7862',1,'Logger_log(struct Logger *logger, const char *const format,...):&#160;Logger.c'],['../_logger_8c.html#ad2bb1379bcb87c38f97e542afd7d7862',1,'Logger_log(struct Logger *logger, const char *const format,...):&#160;Logger.c']]],
   ['loggerstate',['LoggerState',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7',1,'Logger.h']]],
-  ['lowermenuoptionprototype',['lowerMenuOptionPrototype',['../struct_context_menu.html#a87a9f87725ed2420c45d02d2eb15a77b',1,'ContextMenu']]]
+  ['lowermenuoptionprototype',['lowerMenuOptionPrototype',['../struct_context_menu.html#a87a9f87725ed2420c45d02d2eb15a77b',1,'ContextMenu']]],
+  ['luastate',['luaState',['../struct_script_resource.html#a977f3d6715c13c5f13e6134222ffd6f8',1,'ScriptResource']]]
 ];

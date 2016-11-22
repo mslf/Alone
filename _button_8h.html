@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('_button_8h.html','');});
 <code>#include &quot;<a class="el" href="_renderer_8h_source.html">renderer/Renderer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_musican_8h_source.html">musican/Musican.h</a>&quot;</code><br />
-<code>#include &quot;resourceManager/ResourceManager.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_resource_manager_8h_source.html">resourceManager/ResourceManager.h</a>&quot;</code><br />
 <code>#include &quot;sprite/Sprite.h&quot;</code><br />
 <code>#include &quot;text/Text.h&quot;</code><br />
 </div>
@@ -111,7 +111,7 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strings which are used for constructing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="struct_button_scene_node__parser_strings.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_button.html">Button</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standart Gui element to be clicked without holding it's state through the frames. Has some text on itself, focused and pressed <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> and <a class="el" href="struct_sound_resource.html">SoundResource</a>. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing). Also it's useful for other Gui elements, which are needed to be clicked without saving state.  <a href="struct_button.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standart Gui element to be clicked without holding it's state through the frames. Has some text on itself, focused and pressed <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> and <a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a>. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing). Also it's useful for other Gui elements, which are needed to be clicked without saving state.  <a href="struct_button.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -160,7 +160,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a9ebc2f888e3123690008a8b820677826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes <a class="el" href="struct_button.html#a4f009b181e2d1679d58eeb638c79f1f7">Button::pressedEventResource</a> and <a class="el" href="struct_button.html#a6c6350ebecb76824f44acd4af5310894">Button::pressedEvent</a>. Sets old Button::pressedEvent::isNeeded to false, if exists. Decreases old Button::pressedEventResource::pointersCount if exists.  <a href="#a9ebc2f888e3123690008a8b820677826">More...</a><br /></td></tr>
 <tr class="separator:a9ebc2f888e3123690008a8b820677826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e464cd7fac8f1646dd3571f990e11b"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541">ButtonSceneNode_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_button_8h.html#a36e464cd7fac8f1646dd3571f990e11b">Button_save</a> (const struct <a class="el" href="struct_button.html">Button</a> *const button, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, const char *const buttonResId)</td></tr>
-<tr class="memdesc:a36e464cd7fac8f1646dd3571f990e11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates Button::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>.  <a href="#a36e464cd7fac8f1646dd3571f990e11b">More...</a><br /></td></tr>
+<tr class="memdesc:a36e464cd7fac8f1646dd3571f990e11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates Button::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>.  <a href="#a36e464cd7fac8f1646dd3571f990e11b">More...</a><br /></td></tr>
 <tr class="separator:a36e464cd7fac8f1646dd3571f990e11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4626fc067a7a183e59ef37786d4045b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_button_8h.html#a4626fc067a7a183e59ef37786d4045b2">Button_control</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td></tr>
 <tr class="memdesc:a4626fc067a7a183e59ef37786d4045b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to control user input events to <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Pointer to that function should be at Button::sceneNode::control.  <a href="#a4626fc067a7a183e59ef37786d4045b2">More...</a><br /></td></tr>
@@ -215,9 +215,9 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a4943c2d78434d807bb0c4d1b9a6ae9ba"></a>BUTTON_ERR_LOADING_SETTINGS&#160;</td><td class="fielddoc"><p>Loading required settings from <a class="el" href="struct_text_parser.html">TextParser</a> failed. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a6f5ff8a22de27dadac2f87df9f2b6a6f"></a>BUTTON_ERR_NO_FOCUSED_EVENT_RES&#160;</td><td class="fielddoc"><p>Loading new <a class="el" href="struct_button.html#aff7dcf845e86b8d62077ceec6094f3e3">Button::focusedEventResource</a> from <a class="el" href="struct_resource_manager.html">ResourceManager</a> failed. </p>
+<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a6f5ff8a22de27dadac2f87df9f2b6a6f"></a>BUTTON_ERR_NO_FOCUSED_EVENT_RES&#160;</td><td class="fielddoc"><p>Loading new <a class="el" href="struct_button.html#aff7dcf845e86b8d62077ceec6094f3e3">Button::focusedEventResource</a> from <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> failed. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a76bbad36ff06055ddb3111c9ac0a47e8"></a>BUTTON_ERR_NO_PRESSED_EVENT_RES&#160;</td><td class="fielddoc"><p>Loading new <a class="el" href="struct_button.html#a4f009b181e2d1679d58eeb638c79f1f7">Button::pressedEventResource</a> from <a class="el" href="struct_resource_manager.html">ResourceManager</a> failed. </p>
+<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a76bbad36ff06055ddb3111c9ac0a47e8"></a>BUTTON_ERR_NO_PRESSED_EVENT_RES&#160;</td><td class="fielddoc"><p>Loading new <a class="el" href="struct_button.html#a4f009b181e2d1679d58eeb638c79f1f7">Button::pressedEventResource</a> from <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> failed. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a7de8f3bf9838582d53ee571e40ca4e53"></a>BUTTON_ERR_CONSTRUCTIG_FOCUSED_EVENT&#160;</td><td class="fielddoc"><p>Constructing new <a class="el" href="struct_button.html#af8909553495b609dc7c9efd469ffc31d">Button::focusedEvent</a> failed. </p>
 </td></tr>
@@ -299,8 +299,8 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">button</td><td>Pointer to a <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load new <a class="el" href="struct_button.html#aff7dcf845e86b8d62077ceec6094f3e3">Button::focusedEventResource</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">focusedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load new <a class="el" href="struct_button.html#aff7dcf845e86b8d62077ceec6094f3e3">Button::focusedEventResource</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">focusedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -309,7 +309,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541" title="Error codes for Button. ">ButtonSceneNode_errors</a> </dd></dl>
 
@@ -351,8 +351,8 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">button</td><td>Pointer to a <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load new <a class="el" href="struct_button.html#a4f009b181e2d1679d58eeb638c79f1f7">Button::pressedEventResource</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">pressedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load new <a class="el" href="struct_button.html#a4f009b181e2d1679d58eeb638c79f1f7">Button::pressedEventResource</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">pressedEventResId</td><td>String with ID of new <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> to load via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -361,7 +361,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541" title="Error codes for Button. ">ButtonSceneNode_errors</a> </dd></dl>
 
@@ -408,7 +408,7 @@ Variables</h2></td></tr>
 <p>Constructs <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_button.html#a1128327f94baacb1570a98fca0591108">Button::sprite</a> and <a class="el" href="struct_button.html#ab278201aa1758916bc9e825b3833e31b">Button::label</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_button.html#a1128327f94baacb1570a98fca0591108">Button::sprite</a> and <a class="el" href="struct_button.html#ab278201aa1758916bc9e825b3833e31b">Button::label</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
@@ -421,7 +421,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
@@ -567,12 +567,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Saves <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> to the filesystem via <a class="el" href="struct_resource_manager.html">ResourceManager</a>. Before saving, it updates Button::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. </p>
+<p>Saves <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. Before saving, it updates Button::sceneNode::sceneNodeTextResource with the latest changes in <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">button</td><td>Pointer to a <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> which will be saved. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html">ResourceManager</a> which is used to save Button::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
-    <tr><td class="paramname">buttonResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html">ResourceManager</a> will save Button::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to save Button::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
+    <tr><td class="paramname">buttonResId</td><td>Path string, where <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> will save Button::sceneNode::sceneNodeTextResource. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -581,7 +581,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
 <dd>
-<a class="el" href="struct_resource_manager.html">ResourceManager</a> </dd>
+<a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541" title="Error codes for Button. ">ButtonSceneNode_errors</a> </dd></dl>
 

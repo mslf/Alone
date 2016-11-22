@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['textboxscenenode_5fconstants',['TextBoxSceneNode_constants',['../_text_box_8h.html#a75d7522f63d7275c384288f6ec6d6b3b',1,'TextBox.h']]],
-  ['textboxscenenode_5ferrors',['TextBoxSceneNode_errors',['../_text_box_8h.html#a71a51d1e703cde7d8554ab8784f35c81',1,'TextBox.h']]]
+  ['sliderscenenode_5fbuttonalligny',['SliderSceneNode_buttonAllignY',['../_slider_8h.html#adc43c42e96f20e667dab21d62b376c79',1,'Slider.h']]],
+  ['sliderscenenode_5ferrors',['SliderSceneNode_errors',['../_slider_8h.html#af9ea8b03d6825c39fa05fa624e6b5f77',1,'Slider.h']]]
 ];

@@ -87,49 +87,249 @@ $(document).ready(function(){initNavTree('struct_resource_manager.html','');});
 <div class="title">ResourceManager Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same resources (each resources will be stored in array once). There is only one exeption: unique <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>. If loader of <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> wants, he can load one <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> twice and it will be stored in array twice.  
+ <a href="struct_resource_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_resource_manager_8h_source.html">ResourceManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:af4d650f26e6e1a4b53c751abc1eff45e"><td class="memItemLeft" align="right" valign="top"><a id="af4d650f26e6e1a4b53c751abc1eff45e"></a>
-struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>logger</b></td></tr>
+<tr class="memitem:af4d650f26e6e1a4b53c751abc1eff45e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#af4d650f26e6e1a4b53c751abc1eff45e">logger</a></td></tr>
 <tr class="separator:af4d650f26e6e1a4b53c751abc1eff45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2953b1a0b89f028a2ecbd5dc6330eff4"><td class="memItemLeft" align="right" valign="top"><a id="a2953b1a0b89f028a2ecbd5dc6330eff4"></a>
-struct <a class="el" href="struct_texture_resource.html">TextureResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>textureResourcesList</b></td></tr>
+<tr class="memitem:a2953b1a0b89f028a2ecbd5dc6330eff4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_texture_resource.html">TextureResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a2953b1a0b89f028a2ecbd5dc6330eff4">textureResourcesList</a></td></tr>
 <tr class="separator:a2953b1a0b89f028a2ecbd5dc6330eff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fd66af5d432af1325f53a9a2300eae1"><td class="memItemLeft" align="right" valign="top"><a id="a5fd66af5d432af1325f53a9a2300eae1"></a>
-struct <a class="el" href="struct_text_resource.html">TextResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>textResourcesList</b></td></tr>
+<tr class="memitem:a5fd66af5d432af1325f53a9a2300eae1"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a5fd66af5d432af1325f53a9a2300eae1">textResourcesList</a></td></tr>
 <tr class="separator:a5fd66af5d432af1325f53a9a2300eae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab99aaaf14cd1c4d887f068961bc5ff80"><td class="memItemLeft" align="right" valign="top"><a id="ab99aaaf14cd1c4d887f068961bc5ff80"></a>
-struct <a class="el" href="struct_script_resource.html">ScriptResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>scriptResourcesList</b></td></tr>
+<tr class="memitem:ab99aaaf14cd1c4d887f068961bc5ff80"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_script_resource.html">ScriptResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#ab99aaaf14cd1c4d887f068961bc5ff80">scriptResourcesList</a></td></tr>
 <tr class="separator:ab99aaaf14cd1c4d887f068961bc5ff80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eb76005d8836f5ffd80e3da1ca83988"><td class="memItemLeft" align="right" valign="top"><a id="a1eb76005d8836f5ffd80e3da1ca83988"></a>
-struct <a class="el" href="struct_sound_resource.html">SoundResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>soundResourcesList</b></td></tr>
+<tr class="memitem:a1eb76005d8836f5ffd80e3da1ca83988"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sound_resource.html">SoundResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a1eb76005d8836f5ffd80e3da1ca83988">soundResourcesList</a></td></tr>
 <tr class="separator:a1eb76005d8836f5ffd80e3da1ca83988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6e73801084fc078f24e0534d40404aa"><td class="memItemLeft" align="right" valign="top"><a id="ab6e73801084fc078f24e0534d40404aa"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>textureResourcesCount</b></td></tr>
+<tr class="memitem:ab6e73801084fc078f24e0534d40404aa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#ab6e73801084fc078f24e0534d40404aa">textureResourcesCount</a></td></tr>
 <tr class="separator:ab6e73801084fc078f24e0534d40404aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb8f51be13888056994ca65f979e9e89"><td class="memItemLeft" align="right" valign="top"><a id="abb8f51be13888056994ca65f979e9e89"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>textResourcesCount</b></td></tr>
+<tr class="memitem:abb8f51be13888056994ca65f979e9e89"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#abb8f51be13888056994ca65f979e9e89">textResourcesCount</a></td></tr>
 <tr class="separator:abb8f51be13888056994ca65f979e9e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b77179a9b96bf923868a1e01d62cf06"><td class="memItemLeft" align="right" valign="top"><a id="a0b77179a9b96bf923868a1e01d62cf06"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>scriptResourcesCount</b></td></tr>
+<tr class="memitem:a0b77179a9b96bf923868a1e01d62cf06"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a0b77179a9b96bf923868a1e01d62cf06">scriptResourcesCount</a></td></tr>
 <tr class="separator:a0b77179a9b96bf923868a1e01d62cf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab954cc6c43743c2c3826407b6ada7b20"><td class="memItemLeft" align="right" valign="top"><a id="ab954cc6c43743c2c3826407b6ada7b20"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>soundResourcesCount</b></td></tr>
+<tr class="memitem:ab954cc6c43743c2c3826407b6ada7b20"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#ab954cc6c43743c2c3826407b6ada7b20">soundResourcesCount</a></td></tr>
 <tr class="separator:ab954cc6c43743c2c3826407b6ada7b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4473def59a0338584d4d4c466105db47"><td class="memItemLeft" align="right" valign="top"><a id="a4473def59a0338584d4d4c466105db47"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedTextureResourcesCount</b></td></tr>
+<tr class="memitem:a4473def59a0338584d4d4c466105db47"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a4473def59a0338584d4d4c466105db47">allocatedTextureResourcesCount</a></td></tr>
 <tr class="separator:a4473def59a0338584d4d4c466105db47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae61b0771d13aaa72c035c5d306578b7d"><td class="memItemLeft" align="right" valign="top"><a id="ae61b0771d13aaa72c035c5d306578b7d"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedTextResourcesCount</b></td></tr>
+<tr class="memitem:ae61b0771d13aaa72c035c5d306578b7d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#ae61b0771d13aaa72c035c5d306578b7d">allocatedTextResourcesCount</a></td></tr>
 <tr class="separator:ae61b0771d13aaa72c035c5d306578b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f8a119859b5b46cd03ebffbe4385c87"><td class="memItemLeft" align="right" valign="top"><a id="a6f8a119859b5b46cd03ebffbe4385c87"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedScriptResourcesCount</b></td></tr>
+<tr class="memitem:a6f8a119859b5b46cd03ebffbe4385c87"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a6f8a119859b5b46cd03ebffbe4385c87">allocatedScriptResourcesCount</a></td></tr>
 <tr class="separator:a6f8a119859b5b46cd03ebffbe4385c87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b32bb32a73ee0fac79dee341bbb91c3"><td class="memItemLeft" align="right" valign="top"><a id="a0b32bb32a73ee0fac79dee341bbb91c3"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedSoundResourcesCount</b></td></tr>
+<tr class="memitem:a0b32bb32a73ee0fac79dee341bbb91c3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_resource_manager.html#a0b32bb32a73ee0fac79dee341bbb91c3">allocatedSoundResourcesCount</a></td></tr>
 <tr class="separator:a0b32bb32a73ee0fac79dee341bbb91c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same resources (each resources will be stored in array once). There is only one exeption: unique <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>. If loader of <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> wants, he can load one <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> twice and it will be stored in array twice. </p>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> takes care of each resource (with only one exeption for <a class="el" href="_resource_manager_8h.html#ad7f41e9927f041d0b25d0aff433af3b1" title="Generates TextureResource from text and adds it to the ResourceManager::textureResourcesList or finds...">ResourceManager_loadTextureResourceFromText()</a>), which was loaded by <a class="el" href="_resource_manager_8h.html#a3913cb3f22126788e3e308e8e684ed95" title="Loads TextureResource from filesystem and adds it to the ResourceManager::textureResourcesList or fin...">ResourceManager_loadTextureResource()</a>, <a class="el" href="_resource_manager_8h.html#ad7f41e9927f041d0b25d0aff433af3b1" title="Generates TextureResource from text and adds it to the ResourceManager::textureResourcesList or finds...">ResourceManager_loadTextureResourceFromText()</a>, <a class="el" href="_resource_manager_8h.html#a1a4119bdf83f0a07ce472c4caa35b9a8" title="Loads TextResource from filesystem and adds it to the ResourceManager::textResourcesList or finds alr...">ResourceManager_loadTextResource()</a>, <a class="el" href="_resource_manager_8h.html#a6d1ecb044c956d84e5b65aa6825a7b25" title="Loads ScriptResource from filesystem and adds it to the ResourceManager::scriptResourcesList or finds...">ResourceManager_loadScriptResource()</a> and <a class="el" href="_resource_manager_8h.html#a8fe69138575fb777d7867ba21d258d90" title="Loads SoundResource from filesystem and adds it to the ResourceManager::soundResourcesList or finds a...">ResourceManager_loadSoundResource()</a>. So, only <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> should destruct these resources. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_resource_manager_8h.html#a3913cb3f22126788e3e308e8e684ed95" title="Loads TextureResource from filesystem and adds it to the ResourceManager::textureResourcesList or fin...">ResourceManager_loadTextureResource()</a> </dd>
+<dd>
+<a class="el" href="_resource_manager_8h.html#ad7f41e9927f041d0b25d0aff433af3b1" title="Generates TextureResource from text and adds it to the ResourceManager::textureResourcesList or finds...">ResourceManager_loadTextureResourceFromText()</a> </dd>
+<dd>
+<a class="el" href="_resource_manager_8h.html#a1a4119bdf83f0a07ce472c4caa35b9a8" title="Loads TextResource from filesystem and adds it to the ResourceManager::textResourcesList or finds alr...">ResourceManager_loadTextResource()</a> </dd>
+<dd>
+<a class="el" href="_resource_manager_8h.html#a6d1ecb044c956d84e5b65aa6825a7b25" title="Loads ScriptResource from filesystem and adds it to the ResourceManager::scriptResourcesList or finds...">ResourceManager_loadScriptResource()</a> </dd>
+<dd>
+<a class="el" href="_resource_manager_8h.html#a8fe69138575fb777d7867ba21d258d90" title="Loads SoundResource from filesystem and adds it to the ResourceManager::soundResourcesList or finds a...">ResourceManager_loadSoundResource()</a> </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a6f8a119859b5b46cd03ebffbe4385c87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f8a119859b5b46cd03ebffbe4385c87">&sect;&nbsp;</a></span>allocatedScriptResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedScriptResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a> in the <a class="el" href="struct_resource_manager.html#ab99aaaf14cd1c4d887f068961bc5ff80">ResourceManager::scriptResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="a0b32bb32a73ee0fac79dee341bbb91c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b32bb32a73ee0fac79dee341bbb91c3">&sect;&nbsp;</a></span>allocatedSoundResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedSoundResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a> in the <a class="el" href="struct_resource_manager.html#a1eb76005d8836f5ffd80e3da1ca83988">ResourceManager::soundResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="ae61b0771d13aaa72c035c5d306578b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae61b0771d13aaa72c035c5d306578b7d">&sect;&nbsp;</a></span>allocatedTextResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedTextResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> in the <a class="el" href="struct_resource_manager.html#a5fd66af5d432af1325f53a9a2300eae1">ResourceManager::textResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="a4473def59a0338584d4d4c466105db47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4473def59a0338584d4d4c466105db47">&sect;&nbsp;</a></span>allocatedTextureResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedTextureResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_texture_resource.html" title="Resource, which is represents drawable texture. ">TextureResource</a> in the <a class="el" href="struct_resource_manager.html#a2953b1a0b89f028a2ecbd5dc6330eff4">ResourceManager::textureResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="af4d650f26e6e1a4b53c751abc1eff45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d650f26e6e1a4b53c751abc1eff45e">&sect;&nbsp;</a></span>logger</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_logger.html">Logger</a>* logger</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. </p>
+
+</div>
+</div>
+<a id="a0b77179a9b96bf923868a1e01d62cf06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b77179a9b96bf923868a1e01d62cf06">&sect;&nbsp;</a></span>scriptResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t scriptResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a> in the <a class="el" href="struct_resource_manager.html#ab99aaaf14cd1c4d887f068961bc5ff80">ResourceManager::scriptResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="ab99aaaf14cd1c4d887f068961bc5ff80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99aaaf14cd1c4d887f068961bc5ff80">&sect;&nbsp;</a></span>scriptResourcesList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_script_resource.html">ScriptResource</a>** scriptResourcesList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>. </p>
+
+</div>
+</div>
+<a id="ab954cc6c43743c2c3826407b6ada7b20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab954cc6c43743c2c3826407b6ada7b20">&sect;&nbsp;</a></span>soundResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t soundResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a> in the <a class="el" href="struct_resource_manager.html#a1eb76005d8836f5ffd80e3da1ca83988">ResourceManager::soundResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="a1eb76005d8836f5ffd80e3da1ca83988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb76005d8836f5ffd80e3da1ca83988">&sect;&nbsp;</a></span>soundResourcesList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_sound_resource.html">SoundResource</a>** soundResourcesList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to <a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a>. </p>
+
+</div>
+</div>
+<a id="abb8f51be13888056994ca65f979e9e89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb8f51be13888056994ca65f979e9e89">&sect;&nbsp;</a></span>textResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t textResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> in the <a class="el" href="struct_resource_manager.html#a5fd66af5d432af1325f53a9a2300eae1">ResourceManager::textResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="a5fd66af5d432af1325f53a9a2300eae1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fd66af5d432af1325f53a9a2300eae1">&sect;&nbsp;</a></span>textResourcesList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>** textResourcesList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>. </p>
+
+</div>
+</div>
+<a id="ab6e73801084fc078f24e0534d40404aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6e73801084fc078f24e0534d40404aa">&sect;&nbsp;</a></span>textureResourcesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t textureResourcesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_texture_resource.html" title="Resource, which is represents drawable texture. ">TextureResource</a> in the <a class="el" href="struct_resource_manager.html#a2953b1a0b89f028a2ecbd5dc6330eff4">ResourceManager::textureResourcesList</a>. </p>
+
+</div>
+</div>
+<a id="a2953b1a0b89f028a2ecbd5dc6330eff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2953b1a0b89f028a2ecbd5dc6330eff4">&sect;&nbsp;</a></span>textureResourcesList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_texture_resource.html">TextureResource</a>** textureResourcesList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to <a class="el" href="struct_texture_resource.html" title="Resource, which is represents drawable texture. ">TextureResource</a>. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_resource_manager_8h_source.html">ResourceManager.h</a></li>
 </ul>
