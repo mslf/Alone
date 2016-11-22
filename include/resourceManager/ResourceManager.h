@@ -28,6 +28,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "logger/Logger.h"
+#include "renderer/Renderer.h"
 #include "TextureResource.h"
 #include "TextResource.h"
 #include "SoundResource.h"
@@ -37,13 +38,13 @@
  * @brief Some initial constants for #ResourceManager.
  */
 enum ResourceManager_constants {
-    INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES = 10,
+    RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES = 10,
     /**< Init alocating number and reallocating step for ResourceManager#textureResourcesList. */
-    INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES = 100,
+    RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES = 100,
     /**< Init alocating number and reallocating step for ResourceManager#textResourcesList. */
-    INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES = 10,
+    RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES = 10,
     /**< Init alocating number and reallocating step for ResourceManager#scriptResourcesList. */
-    INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES = 10
+    RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES = 10
     /**< Init alocating number and reallocating step for ResourceManager#soundResourcesList. */
 };
 
@@ -53,8 +54,12 @@ enum ResourceManager_constants {
 enum ResourceManager_errors {
     RM_NO_ERRORS = 0,
     /**< All right, no errors. */
-    RM_ERR_NULL_ARGUMENT = 1
+    RM_ERR_NULL_ARGUMENT = 1,
     /**< Some of function's argument is NULL. */
+    RM_ERR_ALLOC = 2,
+    /**< Allocating for #ResourceManager or its lists (texture, text, script, sound) failed. */
+    RM_ERR_SAVING = 3,
+    /**< Saving #TextResource failed due to internal reason. */
 };
 
 /**
@@ -170,7 +175,6 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
  * Also, ResourceManager#textResourcesCount will be increased and 
  * ResourceManager#allocatedTextResourcesCount (if needed), if new #TextResource loaded.
  * @param rm Pointer to a #ResourceManager where to store #TextResource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #TextResource. Can be NULL.
  * @param textResId String with a path to the #TextResource file in filesystem. Can be NULL.
  * @param unique Flag to load #TextResource twice and more from filesystem, even it exists in ResourceManager#textResourcesList.
  * @return Pointer to a #TextResource from ResourceManager#textResourcesList, or NULL if something failed.
@@ -192,7 +196,6 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
  * Also, ResourceManager#scriptResourcesCount will be increased and 
  * ResourceManager#allocatedScriptResourcesCount (if needed), if new #ScriptResource loaded.
  * @param rm Pointer to a #ResourceManager where to store #ScriptResource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #ScriptResource. Can be NULL.
  * @param scriptResId String with a path to the #ScriptResource file in filesystem. Can be NULL.
  * @return Pointer to a #ScriptResource from ResourceManager#scriptResourcesList, or NULL if something failed.
  * @see #ScriptResource
@@ -208,7 +211,6 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
  * Also, ResourceManager#soundResourcesCount will be increased and 
  * ResourceManager#allocatedSoundResourcesCount (if needed), if new #SoundResource loaded.
  * @param rm Pointer to a #ResourceManager where to store #SoundResource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #SoundResource. Can be NULL.
  * @param soundResId String with a path to the #SoundResource file in filesystem. Can be NULL.
  * @return Pointer to a #SoundResource from ResourceManager#soundResourcesList, or NULL if something failed.
  * @see #SoundResource

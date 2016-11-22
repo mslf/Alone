@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/10/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,144 +16,223 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file ResourceManager.c
+ * @author mslf
+ * @date 10 Aug 2016
+ * @brief File containing implementation of #ResourceManager.
+ */
 #include "resourceManager/ResourceManager.h"
 #include <string.h>
 
-const char* const RESOURCE_MANAGER_ERR_ALLOC =
-        "ResourceManager: constructor: allocating memory failed!";
-const char* const RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC =
-        "ResourceManager: constructor: allocating for textureResourcesList failed!";
-const char* const RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC =
-        "ResourceManager: constructor: allocating for textResourcesList failed!";
-const char* const RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC =
-        "ResourceManager: constructor: allocating for scriptResourcesList failed!";
-const char* const RESOURCE_MANAGER_ERR_SOUND_RESOURCES_LIST_ALLOC =
-        "ResourceManager: constructor: allocating for soundResourcesList failed!";
-const char* const RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES =
-        "ResourceManager: TextureResource loader: constructing TextureResource failed!";
-const char* const RESOURCE_MANAGER_ERR_LOAD_TEXT_RES =
-        "ResourceManager: TextResource loader: constructing TextResource failed!";
-const char* const RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES =
-        "ResourceManager: ScriptResource loader: constructing ScriptResource failed!";
-const char* const RESOURCE_MANAGER_ERR_LOAD_SOUND_RES =
-        "ResourceManager: SoundResource loader: constructing SoundResource failed!";
+/**
+ * @brief Error message strings for #ResourceManager.
+ */
+static const struct ResourceManager_errorMessages {
+    const char* const errAlloc;
+    /**< Will be displayed when allocating memory for #ResourceManager failed. */
+    const char* const errTextureResListAlloc;
+    /**< Will be displayed when allocating memory for ResourceManager#textureResourcesList faiiled. */
+    const char* const errTextResListAlloc;
+    /**< Will be displayed when allocating memory for ResourceManager#textResourcesList failed. */
+    const char* const errScriptResListAlloc;
+    /**< Will be displayed when allocating memory for ResourceManager#scriptResourcesList failed. */
+    const char* const errSoundResListAlloc;
+    /**< Will be displayed when allocating memory for ResourceManager#soundResourcesList failed. */
+    const char* const errLoadTextureRes;
+    /**< Will be displayed when loading or generating #TextureResource failed. */
+    const char* const errGeneratingTextureRes;
+    /**< Will be displayed when generating #TextureResource from text failed.*/
+    const char* const errLoadTextRes;
+    /**< Will be displayed when loading #TextResource failed. */
+    const char* const errLoadScriptRes;
+    /**< Will be displayed when loading #ScriptResource failed. */
+    const char* const errLoadSoundRes;
+    /**< Will be displayed when loading #SoundResource failed. */
+}ResourceManager_errorMessages = {
+    "ResourceManager_construct: allocating memory failed!",
+    "ResourceManager_construct: allocating for textureResourcesList failed!",
+    "ResourceManager_construct: allocating for textResourcesList failed!",
+    "ResourceManager_construct: allocating for scriptResourcesList failed!",
+    "ResourceManager_construct: allocating for soundResourcesList failed!",
+    "ResourceManager_loadTextureResource: constructing TextureResource failed!",
+    "ResourceManager_loadTextureResourceFromText: Failed constructng non-cached texture!",
+    "ResourceManager_loadTextResource: constructing TextResource failed!",
+    "ResourceManager_loadScriptResource: constructing ScriptResource failed!",
+    "ResourceManager_loadSoundResource: constructing SoundResource failed!"};
 
-unsigned char ResourceManager_constructTextureResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Allocates memory for ResourceManager#textureResourcesList and
+ * sets ResourceManager#allocatedTextureResourcesCount.
+ * @param rm Pointer to a #ResourceManager, where to allocate memory.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ * @see #ResourceManager_constants
+ */ 
+static enum ResourceManager_errors ResourceManager_constructTextureResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     if (!(rm->textureResourcesList = (struct TextureResource**)malloc(
-            sizeof(struct TextureResource*) * INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
-        return 2;
+            sizeof(struct TextureResource*) * RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES))) {
+        Logger_log(rm->logger, ResourceManager_errorMessages.errTextureResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    rm->allocatedTextureResourcesCount = INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
-    return 0;
+    rm->allocatedTextureResourcesCount = RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
+    return RM_NO_ERRORS;
 }
 
-unsigned char ResourceManager_constructTextResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Allocates memory for ResourceManager#textResourcesList and
+ * sets ResourceManager#allocatedTextResourcesCount.
+ * @param rm Pointer to a #ResourceManager, where to allocate memory.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ * @see #ResourceManager_constants
+ */ 
+static enum ResourceManager_errors ResourceManager_constructTextResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     if (!(rm->textResourcesList = (struct TextResource**)malloc(
-            sizeof(struct TextResource*) * INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC);
-        return  2;
+            sizeof(struct TextResource*) * RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES))) {
+        Logger_log(rm->logger, ResourceManager_errorMessages.errTextResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    rm->allocatedTextResourcesCount = INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES;
-    return 0;
+    rm->allocatedTextResourcesCount = RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES;
+    return RM_NO_ERRORS;
 }
 
-unsigned char ResourceManager_constructScriptResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Allocates memory for ResourceManager#scriptResourcesList and
+ * sets ResourceManager#allocatedScriptResourcesCount.
+ * @param rm Pointer to a #ResourceManager, where to allocate memory.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ * @see #ResourceManager_constants
+ */ 
+static enum ResourceManager_errors ResourceManager_constructScriptResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     if (!(rm->scriptResourcesList = (struct ScriptResource**)malloc(
-            sizeof(struct ScriptResource*) * INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC);
-        return 2;
+            sizeof(struct ScriptResource*) * RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES))) {
+        Logger_log(rm->logger, ResourceManager_errorMessages.errScriptResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    rm->allocatedScriptResourcesCount = INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES;
-    return 0;
+    rm->allocatedScriptResourcesCount = RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES;
+    return RM_NO_ERRORS;
 }
 
-unsigned char ResourceManager_constructSoundResourcesMap(struct ResourceManager* rm) {
+/**
+ * @brief Allocates memory for ResourceManager#soundResourcesList and
+ * sets ResourceManager#allocatedSoundResourcesCount.
+ * @param rm Pointer to a #ResourceManager, where to allocate memory.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ * @see #ResourceManager_constants
+ */ 
+static enum ResourceManager_errors ResourceManager_constructSoundResourcesMap(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     if (!(rm->soundResourcesList = (struct SoundResource**)malloc(
-            sizeof(struct SoundResource*) * INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SOUND_RESOURCES_LIST_ALLOC);
-        return 2;
+            sizeof(struct SoundResource*) * RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES))) {
+        Logger_log(rm->logger, ResourceManager_errorMessages.errSoundResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    rm->allocatedSoundResourcesCount = INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES;
-    return 0;
+    rm->allocatedSoundResourcesCount = RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES;
+    return RM_NO_ERRORS;
 }
 
 struct ResourceManager* ResourceManager_construct(struct Logger* logger) {
     struct ResourceManager* rm = NULL;
     rm = (struct ResourceManager*)calloc(1, sizeof(struct ResourceManager));
     if (!rm) {
-        Logger_log(logger, RESOURCE_MANAGER_ERR_ALLOC);
+        Logger_log(logger, ResourceManager_errorMessages.errAlloc);
         return NULL;
     }
     rm->logger = logger;
-    unsigned char result = 0;
-    result += ResourceManager_constructTextureResourcesList(rm);
-    result += ResourceManager_constructTextResourcesList(rm);
-    result += ResourceManager_constructScriptResourcesList(rm);
-    result += ResourceManager_constructSoundResourcesMap(rm);
-    if (result) {
+    enum ResourceManager_errors constructingTextureResList = RM_NO_ERRORS;
+    enum ResourceManager_errors constructingTextResList = RM_NO_ERRORS;
+    enum ResourceManager_errors constructingScriptResList = RM_NO_ERRORS;
+    enum ResourceManager_errors constructingSoundResList = RM_NO_ERRORS;
+    constructingTextureResList = ResourceManager_constructTextureResourcesList(rm);
+    constructingTextResList = ResourceManager_constructTextResourcesList(rm);
+    constructingScriptResList = ResourceManager_constructScriptResourcesList(rm);
+    constructingSoundResList = ResourceManager_constructSoundResourcesMap(rm);
+    if (constructingTextureResList || constructingTextResList 
+        || constructingScriptResList || constructingSoundResList) {
         ResourceManager_destruct(rm);
         return NULL;
     }
     return rm;
 }
 
+/**
+ * @brief Destructs ResourceManager#textureResourcesList and frees memory, used by it.
+ * Also destructs all #TextureResource in that list.
+ * @param rm Pointer to a #ResourceManager. Can be NULL. Can be not fully initialized.
+ */
 void ResourceManager_destructTextureResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return;
-    size_t i;
     if (rm->textureResourcesList) {
         if (rm->textureResourcesCount > 0)
-            for (i = 0; i < rm->textureResourcesCount; i++)
+            for (size_t i = 0; i < rm->textureResourcesCount; i++)
                 TextureResource_destruct(rm->textureResourcesList[i]);
         free(rm->textureResourcesList);
     }
 }
 
+/**
+ * @brief Destructs ResourceManager#textResourcesList and frees memory, used by it.
+ * Also destructs all #TextResource in that list.
+ * @param rm Pointer to a #ResourceManager. Can be NULL. Can be not fully initialized.
+ */
 void ResourceManager_destructTextResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return;
-    size_t i;
     if (rm->textResourcesList) {
         if (rm->textResourcesCount > 0)
-            for (i = 0; i < rm->textResourcesCount; i++)
+            for (size_t i = 0; i < rm->textResourcesCount; i++)
                 TextResource_destruct(rm->textResourcesList[i]);
         free(rm->textResourcesList);
     }
 }
 
+/**
+ * @brief Destructs ResourceManager#scriptResourcesList and frees memory, used by it.
+ * Also destructs all #ScriptResource in that list.
+ * @param rm Pointer to a #ResourceManager. Can be NULL. Can be not fully initialized.
+ */
 void ResourceManager_destructScriptResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return;
-    size_t i;
     if (rm->scriptResourcesList) {
         if (rm->scriptResourcesCount > 0)
-            for (i = 0; i < rm->scriptResourcesCount; i++)
+            for (size_t i = 0; i < rm->scriptResourcesCount; i++)
                 ScriptResource_destruct(rm->scriptResourcesList[i]);
         free(rm->scriptResourcesList);
     }
 }
 
+/**
+ * @brief Destructs ResourceManager#soundResourcesList and frees memory, used by it.
+ * Also destructs all #SoundResource in that list.
+ * @param rm Pointer to a #ResourceManager. Can be NULL. Can be not fully initialized.
+ */
 void ResourceManager_destructSoundResourcesList(struct ResourceManager* rm) {
     if (!rm)
         return;
-    size_t i;
     if (rm->soundResourcesList) {
         if (rm->soundResourcesCount > 0)
-            for (i = 0; i < rm->soundResourcesCount; i++)
+            for (size_t i = 0; i < rm->soundResourcesCount; i++)
                 SoundResource_destruct(rm->soundResourcesList[i]);
         free(rm->soundResourcesList);
     }
 }
 
+/**
+ * @brief Destructs ResourceManager and frees memory, used by it.
+ * @param rm Pointer to a #ResourceManager. Can be NULL. Can be not fully initialized.
+ */
 void ResourceManager_destruct(struct ResourceManager* rm) {
     if (!rm)
         return;
@@ -167,90 +243,118 @@ void ResourceManager_destruct(struct ResourceManager* rm) {
     free(rm);
 }
 
-unsigned char ResourceManager_reallocateTextureResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Reallocates memory for the ResourceManager#textureResourcesList.
+ * ResourceManager#allocatedTextureResourcesCount will be increased by 
+ * #RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ */
+static enum ResourceManager_errors ResourceManager_reallocateTextureResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     struct TextureResource** textureResourcesList = NULL;
-    size_t i;
-    size_t newSize = rm->allocatedTextureResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
+    size_t newSize = rm->allocatedTextureResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     if (!(textureResourcesList = (struct TextureResource**)malloc(sizeof(struct TextureResource*) * newSize))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
-        return 2;
+        Logger_log(rm->logger, ResourceManager_errorMessages.errTextureResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    for (i = 0; i < rm->textureResourcesCount; i++)
+    for (size_t i = 0; i < rm->textureResourcesCount; i++)
         textureResourcesList[i] = rm->textureResourcesList[i];
     free(rm->textureResourcesList);
     rm->textureResourcesList = textureResourcesList;
     rm->allocatedTextureResourcesCount = newSize;
-    return 0;
+    return RM_NO_ERRORS;
 }
 
-unsigned char ResourceManager_reallocateTextResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Reallocates memory for the ResourceManager#textResourcesList.
+ * ResourceManager#allocatedTextResourcesCount will be increased by 
+ * #RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ */
+static enum ResourceManager_errors ResourceManager_reallocateTextResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     struct TextResource** textResourcesList = NULL;
-    size_t i;
-    size_t newSize = rm->allocatedTextResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
+    size_t newSize = rm->allocatedTextResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES;
     if (!(textResourcesList = (struct TextResource**)malloc(sizeof(struct TextResource*) * newSize))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXT_RESOURCES_LIST_ALLOC);
-        return 2;
+        Logger_log(rm->logger, ResourceManager_errorMessages.errTextResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    for (i = 0; i < rm->textResourcesCount; i++)
+    for (size_t i = 0; i < rm->textResourcesCount; i++)
         textResourcesList[i] = rm->textResourcesList[i];
     free(rm->textResourcesList);
     rm->textResourcesList = textResourcesList;
     rm->allocatedTextResourcesCount = newSize;
-    return 0;
+    return RM_NO_ERRORS;
 }
 
-unsigned char ResourceManager_reallocateScriptResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Reallocates memory for the ResourceManager#scriptResourcesList.
+ * ResourceManager#allocatedScriptResourcesCount will be increased by 
+ * #RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ */
+static enum ResourceManager_errors ResourceManager_reallocateScriptResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     struct ScriptResource** scriptResourcesList = NULL;
-    size_t i;
-    size_t newSize = rm->allocatedScriptResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
+    size_t newSize = rm->allocatedScriptResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES;
     if (!(scriptResourcesList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * newSize))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_SCRIPT_RESOURCES_LIST_ALLOC);
-        return 2;
+        Logger_log(rm->logger, ResourceManager_errorMessages.errScriptResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    for (i = 0; i < rm->scriptResourcesCount; i++)
+    for (size_t i = 0; i < rm->scriptResourcesCount; i++)
         scriptResourcesList[i] = rm->scriptResourcesList[i];
     free(rm->scriptResourcesList);
     rm->scriptResourcesList = scriptResourcesList;
     rm->allocatedScriptResourcesCount = newSize;
-    return 0;
+    return RM_NO_ERRORS;
 }
 
-unsigned char ResourceManager_reallocateSoundResourcesList(struct ResourceManager* rm) {
+/**
+ * @brief Reallocates memory for the ResourceManager#soundResourcesList.
+ * ResourceManager#allocatedSoundResourcesCount will be increased by 
+ * #RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES.
+ * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @return #ResourceManager_errors value.
+ * @see #ResourceManager_errors
+ */
+static enum ResourceManager_errors ResourceManager_reallocateSoundResourcesList(struct ResourceManager* rm) {
     if (!rm)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     struct SoundResource** soundResourcesList = NULL;
-    size_t i;
-    size_t newSize = rm->allocatedSoundResourcesCount + INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
+    size_t newSize = rm->allocatedSoundResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES;
     if (!(soundResourcesList = (struct SoundResource**)malloc(sizeof(struct SoundResource*) * newSize))) {
-        Logger_log(rm->logger, RESOURCE_MANAGER_ERR_TEXTURE_RESOURCES_LIST_ALLOC);
-        return 2;
+        Logger_log(rm->logger, ResourceManager_errorMessages.errSoundResListAlloc);
+        return RM_ERR_ALLOC;
     }
-    for (i = 0; i < rm->soundResourcesCount; i++)
+    for (size_t i = 0; i < rm->soundResourcesCount; i++)
         soundResourcesList[i] = rm->soundResourcesList[i];
     free(rm->soundResourcesList);
     rm->soundResourcesList = soundResourcesList;
     rm->allocatedSoundResourcesCount = newSize;
-    return 0;
+    return RM_NO_ERRORS;
 }
 
-struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm, struct Renderer* renderer,
+struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManager* rm,
+                                                            struct Renderer* renderer,
                                                             const char* const textureResId) {
     if (!rm || !textureResId || !renderer)
         return NULL;
-    unsigned  char found = 0;
+    bool found = false;
     size_t foundIndex = 0;
-    size_t i;
     // Firstly, try to find existing textureResource in list and return it.
     // If no textureResource found, try to load and add new, then return it.
-    for (i = 0; i < rm->textureResourcesCount; i++)
+    for (size_t i = 0; i < rm->textureResourcesCount; i++)
         if (strcmp(textureResId, rm->textureResourcesList[i]->id) == 0) {
-            found = 1;
+            found = true;
             foundIndex = i;
             break;
         }
@@ -258,7 +362,7 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
         struct TextureResource* textureResource = NULL;
         textureResource = TextureResource_construct(renderer, textureResId);
         if (!textureResource) {
-            Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
+            Logger_log(rm->logger, "%s ResourceID: %s", ResourceManager_errorMessages.errLoadTextureRes, textureResId);
             return NULL;
         }
         // Try to reallocate (if needed) and add textureResource to the list
@@ -275,7 +379,8 @@ struct TextureResource* ResourceManager_loadTextureResource(struct ResourceManag
 }
 
 struct TextureResource* ResourceManager_loadTextureResourceFromText(struct ResourceManager* rm,
-                                                                    struct Renderer* renderer, const char* const text,
+                                                                    struct Renderer* renderer,
+                                                                    const char* const text,
                                                                     const char* const fontPath,
                                                                     int size, SDL_Color color) {
     if (!text || !renderer || !fontPath || size <= 0)
@@ -284,14 +389,13 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
         char* textureResId = TextureResource_convertTextParametersToString(text, fontPath, size, color);
         if (!textureResId)
             return NULL;
-        unsigned  char found = 0;
+        bool found = false;
         size_t foundIndex = 0;
-        size_t i;
         // Firstly, try to find existing textureResource in list and return it.
         // If no textureResource found, try to load and add new, then return it.
-        for (i = 0; i < rm->textureResourcesCount; i++)
+        for (size_t i = 0; i < rm->textureResourcesCount; i++)
             if (strcmp(textureResId, rm->textureResourcesList[i]->id) == 0) {
-                found = 1;
+                found = true;
                 foundIndex = i;
                 break;
             }
@@ -299,7 +403,7 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
             struct TextureResource* textureResource = NULL;
             textureResource = TextureResource_constructFromText(renderer, text, fontPath, size, color);
             if (!textureResource) {
-                Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXTURE_RES, textureResId);
+                Logger_log(rm->logger, "%s ResourceID: %s", ResourceManager_errorMessages.errLoadTextureRes, textureResId);
                 free(textureResId);
                 return NULL;
             }
@@ -322,27 +426,26 @@ struct TextureResource* ResourceManager_loadTextureResourceFromText(struct Resou
         struct TextureResource* textureResource = NULL;
         textureResource = TextureResource_constructFromText(renderer, text, fontPath, size, color);
         if (!textureResource) {
-            Logger_log(NULL, "ResourceManager_loadTextureResourceFromText: Failed constructng non-cached texture!");
+            Logger_log(renderer->logger, ResourceManager_errorMessages.errGeneratingTextureRes);
             return NULL;
         }
         return textureResource;
     }
-    
 }
 
 struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm,
-                                                      const char* const textResId, bool unique) {
+                                                      const char* const textResId,
+                                                      bool unique) {
     if (!rm || !textResId)
         return NULL;
-    unsigned  char found = 0;
+    bool found = false;
     size_t foundIndex = 0;
-    size_t i;
     // Firstly, try to find existing non-unique textResource in list and return it.
     // If no textResource found, try to load and add new, then return it.
     if (!unique)
-        for (i = 0; i < rm->textResourcesCount; i++)
+        for (size_t i = 0; i < rm->textResourcesCount; i++)
             if (!rm->textResourcesList[i]->isUnique && strcmp(textResId, rm->textResourcesList[i]->id) == 0) {
-                found = 1;
+                found = true;
                 foundIndex = i;
                 break;
             }
@@ -351,7 +454,7 @@ struct TextResource* ResourceManager_loadTextResource(struct ResourceManager* rm
     struct TextResource* textResource = NULL;
     textResource = TextResource_construct(textResId, unique);
     if (!textResource) {
-        Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_TEXT_RES, textResId);
+        Logger_log(rm->logger, "%s ResourceID: %s", ResourceManager_errorMessages.errLoadTextRes, textResId);
         return NULL;
     }
     // Try to reallocate (if needed) and add textResource to the list
@@ -369,14 +472,13 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
                                                           const char* const scriptResId) {
     if (!rm || !scriptResId)
         return NULL;
-    unsigned  char found = 0;
+    bool found = false;
     size_t foundIndex = 0;
-    size_t i;
     // Firstly, try to find existing scriptResource in list and return it.
     // If no scriptResource found, try to load and add new, then return it.
-    for (i = 0; i < rm->scriptResourcesCount; i++)
+    for (size_t i = 0; i < rm->scriptResourcesCount; i++)
         if (strcmp(scriptResId, rm->scriptResourcesList[i]->id) == 0) {
-            found = 1;
+            found = true;
             foundIndex = i;
             break;
         }
@@ -384,7 +486,7 @@ struct ScriptResource* ResourceManager_loadScriptResource(struct ResourceManager
         struct ScriptResource* scriptResource = NULL;
         scriptResource = ScriptResource_construct(scriptResId);
         if (!scriptResource) {
-            Logger_log(rm->logger, "%s ResourceID: %s", RESOURCE_MANAGER_ERR_LOAD_SCRIPT_RES, scriptResId);
+            Logger_log(rm->logger, "%s ResourceID: %s", ResourceManager_errorMessages.errLoadScriptRes, scriptResId);
             return NULL;
         }
         // Try to reallocate (if needed) and add scriptResource to the list
@@ -404,14 +506,13 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
                                                         const char* const soundResId) {
     if (!rm || !soundResId)
         return NULL;
-    unsigned  char found = 0;
+    bool found = false;
     size_t foundIndex = 0;
-    size_t i;
     // Firstly, try to find existing soundResource in list and return it.
     // If no soundResource found, try to load and add new, then return it.
-    for (i = 0; i < rm->soundResourcesCount; i++)
+    for (size_t i = 0; i < rm->soundResourcesCount; i++)
         if (strcmp(soundResId, rm->soundResourcesList[i]->id) == 0) {
-            found = 1;
+            found = true;
             foundIndex = i;
             break;
         }
@@ -420,7 +521,7 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
         soundResource = SoundResource_construct(soundResId);
         if (!soundResource) {
             Logger_log(rm->logger, "%s ResourceID: %s. SDL_mixer error: %s",
-                       RESOURCE_MANAGER_ERR_LOAD_SOUND_RES,
+                       ResourceManager_errorMessages.errLoadSoundRes,
                        soundResId,
                        Mix_GetError());
             return NULL;
@@ -439,30 +540,30 @@ struct SoundResource* ResourceManager_loadSoundResource(struct ResourceManager* 
 }
 
 enum ResourceManager_errors ResourceManager_saveTextResource(struct ResourceManager* rm,
-                                      struct TextResource* textResource, const char* const textResId) {
+                                                             struct TextResource* textResource,
+                                                             const char* const textResId) {
 
     if (!rm || !textResId || !textResource)
-        return 1;
+        return RM_ERR_NULL_ARGUMENT;
     size_t result = 0;
-    size_t i;
-    unsigned  char found = 0;
+    bool found = false;
     result = TextResource_save(textResource, textResId);
-    for (i = 0; i < rm->textResourcesCount; i++)
+    for (size_t i = 0; i < rm->textResourcesCount; i++)
         if (textResource == rm->textResourcesList[i]) {
-            found = 1;
+            found = true;
             break;
         }
     if (!found) {
         // Try to reallocate (if needed) and add textResource to the list
         if (rm->textResourcesCount >= rm->allocatedTextResourcesCount)
             if (ResourceManager_reallocateTextResourcesList(rm))
-                return 2;
+                return RM_ERR_ALLOC;
         rm->textResourcesList[rm->textResourcesCount] = textResource;
         rm->textResourcesCount++;
     }
     if (result)
-        return (result + 2);
-    return 0;
+        return RM_ERR_SAVING;
+    return RM_NO_ERRORS;
 }
 
 void ResourceManager_destructNeedlessTextureResources(struct ResourceManager* rm) {
