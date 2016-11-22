@@ -1,6 +1,3 @@
-//
-// Created by mslf on 9/27/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,6 +16,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file ScriptResource.c
+ * @author mslf
+ * @date 27 Sep 2016
+ * @brief File containing implementation of #ScriptResource.
+ */
 #include "resourceManager/ScriptResource.h"
 #include <stdlib.h>
 #include "string.h"
