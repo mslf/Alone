@@ -28,7 +28,7 @@ const char* const SCENE_ERR_SCENE_NODE_DEF =
         "Scene_init: definition of SceneNode haven't found!";
 
 //? Again returning 0 1 2 is bad
-unsigned char Scene_reallocateSceneNodesList(struct Scene* scene) {
+enum Scene_errors Scene_reallocateSceneNodesList(struct Scene* scene) {
     if (!scene)
         return 1;
     struct SceneNode** sceneNodesList = NULL;
@@ -48,7 +48,7 @@ unsigned char Scene_reallocateSceneNodesList(struct Scene* scene) {
     return 0;
 }
 
-unsigned char Scene_reallocateEventControllersList(struct Scene* scene) {
+enum Scene_errors Scene_reallocateEventControllersList(struct Scene* scene) {
     if (!scene)
         return 1;
     struct ScriptResource** eventControllersList = NULL;
@@ -68,7 +68,7 @@ unsigned char Scene_reallocateEventControllersList(struct Scene* scene) {
     return 0;
 }
 
-unsigned char Scene_initSceneNode(struct Scene* scene, const char* const sceneNode, struct TextParser* sceneTextParser) {
+enum Scene_errors Scene_initSceneNode(struct Scene* scene, const char* const sceneNode, struct TextParser* sceneTextParser) {
     if (!scene || !sceneTextParser || !sceneNode)
         return 1;
     TextParser_getItemsCount(sceneTextParser, sceneNode);
@@ -98,14 +98,14 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
 
 
 //? Refactor this. Make it smaller.
-unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceManager,
+enum Scene_errors Scene_init(struct Scene* scene, struct ResourceManager* resourceManager,
                          struct Renderer* renderer, struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 
                          struct TextParser* sceneTextParser) {
     if (!scene || !resourceManager || !renderer || !sceneTextParser)
         return 1;
     size_t i;    //? As you are using C99+, go ahead, create it in `for`
     size_t count;
-    count = TextParser_getItemsCount(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING);
+    count = TextParser_getItemsCount(sceneTextParser, Scene_parserStrings.nodes);
     if (sceneTextParser->lastError)
         return 2;
     scene->sceneNodesList = (struct SceneNode**)malloc(sizeof(struct SceneNode*) * count);
@@ -113,7 +113,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
         return 3;
     scene->allocatedSceneNodesCount = count;
     scene->sceneNodesCount = 0;
-    count = TextParser_getItemsCount(sceneTextParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING);
+    count = TextParser_getItemsCount(sceneTextParser, Scene_parserStrings.controllers);
     if (sceneTextParser->lastError)
         return 4;
     scene->eventControllersList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * count);
@@ -123,7 +123,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
     scene->eventControllersCount = 0;
     const char* tempString = NULL;
     for (i = 0; i < scene->allocatedSceneNodesCount; i++) {
-        tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_SCENE_NODES_STRING, i);
+        tempString = TextParser_getString(sceneTextParser, Scene_parserStrings.nodes, i);
         if (tempString) {
             const char* tempSceneNodeRes = NULL;
             tempSceneNodeRes = TextParser_getString(sceneTextParser, tempString, 0);
@@ -135,7 +135,7 @@ unsigned char Scene_init(struct Scene* scene, struct ResourceManager* resourceMa
         }
     }
     for (i = 0; i < scene->allocatedEventControllersCount; i++) {
-        tempString = TextParser_getString(sceneTextParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, i);
+        tempString = TextParser_getString(sceneTextParser, Scene_parserStrings.controllers, i);
         if (tempString)
             Scene_addEventControllerScript(scene, resourceManager, tempString);
     }
@@ -176,7 +176,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager,
         TextParser_destruct(sceneTextParser);
         return NULL;
     }
-    if (strcmp(sceneTypeString, SCENE_PARSER_TYPE_STRING) != 0) {
+    if (strcmp(sceneTypeString, Scene_parserStrings.type) != 0) {
         TextResource_decreasePointersCounter(scene->sceneResource);
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
@@ -207,7 +207,7 @@ void Scene_destruct (struct Scene* scene) {
     }
 }
 
-unsigned char Scene_addSceneNode(struct Scene* scene, struct ResourceManager* const resourceManager,
+enum Scene_errors Scene_addSceneNode(struct Scene* scene, struct ResourceManager* const resourceManager,
                                  struct Renderer* renderer,
                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                  const char* const sceneNodeResId) {
@@ -244,7 +244,7 @@ void Scene_removeSceneNode(
     }
 }
 
-unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneResId) {
+enum Scene_errors Scene_save(struct Scene* const scene, struct ResourceManager* const resourceManager, const char* const sceneResId) {
     if (!scene || !resourceManager || !sceneResId)
         return 1;
     struct TextParser* textParser = NULL;
@@ -253,12 +253,12 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;
-    TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SCENE_PARSER_TYPE_STRING);
+    TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, Scene_parserStrings.type);
     result += textParser->lastError;
     for (i = 0; i < scene->sceneNodesCount; i++) {
         char tempSceeNodeName[600];
         sprintf(tempSceeNodeName, "%ld", i);
-        TextParser_addString(textParser, SCENE_PARSER_SCENE_NODES_STRING, tempSceeNodeName);
+        TextParser_addString(textParser, Scene_parserStrings.nodes, tempSceeNodeName);
         result += textParser->lastError;
         TextParser_addString(textParser, tempSceeNodeName, scene->sceneNodesList[i]->sceneNodeTextResource->id);
         result += textParser->lastError;
@@ -280,7 +280,7 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
         result += textParser->lastError;
     }
     for (i = 0; i < scene->eventControllersCount; i++) {
-        TextParser_addString(textParser, SCENE_PARSER_EVENT_CONTROLLERS_STRING, scene->eventControllersList[i]->id);
+        TextParser_addString(textParser, Scene_parserStrings.controllers, scene->eventControllersList[i]->id);
         result += textParser->lastError;
     }
     char* newText = NULL;
@@ -296,7 +296,7 @@ unsigned char Scene_save(struct Scene* const scene, struct ResourceManager* cons
     return 0;
 }
 
-unsigned char Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
+enum Scene_errors Scene_addEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
                                     const char* const scriptResId) {
     if (!scene || !resourceManager || !scriptResId)
         return 1;
@@ -313,12 +313,12 @@ unsigned char Scene_addEventControllerScript(struct Scene* scene, struct Resourc
     return 0;
 }
 
-void Scene_removeEventControllerScript(struct Scene* scene, struct ResourceManager* resourceManager,
+void Scene_removeEventControllerScript(struct Scene* scene,
                                        const char* const scriptResId) {
     size_t i;
     unsigned char found = 0;
     size_t foundIndex = 0;
-    if (scene && resourceManager && scriptResId) {
+    if (scene && scriptResId) {
         if (scene->eventControllersCount == 0)
             return; // There is no EventControllers
         for (i = 0; i < scene->eventControllersCount; i++)
@@ -341,8 +341,10 @@ void Scene_update(struct Scene* scene) {
     if (!scene)
         return;
     size_t i;
-    for (i = 0; i < scene->eventControllersCount; i++)
+    for (i = 0; i < scene->eventControllersCount; i++) {
         // We have sent pointers to ResourceManager, EventManager, GameManager to the script earlier
         // So we just exicute global code in script
+        lua_getglobal(scene->eventControllersList[i]->luaState, "Global");
         lua_pcall(scene->eventControllersList[i]->luaState, 0, 0, 0);
+    }
 }

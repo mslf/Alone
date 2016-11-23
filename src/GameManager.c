@@ -164,6 +164,7 @@ int GameManager_main(struct GameManager* gm) {
         SDL_RenderClear(gm->renderer->renderer);
         if (gm->scenesCount > 0) {
             i = gm->scenesCount - 1;
+            Scene_update(gm->scenesStack[i]);
             for(j = 0; j < gm->scenesStack[i]->sceneNodesCount; j++) {
                 struct SceneNode* tempSceneNode = gm->scenesStack[i]->sceneNodesList[j];
                 if (tempSceneNode->isActive) {

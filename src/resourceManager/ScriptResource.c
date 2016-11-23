@@ -49,6 +49,7 @@ struct ScriptResource* ScriptResource_construct(const char* const path) {
         ScriptResource_destruct(scriptResource);
         return NULL;
     }
+    lua_setglobal(scriptResource->luaState, "Global");
     scriptResource->pointersCount = 1;
     return scriptResource;
 }
