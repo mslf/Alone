@@ -116,15 +116,29 @@ void Renderer_destruct(struct Renderer* renderer) {
 }
 
 SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point) {
-    SDL_Point newPoint;
-    newPoint.x = renderer->currentScreenSize.x * (point.x - renderer->cameraPosition.x) / renderer->virtualScreenSize.x;
-    newPoint.y = renderer->currentScreenSize.y * (point.y - renderer->cameraPosition.y) / renderer->virtualScreenSize.y;
+    SDL_Point newPoint = {
+        renderer->currentScreenSize.x * (point.x - renderer->cameraPosition.x) / renderer->virtualScreenSize.x,
+        renderer->currentScreenSize.y * (point.y - renderer->cameraPosition.y) / renderer->virtualScreenSize.y};
+    return newPoint;
+}
+
+SDL_Point Renderer_convertCoordinatesA(struct Renderer* renderer, SDL_Point point) {
+    SDL_Point newPoint = {
+        renderer->currentScreenSize.x * point.x / renderer->virtualScreenSize.x,
+        renderer->currentScreenSize.y * point.y / renderer->virtualScreenSize.y};
     return newPoint;
 }
 
 SDL_Point Renderer_convertCoordinatesBack(struct Renderer* renderer, SDL_Point point) {
-    SDL_Point newPoint;
-    newPoint.x = renderer->virtualScreenSize.x * point.x / renderer->currentScreenSize.x + renderer->cameraPosition.x;
-    newPoint.y = renderer->virtualScreenSize.y * point.y / renderer->currentScreenSize.y + renderer->cameraPosition.y;
+    SDL_Point newPoint = {
+        renderer->virtualScreenSize.x * point.x / renderer->currentScreenSize.x + renderer->cameraPosition.x,
+        renderer->virtualScreenSize.y * point.y / renderer->currentScreenSize.y + renderer->cameraPosition.y};
+    return newPoint;
+}
+
+SDL_Point Renderer_convertCoordinatesBackA(struct Renderer* renderer, SDL_Point point) {
+    SDL_Point newPoint = {
+        renderer->virtualScreenSize.x * point.x / renderer->currentScreenSize.x,
+        renderer->virtualScreenSize.y * point.y / renderer->currentScreenSize.y};
     return newPoint;
 }

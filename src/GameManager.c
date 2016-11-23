@@ -156,6 +156,8 @@ int GameManager_main(struct GameManager* gm) {
     unsigned char color = 0;
     SDL_StartTextInput();
     while(!gm->eventManager->quit) {
+        gm->renderer->cameraPosition.x = (-state) *  color;
+        gm->renderer->cameraPosition.y = (-state) * color;
         EventManager_updateSdlEvents(gm->eventManager);
         SDL_SetRenderDrawColor(gm->renderer->renderer, (int)(color * 0.8), color,
                                (int)(color * 0.5), 255);

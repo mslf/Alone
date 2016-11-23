@@ -245,7 +245,7 @@ void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManage
     SDL_Point coordinates = Renderer_convertCoordinates(renderer, sprite->sceneNode.coordinates);
     sprite->dstRect.x = coordinates.x;
     sprite->dstRect.y = coordinates.y;
-    SDL_Point size = Renderer_convertCoordinates(renderer, sprite->virtualSize);
+    SDL_Point size = Renderer_convertCoordinatesA(renderer, sprite->virtualSize);
     sprite->dstRect.w = size.x * sceneNode->scaleX * sprite->percentsToRender.x / 100;
     sprite->dstRect.h = size.y * sceneNode->scaleY * sprite->percentsToRender.y / 100;
 }

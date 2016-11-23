@@ -253,6 +253,8 @@ void Slider_control(struct SceneNode* sceneNode, struct EventManager* eventManag
     if (slider->button->state == BUTTON_STATE_PRESSED) {
         SDL_Point mouseCoordinates;
         SDL_GetMouseState(&mouseCoordinates.x, &mouseCoordinates.y);
+        //FIXME leftBorder and rightBorder should be calculated via Renderer_convertCoordinatesBack
+        //Right now, if you want to move camera position, slider will works bad.
         int leftBorder = slider->base->spriteBase->dstRect.x;
         int rightBorder = slider->base->spriteBase->dstRect.x + slider->base->spriteBase->dstRect.w;
         if (mouseCoordinates.x > leftBorder && mouseCoordinates.x < rightBorder) {
@@ -290,7 +292,6 @@ void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         slider->base->sceneNode.scaleX = slider->sceneNode.scaleX;
         slider->base->sceneNode.scaleY = slider->sceneNode.scaleY;
         slider->base->isGeometryChanged = true;
-        ProgressBar_update((struct SceneNode*)slider->base, eventManager, renderer);
         slider->button->sceneNode.coordinates.y = slider->sceneNode.coordinates.y;
         if (slider->isButtonMoving) {
             SDL_Point mouseVirtualCoordinates = Renderer_convertCoordinatesBack(renderer, slider->lastMouseCoordinates);
@@ -320,6 +321,7 @@ void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         slider->button->isGeometryChanged = true;
         slider->isGeometryChanged = false;
     }
+    ProgressBar_update((struct SceneNode*)slider->base, eventManager, renderer);
     Button_update((struct SceneNode*)slider->button, eventManager, renderer);
 }
 

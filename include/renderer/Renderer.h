@@ -78,6 +78,15 @@ void Renderer_destruct(struct Renderer* renderer);
 SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point);
 
 /**
+ * @brief Converts Upixels absolute coordinates to the real pixels, 
+ * based on Renderer#virtualScreenSize and Renderer#currentScreenSize.
+ * @param renderer Pointer to a #Renderer with needed numbers. Can be NULL.
+ * @param point SDL_Point with world absolute coordinates in Upixels.
+ * @return SDL_Point with a screen relative coordinates in real pixels.
+ */
+SDL_Point Renderer_convertCoordinatesA(struct Renderer* renderer, SDL_Point point);
+
+/**
  * @brief Converts real pixels relative coordinates to the Upixels, 
  * based on Renderer#virtualScreenSize, Renderer#currentScreenSize and Renderer#cameraPosition.
  * @param renderer Pointer to a #Renderer with needed numbers. Can be NULL.
@@ -86,4 +95,12 @@ SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point
  */
 SDL_Point Renderer_convertCoordinatesBack(struct Renderer* renderer, SDL_Point point);
 
+/**
+ * @brief Converts real pixels relative coordinates to the Upixels, 
+ * based on Renderer#virtualScreenSize and Renderer#currentScreenSize.
+ * @param renderer Pointer to a #Renderer with needed numbers. Can be NULL.
+ * @param point SDL_Point with a screen relative coordinates in real pixels.
+ * @return SDL_Point with world absolute coordinates in Upixels.
+ */
+SDL_Point Renderer_convertCoordinatesBackA(struct Renderer* renderer, SDL_Point point);
 #endif //ALONE_RENDERER_H

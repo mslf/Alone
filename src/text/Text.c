@@ -251,7 +251,7 @@ void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager,
     SDL_Point size;
     size.x = text->srcRect.w;
     size.y = text->srcRect.h;
-    SDL_Point convertedSize = Renderer_convertCoordinates(renderer, size);
+    SDL_Point convertedSize = Renderer_convertCoordinatesA(renderer, size);
     text->dstRect.w = convertedSize.x * sceneNode->scaleX;
     text->dstRect.h = convertedSize.y * sceneNode->scaleY;
 }
