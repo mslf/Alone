@@ -11,7 +11,6 @@ sceneNodes = [
     listBox_1,
     listBox_2
 ];
-eventControllers = [data/hello.script];
 menu_2 = [
     "data/menus/menu2.contextMenu",
     10, 10,
@@ -83,6 +82,12 @@ listBox_2 = [
     0,
     0.0,
     1.0, 1.0
+];
+
+eventControllers = [controller_2];
+controller_2 = [
+    data/hello2.script,
+    120
 ];
 /* this
  * is

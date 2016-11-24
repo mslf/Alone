@@ -11,7 +11,6 @@ sceneNodes = [
     bar_3,
     menu_1
 ];
-eventControllers = [data/hello.script];
 sprite_1 = [
     "data/demoSprite1.sprite",
     0, 0,      /* x, y */
@@ -83,6 +82,12 @@ menu_1 = [
     0,
     0.0,
     1.0, 1.0
+];
+
+eventControllers = [controller_1];
+controller_1 = [
+    data/hello.script,
+    60
 ];
 /* this
  * is
