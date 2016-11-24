@@ -87,31 +87,137 @@ $(document).ready(function(){initNavTree('struct_scene.html','');});
 <div class="title">Scene Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents some array of <a class="el" href="struct_scene_node.html">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>, which are controls its behaviour.  
+ <a href="struct_scene.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_scene_8h_source.html">Scene.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a21ff815316283aacca9aa1a2946f2e44"><td class="memItemLeft" align="right" valign="top"><a id="a21ff815316283aacca9aa1a2946f2e44"></a>
-struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sceneResource</b></td></tr>
+<tr class="memitem:a21ff815316283aacca9aa1a2946f2e44"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#a21ff815316283aacca9aa1a2946f2e44">sceneResource</a></td></tr>
 <tr class="separator:a21ff815316283aacca9aa1a2946f2e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c2a731f55f56cdcfa5c21e60ccbb6e4"><td class="memItemLeft" align="right" valign="top"><a id="a5c2a731f55f56cdcfa5c21e60ccbb6e4"></a>
-struct <a class="el" href="struct_scene_node.html">SceneNode</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNodesList</b></td></tr>
+<tr class="memitem:a5c2a731f55f56cdcfa5c21e60ccbb6e4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">sceneNodesList</a></td></tr>
 <tr class="separator:a5c2a731f55f56cdcfa5c21e60ccbb6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4b3987f8cf701755a371f80578a908d"><td class="memItemLeft" align="right" valign="top"><a id="ad4b3987f8cf701755a371f80578a908d"></a>
-struct <a class="el" href="struct_script_resource.html">ScriptResource</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>eventControllersList</b></td></tr>
-<tr class="separator:ad4b3987f8cf701755a371f80578a908d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07444dae294959bed34558e3477a76c6"><td class="memItemLeft" align="right" valign="top"><a id="a07444dae294959bed34558e3477a76c6"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedSceneNodesCount</b></td></tr>
+<tr class="memitem:aad33c3b6450afc793583a4796e53d859"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_periodic_event_controller.html">PeriodicEventController</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">eventControllersList</a></td></tr>
+<tr class="separator:aad33c3b6450afc793583a4796e53d859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07444dae294959bed34558e3477a76c6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#a07444dae294959bed34558e3477a76c6">allocatedSceneNodesCount</a></td></tr>
 <tr class="separator:a07444dae294959bed34558e3477a76c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11cef9a0dcadd4d0fb4b18f1f214fed0"><td class="memItemLeft" align="right" valign="top"><a id="a11cef9a0dcadd4d0fb4b18f1f214fed0"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNodesCount</b></td></tr>
+<tr class="memitem:a11cef9a0dcadd4d0fb4b18f1f214fed0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">sceneNodesCount</a></td></tr>
 <tr class="separator:a11cef9a0dcadd4d0fb4b18f1f214fed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6140a3bd288e2079c3f28f30246c41a6"><td class="memItemLeft" align="right" valign="top"><a id="a6140a3bd288e2079c3f28f30246c41a6"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedEventControllersCount</b></td></tr>
+<tr class="memitem:a6140a3bd288e2079c3f28f30246c41a6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#a6140a3bd288e2079c3f28f30246c41a6">allocatedEventControllersCount</a></td></tr>
 <tr class="separator:a6140a3bd288e2079c3f28f30246c41a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2cf0332471e9bed9ab7792892fafbf0"><td class="memItemLeft" align="right" valign="top"><a id="ab2cf0332471e9bed9ab7792892fafbf0"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>eventControllersCount</b></td></tr>
+<tr class="memitem:ab2cf0332471e9bed9ab7792892fafbf0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene.html#ab2cf0332471e9bed9ab7792892fafbf0">eventControllersCount</a></td></tr>
 <tr class="separator:ab2cf0332471e9bed9ab7792892fafbf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents some array of <a class="el" href="struct_scene_node.html">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>, which are controls its behaviour. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a6140a3bd288e2079c3f28f30246c41a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6140a3bd288e2079c3f28f30246c41a6">&sect;&nbsp;</a></span>allocatedEventControllersCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedEventControllersCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_periodic_event_controller.html" title="ScriptResource with counter for periodic execution. ">PeriodicEventController</a> in the <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>. </p>
+
+</div>
+</div>
+<a id="a07444dae294959bed34558e3477a76c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07444dae294959bed34558e3477a76c6">&sect;&nbsp;</a></span>allocatedSceneNodesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedSceneNodesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_scene_node.html">SceneNode</a> in the <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. </p>
+
+</div>
+</div>
+<a id="ab2cf0332471e9bed9ab7792892fafbf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2cf0332471e9bed9ab7792892fafbf0">&sect;&nbsp;</a></span>eventControllersCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t eventControllersCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_periodic_event_controller.html" title="ScriptResource with counter for periodic execution. ">PeriodicEventController</a> in the <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>. </p>
+
+</div>
+</div>
+<a id="aad33c3b6450afc793583a4796e53d859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad33c3b6450afc793583a4796e53d859">&sect;&nbsp;</a></span>eventControllersList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_periodic_event_controller.html">PeriodicEventController</a>* eventControllersList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to <a class="el" href="struct_periodic_event_controller.html" title="ScriptResource with counter for periodic execution. ">PeriodicEventController</a>, which are controls this <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>. </p>
+
+</div>
+</div>
+<a id="a11cef9a0dcadd4d0fb4b18f1f214fed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11cef9a0dcadd4d0fb4b18f1f214fed0">&sect;&nbsp;</a></span>sceneNodesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t sceneNodesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_scene_node.html">SceneNode</a> in the <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. </p>
+
+</div>
+</div>
+<a id="a5c2a731f55f56cdcfa5c21e60ccbb6e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c2a731f55f56cdcfa5c21e60ccbb6e4">&sect;&nbsp;</a></span>sceneNodesList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_scene_node.html">SceneNode</a>** sceneNodesList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to <a class="el" href="struct_scene_node.html">SceneNode</a>. <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> contaings these <a class="el" href="struct_scene_node.html">SceneNode</a> and it is in charge of them. </p>
+
+</div>
+</div>
+<a id="a21ff815316283aacca9aa1a2946f2e44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21ff815316283aacca9aa1a2946f2e44">&sect;&nbsp;</a></span>sceneResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>* sceneResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> with settings of this <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_scene_8h_source.html">Scene.h</a></li>
 </ul>

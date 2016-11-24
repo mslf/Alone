@@ -1,6 +1,8 @@
 var searchData=
 [
   ['scene',['Scene',['../struct_scene.html',1,'']]],
+  ['scene_5ferrormessages',['Scene_errorMessages',['../struct_scene__error_messages.html',1,'']]],
+  ['scene_5fparserstrings',['Scene_parserStrings',['../struct_scene__parser_strings.html',1,'']]],
   ['scenenode',['SceneNode',['../struct_scene_node.html',1,'']]],
   ['scenenodetype',['SceneNodeType',['../struct_scene_node_type.html',1,'']]],
   ['scenenodetypesregistrar',['SceneNodeTypesRegistrar',['../struct_scene_node_types_registrar.html',1,'']]],
