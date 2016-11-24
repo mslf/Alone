@@ -28,12 +28,16 @@
 static const struct Scene_errorMessages{
     const char* const errNoType;
     /**< Will be displayed when Scene_parserStrings#type string haven't found in #TextParser. */
-    const char* const errNoDef;
+    const char* const errNoNodeDef;
     /**< Will be displayed when string with definition of #SceneNode from Scene_parserStrings#nodes 
+     *haven't found in #TextParser. */
+    const char* const errNoControllerDef;
+    /**< Will be displayed when string with definition of #PeriodicEventController from Scene_parserStrings#controllers
      *haven't found in #TextParser. */
 }Scene_errorMessages = {
     "Scene_constructSceneNode: suitable SceneNode type haven't detected or constructing SceneNode failed!",
-    "Scene_init: definition of SceneNode haven't found!"};
+    "Scene_init: definition of SceneNode haven't found!", 
+    "Scene_init: definition of PeriodicEventController haven't found!"};
 
 /**
  * @brief Reallocates memory for Scene#sceneNodesList, increases Scene#sceneNodesCount 
@@ -47,15 +51,9 @@ static enum Scene_errors Scene_reallocateSceneNodesList(struct Scene* scene) {
         return SCENE_ERR_NULL_ARGUMENT;
     struct SceneNode** sceneNodesList = NULL;
     size_t newSize = scene->allocatedSceneNodesCount + SCENE_SCENE_NODES_REALLOCATION_STEP;
-    if (!(sceneNodesList = (struct SceneNode**)malloc(sizeof(struct SceneNode*) * newSize))) {
-        free(sceneNodesList);
+    sceneNodesList = (struct SceneNode**)realloc(scene->sceneNodesList, sizeof(struct SceneNode*) * newSize);
+    if (!sceneNodesList)
         return SCENE_ERR_ALLOC_NODES_LIST;
-    }
-    for (size_t i = 0; i < newSize; i++)
-        sceneNodesList[i] = NULL;
-    for (size_t i = 0; i < scene->sceneNodesCount; i++)
-        sceneNodesList[i] = scene->sceneNodesList[i];
-    free(scene->sceneNodesList);
     scene->sceneNodesList = sceneNodesList;
     scene->allocatedSceneNodesCount = newSize;
     return SCENE_NO_ERRORS;
@@ -71,17 +69,12 @@ static enum Scene_errors Scene_reallocateSceneNodesList(struct Scene* scene) {
 static enum Scene_errors Scene_reallocateEventControllersList(struct Scene* scene) {
     if (!scene)
         return SCENE_ERR_NULL_ARGUMENT;
-    struct ScriptResource** eventControllersList = NULL;
+    struct PeriodicEventController* eventControllersList = NULL;
     size_t newSize = scene->allocatedEventControllersCount + SCENE_EVENT_CONTROLLERS_REALLOOCATION_STEP;
-    if (!(eventControllersList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * newSize))) {
-        free(eventControllersList);
+    eventControllersList = (struct PeriodicEventController*)realloc(scene->eventControllersList,
+                                                                    sizeof(struct PeriodicEventController) * newSize);
+    if (!eventControllersList)
         return SCENE_ERR_ALLOC_CONTROLLERS_LIST;
-    }
-    for (size_t i = 0; i < newSize; i++)
-        eventControllersList[i] = NULL;
-    for (size_t i = 0; i < scene->eventControllersCount; i++)
-        eventControllersList[i] = scene->eventControllersList[i];
-    free(scene->eventControllersList);
     scene->eventControllersList = eventControllersList;
     scene->allocatedEventControllersCount = newSize;
     return SCENE_NO_ERRORS;
@@ -175,7 +168,7 @@ static enum Scene_errors Scene_init(struct Scene* scene, struct ResourceManager*
     count = TextParser_getItemsCount(sceneTextParser, Scene_parserStrings.controllers);
     if (sceneTextParser->lastError)
         return SCENE_ERR_NO_CONTROLLERS;
-    scene->eventControllersList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * count);
+    scene->eventControllersList = (struct PeriodicEventController*)malloc(sizeof(struct PeriodicEventController) * count);
     if (!scene->eventControllersList)
         return SCENE_ERR_ALLOC_CONTROLLERS_LIST;
     scene->allocatedEventControllersCount = count;
@@ -187,7 +180,7 @@ static enum Scene_errors Scene_init(struct Scene* scene, struct ResourceManager*
             const char* tempSceneNodeRes = NULL;
             tempSceneNodeRes = TextParser_getString(sceneTextParser, tempString, 0);
             if (!tempSceneNodeRes) {
-                Logger_log(resourceManager->logger, "%s Name: <%s>", Scene_errorMessages.errNoDef, tempString);
+                Logger_log(resourceManager->logger, "%s Name: <%s>", Scene_errorMessages.errNoNodeDef, tempString);
             }
             if (Scene_addSceneNode(scene, resourceManager, renderer, sceneNodeTypesRegistrar, tempSceneNodeRes) == 0)
                 Scene_initSceneNode(scene, tempString, sceneTextParser);
@@ -195,8 +188,13 @@ static enum Scene_errors Scene_init(struct Scene* scene, struct ResourceManager*
     }
     for (size_t i = 0; i < scene->allocatedEventControllersCount; i++) {
         tempString = TextParser_getString(sceneTextParser, Scene_parserStrings.controllers, i);
-        if (tempString)
-            Scene_addEventControllerScript(scene, resourceManager, tempString);
+        if (tempString) {
+            const char* tempScriptRes = TextParser_getString(sceneTextParser, tempString, 0);
+            size_t period = (size_t)TextParser_getInt(sceneTextParser, tempString, 1);
+            if (!tempScriptRes)
+                Logger_log(resourceManager->logger, "%s Name: <%s>", Scene_errorMessages.errNoControllerDef, tempString);
+            Scene_addEventControllerScript(scene, resourceManager, tempScriptRes, period);
+        }
     }
     return SCENE_NO_ERRORS;
 }
@@ -250,7 +248,7 @@ void Scene_destruct (struct Scene* scene) {
     if (scene) {
         if (scene->eventControllersList) {
             for (size_t i = 0; i < scene->eventControllersCount; i++)
-                ScriptResource_decreasePointersCounter(scene->eventControllersList[i]);
+                ScriptResource_decreasePointersCounter(scene->eventControllersList[i].script);
             free(scene->eventControllersList);
         }
         if (scene->sceneNodesList) {
@@ -324,8 +322,13 @@ enum Scene_errors Scene_save(struct Scene* const scene,
         result += TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->scaleX);
         result += TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->scaleY);
     }
-    for (size_t i = 0; i < scene->eventControllersCount; i++)
-        result += TextParser_addString(textParser, Scene_parserStrings.controllers, scene->eventControllersList[i]->id);
+    for (size_t i = 0; i < scene->eventControllersCount; i++) {
+        char tempControllerName[600];
+        sprintf(tempControllerName, "%ld", i);
+        result += TextParser_addString(textParser, Scene_parserStrings.controllers, tempControllerName);
+        result += TextParser_addString(textParser, tempControllerName, scene->eventControllersList[i].script->id);
+        result += TextParser_addInt(textParser, tempControllerName, (long)scene->eventControllersList[i].period);
+    }
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
     result += textParser->lastError;
@@ -341,7 +344,8 @@ enum Scene_errors Scene_save(struct Scene* const scene,
 
 enum Scene_errors Scene_addEventControllerScript(struct Scene* scene,
                                                  struct ResourceManager* resourceManager,
-                                                 const char* const scriptResId) {
+                                                 const char* const scriptResId,
+                                                 size_t period) {
     if (!scene || !resourceManager || !scriptResId)
         return SCENE_ERR_NULL_ARGUMENT;
     struct ScriptResource* scriptResource = NULL;
@@ -352,7 +356,9 @@ enum Scene_errors Scene_addEventControllerScript(struct Scene* scene,
     if (scene->eventControllersCount >= scene->allocatedEventControllersCount)
         if (Scene_reallocateEventControllersList(scene))
             return SCENE_ERR_ALLOC_CONTROLLERS_LIST;
-    scene->eventControllersList[scene->eventControllersCount] = scriptResource;
+    scene->eventControllersList[scene->eventControllersCount].script = scriptResource;
+    scene->eventControllersList[scene->eventControllersCount].period = period;
+    scene->eventControllersList[scene->eventControllersCount].counter = 0;
     scene->eventControllersCount++;
     return SCENE_NO_ERRORS;
 }
@@ -365,14 +371,14 @@ void Scene_removeEventControllerScript(struct Scene* scene,
         if (scene->eventControllersCount == 0)
             return; // There is no EventControllers
         for (size_t i = 0; i < scene->eventControllersCount; i++)
-            if (strcmp(scene->eventControllersList[i]->id, scriptResId) == 0) {
+            if (strcmp(scene->eventControllersList[i].script->id, scriptResId) == 0) {
                 found = 1;
                 foundIndex = i;
                 break;
             }
         if (!found)
             return;
-        ScriptResource_decreasePointersCounter(scene->eventControllersList[foundIndex]);
+        ScriptResource_decreasePointersCounter(scene->eventControllersList[foundIndex].script);
         scene->eventControllersCount--;
         for (size_t i = foundIndex; i < scene->eventControllersCount; i++)
             scene->eventControllersList[i] = scene->eventControllersList[i + 1];
@@ -385,7 +391,11 @@ void Scene_update(struct Scene* scene) {
     for (size_t i = 0; i < scene->eventControllersCount; i++) {
         // We have sent pointers to ResourceManager, EventManager, GameManager to the script earlier
         // So we just exicute global code in script
-        lua_getglobal(scene->eventControllersList[i]->luaState, "Global");
-        lua_pcall(scene->eventControllersList[i]->luaState, 0, 0, 0);
+        scene->eventControllersList[i].counter++;
+        if (scene->eventControllersList[i].counter > scene->eventControllersList[i].period) {
+            scene->eventControllersList[i].counter = 0;
+            lua_getglobal(scene->eventControllersList[i].script->luaState, "Global");
+            lua_pcall(scene->eventControllersList[i].script->luaState, 0, 0, 0);
+        }
     }
 }

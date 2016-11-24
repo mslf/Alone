@@ -25,6 +25,7 @@
 #ifndef ALONE_SCENE_H
 #define ALONE_SCENE_H
 
+#include <stddef.h>
 #include "scene/SceneNodeTypesRegistrar.h"
 #include "scene/SceneNode.h"
 #include "resourceManager/ResourceManager.h"
@@ -34,8 +35,11 @@
  * @brief Strings which are used for constructing #Scene from #TextParser.
  * @see Scene_construct
  * @note Scene_parserStrings_parserStrings#nodes doesn't contain actual 
- * settings (such an id or initial coordinates, etc) of the constructed #SceneNode.
- * It contains array of #SceneNode names, which will be found in #TextParser, so they will contain actual data. 
+ * settings (such an ID or initial coordinates, etc) of the constructed #SceneNode.
+ * It contains array of #SceneNode names, which will be found in #TextParser, so they will contain actual data.
+ * @note Scene_parserStrings_parserStrings#controllers doesn't contain actual 
+ * settings (such an ID period) of the constructed #PeriodicEventController.
+ * It contains array of #PeriodicEventController names, which will be found in #TextParser, so they will contain actual data. 
  */
 static const struct Scene_parserStrings {
     const char* const type;
@@ -43,7 +47,7 @@ static const struct Scene_parserStrings {
     const char* const nodes;
     /**< List of strings with name of #SceneNode, which #Scene will find in #TextParser. */
     const char* const controllers;
-    /**< List of #ScriptResource IDs, for controlling events in #Scene. */
+    /**< List of strings with name of #PeriodicEventController, which #Scene will find in #TextParser. */
 }Scene_parserStrings= {
     "Scene",
     "sceneNodes",
@@ -87,19 +91,17 @@ enum Scene_constants{
     /**< Init alocating number and reallocating step for Scene#eventControllersList. */
 };
 
-/*
-*
+/**
  * @brief #ScriptResource with counter for periodic execution.
- *
+ */
 struct PeriodicEventController {
-    struct ScriptResource* eventController;
-    *< Periodic controller of the #Scene. *
+    struct ScriptResource* script;
+    /**< Periodic controller of the #Scene. */
     size_t counter;
-    *< Current missed frames counter. *
+    /**< Current missed frames counter. */
     size_t period;
-    *< Period of the #ScriptResourcce execution. *
+    /**< Period of the #ScriptResourcce execution. */
 };
-*/
 
 /**
  * @brief Represents some array of #SceneNode and #ScriptResource, which are controls its behaviour.
@@ -109,16 +111,16 @@ struct Scene {
     /**< #TextResource with settings of this #Scene.*/
     struct SceneNode** sceneNodesList;
     /**< Array of pointers to #SceneNode. #Scene contaings these #SceneNode and it is in charge of them.*/
-    struct ScriptResource** eventControllersList;
-    /**< Array of pointers to #ScriptResource, which are controls this #Scene. */
+    struct PeriodicEventController* eventControllersList;
+    /**< Array of pointers to #PeriodicEventController, which are controls this #Scene. */
     size_t allocatedSceneNodesCount;
     /**< Allocated number of #SceneNode in the Scene#sceneNodesList. */
     size_t sceneNodesCount;
     /**< Current number of existing #SceneNode in the Scene#sceneNodesList. */
     size_t allocatedEventControllersCount;
-    /**< Allocated number of #ScriptResource in the Scene#eventControllersList. */
+    /**< Allocated number of #PeriodicEventController in the Scene#eventControllersList. */
     size_t eventControllersCount;
-    /**< Current number of existing #ScriptResource in the Scene#eventControllersList. */
+    /**< Current number of existing #PeriodicEventController in the Scene#eventControllersList. */
 };
 
 /**
@@ -191,30 +193,37 @@ enum Scene_errors Scene_save(struct Scene* const scene,
                              const char* const sceneResId);
 
 /**
- * @brief Adds #ScriptResource to the Scene#eventControllersList.
+ * @brief Adds #PeriodicEventController to the Scene#eventControllersList.
  * increases Scene#eventControllersCount and reallocates Scene#eventControllersList (if needed).
- * @param scene Pointer to a #Scene where to add #ScriptResource. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager which is used to load #ScriptResource. Can be NULL.
+ * @param scene Pointer to a #Scene where to add #PeriodicEventController. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager which is used to load #PeriodicEventController. Can be NULL.
+ * @param scriptResId String with ID (path) to the #ScriptResource resource. Can be NULL.
+ * @param period Execution period number to set PeriodicEventController#period.
  * @return #Scene_errors value.
  * @see #Scene_errors
+ * @see #PeriodicEventController
  */
 enum Scene_errors Scene_addEventControllerScript(struct Scene* scene,
                                                  struct ResourceManager* resourceManager,
-                                                 const char* const scriptResId);
+                                                 const char* const scriptResId,
+                                                 size_t period);
 
 /**
- * @brief Removes #ScriptResource from Scene#eventControllersList.
+ * @brief Removes #PeriodicEventController from Scene#eventControllersList.
  * Decreases Scene#eventControllersCount and shifts Scene#eventControllersList to the left.
  * @param scene Pointer to a #Scene, where to remove #SceneNode. Can be NULL.
- * @param index Index of #SceneNode in Scene#sceneNodesList. Can be any number.
+ * @param scriptResId String with ID (path) of #ScriptResource in #PeriodicEventController in 
+ * Scene#sceneNodesList to be removed. Can be NULL.
  * @see #SceneNode
+ * @see #PeriodicEventController
  */
 void Scene_removeEventControllerScript(struct Scene* scene,
                                        const char* const scriptResId);
 
 /**
- * @brief Executes #ScriptResource in Scene#eventControllersList.
- * @param scene Pointer to a #Scene where to execute #ScriptResource. Can be NULL.
+ * @brief Executes #PeriodicEventController in Scene#eventControllersList.
+ * @param scene Pointer to a #Scene where to execute #PeriodicEventController. Can be NULL.
+ * @see #PeriodicEventController
  */
 void Scene_update(struct Scene* scene);
 #endif //ALONE_SCENE_H
