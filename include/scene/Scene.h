@@ -57,15 +57,33 @@ enum Scene_errors {
     /**< All right, no errors. */
     SCENE_ERR_NULL_ARGUMENT = 1,
     /**< Some of function's argument is NULL. */
+    SCENE_ERR_ALLOC_NODES_LIST = 2,
+    /**< Allocating memory for Scene#sceneNodesList failed. */
+    SCENE_ERR_ALLOC_CONTROLLERS_LIST = 3,
+    /**< Allocating memory for Scene#eventControllersList failed. */
+    SCENE_ERR_NO_NODE_DEF = 4,
+    /**< Definition of #SceneNode string (from #TextParser, Scene_parserStrings#nodes) haven't found. */
+    SCENE_ERR_CONSTRUCTING_TEXT_PARSER = 5,
+    /**< Constructing new #TextParser for some required reason failed. */
+    SCENE_ERR_NO_NODES = 6,
+    /**< No Scene_parserStrings#nodes string found in #TextParser. */
+    SCENE_ERR_NO_CONTROLLERS = 7,
+    /**< No Scene_parserStrings#controllers string found in #TextParser. */
+    SCENE_ERR_CONSTRUCTING_NODE = 8,
+    /**< Constructing new #SceneNode to add to the Scene#sceneNodesList failed. */
+    SCENE_ERR_SAVING = 9,
+    /**< Saving #Scene failed due to internal reason. */
+    SCENE_ERR_CONSTRUCTING_CONTROLLER = 10,
+    /**< Constructing new #ScriptResource to add to the Scene#eventControllersList failed. */
 };
     
 /**
  * @brief Some initial constants for #Scene.
  */
 enum Scene_constants{
-    SCENE_NODES_REALLOCATION_STEP = 10,
+    SCENE_SCENE_NODES_REALLOCATION_STEP = 10,
     /**< Init alocating number and reallocating step for Scene#sceneNodesList. */
-    EVENT_CONTROLLERS_REALLOOCATION_STEP = 10
+    SCENE_EVENT_CONTROLLERS_REALLOOCATION_STEP = 10
     /**< Init alocating number and reallocating step for Scene#eventControllersList. */
 };
 
