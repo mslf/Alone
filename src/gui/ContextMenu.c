@@ -583,17 +583,11 @@ void ContextMenu_update(struct SceneNode* sceneNode, struct EventManager* eventM
     size_t i;
     if (contextMenu->isGeometryChanged && contextMenu->menuOptionsCount > 0) {
             contextMenu->menuOptionsList[0]->sceneNode.coordinates = contextMenu->sceneNode.coordinates;
-            contextMenu->menuOptionsList[0]->sceneNode.flip = contextMenu->sceneNode.flip;
-            contextMenu->menuOptionsList[0]->sceneNode.scaleX = contextMenu->sceneNode.scaleX;
-            contextMenu->menuOptionsList[0]->sceneNode.scaleY = contextMenu->sceneNode.scaleY;
         for (i = 1; i < contextMenu->menuOptionsCount; i++) {
             contextMenu->menuOptionsList[i]->sceneNode.coordinates = contextMenu->sceneNode.coordinates;
             contextMenu->menuOptionsList[i]->sceneNode.coordinates.y =
                     contextMenu->menuOptionsList[i - 1]->sceneNode.coordinates.y
                     + contextMenu->menuOptionsList[i - 1]->sprite->virtualSize.y;
-            contextMenu->menuOptionsList[i]->sceneNode.flip = contextMenu->sceneNode.flip;
-            contextMenu->menuOptionsList[i]->sceneNode.scaleX = contextMenu->sceneNode.scaleX;
-            contextMenu->menuOptionsList[i]->sceneNode.scaleY = contextMenu->sceneNode.scaleY;
         }
         contextMenu->isGeometryChanged = false;
     }

@@ -288,9 +288,6 @@ void TextBox_update(struct SceneNode* sceneNode, struct EventManager* eventManag
     }
     if (textBox->isGeometryChanged) {
         textBox->box->sceneNode.coordinates = textBox->sceneNode.coordinates;
-        textBox->box->sceneNode.flip = textBox->sceneNode.flip;
-        textBox->box->sceneNode.scaleX = textBox->sceneNode.scaleX;
-        textBox->box->sceneNode.scaleY = textBox->sceneNode.scaleY;
         textBox->box->isGeometryChanged = true;
         textBox->isGeometryChanged = false;
     }

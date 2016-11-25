@@ -34,7 +34,7 @@
 /**
  * @brief Possible types of #SceneNode.
  */
-enum SceneNodeType {
+enum SceneNodeBaseType {
     SCENE_NODE_SIMPLE = 0,
     /**< Represents simple #SceneNode. */
     SCENE_NODE_DYNAMIC = 1,
@@ -46,10 +46,10 @@ enum SceneNodeType {
 /**
  * @brief Basic object, which is represent node of #Scene.
  * Use SceneNode_init() to init this #SceneNode.
- * @see #SceneNodeType
+ * @see #SceneNodeBaseType
  */
 struct SceneNode {
-    enum SceneNodeType nodeType;
+    enum SceneNodeBaseType nodeType;
     /**< Determines type of #SceneNode. */
     bool isActive;
     /**< Flag, which is determine activity state of #SceneNode. */
@@ -106,19 +106,19 @@ struct PhysicalSceneNode {
 };
 
 /**
- * @brief Inits #SceneNode and sets SceneNode#nodeType to SceneNodeType#SCENE_NODE_SIMPLE.
+ * @brief Inits #SceneNode and sets SceneNode#nodeType to SceneNodeBaseType#SCENE_NODE_SIMPLE.
  * @param sceneNode Pointer to a #SceneNode to be initialized. Can be NULL.
  */
 void SceneNode_init(struct SceneNode* sceneNode);
 
 /**
- * @brief Inits #DynamicSceneNode and sets SceneNode#nodeType to SceneNodeType#SCENE_NODE_DYNAMIC.
+ * @brief Inits #DynamicSceneNode and sets SceneNode#nodeType to SceneNodeBaseType#SCENE_NODE_DYNAMIC.
  * @param dynamicSceneNode Pointer to a #DynamicSceneNode to be initialized. Can be NULL.
  */
 void SceneNode_initDynamic(struct DynamicSceneNode* dynamicSceneNode);
 
 /**
- * @brief Inits #PhysicalSceneNode and sets SceneNode#nodeType to SceneNodeType#SCENE_NODE_PHYSICAL.
+ * @brief Inits #PhysicalSceneNode and sets SceneNode#nodeType to SceneNodeBaseType#SCENE_NODE_PHYSICAL.
  * @param physicalSceneNode Pointer to a #PhysicalSceneNode to be initialized. Can be NULL.
  */
 void SceneNode_initPhysical(struct PhysicalSceneNode* physicalSceneNode);

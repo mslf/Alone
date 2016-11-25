@@ -370,7 +370,7 @@ enum CheckBoxSceneNode_errors CheckBox_save(const struct CheckBox* const checkBo
         return CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
     result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, CheckBoxSceneNode_parserString.type);
     result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.spriteRes,
-                                   checkBox->sprite->sceneNode.sceneNodeTextResource->id);
+                                   checkBox->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedEventRes,
                                    checkBox->focusedEventResource->id);
     result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedEventRes,
@@ -478,12 +478,7 @@ void CheckBox_update(struct SceneNode* sceneNode, struct EventManager* eventMana
         checkBox->sprite->renderingsCounter = 0;
     }
     if (checkBox->isGeometryChanged) {
-        checkBox->sprite->sceneNode.angle = checkBox->sceneNode.angle;
-        checkBox->sprite->sceneNode.coordinates = checkBox->sceneNode.coordinates;
-        checkBox->sprite->sceneNode.flip = checkBox->sceneNode.flip;
-        checkBox->sprite->sceneNode.rotatePointCoordinates = checkBox->sceneNode.rotatePointCoordinates;
-        checkBox->sprite->sceneNode.scaleX = checkBox->sceneNode.scaleX;
-        checkBox->sprite->sceneNode.scaleY = checkBox->sceneNode.scaleY;
+        checkBox->sprite->dynamicSceneNode.sceneNode.coordinates = checkBox->sceneNode.coordinates;
         checkBox->isGeometryChanged = false;
     }
     Sprite_update((struct SceneNode*)checkBox->sprite, eventManager, renderer);

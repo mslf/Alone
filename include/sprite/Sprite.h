@@ -22,6 +22,7 @@
 #ifndef ALONE_SPRITE_H
 #define ALONE_SPRITE_H
 
+#include <stddef.h>
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
 #include "renderer/Renderer.h"
@@ -53,15 +54,15 @@ struct Animation {
     size_t oneFrameDuration;
 };
 /*
- * Sprite is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Sprite struct,
- * if you want code to work with Sprite like with a SceneNode.
+ * Sprite is an inheritor of the SceneNodeType.
+ * You SHOULD include the "struct SceneNodeType blablaNode;" at the begining of Sprite struct,
+ * if you want code to work with Sprite like with a SceneNodeType.
  * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
  * or to your function implementation.
- * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ * Don't forget to add this warning comment to your own new SceneNodeType inheritors.
  */
 struct Sprite {
-    struct SceneNode sceneNode;
+    struct DynamicSceneNode dynamicSceneNode;
     struct TextureResource* textureResource;
     struct Animation* animations;
     size_t animationsCount;

@@ -107,11 +107,11 @@ static unsigned char Text_generateTexture(struct Text* text, struct ResourceMana
         return 2;
     text->srcRect.w = textureW;
     text->srcRect.h = textureH;
-    text->sceneNode.update = Text_update;
-    text->sceneNode.render = Text_render;
-    text->sceneNode.destruct = Text_destruct;
-    text->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(TEXT_SCENENODE_PARSER_TYPE_STRING) + 1));
-    if (!text->sceneNode.type)
+    text->dynamicSceneNode.sceneNode.update = Text_update;
+    text->dynamicSceneNode.sceneNode.render = Text_render;
+    text->dynamicSceneNode.sceneNode.destruct = Text_destruct;
+    text->dynamicSceneNode.sceneNode.type = (char*)malloc(sizeof(char) * (strlen(TEXT_SCENENODE_PARSER_TYPE_STRING) + 1));
+    if (!text->dynamicSceneNode.sceneNode.type)
         return 3;
     return 0;
 }
@@ -127,7 +127,7 @@ struct SceneNode* Text_construct(struct ResourceManager* const resourceManager,
     text = (struct Text*)calloc(1, sizeof(struct Text));
     if (!text)
         return NULL;
-    SceneNode_init(&(text->sceneNode));
+    SceneNode_initDynamic(&(text->dynamicSceneNode));
     unsigned char logFlag = 0;
     if (Text_tryGetSettingsFromTextParser(text, resourceManager, textParser, &logFlag)) {
         Text_destruct((struct SceneNode*)text);
@@ -143,7 +143,7 @@ struct SceneNode* Text_construct(struct ResourceManager* const resourceManager,
         Text_destruct((struct SceneNode*)text);
         return NULL;
     }
-    strcpy(text->sceneNode.type, TEXT_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(text->dynamicSceneNode.sceneNode.type, TEXT_SCENENODE_PARSER_TYPE_STRING);
     return (struct SceneNode*)text;
 }
 
@@ -233,8 +233,8 @@ unsigned char Text_save(
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
     result += textParser->lastError;
-    result += TextResource_updateContent(text->sceneNode.sceneNodeTextResource, newText);
-    result += ResourceManager_saveTextResource(resourceManager, text->sceneNode.sceneNodeTextResource, textResId);
+    result += TextResource_updateContent(text->dynamicSceneNode.sceneNode.sceneNodeTextResource, newText);
+    result += ResourceManager_saveTextResource(resourceManager, text->dynamicSceneNode.sceneNode.sceneNodeTextResource, textResId);
     TextParser_destruct(textParser);
     if (newText)
         free(newText);
@@ -245,15 +245,15 @@ void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager,
     if (!sceneNode || !renderer)
         return;
     struct Text* text = (struct Text*)sceneNode;
-    SDL_Point coordinates = Renderer_convertCoordinates(renderer, text->sceneNode.coordinates);
+    SDL_Point coordinates = Renderer_convertCoordinates(renderer, text->dynamicSceneNode.sceneNode.coordinates);
     text->dstRect.x = coordinates.x;
     text->dstRect.y = coordinates.y;
     SDL_Point size;
     size.x = text->srcRect.w;
     size.y = text->srcRect.h;
     SDL_Point convertedSize = Renderer_convertCoordinatesA(renderer, size);
-    text->dstRect.w = convertedSize.x * sceneNode->scaleX;
-    text->dstRect.h = convertedSize.y * sceneNode->scaleY;
+    text->dstRect.w = convertedSize.x * text->dynamicSceneNode.scaleX;
+    text->dstRect.h = convertedSize.y * text->dynamicSceneNode.scaleY;
 }
 
 void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
@@ -261,5 +261,5 @@ void Text_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
         return;
     struct Text* text = (struct Text*)sceneNode;
     SDL_RenderCopyEx(renderer->renderer, text->textureResource->texture, &text->srcRect, &text->dstRect,
-                     text->sceneNode.angle, &text->sceneNode.rotatePointCoordinates, text->sceneNode.flip);
+                     text->dynamicSceneNode.angle, &text->dynamicSceneNode.rotatePointCoordinates, text->dynamicSceneNode.flip);
 }

@@ -288,9 +288,6 @@ void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         if (slider->base->value % slider->step != 0)
             slider->base->value = slider->base->value / slider->step * slider->step;
         slider->base->sceneNode.coordinates = slider->sceneNode.coordinates;
-        slider->base->sceneNode.flip = slider->sceneNode.flip;
-        slider->base->sceneNode.scaleX = slider->sceneNode.scaleX;
-        slider->base->sceneNode.scaleY = slider->sceneNode.scaleY;
         slider->base->isGeometryChanged = true;
         slider->button->sceneNode.coordinates.y = slider->sceneNode.coordinates.y;
         if (slider->isButtonMoving) {
@@ -315,9 +312,6 @@ void Slider_update(struct SceneNode* sceneNode, struct EventManager* eventManage
                 case SLIDER_ALLIGN_Y_NONE:
                     break;
             }
-        slider->button->sceneNode.flip = slider->sceneNode.flip;
-        slider->button->sceneNode.scaleX = slider->sceneNode.scaleX;
-        slider->button->sceneNode.scaleY = slider->sceneNode.scaleY;
         slider->button->isGeometryChanged = true;
         slider->isGeometryChanged = false;
     }

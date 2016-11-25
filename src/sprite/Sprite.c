@@ -172,20 +172,20 @@ struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager
     sprite = (struct Sprite*)calloc(1, sizeof(struct Sprite));
     if (!sprite)
         return NULL;
-    SceneNode_init(&(sprite->sceneNode));
+    SceneNode_initDynamic(&(sprite->dynamicSceneNode));
     if (Sprite_tryGetSettingsFromTextParser(sprite, resourceManager, renderer, textParser)) {
         Sprite_destruct((struct SceneNode*)sprite);
         return NULL;
     }
-    sprite->sceneNode.update = Sprite_update;
-    sprite->sceneNode.render = Sprite_render;
-    sprite->sceneNode.destruct = Sprite_destruct;
-    sprite->sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SPRITE_SCENENODE_PARSER_TYPE_STRING) + 1));
-    if (!sprite->sceneNode.type) {
+    sprite->dynamicSceneNode.sceneNode.update = Sprite_update;
+    sprite->dynamicSceneNode.sceneNode.render = Sprite_render;
+    sprite->dynamicSceneNode.sceneNode.destruct = Sprite_destruct;
+    sprite->dynamicSceneNode.sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SPRITE_SCENENODE_PARSER_TYPE_STRING) + 1));
+    if (!sprite->dynamicSceneNode.sceneNode.type) {
         Sprite_destruct((struct SceneNode*)sprite);
         return NULL;
     }
-    strcpy(sprite->sceneNode.type, SPRITE_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(sprite->dynamicSceneNode.sceneNode.type, SPRITE_SCENENODE_PARSER_TYPE_STRING);
     return (struct SceneNode*)sprite;
 }
 
@@ -226,8 +226,8 @@ unsigned char Sprite_save(
     }
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
-    result += TextResource_updateContent(sprite->sceneNode.sceneNodeTextResource, tempString);
-    ResourceManager_saveTextResource(resourceManager, sprite->sceneNode.sceneNodeTextResource, spriteResId);
+    result += TextResource_updateContent(sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource, tempString);
+    ResourceManager_saveTextResource(resourceManager, sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource, spriteResId);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
@@ -242,12 +242,12 @@ void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManage
     sprite->srcRect.y = sprite->currentAnimation * sprite->frameSize.y;
     sprite->srcRect.w = sprite->frameSize.x * sprite->percentsToRender.x / 100;
     sprite->srcRect.h = sprite->frameSize.y * sprite->percentsToRender.y / 100;
-    SDL_Point coordinates = Renderer_convertCoordinates(renderer, sprite->sceneNode.coordinates);
+    SDL_Point coordinates = Renderer_convertCoordinates(renderer, sprite->dynamicSceneNode.sceneNode.coordinates);
     sprite->dstRect.x = coordinates.x;
     sprite->dstRect.y = coordinates.y;
     SDL_Point size = Renderer_convertCoordinatesA(renderer, sprite->virtualSize);
-    sprite->dstRect.w = size.x * sceneNode->scaleX * sprite->percentsToRender.x / 100;
-    sprite->dstRect.h = size.y * sceneNode->scaleY * sprite->percentsToRender.y / 100;
+    sprite->dstRect.w = size.x * sprite->dynamicSceneNode.scaleX * sprite->percentsToRender.x / 100;
+    sprite->dstRect.h = size.y * sprite->dynamicSceneNode.scaleY * sprite->percentsToRender.y / 100;
 }
 
 void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
@@ -261,7 +261,7 @@ void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
     if (sprite->currentFrame > sprite->animations[sprite->currentAnimation].framesCount - 1)
         sprite->currentFrame = 0;
     SDL_RenderCopyEx(renderer->renderer, sprite->textureResource->texture, &sprite->srcRect, &sprite->dstRect,
-                     sprite->sceneNode.angle, &sprite->sceneNode.rotatePointCoordinates, sprite->sceneNode.flip);
+                     sprite->dynamicSceneNode.angle, &sprite->dynamicSceneNode.rotatePointCoordinates, sprite->dynamicSceneNode.flip);
     sprite->renderingsCounter++;
 }
 

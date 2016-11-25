@@ -113,14 +113,23 @@ static enum Scene_errors Scene_initSceneNode(struct Scene* scene,
     };
     SceneNode_partiallyInitFrom(scene->sceneNodesList[index], &tempSceneNode);*/
     // It doesn't becomes easier to read. Or I can't.
+    // FIXME crap.
     scene->sceneNodesList[index]->coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1);
     scene->sceneNodesList[index]->coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2);
-    scene->sceneNodesList[index]->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
-    scene->sceneNodesList[index]->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
-    scene->sceneNodesList[index]->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 5);
-    scene->sceneNodesList[index]->angle = TextParser_getDouble(sceneTextParser, sceneNode, 6);
-    scene->sceneNodesList[index]->scaleX = TextParser_getDouble(sceneTextParser, sceneNode, 7);
-    scene->sceneNodesList[index]->scaleY = TextParser_getDouble(sceneTextParser, sceneNode, 8);
+    if (scene->sceneNodesList[index]->nodeType == SCENE_NODE_DYNAMIC) {
+        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->rotatePointCoordinates.x 
+                                                                = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
+        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->rotatePointCoordinates.y 
+                                                                = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
+        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->flip 
+                                                                = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 5);
+        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->angle 
+                                                                = TextParser_getDouble(sceneTextParser, sceneNode, 6);
+        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->scaleX 
+                                                                = TextParser_getDouble(sceneTextParser, sceneNode, 7);
+        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->scaleY 
+                                                                = TextParser_getDouble(sceneTextParser, sceneNode, 8);
+    }
     return SCENE_NO_ERRORS;
 }
 
@@ -315,12 +324,21 @@ enum Scene_errors Scene_save(struct Scene* const scene,
         result += TextParser_addString(textParser, tempSceeNodeName, scene->sceneNodesList[i]->sceneNodeTextResource->id);
         result += TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.x);
         result += TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.y);
-        result += TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->rotatePointCoordinates.x);
-        result += TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->rotatePointCoordinates.y);
-        result += TextParser_addInt(textParser, tempSceeNodeName, (long)scene->sceneNodesList[i]->flip);
-        result += TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->angle);
-        result += TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->scaleX);
-        result += TextParser_addDouble(textParser, tempSceeNodeName, scene->sceneNodesList[i]->scaleY);
+        // FIXME and this is crap too.
+        if (scene->sceneNodesList[i]->nodeType == SCENE_NODE_DYNAMIC) {
+            result += TextParser_addInt(textParser, tempSceeNodeName,
+                                        ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->rotatePointCoordinates.x);
+            result += TextParser_addInt(textParser, tempSceeNodeName,
+                                        ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->rotatePointCoordinates.y);
+            result += TextParser_addInt(textParser, tempSceeNodeName,
+                                        (long)((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->flip);
+            result += TextParser_addDouble(textParser, tempSceeNodeName,
+                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->angle);
+            result += TextParser_addDouble(textParser, tempSceeNodeName,
+                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->scaleX);
+            result += TextParser_addDouble(textParser, tempSceeNodeName,
+                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->scaleY);
+        }
     }
     for (size_t i = 0; i < scene->eventControllersCount; i++) {
         char tempControllerName[600];

@@ -368,9 +368,9 @@ enum ButtonSceneNode_errors Button_save(const struct Button* const button, struc
         return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
     result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ButtonSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.spriteRes,
-                                   button->sprite->sceneNode.sceneNodeTextResource->id);
+                                   button->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.textRes,
-                                   button->label->sceneNode.sceneNodeTextResource->id);
+                                   button->label->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedEventRes,
                                    button->focusedEventResource->id);
     result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedEventRes,
@@ -460,19 +460,9 @@ void Button_update(struct SceneNode* sceneNode, struct EventManager* eventManage
         button->sprite->renderingsCounter = 0;
     }
     if (button->isGeometryChanged) {
-        button->sprite->sceneNode.angle = button->sceneNode.angle;
-        button->sprite->sceneNode.coordinates = button->sceneNode.coordinates;
-        button->sprite->sceneNode.flip = button->sceneNode.flip;
-        button->sprite->sceneNode.rotatePointCoordinates = button->sceneNode.rotatePointCoordinates;
-        button->sprite->sceneNode.scaleX = button->sceneNode.scaleX;
-        button->sprite->sceneNode.scaleY = button->sceneNode.scaleY;
-        button->label->sceneNode.angle = button->sceneNode.angle;
-        button->label->sceneNode.coordinates.x = button->sceneNode.coordinates.x + button->labelOffset.x;
-        button->label->sceneNode.coordinates.y = button->sceneNode.coordinates.y + button->labelOffset.y;
-        button->label->sceneNode.flip = button->sceneNode.flip;
-        button->label->sceneNode.rotatePointCoordinates = button->sceneNode.rotatePointCoordinates;
-        button->label->sceneNode.scaleX = button->sceneNode.scaleX;
-        button->label->sceneNode.scaleY = button->sceneNode.scaleY;
+        button->sprite->dynamicSceneNode.sceneNode.coordinates = button->sceneNode.coordinates;
+        button->label->dynamicSceneNode.sceneNode.coordinates.x = button->sceneNode.coordinates.x + button->labelOffset.x;
+        button->label->dynamicSceneNode.sceneNode.coordinates.y = button->sceneNode.coordinates.y + button->labelOffset.y;
         button->isGeometryChanged = false;
     }
     Sprite_update((struct SceneNode*)button->sprite, eventManager, renderer);

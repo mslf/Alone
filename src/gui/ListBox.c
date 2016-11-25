@@ -350,21 +350,12 @@ void ListBox_update(struct SceneNode* sceneNode, struct EventManager* eventManag
     struct ListBox* listBox = (struct ListBox*)sceneNode;
     if (listBox->isGeometryChanged) {
         listBox->textBox->sceneNode.coordinates = listBox->sceneNode.coordinates;
-        listBox->textBox->sceneNode.flip = listBox->sceneNode.flip;
-        listBox->textBox->sceneNode.scaleX = listBox->sceneNode.scaleX;
-        listBox->textBox->sceneNode.scaleY = listBox->sceneNode.scaleY;
         listBox->textBox->isGeometryChanged = true;
         listBox->button->sceneNode.coordinates = listBox->sceneNode.coordinates;
         listBox->button->sceneNode.coordinates.x += listBox->textBox->box->sprite->virtualSize.x;
-        listBox->button->sceneNode.flip = listBox->sceneNode.flip;
-        listBox->button->sceneNode.scaleX = listBox->sceneNode.scaleX;
-        listBox->button->sceneNode.scaleY = listBox->sceneNode.scaleY;
         listBox->button->isGeometryChanged = true;
         listBox->contextMenu->sceneNode.coordinates = listBox->sceneNode.coordinates;
         listBox->contextMenu->sceneNode.coordinates.y += listBox->textBox->box->sprite->virtualSize.y;
-        listBox->contextMenu->sceneNode.flip = listBox->sceneNode.flip;
-        listBox->contextMenu->sceneNode.scaleX = listBox->sceneNode.scaleX;
-        listBox->contextMenu->sceneNode.scaleY = listBox->sceneNode.scaleY;
         listBox->contextMenu->isGeometryChanged = true;
         listBox->isGeometryChanged = false;
     }

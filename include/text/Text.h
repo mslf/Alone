@@ -46,15 +46,15 @@ enum {
     TEXT_SCENENODE_DEFAULT_COLOR_A = 0
 };
 /*
- * Text is an inheritor of the SceneNode.
- * You SHOULD include the "struct SceneNode blablaNode;" at the begining of Text struct,
- * if you want code to work with Text like with a SceneNode.
+ * Text is an inheritor of the DynamicSceneNode.
+ * You SHOULD include the "struct DynamicSceneNode blablaNode;" at the begining of Text struct,
+ * if you want code to work with Text like with a DynamicSceneNode.
  * More, you SHOULD initialize function pointers in 'blablaNode' to NULL (by calling SceneNode_init)
  * or to your function implementation.
- * Don't forget to add this warning comment to your own new SceneNode inheritors.
+ * Don't forget to add this warning comment to your own new DynamicSceneNode inheritors.
  */
 struct Text {
-    struct SceneNode sceneNode;
+    struct DynamicSceneNode dynamicSceneNode;
     struct TextureResource* textureResource;
     char* fontPath;
     char* text;

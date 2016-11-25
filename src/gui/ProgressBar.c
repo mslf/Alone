@@ -181,7 +181,7 @@ enum ProgressBarSceneNode_errors ProgressBar_save(const struct ProgressBar* cons
         return PROGRESS_BAR_ERR_CONSTRUCTIG_TEXT_PARSER;
     result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ProgressBarSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, ProgressBarSceneNode_parserStrings.spriteRes,
-                                   progressBar->spriteBase->sceneNode.sceneNodeTextResource->id);
+                                   progressBar->spriteBase->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addInt(textParser, ProgressBarSceneNode_parserStrings.value, (long)progressBar->value);
     char* tempString = TextParser_convertToText(textParser);
     result += textParser->lastError;
@@ -201,18 +201,8 @@ void ProgressBar_update(struct SceneNode* sceneNode, struct EventManager* eventM
         return;
     struct ProgressBar* progressBar = (struct ProgressBar*)sceneNode;
     if (progressBar->isGeometryChanged) {
-        progressBar->spriteBase->sceneNode.angle = progressBar->sceneNode.angle;
-        progressBar->spriteBase->sceneNode.coordinates = progressBar->sceneNode.coordinates;
-        progressBar->spriteBase->sceneNode.flip = progressBar->sceneNode.flip;
-        progressBar->spriteBase->sceneNode.rotatePointCoordinates = progressBar->sceneNode.rotatePointCoordinates;
-        progressBar->spriteBase->sceneNode.scaleX = progressBar->sceneNode.scaleX;
-        progressBar->spriteBase->sceneNode.scaleY = progressBar->sceneNode.scaleY;
-        progressBar->spriteBar->sceneNode.angle = progressBar->sceneNode.angle;
-        progressBar->spriteBar->sceneNode.coordinates = progressBar->sceneNode.coordinates;
-        progressBar->spriteBar->sceneNode.flip = progressBar->sceneNode.flip;
-        progressBar->spriteBar->sceneNode.rotatePointCoordinates = progressBar->sceneNode.rotatePointCoordinates;
-        progressBar->spriteBar->sceneNode.scaleX = progressBar->sceneNode.scaleX;
-        progressBar->spriteBar->sceneNode.scaleY = progressBar->sceneNode.scaleY;
+        progressBar->spriteBase->dynamicSceneNode.sceneNode.coordinates = progressBar->sceneNode.coordinates;
+        progressBar->spriteBar->dynamicSceneNode.sceneNode.coordinates = progressBar->sceneNode.coordinates;
         progressBar->spriteBar->percentsToRender.x = progressBar->value;
         progressBar->isGeometryChanged = false;
     }
