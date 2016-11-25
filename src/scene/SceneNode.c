@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/11/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,18 +16,21 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file SceneNode.c
+ * @author mslf
+ * @date 11 Aug 2016
+ * @brief File containing implementation os #SceneNode.
+ */
 #include "scene/SceneNode.h"
 
 void SceneNode_init(struct SceneNode* sceneNode) {
+    if (!sceneNode)
+        return;
+    sceneNode->nodeType = SCENE_NODE_SIMPLE;
     sceneNode->isActive = true;
-    sceneNode->angle = 0.0;
     sceneNode->coordinates.x = 0;
     sceneNode->coordinates.y = 0;
-    sceneNode->flip = SDL_FLIP_NONE;
-    sceneNode->rotatePointCoordinates.x = 0;
-    sceneNode->rotatePointCoordinates.y = 0;
-    sceneNode->scaleX = 1.0;
-    sceneNode->scaleY = 1.0;
     sceneNode->type = NULL;
     sceneNode->control = NULL;
     sceneNode->render = NULL;
@@ -38,4 +38,27 @@ void SceneNode_init(struct SceneNode* sceneNode) {
     sceneNode->sound = NULL;
     sceneNode->destruct = NULL;
     sceneNode->sceneNodeTextResource = NULL;
+}
+
+void SceneNode_initDynamic(struct DynamicSceneNode* dynamicSceneNode) {
+    if (!dynamicSceneNode)
+        return;
+    SceneNode_init((struct SceneNode*)dynamicSceneNode);
+    dynamicSceneNode->sceneNode.nodeType = SCENE_NODE_DYNAMIC;
+    dynamicSceneNode->angle = 0.0;
+    dynamicSceneNode->flip = SDL_FLIP_NONE;
+    dynamicSceneNode->rotatePointCoordinates.x = 0;
+    dynamicSceneNode->rotatePointCoordinates.y = 0;
+    dynamicSceneNode->scaleX = 1.0;
+    dynamicSceneNode->scaleY = 1.0;
+}
+
+void SceneNode_initPhysical(struct PhysicalSceneNode* physicalSceneNode) {
+    if (physicalSceneNode)
+        return;
+    SceneNode_initDynamic((struct DynamicSceneNode*)physicalSceneNode);
+    physicalSceneNode->dynamicSceneNode.sceneNode.nodeType = SCENE_NODE_PHYSICAL;
+    physicalSceneNode->angleVel = 0.0;
+    physicalSceneNode->velX = 0.0;
+    physicalSceneNode->velY = 0.0;
 }
