@@ -87,16 +87,52 @@ $(document).ready(function(){initNavTree('struct_scene_node_type.html','');});
 <div class="title">SceneNodeType Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represent <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor's type.  
+ <a href="struct_scene_node_type.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_scene_node_types_registrar_8h_source.html">SceneNodeTypesRegistrar.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a23506fc4821ab6d9671f3e6222591a96"><td class="memItemLeft" align="right" valign="top"><a id="a23506fc4821ab6d9671f3e6222591a96"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="memitem:a23506fc4821ab6d9671f3e6222591a96"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node_type.html#a23506fc4821ab6d9671f3e6222591a96">type</a></td></tr>
 <tr class="separator:a23506fc4821ab6d9671f3e6222591a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73c6b5f5faad9469791b4d28ad90495b"><td class="memItemLeft" align="right" valign="top"><a id="a73c6b5f5faad9469791b4d28ad90495b"></a>
-struct <a class="el" href="struct_scene_node.html">SceneNode</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><b>construct</b> )(struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *const renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, struct <a class="el" href="struct_text_parser.html">TextParser</a> *const textParser)</td></tr>
+<tr class="memitem:a73c6b5f5faad9469791b4d28ad90495b"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node_type.html#a73c6b5f5faad9469791b4d28ad90495b">construct</a> )(struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *const renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, struct <a class="el" href="struct_text_parser.html">TextParser</a> *const textParser)</td></tr>
 <tr class="separator:a73c6b5f5faad9469791b4d28ad90495b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represent <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor's type. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a73c6b5f5faad9469791b4d28ad90495b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73c6b5f5faad9469791b4d28ad90495b">&sect;&nbsp;</a></span>construct</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_scene_node.html">SceneNode</a>*(* construct) (struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *const renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, struct <a class="el" href="struct_text_parser.html">TextParser</a> *const textParser)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a function, that constructs <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor of that type. </p>
+
+</div>
+</div>
+<a id="a23506fc4821ab6d9671f3e6222591a96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23506fc4821ab6d9671f3e6222591a96">&sect;&nbsp;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Type string, which will be found in <a class="el" href="struct_text_parser.html">TextParser</a> for constructing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_scene_node_types_registrar_8h_source.html">SceneNodeTypesRegistrar.h</a></li>
 </ul>

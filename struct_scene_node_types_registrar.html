@@ -87,19 +87,69 @@ $(document).ready(function(){initNavTree('struct_scene_node_types_registrar.html
 <div class="title">SceneNodeTypesRegistrar Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains list of all registered <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritors with their constructors.  
+ <a href="struct_scene_node_types_registrar.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_scene_node_types_registrar_8h_source.html">SceneNodeTypesRegistrar.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a26220f07d07585c20b71ddab90783db6"><td class="memItemLeft" align="right" valign="top"><a id="a26220f07d07585c20b71ddab90783db6"></a>
-struct <a class="el" href="struct_scene_node_type.html">SceneNodeType</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNodeTypesList</b></td></tr>
+<tr class="memitem:a26220f07d07585c20b71ddab90783db6"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node_type.html">SceneNodeType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node_types_registrar.html#a26220f07d07585c20b71ddab90783db6">sceneNodeTypesList</a></td></tr>
 <tr class="separator:a26220f07d07585c20b71ddab90783db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1d22eb74c59dd10779143e8b799dd0"><td class="memItemLeft" align="right" valign="top"><a id="a5a1d22eb74c59dd10779143e8b799dd0"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedSceneNodeTypes</b></td></tr>
+<tr class="memitem:a5a1d22eb74c59dd10779143e8b799dd0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node_types_registrar.html#a5a1d22eb74c59dd10779143e8b799dd0">allocatedSceneNodeTypes</a></td></tr>
 <tr class="separator:a5a1d22eb74c59dd10779143e8b799dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a431a77356de72071ae14aaf0fdd5894d"><td class="memItemLeft" align="right" valign="top"><a id="a431a77356de72071ae14aaf0fdd5894d"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNodeTypesCount</b></td></tr>
+<tr class="memitem:a431a77356de72071ae14aaf0fdd5894d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node_types_registrar.html#a431a77356de72071ae14aaf0fdd5894d">sceneNodeTypesCount</a></td></tr>
 <tr class="separator:a431a77356de72071ae14aaf0fdd5894d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains list of all registered <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritors with their constructors. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a5a1d22eb74c59dd10779143e8b799dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1d22eb74c59dd10779143e8b799dd0">&sect;&nbsp;</a></span>allocatedSceneNodeTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedSceneNodeTypes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocated number of <a class="el" href="struct_scene_node_type.html" title="Represent SceneNode inheritor&#39;s type. ">SceneNodeType</a> in the <a class="el" href="struct_scene_node_types_registrar.html#a26220f07d07585c20b71ddab90783db6">SceneNodeTypesRegistrar::sceneNodeTypesList</a>. </p>
+
+</div>
+</div>
+<a id="a431a77356de72071ae14aaf0fdd5894d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a431a77356de72071ae14aaf0fdd5894d">&sect;&nbsp;</a></span>sceneNodeTypesCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t sceneNodeTypesCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_scene_node_type.html" title="Represent SceneNode inheritor&#39;s type. ">SceneNodeType</a> in the <a class="el" href="struct_scene_node_types_registrar.html#a26220f07d07585c20b71ddab90783db6">SceneNodeTypesRegistrar::sceneNodeTypesList</a>. </p>
+
+</div>
+</div>
+<a id="a26220f07d07585c20b71ddab90783db6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26220f07d07585c20b71ddab90783db6">&sect;&nbsp;</a></span>sceneNodeTypesList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_scene_node_type.html">SceneNodeType</a>* sceneNodeTypesList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of <a class="el" href="struct_scene_node_type.html" title="Represent SceneNode inheritor&#39;s type. ">SceneNodeType</a>. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_scene_node_types_registrar_8h_source.html">SceneNodeTypesRegistrar.h</a></li>
 </ul>

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['readme',['README',['../md__home_mslf_programs_git__alone__r_e_a_d_m_e.html',1,'']]],
+  ['render',['render',['../struct_scene_node.html#addb4ef28bccaae82a75ab780569a3b58',1,'SceneNode']]],
   ['renderer',['Renderer',['../struct_renderer.html',1,'Renderer'],['../struct_renderer.html#a966da7a60c4ea3ba301e26ccc5efe452',1,'Renderer::renderer()']]],
   ['renderer_2ec',['Renderer.c',['../_renderer_8c.html',1,'']]],
   ['renderer_2eh',['Renderer.h',['../_renderer_8h.html',1,'']]],
@@ -49,5 +50,6 @@ var searchData=
   ['rm_5finitial_5fnumber_5fallocated_5fsound_5fresources',['RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES',['../_resource_manager_8h.html#aa6022e3905e8902ed433d43ea4162259ad2a09060d4a0f24145218d39543111d3',1,'ResourceManager.h']]],
   ['rm_5finitial_5fnumber_5fallocated_5ftext_5fresources',['RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES',['../_resource_manager_8h.html#aa6022e3905e8902ed433d43ea4162259af00b6b37ae97415f8cc56d28a72f1213',1,'ResourceManager.h']]],
   ['rm_5finitial_5fnumber_5fallocated_5ftexture_5fresources',['RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES',['../_resource_manager_8h.html#aa6022e3905e8902ed433d43ea4162259ade296093cec69420f3d312e8653eb472',1,'ResourceManager.h']]],
-  ['rm_5fno_5ferrors',['RM_NO_ERRORS',['../_resource_manager_8h.html#aedd8a6f022397abee3c6ea178911db42ad460a8b6e32586bdde11d3c3952e860d',1,'ResourceManager.h']]]
+  ['rm_5fno_5ferrors',['RM_NO_ERRORS',['../_resource_manager_8h.html#aedd8a6f022397abee3c6ea178911db42ad460a8b6e32586bdde11d3c3952e860d',1,'ResourceManager.h']]],
+  ['rotatepointcoordinates',['rotatePointCoordinates',['../struct_dynamic_scene_node.html#af6753b63e96d86515e63e68c527ff215',1,'DynamicSceneNode']]]
 ];

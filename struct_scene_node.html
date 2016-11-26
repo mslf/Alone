@@ -87,52 +87,189 @@ $(document).ready(function(){initNavTree('struct_scene_node.html','');});
 <div class="title">SceneNode Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Basic object, which is represent node of <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>. Use <a class="el" href="_scene_node_8h.html#a8f169863eb88e8f926cf71c46a9eeb29" title="Inits SceneNode and sets SceneNode::nodeType to SceneNodeBaseType::SCENE_NODE_SIMPLE. ">SceneNode_init()</a> to init this <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>.  
+ <a href="struct_scene_node.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_scene_node_8h_source.html">SceneNode.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a96eff8420fb9ee1b4c5d5f1bcace116d"><td class="memItemLeft" align="right" valign="top"><a id="a96eff8420fb9ee1b4c5d5f1bcace116d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b></td></tr>
+<tr class="memitem:a8ba1de8afbaa8cfa16a049b8aa9bb8ad"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_scene_node_8h.html#aac850f9cbb1f3dcec11ff0abe1053e6f">SceneNodeBaseType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a8ba1de8afbaa8cfa16a049b8aa9bb8ad">nodeType</a></td></tr>
+<tr class="separator:a8ba1de8afbaa8cfa16a049b8aa9bb8ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96eff8420fb9ee1b4c5d5f1bcace116d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a96eff8420fb9ee1b4c5d5f1bcace116d">isActive</a></td></tr>
 <tr class="separator:a96eff8420fb9ee1b4c5d5f1bcace116d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9595a68ef5977595b838f7edad1bcfe3"><td class="memItemLeft" align="right" valign="top"><a id="a9595a68ef5977595b838f7edad1bcfe3"></a>
-struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sceneNodeTextResource</b></td></tr>
+<tr class="memitem:a9595a68ef5977595b838f7edad1bcfe3"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a9595a68ef5977595b838f7edad1bcfe3">sceneNodeTextResource</a></td></tr>
 <tr class="separator:a9595a68ef5977595b838f7edad1bcfe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23506fc4821ab6d9671f3e6222591a96"><td class="memItemLeft" align="right" valign="top"><a id="a23506fc4821ab6d9671f3e6222591a96"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="memitem:a23506fc4821ab6d9671f3e6222591a96"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a23506fc4821ab6d9671f3e6222591a96">type</a></td></tr>
 <tr class="separator:a23506fc4821ab6d9671f3e6222591a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667ad041f76f3b99c2ea65cd78b668ea"><td class="memItemLeft" align="right" valign="top"><a id="a667ad041f76f3b99c2ea65cd78b668ea"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>coordinates</b></td></tr>
+<tr class="memitem:a667ad041f76f3b99c2ea65cd78b668ea"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a667ad041f76f3b99c2ea65cd78b668ea">coordinates</a></td></tr>
 <tr class="separator:a667ad041f76f3b99c2ea65cd78b668ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6753b63e96d86515e63e68c527ff215"><td class="memItemLeft" align="right" valign="top"><a id="af6753b63e96d86515e63e68c527ff215"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>rotatePointCoordinates</b></td></tr>
-<tr class="separator:af6753b63e96d86515e63e68c527ff215"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53e571e5a895ca006bf1ca38cd681ab1"><td class="memItemLeft" align="right" valign="top"><a id="a53e571e5a895ca006bf1ca38cd681ab1"></a>
-SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><b>flip</b></td></tr>
-<tr class="separator:a53e571e5a895ca006bf1ca38cd681ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79dea7ed146af26ff4a0ba4bf5c83eee"><td class="memItemLeft" align="right" valign="top"><a id="a79dea7ed146af26ff4a0ba4bf5c83eee"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>angle</b></td></tr>
-<tr class="separator:a79dea7ed146af26ff4a0ba4bf5c83eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af04d6c916584bdddd6a334359ff1059d"><td class="memItemLeft" align="right" valign="top"><a id="af04d6c916584bdddd6a334359ff1059d"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>scaleX</b></td></tr>
-<tr class="separator:af04d6c916584bdddd6a334359ff1059d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a936cc64e631dcd2b4ea124d5d8d4fe38"><td class="memItemLeft" align="right" valign="top"><a id="a936cc64e631dcd2b4ea124d5d8d4fe38"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>scaleY</b></td></tr>
-<tr class="separator:a936cc64e631dcd2b4ea124d5d8d4fe38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8153fb8b7d19bc0fb8c732014085e19b"><td class="memItemLeft" align="right" valign="top"><a id="a8153fb8b7d19bc0fb8c732014085e19b"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>control</b> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td></tr>
+<tr class="memitem:a8153fb8b7d19bc0fb8c732014085e19b"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a8153fb8b7d19bc0fb8c732014085e19b">control</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td></tr>
 <tr class="separator:a8153fb8b7d19bc0fb8c732014085e19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f53df0be4e8b1ea881a1612fecc6fd6"><td class="memItemLeft" align="right" valign="top"><a id="a6f53df0be4e8b1ea881a1612fecc6fd6"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
+<tr class="memitem:a6f53df0be4e8b1ea881a1612fecc6fd6"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a6f53df0be4e8b1ea881a1612fecc6fd6">update</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
 <tr class="separator:a6f53df0be4e8b1ea881a1612fecc6fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addb4ef28bccaae82a75ab780569a3b58"><td class="memItemLeft" align="right" valign="top"><a id="addb4ef28bccaae82a75ab780569a3b58"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
+<tr class="memitem:addb4ef28bccaae82a75ab780569a3b58"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#addb4ef28bccaae82a75ab780569a3b58">render</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
 <tr class="separator:addb4ef28bccaae82a75ab780569a3b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2157f5f26dcdffd419c5c675961e9a8a"><td class="memItemLeft" align="right" valign="top"><a id="a2157f5f26dcdffd419c5c675961e9a8a"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>sound</b> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_musican.html">Musican</a> *musican)</td></tr>
+<tr class="memitem:a2157f5f26dcdffd419c5c675961e9a8a"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a2157f5f26dcdffd419c5c675961e9a8a">sound</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_musican.html">Musican</a> *musican)</td></tr>
 <tr class="separator:a2157f5f26dcdffd419c5c675961e9a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33da6753937fe159afc33054641a556f"><td class="memItemLeft" align="right" valign="top"><a id="a33da6753937fe159afc33054641a556f"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>destruct</b> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode)</td></tr>
+<tr class="memitem:a33da6753937fe159afc33054641a556f"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a33da6753937fe159afc33054641a556f">destruct</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode)</td></tr>
 <tr class="separator:a33da6753937fe159afc33054641a556f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Basic object, which is represent node of <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>. Use <a class="el" href="_scene_node_8h.html#a8f169863eb88e8f926cf71c46a9eeb29" title="Inits SceneNode and sets SceneNode::nodeType to SceneNodeBaseType::SCENE_NODE_SIMPLE. ">SceneNode_init()</a> to init this <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_scene_node_8h.html#aac850f9cbb1f3dcec11ff0abe1053e6f" title="Possible types of SceneNode. ">SceneNodeBaseType</a> </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a8153fb8b7d19bc0fb8c732014085e19b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8153fb8b7d19bc0fb8c732014085e19b">&sect;&nbsp;</a></span>control</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* control) (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a function, that implements controlling of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
+<a id="a667ad041f76f3b99c2ea65cd78b668ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a667ad041f76f3b99c2ea65cd78b668ea">&sect;&nbsp;</a></span>coordinates</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point coordinates</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Coordinates of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> in Upixels. </p>
+
+</div>
+</div>
+<a id="a33da6753937fe159afc33054641a556f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33da6753937fe159afc33054641a556f">&sect;&nbsp;</a></span>destruct</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* destruct) (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a function, that implements destruction of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
+<a id="a96eff8420fb9ee1b4c5d5f1bcace116d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96eff8420fb9ee1b4c5d5f1bcace116d">&sect;&nbsp;</a></span>isActive</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isActive</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag, which is determine activity state of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </p>
+
+</div>
+</div>
+<a id="a8ba1de8afbaa8cfa16a049b8aa9bb8ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ba1de8afbaa8cfa16a049b8aa9bb8ad">&sect;&nbsp;</a></span>nodeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_scene_node_8h.html#aac850f9cbb1f3dcec11ff0abe1053e6f">SceneNodeBaseType</a> nodeType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Determines type of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </p>
+
+</div>
+</div>
+<a id="addb4ef28bccaae82a75ab780569a3b58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addb4ef28bccaae82a75ab780569a3b58">&sect;&nbsp;</a></span>render</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* render) (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a function, that implements rendering of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
+<a id="a9595a68ef5977595b838f7edad1bcfe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9595a68ef5977595b838f7edad1bcfe3">&sect;&nbsp;</a></span>sceneNodeTextResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>* sceneNodeTextResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> with data strings of this #SceneResource inheritor. </p>
+
+</div>
+</div>
+<a id="a2157f5f26dcdffd419c5c675961e9a8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2157f5f26dcdffd419c5c675961e9a8a">&sect;&nbsp;</a></span>sound</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* sound) (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_musican.html">Musican</a> *musican)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a function, that implements playing sounds of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
+<a id="a23506fc4821ab6d9671f3e6222591a96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23506fc4821ab6d9671f3e6222591a96">&sect;&nbsp;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>String with type of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
+<a id="a6f53df0be4e8b1ea881a1612fecc6fd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f53df0be4e8b1ea881a1612fecc6fd6">&sect;&nbsp;</a></span>update</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* update) (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a function, that implements updating of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_scene_node_8h_source.html">SceneNode.h</a></li>
 </ul>

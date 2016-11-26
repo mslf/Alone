@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('_scene_8c.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>File containing implementation os <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>.  
+<p>File containing implementation of <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_scene_8h_source.html">scene/Scene.h</a>&quot;</code><br />
 <code>#include &quot;textParser/TextParser.h&quot;</code><br />
@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('_scene_8c.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene__error_messages.html">Scene_errorMessages</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error message strings for <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>.  <a href="struct_scene__error_messages.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -109,13 +110,13 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0090579f99396026b41fb705c4f81d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocates memory for <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>, increases <a class="el" href="struct_scene.html#ab2cf0332471e9bed9ab7792892fafbf0">Scene::eventControllersCount</a> by SCENE_EVENT_CONTROLLERS_REALLOOCATION_STEP.  <a href="#a0090579f99396026b41fb705c4f81d53">More...</a><br /></td></tr>
 <tr class="separator:a0090579f99396026b41fb705c4f81d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75dbc575dd6c48d2f63c59fcca360d38"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_scene_8h.html#a4170dfe98a99c786ceecf3d3b6412769">Scene_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#a75dbc575dd6c48d2f63c59fcca360d38">Scene_initSceneNode</a> (struct <a class="el" href="struct_scene.html">Scene</a> *scene, const char *const sceneNode, struct <a class="el" href="struct_text_parser.html">TextParser</a> *sceneTextParser)</td></tr>
-<tr class="memdesc:a75dbc575dd6c48d2f63c59fcca360d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits <a class="el" href="struct_scene_node.html">SceneNode</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#a75dbc575dd6c48d2f63c59fcca360d38">More...</a><br /></td></tr>
+<tr class="memdesc:a75dbc575dd6c48d2f63c59fcca360d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#a75dbc575dd6c48d2f63c59fcca360d38">More...</a><br /></td></tr>
 <tr class="separator:a75dbc575dd6c48d2f63c59fcca360d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13baa8bc1df637dc9ffcee53985cad46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#a13baa8bc1df637dc9ffcee53985cad46">Scene_destructSceneNode</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode)</td></tr>
-<tr class="memdesc:a13baa8bc1df637dc9ffcee53985cad46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_scene_node.html">SceneNode</a> using SceneNode::destruct.  <a href="#a13baa8bc1df637dc9ffcee53985cad46">More...</a><br /></td></tr>
+<tr class="memdesc:a13baa8bc1df637dc9ffcee53985cad46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> using <a class="el" href="struct_scene_node.html#a33da6753937fe159afc33054641a556f">SceneNode::destruct</a>.  <a href="#a13baa8bc1df637dc9ffcee53985cad46">More...</a><br /></td></tr>
 <tr class="separator:a13baa8bc1df637dc9ffcee53985cad46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a667cca0a476fdaea3ab6f8effcd6f9fb"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_scene_8h.html#a4170dfe98a99c786ceecf3d3b6412769">Scene_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#a667cca0a476fdaea3ab6f8effcd6f9fb">Scene_init</a> (struct <a class="el" href="struct_scene.html">Scene</a> *scene, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, struct <a class="el" href="struct_text_parser.html">TextParser</a> *sceneTextParser)</td></tr>
-<tr class="memdesc:a667cca0a476fdaea3ab6f8effcd6f9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits (adds <a class="el" href="struct_scene_node.html">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>) <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#a667cca0a476fdaea3ab6f8effcd6f9fb">More...</a><br /></td></tr>
+<tr class="memdesc:a667cca0a476fdaea3ab6f8effcd6f9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits (adds <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>) <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#a667cca0a476fdaea3ab6f8effcd6f9fb">More...</a><br /></td></tr>
 <tr class="separator:a667cca0a476fdaea3ab6f8effcd6f9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5a8d60ddff11900a043a140ed465544"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene.html">Scene</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#ac5a8d60ddff11900a043a140ed465544">Scene_construct</a> (struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, const char *const sceneResId)</td></tr>
 <tr class="memdesc:ac5a8d60ddff11900a043a140ed465544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> and inits it from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#ac5a8d60ddff11900a043a140ed465544">More...</a><br /></td></tr>
@@ -124,10 +125,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:a3d6c9b1e47f230759ddea6316259d710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> and frees memory, used by it. Also destructs all #SceneNodes in <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>.  <a href="#a3d6c9b1e47f230759ddea6316259d710">More...</a><br /></td></tr>
 <tr class="separator:a3d6c9b1e47f230759ddea6316259d710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad57784a7a753aa067d500d073d29235c"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_scene_8h.html#a4170dfe98a99c786ceecf3d3b6412769">Scene_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#ad57784a7a753aa067d500d073d29235c">Scene_addSceneNode</a> (struct <a class="el" href="struct_scene.html">Scene</a> *scene, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, const char *const sceneNodeResId)</td></tr>
-<tr class="memdesc:ad57784a7a753aa067d500d073d29235c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and adds <b>any registered before</b> type of <a class="el" href="struct_scene_node.html">SceneNode</a> to a <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>, increases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and reallocates <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> (if needed).  <a href="#ad57784a7a753aa067d500d073d29235c">More...</a><br /></td></tr>
+<tr class="memdesc:ad57784a7a753aa067d500d073d29235c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and adds <b>any registered before</b> type of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> to a <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>, increases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and reallocates <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> (if needed).  <a href="#ad57784a7a753aa067d500d073d29235c">More...</a><br /></td></tr>
 <tr class="separator:ad57784a7a753aa067d500d073d29235c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dcca518b518d0440b349054d8c6f395"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#a2dcca518b518d0440b349054d8c6f395">Scene_removeSceneNode</a> (struct <a class="el" href="struct_scene.html">Scene</a> *const scene, size_t index)</td></tr>
-<tr class="memdesc:a2dcca518b518d0440b349054d8c6f395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs and removes <a class="el" href="struct_scene_node.html">SceneNode</a> from <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Decreases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and shifts <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> to the left.  <a href="#a2dcca518b518d0440b349054d8c6f395">More...</a><br /></td></tr>
+<tr class="memdesc:a2dcca518b518d0440b349054d8c6f395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs and removes <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> from <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Decreases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and shifts <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> to the left.  <a href="#a2dcca518b518d0440b349054d8c6f395">More...</a><br /></td></tr>
 <tr class="separator:a2dcca518b518d0440b349054d8c6f395"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a360dffa49607ca6071e82877b8dea737"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_scene_8h.html#a4170dfe98a99c786ceecf3d3b6412769">Scene_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_scene_8c.html#a360dffa49607ca6071e82877b8dea737">Scene_save</a> (struct <a class="el" href="struct_scene.html">Scene</a> *const scene, struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, const char *const sceneResId)</td></tr>
 <tr class="memdesc:a360dffa49607ca6071e82877b8dea737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> to the filesystem via <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>.  <a href="#a360dffa49607ca6071e82877b8dea737">More...</a><br /></td></tr>
@@ -148,7 +149,7 @@ Variables</h2></td></tr>
 <tr class="separator:aabdcfd7fbf266dedc01d149b9f24fb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>File containing implementation os <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>. </p>
+<div class="textblock"><p>File containing implementation of <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>mslf </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>11 Aug 2016 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -251,23 +252,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs and adds <b>any registered before</b> type of <a class="el" href="struct_scene_node.html">SceneNode</a> to a <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>, increases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and reallocates <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> (if needed). </p>
+<p>Constructs and adds <b>any registered before</b> type of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> to a <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>, increases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and reallocates <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> (if needed). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> where to add <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading all needed by <a class="el" href="struct_scene_node.html">SceneNode</a> resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for creating <a class="el" href="struct_scene_node.html">SceneNode</a>, that needs <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for creating <b>any registered before</b><a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeResId</td><td>String with ID (path) to the <a class="el" href="struct_scene_node.html">SceneNode</a> resource. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> where to add <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading all needed by <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> resources. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for creating <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>, that needs <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> for creating <b>any registered before</b><a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNodeResId</td><td>String with ID (path) to the <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> resource. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="_scene_8h.html#a4170dfe98a99c786ceecf3d3b6412769" title="Error codes for Scene. ">Scene_errors</a> value. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_scene_8h.html#a4170dfe98a99c786ceecf3d3b6412769" title="Error codes for Scene. ">Scene_errors</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
+<a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd></dl>
+<a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> </dd></dl>
 
 </div>
 </div>
@@ -313,19 +314,19 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading all needed resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for creating <a class="el" href="struct_scene_node.html">SceneNode</a>, that needs <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> for creating <b>any registered before</b><a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for creating <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>, that needs <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> for creating <b>any registered before</b><a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneResId</td><td>String with ID (path) to the <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> resource. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> or NULL if something general failed. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will be created even if some <a class="el" href="struct_scene_node.html">SceneNode</a> or <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a> creating failed. So returning empty <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> is normal. </dd>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will be created even if some <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> or <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a> creating failed. So returning empty <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> is normal. </dd>
 <dd>
 Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f230759ddea6316259d710" title="Destructs Scene and frees memory, used by it. Also destructs all #SceneNodes in Scene::sceneNodesList...">Scene_destruct()</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd></dl>
+<a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> </dd></dl>
 
 </div>
 </div>
@@ -371,10 +372,10 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
       </table>
 </div><div class="memdoc">
 
-<p>Destructs <a class="el" href="struct_scene_node.html">SceneNode</a> using SceneNode::destruct. </p>
+<p>Destructs <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> using <a class="el" href="struct_scene_node.html#a33da6753937fe159afc33054641a556f">SceneNode::destruct</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_scene_node.html">SceneNode</a> to be destructed. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> to be destructed. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -433,13 +434,13 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 </table>
 </div><div class="memdoc">
 
-<p>Inits (adds <a class="el" href="struct_scene_node.html">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>) <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> from <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<p>Inits (adds <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>) <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> from <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> to be initialized. Can be NULL. </td></tr>
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> where <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will get all needed resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> to construct <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> to construct <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> where <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will get all settings. Can be NULL. </td></tr>
   </table>
   </dd>
@@ -449,13 +450,13 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
+<a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd>
 <dd>
 <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd></dl>
+<a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> </dd></dl>
 
 </div>
 </div>
@@ -499,12 +500,12 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 </table>
 </div><div class="memdoc">
 
-<p>Inits <a class="el" href="struct_scene_node.html">SceneNode</a> from <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<p>Inits <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> from <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> where last added <a class="el" href="struct_scene_node.html">SceneNode</a> will be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNode</td><td>String with name of <a class="el" href="struct_scene_node.html">SceneNode</a> to find it in <a class="el" href="struct_text_parser.html">TextParser</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data of <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> where last added <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> will be initialized. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>String with name of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> to find it in <a class="el" href="struct_text_parser.html">TextParser</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -513,7 +514,7 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <dd>
 <a class="el" href="struct_text_parser.html">TextParser</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node.html">SceneNode</a> </dd></dl>
+<a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd></dl>
 
 </div>
 </div>
@@ -618,12 +619,12 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <p>Removes <a class="el" href="struct_periodic_event_controller.html" title="ScriptResource with counter for periodic execution. ">PeriodicEventController</a> from <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>. Decreases <a class="el" href="struct_scene.html#ab2cf0332471e9bed9ab7792892fafbf0">Scene::eventControllersCount</a> and shifts <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a> to the left. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where to remove <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where to remove <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">scriptResId</td><td>String with ID (path) of <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a> in <a class="el" href="struct_periodic_event_controller.html" title="ScriptResource with counter for periodic execution. ">PeriodicEventController</a> in <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> to be removed. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd>
 <dd>
 <a class="el" href="struct_periodic_event_controller.html" title="ScriptResource with counter for periodic execution. ">PeriodicEventController</a> </dd></dl>
 
@@ -655,15 +656,15 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
       </table>
 </div><div class="memdoc">
 
-<p>Destructs and removes <a class="el" href="struct_scene_node.html">SceneNode</a> from <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Decreases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and shifts <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> to the left. </p>
+<p>Destructs and removes <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> from <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Decreases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> and shifts <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a> to the left. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where to remove <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">index</td><td>Index of <a class="el" href="struct_scene_node.html">SceneNode</a> in <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Can be any number. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where to remove <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">index</td><td>Index of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> in <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Can be any number. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html">SceneNode</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd></dl>
 
 </div>
 </div>

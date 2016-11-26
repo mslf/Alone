@@ -74,6 +74,7 @@ var menudata={children:[
 {text:'r',url:'globals_func_r.html#index_r'},
 {text:'s',url:'globals_func_s.html#index_s'},
 {text:'t',url:'globals_func_t.html#index_t'}]},
+{text:'Variables',url:'globals_vars.html'},
 {text:'Enumerations',url:'globals_enum.html'},
 {text:'Enumerator',url:'globals_eval.html',children:[
 {text:'b',url:'globals_eval.html#index_b'},

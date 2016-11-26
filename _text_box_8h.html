@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('_text_box_8h.html','');});
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL.h&gt;</code><br />
-<code>#include &quot;scene/SceneNode.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_scene_node_8h_source.html">scene/SceneNode.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_renderer_8h_source.html">renderer/Renderer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_musican_8h_source.html">musican/Musican.h</a>&quot;</code><br />
@@ -258,7 +258,7 @@ Variables</h2></td></tr>
 <p>Changes <a class="el" href="struct_text_box.html#aed1cfb225a5fb77461e7972691e68a72">TextBox::string</a>, sets <a class="el" href="struct_text_box.html#a1c6db9813ce047719bb6c91e0c161240">TextBox::isStringChanged</a> and reallocates <a class="el" href="struct_text_box.html#aed1cfb225a5fb77461e7972691e68a72">TextBox::string</a>, if needed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">textBox</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">textBox</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">newString</td><td>String, which will be setted to <a class="el" href="struct_text_box.html#aed1cfb225a5fb77461e7972691e68a72">TextBox::string</a>. Can be NULL. </td></tr>
   </table>
   </dd>
@@ -313,18 +313,18 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_text_box.html#a548acc7030d1ae8d0b510cc513e4130e">TextBox::box</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_text_box.html#a548acc7030d1ae8d0b510cc513e4130e">TextBox::box</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_text_box.html#a548acc7030d1ae8d0b510cc513e4130e">TextBox::box</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to an initialized <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>, or NULL if constructing failed. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Use only <a class="el" href="_text_box_8h.html#a3421527e1447be2a3d0b985f96c41cca" title="Destructs TextBox and frees memory, used by it. Pointer to that function should be at TextBox::sceneN...">TextBox_destruct()</a> or TextBox::sceneNode::destruct() to destruct returned <a class="el" href="struct_scene_node.html">SceneNode</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to an initialized <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>, or NULL if constructing failed. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Use only <a class="el" href="_text_box_8h.html#a3421527e1447be2a3d0b985f96c41cca" title="Destructs TextBox and frees memory, used by it. Pointer to that function should be at TextBox::sceneN...">TextBox_destruct()</a> or TextBox::sceneNode::destruct() to destruct returned <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> </dd>
 <dd>
 <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> </dd>
+<a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> </dd>
 <dd>
 <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
@@ -365,12 +365,12 @@ Variables</h2></td></tr>
 <p>Function to control user input events to <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>. Pointer to that function should be at TextBox::sceneNode::control. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>, where that function will get user input events. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
 
 </div>
 </div>
@@ -393,7 +393,7 @@ Variables</h2></td></tr>
 <p>Destructs <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> and frees memory, used by it. Pointer to that function should be at TextBox::sceneNode::destruct. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">textBox</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be not fully initialized. Can be NULL. </td></tr>
+    <tr><td class="paramname">textBox</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be not fully initialized. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -431,12 +431,12 @@ Variables</h2></td></tr>
 <p>Function to render <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> on the screen. Pointer to that function should be at TextBox::sceneNode::render. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for drawing <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
 
 </div>
 </div>
@@ -484,7 +484,7 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="_text_box_8h.html#a71a51d1e703cde7d8554ab8784f35c81" title="Error codes for TextBox. ">TextBoxSceneNode_errors</a> value. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> </dd>
 <dd>
-<a class="el" href="struct_scene_node.html">SceneNode</a> </dd>
+<a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd>
 <dd>
 <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
@@ -521,12 +521,12 @@ Variables</h2></td></tr>
 <p>Function to play sounds of a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>. Pointer to that function should be at TextBox::sceneNode::sound. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">musican</td><td>Pointer to a <a class="el" href="struct_musican.html" title="Music subsystem. ">Musican</a> for playing audio of a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
 
 </div>
 </div>
@@ -565,13 +565,13 @@ Variables</h2></td></tr>
 <p>Function to update <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> and interacting with <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Pointer to that function should be at TextBox::sceneNode::update. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>Pointer to a <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a>, casted to <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">eventManager</td><td>Pointer to an <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>, where that function will place it's events. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for screen-depend coordinates converting. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Passing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritors, which is not <a class="el" href="struct_text_box.html" title="Standart Gui element for some text editing, builded from Button. User can input, delete, copy and paste text strings in it. User can click the TextBox, and some things will happen (such a GameEvent or sound playing in TextBox::box). ">TextBox</a> is not accepted! </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Don't use this function for drawing. </dd></dl>
 
 </div>
