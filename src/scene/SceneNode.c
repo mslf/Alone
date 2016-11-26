@@ -20,7 +20,7 @@
  * @file SceneNode.c
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing implementation os #SceneNode.
+ * @brief File containing implementation of #SceneNode.
  */
 #include "scene/SceneNode.h"
 

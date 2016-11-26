@@ -1,6 +1,3 @@
-//
-// Created by mslf on 11/5/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,29 +16,45 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file SceneNodeTypesRegistrar.c
+ * @author mslf
+ * @date 5 Nov 2016
+ * @brief File containing implementation of #SceneNodeTypesRegistrar.
+ */
+#include <stddef.h>
 #include "scene/SceneNodeTypesRegistrar.h"
 
-const char* const SCENENODE_TYPES_REGISTRAR_ERR = 
-                    "SceneNodeTypesRegistrar_constructSceneNode: constructing SceneNode failed!";
-const char* const SCENENODE_TYPES_REGISTRAR_ERR_NO_TYPE = 
-                    "SceneNodeTypesRegistrar_constructSceneNode: suitable SceneNode type haven't detected!";
-const char* const SCENENODE_TYPES_REGISTRAR_ERR_TYPE = 
-                    "SceneNodeTypesRegistrar_constructSceneNode: SceneNode type string doesn't equal to required type string!";
-const char* const SCENENODE_TYPES_REGISTRAR_ERR_NO_REGISTERED_TYPE = 
-                    "SceneNodeTypesRegistrar_constructSceneNode: SceneNode type haven't registered!";
+/**
+ * @brief Error message strings for #SceneNodeTypesRegistrar.
+ */
+static const struct SNTR_errorMessages {
+    const char* const errConstructingNode;
+    /**< Will be displayed when constructing #SceneNode inheritor type object failed. */
+    const char* const errNoTypeString;
+    /**< Will be displayed when any type string haven't found in #TextParser. */
+    const char* const errType;
+    /**< Will be displayed when wishful type string haven't found in #TextParser. */
+    const char* const errNoRegisteredType;
+    /**< Will be displayed when SceneNodeTypesRegistrar#sceneNodeTypesList doesn't contain registered 
+     *type of #SceneNode inheritor with type string like that, which was loaded from #TextResource type string. */
+}SNTR_errorMessages = {
+    "SceneNodeTypesRegistrar_constructSceneNode: constructing SceneNode failed!",
+    "SceneNodeTypesRegistrar_constructSceneNode: suitable SceneNode type haven't detected!",
+    "SceneNodeTypesRegistrar_constructSceneNode: SceneNode type string doesn't equal to required type string!",
+    "SceneNodeTypesRegistrar_constructSceneNode: SceneNode type haven't registered!"};
 
 struct SceneNodeTypesRegistrar* SceneNodeTypesRegistrar_construct() {
     struct SceneNodeTypesRegistrar* SNTR = NULL;
     SNTR = (struct SceneNodeTypesRegistrar*)calloc(1, sizeof(struct SceneNodeTypesRegistrar));
     if (!SNTR)
         return NULL;
-    SNTR->sceneNodeTypesList = (struct SceneNodeType*)malloc(sizeof(struct SceneNodeType) 
-                                                * SCENE_NODE_TYPES_REGISTRAR_TYPES_REALLOCATION_STEP);
+    SNTR->sceneNodeTypesList = (struct SceneNodeType*)malloc(sizeof(struct SceneNodeType) * SNTR_TYPES_REALLOCATION_STEP);
     if (!SNTR->sceneNodeTypesList) {
         SceneNodeTypesRegistrar_destruct(SNTR);
         return NULL;
     }
-    SNTR->allocatedSceneNodeTypes = SCENE_NODE_TYPES_REGISTRAR_TYPES_REALLOCATION_STEP;
+    SNTR->allocatedSceneNodeTypes = SNTR_TYPES_REALLOCATION_STEP;
     return SNTR;
 }
 
@@ -49,59 +62,115 @@ void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeT
     if (!sceneNodeTypesRegistrar)
         return;
     if (sceneNodeTypesRegistrar->sceneNodeTypesList) {
-        size_t i;
-        for (i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
+        for (size_t i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
             free(sceneNodeTypesRegistrar->sceneNodeTypesList[i].type);
         free(sceneNodeTypesRegistrar->sceneNodeTypesList);
     }
     free(sceneNodeTypesRegistrar);
 }
 
-static unsigned char SceneNodeTypesRegistrar_reallocateTypesList(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar) {
+/**
+ * @brief Reallocates memory for SceneNodeTypesRegistrar#sceneNodeTypesList, 
+ * increases SceneNodeTypesRegistrar#allocatedSceneNodeTypes by SNTR_TYPES_REALLOCATION_STEP.
+ * @param sceneNodeTypesRegistrar Pointer to a SceneNodeTypesRegistrar, where function will 
+ * reallocate SceneNodeTypesRegistrar#sceneNodeTypesList. Can be NULL.
+ * @return #SNTR_errors value.
+ * @see #SNTR_errors
+ */
+static enum SNTR_errors SceneNodeTypesRegistrar_reallocateTypesList(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar) {
     if (!sceneNodeTypesRegistrar)
-        return 1;
+        return SNTR_ERR_NULL_ARGUMENT;
     struct SceneNodeType* sceneNodeTypesList = NULL;
-    size_t i;
-    size_t newSize = sceneNodeTypesRegistrar->allocatedSceneNodeTypes + SCENE_NODE_TYPES_REGISTRAR_TYPES_REALLOCATION_STEP;
+    
+    size_t newSize = sceneNodeTypesRegistrar->allocatedSceneNodeTypes + SNTR_TYPES_REALLOCATION_STEP;
     sceneNodeTypesList = (struct SceneNodeType*)malloc(sizeof(struct SceneNodeType) * newSize);
     if (!sceneNodeTypesList)
-        return 2;
-    for (i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
+        return SNTR_ERR_ALLOC_LIST;
+    for (size_t i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
         sceneNodeTypesList[i] = sceneNodeTypesRegistrar->sceneNodeTypesList[i];
     free(sceneNodeTypesRegistrar->sceneNodeTypesList);
     sceneNodeTypesRegistrar->sceneNodeTypesList = sceneNodeTypesList;
     sceneNodeTypesRegistrar->allocatedSceneNodeTypes = newSize;
-    return 0;
+    return SNTR_NO_ERRORS;
 }
 
-unsigned char SceneNodeTypesRegistrar_registerNewSceneNodeType(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
-                                                      const char* const typeString,
-                                                      struct SceneNode* (*constructor)(
-                                                          struct ResourceManager* const resourceManager, 
-                                                          struct Renderer* const renderer,
-                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
-                                                          struct TextParser* const textParser)) {
+enum SNTR_errors SceneNodeTypesRegistrar_registerNewSceneNodeType(
+                                            struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                            const char* const typeString,
+                                            struct SceneNode* (*constructor)(
+                                                struct ResourceManager* const resourceManager, 
+                                                struct Renderer* const renderer,
+                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                struct TextParser* const textParser)) {
     if (!sceneNodeTypesRegistrar || !typeString || !constructor)
-        return 1;
-    size_t i;
-    for (i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
+        return SNTR_ERR_NULL_ARGUMENT;
+    for (size_t i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
         if (strcmp(typeString, sceneNodeTypesRegistrar->sceneNodeTypesList[i].type) == 0)
-            return 0;
+            return SNTR_ERR_REGISTERED_BEFORE;
     if (sceneNodeTypesRegistrar->sceneNodeTypesCount >= sceneNodeTypesRegistrar->allocatedSceneNodeTypes)
         if (SceneNodeTypesRegistrar_reallocateTypesList(sceneNodeTypesRegistrar))
-            return 2;
+            return SNTR_ERR_ALLOC_LIST;
     char* tempString = (char*)malloc(sizeof(char) * (strlen(typeString) + 1));
     if (!tempString)
-        return 3;
+        return SNTR_ERR_ALLOC_TYPE_STRING;
     strcpy(tempString, typeString);
     sceneNodeTypesRegistrar->sceneNodeTypesList[sceneNodeTypesRegistrar->sceneNodeTypesCount].type = tempString;
     sceneNodeTypesRegistrar->sceneNodeTypesList[sceneNodeTypesRegistrar->sceneNodeTypesCount].construct = constructor;
     sceneNodeTypesRegistrar->sceneNodeTypesCount++;
-    return 0;
+    return SNTR_NO_ERRORS;
 }
 
-//? Messy. Refactor.
-// Remember you can create some static functions and call them with 0 overhead.
+/**
+ * @brief Checks #SceneNode inheritor type.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar where to find registered types. Can be NULL.
+ * @param textParser Pointer to a #TextParser with type string, which will be checked. Can be NULL.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param foundIndex Pointer to a number, where this function will place index of found SceneNodeType. Can be NULL.
+ * @param requiredTypeString String with wishful #SceneNode inheritor type. Can be NULL.
+ * @param resId String with ID (path) to the #SceneNode inheritor resource. Can be NULL. 
+ * Will be used only for logging purpose.
+ * @return #SNTR_errors value.
+ * @see #SNTR_errors
+ */
+static enum SNTR_errors SceneNodeTypesRegistrar_checkType(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                                          struct TextParser* textParser,
+                                                          struct Logger* logger,
+                                                          size_t* foundIndex,
+                                                          const char* const requiredTypeString,
+                                                          const char* const resId) {
+    // Don't check logger, because it's ok.
+    if (!sceneNodeTypesRegistrar || !textParser || !foundIndex || !resId)
+        return SNTR_ERR_NULL_ARGUMENT;
+    const char* typeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    if (!typeString) {
+        Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errNoTypeString, resId);
+        Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errConstructingNode, resId);
+        return SNTR_ERR_NO_TYPE_STRING;
+    }
+    bool found = false;
+    for (size_t i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
+        if (strcmp(typeString, sceneNodeTypesRegistrar->sceneNodeTypesList[i].type) == 0) {
+            found = true;
+            (*foundIndex) = i;
+            break;
+        }
+    if (!found) {
+        Logger_log(logger, "%s Type: %s", SNTR_errorMessages.errNoRegisteredType, typeString);
+        Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errConstructingNode, resId);
+        return SNTR_ERR_NO_REGISTERED_TYPE;
+    }
+    // We check 'requiredTypeString' only if it not NULL
+    if (requiredTypeString) {
+        const char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+        if (strcmp(tempTypeString, requiredTypeString) != 0) {
+            Logger_log(logger, "%s Type: %s", SNTR_errorMessages.errType, typeString);
+            Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errConstructingNode, resId);
+            return SNTR_ERR_TYPE;
+        }
+    }
+    return SNTR_NO_ERRORS;
+}
+
 struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceManager* resourceManager,
                                                              struct Renderer* renderer,
                                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
@@ -118,40 +187,15 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
         TextResource_decreasePointersCounter(tempTextResource);
         return NULL;
     }
-    const char* typeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
-    if (!typeString) {
-        Logger_log(renderer->logger, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR_NO_TYPE, resId);
-        Logger_log(renderer->logger, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
+    size_t foundIndex;
+    if (SceneNodeTypesRegistrar_checkType(sceneNodeTypesRegistrar,
+                                          textParser, renderer->logger,
+                                          &foundIndex,
+                                          requiredTypeString,
+                                          resId)) {
         TextResource_decreasePointersCounter(tempTextResource);
         TextParser_destruct(textParser);
         return NULL;
-    }
-    size_t i;
-    bool found = false;
-    size_t foundIndex = 0;
-    for (i = 0; i < sceneNodeTypesRegistrar->sceneNodeTypesCount; i++)
-        if (strcmp(typeString, sceneNodeTypesRegistrar->sceneNodeTypesList[i].type) == 0) {
-            found = true;
-            foundIndex = i;
-            break;
-        }
-    if (!found) {
-        Logger_log(renderer->logger, "%s Type: %s", SCENENODE_TYPES_REGISTRAR_ERR_NO_REGISTERED_TYPE, typeString);
-        Logger_log(renderer->logger, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
-        TextResource_decreasePointersCounter(tempTextResource);
-        TextParser_destruct(textParser);
-        return NULL;
-    }
-    // We check 'requiredTypeString' only if it not NULL
-    if (requiredTypeString) {
-        const char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
-        if (strcmp(tempTypeString, requiredTypeString) != 0) {
-            Logger_log(renderer->logger, "%s Type: %s", SCENENODE_TYPES_REGISTRAR_ERR_TYPE, typeString);
-            Logger_log(renderer->logger, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
-            TextResource_decreasePointersCounter(tempTextResource);
-            TextParser_destruct(textParser);
-            return NULL;
-        }
     }
     struct SceneNode* tempSceneNode = 
                     sceneNodeTypesRegistrar->sceneNodeTypesList[foundIndex].construct(resourceManager, renderer,
@@ -159,7 +203,7 @@ struct SceneNode* SceneNodeTypesRegistrar_constructSceneNode(struct ResourceMana
     TextParser_destruct(textParser);
     if (!tempSceneNode) {
         TextResource_decreasePointersCounter(tempTextResource);
-        Logger_log(renderer->logger, "%s Resource ID: %s", SCENENODE_TYPES_REGISTRAR_ERR, resId);
+        Logger_log(renderer->logger, "%s Resource ID: %s", SNTR_errorMessages.errConstructingNode, resId);
         return NULL;
     }
     tempSceneNode->sceneNodeTextResource = tempTextResource;

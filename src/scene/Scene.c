@@ -20,11 +20,14 @@
  * @file Scene.c
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing implementation os #Scene.
+ * @brief File containing implementation of #Scene.
  */
 #include "scene/Scene.h"
 #include "textParser/TextParser.h"
 
+/**
+ * @brief Error message strings for #Scene.
+ */
 static const struct Scene_errorMessages{
     const char* const errNoType;
     /**< Will be displayed when Scene_parserStrings#type string haven't found in #TextParser. */
