@@ -1,8 +1,6 @@
 type = Settings;
-screenWidth = 900;
-screenHeight = 600;
-virtualScreenWidth = 900;
-virtualScreenHeight = 600;
+screenSize = [900, 600];
+virtualScreenSize = [900, 600];
 fullscreen = 0;
 music = 1;
 sound = 1;
