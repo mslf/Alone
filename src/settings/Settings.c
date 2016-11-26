@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/11/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,99 +16,111 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Settings.c
+ * @author mslf
+ * @date 11 Aug 2016
+ * @brief File containing implementation of #Settings.
+ */
 #include <resourceManager/ResourceManager.h>
 #include "settings/Settings.h"
 #include "textParser/TextParser.h"
 
-const char* const SETTINGS_PARSER_ERR_NO_TYPE_STRING =
-        "Settings_construct: TextParser have no type string!";
-const char* const SETTINGS_PARSER_ERR_NOT_MY_TYPE_STRING =
-        "Settings_construct: TextParser have no suitable type string!";
-const char* const SETTINGS_ERR_TEXT_PARSER_CONSTRUCTING = 
-        "Settings_construct: constructing TextParser failed!";
-const char* const SETTINGS_ERR_DEFAULTS = "Settings: constructor: using defaults settings!";
-const char* const SETTINGS_ERR_MAIN_SCENE_STRING_ALLOC = 
-        "Settings_construct: allocating memory for mainScene string failed!";
+/**
+ * @brief Error message strings for #Button.
+ */
+static const struct Settings_errorMessages {
+    const char* const errNoTypeString;
+    /**< Will be displayed when #TextParser have no type string. */
+    const char* const errType;
+    /**< Will be displayed when #TextParser haven't Settings_parserStrings#type string. */
+    const char* const errConstructingTextParser;
+    /**< Will be displayed when constructing #TextParser for some requiredreason failed. */
+    const char* const errDefault;
+    /**< Will be displayed when some of #Settings_parserStrings haven't found, so they will be got from #Settings_default. */
+    const char* const errAllocMainSceneString;
+    /**< Will be displayed when allocating memory for Settings#mainScene failed. */
+}Settings_errorMessages = {
+    "Settings_construct: TextParser have no type string!",
+    "Settings_construct: TextParser have no suitable type string!",
+    "Settings_construct: constructing TextParser failed!",
+    "Settings_construct: using defaults settings!",
+    "Settings_construct: allocating memory for mainScene string failed!"};
 
-struct Settings* Settings_defaults(struct Settings* settings) {
-    if (settings) {
-        settings->h = SETTINGS_DEFAULT_H;
-        settings->w = SETTINGS_DEFAULT_W;
-        settings->virtualH = SETTINGS_DEFAULT_H;
-        settings->virtualW = SETTINGS_DEFAULT_W;
-        settings->isFullscreen = SETTINGS_DEFAULT_FULLSCREEN;
-        settings->isMusicActive = SETTINGS_DEFAULT_MUSIC;
-        settings->isSoundActive = SETTINGS_DEFAULT_SOUND;
-        settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
-        char* tempString = SETTINGS_DEFAULT_MAIN_SCENE;
-        settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
-        if (!settings->mainScene) {
-            Settings_destruct(settings);
-            return NULL;
-        }
-        strcpy(settings->mainScene, tempString);
-    }
-    return settings;
-}
 
-static unsigned char Settings_checkTextResourceType(struct Settings* settings, struct TextParser* textParser,
-                                             struct ResourceManager* resourceManager) {
-    if (!settings || !textParser || !resourceManager)
-        return 1;
+/**
+ * @brief Checks type string in #TextParser for suitability for initializing #Settings.
+ * @param textParser Pointer to a #TextParser with Settings_parserStrings#type string. Can be NULL.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @return #Settings_errors value.
+ * @see #Settings
+ * @see #Settings_errors
+ */
+static enum Settings_errors Settings_checkTextResourceType(struct TextParser* textParser,
+                                                           struct Logger* logger) {
+    if (!textParser)
+        return SETTINGS_ERR_NULL_ARGUMENT;
     const char* settingsTypeString = NULL;
     settingsTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
     if (textParser->lastError) {
-        Logger_log(resourceManager->logger, SETTINGS_PARSER_ERR_NO_TYPE_STRING);
-        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
-        settings->settingsResource->pointersCount = 0;
-        ResourceManager_destructNeedlessTextResources(resourceManager);
-        return 2;
+        Logger_log(logger, Settings_errorMessages.errNoTypeString);
+        Logger_log(logger, "%s <ALL>", Settings_errorMessages.errDefault);
+        return SETTINGS_ERR_NO_TYPE_STRING;
     }
-    if (strcmp(settingsTypeString, SETTINGS_PARSER_TYPE_STRING) != 0) {
-        Logger_log(resourceManager->logger, SETTINGS_PARSER_ERR_NOT_MY_TYPE_STRING);
-        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
-        settings->settingsResource->pointersCount = 0;
-        ResourceManager_destructNeedlessTextResources(resourceManager);
-        return 3;
+    if (strcmp(settingsTypeString, Settings_parserStrings.type) != 0) {
+        Logger_log(logger, Settings_errorMessages.errType);
+        Logger_log(logger, "%s <ALL>", Settings_errorMessages.errDefault);
+        return SETTINGS_ERR_TYPE;
     }
-    return 0;
+    return SETTINGS_NO_ERRORS;
 }
 
-static unsigned char Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
+/**
+ * @brief Initalizes #Settings from #TextParser.
+ * @param settings Pointer to a #Settings to be initalized. Can be NULL.
+ * @param textParser Pointer to a #TextParser with #Settings_parserStrings.
+ * @return #Settings_errors value.
+ * @see #Settings
+ * @see #Settings_errors
+ */
+static enum Settings_errors Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
     if (!settings || !textParser)
-        return 1;
-    settings->h = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_HEIGHT, 0);
-    if (textParser->lastError)
-        settings->h = SETTINGS_DEFAULT_H;
-    settings->w = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_SCREEN_WIDTH, 0);
-    if (textParser->lastError)
-        settings->w = SETTINGS_DEFAULT_W;
-    settings->virtualH = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT, 0);
-    if (textParser->lastError)
-        settings->virtualH = SETTINGS_DEFAULT_H;
-    settings->virtualW = (size_t)TextParser_getInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH, 0);
-    if (textParser->lastError)
-        settings->virtualW = SETTINGS_DEFAULT_W;
-    settings->isFullscreen = TextParser_getFlag(textParser, SETTINGS_PARSER_FULLSCREEN, 0);
-    if (textParser->lastError)
-        settings->isFullscreen = SETTINGS_DEFAULT_FULLSCREEN;
-    settings->isMusicActive = TextParser_getFlag(textParser, SETTINGS_PARSER_MUSIC, 0);
-    if (textParser->lastError)
-        settings->isMusicActive = SETTINGS_DEFAULT_MUSIC;
-    settings->isSoundActive = TextParser_getFlag(textParser, SETTINGS_PARSER_SOUND, 0);
-    if (textParser->lastError)
-        settings->isSoundActive = SETTINGS_DEFAULT_SOUND;
-    settings->isVsyncActive = TextParser_getFlag(textParser, SETTINGS_PARSER_VSYNC, 0);
-    if (textParser->lastError)
-        settings->isVsyncActive = SETTINGS_DEFAULT_VSYNC;
-    const char* tempString = TextParser_getString(textParser, SETTINGS_PARSER_MAIN_SCENE, 0);
-    if (textParser->lastError)
-        tempString = SETTINGS_DEFAULT_MAIN_SCENE;
+        return SETTINGS_ERR_NULL_ARGUMENT;
+    unsigned char result = 0;
+    settings->w = (size_t)TextParser_getInt(textParser, Settings_parserStrings.screenSize, 0);
+    if (textParser->lastError && ++result)
+        settings->w = Settings_default.w;
+    settings->h = (size_t)TextParser_getInt(textParser, Settings_parserStrings.screenSize, 1);
+    if (textParser->lastError && ++result)
+        settings->h = Settings_default.h;
+    settings->virtualW = (size_t)TextParser_getInt(textParser, Settings_parserStrings.virtualScreenSize, 0);
+    if (textParser->lastError && ++result)
+        settings->virtualW = Settings_default.virtualW;
+    settings->virtualH = (size_t)TextParser_getInt(textParser, Settings_parserStrings.virtualScreenSize, 1);
+    if (textParser->lastError && ++result)
+        settings->virtualH = Settings_default.virtualH;
+    settings->isFullscreen = TextParser_getFlag(textParser, Settings_parserStrings.fullscreen, 0);
+    if (textParser->lastError && ++result)
+        settings->isFullscreen = Settings_default.isFullscreen;
+    settings->isMusicActive = TextParser_getFlag(textParser, Settings_parserStrings.music, 0);
+    if (textParser->lastError && ++result)
+        settings->isMusicActive = Settings_default.isMusicActive;
+    settings->isSoundActive = TextParser_getFlag(textParser, Settings_parserStrings.sound, 0);
+    if (textParser->lastError && ++result)
+        settings->isSoundActive = Settings_default.isSoundActive;
+    settings->isVsyncActive = TextParser_getFlag(textParser, Settings_parserStrings.vsync, 0);
+    if (textParser->lastError && ++result)
+        settings->isVsyncActive = Settings_default.isVsyncActive;
+    const char* tempString = TextParser_getString(textParser, Settings_parserStrings.mainScene, 0);
+    if (textParser->lastError && ++result)
+        tempString = Settings_default.mainScene;
     settings->mainScene = (char*)malloc(sizeof(char) * (strlen(tempString) + 1));
     if (!settings->mainScene)
-        return 2;
+        return SETTINGS_ERR_ALLOC_MAIN_SCENE_STRING;
     strcpy(settings->mainScene, tempString);
-    return 0;
+    if (result)
+        return SETTINGS_WARN_DEFAULTS;
+    return SETTINGS_NO_ERRORS;
 }
 
 struct Settings* Settings_construct(struct ResourceManager* resourceManager, const char* const settingsResId) {
@@ -121,76 +130,78 @@ struct Settings* Settings_construct(struct ResourceManager* resourceManager, con
     settings = (struct Settings *) calloc(1, sizeof(struct Settings));
     if (!settings)
         return NULL;
+    (*settings) = Settings_default;
     settings->settingsResource = ResourceManager_loadTextResource(resourceManager, settingsResId, 0);
     if (!settings->settingsResource) {
-        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
-        return Settings_defaults(settings);
+        Logger_log(resourceManager->logger, "%s <ALL>", Settings_errorMessages.errDefault);
+        return settings;
     }
     struct TextParser *textParser = NULL;
     textParser = TextParser_constructFromTextResource(resourceManager->logger, settings->settingsResource);
     if (!textParser) {
-        Logger_log(resourceManager->logger, SETTINGS_ERR_TEXT_PARSER_CONSTRUCTING);
-        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
-        settings->settingsResource->pointersCount = 0;
-        ResourceManager_destructNeedlessTextResources(resourceManager);
-        return Settings_defaults(settings);
+        Logger_log(resourceManager->logger, Settings_errorMessages.errConstructingTextParser);
+        Logger_log(resourceManager->logger, "%s <ALL>", Settings_errorMessages.errDefault);
+        return settings;
     }
-    if (Settings_checkTextResourceType(settings, textParser, resourceManager)) {
-        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
-        return Settings_defaults(settings);
+    if (Settings_checkTextResourceType(textParser, resourceManager->logger)) {
+        Logger_log(resourceManager->logger, "%s <ALL>", Settings_errorMessages.errDefault);
+        return settings;
     }
-    if (Settings_tryGetSettingsFromTextParser(settings, textParser)) {
-        Logger_log(resourceManager->logger, SETTINGS_ERR_MAIN_SCENE_STRING_ALLOC);
-        Logger_log(resourceManager->logger, SETTINGS_ERR_DEFAULTS);
-        return Settings_defaults(settings);
-    }
+    enum Settings_errors result = Settings_tryGetSettingsFromTextParser(settings, textParser);
+    if (result == SETTINGS_ERR_ALLOC_MAIN_SCENE_STRING)
+        Logger_log(resourceManager->logger, Settings_errorMessages.errAllocMainSceneString);
+    if (result == SETTINGS_WARN_DEFAULTS)
+        Logger_log(resourceManager->logger, "%s <SOME>", Settings_errorMessages.errDefault);
     TextParser_destruct(textParser);
     return settings;
 }
 
-unsigned char Settings_updateMainSceneString(struct Settings* settings, const char* const mainScene) {
+enum Settings_errors Settings_updateMainSceneString(struct Settings* settings, const char* const mainScene) {
     if (!settings || !mainScene)
-        return 1;
+        return SETTINGS_ERR_NULL_ARGUMENT;
     char* newText = NULL;
     newText = (char*)malloc(sizeof(char) * (strlen(mainScene) + 1));
     if (!newText)
-        return 2;
+        return SETTINGS_ERR_ALLOC_MAIN_SCENE_STRING;
     strcpy(newText, mainScene);
     free(settings->mainScene);
     settings->mainScene = newText;
-    return 0;
+    return SETTINGS_NO_ERRORS;
 }
 
-unsigned char Settings_save(struct Settings* settings, struct ResourceManager* resourceManager,
+enum Settings_errors Settings_save(struct Settings* settings, struct ResourceManager* resourceManager,
                             const char* const settingsResId) {
     if (!settings || !resourceManager || !settingsResId)
-        return 1;
+        return SETTINGS_ERR_NULL_ARGUMENT;
     struct TextParser* textParser = NULL;
     textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
+        return SETTINGS_ERR_CONSTRUCTIG_TEXT_PARSER;
     unsigned char result = 0;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SETTINGS_PARSER_TYPE_STRING);
-    result += TextParser_addInt(textParser, SETTINGS_PARSER_SCREEN_HEIGHT, settings->h);
-    result += TextParser_addInt(textParser, SETTINGS_PARSER_SCREEN_WIDTH, settings->w);
-    result += TextParser_addInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_HEIGHT, settings->virtualH);
-    result += TextParser_addInt(textParser, SETTINGS_PARSER_VIRTUAL_SCREEN_WIDTH, settings->virtualW);
-    result += TextParser_addFlag(textParser, SETTINGS_PARSER_FULLSCREEN, settings->isFullscreen);
-    result += TextParser_addFlag(textParser, SETTINGS_PARSER_MUSIC, settings->isMusicActive);
-    result += TextParser_addFlag(textParser, SETTINGS_PARSER_SOUND, settings->isSoundActive);
-    result += TextParser_addFlag(textParser, SETTINGS_PARSER_VSYNC, settings->isVsyncActive);
-    result += TextParser_addString(textParser, SETTINGS_PARSER_MAIN_SCENE, settings->mainScene);
+    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, Settings_parserStrings.type);
+    result += TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->w);
+    result += TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->h);
+    result += TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualW);
+    result += TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualH);
+    result += TextParser_addFlag(textParser, Settings_parserStrings.fullscreen, settings->isFullscreen);
+    result += TextParser_addFlag(textParser, Settings_parserStrings.music, settings->isMusicActive);
+    result += TextParser_addFlag(textParser, Settings_parserStrings.sound, settings->isSoundActive);
+    result += TextParser_addFlag(textParser, Settings_parserStrings.vsync, settings->isVsyncActive);
+    result += TextParser_addString(textParser, Settings_parserStrings.mainScene, settings->mainScene);
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
     result += textParser->lastError;
+    /* FIXME in that place (and in other like this) may occur errors, if we want to construct new objects in runtime
+     * without assotiated (and existing) file in filesystem. */
     result += TextResource_updateContent(settings->settingsResource, newText);
     result += ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId);
     TextParser_destruct(textParser);
     if (newText)
         free(newText);
-    return result;
+    if (result)
+        return SETTINGS_ERR_SAVING;
+    return SETTINGS_NO_ERRORS;
 }
-
 
 void Settings_destruct(struct Settings* settings) {
     if (!settings)
