@@ -156,7 +156,7 @@ enum ProgressBarSceneNode_errors ProgressBar_save(const struct ProgressBar* cons
  * @brief Function to update #ProgressBar and interacting with #EventManager.
  * Pointer to that function should be at ProgressBar#sceneNode#update.
  * @param sceneNode Pointer to a #ProgressBar, casted to #SceneNode. Can be NULL.
- * @param eventManager Pointer to an #EventManager, where that function will place it's events. Can be NULL.
+ * @param eventManager Not used. Just here due to univirsal constructors. Can be NULL.
  * @param renderer Pointer to a #Renderer for screen-depend coordinates converting. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #ProgressBar is not accepted!
  * @note Don't use this function for drawing.

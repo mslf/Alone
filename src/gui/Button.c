@@ -93,7 +93,7 @@ static enum ButtonSceneNode_errors Button_loadTextResource(struct Button* button
                                                                renderer,
                                                                sceneNodeTypesRegistrar,
                                                                tempResId,
-                                                               TEXT_SCENENODE_PARSER_TYPE_STRING);
+                                                               TextSceneNode_parserStrings.type);
     if (!button->label)
         return BUTTON_ERR_CONSTRUCTIG_TEXT;
     return BUTTON_NO_ERRORS;

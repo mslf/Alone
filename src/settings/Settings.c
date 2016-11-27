@@ -191,8 +191,9 @@ enum Settings_errors Settings_save(struct Settings* settings, struct ResourceMan
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
     result += textParser->lastError;
-    /* FIXME in that place (and in other like this) may occur errors, if we want to construct new objects in runtime
-     * without assotiated (and existing) file in filesystem. */
+    /* FIXME in that place (and in other like this) will occur errors, if we want to construct new objects in runtime
+     * without assotiated (and existing) file in filesystem.
+     * Need to implement function for creating TextResource from TextParser. */
     result += TextResource_updateContent(settings->settingsResource, newText);
     result += ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId);
     TextParser_destruct(textParser);
