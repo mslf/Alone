@@ -45,9 +45,9 @@ enum TextParser_constants{
     /**< Init alocating number and reallocating step for TextParser#pairsList. */
     TP_INITIAL_NUMBER_ALLOCATED_ITEMS = 5,
     /**< Init alocating number and reallocating step for RightValue#itemsList. */
-    TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_OPERAND_STRING = 100,
+    TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_VALUE_STRING = 100,
     /**< Init alocating number and reallocating step for Pair#leftValue. */
-    TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING = 100,
+    TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_VALUE_STRING = 100,
     /**< Init alocating number and reallocating step for #RightValue <B>full</B> string, while parsing. */
     TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING = 50
     /**< Init alocating number and reallocating step for each item in RightValue#itemsList. */
@@ -91,8 +91,16 @@ enum TextParser_errors {
     /**< Converting string to some value failed. */
     TEXT_PARSER_ERR_OUT_OF_RANGE = 4,
     /**< RightValue#itemsList have only RightValue#itemsCount, but you are trying to get more. */
-    TEXT_PARSER_ERR_ALLOC = 5
+    TEXT_PARSER_ERR_ALLOC_STRING = 5,
     /**< Allocating memory for some string while parsing or adding or converting failed. */
+    TEXT_PARSER_ERR_REALLOC_PAIRS_LIST = 6,
+    /**< Allocating memory for TextParser#pairsList failed. */
+    TEXT_PARSER_ERR_REALLOC_ITEMS_LIST = 7,
+    /**< Allocating memory for RightValue#itemsList failed. */
+    TEXT_PARSER_ERR_SPLITTING_ASSIGMENT = 8,
+    /**< Splitting assigment string failed due to syntax error. */
+    TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF = 9,
+    /**< Splitting assigment string failed due to unexpected EOF. */
 };
 
 /**
