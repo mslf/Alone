@@ -101,8 +101,15 @@ enum TextParser_errors {
     /**< Splitting assigment string failed due to syntax error. */
     TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF = 9,
     /**< Splitting assigment string failed due to unexpected EOF. */
-    TEXT_PARSER_ERR_DELETING_NOT_QUOTED_SPACES = 10
+    TEXT_PARSER_ERR_DELETING_NOT_QUOTED_SPACES = 10,
     /**< Deleting space-symbols from right value string failed due to odd count of quotes or unexpected EOF. */
+    TEXT_PARSER_ERR_PARSING_ITEMS_ARRAY_EOF = 11,
+    /**< Parsing items array string failed due to unexpected EOF. */
+    TEXT_PARSER_ERR_PARSING_ITEMS_ARRAY_BRACKETS = 12,
+    /**< Parsing items array string failed because opening or closing square brackets haven't found. */
+    TEXT_PARSER_ERR_DELETING_COMMENTS = 13
+    /**< Syntax error or unexpected EOF happened while deleting comment blocks. */
+
 };
 
 /**

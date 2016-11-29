@@ -54,7 +54,7 @@ static const struct TextParser_errorMessages {
     /**< Will be displayed when unexpected EOF happened while spliting items array for #RightValue. */
     const char* const errBrackets;
     /**< Will be displayed when opening or closing square brackets haven't found while 
-     *spliting items array for #RightValue. */
+     * parsing items array for #RightValue. */
     const char* const errAddingItem;
     /**< Will be displayed when adding item string to #RightValue failed. */
 }TextParser_errorMessages = {
@@ -88,6 +88,22 @@ enum TextParser_splittingStates {
         SPLITTING_ERR = 4
         /**< Splitting assigment ends with a syntax error. */
 };    
+
+/**
+ * @brief States for TextParser_parseItemsArrayString() function.
+ */
+enum TextParser_parsingItemsArrayStates{
+        PARSING_ITEMS_ARRAY_NOT_IN_QUOTES = 0,
+        /**< Building and adding item string to the Pair#rightValue without ',' symbol. */
+        PARSING_ITEMS_ARRAY_IN_QUOTES = 1,
+        /**< Building and adding item string to the Pair#rightValue including ',' symbol. */
+        PARSING_ITEMS_ARRAY_CHECKING_END = 2,
+        /**< Checking for and of items array (']' symbol) or parsing next item in array (',' symbol). */
+        PARSING_ITEMS_ARRAY_ON_END = 3,
+        /**< Parsing items string ends succes. */
+        PARSING_ITEMS_ARRAY_ERR = 4
+        /**< Parsing items string  ends with a syntax error. */
+};  
 
 /**
  * @brief Reallocates TextParser#pairsList and increases TextParser#allocatedPairsCount 
@@ -323,7 +339,7 @@ static enum TextParser_errors TextParser_splitExpression(struct Logger* logger,
         }
         (*startIndex)++;
     }
-    if (state == SPLITTING_ON_END)
+    if (state == SPLITTING_ON_END || state == SPLITTING_STATE_START)
         return TEXT_PARSER_NO_ERRORS;
     if (state == SPLITTING_ERR)
         return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT;
@@ -454,147 +470,260 @@ static enum TextParser_errors TextParser_addItemToRightValue(struct Logger* logg
     return TEXT_PARSER_NO_ERRORS;
 }
 
-static unsigned char TextParser_parseItemsArrayString(struct Logger* logger, struct Pair* pair, char* itemsString,
-                                               size_t itemsStringLength) {
-    if (!pair || !itemsString || !itemsStringLength)
-        return 6;
-    unsigned char state = 0;
+/**
+ * @brief Adds all symbols (except of ',') to the itemString.
+ * When it finds ']' or ',' symbol, then building item string is done and this item will be added to the Pair#rightValue.
+ * @param c Current parsing symbol.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param pair Pointer to a #Pair where items will be added.
+ * @param itemString String, where current item string is building.
+ * @param itemStringLength Length of itemString. Will be increased as new char added to itemString.
+ * @return #TextParser_parsingItemsArrayStates value.
+ * @see #TextParser_parsingItemsArrayStates
+ * @see #Pair
+ * @see TextParser_addItemToRightValue()
+ * @see TextParser_parseItemsArrayString()
+ */
+static enum TextParser_parsingItemsArrayStates TextParser_parseItemsArrayStringNotInQuotes(struct Logger* logger,
+                                                                                           struct Pair* pair,
+                                                                                           const char c,
+                                                                                           char* const itemString,
+                                                                                           size_t* itemStringLength) {
+    assert(pair);
+    assert(itemString && itemStringLength);
+    if (c == '\"')
+         return PARSING_ITEMS_ARRAY_IN_QUOTES;
+    if (c == ']') {
+        if ((*itemStringLength) > 0) {
+            TextParser_addItemToRightValue(logger, pair, itemString, (*itemStringLength));
+            (*itemStringLength) = 0;
+            return PARSING_ITEMS_ARRAY_ON_END;
+        } else
+            return PARSING_ITEMS_ARRAY_ERR;
+    }
+    if (c == ',') {
+        TextParser_addItemToRightValue(logger, pair, itemString, (*itemStringLength));
+        (*itemStringLength) = 0;
+    }
+    itemString[(*itemStringLength)] = c;
+    (*itemStringLength)++;
+    return PARSING_ITEMS_ARRAY_NOT_IN_QUOTES;
+}
+
+/**
+ * @brief Adds all symbols to the itemString.
+ * When it finds '"' symbol, then building item string is done and this item will be added to the Pair#rightValue.
+ * @param c Current parsing symbol.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param pair Pointer to a #Pair where items will be added.
+ * @param itemString String, where current item string is building.
+ * @param itemStringLength Length of itemString. Will be increased as new char added to itemString.
+ * @return #TextParser_parsingItemsArrayStates value.
+ * @see #TextParser_parsingItemsArrayStates
+ * @see #Pair
+ * @see TextParser_addItemToRightValue()
+ * @see TextParser_parseItemsArrayString()
+ */
+static enum TextParser_parsingItemsArrayStates TextParser_parseItemsArrayStringInQuotes(struct Logger* logger,
+                                                                                           struct Pair* pair,
+                                                                                           const char c,
+                                                                                           char* const itemString,
+                                                                                           size_t* itemStringLength) {
+    assert(pair);
+    assert(itemString && itemStringLength);
+    if (c == '\"') {
+        if ((*itemStringLength) > 0) {
+            TextParser_addItemToRightValue(logger, pair, itemString, (*itemStringLength));
+            (*itemStringLength) = 0;
+            return PARSING_ITEMS_ARRAY_CHECKING_END;
+        } else
+            return PARSING_ITEMS_ARRAY_ERR;
+    }
+    itemString[(*itemStringLength)] = c;
+    (*itemStringLength)++;
+    return PARSING_ITEMS_ARRAY_IN_QUOTES;
+}
+
+/**
+ * @brief Parses string with items and adda them to the #Pair.
+ * Strings looks like <tt>[item1, item2, item3]</tt>. If you need strings with spaces in the array, then 
+ * you can quote them like this <tt>["item 1", "item 2", "item 3"]</tt>.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param pair Pointer to a #Pair where items will be added.
+ * @param itemsString String with array of items.
+ * @param itemsStringLength Length of itemsString.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ * @see #Pair
+ */
+static enum TextParser_errors TextParser_parseItemsArrayString(struct Logger* logger,
+                                                               struct Pair* pair,
+                                                               const char* const itemsString,
+                                                               size_t itemsStringLength) {
+    assert(pair && itemsString);
+    assert(itemsStringLength != 0);
+    enum TextParser_parsingItemsArrayStates state = PARSING_ITEMS_ARRAY_NOT_IN_QUOTES;
     size_t i = 1; // start from first symbol, because zero-zymbol is '['
     char* tempItemString = NULL;
-    tempItemString = (char*)malloc(sizeof(char) * INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING);
+    tempItemString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING);
     if (!tempItemString)
-        return 7;
-    size_t allocatedCharsForTempItemString = INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING;
+        return TEXT_PARSER_ERR_ALLOC_STRING;
+    size_t allocatedCharsForTempItemString = TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING;
     size_t charsCounter = 0;
-    while (i < itemsStringLength && state != 3 && state != 4) {
+    while (i < itemsStringLength && state != PARSING_ITEMS_ARRAY_ON_END && state != PARSING_ITEMS_ARRAY_ERR) {
         char c = itemsString[i];
         if (charsCounter >= allocatedCharsForTempItemString)
             if (TextParser_reallocateString(logger, &tempItemString, &allocatedCharsForTempItemString,
-                                            INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING)) {
+                                            TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_ITEM_STRING)) {
                 free(tempItemString);
-                return 5;
+                return TEXT_PARSER_ERR_ALLOC_STRING;
             }
         switch (state) {
-            case 0: // buildingItemString_NotInQuotes
-                if (c == '\"') {
-                    state = 1;
-                    break;
-                }
-                if (c == ']') {
-                    if (charsCounter > 0) {
-                        TextParser_addItemToRightValue(logger, pair, tempItemString, charsCounter);
-                        charsCounter = 0;
-                        state = 3;
-                    } else
-                        state = 4;
-                    break;
-                }
-                if (c == ',') {
-                    TextParser_addItemToRightValue(logger, pair, tempItemString, charsCounter);
-                    charsCounter = 0;
-                    break;
-                }
-                tempItemString[charsCounter] = c;
-                charsCounter++;
+            case PARSING_ITEMS_ARRAY_NOT_IN_QUOTES:
+                state = TextParser_parseItemsArrayStringNotInQuotes(logger, pair, c, tempItemString, &charsCounter);
                 break;
-            case 1: // buildingItemString_InQuotes
-                if (c == '\"') {
-                    if (charsCounter > 0) {
-                        TextParser_addItemToRightValue(logger, pair, tempItemString, charsCounter);
-                        charsCounter = 0;
-                        state = 2;
-                    } else
-                        state = 4;
-                    break;
-                }
-                tempItemString[charsCounter] = c;
-                charsCounter++;
+            case PARSING_ITEMS_ARRAY_IN_QUOTES:
+                state = TextParser_parseItemsArrayStringInQuotes(logger, pair, c, tempItemString, &charsCounter);
                 break;
-            case 2: // checkingEnd
-                if (c == ',') {
-                    state = 0;
-                    break;
-                }
-                if (c == ']') {
-                    state = 3;
-                    break;
-                }
-                state = 4;
+            case PARSING_ITEMS_ARRAY_CHECKING_END:
+                if (c == ',')
+                    state = PARSING_ITEMS_ARRAY_NOT_IN_QUOTES;
+                else if (c == ']')
+                    state = PARSING_ITEMS_ARRAY_ON_END;
+                else 
+                    state = PARSING_ITEMS_ARRAY_ERR;
                 break;
-            case 3: // end
-                break;
-            case 4: // syntax error
+            default:
                 break;
         }
         i++;
     }
     free(tempItemString);
-    return state;
+    if (state != PARSING_ITEMS_ARRAY_ON_END)
+        return TEXT_PARSER_ERR_PARSING_ITEMS_ARRAY_EOF;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
-static void TextParser_destructTempOperandStrings(char* left, char* right) {
-    if (left)
-        free(left);
-    if (right)
-        free(right);
+/**
+ * @brief Destructs two temp strings.
+ * @param left String to be freed.
+ * @param right String to be freed.
+ */
+static void TextParser_destructTempValueStrings(char* left, char* right) {
+    free(left);
+    free(right);
 }
 
-static unsigned char TextParser_addPair(struct Logger* logger, struct TextParser* textParser, char* leftValueString,
-                                 size_t leftCounter, char* rightValueString, size_t rightCounter) {
-    if (!textParser || !leftValueString || !leftCounter || !rightValueString || !rightCounter)
-        return 1;
-    size_t j;
-    // adding leftValueString string as a leftValue to the pair
-    if (textParser->pairsCount >= textParser->allocatedPairsCount)
-        if (TextParser_reallocatePairsList(logger, textParser)) {
-            TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-            return  2;
-        }
-    textParser->pairsList[textParser->pairsCount].leftValue = (char*)malloc(sizeof(char) * (leftCounter + 1));
-    if (!textParser->pairsList[textParser->pairsCount].leftValue) {
-        Logger_log(logger, TEXT_PARSER_ERR_LEFT_OPERAND_STRING_ALLOC);
-        TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-        return 3;
-    }
-    for (j = 0; j < leftCounter; j ++)
-        textParser->pairsList[textParser->pairsCount].leftValue[j] =  leftValueString[j];
-    textParser->pairsList[textParser->pairsCount].leftValue[leftCounter] = 0;
-    // Working with rightValue
+/**
+ * @brief Checks rightValue string and adds it (or its items) to the last #Pair in the #TextParser.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where last (with index of Pair#pairsCount) #Pair in 
+ * TextParser#pairsList will be changed
+ * (items from rightValue string (or item) will be added to the Pair#rightValue#itemsList).
+ * @param rightValueString String with array of items or just one item.
+ * @param rightCounter Length of rightValueString.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ * @see #Pair
+ * @see #RightValue
+ */
+static enum TextParser_errors TextParser_addPairParsingRightValue(struct Logger* logger,
+                                                                  struct TextParser* textParser,
+                                                                  char* const rightValueString,
+                                                                  size_t rightCounter) {
+    assert(textParser);
+    assert(rightValueString && rightCounter);
     if (TextParser_deleteNonQuotedSpaces(rightValueString, &rightCounter)) {
-        Logger_log(logger, TEXT_PARSER_ERR_SYNTAX_QUOTES);
-        TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-        return 4;
+        Logger_log(logger, TextParser_errorMessages.errOddQuotesCount);
+        return TEXT_PARSER_ERR_DELETING_NOT_QUOTED_SPACES;
     }
     if (rightValueString[0] == '[' && rightValueString[rightCounter - 1] == ']') {
         if (TextParser_parseItemsArrayString(logger, &(textParser->pairsList[textParser->pairsCount]),
-                                             rightValueString, rightCounter) != 3) {
-            Logger_log(logger, TEXT_PARSER_ERR_UNEXPEXTED_EOF_ITEMS_ARRAY_STRING);
-            TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-            return 5;
-        }
-    } else { // adding rightValueString as a first item to the pair
-        if (rightValueString[0] == '[' || rightValueString[rightCounter - 1] == ']') {
-            Logger_log(logger, TEXT_PARSER_ERR_SYNTAX_BRACKETS);
-            TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-            return 6;
-        }
-        if (TextParser_addItemToRightValue(logger, &(textParser->pairsList[textParser->pairsCount]),
                                              rightValueString, rightCounter)) {
-            TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-            return 7;
+            Logger_log(logger, TextParser_errorMessages.errUnexpectedEofWhileSplittingArray);
+            return TEXT_PARSER_ERR_PARSING_ITEMS_ARRAY_EOF;
         }
+    } else { 
+        // adding rightValueString as a first (and only ine) item to the pair
+        if (rightValueString[0] == '[' || rightValueString[rightCounter - 1] == ']') {
+            Logger_log(logger, TextParser_errorMessages.errBrackets);
+            return TEXT_PARSER_ERR_PARSING_ITEMS_ARRAY_BRACKETS;
+        }
+        enum TextParser_errors result = TEXT_PARSER_NO_ERRORS;
+        result = TextParser_addItemToRightValue(logger,
+                                                &(textParser->pairsList[textParser->pairsCount]),
+                                                rightValueString,
+                                                rightCounter);
+        if (result)
+            return result;
     }
-    textParser->pairsCount++;
-    return 0;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
-static unsigned char TextParser_deleteComments(char* const srcText, char** dstText) {
-    if (!srcText || !dstText)
-        return 4;
+/**
+ * @brief Adds and inits #Pair in the #TextParser from the value (left and right) strings.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param textParser Pointer to a #TextParser, where last (with index of Pair#pairsCount) #Pair 
+ * in TextParser#pairsList will be changed
+ * (items from rightValue string (or item) will be added to the Pair#rightValue#itemsList).
+ * @param leftValueString String to set Pair#leftValue.
+ * @param leftCounter Length of leftValueString.
+ * @param rightValueString String with array of items or just one item.
+ * @param rightCounter Length of rightValueString.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ * @see #Pair
+ * @see #RightValue
+ */
+static enum TextParser_errors TextParser_addPair(struct Logger* logger,
+                                                 struct TextParser* textParser,
+                                                 char* const leftValueString,
+                                                 size_t leftCounter,
+                                                 char* const rightValueString,
+                                                 size_t rightCounter) {
+    assert(textParser);
+    assert(leftValueString && leftCounter);
+    assert(rightValueString && rightCounter);
+    // adding leftValueString string as a leftValue to the pair
+    if (textParser->pairsCount >= textParser->allocatedPairsCount)
+        if (TextParser_reallocatePairsList(logger, textParser)) {
+            TextParser_destructTempValueStrings(leftValueString, rightValueString);
+            return TEXT_PARSER_ERR_REALLOC_PAIRS_LIST;
+        }
+    textParser->pairsList[textParser->pairsCount].leftValue = (char*)malloc(sizeof(char) * (leftCounter + 1));
+    if (!textParser->pairsList[textParser->pairsCount].leftValue) {
+        Logger_log(logger, TextParser_errorMessages.errValueStringAlloc);
+        TextParser_destructTempValueStrings(leftValueString, rightValueString);
+        return TEXT_PARSER_ERR_ALLOC_STRING;
+    }
+    for (size_t i = 0; i< leftCounter; i ++)
+        textParser->pairsList[textParser->pairsCount].leftValue[i] =  leftValueString[i];
+    textParser->pairsList[textParser->pairsCount].leftValue[leftCounter] = 0;
+    enum TextParser_errors result = TEXT_PARSER_NO_ERRORS;
+    result = TextParser_addPairParsingRightValue(logger, textParser, rightValueString, rightCounter);
+    if (result) {
+        TextParser_destructTempValueStrings(leftValueString, rightValueString);
+        return result;
+    }
+    textParser->pairsCount++;
+    return TEXT_PARSER_NO_ERRORS;
+}
+
+/**
+ * @brief Removes C-style comment blocks (/_* comment *_/, without of '_') from string.
+ * @param srcText String with source text.
+ * @param dstText Pointer to a string, where destination text will be placed. Will be null-terminated.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ * @note You should free memory of dstText by yourself.
+ */
+static enum TextParser_errors TextParser_deleteComments(char* const srcText, char** dstText) {
+    assert(srcText);
+    assert(dstText);
     size_t length = strlen(srcText);
     *(dstText) = (char*)malloc(sizeof(char) * (length + 1));
     if (!(*dstText))
-        return 5;
+        return TEXT_PARSER_ERR_ALLOC_STRING;
     unsigned char state = 0;
     size_t counter = 0;
     size_t i = 0;
@@ -635,33 +764,46 @@ static unsigned char TextParser_deleteComments(char* const srcText, char** dstTe
         i++;
     }
     (*dstText)[counter] = 0;
-    return state;
+    if (state)
+        return TEXT_PARSER_ERR_DELETING_COMMENTS;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
-static unsigned char TextParser_parseTextResource(struct Logger* logger, struct TextParser* textParser,
-                                           const struct TextResource* const textResource) {
-    if (!textParser || !textResource)
-        return 1;
+/**
+ * @brief Parse #TextResource for assigments (#Pair) and adds them to the #TextParser.
+ * @param logger Pointer to a #Logger for logging purpose.
+ * @param textParser Pointer to a #TextParser, where new #Pair will be added.
+ * @param textResource Pointer to a #TextResource with plain text data, to be parsed as a list of assigments.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ * @see #Pair
+ * @see #TextParser_constants
+ * @see #TextParser_errorMesssages
+ */
+static enum TextParser_errors TextParser_parseTextResource(struct Logger* logger,
+                                                           struct TextParser* textParser,
+                                                           const struct TextResource* const textResource) {
+    assert(textParser);
+    assert(textResource);
     char* leftValueString = NULL;
     char* rightValueString = NULL;
-    leftValueString = (char*)malloc(sizeof(char) * INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_OPERAND_STRING);
-    rightValueString = (char*)malloc(sizeof(char) * INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING);
+    leftValueString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_VALUE_STRING);
+    rightValueString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_VALUE_STRING);
     if (!leftValueString || !rightValueString) {
-        Logger_log(logger, "%s ResourceID: %s", TEXT_PARSER_ERR_OPERANDS_ALLOC, textResource->id);
-        TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-        return 2;
+        Logger_log(logger, "%s ResourceID: %s", TextParser_errorMessages.errValueStringAlloc, textResource->id);
+        TextParser_destructTempValueStrings(leftValueString, rightValueString);
+        return TEXT_PARSER_ERR_ALLOC_STRING;
     }
-    size_t allocatedCharsForLeftOperand = INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_OPERAND_STRING;
-    size_t allocatedCharsForRightValue = INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_OPERAND_STRING;
+    size_t allocatedCharsForLeftOperand = TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_VALUE_STRING;
+    size_t allocatedCharsForRightValue = TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_VALUE_STRING;
     size_t leftCounter = 0;
     size_t rightCounter = 0;
     size_t i = 0;
-    size_t j = 0;
-    unsigned char state = 0;
+    enum TextParser_errors state = TEXT_PARSER_NO_ERRORS;
     char* tempText = NULL;
     if (TextParser_deleteComments(textResource->text, &tempText)) {
-        Logger_log(logger, TEXT_PARSER_ERR_SYNTAX_DELETE_COMMENTS);
-        return 3;
+        Logger_log(logger, TextParser_errorMessages.errDeletingComments);
+        return TEXT_PARSER_ERR_DELETING_COMMENTS;
     }
     while (i < strlen(tempText)) {
         leftCounter = 0;
@@ -669,29 +811,30 @@ static unsigned char TextParser_parseTextResource(struct Logger* logger, struct 
         state = TextParser_splitExpression(logger, tempText, &i, &leftValueString, &leftCounter,
                                            &allocatedCharsForLeftOperand, &rightValueString, &rightCounter,
                                            &allocatedCharsForRightValue);
-        if (state != 3 && state != 4 && state != 0) {
-            Logger_log(logger, "%s ResourceID: %s", TEXT_PARSER_ERR_UNEXPEXTED_EOF_SPLIT_EXPRESSION, textResource->id);
-            TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-            return 4;
+        if (state == TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF) {
+            Logger_log(logger,
+                       "%s ResourceID: %s", TextParser_errorMessages.errUnexpectedEofWhileSplittingAssigment,
+                       textResource->id);
+            TextParser_destructTempValueStrings(leftValueString, rightValueString);
+            return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF;
         }
-        if (state == 4) {
-            Logger_log(logger, "%s ResourceID: %s", TEXT_PARSER_ERR_SYNTAX_SPLIT_EXPRESSION, textResource->id);
-            TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-            return 5;
+        if (state == TEXT_PARSER_ERR_SPLITTING_ASSIGMENT) {
+            Logger_log(logger, "%s ResourceID: %s", TextParser_errorMessages.errSpliting, textResource->id);
+            TextParser_destructTempValueStrings(leftValueString, rightValueString);
+            return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT;
         }
-        if (state == 3) {
-            unsigned char result = TextParser_addPair(logger, textParser, leftValueString, leftCounter,
-                                                      rightValueString, rightCounter);
+        if (state == TEXT_PARSER_NO_ERRORS && leftCounter != 0 && rightCounter != 0) {
+            enum TextParser_errors result = TextParser_addPair(logger, textParser, leftValueString, leftCounter,
+                                                               rightValueString, rightCounter);
             if (result) {
                 Logger_log(logger, "\t in ResourceID: %s", textResource->id);
-                return (result + 5);
+                return result;
             }
-
         }
     }
     free(tempText);
-    TextParser_destructTempOperandStrings(leftValueString, rightValueString);
-    return 0;
+    TextParser_destructTempValueStrings(leftValueString, rightValueString);
+    return TEXT_PARSER_NO_ERRORS;
 }
 
 struct TextParser* TextParser_constructFromTextResource(struct Logger* logger,
@@ -715,23 +858,22 @@ struct TextParser* TextParser_constructEmpty() {
     if (!textParser)
         return NULL;
     textParser->pairsCount = 0;
-    textParser->pairsList = (struct Pair*)malloc(sizeof(struct Pair) * INITIAL_NUMBER_ALLOCATED_PAIRS);
+    textParser->pairsList = (struct Pair*)malloc(sizeof(struct Pair) * TP_INITIAL_NUMBER_ALLOCATED_PAIRS);
     if (!textParser->pairsList) {
         TextParser_destruct(textParser);
         return NULL;
     }
-    textParser->allocatedPairsCount = INITIAL_NUMBER_ALLOCATED_PAIRS;
-    size_t i;
-    for (i = 0; i < textParser->allocatedPairsCount; i++){
+    textParser->allocatedPairsCount = TP_INITIAL_NUMBER_ALLOCATED_PAIRS;
+    for (size_t i = 0; i < textParser->allocatedPairsCount; i++){
         textParser->pairsList[i].rightValue.itemsCount = 0;
         if (!(textParser->pairsList[i].rightValue.itemsList =
-                    (char**)malloc(sizeof(char*) * INITIAL_NUMBER_ALLOCATED_ITEMS))) {
+                    (char**)malloc(sizeof(char*) * TP_INITIAL_NUMBER_ALLOCATED_ITEMS))) {
             TextParser_destruct(textParser);
             return NULL;
         }
-        textParser->pairsList[i].rightValue.allocatedItemsCount = INITIAL_NUMBER_ALLOCATED_ITEMS;
+        textParser->pairsList[i].rightValue.allocatedItemsCount = TP_INITIAL_NUMBER_ALLOCATED_ITEMS;
     }
-    textParser->lastError = NoError;
+    textParser->lastError = TEXT_PARSER_NO_ERRORS;
     return textParser;
 }
 
@@ -739,13 +881,11 @@ void TextParser_destruct(struct TextParser* textParser) {
     if (!textParser)
         return;
     if (textParser->pairsList) {
-        size_t i;
-        size_t j;
-        for (i = 0; i < textParser->allocatedPairsCount; i++){
+        for (size_t i = 0; i < textParser->allocatedPairsCount; i++) {
             if (i < textParser->pairsCount)
                 free(textParser->pairsList[i].leftValue);
             if (i < textParser->pairsCount)
-                for (j = 0; j < textParser->pairsList[i].rightValue.itemsCount; j++)
+                for (size_t j = 0; j < textParser->pairsList[i].rightValue.itemsCount; j++)
                     free(textParser->pairsList[i].rightValue.itemsList[j]);
             free(textParser->pairsList[i].rightValue.itemsList);
         }
@@ -760,10 +900,10 @@ size_t TextParser_getItemsCount(struct TextParser* textParser, const char* const
     size_t i = 0;
     for (i = 0; i < textParser->pairsCount; i++)
         if (strcmp(leftValue, textParser->pairsList[i].leftValue) == 0) {
-            textParser->lastError = NoError;
+            textParser->lastError = TEXT_PARSER_NO_ERRORS;
             return textParser->pairsList[i].rightValue.itemsCount;
         }
-    textParser->lastError = NoLeftOperandError;
+    textParser->lastError = TEXT_PARSER_ERR_NO_LEFT_VALUE_IN_LIST;
     return 0;
 }
 
@@ -771,7 +911,7 @@ const char* TextParser_getString(struct TextParser* textParser, const char* cons
     if (!textParser)
         return NULL;
     if (!leftValue) {
-        textParser->lastError = NoLeftOperandError;
+        textParser->lastError = TEXT_PARSER_ERR_NO_LEFT_VALUE_IN_LIST;
         return NULL;
     }
     size_t i = 0;
@@ -784,14 +924,14 @@ const char* TextParser_getString(struct TextParser* textParser, const char* cons
             break;
         }
     if (!found) {
-        textParser->lastError = NoLeftOperandError;
+        textParser->lastError = TEXT_PARSER_ERR_NO_LEFT_VALUE_IN_LIST;
         return NULL;
     }
     if (index >= textParser->pairsList[foundIndex].rightValue.itemsCount) {
-        textParser->lastError = OutOfRangeError;
+        textParser->lastError = TEXT_PARSER_ERR_OUT_OF_RANGE;
         return NULL;
     }
-    textParser->lastError = NoError;
+    textParser->lastError = TEXT_PARSER_NO_ERRORS;
     return textParser->pairsList[foundIndex].rightValue.itemsList[index];
 }
 
@@ -819,61 +959,62 @@ bool TextParser_getFlag(struct TextParser* textParser, const char* const leftVal
         return false;
 }
 
-unsigned char TextParser_addString(struct TextParser* textParser, const char* const leftValue, const char* const item) {
+enum TextParser_errors TextParser_addString(struct TextParser* textParser,
+                                            const char* const leftValue,
+                                            const char* const item) {
     if (!textParser || !leftValue || !item)
-        return 1;
+        return TEXT_PARSER_ERR_NULL_ARGUMENT;
     TextParser_getItemsCount(textParser, leftValue); // later, we will use textParser->lastError. Don't remove this.
     size_t found = 0;
     size_t index = 0;
-    size_t i = 0;
-    if (textParser->lastError == NoLeftOperandError) {
+    if (textParser->lastError == TEXT_PARSER_ERR_NO_LEFT_VALUE_IN_LIST) {
         if (textParser->pairsCount >= textParser->allocatedPairsCount)
             if (TextParser_reallocatePairsList(NULL, textParser)) {
-                textParser->lastError = MemoryAllocationError;
-                return 2;
+                textParser->lastError = TEXT_PARSER_ERR_ALLOC_STRING;
+                return TEXT_PARSER_ERR_ALLOC_STRING;
             }
         char* tempLeftOperandString = NULL;
         tempLeftOperandString = (char*)malloc(sizeof(char) * (strlen(leftValue) + 1));
         if (!tempLeftOperandString) {
-            textParser->lastError = MemoryAllocationError;
-            return 3;
+            textParser->lastError = TEXT_PARSER_ERR_ALLOC_STRING;
+            return TEXT_PARSER_ERR_ALLOC_STRING;
         }
         strcpy(tempLeftOperandString, leftValue);
         textParser->pairsList[textParser->pairsCount].leftValue = tempLeftOperandString;
         index = textParser->pairsCount;
         textParser->pairsCount++;
-    } else if (textParser->lastError == NoError)
-        for (i = 0; i < textParser->pairsCount; i++)
+    } else if (textParser->lastError == TEXT_PARSER_NO_ERRORS)
+        for (size_t i = 0; i < textParser->pairsCount; i++)
             if (strcmp(leftValue, textParser->pairsList[i].leftValue) == 0) {
                 found = 1;
                 index = i;
                 break;
             }
     if (TextParser_addItemToRightValue(NULL, &(textParser->pairsList[index]), item, strlen(item))) {
-        textParser->lastError = MemoryAllocationError;
+        textParser->lastError = TEXT_PARSER_ERR_ALLOC_STRING;
         if (!found) {
             free (textParser->pairsList[index].leftValue);
             textParser->pairsCount--;
         }
-        return 4;
+        return TEXT_PARSER_ERR_ALLOC_STRING;
     }
-    textParser->lastError = NoError;
-    return 0;
+    textParser->lastError = TEXT_PARSER_NO_ERRORS;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
-unsigned char TextParser_addInt(struct TextParser* textParser, const char* const leftValue, long int item) {
+enum TextParser_errors TextParser_addInt(struct TextParser* textParser, const char* const leftValue, long int item) {
     char tempString[100];
     sprintf(tempString, "%ld", item);
     return TextParser_addString(textParser, leftValue, tempString);
 }
 
-unsigned char TextParser_addDouble(struct TextParser* textParser, const char* leftValue, double item) {
+enum TextParser_errors TextParser_addDouble(struct TextParser* textParser, const char* leftValue, double item) {
     char tempString[100];
     sprintf(tempString, "%f", item);
     return TextParser_addString(textParser, leftValue, tempString);
 }
 
-unsigned char TextParser_addFlag(struct TextParser* textParser, const char* const leftValue, bool item) {
+enum TextParser_errors TextParser_addFlag(struct TextParser* textParser, const char* const leftValue, bool item) {
     char tempString[2];
     if (item)
         sprintf(tempString, "1");
@@ -882,24 +1023,42 @@ unsigned char TextParser_addFlag(struct TextParser* textParser, const char* cons
     return TextParser_addString(textParser, leftValue, tempString);
 }
 
-static unsigned char TextParser_checkWroteCounter(struct TextParser* textParser, size_t wrote, size_t* counter,
-                                           size_t* allocatedLength, char** string) {
-    if (!textParser || !counter || !allocatedLength || !string)
-        return 1;
+/**
+ * @brief Reallocates given string, if its counter number is more then allocated chars for 
+ * this string divided by 2.
+ * @param textParser Pointer to a #TextParser, where TextParser#lastError will be set.
+ * @param wrote Number of last wrote chars to string. Will be added to counter.
+ * @param counter Pointer to a number of <B>all</B> wrote chars to string.
+ * @param allocatedLength Pointer to a number of allocated chars in string.
+ * @param string Pointer to a string, which will be reallocated (if needed).
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ * @note This function destructs given string, if errors happened.
+ */
+static enum TextParser_errors TextParser_checkWroteCounter(struct TextParser* textParser,
+                                                           size_t wrote,
+                                                           size_t* counter,
+                                                           size_t* allocatedLength,
+                                                           char** string) {
+    assert(textParser);
+    assert(counter);
+    assert(allocatedLength);
+    assert(string);
     if (wrote > 0)
         (*counter) += wrote;
     else {
-        textParser->lastError = ConvertingError;
+        textParser->lastError = TEXT_PARSER_ERR_CONVERTING;
         free((*string));
-        return 2;
+        return TEXT_PARSER_ERR_CONVERTING;
     }
     if ((*counter) >= (*allocatedLength) / 2)
         if (TextParser_reallocateString(NULL, string, allocatedLength, (*allocatedLength))) {
-            textParser->lastError = MemoryAllocationError;
+            textParser->lastError = TEXT_PARSER_ERR_ALLOC_STRING;
             free((*string));
-            return 3;
+            return TEXT_PARSER_ERR_ALLOC_STRING;
         }
-    return 0;
+    textParser->lastError = TEXT_PARSER_NO_ERRORS;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
 char* TextParser_convertToText(struct TextParser* textParser) {
@@ -908,25 +1067,23 @@ char* TextParser_convertToText(struct TextParser* textParser) {
     char* tempString = NULL;
     size_t counter = 0;
     size_t allocatedLength = 5000;
-    size_t i = 0;
-    size_t j = 0;
     size_t wroteBuf = 0;
     tempString = (char*)malloc(sizeof(char) * allocatedLength);
     if (!tempString) {
-        textParser->lastError = MemoryAllocationError;
+        textParser->lastError = TEXT_PARSER_ERR_ALLOC_STRING;
         return NULL;
     }
     wroteBuf = sprintf(&(tempString[counter]), "/*%s*/\n", TEXT_PARSER_HEADER_COMMENT);
     if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
             return  NULL;
-    for (i = 0; i < textParser->pairsCount; i++) {
+    for (size_t i = 0; i < textParser->pairsCount; i++) {
         wroteBuf = sprintf(&(tempString[counter]), "%s = ", textParser->pairsList[i].leftValue);
         if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
             return  NULL;
         wroteBuf = sprintf(&(tempString[counter]), "[\n");
         if (TextParser_checkWroteCounter(textParser, wroteBuf, &counter, &allocatedLength, &tempString))
             return  NULL;
-        for (j = 0; j < textParser->pairsList[i].rightValue.itemsCount; j++) {
+        for (size_t j = 0; j < textParser->pairsList[i].rightValue.itemsCount; j++) {
             if (j == 0)
                 wroteBuf = sprintf(&(tempString[counter]), "\t\"%s\"",
                                 textParser->pairsList[i].rightValue.itemsList[j]);
