@@ -504,6 +504,7 @@ static enum TextParser_parsingItemsArrayStates TextParser_parseItemsArrayStringN
     if (c == ',') {
         TextParser_addItemToRightValue(logger, pair, itemString, (*itemStringLength));
         (*itemStringLength) = 0;
+        return PARSING_ITEMS_ARRAY_NOT_IN_QUOTES;
     }
     itemString[(*itemStringLength)] = c;
     (*itemStringLength)++;
