@@ -141,7 +141,7 @@ static enum SNTR_errors SceneNodeTypesRegistrar_checkType(struct SceneNodeTypesR
     // Don't check logger, because it's ok.
     if (!sceneNodeTypesRegistrar || !textParser || !foundIndex || !resId)
         return SNTR_ERR_NULL_ARGUMENT;
-    const char* typeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    const char* typeString = TextParser_getString(textParser, TextParser_standartTypeString, 0);
     if (!typeString) {
         Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errNoTypeString, resId);
         Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errConstructingNode, resId);
@@ -161,7 +161,7 @@ static enum SNTR_errors SceneNodeTypesRegistrar_checkType(struct SceneNodeTypesR
     }
     // We check 'requiredTypeString' only if it not NULL
     if (requiredTypeString) {
-        const char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+        const char* tempTypeString = TextParser_getString(textParser, TextParser_standartTypeString, 0);
         if (strcmp(tempTypeString, requiredTypeString) != 0) {
             Logger_log(logger, "%s Type: %s", SNTR_errorMessages.errType, typeString);
             Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errConstructingNode, resId);

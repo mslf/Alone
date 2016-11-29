@@ -224,7 +224,7 @@ enum SliderSceneNode_errors Slider_save(const struct Slider* const slider,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return SLIDER_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SliderSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, SliderSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, SliderSceneNode_parserStrings.progressBarRes,
                                    slider->base->sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, SliderSceneNode_parserStrings.buttonRes,

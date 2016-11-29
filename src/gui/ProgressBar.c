@@ -179,7 +179,7 @@ enum ProgressBarSceneNode_errors ProgressBar_save(const struct ProgressBar* cons
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return PROGRESS_BAR_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ProgressBarSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, ProgressBarSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, ProgressBarSceneNode_parserStrings.spriteRes,
                                    progressBar->spriteBase->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addInt(textParser, ProgressBarSceneNode_parserStrings.value, (long)progressBar->value);

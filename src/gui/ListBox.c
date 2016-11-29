@@ -260,7 +260,7 @@ enum ListBoxSceneNode_errors ListBox_save(const struct ListBox* const listBox,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return LIST_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ListBoxSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, ListBoxSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.textBoxRes,
                                    listBox->textBox->sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.buttonRes,

@@ -61,7 +61,7 @@ static enum Settings_errors Settings_checkTextResourceType(struct TextParser* te
     if (!textParser)
         return SETTINGS_ERR_NULL_ARGUMENT;
     const char* settingsTypeString = NULL;
-    settingsTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    settingsTypeString = TextParser_getString(textParser, TextParser_standartTypeString, 0);
     if (textParser->lastError) {
         Logger_log(logger, Settings_errorMessages.errNoTypeString);
         Logger_log(logger, "%s <ALL>", Settings_errorMessages.errDefault);
@@ -178,7 +178,7 @@ enum Settings_errors Settings_save(struct Settings* settings, struct ResourceMan
     if (!textParser)
         return SETTINGS_ERR_CONSTRUCTIG_TEXT_PARSER;
     unsigned char result = 0;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, Settings_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, Settings_parserStrings.type);
     result += TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->w);
     result += TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->h);
     result += TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualW);

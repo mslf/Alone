@@ -240,7 +240,7 @@ enum TextSceneNode_errors Text_save(const struct  Text* const text,
     if (!textParser)
         return TEXT_ERR_CONSTRUCTIG_TEXT_PARSER;
     unsigned char result = 0;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TextSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, TextSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, TextSceneNode_parserStrings.fontPath, text->fontPath);
     result += TextParser_addString(textParser, TextSceneNode_parserStrings.text, text->text);
     result += TextParser_addInt(textParser, TextSceneNode_parserStrings.size, (size_t)text->size);

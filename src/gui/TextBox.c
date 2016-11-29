@@ -146,7 +146,7 @@ enum TextBoxSceneNode_errors TextBox_save(
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return TEXT_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, TextBoxSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, TextBoxSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, TextBoxSceneNode_parserStrings.buttonRes,
                                    textBox->box->sceneNode.sceneNodeTextResource->id);
     result += TextParser_addInt(textParser, TextBoxSceneNode_parserStrings.maxLength, textBox->maxLength);

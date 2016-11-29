@@ -368,7 +368,7 @@ enum CheckBoxSceneNode_errors CheckBox_save(const struct CheckBox* const checkBo
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, CheckBoxSceneNode_parserString.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, CheckBoxSceneNode_parserString.type);
     result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.spriteRes,
                                    checkBox->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedEventRes,

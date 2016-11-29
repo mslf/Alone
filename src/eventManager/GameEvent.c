@@ -66,7 +66,7 @@ struct GameEvent* GameEvent_construct(const char* const channel, struct SceneNod
 struct GameEvent* GameEvent_constructFromTextParser(struct TextParser* textParser, struct SceneNode* sender) {
     if (!textParser || !sender)
         return NULL;
-    const char* tempTypeString = TextParser_getString(textParser, TEXT_PARSER_TYPE_STRING, 0);
+    const char* tempTypeString = TextParser_getString(textParser, TextParser_standartTypeString, 0);
     if (!tempTypeString)
         return NULL;
     if (strcmp(tempTypeString, GamaEvent_parserStrings.type) != 0)

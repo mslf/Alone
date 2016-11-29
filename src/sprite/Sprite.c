@@ -212,7 +212,7 @@ unsigned char Sprite_save(
     struct TextParser* textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, SPRITE_SCENENODE_PARSER_TYPE_STRING);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING);
     result += TextParser_addString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, sprite->textureResource->id);
     result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_WIDTH, sprite->frameSize.x);
     result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_HEIGHT, sprite->frameSize.y);

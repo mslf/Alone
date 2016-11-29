@@ -527,7 +527,7 @@ enum ContextMenuSceneNode_errors ContextMenu_save(
     struct TextParser* textParser = TextParser_constructEmpty();
     if (!textParser)
         return CONTEXT_MENU_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING,
+    result += TextParser_addString(textParser, TextParser_standartTypeString,
                                    ContextMenuSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
                          contextMenu->onlyOneMenuOptionPrototype);

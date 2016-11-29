@@ -366,7 +366,7 @@ enum ButtonSceneNode_errors Button_save(const struct Button* const button, struc
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, ButtonSceneNode_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, ButtonSceneNode_parserStrings.type);
     result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.spriteRes,
                                    button->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
     result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.textRes,

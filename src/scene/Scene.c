@@ -236,7 +236,7 @@ struct Scene* Scene_construct(struct ResourceManager* const resourceManager,
         return NULL;
     }
     const char* sceneTypeString = NULL;
-    sceneTypeString = TextParser_getString(sceneTextParser, TEXT_PARSER_TYPE_STRING, 0);
+    sceneTypeString = TextParser_getString(sceneTextParser, TextParser_standartTypeString, 0);
     if (sceneTextParser->lastError) {
         Scene_destruct(scene);
         TextParser_destruct(sceneTextParser);
@@ -319,7 +319,7 @@ enum Scene_errors Scene_save(struct Scene* const scene,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return SCENE_ERR_CONSTRUCTING_TEXT_PARSER;
-    result += TextParser_addString(textParser, TEXT_PARSER_TYPE_STRING, Scene_parserStrings.type);
+    result += TextParser_addString(textParser, TextParser_standartTypeString, Scene_parserStrings.type);
     for (size_t i = 0; i < scene->sceneNodesCount; i++) {
         char tempSceeNodeName[600];
         sprintf(tempSceeNodeName, "%ld", i);
