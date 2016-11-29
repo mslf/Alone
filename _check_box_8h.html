@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('_check_box_8h.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box_scene_node__parser_string.html">CheckBoxSceneNode_parserString</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strings which are used for constructing <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="struct_check_box_scene_node__parser_string.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strings which are used for constructing <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>.  <a href="struct_check_box_scene_node__parser_string.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_check_box.html">CheckBox</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standart Gui element to be clicked with holding it's state through the frames. Has focused, checked and unChecked <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> and <a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a>. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing). Also it's useful for other Gui elements, which are needed to be clicked with saving state.  <a href="struct_check_box.html#details">More...</a><br /></td></tr>
@@ -152,7 +152,7 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0c5e97f5adb06ff5ad3be85a21907dbe"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_check_box_8h.html#a0c5e97f5adb06ff5ad3be85a21907dbe">CheckBox_construct</a> (struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *const renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, struct <a class="el" href="struct_text_parser.html">TextParser</a> *const textParser)</td></tr>
-<tr class="memdesc:a0c5e97f5adb06ff5ad3be85a21907dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#a0c5e97f5adb06ff5ad3be85a21907dbe">More...</a><br /></td></tr>
+<tr class="memdesc:a0c5e97f5adb06ff5ad3be85a21907dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> and inits it from a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>.  <a href="#a0c5e97f5adb06ff5ad3be85a21907dbe">More...</a><br /></td></tr>
 <tr class="separator:a0c5e97f5adb06ff5ad3be85a21907dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7433b466519995e714f44bda1aaf9e0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_check_box_8h.html#a7433b466519995e714f44bda1aaf9e0e">CheckBox_destruct</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *checkBox)</td></tr>
 <tr class="memdesc:a7433b466519995e714f44bda1aaf9e0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> and frees memory, used by it. Pointer to that function should be at CheckBox::sceneNode::destruct.  <a href="#a7433b466519995e714f44bda1aaf9e0e">More...</a><br /></td></tr>
@@ -210,7 +210,7 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fa14fab460d0025f62178313d4a4fc9a59"></a>CHECK_BOX_ERR_NULL_ARGUMENT&#160;</td><td class="fielddoc"><p>Some of function's arguments are NULL. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fa718498fae468fecf92193480ae962791"></a>CHECK_BOX_ERR_NO_SPRITE_RES&#160;</td><td class="fielddoc"><p>No CheckBoxSceneNode_parserStrings::spriteRes string found in <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fa718498fae468fecf92193480ae962791"></a>CHECK_BOX_ERR_NO_SPRITE_RES&#160;</td><td class="fielddoc"><p>No CheckBoxSceneNode_parserStrings::spriteRes string found in <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fa89db9575de5b1356625efccec422ca25"></a>CHECK_BOX_ERR_CONSTRUCTIG_SPRITE&#160;</td><td class="fielddoc"><p>Constructing <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a> failed. </p>
 </td></tr>
@@ -228,7 +228,7 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fa4be9ba0a93949c61112ce25933644083"></a>CHECK_BOX_ERR_CONSTRUCTIG_UNCHECKED_EVENT&#160;</td><td class="fielddoc"><p>Constructing new CheckBox::unChecedEvent failed. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fabd4e01f0cba4a8b75e2d4851453ea2c7"></a>CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER&#160;</td><td class="fielddoc"><p>Constructing new <a class="el" href="struct_text_parser.html">TextParser</a> for some required reason failed. </p>
+<tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fabd4e01f0cba4a8b75e2d4851453ea2c7"></a>CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER&#160;</td><td class="fielddoc"><p>Constructing new <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> for some required reason failed. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a15b393afbe508250113a293413c35f7fa948c563ded72ea53226dc9b8476b1719"></a>CHECK_BOX_ERR_SAVING&#160;</td><td class="fielddoc"><p>Saving <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> failed due to internal reason. </p>
 </td></tr>
@@ -468,13 +468,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<p>Constructs <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a> and inits it from a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_check_box.html#a1128327f94baacb1570a98fca0591108">CheckBox::sprite</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data strings for initializing <a class="el" href="struct_check_box.html" title="Standart Gui element to be clicked with holding it&#39;s state through the frames. Has focused...">CheckBox</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -488,7 +488,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
-<a class="el" href="struct_text_parser.html">TextParser</a> </dd>
+<a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> </dd>
 <dd>
 <a class="el" href="struct_check_box_scene_node__parser_string.html" title="Strings which are used for constructing CheckBox from TextParser. ">CheckBoxSceneNode_parserString</a> </dd></dl>
 

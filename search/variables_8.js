@@ -14,5 +14,7 @@ var searchData=
   ['isstringchanged',['isStringChanged',['../struct_text_box.html#a1c6db9813ce047719bb6c91e0c161240',1,'TextBox']]],
   ['isstringexistinlist',['isStringExistInList',['../struct_list_box.html#a284c5592089954400f6ea24229c31617',1,'ListBox']]],
   ['isunique',['isUnique',['../struct_text_resource.html#a1bf1b6bebe561b86cd3d6b5dbf54be1c',1,'TextResource']]],
-  ['isvsyncactive',['isVsyncActive',['../struct_settings.html#a268770171cd0fa68cd268fa1b0ee8c6a',1,'Settings']]]
+  ['isvsyncactive',['isVsyncActive',['../struct_settings.html#a268770171cd0fa68cd268fa1b0ee8c6a',1,'Settings']]],
+  ['itemscount',['itemsCount',['../struct_right_value.html#a48e4ac11eaaa4c16805d455ffe2c5f5f',1,'RightValue']]],
+  ['itemslist',['itemsList',['../struct_right_value.html#a1137a9f799202660c420a7894e9257e2',1,'RightValue']]]
 ];

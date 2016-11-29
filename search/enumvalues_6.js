@@ -45,5 +45,10 @@ var searchData=
   ['sntr_5ferr_5fregistered_5fbefore',['SNTR_ERR_REGISTERED_BEFORE',['../_scene_node_types_registrar_8h.html#adc004591ab4744b1e3fa0e8d3f6861b3ab3aa078e2d223cdd55753c96fe8f756e',1,'SceneNodeTypesRegistrar.h']]],
   ['sntr_5ferr_5ftype',['SNTR_ERR_TYPE',['../_scene_node_types_registrar_8h.html#adc004591ab4744b1e3fa0e8d3f6861b3a312e1b64340968a013480392775aa794',1,'SceneNodeTypesRegistrar.h']]],
   ['sntr_5fno_5ferrors',['SNTR_NO_ERRORS',['../_scene_node_types_registrar_8h.html#adc004591ab4744b1e3fa0e8d3f6861b3aa78a6c56ea1c02c7696dbb4f9bf8ae73',1,'SceneNodeTypesRegistrar.h']]],
-  ['sntr_5ftypes_5freallocation_5fstep',['SNTR_TYPES_REALLOCATION_STEP',['../_scene_node_types_registrar_8h.html#aa3f750f00e63fe9e40fd65b87d0f5e95ad1010a585084fb63d9d9b0e9c5fe9985',1,'SceneNodeTypesRegistrar.h']]]
+  ['sntr_5ftypes_5freallocation_5fstep',['SNTR_TYPES_REALLOCATION_STEP',['../_scene_node_types_registrar_8h.html#aa3f750f00e63fe9e40fd65b87d0f5e95ad1010a585084fb63d9d9b0e9c5fe9985',1,'SceneNodeTypesRegistrar.h']]],
+  ['splitting_5ferr',['SPLITTING_ERR',['../_text_parser_8c.html#a8f2bd7af906e5dd2f46f199aac1fe2b1abc3e91088b8ba5cf68525bb63799ef49',1,'TextParser.c']]],
+  ['splitting_5fon_5fend',['SPLITTING_ON_END',['../_text_parser_8c.html#a8f2bd7af906e5dd2f46f199aac1fe2b1a9d64f0a19d3fde11a42a0ab4d9a1a798',1,'TextParser.c']]],
+  ['splitting_5fon_5fleft_5fpart',['SPLITTING_ON_LEFT_PART',['../_text_parser_8c.html#a8f2bd7af906e5dd2f46f199aac1fe2b1add4811bd4d89cc5a333b57ecf1620280',1,'TextParser.c']]],
+  ['splitting_5fon_5fright_5fpart',['SPLITTING_ON_RIGHT_PART',['../_text_parser_8c.html#a8f2bd7af906e5dd2f46f199aac1fe2b1ad01da973b461ebe26ddd7864449956ef',1,'TextParser.c']]],
+  ['splitting_5fstate_5fstart',['SPLITTING_STATE_START',['../_text_parser_8c.html#a8f2bd7af906e5dd2f46f199aac1fe2b1a935cb3ba023df51e069606ed6d903cb3',1,'TextParser.c']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Alone: RightOperand Struct Reference</title>
+<title>Alone: RightValue Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('struct_right_operand.html','');});
+$(document).ready(function(){initNavTree('struct_right_value.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -84,22 +84,72 @@ $(document).ready(function(){initNavTree('struct_right_operand.html','');});
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">RightOperand Struct Reference</div>  </div>
+<div class="title">RightValue Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents right value of <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a>. It can contain a lot of items (strings) for array organization.  
+ <a href="struct_right_value.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_text_parser_8h_source.html">TextParser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aab9e2a97e1c9ef112e0858f0ca253e9b"><td class="memItemLeft" align="right" valign="top"><a id="aab9e2a97e1c9ef112e0858f0ca253e9b"></a>
-char **&#160;</td><td class="memItemRight" valign="bottom"><b>rightOperandItemsList</b></td></tr>
-<tr class="separator:aab9e2a97e1c9ef112e0858f0ca253e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48e4ac11eaaa4c16805d455ffe2c5f5f"><td class="memItemLeft" align="right" valign="top"><a id="a48e4ac11eaaa4c16805d455ffe2c5f5f"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>itemsCount</b></td></tr>
+<tr class="memitem:a1137a9f799202660c420a7894e9257e2"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_right_value.html#a1137a9f799202660c420a7894e9257e2">itemsList</a></td></tr>
+<tr class="separator:a1137a9f799202660c420a7894e9257e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e4ac11eaaa4c16805d455ffe2c5f5f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_right_value.html#a48e4ac11eaaa4c16805d455ffe2c5f5f">itemsCount</a></td></tr>
 <tr class="separator:a48e4ac11eaaa4c16805d455ffe2c5f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeec70ba2a764db8a757dbd935e169d4c"><td class="memItemLeft" align="right" valign="top"><a id="aeec70ba2a764db8a757dbd935e169d4c"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedItemsCount</b></td></tr>
+<tr class="memitem:aeec70ba2a764db8a757dbd935e169d4c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_right_value.html#aeec70ba2a764db8a757dbd935e169d4c">allocatedItemsCount</a></td></tr>
 <tr class="separator:aeec70ba2a764db8a757dbd935e169d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents right value of <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a>. It can contain a lot of items (strings) for array organization. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="aeec70ba2a764db8a757dbd935e169d4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeec70ba2a764db8a757dbd935e169d4c">&sect;&nbsp;</a></span>allocatedItemsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedItemsCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current allocated number of items in <a class="el" href="struct_right_value.html#a1137a9f799202660c420a7894e9257e2">RightValue::itemsList</a>. </p>
+
+</div>
+</div>
+<a id="a48e4ac11eaaa4c16805d455ffe2c5f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e4ac11eaaa4c16805d455ffe2c5f5f">&sect;&nbsp;</a></span>itemsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t itemsCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing items in <a class="el" href="struct_right_value.html#a1137a9f799202660c420a7894e9257e2">RightValue::itemsList</a>. </p>
+
+</div>
+</div>
+<a id="a1137a9f799202660c420a7894e9257e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1137a9f799202660c420a7894e9257e2">&sect;&nbsp;</a></span>itemsList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** itemsList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of pointers to a item string. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_text_parser_8h_source.html">TextParser.h</a></li>
 </ul>
@@ -108,7 +158,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedItemsCount
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="struct_right_operand.html">RightOperand</a></li>
+    <li class="navelem"><a class="el" href="struct_right_value.html">RightValue</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

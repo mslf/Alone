@@ -101,14 +101,14 @@ $(document).ready(function(){initNavTree('_button_8h.html','');});
 <code>#include &quot;<a class="el" href="_musican_8h_source.html">musican/Musican.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_resource_manager_8h_source.html">resourceManager/ResourceManager.h</a>&quot;</code><br />
 <code>#include &quot;sprite/Sprite.h&quot;</code><br />
-<code>#include &quot;text/Text.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_text_8h_source.html">text/Text.h</a>&quot;</code><br />
 </div>
 <p><a href="_button_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_button_scene_node__parser_strings.html">ButtonSceneNode_parserStrings</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strings which are used for constructing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> from <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="struct_button_scene_node__parser_strings.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strings which are used for constructing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>.  <a href="struct_button_scene_node__parser_strings.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_button.html">Button</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standart Gui element to be clicked without holding it's state through the frames. Has some text on itself, focused and pressed <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> and <a class="el" href="struct_sound_resource.html" title="Resource, which is represents playable sound (not music!). ">SoundResource</a>. <a class="el" href="struct_user.html">User</a> can click the <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>, and some things will happen (such a <a class="el" href="struct_game_event.html" title="Standart structure for SceneNode communication and more. ">GameEvent</a> or sound playing). Also it's useful for other Gui elements, which are needed to be clicked without saving state.  <a href="struct_button.html#details">More...</a><br /></td></tr>
@@ -148,7 +148,7 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af75cacaf53085bfb94b9c70c6b10caed"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_scene_node.html">SceneNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_button_8h.html#af75cacaf53085bfb94b9c70c6b10caed">Button_construct</a> (struct <a class="el" href="struct_resource_manager.html">ResourceManager</a> *const resourceManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *const renderer, struct <a class="el" href="struct_scene_node_types_registrar.html">SceneNodeTypesRegistrar</a> *sceneNodeTypesRegistrar, struct <a class="el" href="struct_text_parser.html">TextParser</a> *const textParser)</td></tr>
-<tr class="memdesc:af75cacaf53085bfb94b9c70c6b10caed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>.  <a href="#af75cacaf53085bfb94b9c70c6b10caed">More...</a><br /></td></tr>
+<tr class="memdesc:af75cacaf53085bfb94b9c70c6b10caed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> and inits it from a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>.  <a href="#af75cacaf53085bfb94b9c70c6b10caed">More...</a><br /></td></tr>
 <tr class="separator:af75cacaf53085bfb94b9c70c6b10caed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a088a0c517db01f25bbdeea23240861fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_button_8h.html#a088a0c517db01f25bbdeea23240861fa">Button_destruct</a> (struct <a class="el" href="struct_scene_node.html">SceneNode</a> *button)</td></tr>
 <tr class="memdesc:a088a0c517db01f25bbdeea23240861fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> and frees memory, used by it. Pointer to that function should be at Button::sceneNode::destruct.  <a href="#a088a0c517db01f25bbdeea23240861fa">More...</a><br /></td></tr>
@@ -203,17 +203,17 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a35aa4c7a82612ea1172e5d7002214b57"></a>BUTTON_ERR_NULL_ARGUMENT&#160;</td><td class="fielddoc"><p>Some of function's arguments are NULL. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541ae84de1fc45be966b8584dae700456540"></a>BUTTON_ERR_NO_SPRITE_RES&#160;</td><td class="fielddoc"><p>No <a class="el" href="struct_button_scene_node__parser_strings.html#a008090dd7a5af169656ea5a85a437385">ButtonSceneNode_parserStrings::spriteRes</a> string found in <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541ae84de1fc45be966b8584dae700456540"></a>BUTTON_ERR_NO_SPRITE_RES&#160;</td><td class="fielddoc"><p>No <a class="el" href="struct_button_scene_node__parser_strings.html#a008090dd7a5af169656ea5a85a437385">ButtonSceneNode_parserStrings::spriteRes</a> string found in <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541ade3209bc63b0a416a6f81f090cce00bd"></a>BUTTON_ERR_CONSTRUCTIG_SPRITE&#160;</td><td class="fielddoc"><p>Constructing <a class="el" href="struct_button.html#a1128327f94baacb1570a98fca0591108">Button::sprite</a> failed. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a7459f38d8e5acea97e95bfa968f0f9db"></a>BUTTON_ERR_NOT_ENOUGH_ANIMATIONS&#160;</td><td class="fielddoc"><p>Constructed <a class="el" href="struct_button.html#a1128327f94baacb1570a98fca0591108">Button::sprite</a> doesn't have enough animations. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a1a129c4a474132b09d1e4350f356b6a0"></a>BUTTON_ERR_NO_TEXT_RES&#160;</td><td class="fielddoc"><p>No <a class="el" href="struct_button_scene_node__parser_strings.html#ab8666a8039b6fdab629c3e0853421c3c">ButtonSceneNode_parserStrings::textRes</a> string found in <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a1a129c4a474132b09d1e4350f356b6a0"></a>BUTTON_ERR_NO_TEXT_RES&#160;</td><td class="fielddoc"><p>No <a class="el" href="struct_button_scene_node__parser_strings.html#ab8666a8039b6fdab629c3e0853421c3c">ButtonSceneNode_parserStrings::textRes</a> string found in <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a23f6cc8e710922f78084ac7bfd188398"></a>BUTTON_ERR_CONSTRUCTIG_TEXT&#160;</td><td class="fielddoc"><p>Constructing <a class="el" href="struct_button.html#ab278201aa1758916bc9e825b3833e31b">Button::label</a> failed. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a4943c2d78434d807bb0c4d1b9a6ae9ba"></a>BUTTON_ERR_LOADING_SETTINGS&#160;</td><td class="fielddoc"><p>Loading required settings from <a class="el" href="struct_text_parser.html">TextParser</a> failed. </p>
+<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a4943c2d78434d807bb0c4d1b9a6ae9ba"></a>BUTTON_ERR_LOADING_SETTINGS&#160;</td><td class="fielddoc"><p>Loading required settings from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> failed. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a6f5ff8a22de27dadac2f87df9f2b6a6f"></a>BUTTON_ERR_NO_FOCUSED_EVENT_RES&#160;</td><td class="fielddoc"><p>Loading new <a class="el" href="struct_button.html#aff7dcf845e86b8d62077ceec6094f3e3">Button::focusedEventResource</a> from <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> failed. </p>
 </td></tr>
@@ -223,7 +223,7 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a9c2549d82bd346f5bcec701a0bf0512b"></a>BUTTON_ERR_CONSTRUCTIG_PRESSED_EVENT&#160;</td><td class="fielddoc"><p>Constructing new <a class="el" href="struct_button.html#a6c6350ebecb76824f44acd4af5310894">Button::pressedEvent</a> failed. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a5722a222eddcd221d7e46100140907e6"></a>BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER&#160;</td><td class="fielddoc"><p>Constructing new <a class="el" href="struct_text_parser.html">TextParser</a> for some required reason failed. </p>
+<tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a5722a222eddcd221d7e46100140907e6"></a>BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER&#160;</td><td class="fielddoc"><p>Constructing new <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> for some required reason failed. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a56aa7ab9e56ca13f0d24a2aa90746541a2c57e661704d0a28013172d49d0661ec"></a>BUTTON_ERR_SAVING&#160;</td><td class="fielddoc"><p>Saving <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> failed due to internal reason. </p>
 </td></tr>
@@ -405,13 +405,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> and inits it from a <a class="el" href="struct_text_parser.html">TextParser</a>. </p>
+<p>Constructs <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a> and inits it from a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> which is used to load additional resources, needed for <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> which is used to construct <a class="el" href="struct_button.html#a1128327f94baacb1570a98fca0591108">Button::sprite</a> and <a class="el" href="struct_button.html#ab278201aa1758916bc9e825b3833e31b">Button::label</a>. Can be NULL. </td></tr>
     <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> which is used to construct <a class="el" href="struct_button.html#a1128327f94baacb1570a98fca0591108">Button::sprite</a> and <a class="el" href="struct_button.html#ab278201aa1758916bc9e825b3833e31b">Button::label</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html">TextParser</a> with data strings for initializing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data strings for initializing <a class="el" href="struct_button.html" title="Standart Gui element to be clicked without holding it&#39;s state through the frames. Has some text on it...">Button</a>. Can be NULL. </td></tr>
   </table>
   </dd>
 </dl>
@@ -425,7 +425,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> </dd>
 <dd>
-<a class="el" href="struct_text_parser.html">TextParser</a> </dd>
+<a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> </dd>
 <dd>
 <a class="el" href="struct_button_scene_node__parser_strings.html" title="Strings which are used for constructing Button from TextParser. ">ButtonSceneNode_parserStrings</a> </dd></dl>
 

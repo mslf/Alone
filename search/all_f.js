@@ -42,7 +42,7 @@ var searchData=
   ['resourcemanager_5freallocatetextresourceslist',['ResourceManager_reallocateTextResourcesList',['../_resource_manager_8c.html#acd44d2d403d31146be378f994d4ef8db',1,'ResourceManager.c']]],
   ['resourcemanager_5freallocatetextureresourceslist',['ResourceManager_reallocateTextureResourcesList',['../_resource_manager_8c.html#a6ebb534d129947aea6bb3b7d4d6a0843',1,'ResourceManager.c']]],
   ['resourcemanager_5fsavetextresource',['ResourceManager_saveTextResource',['../_resource_manager_8h.html#abb0a4b80d4fbe8d33c7552e6b3f74bfb',1,'ResourceManager_saveTextResource(struct ResourceManager *rm, struct TextResource *textResource, const char *const textResId):&#160;ResourceManager.c'],['../_resource_manager_8c.html#abb0a4b80d4fbe8d33c7552e6b3f74bfb',1,'ResourceManager_saveTextResource(struct ResourceManager *rm, struct TextResource *textResource, const char *const textResId):&#160;ResourceManager.c']]],
-  ['rightoperand',['RightOperand',['../struct_right_operand.html',1,'']]],
+  ['rightvalue',['RightValue',['../struct_right_value.html',1,'RightValue'],['../struct_pair.html#abf5dbd3d6f8f92f7c39521b89e218bf8',1,'Pair::rightValue()']]],
   ['rm_5ferr_5falloc',['RM_ERR_ALLOC',['../_resource_manager_8h.html#aedd8a6f022397abee3c6ea178911db42a3a87dda392c0061c5c1837d88546168b',1,'ResourceManager.h']]],
   ['rm_5ferr_5fnull_5fargument',['RM_ERR_NULL_ARGUMENT',['../_resource_manager_8h.html#aedd8a6f022397abee3c6ea178911db42abb0c32c85118d27ff23a359fe4a0d202',1,'ResourceManager.h']]],
   ['rm_5ferr_5fsaving',['RM_ERR_SAVING',['../_resource_manager_8h.html#aedd8a6f022397abee3c6ea178911db42a71cd3fb6df031273e57f1fde47575666',1,'ResourceManager.h']]],

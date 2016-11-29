@@ -87,22 +87,90 @@ $(document).ready(function(){initNavTree('struct_text_parser.html','');});
 <div class="title">TextParser Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents structure for containing <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a>, parsed from <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>. Some info about parsing format:  
+ <a href="struct_text_parser.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_text_parser_8h_source.html">TextParser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a311aae354eec049861eb556c1b0e1776"><td class="memItemLeft" align="right" valign="top"><a id="a311aae354eec049861eb556c1b0e1776"></a>
-struct <a class="el" href="struct_pair.html">Pair</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pairsList</b></td></tr>
+<tr class="memitem:a311aae354eec049861eb556c1b0e1776"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_pair.html">Pair</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_parser.html#a311aae354eec049861eb556c1b0e1776">pairsList</a></td></tr>
 <tr class="separator:a311aae354eec049861eb556c1b0e1776"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a80ad9b6aca5708b96406da00437010"><td class="memItemLeft" align="right" valign="top"><a id="a7a80ad9b6aca5708b96406da00437010"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pairsCount</b></td></tr>
+<tr class="memitem:a7a80ad9b6aca5708b96406da00437010"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_parser.html#a7a80ad9b6aca5708b96406da00437010">pairsCount</a></td></tr>
 <tr class="separator:a7a80ad9b6aca5708b96406da00437010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c09e3bb8d61dd466fa85b59029408b1"><td class="memItemLeft" align="right" valign="top"><a id="a0c09e3bb8d61dd466fa85b59029408b1"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>allocatedPairsCount</b></td></tr>
+<tr class="memitem:a0c09e3bb8d61dd466fa85b59029408b1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_parser.html#a0c09e3bb8d61dd466fa85b59029408b1">allocatedPairsCount</a></td></tr>
 <tr class="separator:a0c09e3bb8d61dd466fa85b59029408b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb02976c4ac737d7ebe3a5e0b03977b"><td class="memItemLeft" align="right" valign="top"><a id="aecb02976c4ac737d7ebe3a5e0b03977b"></a>
-enum TextParserError&#160;</td><td class="memItemRight" valign="bottom"><b>lastError</b></td></tr>
-<tr class="separator:aecb02976c4ac737d7ebe3a5e0b03977b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f39065075c00c7abf26ccd245990701"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_text_parser.html#a4f39065075c00c7abf26ccd245990701">lastError</a></td></tr>
+<tr class="separator:a4f39065075c00c7abf26ccd245990701"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents structure for containing <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a>, parsed from <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>. Some info about parsing format: </p>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> parses <a class="el" href="struct_text_resource.html#a5633b1433389cec21ade3811bbe9ca5b">TextResource::text</a> for assigments like this: <code>lvalue = rvalue;</code>, and this: <code>lvalue = [item1, item2, item3, ..., itemN];</code> Also, you can quote your rvalue in quotes &lt;"&gt; for protecting spaces:
+&lt;tt&gt;lvalue1 = "rvalue 1";
+    lvalue2 = ["item 1", "item 2"]; You can add a multiline comments like in C in any place of <a class="el" href="struct_text_resource.html#a5633b1433389cec21ade3811bbe9ca5b">TextResource::text</a> (remove <code>_</code> symbol). <code>/_* comment *_/</code> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a> </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a0c09e3bb8d61dd466fa85b59029408b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c09e3bb8d61dd466fa85b59029408b1">&sect;&nbsp;</a></span>allocatedPairsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t allocatedPairsCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number os allocated <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a> in <a class="el" href="struct_text_parser.html#a311aae354eec049861eb556c1b0e1776">TextParser::pairsList</a>. </p>
+
+</div>
+</div>
+<a id="a4f39065075c00c7abf26ccd245990701"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f39065075c00c7abf26ccd245990701">&sect;&nbsp;</a></span>lastError</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a> lastError</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Place for storing errors (if function return other useful value), which are happened while doing some things with existing <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
+
+</div>
+</div>
+<a id="a7a80ad9b6aca5708b96406da00437010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a80ad9b6aca5708b96406da00437010">&sect;&nbsp;</a></span>pairsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t pairsCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a> in <a class="el" href="struct_text_parser.html#a311aae354eec049861eb556c1b0e1776">TextParser::pairsList</a>. </p>
+
+</div>
+</div>
+<a id="a311aae354eec049861eb556c1b0e1776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a311aae354eec049861eb556c1b0e1776">&sect;&nbsp;</a></span>pairsList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_pair.html">Pair</a>* pairsList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>List of parsed or added assigments. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_text_parser_8h_source.html">TextParser.h</a></li>
 </ul>

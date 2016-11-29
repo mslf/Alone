@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['pairscount',['pairsCount',['../struct_text_parser.html#a7a80ad9b6aca5708b96406da00437010',1,'TextParser']]],
+  ['pairslist',['pairsList',['../struct_text_parser.html#a311aae354eec049861eb556c1b0e1776',1,'TextParser']]],
   ['period',['period',['../struct_periodic_event_controller.html#a227ee8509806bda3e6bc2b52c4405cc9',1,'PeriodicEventController']]],
   ['pointerscount',['pointersCount',['../struct_script_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'ScriptResource::pointersCount()'],['../struct_sound_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'SoundResource::pointersCount()'],['../struct_text_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'TextResource::pointersCount()'],['../struct_texture_resource.html#aa058e87a17f5f5079be31c1631ed5f50',1,'TextureResource::pointersCount()']]],
   ['pressedevent',['pressedEvent',['../struct_button.html#a6c6350ebecb76824f44acd4af5310894',1,'Button']]],

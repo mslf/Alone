@@ -47,6 +47,7 @@ var searchData=
   ['checkedeventresource',['checkedEventResource',['../struct_check_box.html#a141e6071f8fcb7d05f669cb32022bdc3',1,'CheckBox']]],
   ['checkedsoundres',['checkedSoundRes',['../struct_check_box_scene_node__parser_string.html#a4c95ad629fa53a897306f0631a537cf1',1,'CheckBoxSceneNode_parserString']]],
   ['checkedsoundresource',['checkedSoundResource',['../struct_check_box.html#ac6c8715d0371c2a1d98681db939c703c',1,'CheckBox']]],
+  ['color',['color',['../struct_text_scene_node__parser_strings.html#af47bf15ddbc37a9176ffcec20c5b4245',1,'TextSceneNode_parserStrings::color()'],['../struct_text.html#a631bf4babe4c1825a2cdc0c19c2bd04f',1,'Text::color()']]],
   ['command',['command',['../struct_game_event__parser_strings.html#ac7eef288127bdf6b327ed1ff5c8ab5bb',1,'GameEvent_parserStrings::command()'],['../struct_game_event.html#ade9cba72805fe52685a1deea307a8e82',1,'GameEvent::command()']]],
   ['construct',['construct',['../struct_scene_node_type.html#a73c6b5f5faad9469791b4d28ad90495b',1,'SceneNodeType']]],
   ['context_5fmenu_5ferr_5falloc_5fprototype_5fstring',['CONTEXT_MENU_ERR_ALLOC_PROTOTYPE_STRING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a362e8951ef5fd2e327151b654e9e4e25',1,'ContextMenu.h']]],
