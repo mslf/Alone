@@ -22,6 +22,7 @@
  * @date 6 Oct 2016
  * @brief File containing implementation of #TextParser.
  */
+#include <stddef.h>
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
@@ -68,6 +69,25 @@ static const struct TextParser_errorMessages {
     "TextParser_addPair: unexpected EOF while parsing items array string!",
     "TextParser_addPair: syntax error - opening or closing square-brackets haven't found!",
     "TextParser_addItemToRightValue: adding item failed!"};
+
+/**
+ * @brief States for TextParser_splitExpression() function.
+ */
+enum TextParser_splittingStates {
+        SPLITTING_STATE_START = 0,
+        /**< Splitting assigment starts before the assigment (deleting trailing spaces, tabulations and new-lines). */
+        SPLITTING_ON_LEFT_PART = 1,
+        /**< Splitting assigment now on leftValue part of assigment before '=' symbol (spaces and tabulations will be ignored,
+         * but other symbols will be added to the leftValueString). */
+        SPLITTING_ON_RIGHT_PART = 2,
+        /**< Splitting assigment now on rightValue part of assigment after '=' symbol, but before ';' symbol
+         * (spaces and tabulations will be added (if in quotes), but other symbols will be added to the rightValueString).
+         * Also all other symbols will be added.*/
+        SPLITTING_ON_END = 3,
+        /**< Splitting assigment ends succes. */
+        SPLITTING_ERR = 4
+        /**< Splitting assigment ends with a syntax error. */
+};    
 
 /**
  * @brief Reallocates TextParser#pairsList and increases TextParser#allocatedPairsCount 
@@ -149,12 +169,93 @@ static enum TextParser_errors TextParser_reallocateString(struct Logger* logger,
     size_t newLength = (*oldLength) + step;
     newString = (char*)realloc((*string), sizeof(char) * newLength);
     if (!newString) {
-        Logger_log(logger, TEXT_PARSER_ERR_STRING_REALLOC);
+        Logger_log(logger, TextParser_errorMessages.errStringAlloc);
         return TEXT_PARSER_ERR_ALLOC_STRING;
     }
     (*string) = newString;
     (*oldLength) = newLength;
     return TEXT_PARSER_NO_ERRORS;
+}
+
+
+/**
+ * @brief Escapes space-symbols before left value part of assigment.
+ * Adds first symbol of left value part of assigment as found.
+ * @param c Current parsing symbol.
+ * @param leftValueString Pointer to a string (char**), where this function will store parsed symbols of 
+ * left value from assigment. 
+ * @param leftCounter Pointer to a number, which is represents current existing chars in leftValueString. 
+ * Will be updated while parsing.
+ * @return #TextParser_splittingStates value.
+ * @see #TextParser_splittingStates
+ * @see TextParser_splitExpression()
+ */
+static enum TextParser_splittingStates TextParser_splitExpressionOnStart(const char c,
+                                                                         char** const leftValueString,
+                                                                         size_t* const leftCounter) {
+    assert(leftValueString && leftCounter);
+    if (c == ';')
+        return SPLITTING_ERR;
+    if (c != ' ' && c!= '\t' && c!= '\n') {
+        (*leftValueString)[*leftCounter] = c;
+        (*leftCounter)++;
+        return SPLITTING_ON_LEFT_PART;
+    }
+    return SPLITTING_STATE_START;
+}
+
+/**
+ * @brief Adds symbols to the leftValueString if they are not space-symbols.
+ * When it finds '=' symbol, then leftValueString is over.
+ * @param c Current parsing symbol.
+ * @param leftValueString Pointer to a string (char**), where this function will store parsed symbols of 
+ * left value from assigment. 
+ * @param leftCounter Pointer to a number, which is represents current existing chars in leftValueString. 
+ * Will be updated while parsing.
+ * @return #TextParser_splittingStates value.
+ * @see #TextParser_splittingStates
+ * @see TextParser_splitExpression()
+ */
+static enum TextParser_splittingStates TextParser_splitExpressionOnLeft(const char c,
+                                                                        char** const leftValueString,
+                                                                        size_t* const leftCounter) {
+    assert(leftValueString && leftCounter);
+    if (c == '=' && (*leftCounter) > 0)
+        return SPLITTING_ON_RIGHT_PART;
+    if (c == '=' && (*leftCounter) == 0)
+        return SPLITTING_ERR;
+    if (c == '\n' || c == ';')
+        return SPLITTING_ERR;
+    if (c != ' ' && c != '\t') {
+        (*leftValueString)[*leftCounter] = c;
+        (*leftCounter)++;
+    }
+    return SPLITTING_ON_LEFT_PART;
+}
+
+/**
+ * @brief Adds all symbols to the rightValueString.
+ * When it finds ';' symbol, then assigment is done.
+ * @param c Current parsing symbol.
+ * @param rightValueString Pointer to a string (char**), where this function will store parsed symbols of 
+ * right value from assigment. 
+ * @param rightCounter Pointer to a number, which is represents current existing chars in rightValueString. 
+ * Will be updated while parsing.
+ * @return #TextParser_splittingStates value.
+ * @see #TextParser_splittingStates
+ * @see TextParser_splitExpression()
+ */
+static enum TextParser_splittingStates TextParser_splitExpressionOnRight(const char c,
+                                                                         char** const rightValueString,
+                                                                         size_t* const rightCounter) {
+    assert(rightValueString && rightCounter);
+    if (c == ';' && (*rightCounter) > 0)
+        return SPLITTING_ON_END;
+    if (c == ';' && (*rightCounter) == 0)
+        return SPLITTING_ERR;
+    (*rightValueString)[*rightCounter] = c;
+    (*rightCounter)++;
+    return SPLITTING_ON_RIGHT_PART;
 }
 
 /**
@@ -196,13 +297,7 @@ static enum TextParser_errors TextParser_splitExpression(struct Logger* logger,
     assert(startIndex);
     assert(leftValueString && leftCounter && allocatedCharsForLeftValue);
     assert(rightValueString && rightCounter && allocatedCharsForRightValue);
-    enum SplittingStates {
-        SPLITTING_STATE_START = 0,
-        SPLITTING_ON_LEFT_PART = 1,
-        SPLITTING_ON_RIGHT_PART = 2,
-        SPLITTING_ON_END = 3,
-        SPLITTING_ERR = 4
-    } state = SPLITTING_STATE_START;
+    enum TextParser_splittingStates state = SPLITTING_STATE_START;
     while ((*startIndex) < strlen(string) && state != SPLITTING_ON_END && state != SPLITTING_ERR) {
         char c = string[*startIndex];
         if ((*leftCounter) >= (*allocatedCharsForLeftValue))
@@ -213,53 +308,17 @@ static enum TextParser_errors TextParser_splitExpression(struct Logger* logger,
             if (TextParser_reallocateString(logger, rightValueString, allocatedCharsForRightValue,
                                             TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_VALUE_STRING))
                 return TEXT_PARSER_ERR_ALLOC_STRING;
-        //? You can use goto with case labels.
-        // FIXME hmmmm.
         switch (state) {
             case SPLITTING_STATE_START:
-                if (c == ';'){
-                    state = SPLITTING_ERR;
-                    break;
-                }
-                if (c != ' ' && c!= '\t' && c!= '\n') {
-                    state = SPLITTING_ON_LEFT_PART;
-                    (*leftValueString)[*leftCounter] = c;
-                    (*leftCounter)++;
-                }
+                state = TextParser_splitExpressionOnStart(c, leftValueString, leftCounter);
                 break;
             case SPLITTING_ON_LEFT_PART:
-                if (c == '=' && (*leftCounter) > 0) {
-                    state = SPLITTING_ON_RIGHT_PART;
-                    break;
-                }
-                if (c == '=' && (*leftCounter) == 0) {
-                    state = SPLITTING_ERR;
-                    break;
-                }
-                if (c == '\n' || c == ';') {
-                    state = SPLITTING_ERR;
-                    break;
-                }
-                if (c != ' ' && c != '\t') {
-                    (*leftValueString)[*leftCounter] = c;
-                    (*leftCounter)++;
-                }
+                state = TextParser_splitExpressionOnLeft(c, leftValueString, leftCounter);
                 break;
             case SPLITTING_ON_RIGHT_PART:
-                if (c == ';' && (*rightCounter) > 0) {
-                    state = SPLITTING_ON_END;
-                    break;
-                }
-                if (c == ';' && (*rightCounter) == 0) {
-                    state = SPLITTING_ERR;
-                    break;
-                }
-                (*rightValueString)[*rightCounter] = c;
-                (*rightCounter)++;
+                state = TextParser_splitExpressionOnRight(c, rightValueString, rightCounter);
                 break;
-            case SPLITTING_ON_END:
-                break;
-            case SPLITTING_ERR:
+            default:
                 break;
         }
         (*startIndex)++;
@@ -271,69 +330,128 @@ static enum TextParser_errors TextParser_splitExpression(struct Logger* logger,
     return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF;
 }
 
-static unsigned char TextParser_deleteNonQuotedSpaces(char* rightValueString, size_t* rightCounter) {
-    if (!rightValueString || !rightCounter)
-        return 2;
-    unsigned char state = 0;
+/**
+ * @brief Removes space-symbols from the string if they are not-quoted.
+ * @param c Current parsing symbol.
+ * @param position Pointer to a number, which is represents current position in the string. Will be updated, 
+ * is the symbol was deleted.
+ * @param rightValueString String (char*), where this function will delete space-symbols.
+ * @param rightCounter Pointer to a number, which is represents current existing chars in rightValueString. 
+ * Will be updated while deleting.
+ * @return true, if '"' symbol found, or false if not..
+ * @see TextParser_deleteNonQuotedSpaces()
+ */
+static bool TextParser_deleteNonQuotedSpacesNotInQuotes(const char c,
+                                                        size_t* position,
+                                                        char* const rightValueString,
+                                                        size_t* const rightCounter) {
+    assert(position);
+    assert(rightValueString && rightCounter);
+    if (c == '\"')
+        return true;
+    if (c == ' ' || c == '\t' || c == '\n') {
+        for (size_t j = (*position); j < (*rightCounter) - 1; j++)
+            rightValueString[j] = rightValueString[j + 1];
+        (*rightCounter)--;
+        (*position)--;
+    }
+    return false;
+}
+
+/**
+ * @brief Removes space-symbols from the string if they are not-quoted.
+ * @param c Current parsing symbol.
+ * @param position Pointer to a number, which is represents current position in the string. Will be updated, 
+ * is the symbol was deleted.
+ * @param rightValueString String (char*), where this function will delete space-symbols.
+ * @param rightCounter Pointer to a number, which is represents current existing chars in rightValueString. 
+ * Will be updated while deleting.
+ * @return false, if '"' symbol found, or true if not..
+ * @see TextParser_deleteNonQuotedSpaces()
+ */
+static bool TextParser_deleteNonQuotedSpacesInQuotes(const char c,
+                                                     size_t* position,
+                                                     char* const rightValueString,
+                                                     size_t* const rightCounter) {
+    assert(position);
+    assert(rightValueString && rightCounter);
+    if (c == '\"')
+        return false;
+    if (c == '\n') {
+        for (size_t j = (*position); j < (*rightCounter) - 1; j++)
+            rightValueString[j] = rightValueString[j + 1];
+        (*rightCounter)--;
+        (*position)--;
+    }
+    return true;
+}
+
+/**
+ * @brief Deletes non-quoted space-symbols (space, tabulation, new-line) in string and shifts its content to the left.
+ * @param rightValueString String (char*), where this function will delete space-symbols.
+ * @param rightCounter Pointer to a number, which is represents current existing chars in rightValueString. 
+ * Will be updated while deleting.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ */
+static enum TextParser_errors TextParser_deleteNonQuotedSpaces(char* rightValueString, size_t* rightCounter) {
+    assert(rightValueString && rightCounter);
+    bool inQuotes = false;
     size_t i = 0;
-    size_t j = 0;
-    size_t quotesCount = 0;
     while (i < (*rightCounter)) {
         char c = rightValueString[i];
+        unsigned char state; // Because bool can't be in the switch
+        if (inQuotes)
+            state = 1;
+        else
+            state = 0;
         switch (state) {
-            case 0: // notInQuotes
-                if (c == '\"') {
-                    state = 1;
-                    quotesCount++;
-                    break;
-                }
-                if (c == ' ' || c == '\t' || c == '\n') {
-                    for (j = i; j < (*rightCounter) - 1; j++)
-                        rightValueString[j] = rightValueString[j + 1];
-                    (*rightCounter)--;
-                    i--;
-                }
+            case 0: // inQuotes == false
+                inQuotes = TextParser_deleteNonQuotedSpacesNotInQuotes(c, &i, rightValueString, rightCounter);
                 break;
-            case 1: // inQuotes
-                if (c == '\"') {
-                    state = 0;
-                    quotesCount++;
-                    break;
-                }
-                if (c == '\n') {
-                    for (j = i; j < (*rightCounter) - 1; j++)
-                        rightValueString[j] = rightValueString[j + 1];
-                    (*rightCounter)--;
-                    i--;
-                }
+            case 1: // inQuotes == true
+                inQuotes = TextParser_deleteNonQuotedSpacesInQuotes(c, &i, rightValueString, rightCounter);
                 break;
         }
         i++;
     }
-    return (quotesCount % 2);
+    if (inQuotes)
+        return TEXT_PARSER_ERR_DELETING_NOT_QUOTED_SPACES;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
-static unsigned char TextParser_addItemToRightValue(struct Logger* logger, struct Pair* pair,
-                                                      const char* const itemString,
-                                                      size_t itemStringLength) {
-    if (!pair || !itemString || !itemStringLength)
-        return 1;
-    size_t i = 0;
+/**
+ * @brief Adds item string to the #Pair.
+ * Increases Pair#itemsCount and reallocates Pair#itemsList, if needed.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param pair Pointer to a #Pair where item will be added.
+ * @param itemString String, which will be added to the #Pair. Can be not 0-terminated.
+ * @param itemStringLength Count of chars, which will be copyed from item string.
+ * @return #TextParser_errors value.
+ * @see #TextParser_errors
+ */
+static enum TextParser_errors TextParser_addItemToRightValue(struct Logger* logger,
+                                                             struct Pair* pair,
+                                                             const char* const itemString,
+                                                             size_t itemStringLength) {
+    assert(pair);
+    assert(itemString);
+    assert(itemStringLength != 0);
     if (pair->rightValue.itemsCount >=
             pair->rightValue.allocatedItemsCount)
         if (TextParser_reallocateItemsList(logger, &(pair->rightValue)))
-            return 2;
+            return TEXT_PARSER_ERR_REALLOC_ITEMS_LIST;
     pair->rightValue.itemsList[pair->rightValue.itemsCount] =
             (char*)malloc(sizeof(char) * (itemStringLength + 1));
     if (!pair->rightValue.itemsList[pair->rightValue.itemsCount]) {
-        Logger_log(logger, TEXT_PARSER_ERR_ADD_ITEM);
-        return 3;
+        Logger_log(logger, TextParser_errorMessages.errAddingItem);
+        return TEXT_PARSER_ERR_ALLOC_STRING;
     }
-    for (i = 0; i < itemStringLength; i ++)
+    for (size_t i = 0; i < itemStringLength; i ++)
         pair->rightValue.itemsList[pair->rightValue.itemsCount][i] = itemString[i];
     pair->rightValue.itemsList[pair->rightValue.itemsCount][itemStringLength] = 0;
     pair->rightValue.itemsCount++;
-    return 0;
+    return TEXT_PARSER_NO_ERRORS;
 }
 
 static unsigned char TextParser_parseItemsArrayString(struct Logger* logger, struct Pair* pair, char* itemsString,

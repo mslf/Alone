@@ -101,6 +101,8 @@ enum TextParser_errors {
     /**< Splitting assigment string failed due to syntax error. */
     TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF = 9,
     /**< Splitting assigment string failed due to unexpected EOF. */
+    TEXT_PARSER_ERR_DELETING_NOT_QUOTED_SPACES = 10
+    /**< Deleting space-symbols from right value string failed due to odd count of quotes or unexpected EOF. */
 };
 
 /**
