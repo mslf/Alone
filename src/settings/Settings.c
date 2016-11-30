@@ -51,8 +51,8 @@ static const struct Settings_errorMessages {
 
 /**
  * @brief Checks type string in #TextParser for suitability for initializing #Settings.
- * @param textParser Pointer to a #TextParser with Settings_parserStrings#type string. Can be NULL.
- * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param textParser Pointer to a #TextParser with Settings_parserStrings#type string.
+ * @param logger Pointer to a #Logger for logging purpose.
  * @return #Settings_errors value.
  * @see #Settings
  * @see #Settings_errors
@@ -77,7 +77,7 @@ static enum Settings_errors Settings_checkTextResourceType(struct TextParser* te
 
 /**
  * @brief Initalizes #Settings from #TextParser.
- * @param settings Pointer to a #Settings to be initalized. Can be NULL.
+ * @param settings Pointer to a #Settings to be initalized.
  * @param textParser Pointer to a #TextParser with #Settings_parserStrings.
  * @return #Settings_errors value.
  * @see #Settings

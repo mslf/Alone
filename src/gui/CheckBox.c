@@ -68,13 +68,13 @@ static const struct CheckBoxSceneNode_errorMessages {
     
 /**
  * @brief Function for loading and constructing CheckBox#sprite.
- * @param checkBox Pointer to a #CheckBox where to construct CheckBox#sprite. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing CheckBox#sprite. Can be NULL.
+ * @param checkBox Pointer to a #CheckBox where to construct CheckBox#sprite.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource.
+ * @param renderer Pointer to a #Renderer for constructing CheckBox#sprite.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing CheckBox#sprite. Can be NULL.
+ * for constructing CheckBox#sprite.
  * @param textParser Pointer to a #TextParser, where function will get 
- * CheckBoxSceneNode_parserStrings#spriteRes. Can be NULL.
+ * CheckBoxSceneNode_parserStrings#spriteRes.
  * @return #CheckBoxSceneNode_errors value.
  * @see #CheckBox
  * @see #Sprite
@@ -117,12 +117,12 @@ static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox
 /**
  * @brief Function for loading and constructing CheckBox#focusedSoundResource,
  * CheckBox#checkedSoundResource and CheckBox#unCheckedSoundResource.
- * @param checkBox Pointer to a #CheckBox where to construct sound resources. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading sound resources. Can be NULL.
+ * @param checkBox Pointer to a #CheckBox where to construct sound resources.
+ * @param resourceManager Pointer to a #ResourceManager for loading sound resources.
  * @param textParser Pointer to a #TextParser, where function will get 
  * CheckBoxSceneNode_parserStrings#focusedSoundRes, 
  * CheckBoxSceneNode_parserStrings#checkedSoundRes and 
- * CheckBoxSceneNode_parserStrings#unCheckedSoundRes. Can be NULL.
+ * CheckBoxSceneNode_parserStrings#unCheckedSoundRes.
  * @see #CheckBox
  * @see #SoundResource
  * @see #ResourceManager
@@ -159,12 +159,12 @@ static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct Resour
  * CheckBox#checkedEvent and CheckBox#unChecnedEvent.
  * Also, it will update CheckBox#focusedEventResource, CheckBox#checkedEventResource 
  * and CheckBox#unCheckedEventResource.
- * @param checkBox Pointer to a #CheckBox where to construct events. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #GameEvent resources. Can be NULL.
+ * @param checkBox Pointer to a #CheckBox where to construct events.
+ * @param resourceManager Pointer to a #ResourceManager for loading #GameEvent resources.
  * @param textParser Pointer to a #TextParser, where function will get 
  * CheckBoxSceneNode_parserStrings#focusedEventRes, 
  * CheckBoxSceneNode_parserStrings#checkedEventRes 
- * and CheckBoxSceneNode_parserStrings#unCheckedEventRes. Can be NULL.
+ * and CheckBoxSceneNode_parserStrings#unCheckedEventRes.
  * @see #CheckBox
  * @see #GameEvent
  * @see #ResourceManager
@@ -195,12 +195,12 @@ static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct Resou
 
 /**
  * @brief Function for loading settings and initializing #CheckBox from #TextParser.
- * @param checkBox Pointer to a #CheckBox which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing CheckBox#sprite. Can be NULL.
+ * @param checkBox Pointer to a #CheckBox which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
+ * @param renderer Pointer to a #Renderer for constructing CheckBox#sprite.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing CheckBox#sprite. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing CheckBox#sprite.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #CheckBoxSceneNode_errors value.
  * @see #CheckBox
  * @see #SceneNodeTypesRegistrar

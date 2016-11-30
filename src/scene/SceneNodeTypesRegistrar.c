@@ -74,7 +74,7 @@ void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeT
  * @brief Reallocates memory for SceneNodeTypesRegistrar#sceneNodeTypesList, 
  * increases SceneNodeTypesRegistrar#allocatedSceneNodeTypes by SNTR_TYPES_REALLOCATION_STEP.
  * @param sceneNodeTypesRegistrar Pointer to a SceneNodeTypesRegistrar, where function will 
- * reallocate SceneNodeTypesRegistrar#sceneNodeTypesList. Can be NULL.
+ * reallocate SceneNodeTypesRegistrar#sceneNodeTypesList.
  * @return #SNTR_errors value.
  * @see #SNTR_errors
  */
@@ -122,12 +122,12 @@ enum SNTR_errors SceneNodeTypesRegistrar_registerNewSceneNodeType(
 
 /**
  * @brief Checks #SceneNode inheritor type.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar where to find registered types. Can be NULL.
- * @param textParser Pointer to a #TextParser with type string, which will be checked. Can be NULL.
- * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
- * @param foundIndex Pointer to a number, where this function will place index of found SceneNodeType. Can be NULL.
- * @param requiredTypeString String with wishful #SceneNode inheritor type. Can be NULL.
- * @param resId String with ID (path) to the #SceneNode inheritor resource. Can be NULL. 
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar where to find registered types.
+ * @param textParser Pointer to a #TextParser with type string, which will be checked.
+ * @param logger Pointer to a #Logger for logging purpose.
+ * @param foundIndex Pointer to a number, where this function will place index of found SceneNodeType.
+ * @param requiredTypeString String with wishful #SceneNode inheritor type.
+ * @param resId String with ID (path) to the #SceneNode inheritor resource. 
  * Will be used only for logging purpose.
  * @return #SNTR_errors value.
  * @see #SNTR_errors

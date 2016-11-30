@@ -40,12 +40,12 @@ static const struct TextBoxSceneNode_errorMessages {
 
 /**
  * @brief Function for loading settings and initializing #TextBox from #TextParser.
- * @param textBox Pointer to a #TextBox which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing TextBox#box. Can be NULL.
+ * @param textBox Pointer to a #TextBox which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
+ * @param renderer Pointer to a #Renderer for constructing TextBox#box.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing TextBox#box. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing TextBox#box.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #TextBoxSceneNode_errors value.
  * @see #TextBox
  * @see #Button
@@ -172,7 +172,7 @@ enum TextBoxSceneNode_errors TextBox_save(
  * If requiredLength specified (not 0) then TextBox#allocatedCharsh will be it.
  * Else, TextBox#allocatedChars will be sum of old TextBox#allocatedChars 
  * and #TEXT_BOX_SCENENODE_REALLOC_STRING_LENGTH_STEP.
- * @param textBox Pointer to a #TextBox, where string will be reallocated. Can be NULL.
+ * @param textBox Pointer to a #TextBox, where string will be reallocated.
  * @param requiredLength Nes size of TextBox#string.
  * @return TextBoxSceneNode_errors value.
  * @see #TextBoxSceneNode_errors

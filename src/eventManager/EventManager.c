@@ -79,7 +79,7 @@ struct EventManager* EventManager_construct(struct Logger* logger) {
 /**
  * @brief Reallocates memory for the EventManager#gameEventsList.
  * EventManager#allocatedGameEventsCount will be increased by #EM_INITIAL_NUMBER_ALLOCATED_EVENTS.
- * @param em Pointer to a #EventManager. Can be NULL.
+ * @param em Pointer to a #EventManager.
  * @return #EventManager_errors value.
  * @see #EventManager_errors
  */
@@ -98,7 +98,7 @@ static enum EventManager_errors EventManager_reallocateGameEventsList(struct Eve
 /**
  * @brief Reallocates memory for the EventManager#customGameEventsList.
  * EventManager#allocatedCustomGameEventsCount will be increased by #EM_INITIAL_NUMBER_ALLOCATED_EVENTS.
- * @param em Pointer to a #EventManager. Can be NULL.
+ * @param em Pointer to a #EventManager.
  * @return #EventManager_errors value.
  * @see #EventManager_errors
  */
@@ -117,7 +117,7 @@ static enum EventManager_errors EventManager_reallocateCustomGameEventsList(stru
 /**
  * @brief Reallocates memory for the EventManager#sdlEventsList.
  * EventManager#allocatedSdlEventsCount will be increased by #EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS.
- * @param em Pointer to a #EventManager. Can be NULL.
+ * @param em Pointer to a #EventManager.
  * @return #EventManager_errors value.
  * @see #EventManager_errors
  */

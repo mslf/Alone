@@ -244,7 +244,7 @@ void ResourceManager_destruct(struct ResourceManager* rm) {
  * @brief Reallocates memory for the ResourceManager#textureResourcesList.
  * ResourceManager#allocatedTextureResourcesCount will be increased by 
  * #RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES.
- * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @param rm Pointer to a #ResourceManager.
  * @return #ResourceManager_errors value.
  * @see #ResourceManager_errors
  */
@@ -268,7 +268,7 @@ static enum ResourceManager_errors ResourceManager_reallocateTextureResourcesLis
  * @brief Reallocates memory for the ResourceManager#textResourcesList.
  * ResourceManager#allocatedTextResourcesCount will be increased by 
  * #RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES.
- * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @param rm Pointer to a #ResourceManager.
  * @return #ResourceManager_errors value.
  * @see #ResourceManager_errors
  */
@@ -292,7 +292,7 @@ static enum ResourceManager_errors ResourceManager_reallocateTextResourcesList(s
  * @brief Reallocates memory for the ResourceManager#scriptResourcesList.
  * ResourceManager#allocatedScriptResourcesCount will be increased by 
  * #RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES.
- * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @param rm Pointer to a #ResourceManager.
  * @return #ResourceManager_errors value.
  * @see #ResourceManager_errors
  */
@@ -316,7 +316,7 @@ static enum ResourceManager_errors ResourceManager_reallocateScriptResourcesList
  * @brief Reallocates memory for the ResourceManager#soundResourcesList.
  * ResourceManager#allocatedSoundResourcesCount will be increased by 
  * #RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES.
- * @param rm Pointer to a #ResourceManager. Can be NULL.
+ * @param rm Pointer to a #ResourceManager.
  * @return #ResourceManager_errors value.
  * @see #ResourceManager_errors
  */

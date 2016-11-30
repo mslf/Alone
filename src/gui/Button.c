@@ -61,13 +61,13 @@ static const struct ButtonSceneNode_errorMessages {
 
 /**
  * @brief Function for loading and constructing Button#label.
- * @param button Pointer to a #Button where to construct Button#label. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Text resource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing Button#label. Can be NULL.
+ * @param button Pointer to a #Button where to construct Button#label.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Text resource.
+ * @param renderer Pointer to a #Renderer for constructing Button#label.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing Button#label. Can be NULL.
+ * for constructing Button#label.
  * @param textParser Pointer to a #TextParser, where function will get 
- * ButtonSceneNode_parserStrings#textRes. Can be NULL.
+ * ButtonSceneNode_parserStrings#textRes.
  * @return #ButtonSceneNode_errors value.
  * @see #Button
  * @see #Text
@@ -105,13 +105,13 @@ static enum ButtonSceneNode_errors Button_loadTextResource(struct Button* button
 
 /**
  * @brief Function for loading and constructing Button#sprite.
- * @param button Pointer to a #Button where to construct Button#sprite. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing Button#sprite. Can be NULL.
+ * @param button Pointer to a #Button where to construct Button#sprite.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource.
+ * @param renderer Pointer to a #Renderer for constructing Button#sprite.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing Button#sprite. Can be NULL.
+ * for constructing Button#sprite.
  * @param textParser Pointer to a #TextParser, where function will get 
- * ButtonSceneNode_parserStrings#spriteRes. Can be NULL.
+ * ButtonSceneNode_parserStrings#spriteRes.
  * @return #ButtonSceneNode_errors value.
  * @see #Button
  * @see #Sprite
@@ -154,11 +154,11 @@ static enum ButtonSceneNode_errors Button_loadSpriteResource(struct Button* butt
 /**
  * @brief Function for loading and constructing Button#focusedSoundResource and Button#pressedSoundResource.
  * @param button Pointer to a #Button where to construct Button#focusedSoundResource 
- * and Button#pressedSoundResource. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading sound resources. Can be NULL.
+ * and Button#pressedSoundResource.
+ * @param resourceManager Pointer to a #ResourceManager for loading sound resources.
  * @param textParser Pointer to a #TextParser, where function will get 
  * ButtonSceneNode_parserStrings#focusedSoundRes 
- * and ButtonSceneNode_parserStrings#pressedSoundRes. Can be NULL.
+ * and ButtonSceneNode_parserStrings#pressedSoundRes.
  * @see #Button
  * @see #SoundResource
  * @see #ResourceManager
@@ -186,11 +186,11 @@ static void Button_loadSoundResources(struct Button* button,
 /**
  * @brief Function for loading and constructing Button#focusedEvent and Button#pressedEvent.
  * Also, it will update Button#focusedEventResource and Button#pressedEventResource.
- * @param button Pointer to a #Button where to construct events. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #GameEvent resources. Can be NULL.
+ * @param button Pointer to a #Button where to construct events.
+ * @param resourceManager Pointer to a #ResourceManager for loading #GameEvent resources.
  * @param textParser Pointer to a #TextParser, where function will get 
  * ButtonSceneNode_parserStrings#focusedEventRes
- * and ButtonSceneNode_parserStrings#pressedEventRes. Can be NULL.
+ * and ButtonSceneNode_parserStrings#pressedEventRes.
  * @see #Button
  * @see #GameEvent
  * @see #ResourceManager
@@ -217,12 +217,12 @@ static void Button_loadEventsResources(struct Button* button,
 
 /**
  * @brief Function for loading settings and initializing #Button from #TextParser.
- * @param button Pointer to a #Button which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing Button#sprite and Button#label. Can be NULL.
+ * @param button Pointer to a #Button which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
+ * @param renderer Pointer to a #Renderer for constructing Button#sprite and Button#label.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing Button#sprite and Button#label. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing Button#sprite and Button#label.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ButtonSceneNode_errors value.
  * @see #Button
  * @see #SceneNodeTypesRegistrar

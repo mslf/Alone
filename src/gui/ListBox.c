@@ -39,11 +39,11 @@ static const struct ListBoxSceneNode_errorMessages {
     
 /**
  * @brief Function for loading and constructing ListBox#contextMenu from #TextParser.
- * @param listBox Pointer to a #ListBox, where to construct #ContextMenu. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #ContextMenu resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #ContextMenu. Can be NULL.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #ContextMenu. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @param listBox Pointer to a #ListBox, where to construct #ContextMenu.
+ * @param resourceManager Pointer to a #ResourceManager for loading #ContextMenu resources.
+ * @param renderer Pointer to a #Renderer for constructing #ContextMenu.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #ContextMenu.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ListBoxSceneNode_errors value.
  * @see #ListBox
  * @see #ContextMenu
@@ -91,11 +91,11 @@ static enum ListBoxSceneNode_errors ListBox_loadContextMenuResource(struct ListB
 
 /**
  * @brief Function for loading and constructing ListBox#button from #TextParser.
- * @param listBox Pointer to a #ListBox, where to construct #Button. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Button resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #Button. Can be NULL.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @param listBox Pointer to a #ListBox, where to construct #Button.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Button resources.
+ * @param renderer Pointer to a #Renderer for constructing #Button.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ListBoxSceneNode_errors value.
  * @see #ListBox
  * @see #Button
@@ -133,11 +133,11 @@ static enum ListBoxSceneNode_errors ListBox_loadButtonResource(struct ListBox* l
 
 /**
  * @brief Function for loading and constructing ListBox#textBox from #TextParser.
- * @param listBox Pointer to a #ListBox, where to construct #TextBox. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #TextBox resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #TextBox. Can be NULL.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #TextBox. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @param listBox Pointer to a #ListBox, where to construct #TextBox.
+ * @param resourceManager Pointer to a #ResourceManager for loading #TextBox resources.
+ * @param renderer Pointer to a #Renderer for constructing #TextBox.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #TextBox.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ListBoxSceneNode_errors value.
  * @see #ListBox
  * @see #TextBox
@@ -175,13 +175,13 @@ static enum ListBoxSceneNode_errors ListBox_loadTextBoxResource(struct ListBox* 
 
 /**
  * @brief Function for loading settings and initializing #ListBox from #TextParser.
- * @param listBox Pointer to a #ListBox which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param listBox Pointer to a #ListBox which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
  * @param renderer Pointer to a #Renderer for constructing ListBox#button, ListBox#textBox 
- * and ListBox#contextMenu. Can be NULL.
+ * and ListBox#contextMenu.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing ListBox#button, ListBox#textBox and ListBox#contextMenu. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing ListBox#button, ListBox#textBox and ListBox#contextMenu.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ListBoxSceneNode_errors value.
  * @see #ListBox
  * @see #Button

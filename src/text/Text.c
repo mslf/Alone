@@ -49,10 +49,10 @@ static const struct TextSceneNode_errorMessages {
 
 /**
  * @brief Loads #Text settings from #TextParser and calls Text_regenerateTexture() with them.
- * @param text Pointer to a #Text, which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for passing to Text_regenerateTexture(). Can be NULL.
- * @param renderer Pointer to a #Renderer for passing to Text_regenerateTexture(). Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings for initializing #Text. Can be NULL.
+ * @param text Pointer to a #Text, which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for passing to Text_regenerateTexture().
+ * @param renderer Pointer to a #Renderer for passing to Text_regenerateTexture().
+ * @param textParser Pointer to a #TextParser with data strings for initializing #Text.
  * @param logFlag Poinnter to a bool flag. Will be set if sobe log happened in this function.
  * @return TextSceneNode_errors value.
  * @see #TextSceneNode_errors
@@ -159,9 +159,9 @@ void Text_destruct(struct SceneNode* text) {
 
 /**
  * @brief Updates Text#fontPath, Text#text, Text#size and Text#color with new values.
- * @param text Poinnter to a #Text, where fields will be changed. Can be NULL.
- * @param textString String with text rendered in Text#textureResource. Can be NULL.
- * @param fontPath String with path to the ttf font. Can be NULL.
+ * @param text Poinnter to a #Text, where fields will be changed.
+ * @param textString String with text rendered in Text#textureResource.
+ * @param fontPath String with path to the ttf font.
  * @param size Vertical size of text in Upixels, which rendered in Text#textureResource.
  * @param color RGBA color of text, which rendered in Text#textureResource.
  * @return #TextSceneNode_errors value.
@@ -175,7 +175,8 @@ static enum TextSceneNode_errors Text_updateFields(struct Text* text,
     assert(text);
     assert(textString);
     assert(fontPath);
-    assert(size > 0);
+    if (size <= 0)
+        return TEXT_ERR_NULL_ARGUMENT;
     char* tempTextString = NULL;
     tempTextString = (char*)malloc(sizeof(char) * (strlen(textString) + 1));
     if (!tempTextString)

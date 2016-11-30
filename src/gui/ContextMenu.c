@@ -60,11 +60,11 @@ static const struct ContextMenuScenNode_errorMessages {
 
 /**
  * @brief Function for initialization ContextMenu#menuOptionsList from #TextParser.
- * @param contextMenu Pointer to a #ContextMenu, where to set prototype strings. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Button resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #Button. Can be NULL.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu, where to set prototype strings.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Button resources.
+ * @param renderer Pointer to a #Renderer for constructing #Button.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ContextMenuSceneNode_errors value.
  * @see #ContextMenu
  * @see #ResourceManager
@@ -112,9 +112,9 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
  * @brief Function for loading #Button prototype strings.
  * Sets ContextMenu#onlyOneMenuOptionPrototype, ContextMenu#topMenuOptionPrototype, 
  * ContextMenu#middleMenuOptionPrototype and ContextMenu#lowerMenuOptionPrototype strings from #TextParser.
- * @param contextMenu Pointer to a #ContextMenu, where to set prototype strings. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu, where to set prototype strings.
  * @param logger Pointer to a #Logger for logging. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ContextMenuSceneNode_errors value.
  * @see #ContextMenu
  * @see #Logger
@@ -169,12 +169,12 @@ static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct 
 
 /**
  * @brief Function for loading settings and initializing #ContextMenu from #TextParser.
- * @param contextMenu Pointer to a #ContextMenu which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #Button for menuOptions. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
+ * @param renderer Pointer to a #Renderer for constructing #Button for menuOptions.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing #Button for menuOptions. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing #Button for menuOptions.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ContextMenuSceneNode_errors value.
  * @see #ContextMenu
  * @see #Button
@@ -270,10 +270,10 @@ void ContextMenu_destruct(struct SceneNode* contextMenu) {
  * Tryies to construct specified prototype and then uses Button_changeFocusedEventResource(), 
  * Button_changePressedEventResource() and Text_regenerateTexture() on that #Button (and its label).
  * If succeed, destructs old #Button in ContextMenu#optionsList and changes it to new.
- * @param contextMenu Pointer to a #ContextMenu, where #Button will be updated. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Button resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #Button. Can be NULL.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu, where #Button will be updated.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Button resources.
+ * @param renderer Pointer to a #Renderer for constructing #Button.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button.
  * @param index Index of #Button in ContextMenu#optionsList to be updated. Can be anything (there is checking).
  * @param newButtonResId String with ID of new #Button prototype to load via #ResourceManager. Can be NULL.
  * @return #ContextMenuSceneNode_errors value.
@@ -342,7 +342,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct Cont
 /**
  * @brief Reallocates memory for the ContextMenu#optionsList.
  * ContextMenu#allocatedMenuOptions will be increased by #CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS.
- * @param contextMenu Pointer to a #ContextMenu. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu.
  * @return #ContextMenuSceneNode_errors value.
  * @see #ContextMenuSceneNode_errors
  */
@@ -366,12 +366,12 @@ static enum ContextMenuSceneNode_errors ContextMenu_realloccateMenuOptionsList(s
  * If ContextMenu#menuOptionsCount == 2 then #ContextMenu will looks like this [0. < T >], [1. < L >].
  * If ContextMenu#menuOptionsCount == 3 then #ContextMenu will looks like this [0. < T >], [1. < M >], [2. < L >].
  * And so on. If some error happened than < O > prototype will be used.
- * @param contextMenu Pointer to a #ContextMenu, where ContextMenu#optionsList will be updated. Can be NULL.
+ * @param contextMenu Pointer to a #ContextMenu, where ContextMenu#optionsList will be updated.
  * @param resourceManager Pointer to a #ResourceManager for loading needed 
- * by ContextMenu_updateMenuOption() resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #Button by ContextMenu_updateMenuOption(). Can be NULL.
+ * by ContextMenu_updateMenuOption() resources.
+ * @param renderer Pointer to a #Renderer for constructing #Button by ContextMenu_updateMenuOption().
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar for constructing #Button 
- * by ContextMenu_updateMenuOption(). Can be NULL.
+ * by ContextMenu_updateMenuOption().
  * @return #ContextMenuSceneNode_errors value.
  * @see #ContextMenu
  * @see #Button

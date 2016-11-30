@@ -41,14 +41,14 @@ static const struct ProgressBarSceneNode_errorMessages {
 /**
  * @brief Function for loading and constructing ProgressBar#spriteBase and ProgressBar#spriteBar.
  * @param progressBar Pointer to a #ProgressBar where to construct ProgressBar#spriteBase 
- * and ProgressBar#spriteBar. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource. Can be NULL.
+ * and ProgressBar#spriteBar.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Sprite resource.
  * @param renderer Pointer to a #Renderer for constructing ProgressBar#spriteBase 
- * and ProgressBar#spriteBar. Can be NULL.
+ * and ProgressBar#spriteBar.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing ProgressBar#spriteBase and ProgressBar#spriteBar. Can be NULL.
+ * for constructing ProgressBar#spriteBase and ProgressBar#spriteBar.
  * @param textParser Pointer to a #TextParser, where function will get 
- * ProgressBarSceneNode_parserStrings#spriteRes. Can be NULL.
+ * ProgressBarSceneNode_parserStrings#spriteRes.
  * @return #ProgressBarSceneNode_errors value.
  * @see #ProgressBar
  * @see #Sprite
@@ -98,13 +98,13 @@ static enum ProgressBarSceneNode_errors ProgressBar_loadSpritesResource(struct P
 
 /**
  * @brief Function for loading settings and initializing #ProgressBar from #TextParser.
- * @param progressBar Pointer to a #ProgressBar which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
+ * @param progressBar Pointer to a #ProgressBar which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
  * @param renderer Pointer to a #Renderer for constructing ProgressBar#spriteBase 
- * and ProgressBar#spriteBar. Can be NULL.
+ * and ProgressBar#spriteBar.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing ProgressBar#spriteBase and ProgressBar#spriteBar. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing ProgressBar#spriteBase and ProgressBar#spriteBar.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #ProgressBarSceneNode_errors value.
  * @see #ProgressBar
  * @see #Sprite

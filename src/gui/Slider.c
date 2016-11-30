@@ -40,14 +40,14 @@ static const struct SliderSceneNode_errorMessages {
 /**
  * @brief Function for loading and constructing Slider#base.
  * Also sets Slider#step and Slider#base#value from #TextParser.
- * @param slider Pointer to a #Slider where to construct Slider#base. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #ProgressBar resource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing Slider#base. Can be NULL.
+ * @param slider Pointer to a #Slider where to construct Slider#base.
+ * @param resourceManager Pointer to a #ResourceManager for loading #ProgressBar resource.
+ * @param renderer Pointer to a #Renderer for constructing Slider#base.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing Slider#base. Can be NULL.
+ * for constructing Slider#base.
  * @param textParser Pointer to a #TextParser, where function will get 
  * SliderSceneNode_parserStrings#progressBarRes, SliderSceneNode_parserStrings#value 
- * and SliderSceneNode_parserStrings#step. Can be NULL.
+ * and SliderSceneNode_parserStrings#step.
  * @return #SliderSceneNode_errors value.
  * @see #Slider
  * @see #Button
@@ -93,13 +93,13 @@ static enum SliderSceneNode_errors Slider_loadBase(struct Slider* slider,
 /**
  * @brief Function for loading and constructing Slider#button.
  * Also sets Slider#buttonAllignY from #TextParser.
- * @param slider Pointer to a #Slider where to construct Slider#button. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading #Button resource. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing Slider#button. Can be NULL.
+ * @param slider Pointer to a #Slider where to construct Slider#button.
+ * @param resourceManager Pointer to a #ResourceManager for loading #Button resource.
+ * @param renderer Pointer to a #Renderer for constructing Slider#button.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing Slider#button. Can be NULL.
+ * for constructing Slider#button.
  * @param textParser Pointer to a #TextParser, where function will get 
- * SliderSceneNode_parserStrings#buttonRes and SliderSceneNode_parserStrings#allign. Can be NULL.
+ * SliderSceneNode_parserStrings#buttonRes and SliderSceneNode_parserStrings#allign.
  * @return #SliderSceneNode_errors value.
  * @see #Slider
  * @see #SliderSceneNode_buttonAllignY
@@ -143,12 +143,12 @@ static enum SliderSceneNode_errors Slider_loadButton(struct Slider* slider,
 
 /**
  * @brief Function for loading settings and initializing #Slider from #TextParser.
- * @param slider Pointer to a #Slider which will be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager for loading required resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing Slider#base and Slider#button. Can be NULL.
+ * @param slider Pointer to a #Slider which will be initialized.
+ * @param resourceManager Pointer to a #ResourceManager for loading required resources.
+ * @param renderer Pointer to a #Renderer for constructing Slider#base and Slider#button.
  * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar 
- * for constructing Slider#base and Slider#button. Can be NULL.
- * @param textParser Pointer to a #TextParser with data strings. Can be NULL.
+ * for constructing Slider#base and Slider#button.
+ * @param textParser Pointer to a #TextParser with data strings.
  * @return #SliderSceneNode_errors value.
  * @see #Slider
  * @see #Button

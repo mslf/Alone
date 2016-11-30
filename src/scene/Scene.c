@@ -46,7 +46,7 @@ static const struct Scene_errorMessages{
 /**
  * @brief Reallocates memory for Scene#sceneNodesList, increases Scene#sceneNodesCount 
  * by SCENE_SCENE_NODES_REALLOCATION_STEP.
- * @param scene Pointer to a #Scene, where function will reallocate Scene#sceneNodesList. Can be NULL.
+ * @param scene Pointer to a #Scene, where function will reallocate Scene#sceneNodesList.
  * @return #Scene_errors value.
  * @see #Scene_errors
  */
@@ -65,7 +65,7 @@ static enum Scene_errors Scene_reallocateSceneNodesList(struct Scene* scene) {
 /**
  * @brief Reallocates memory for Scene#eventControllersList, increases Scene#eventControllersCount
  * by SCENE_EVENT_CONTROLLERS_REALLOOCATION_STEP.
- * @param scene Pointer to a #Scene, where function will reallocate Scene#eventControllersList. Can be NULL.
+ * @param scene Pointer to a #Scene, where function will reallocate Scene#eventControllersList.
  * @return #Scene_errors value.
  * @see #Scene_errors
  */
@@ -84,9 +84,9 @@ static enum Scene_errors Scene_reallocateEventControllersList(struct Scene* scen
 
 /**
  * @brief Inits #SceneNode from #TextParser.
- * @param scene Pointer to a #Scene where last added #SceneNode will be initialized. Can be NULL.
- * @param sceneNode String with name of #SceneNode to find it in #TextParser. Can be NULL.
- * @param sceneTextParser Pointer to a #TextParser with data of #SceneNode. Can be NULL.
+ * @param scene Pointer to a #Scene where last added #SceneNode will be initialized.
+ * @param sceneNode String with name of #SceneNode to find it in #TextParser.
+ * @param sceneTextParser Pointer to a #TextParser with data of #SceneNode.
  * @return #Scene_errors value.
  * @see #Scene_errors
  * @see #TextParser
@@ -150,11 +150,11 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
 
 /**
  * @brief Inits (adds #SceneNode and #ScriptResource) #Scene from #TextParser.
- * @param scene Pointer to a #Scene to be initialized. Can be NULL.
- * @param resourceManager Pointer to a #ResourceManager where #Scene will get all needed resources. Can be NULL.
- * @param renderer Pointer to a #Renderer for constructing #SceneNode. Can be NULL.
- * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar to construct #SceneNode. Can be NULL.
- * @param sceneTextParser Pointer to a #TextParser where #Scene will get all settings. Can be NULL.
+ * @param scene Pointer to a #Scene to be initialized.
+ * @param resourceManager Pointer to a #ResourceManager where #Scene will get all needed resources.
+ * @param renderer Pointer to a #Renderer for constructing #SceneNode.
+ * @param sceneNodeTypesRegistrar Pointer to a #SceneNodeTypesRegistrar to construct #SceneNode.
+ * @param sceneTextParser Pointer to a #TextParser where #Scene will get all settings.
  * @return #Scene_errors value.
  * @see #Scene_errors
  * @see #TextParser
