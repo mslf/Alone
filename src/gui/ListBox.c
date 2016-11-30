@@ -260,18 +260,18 @@ enum ListBoxSceneNode_errors ListBox_save(const struct ListBox* const listBox,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return LIST_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, ListBoxSceneNode_parserStrings.type);
-    result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.textBoxRes,
-                                   listBox->textBox->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.buttonRes,
-                                   listBox->button->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, ListBoxSceneNode_parserStrings.contextMenuRes,
-                                   listBox->contextMenu->sceneNode.sceneNodeTextResource->id);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, ListBoxSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, ListBoxSceneNode_parserStrings.textBoxRes,
+                                   listBox->textBox->sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addString(textParser, ListBoxSceneNode_parserStrings.buttonRes,
+                                   listBox->button->sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addString(textParser, ListBoxSceneNode_parserStrings.contextMenuRes,
+                                   listBox->contextMenu->sceneNode.sceneNodeTextResource->id) != 0);
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(listBox->sceneNode.sceneNodeTextResource, tempString);
-    result += ResourceManager_saveTextResource(resourceManager,
-                                               listBox->sceneNode.sceneNodeTextResource, listBoxResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(listBox->sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager,
+                                               listBox->sceneNode.sceneNodeTextResource, listBoxResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);

@@ -179,15 +179,15 @@ enum ProgressBarSceneNode_errors ProgressBar_save(const struct ProgressBar* cons
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return PROGRESS_BAR_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, ProgressBarSceneNode_parserStrings.type);
-    result += TextParser_addString(textParser, ProgressBarSceneNode_parserStrings.spriteRes,
-                                   progressBar->spriteBase->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addInt(textParser, ProgressBarSceneNode_parserStrings.value, (long)progressBar->value);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, ProgressBarSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, ProgressBarSceneNode_parserStrings.spriteRes,
+                                   progressBar->spriteBase->dynamicSceneNode.sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addInt(textParser, ProgressBarSceneNode_parserStrings.value, (long)progressBar->value) != 0);
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(progressBar->sceneNode.sceneNodeTextResource, tempString);
-    result += ResourceManager_saveTextResource(resourceManager,
-                                               progressBar->sceneNode.sceneNodeTextResource, progressBarResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(progressBar->sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager,
+                                               progressBar->sceneNode.sceneNodeTextResource, progressBarResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);

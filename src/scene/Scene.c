@@ -319,42 +319,42 @@ enum Scene_errors Scene_save(struct Scene* const scene,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return SCENE_ERR_CONSTRUCTING_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, Scene_parserStrings.type);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, Scene_parserStrings.type) != 0);
     for (size_t i = 0; i < scene->sceneNodesCount; i++) {
         char tempSceeNodeName[600];
         sprintf(tempSceeNodeName, "%ld", i);
-        result += TextParser_addString(textParser, Scene_parserStrings.nodes, tempSceeNodeName);
-        result += TextParser_addString(textParser, tempSceeNodeName, scene->sceneNodesList[i]->sceneNodeTextResource->id);
-        result += TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.x);
-        result += TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.y);
+        result += (TextParser_addString(textParser, Scene_parserStrings.nodes, tempSceeNodeName) != 0);
+        result += (TextParser_addString(textParser, tempSceeNodeName, scene->sceneNodesList[i]->sceneNodeTextResource->id) != 0);
+        result += (TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.x) != 0);
+        result += (TextParser_addInt(textParser, tempSceeNodeName, scene->sceneNodesList[i]->coordinates.y) != 0);
         // FIXME and this is crap too.
         if (scene->sceneNodesList[i]->nodeType == SCENE_NODE_DYNAMIC) {
-            result += TextParser_addInt(textParser, tempSceeNodeName,
-                                        ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->rotatePointCoordinates.x);
-            result += TextParser_addInt(textParser, tempSceeNodeName,
-                                        ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->rotatePointCoordinates.y);
-            result += TextParser_addInt(textParser, tempSceeNodeName,
-                                        (long)((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->flip);
-            result += TextParser_addDouble(textParser, tempSceeNodeName,
-                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->angle);
-            result += TextParser_addDouble(textParser, tempSceeNodeName,
-                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->scaleX);
-            result += TextParser_addDouble(textParser, tempSceeNodeName,
-                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->scaleY);
+            result += (TextParser_addInt(textParser, tempSceeNodeName,
+                                        ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->rotatePointCoordinates.x) != 0);
+            result += (TextParser_addInt(textParser, tempSceeNodeName,
+                                        ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->rotatePointCoordinates.y) != 0);
+            result += (TextParser_addInt(textParser, tempSceeNodeName,
+                                        (long)((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->flip) != 0);
+            result += (TextParser_addDouble(textParser, tempSceeNodeName,
+                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->angle) != 0);
+            result += (TextParser_addDouble(textParser, tempSceeNodeName,
+                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->scaleX) != 0);
+            result += (TextParser_addDouble(textParser, tempSceeNodeName,
+                                           ((struct DynamicSceneNode*)(scene->sceneNodesList[i]))->scaleY) != 0);
         }
     }
     for (size_t i = 0; i < scene->eventControllersCount; i++) {
         char tempControllerName[600];
         sprintf(tempControllerName, "%ld", i);
-        result += TextParser_addString(textParser, Scene_parserStrings.controllers, tempControllerName);
-        result += TextParser_addString(textParser, tempControllerName, scene->eventControllersList[i].script->id);
-        result += TextParser_addInt(textParser, tempControllerName, (long)scene->eventControllersList[i].period);
+        result += (TextParser_addString(textParser, Scene_parserStrings.controllers, tempControllerName) != 0);
+        result += (TextParser_addString(textParser, tempControllerName, scene->eventControllersList[i].script->id) != 0);
+        result += (TextParser_addInt(textParser, tempControllerName, (long)scene->eventControllersList[i].period) != 0);
     }
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(scene->sceneResource, newText);
-    result += ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(scene->sceneResource, newText) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager, scene->sceneResource, sceneResId) != 0);
     TextParser_destruct(textParser);
     if(newText)
         free(newText);

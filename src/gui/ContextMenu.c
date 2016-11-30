@@ -527,38 +527,38 @@ enum ContextMenuSceneNode_errors ContextMenu_save(
     struct TextParser* textParser = TextParser_constructEmpty();
     if (!textParser)
         return CONTEXT_MENU_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString,
-                                   ContextMenuSceneNode_parserStrings.type);
-    result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
-                         contextMenu->onlyOneMenuOptionPrototype);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString,
+                                   ContextMenuSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
+                         contextMenu->onlyOneMenuOptionPrototype) != 0);
     if (contextMenu->topMenuOptionPrototype 
         && contextMenu->middleMenuOptionPrototype 
         && contextMenu->lowerMenuOptionPrototype) {
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
-                            contextMenu->topMenuOptionPrototype);
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
-                            contextMenu->middleMenuOptionPrototype);
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
-                            contextMenu->lowerMenuOptionPrototype);
+        result += (TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
+                            contextMenu->topMenuOptionPrototype) != 0);
+        result += (TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
+                            contextMenu->middleMenuOptionPrototype) != 0);
+        result += (TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.prototypes,
+                            contextMenu->lowerMenuOptionPrototype) != 0);
     }
     for (i = 0; i < contextMenu->menuOptionsCount; i++) {
         char tempMenuOptionName[600];
         sprintf(tempMenuOptionName, "%ld", i);
-        result += TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.optionsList, tempMenuOptionName);
-        result += TextParser_addString(textParser, tempMenuOptionName, contextMenu->menuOptionsList[i]->label->text);
+        result += (TextParser_addString(textParser, ContextMenuSceneNode_parserStrings.optionsList, tempMenuOptionName) != 0);
+        result += (TextParser_addString(textParser, tempMenuOptionName, contextMenu->menuOptionsList[i]->label->text) != 0);
         if (contextMenu->menuOptionsList[i]->pressedEventResource->id) {
-            result += TextParser_addString(textParser, tempMenuOptionName,
-                                 contextMenu->menuOptionsList[i]->pressedEventResource->id);
+            result += (TextParser_addString(textParser, tempMenuOptionName,
+                                 contextMenu->menuOptionsList[i]->pressedEventResource->id) != 0);
             // Next is optional
             TextParser_addString(textParser, tempMenuOptionName,
                                  contextMenu->menuOptionsList[i]->focusedEventResource->id);
         }
     }
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(contextMenu->sceneNode.sceneNodeTextResource, tempString);
-    result += ResourceManager_saveTextResource(resourceManager, contextMenu->sceneNode.sceneNodeTextResource,
-                                               contextMenuResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(contextMenu->sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager, contextMenu->sceneNode.sceneNodeTextResource,
+                                               contextMenuResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);

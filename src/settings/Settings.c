@@ -178,24 +178,24 @@ enum Settings_errors Settings_save(struct Settings* settings, struct ResourceMan
     if (!textParser)
         return SETTINGS_ERR_CONSTRUCTIG_TEXT_PARSER;
     unsigned char result = 0;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, Settings_parserStrings.type);
-    result += TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->w);
-    result += TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->h);
-    result += TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualW);
-    result += TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualH);
-    result += TextParser_addFlag(textParser, Settings_parserStrings.fullscreen, settings->isFullscreen);
-    result += TextParser_addFlag(textParser, Settings_parserStrings.music, settings->isMusicActive);
-    result += TextParser_addFlag(textParser, Settings_parserStrings.sound, settings->isSoundActive);
-    result += TextParser_addFlag(textParser, Settings_parserStrings.vsync, settings->isVsyncActive);
-    result += TextParser_addString(textParser, Settings_parserStrings.mainScene, settings->mainScene);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, Settings_parserStrings.type) != 0);
+    result += (TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->w) != 0);
+    result += (TextParser_addInt(textParser, Settings_parserStrings.screenSize, settings->h) != 0);
+    result += (TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualW) != 0);
+    result += (TextParser_addInt(textParser, Settings_parserStrings.virtualScreenSize, settings->virtualH) != 0);
+    result += (TextParser_addFlag(textParser, Settings_parserStrings.fullscreen, settings->isFullscreen) != 0);
+    result += (TextParser_addFlag(textParser, Settings_parserStrings.music, settings->isMusicActive) != 0);
+    result += (TextParser_addFlag(textParser, Settings_parserStrings.sound, settings->isSoundActive) != 0);
+    result += (TextParser_addFlag(textParser, Settings_parserStrings.vsync, settings->isVsyncActive) != 0);
+    result += (TextParser_addString(textParser, Settings_parserStrings.mainScene, settings->mainScene) != 0);
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
-    result += textParser->lastError;
+    result += (textParser->lastError != 0);
     /* FIXME in that place (and in other like this) will occur errors, if we want to construct new objects in runtime
      * without assotiated (and existing) file in filesystem.
      * Need to implement function for creating TextResource from TextParser. */
-    result += TextResource_updateContent(settings->settingsResource, newText);
-    result += ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId);
+    result += (TextResource_updateContent(settings->settingsResource, newText) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager, settings->settingsResource, settingsResId) != 0);
     TextParser_destruct(textParser);
     if (newText)
         free(newText);

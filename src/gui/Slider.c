@@ -224,19 +224,19 @@ enum SliderSceneNode_errors Slider_save(const struct Slider* const slider,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return SLIDER_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, SliderSceneNode_parserStrings.type);
-    result += TextParser_addString(textParser, SliderSceneNode_parserStrings.progressBarRes,
-                                   slider->base->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, SliderSceneNode_parserStrings.buttonRes,
-                                   slider->button->sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addInt(textParser, SliderSceneNode_parserStrings.step, (long)slider->step);
-    result += TextParser_addInt(textParser, SliderSceneNode_parserStrings.value, (long)slider->base->value);
-    result += TextParser_addInt(textParser, SliderSceneNode_parserStrings.allign, (long)slider->buttonAllignY);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, SliderSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, SliderSceneNode_parserStrings.progressBarRes,
+                                   slider->base->sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addString(textParser, SliderSceneNode_parserStrings.buttonRes,
+                                   slider->button->sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addInt(textParser, SliderSceneNode_parserStrings.step, (long)slider->step) != 0);
+    result += (TextParser_addInt(textParser, SliderSceneNode_parserStrings.value, (long)slider->base->value) != 0);
+    result += (TextParser_addInt(textParser, SliderSceneNode_parserStrings.allign, (long)slider->buttonAllignY) != 0);
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(slider->sceneNode.sceneNodeTextResource, tempString);
-    result += ResourceManager_saveTextResource(resourceManager,
-                                               slider->sceneNode.sceneNodeTextResource, sliderResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(slider->sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager,
+                                               slider->sceneNode.sceneNodeTextResource, sliderResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);

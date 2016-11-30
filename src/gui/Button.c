@@ -366,28 +366,28 @@ enum ButtonSceneNode_errors Button_save(const struct Button* const button, struc
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return BUTTON_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, ButtonSceneNode_parserStrings.type);
-    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.spriteRes,
-                                   button->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.textRes,
-                                   button->label->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedEventRes,
-                                   button->focusedEventResource->id);
-    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedEventRes,
-                                   button->pressedEventResource->id);
-    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedSoundRes,
-                                   button->focusedSoundResource->id);
-    result += TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedSoundRes,
-                                   button->pressedSoundResource->id);
-    result += TextParser_addInt(textParser, ButtonSceneNode_parserStrings.labelOffset,
-                                   button->labelOffset.x);
-    result += TextParser_addInt(textParser, ButtonSceneNode_parserStrings.labelOffset,
-                                   button->labelOffset.y);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, ButtonSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, ButtonSceneNode_parserStrings.spriteRes,
+                                   button->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addString(textParser, ButtonSceneNode_parserStrings.textRes,
+                                   button->label->dynamicSceneNode.sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedEventRes,
+                                   button->focusedEventResource->id) != 0);
+    result += (TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedEventRes,
+                                   button->pressedEventResource->id) != 0);
+    result += (TextParser_addString(textParser, ButtonSceneNode_parserStrings.focusedSoundRes,
+                                   button->focusedSoundResource->id) != 0);
+    result += (TextParser_addString(textParser, ButtonSceneNode_parserStrings.pressedSoundRes,
+                                   button->pressedSoundResource->id) != 0);
+    result += (TextParser_addInt(textParser, ButtonSceneNode_parserStrings.labelOffset,
+                                   button->labelOffset.x) != 0);
+    result += (TextParser_addInt(textParser, ButtonSceneNode_parserStrings.labelOffset,
+                                   button->labelOffset.y) != 0);
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(button->sceneNode.sceneNodeTextResource, tempString);
-    result += ResourceManager_saveTextResource(resourceManager,
-                                               button->sceneNode.sceneNodeTextResource, buttonResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(button->sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager,
+                                               button->sceneNode.sceneNodeTextResource, buttonResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);

@@ -240,19 +240,20 @@ enum TextSceneNode_errors Text_save(const struct  Text* const text,
     if (!textParser)
         return TEXT_ERR_CONSTRUCTIG_TEXT_PARSER;
     unsigned char result = 0;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, TextSceneNode_parserStrings.type);
-    result += TextParser_addString(textParser, TextSceneNode_parserStrings.fontPath, text->fontPath);
-    result += TextParser_addString(textParser, TextSceneNode_parserStrings.text, text->text);
-    result += TextParser_addInt(textParser, TextSceneNode_parserStrings.size, (size_t)text->size);
-    result += TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.r);
-    result += TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.g);
-    result += TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.b);
-    result += TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.a);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, TextSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, TextSceneNode_parserStrings.fontPath, text->fontPath) != 0);
+    result += (TextParser_addString(textParser, TextSceneNode_parserStrings.text, text->text) != 0);
+    result += (TextParser_addInt(textParser, TextSceneNode_parserStrings.size, (size_t)text->size) != 0);
+    result += (TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.r) != 0);
+    result += (TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.g) != 0);
+    result += (TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.b) != 0);
+    result += (TextParser_addInt(textParser, TextSceneNode_parserStrings.color, (size_t)text->color.a) != 0);
     char* newText = NULL;
     newText = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(text->dynamicSceneNode.sceneNode.sceneNodeTextResource, newText);
-    result += ResourceManager_saveTextResource(resourceManager, text->dynamicSceneNode.sceneNode.sceneNodeTextResource, textResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(text->dynamicSceneNode.sceneNode.sceneNodeTextResource, newText) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager, text->dynamicSceneNode.sceneNode.sceneNodeTextResource,
+                                                textResId) != 0);
     TextParser_destruct(textParser);
     if (newText)
         free(newText);

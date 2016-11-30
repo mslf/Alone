@@ -212,22 +212,23 @@ unsigned char Sprite_save(
     struct TextParser* textParser = TextParser_constructEmpty();
     if (!textParser)
         return 2;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING);
-    result += TextParser_addString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, sprite->textureResource->id);
-    result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_WIDTH, sprite->frameSize.x);
-    result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_HEIGHT, sprite->frameSize.y);
-    result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH, sprite->virtualSize.x);
-    result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_HEIGHT, sprite->virtualSize.y);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0);
+    result += (TextParser_addString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, sprite->textureResource->id) != 0);
+    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_WIDTH, sprite->frameSize.x) != 0);
+    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_HEIGHT, sprite->frameSize.y) != 0);
+    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH, sprite->virtualSize.x) != 0);
+    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_HEIGHT, sprite->virtualSize.y) != 0);
     for (i = 0; i < sprite->animationsCount; i++) {
-        result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT,
-                                    sprite->animations[i].framesCount);
-        result += TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION,
-                                    sprite->animations[i].oneFrameDuration);
+        result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT,
+                                    sprite->animations[i].framesCount) != 0);
+        result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION,
+                                    sprite->animations[i].oneFrameDuration) != 0);
     }
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource, tempString);
-    ResourceManager_saveTextResource(resourceManager, sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource, spriteResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager, sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource,
+                                                spriteResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);

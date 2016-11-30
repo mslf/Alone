@@ -368,26 +368,26 @@ enum CheckBoxSceneNode_errors CheckBox_save(const struct CheckBox* const checkBo
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return CHECK_BOX_ERR_CONSTRUCTIG_TEXT_PARSER;
-    result += TextParser_addString(textParser, TextParser_standartTypeString, CheckBoxSceneNode_parserString.type);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.spriteRes,
-                                   checkBox->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedEventRes,
-                                   checkBox->focusedEventResource->id);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedEventRes,
-                                   checkBox->checkedEventResource->id);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.unCheckedEventRes,
-                                   checkBox->unCheckedEventResource->id);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedSoundRes,
-                                   checkBox->focusedSoundResource->id);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedSoundRes,
-                                   checkBox->checkedSoundResource->id);
-    result += TextParser_addString(textParser, CheckBoxSceneNode_parserString.unCheckedSoundRes,
-                                   checkBox->unCheckedSoundResource->id);
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, CheckBoxSceneNode_parserString.type) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.spriteRes,
+                                   checkBox->sprite->dynamicSceneNode.sceneNode.sceneNodeTextResource->id) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedEventRes,
+                                   checkBox->focusedEventResource->id) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedEventRes,
+                                   checkBox->checkedEventResource->id) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.unCheckedEventRes,
+                                   checkBox->unCheckedEventResource->id) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.focusedSoundRes,
+                                   checkBox->focusedSoundResource->id) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.checkedSoundRes,
+                                   checkBox->checkedSoundResource->id) != 0);
+    result += (TextParser_addString(textParser, CheckBoxSceneNode_parserString.unCheckedSoundRes,
+                                   checkBox->unCheckedSoundResource->id) != 0);
     char* tempString = TextParser_convertToText(textParser);
-    result += textParser->lastError;
-    result += TextResource_updateContent(checkBox->sceneNode.sceneNodeTextResource, tempString);
-    result += ResourceManager_saveTextResource(resourceManager,
-                                               checkBox->sceneNode.sceneNodeTextResource, checkBoxResId);
+    result += (textParser->lastError != 0);
+    result += (TextResource_updateContent(checkBox->sceneNode.sceneNodeTextResource, tempString) != 0);
+    result += (ResourceManager_saveTextResource(resourceManager,
+                                               checkBox->sceneNode.sceneNodeTextResource, checkBoxResId) != 0);
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
