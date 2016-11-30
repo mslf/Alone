@@ -1,8 +1,6 @@
 type = Sprite;
 textureResource = data/slider/sliderButton.png;
-frameWidth = 50;
-frameHeight = 50;
-animationsListFramesCount = [1, 1, 1];
-animationsListOneFrameDuration = [0, 0, 0];
-virtualWidth = 25;
-virtualHeight = 25;
+frameSize = [50, 50];
+framesCountsList = [1, 1, 1];
+frameDurationsList = [0, 0, 0];
+virtualSize = [25, 25];

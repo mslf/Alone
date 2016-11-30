@@ -1,8 +1,6 @@
 type = Sprite;
 textureResource = data/menus/prototypes/middleMenuOption.png;
-frameWidth = 300;
-frameHeight = 100;
-animationsListFramesCount = [1, 1, 1];
-animationsListOneFrameDuration = [0, 0, 0];
-virtualWidth = 150;
-virtualHeight = 50;
+frameSize = [300, 100];
+framesCountsList = [1, 1, 1];
+frameDurationsList = [0, 0, 0];
+virtualSize = [150, 50];

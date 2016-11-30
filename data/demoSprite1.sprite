@@ -1,8 +1,6 @@
 type = Sprite;
 textureResource = data/img1.png;
-frameWidth = 50;
-frameHeight = 100;
-animationsListFramesCount = [2];
-animationsListOneFrameDuration = [30];
-virtualWidth = 50;
-virtualHeight = 50;
+frameSize = [50, 100];
+framesCountsList = [2];
+frameDurationsList = [30];
+virtualSize = [50, 50];
