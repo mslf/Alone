@@ -67,15 +67,19 @@ enum SpriteSceneNode_errors {
     /**< All right, no errors. */
     SPRITE_ERR_NULL_ARGUMENT = 1,
     /**< Some of function's arguments are NULL. */
-    SPRITE_ERR_GENERATING_SPRITEURE = 3,
-    /**< Generating Sprite#textureResource failed. */
-    SPRITE_ERR_GETTING_SPRITEURE_SIZE = 4,
+    SPRITE_ERR_GETTING_TEXTURE_SIZE = 2,
     /**< Getting size of Sprite#textureResource failed. */
-    SPRITE_ERR_STRING_ALLOC = 5,
-    /**< Allocating string for Sprite#fontPath or Sprite#text failed. */
-    SPRITE_ERR_CONSTRUCTIG_SPRITE_PARSER = 6,
-    /**< Constructing new #SpriteParser for some required reason failed. */
-    SPRITE_ERR_SAVING = 7
+    SPRITE_ERR_FRAME_SIZE_NOT_FIT_H = 3,
+    /**< GIven (or divided by 2) frame width multiplyed by framesCount doesn't fit into Sprite#textureResource. */
+    SPRITE_ERR_FRAME_SIZE_NOT_FIT_V = 4,
+    /**< GIven (or divided by 2) frame height multiplyed by animationsCount doesn't fit into Sprite#textureResource. */
+    SPRITE_ERR_ANIMATIONS_ALLOC = 5,
+    /**< Allocating memory for Sprite#animations failed. */
+    SPRITE_ERR_CONSTRUCTING_TEXTURE_RES = 6,
+    /**< Constructing Sprite#textureResource failed. */
+    SPRITE_ERR_CONSTRUCTIG_TEXT_PARSER = 7,
+    /**< Constructing new #TextParser for some required reason failed. */
+    SPRITE_ERR_SAVING = 8
     /**< Saving #Sprite failed due to internal reason. */
 };    
     

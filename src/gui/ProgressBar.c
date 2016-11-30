@@ -78,7 +78,7 @@ static enum ProgressBarSceneNode_errors ProgressBar_loadSpritesResource(struct P
                                                                          renderer,
                                                                          sceneNodeTypesRegistrar,
                                                                          tempResId,
-                                                                         SPRITE_SCENENODE_PARSER_TYPE_STRING);
+                                                                         SpriteSceneNode_parserStrings.type);
     if (!progressBar->spriteBase)
         return PROGRESS_BAR_ERR_CONSTRUCTIG_SPRITE;
     if (progressBar->spriteBase->animationsCount < 2) {
@@ -89,7 +89,7 @@ static enum ProgressBarSceneNode_errors ProgressBar_loadSpritesResource(struct P
                                                                          renderer,
                                                                          sceneNodeTypesRegistrar,
                                                                          tempResId,
-                                                                         SPRITE_SCENENODE_PARSER_TYPE_STRING);
+                                                                         SpriteSceneNode_parserStrings.type);
     if (!progressBar->spriteBar)
         return PROGRESS_BAR_ERR_CONSTRUCTIG_SPRITE;
     progressBar->spriteBar->currentAnimation = 1;

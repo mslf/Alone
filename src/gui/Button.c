@@ -141,7 +141,7 @@ static enum ButtonSceneNode_errors Button_loadSpriteResource(struct Button* butt
                                                                 renderer,
                                                                 sceneNodeTypesRegistrar,
                                                                 tempResId,
-                                                                SPRITE_SCENENODE_PARSER_TYPE_STRING);
+                                                                SpriteSceneNode_parserStrings.type);
     if (!button->sprite)
         return BUTTON_ERR_CONSTRUCTIG_SPRITE;
     if (button->sprite->animationsCount < 3) {

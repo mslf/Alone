@@ -104,7 +104,7 @@ static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox
                                                                                   renderer,
                                                                                   sceneNodeTypesRegistrar,
                                                                                   tempResId,
-                                                                                  SPRITE_SCENENODE_PARSER_TYPE_STRING);
+                                                                                  SpriteSceneNode_parserStrings.type);
     if (!checkBox->sprite)
         return CHECK_BOX_ERR_CONSTRUCTIG_SPRITE;
     if (checkBox->sprite->animationsCount < 4) {

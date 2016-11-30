@@ -1,6 +1,3 @@
-//
-// Created by mslf on 8/11/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,74 +16,93 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file Sprite.c
+ * @author mslf
+ * @date 11 Aug 2016
+ * @brief File containing implementation of #Sprite.
+ */
 #include <assert.h>
+#include <stdbool.h>
 #include <textParser/TextParser.h>
 #include "sprite/Sprite.h"
 
-const char* const SPRITE_SCENENODE_WARN_VIRTUAL_SIZE_NOT_FOUND =
-        "Sprite_initAnimations: virtual size of sprite haven't found. Using present texture size for virtual size.";
-const char* const SPRITE_SCENENODE_ERR_TEXTURE_RES_NOT_FOUND =
-        "Sprite_tryGetSettingsFromTextParser: TextureResource constructing failed! Trying default.";
-const char* const SPRITE_SCENENODE_ERR_DEFAULT_TEXTURE_RES_NOT_FOUND =
-        "Sprite_tryGetSettingsFromTextParser: default TextureResource constructing failed!";
-const char* const SPRITE_SCENENODE_ERR_ANIMATIONS_ALLOC =
-        "Sprite_initAnimations: allocating memory for animations failed!";
-const char* const SPRITE_SCENENODE_WARN_ANIMATIONS_COUNT =
-        "Sprite_initAnimations: animations count haven't properly defined or ignored. Using default.";
-const char* const SPRITE_SCENENODE_WARN_FRAMES_COUNT =
-        "Sprite_initAnimations: framesCount haven't properly defined or ignored. Using default.";
-const char* const SPRITE_SCENENODE_WARN_ONE_FRAME_DURATION =
-        "Sprite_initAnimations: frameDuration haven't properly defined or ignored. Using default.";
-const char* const SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_W =
-        "Sprite_initAnimations: frame size is not fit in texture size horizontally.";
-const char* const SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_W_DEFAULT =
-        "Sprite_initAnimations: using present frame width.";
-const char* const SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_W =
-        "Sprite_initAnimations: divided frame size is not fit in texture size horizontally.";
-const char* const SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_H =
-        "Sprite_initAnimations: frame size is not fit in texture size vertically.";
-const char* const SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_H_DEFAULT =
-        "Sprite_initAnimations: using present frame width.";
-const char* const SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_H =
-        "Sprite_initAnimations: divided frame size is not fit in texture size vertically.";
+static const struct SpriteSceneNode_errorMessages {
+    const char* const warnNoVirtualSize;
+    const char* const errNoTextureRes;
+    const char* const errAnimationsAlloc;
+    const char* const warnAnimationsCount;
+    const char* const warnFramesCount;
+    const char* const warnFrameDuration;
+    const char* const warnFramesNotFitH;
+    const char* const errFramesNotFitH;
+    const char* const warnFramesNotFitV;
+    const char* const errFramesNotFitV;
+}SpriteSceneNode_errorMessages = {
+    "Sprite_initAnimations: virtual size of sprite haven't found. Using present texture size for virtual size.",
+    "Sprite_tryGetSettingsFromTextParser: TextureResource constructing failed!",
+    "Sprite_initAnimations: allocating memory for animations failed!",
+    "Sprite_initAnimations: animations count haven't properly defined or ignored. Assuming there is one animation.",
+    "Sprite_initAnimations: framesCount haven't properly defined or ignored. Assuming there is one frame.",
+    "Sprite_initAnimations: frameDuration haven't properly defined or ignored. Assuming it is equal to 0.",
+    "Sprite_initAnimations: frame size is not fit in texture size horizontally. Trying to divide it by 2.",
+    "Sprite_initAnimations: divided frame size is not fit in texture size horizontally!",
+    "Sprite_initAnimations: frame size is not fit in texture size vertically. Trying to divide it by 2.",
+    "Sprite_initAnimations: divided frame size is not fit in texture size vertically!"};
 
-static unsigned char Sprite_initFrameSize(struct Sprite* sprite, struct ResourceManager* resourceManager,
-                                   struct TextParser* textParser, unsigned char usePresentForVirtual,
-                                   unsigned char useDefaultTexture, size_t maxFramesCount) {
+/**
+ * @brief Checks and inits Sprite#frameSize and Sprite#virtualSize from #TextParser.
+ * Sprite#frameSize.x * maxFramesCount should be less (or equal) then width of Sprite#textureResource.
+ * Sprite#frameSize.y * Sprite#animationsCount should be less (or equal) then height of Sprite#textureResource.
+ * If it fails with given sizes, then it will try to divide them by 2.
+ * @param sprite Pointer to a #Sprite, where Sprite#frameSize and Sprite#virtualSize will be set.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings for creating #Sprite.
+ * @param usePresentForVirtual If that flag is set, then Sprite#virtualSize will be set 
+ * to the real size of Sprite#textureResource.
+ * @param maxFramesCount Given maximum number of frames for that #Sprite.
+ * @return #SpriteSceneNode_errors value.
+ * @see #SpriteSceneNode_errors
+ * @see #TextureResource
+ * @see #Animation
+ * @see #Sprite
+ */
+static enum SpriteSceneNode_errors Sprite_initFrameSize(struct Sprite* sprite,
+                                                        struct Logger* logger,
+                                                        struct TextParser* textParser,
+                                                        bool usePresentForVirtual,
+                                                        size_t maxFramesCount) {
     assert(sprite);
-    assert(resourceManager);
     assert(textParser);
     int textureW;
     int textureH;
     if (SDL_QueryTexture(sprite->textureResource->texture, NULL, NULL, &textureW, &textureH))
-        return 1;
-    sprite->frameSize.x = (int)TextParser_getInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_WIDTH, 0);
+        return SPRITE_ERR_GETTING_TEXTURE_SIZE;
+    sprite->frameSize.x = (int)TextParser_getInt(textParser, SpriteSceneNode_parserStrings.frameSize, 0);
     if (sprite->frameSize.x <= 0 || sprite->frameSize.x * maxFramesCount > (size_t)textureW) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_W);
-        if (useDefaultTexture || maxFramesCount == 1) {
-            Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_W_DEFAULT);
+        Logger_log(logger, SpriteSceneNode_errorMessages.warnFramesNotFitH);
+        if (maxFramesCount == 1) {
             sprite->frameSize.x = textureW;
         }
         else {
-            sprite->frameSize.x /= SPRITE_SCENENODE_DEFAULT_FRAME_WIDTH_DIVIDER;
+            sprite->frameSize.x /= 2;
             if (sprite->frameSize.x <= 0 || sprite->frameSize.x * maxFramesCount > (size_t)textureW) {
-                Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_W);
-                return 2;
+                Logger_log(logger, SpriteSceneNode_errorMessages.errFramesNotFitH);
+                return SPRITE_ERR_FRAME_SIZE_NOT_FIT_H;
             }
         }
     }
-    sprite->frameSize.y = (int)TextParser_getInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_HEIGHT, 0);
+    sprite->frameSize.y = (int)TextParser_getInt(textParser, SpriteSceneNode_parserStrings.frameSize, 1);
     if (sprite->frameSize.y <= 0 || sprite->frameSize.y * sprite->animationsCount > (size_t)textureH) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_H);
-        if (useDefaultTexture || sprite->animationsCount == 1) {
-            Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_H_DEFAULT);
+        Logger_log(logger, SpriteSceneNode_errorMessages.warnFramesNotFitV);
+        if (sprite->animationsCount == 1) {
             sprite->frameSize.y = textureH;
         }
         else {
-            sprite->frameSize.y /= SPRITE_SCENENODE_DEFAULT_FRAME_HEIGHT_DIVIDER;
+            sprite->frameSize.y /= 2;
             if (sprite->frameSize.y <= 0 || sprite->frameSize.y * sprite->animationsCount > (size_t)textureH) {
-                Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_W);
-                return 3;
+                Logger_log(logger, SpriteSceneNode_errorMessages.errFramesNotFitV);
+                return SPRITE_ERR_FRAME_SIZE_NOT_FIT_V;
             }
         }
     }
@@ -94,83 +110,101 @@ static unsigned char Sprite_initFrameSize(struct Sprite* sprite, struct Resource
         sprite->virtualSize.x = textureW;
         sprite->virtualSize.y = textureH;
     }
-    return 0;
+    return SPRITE_NO_ERRORS;
 }
 
-static unsigned char Sprite_initAnimations(struct Sprite* sprite, struct ResourceManager* resourceManager,
-                                    struct Renderer* renderer, struct TextParser* textParser,
-                                    unsigned char usePresentForVirtual, unsigned char useDefaultTexture) {
+/**
+ * @brief Inits Sprite#animations list and inits Sprite#frameSize and Sprite#virtualSize from #TextParser.
+ * @param sprite Pointer to a #Sprite, where Sprite#animations, Sprite#frameSize and Sprite#virtualSize will be set.
+ * @param logger Pointer to a #Logger for logging purpose. Can be NULL.
+ * @param textParser Pointer to a #TextParser with data strings for creating #Sprite.
+ * @param usePresentForVirtual If that flag is set, then Sprite#virtualSize will be set 
+ * to the real size of Sprite#textureResource.
+ * @return #SpriteSceneNode_errors value.
+ * @see #SpriteSceneNode_errors
+ * @see #TextureResource
+ * @see #Animation
+ * @see #Sprite
+ */
+static enum SpriteSceneNode_errors Sprite_initAnimations(struct Sprite* sprite,
+                                                         struct Logger* logger,
+                                                         struct TextParser* textParser,
+                                                         bool usePresentForVirtual) {
     assert(sprite);
-    assert(resourceManager);
-    assert(renderer);
     assert(textParser);
-    size_t i = 0;
-    sprite->animationsCount = (size_t)TextParser_getItemsCount(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT);
-    if (sprite->animationsCount == 0 || useDefaultTexture) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_ANIMATIONS_COUNT);
-        sprite->animationsCount = SPRITE_SCENENODE_DEFAULT_ANIMATIONS_COUNT;
+    sprite->animationsCount = (size_t)TextParser_getItemsCount(textParser, SpriteSceneNode_parserStrings.frameCountsList);
+    if (sprite->animationsCount == 0) {
+        Logger_log(logger, SpriteSceneNode_errorMessages.warnAnimationsCount);
+        sprite->animationsCount = 1;
     }
     sprite->animations = (struct Animation*)calloc(sprite->animationsCount, sizeof(struct Animation));
     if (!sprite->animations) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_ANIMATIONS_ALLOC);
-        return 1;
+        Logger_log(logger, SpriteSceneNode_errorMessages.errAnimationsAlloc);
+        return SPRITE_ERR_ANIMATIONS_ALLOC;
     }
     size_t maxFramesCount = 0;
-    for (i = 0; i < sprite->animationsCount; i++) {
-        sprite->animations[i].framesCount = (size_t)TextParser_getInt(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT, i);
-        if (sprite->animations[i].framesCount == 0 || useDefaultTexture) {
-            Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_FRAMES_COUNT);
-            sprite->animations[i].framesCount = SPRITE_SCENENODE_DEFAULT_FRAMES_COUNT;
+    for (size_t i = 0; i < sprite->animationsCount; i++) {
+        sprite->animations[i].framesCount = (size_t)TextParser_getInt(textParser,
+                                                                      SpriteSceneNode_parserStrings.frameCountsList, i);
+        if (textParser->lastError) {
+            Logger_log(logger, SpriteSceneNode_errorMessages.warnAnimationsCount);
+            sprite->animations[i].framesCount = 1;
         }
         if (sprite->animations[i].framesCount > maxFramesCount)
             maxFramesCount = sprite->animations[i].framesCount;
         sprite->animations[i].frameDuration = (size_t)TextParser_getInt(textParser,
-                                                                           SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION, i);
-        if (useDefaultTexture || textParser->lastError) {
-            Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_ONE_FRAME_DURATION);
-            sprite->animations[i].frameDuration = SPRITE_SCENENODE_DEFAULT_ONE_FRAME_DURATION;
+                                                                        SpriteSceneNode_parserStrings.frameDurationsList, i);
+        if (textParser->lastError) {
+            Logger_log(logger, SpriteSceneNode_errorMessages.warnFrameDuration);
+            sprite->animations[i].frameDuration = 0;
         }
     }
-    unsigned char result = Sprite_initFrameSize(sprite, resourceManager, textParser, usePresentForVirtual,
-                                                useDefaultTexture, maxFramesCount);
+    enum SpriteSceneNode_errors result = Sprite_initFrameSize(sprite, logger, textParser,
+                                                              usePresentForVirtual, maxFramesCount);
     if (result)
-        return result + 1;
-    return 0;
+        return result;
+    return SPRITE_NO_ERRORS;
 }
 
-static unsigned char Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite, struct ResourceManager* resourceManager,
-                                                  struct Renderer* renderer, struct TextParser* textParser) {
+/**
+ * @brief Inits #Sprite from #TextParser.
+ * @param sprite Pointer to a #Sprite to be initialized.
+ * @param resourceManager Pointer to a #ResourceManager to load Sprite#textureResource.
+ * @param renderer Pointer to a #Renderer to create Sprite#textureResource.
+ * @param textParser Pointer to a #TextParser with data strings for creating #Sprite.
+ * @return #SpriteSceneNode_errors value.
+ * @see #SpriteSceneNode_errors
+ * @see #TextureResource
+ * @see #Animation
+ * @see #Sprite
+ */
+static enum SpriteSceneNode_errors Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite,
+                                                                       struct ResourceManager* resourceManager,
+                                                                       struct Renderer* renderer,
+                                                                       struct TextParser* textParser) {
     assert(sprite);
     assert(resourceManager);
     assert(renderer);
     assert(textParser);
-    unsigned char useDefaultTexture = 0;
-    unsigned char usePresentForVirtual = 0;
-    sprite->virtualSize.x = (int)TextParser_getInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH, 0);
-    sprite->virtualSize.y = (int)TextParser_getInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_HEIGHT, 0);
+    bool usePresentForVirtual = 0;
+    sprite->virtualSize.x = (int)TextParser_getInt(textParser, SpriteSceneNode_parserStrings.virtualSize, 0);
+    sprite->virtualSize.y = (int)TextParser_getInt(textParser, SpriteSceneNode_parserStrings.virtualSize, 1);
     if (sprite->virtualSize.x <= 0 || sprite->virtualSize.y <= 0) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_VIRTUAL_SIZE_NOT_FOUND);
-        usePresentForVirtual = 1;
+        Logger_log(resourceManager->logger, SpriteSceneNode_errorMessages.warnNoVirtualSize);
+        usePresentForVirtual = true;
     }
-    const char* tempTextureResourceId = TextParser_getString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, 0);
+    const char* tempTextureResourceId = TextParser_getString(textParser, SpriteSceneNode_parserStrings.textureRes, 0);
     sprite->textureResource = ResourceManager_loadTextureResource(resourceManager, renderer, tempTextureResourceId);
     if (!sprite->textureResource) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_TEXTURE_RES_NOT_FOUND);
-        useDefaultTexture = 1;
-        if (!(sprite->textureResource = ResourceManager_loadTextureResource(resourceManager, renderer,
-                                                                            SPRITE_SCENENODE_DEFAULT_TEXTURE))) {
-            Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_DEFAULT_TEXTURE_RES_NOT_FOUND);
-            return 1;
-        }
-
+        Logger_log(resourceManager->logger, SpriteSceneNode_errorMessages.errNoTextureRes);
+        return SPRITE_ERR_CONSTRUCTING_TEXTURE_RES;
     }
-    unsigned char result = Sprite_initAnimations(sprite, resourceManager, renderer, textParser,
-                                                 usePresentForVirtual, useDefaultTexture);
+    enum SpriteSceneNode_errors result = Sprite_initAnimations(sprite, renderer->logger, textParser, usePresentForVirtual);
     sprite->percentsToRender.x = 100;
     sprite->percentsToRender.y = 100;
     if (result)
-        return result + 1;
-    return 0;
+        return result;
+    return SPRITE_NO_ERRORS;
 }
 
 struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager,
@@ -192,12 +226,12 @@ struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager
     sprite->dynamicSceneNode.sceneNode.update = Sprite_update;
     sprite->dynamicSceneNode.sceneNode.render = Sprite_render;
     sprite->dynamicSceneNode.sceneNode.destruct = Sprite_destruct;
-    sprite->dynamicSceneNode.sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SPRITE_SCENENODE_PARSER_TYPE_STRING) + 1));
+    sprite->dynamicSceneNode.sceneNode.type = (char*)malloc(sizeof(char) * (strlen(SpriteSceneNode_parserStrings.type) + 1));
     if (!sprite->dynamicSceneNode.sceneNode.type) {
         Sprite_destruct((struct SceneNode*)sprite);
         return NULL;
     }
-    strcpy(sprite->dynamicSceneNode.sceneNode.type, SPRITE_SCENENODE_PARSER_TYPE_STRING);
+    strcpy(sprite->dynamicSceneNode.sceneNode.type, SpriteSceneNode_parserStrings.type);
     return (struct SceneNode*)sprite;
 }
 
@@ -214,26 +248,25 @@ void Sprite_destruct(struct SceneNode* sprite) {
     free(sprite);
 }
 
-unsigned char Sprite_save(
-        const struct Sprite* const sprite, struct ResourceManager* const resourceManager,
-        const char* const spriteResId) {
+enum SpriteSceneNode_errors Sprite_save(const struct Sprite* const sprite,
+                                        struct ResourceManager* const resourceManager,
+                                        const char* const spriteResId) {
     if (!sprite || !resourceManager || !spriteResId)
-        return 1;
-    size_t i;
+        return SPRITE_ERR_NULL_ARGUMENT;
     unsigned char result = 0;
     struct TextParser* textParser = TextParser_constructEmpty();
     if (!textParser)
-        return 2;
-    result += (TextParser_addString(textParser, TextParser_standartTypeString, SPRITE_SCENENODE_PARSER_TYPE_STRING) != 0);
-    result += (TextParser_addString(textParser, SPRITE_SCENENODE_PARSER_TEXTURE_RESOURCE, sprite->textureResource->id) != 0);
-    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_WIDTH, sprite->frameSize.x) != 0);
-    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAME_HEIGHT, sprite->frameSize.y) != 0);
-    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH, sprite->virtualSize.x) != 0);
-    result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_HEIGHT, sprite->virtualSize.y) != 0);
-    for (i = 0; i < sprite->animationsCount; i++) {
-        result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT,
+        return SPRITE_ERR_CONSTRUCTIG_TEXT_PARSER;
+    result += (TextParser_addString(textParser, TextParser_standartTypeString, SpriteSceneNode_parserStrings.type) != 0);
+    result += (TextParser_addString(textParser, SpriteSceneNode_parserStrings.textureRes, sprite->textureResource->id) != 0);
+    result += (TextParser_addInt(textParser, SpriteSceneNode_parserStrings.frameSize, sprite->frameSize.x) != 0);
+    result += (TextParser_addInt(textParser, SpriteSceneNode_parserStrings.frameSize, sprite->frameSize.y) != 0);
+    result += (TextParser_addInt(textParser, SpriteSceneNode_parserStrings.virtualSize, sprite->virtualSize.x) != 0);
+    result += (TextParser_addInt(textParser, SpriteSceneNode_parserStrings.virtualSize, sprite->virtualSize.y) != 0);
+    for (size_t i = 0; i < sprite->animationsCount; i++) {
+        result += (TextParser_addInt(textParser, SpriteSceneNode_parserStrings.frameCountsList,
                                     sprite->animations[i].framesCount) != 0);
-        result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION,
+        result += (TextParser_addInt(textParser, SpriteSceneNode_parserStrings.frameDurationsList,
                                     sprite->animations[i].frameDuration) != 0);
     }
     char* tempString = TextParser_convertToText(textParser);
@@ -244,7 +277,9 @@ unsigned char Sprite_save(
     TextParser_destruct(textParser);
     if (tempString)
         free(tempString);
-    return result;
+    if (result)
+        return SPRITE_ERR_SAVING;
+    return SPRITE_NO_ERRORS;
 }
 
 void Sprite_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {
@@ -278,36 +313,37 @@ void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
     sprite->renderingsCounter++;
 }
 
-unsigned char Sprite_changeTextureResource(struct Sprite* sprite, struct ResourceManager* resourceManager,
-                                           struct Renderer* renderer, const char* const textureResId) {
+enum SpriteSceneNode_errors Sprite_changeTextureResource(struct Sprite* sprite,
+                                                         struct ResourceManager* resourceManager,
+                                                         struct Renderer* renderer,
+                                                         const char* const textureResId) {
     if (!sprite || !resourceManager || !renderer || !textureResId)
-        return 1;
+        return SPRITE_ERR_NULL_ARGUMENT;
     struct TextureResource* textureResource = NULL;
     textureResource = ResourceManager_loadTextureResource(resourceManager, renderer, textureResId);
     if (!textureResource)
-        return 2;
+        return SPRITE_ERR_CONSTRUCTING_TEXTURE_RES;
     int textureW;
     int textureH;
-    size_t i;
     size_t maxFramesCount = 0;
     if (SDL_QueryTexture(textureResource->texture, NULL, NULL, &textureW, &textureH)) {
         TextureResource_decreasePointersCounter(textureResource);
-        return 3;
+        return SPRITE_ERR_GETTING_TEXTURE_SIZE;
     }
-    for (i = 0; i < sprite->animationsCount; i++)
+    for (size_t i = 0; i < sprite->animationsCount; i++)
         if (sprite->animations[i].framesCount > maxFramesCount)
             maxFramesCount = sprite->animations[i].framesCount;
     if (sprite->frameSize.x * maxFramesCount > (size_t)textureW) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_W);
+        Logger_log(resourceManager->logger, SpriteSceneNode_errorMessages.errFramesNotFitH);
         TextureResource_decreasePointersCounter(textureResource);
-        return 4;
+        return SPRITE_ERR_FRAME_SIZE_NOT_FIT_H;
     }
     if (sprite->frameSize.y * sprite->animationsCount > (size_t)textureH) {
-        Logger_log(resourceManager->logger, SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_H);
+        Logger_log(resourceManager->logger, SpriteSceneNode_errorMessages.errFramesNotFitV);
         TextureResource_decreasePointersCounter(textureResource);
-        return 5;
+        return SPRITE_ERR_FRAME_SIZE_NOT_FIT_V;
     }
     TextureResource_decreasePointersCounter(sprite->textureResource);
     sprite->textureResource = textureResource;
-    return 0;
+    return SPRITE_NO_ERRORS;
 }

@@ -51,7 +51,7 @@ static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) 
     assert(gm);
     unsigned char result = 0;
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
-                                                               SPRITE_SCENENODE_PARSER_TYPE_STRING,
+                                                               SpriteSceneNode_parserStrings.type,
                                                                Sprite_construct);
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                TextSceneNode_parserStrings.type,
