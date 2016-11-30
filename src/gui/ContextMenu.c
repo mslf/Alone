@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #ContextMenu.
  */
+#include <assert.h>
 #include "gui/ContextMenu.h"
 #include "textParser/TextParser.h"
 
@@ -78,8 +79,11 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
                                                        struct Renderer* renderer,
                                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                        struct TextParser* textParser) {
-    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return CONTEXT_MENU_ERR_NULL_ARGUMENT;
+    assert(contextMenu);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     size_t i;
     size_t menuOptionsCount = TextParser_getItemsCount(textParser, ContextMenuSceneNode_parserStrings.optionsList);
     if (textParser->lastError) {
@@ -121,9 +125,8 @@ static enum ContextMenuSceneNode_errors ContextMenu_constructMenuOptions(struct 
 static enum ContextMenuSceneNode_errors ContextMenu_loadButtonPrototypes(struct ContextMenu* contextMenu,
                                                                          struct Logger* logger,
                                                                          struct TextParser* textParser) {
-    // Don't care, if logger is NULL
-    if (!contextMenu || !textParser)
-        return CONTEXT_MENU_ERR_NULL_ARGUMENT;
+    assert(contextMenu);
+    assert(textParser);
     const char* tempString = NULL;
     tempString = TextParser_getString(textParser, ContextMenuSceneNode_parserStrings.prototypes, 0);
     if (!tempString) {
@@ -187,8 +190,11 @@ static enum ContextMenuSceneNode_errors ContextMenu_tryGetSettingsFromTextParser
                                                        struct Renderer* renderer,
                                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                        struct TextParser* textParser) {
-    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return CONTEXT_MENU_ERR_NULL_ARGUMENT;
+    assert(contextMenu);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     enum ContextMenuSceneNode_errors loadingPrototypesError = CONTEXT_MENU_NO_ERRORS;
     enum ContextMenuSceneNode_errors constructingOptionsError = CONTEXT_MENU_NO_ERRORS;
     loadingPrototypesError = ContextMenu_loadButtonPrototypes(contextMenu, renderer->logger, textParser);
@@ -285,7 +291,12 @@ static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct Cont
                                                   struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                   size_t index,
                                                   const char* const newButtonResId) {
-    if (!contextMenu || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !newButtonResId)
+    assert(contextMenu);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    //assert(newButtonResId);
+    if (!newButtonResId)
         return CONTEXT_MENU_ERR_NULL_ARGUMENT;
     if (index >= contextMenu->menuOptionsCount)
         return CONTEXT_MENU_ERR_INDEX_OUT_OF_RANGE;
@@ -336,8 +347,7 @@ static enum ContextMenuSceneNode_errors ContextMenu_updateMenuOption(struct Cont
  * @see #ContextMenuSceneNode_errors
  */
 static enum ContextMenuSceneNode_errors ContextMenu_realloccateMenuOptionsList(struct ContextMenu* contextMenu) {
-    if (!contextMenu)
-        return CONTEXT_MENU_ERR_NULL_ARGUMENT;
+    assert(contextMenu);
     struct Button** menuOptionsList = NULL;
     size_t newSize = contextMenu->allocatedMenuOptions + CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS;
     menuOptionsList = (struct Button**)realloc(contextMenu->menuOptionsList, sizeof(struct Button*) * newSize);
@@ -376,8 +386,10 @@ static enum ContextMenuSceneNode_errors CotextMenu_updateMenuOptionsList(struct 
                                                       struct ResourceManager* const resourceManager,
                                                       struct Renderer* const renderer,
                                                       struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar) {
-    if (!contextMenu || !resourceManager || !renderer)
-        return CONTEXT_MENU_ERR_NULL_ARGUMENT;
+    assert(contextMenu);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
     size_t i;
     switch (contextMenu->menuOptionsCount) {
         case 0:

@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #Slider.
  */
+#include <assert.h>
 #include "gui/Slider.h"
 
 /**
@@ -62,8 +63,11 @@ static enum SliderSceneNode_errors Slider_loadBase(struct Slider* slider,
                                      struct Renderer* const renderer,
                                      struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                      struct TextParser* const textParser) {
-    if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return SLIDER_ERR_NULL_ARGUMENT;
+    assert(slider);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = NULL;
     tempResId = TextParser_getString(textParser, SliderSceneNode_parserStrings.progressBarRes, 0);
     if (!tempResId) {
@@ -112,8 +116,11 @@ static enum SliderSceneNode_errors Slider_loadButton(struct Slider* slider,
                                        struct Renderer* const renderer,
                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                        struct TextParser* const textParser) {
-    if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return SLIDER_ERR_NULL_ARGUMENT;
+    assert(slider);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = NULL;
     tempResId = TextParser_getString(textParser, SliderSceneNode_parserStrings.buttonRes, 0);
     if (!tempResId) {
@@ -158,8 +165,11 @@ static enum SliderSceneNode_errors Slider_tryGetSettingsFromTextParser(struct Sl
                                        struct Renderer* const renderer,
                                        struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                        struct TextParser* const textParser) {
-    if (!slider || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return SLIDER_ERR_NULL_ARGUMENT;
+    assert(slider);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     enum SliderSceneNode_errors loadingButtonResult = SLIDER_NO_ERRORS;
     enum SliderSceneNode_errors loadingBaseResult = SLIDER_NO_ERRORS;
     loadingButtonResult = Slider_loadButton(slider, resourceManager, renderer, sceneNodeTypesRegistrar, textParser);

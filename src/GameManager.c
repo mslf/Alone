@@ -21,6 +21,7 @@
 */
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include "GameManager.h"
 #include "sprite/Sprite.h"
 #include "text/Text.h"
@@ -47,6 +48,7 @@ const char* const GAME_MANAGER_COMMAND_PUSH = "GameManager_pushScene";
 const char* const GAME_MANAGER_COMMAND_POP = "GameManager_popScene";
 
 static unsigned char GameManager_registerSceneNodeTypes(struct GameManager* gm) {
+    assert(gm);
     unsigned char result = 0;
     result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                SPRITE_SCENENODE_PARSER_TYPE_STRING,
@@ -127,8 +129,7 @@ struct GameManager* GameManager_construct() {
 }
 
 static void GameManager_handleEvents(struct GameManager* gm) {
-    if (!gm)
-        return;
+    assert(gm);
     if (EventManager_generateCustomEventsList(gm->eventManager, "GameManager"))
         return;
     size_t i;

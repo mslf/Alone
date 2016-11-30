@@ -22,6 +22,7 @@
  * @date 10 Aug 2016
  * @brief File containing implementation of #EventManager.
  */
+#include <assert.h>
 #include "eventManager/EventManager.h"
 #include "string.h"
 
@@ -83,8 +84,7 @@ struct EventManager* EventManager_construct(struct Logger* logger) {
  * @see #EventManager_errors
  */
 static enum EventManager_errors EventManager_reallocateGameEventsList(struct EventManager* em) {
-    if (!em)
-        return EM_ERR_NULL_ARGUMENT;
+    assert(em);
     struct GameEvent** tList = NULL;
     size_t newSize = em->allocatedGameEventsCount + EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
     tList = (struct GameEvent**)realloc(em->gameEventsList, sizeof(struct GameEvent*) * newSize);
@@ -103,8 +103,7 @@ static enum EventManager_errors EventManager_reallocateGameEventsList(struct Eve
  * @see #EventManager_errors
  */
 static enum EventManager_errors EventManager_reallocateCustomGameEventsList(struct EventManager* em) {
-    if (!em)
-        return EM_ERR_NULL_ARGUMENT;
+    assert(em);
     struct GameEvent** tList = NULL;
     size_t newSize = em->allocatedGameEventsCount + EM_INITIAL_NUMBER_ALLOCATED_EVENTS;
     tList = (struct GameEvent**)realloc(em->customGameEventsList, sizeof(struct GameEvent*) * newSize);
@@ -123,8 +122,7 @@ static enum EventManager_errors EventManager_reallocateCustomGameEventsList(stru
  * @see #EventManager_errors
  */
 static enum EventManager_errors EventManager_reallocateSdlEventsList(struct EventManager* em) {
-    if (!em)
-        return EM_ERR_NULL_ARGUMENT;
+    assert(em);
     SDL_Event* tList = NULL;
     size_t newSize = em->allocatedSdlEventsCount + EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS;
     tList = (SDL_Event*)realloc(em->sdlEventsList, sizeof(SDL_Event) * newSize);

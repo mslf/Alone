@@ -22,6 +22,7 @@
  * @date 11 Aug 2016
  * @brief File containing implementation of #Text.
  */
+#include <assert.h>
 #include <stdbool.h>
 #include "text/Text.h"
 #include "textParser/TextParser.h"
@@ -64,8 +65,11 @@ static enum TextSceneNode_errors Text_tryGetSettingsFromTextParser(struct Text* 
                                                                    struct Renderer* const renderer,
                                                                    struct TextParser* textParser,
                                                                    bool* logFlag) {
-    if (!text || !resourceManager || !renderer || !textParser || !logFlag)
-        return TEXT_ERR_NULL_ARGUMENT;
+    assert(text);
+    assert(resourceManager);
+    assert(renderer);
+    assert(textParser);
+    assert(logFlag);
     const char* tempFontPath = TextParser_getString(textParser, TextSceneNode_parserStrings.fontPath, 0);
     if (!tempFontPath && ++(*logFlag)) {
         Logger_log(renderer->logger, TextSceneNode_errorMessages.errNoFontPath);
@@ -168,8 +172,10 @@ static enum TextSceneNode_errors Text_updateFields(struct Text* text,
                                                     const char* const fontPath,
                                                     int size,
                                                     SDL_Color color) {
-    if (!text || !textString || !fontPath || size <= 0)
-        return TEXT_ERR_NULL_ARGUMENT;
+    assert(text);
+    assert(textString);
+    assert(fontPath);
+    assert(size > 0);
     char* tempTextString = NULL;
     tempTextString = (char*)malloc(sizeof(char) * (strlen(textString) + 1));
     if (!tempTextString)

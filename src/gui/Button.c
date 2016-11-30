@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #Button.
  */
+#include <assert.h>
 #include "gui/Button.h"
 #include "textParser/TextParser.h"
 
@@ -82,8 +83,11 @@ static enum ButtonSceneNode_errors Button_loadTextResource(struct Button* button
                                              struct Renderer* renderer,
                                              struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                              struct TextParser* textParser) {
-    if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return BUTTON_ERR_NULL_ARGUMENT;
+    assert(button);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* const tempResId = TextParser_getString(textParser, ButtonSceneNode_parserStrings.textRes, 0);
     if (!tempResId) {
         Logger_log(resourceManager->logger, ButtonSceneNode_errorMessages.errTextRes);
@@ -123,8 +127,11 @@ static enum ButtonSceneNode_errors Button_loadSpriteResource(struct Button* butt
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
-    if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return BUTTON_ERR_NULL_ARGUMENT;
+    assert(button);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* const tempResId = TextParser_getString(textParser, ButtonSceneNode_parserStrings.spriteRes, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, ButtonSceneNode_errorMessages.errSpriteRes);
@@ -161,8 +168,9 @@ static enum ButtonSceneNode_errors Button_loadSpriteResource(struct Button* butt
 static void Button_loadSoundResources(struct Button* button,
                                       struct ResourceManager* resourceManager,
                                       struct TextParser* textParser) {
-    if (!button || !resourceManager || !textParser)
-        return;
+    assert(button);
+    assert(resourceManager);
+    assert(textParser);
     const char* const tempFocusedSoundResourceString = TextParser_getString(textParser,
                                                                 ButtonSceneNode_parserStrings.focusedSoundRes, 0);
     if (!tempFocusedSoundResourceString)
@@ -192,8 +200,9 @@ static void Button_loadSoundResources(struct Button* button,
 static void Button_loadEventsResources(struct Button* button,
                                        struct ResourceManager* resourceManager,
                                        struct TextParser* textParser){
-    if (!button || !resourceManager || !textParser)
-        return;
+    assert(button);
+    assert(resourceManager);
+    assert(textParser);
     const char* const tempFocusedEventResourceString = TextParser_getString(textParser,
                                                           ButtonSceneNode_parserStrings.focusedEventRes, 0);
     if (!tempFocusedEventResourceString)
@@ -228,8 +237,11 @@ static enum ButtonSceneNode_errors Button_tryGetSettingsFromTextParser(struct Bu
                                                          struct Renderer* renderer,
                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                          struct TextParser* textParser) {
-    if (!button || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return BUTTON_ERR_NULL_ARGUMENT;
+    assert(button);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     enum ButtonSceneNode_errors loadingSpriteResult = BUTTON_NO_ERRORS;
     enum ButtonSceneNode_errors loadingTextResult = BUTTON_NO_ERRORS;
     Button_loadEventsResources(button, resourceManager, textParser);

@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #ListBox.
  */
+#include <assert.h>
 #include "gui/ListBox.h"
 
 static const struct ListBoxSceneNode_errorMessages {
@@ -58,8 +59,11 @@ static enum ListBoxSceneNode_errors ListBox_loadContextMenuResource(struct ListB
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
-    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return LIST_BOX_ERR_NULL_ARGUMENT;
+    assert(listBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = TextParser_getString(textParser, ListBoxSceneNode_parserStrings.contextMenuRes, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, ListBoxSceneNode_errorMessages.errNoContextMenuRes);
@@ -107,8 +111,11 @@ static enum ListBoxSceneNode_errors ListBox_loadButtonResource(struct ListBox* l
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
-    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return LIST_BOX_ERR_NULL_ARGUMENT;
+    assert(listBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = TextParser_getString(textParser, ListBoxSceneNode_parserStrings.buttonRes, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, ListBoxSceneNode_errorMessages.errNoButtonRes);
@@ -146,8 +153,11 @@ static enum ListBoxSceneNode_errors ListBox_loadTextBoxResource(struct ListBox* 
                                                struct Renderer* renderer,
                                                struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                struct TextParser* textParser) {
-    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return LIST_BOX_ERR_NULL_ARGUMENT;
+    assert(listBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = TextParser_getString(textParser, ListBoxSceneNode_parserStrings.textBoxRes, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, ListBoxSceneNode_errorMessages.errNoTextBoxRes);
@@ -188,8 +198,11 @@ static enum ListBoxSceneNode_errors ListBox_tryGetSettingsFromTextParser(struct 
                                                 struct ResourceManager* resourceManager, struct Renderer* renderer,
                                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                 struct TextParser* textParser) {
-    if (!listBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return LIST_BOX_ERR_NULL_ARGUMENT;
+    assert(listBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     enum ListBoxSceneNode_errors resultLoadingTextBox = LIST_BOX_NO_ERRORS;
     enum ListBoxSceneNode_errors resultLoadingButton = LIST_BOX_NO_ERRORS;
     enum ListBoxSceneNode_errors resultLoadingContextMenu = LIST_BOX_NO_ERRORS;

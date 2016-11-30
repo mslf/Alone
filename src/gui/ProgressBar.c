@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #ProgressBar.
  */
+#include <assert.h>
 #include "gui/ProgressBar.h"
 #include "textParser/TextParser.h"
 
@@ -63,8 +64,11 @@ static enum ProgressBarSceneNode_errors ProgressBar_loadSpritesResource(struct P
                                                      struct Renderer* const renderer,
                                                      struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                      struct TextParser* const textParser) {
-    if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return PROGRESS_BAR_ERR_NULL_ARGUMENT;
+    assert(progressBar);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* const tempResId = TextParser_getString(textParser, ProgressBarSceneNode_parserStrings.spriteRes, 0);
     if (!tempResId) {
         Logger_log(resourceManager->logger, ProgressBarSceneNode_errorMessages.errNoSpriteRes);
@@ -116,8 +120,11 @@ static enum ProgressBarSceneNode_errors ProgressBar_tryGetSettingsFromTextParser
                                                               struct Renderer* const renderer,
                                                               struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                               struct TextParser* const textParser) {
-    if (!progressBar || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return PROGRESS_BAR_ERR_NULL_ARGUMENT;
+    assert(progressBar);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     unsigned char value = 0;
     value = (unsigned char)TextParser_getInt(textParser, ProgressBarSceneNode_parserStrings.value, 0);
     if (value <= 100)

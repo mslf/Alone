@@ -22,6 +22,7 @@
  * @date 11 Aug 2016
  * @brief File containing implementation of #Scene.
  */
+#include <assert.h>
 #include "scene/Scene.h"
 #include "textParser/TextParser.h"
 
@@ -50,8 +51,7 @@ static const struct Scene_errorMessages{
  * @see #Scene_errors
  */
 static enum Scene_errors Scene_reallocateSceneNodesList(struct Scene* scene) {
-    if (!scene)
-        return SCENE_ERR_NULL_ARGUMENT;
+    assert(scene);
     struct SceneNode** sceneNodesList = NULL;
     size_t newSize = scene->allocatedSceneNodesCount + SCENE_SCENE_NODES_REALLOCATION_STEP;
     sceneNodesList = (struct SceneNode**)realloc(scene->sceneNodesList, sizeof(struct SceneNode*) * newSize);
@@ -70,8 +70,7 @@ static enum Scene_errors Scene_reallocateSceneNodesList(struct Scene* scene) {
  * @see #Scene_errors
  */
 static enum Scene_errors Scene_reallocateEventControllersList(struct Scene* scene) {
-    if (!scene)
-        return SCENE_ERR_NULL_ARGUMENT;
+    assert(scene);
     struct PeriodicEventController* eventControllersList = NULL;
     size_t newSize = scene->allocatedEventControllersCount + SCENE_EVENT_CONTROLLERS_REALLOOCATION_STEP;
     eventControllersList = (struct PeriodicEventController*)realloc(scene->eventControllersList,
@@ -96,8 +95,9 @@ static enum Scene_errors Scene_reallocateEventControllersList(struct Scene* scen
 static enum Scene_errors Scene_initSceneNode(struct Scene* scene,
                                              const char* const sceneNode,
                                              struct TextParser* sceneTextParser) {
-    if (!scene || !sceneTextParser || !sceneNode)
-        return SCENE_ERR_NULL_ARGUMENT;
+    assert(scene);
+    assert(sceneNode);
+    assert(sceneTextParser);
     TextParser_getItemsCount(sceneTextParser, sceneNode);
     if (sceneTextParser->lastError)
         return SCENE_ERR_NO_NODE_DEF;
@@ -166,8 +166,11 @@ void Scene_destructSceneNode(struct SceneNode* sceneNode) {
 static enum Scene_errors Scene_init(struct Scene* scene, struct ResourceManager* resourceManager,
                          struct Renderer* renderer, struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar, 
                          struct TextParser* sceneTextParser) {
-    if (!scene || !resourceManager || !renderer || !sceneTextParser)
-        return SCENE_ERR_NULL_ARGUMENT;
+    assert(scene);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(sceneTextParser);
     size_t count;
     count = TextParser_getItemsCount(sceneTextParser, Scene_parserStrings.nodes);
     if (sceneTextParser->lastError)

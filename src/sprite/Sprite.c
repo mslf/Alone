@@ -19,6 +19,7 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+#include <assert.h>
 #include <textParser/TextParser.h>
 #include "sprite/Sprite.h"
 
@@ -52,6 +53,9 @@ const char* const SPRITE_SCENENODE_ERR_FRAMES_NOT_FIT_H =
 static unsigned char Sprite_initFrameSize(struct Sprite* sprite, struct ResourceManager* resourceManager,
                                    struct TextParser* textParser, unsigned char usePresentForVirtual,
                                    unsigned char useDefaultTexture, size_t maxFramesCount) {
+    assert(sprite);
+    assert(resourceManager);
+    assert(textParser);
     int textureW;
     int textureH;
     if (SDL_QueryTexture(sprite->textureResource->texture, NULL, NULL, &textureW, &textureH))
@@ -96,6 +100,10 @@ static unsigned char Sprite_initFrameSize(struct Sprite* sprite, struct Resource
 static unsigned char Sprite_initAnimations(struct Sprite* sprite, struct ResourceManager* resourceManager,
                                     struct Renderer* renderer, struct TextParser* textParser,
                                     unsigned char usePresentForVirtual, unsigned char useDefaultTexture) {
+    assert(sprite);
+    assert(resourceManager);
+    assert(renderer);
+    assert(textParser);
     size_t i = 0;
     sprite->animationsCount = (size_t)TextParser_getItemsCount(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT);
     if (sprite->animationsCount == 0 || useDefaultTexture) {
@@ -132,6 +140,10 @@ static unsigned char Sprite_initAnimations(struct Sprite* sprite, struct Resourc
 
 static unsigned char Sprite_tryGetSettingsFromTextParser(struct Sprite* sprite, struct ResourceManager* resourceManager,
                                                   struct Renderer* renderer, struct TextParser* textParser) {
+    assert(sprite);
+    assert(resourceManager);
+    assert(renderer);
+    assert(textParser);
     unsigned char useDefaultTexture = 0;
     unsigned char usePresentForVirtual = 0;
     sprite->virtualSize.x = (int)TextParser_getInt(textParser, SPRITE_SCENENODE_PARSER_VIRTUAL_WIDTH, 0);

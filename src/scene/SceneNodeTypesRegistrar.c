@@ -22,6 +22,7 @@
  * @date 5 Nov 2016
  * @brief File containing implementation of #SceneNodeTypesRegistrar.
  */
+#include <assert.h>
 #include <stddef.h>
 #include "scene/SceneNodeTypesRegistrar.h"
 
@@ -78,8 +79,7 @@ void SceneNodeTypesRegistrar_destruct(struct SceneNodeTypesRegistrar* sceneNodeT
  * @see #SNTR_errors
  */
 static enum SNTR_errors SceneNodeTypesRegistrar_reallocateTypesList(struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar) {
-    if (!sceneNodeTypesRegistrar)
-        return SNTR_ERR_NULL_ARGUMENT;
+    assert(sceneNodeTypesRegistrar);
     struct SceneNodeType* sceneNodeTypesList = NULL;
     
     size_t newSize = sceneNodeTypesRegistrar->allocatedSceneNodeTypes + SNTR_TYPES_REALLOCATION_STEP;
@@ -138,9 +138,10 @@ static enum SNTR_errors SceneNodeTypesRegistrar_checkType(struct SceneNodeTypesR
                                                           size_t* foundIndex,
                                                           const char* const requiredTypeString,
                                                           const char* const resId) {
-    // Don't check logger, because it's ok.
-    if (!sceneNodeTypesRegistrar || !textParser || !foundIndex || !resId)
-        return SNTR_ERR_NULL_ARGUMENT;
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
+    assert(foundIndex);
+    assert(resId);
     const char* typeString = TextParser_getString(textParser, TextParser_standartTypeString, 0);
     if (!typeString) {
         Logger_log(logger, "%s Resource ID: %s", SNTR_errorMessages.errNoTypeString, resId);

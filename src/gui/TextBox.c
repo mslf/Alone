@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #TextBox.
  */
+#include <assert.h>
 #include "gui/TextBox.h"
 
 /**
@@ -59,8 +60,11 @@ static enum TextBoxSceneNode_errors TextBox_tryGetSettingsFromTextParser(struct 
                                                          struct ResourceManager* resourceManager, struct Renderer* renderer,
                                                          struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                          struct TextParser* textParser) {
-    if (!textBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return TEXT_BOX_ERR_NULL_ARGUMENT;
+    assert(textBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = TextParser_getString(textParser, TextBoxSceneNode_parserStrings.buttonRes, 0);
     if (!tempResId) {
         Logger_log(renderer->logger, TextBoxSceneNode_errorMessages.errNoButtonRes);
@@ -175,8 +179,7 @@ enum TextBoxSceneNode_errors TextBox_save(
  * @see #TextBoxSceneNode_constants.
  */
 static enum TextBoxSceneNode_errors TextBox_reallocateString(struct TextBox* textBox, size_t requiredLength) {
-    if (!textBox)
-        return TEXT_BOX_ERR_NULL_ARGUMENT;
+    assert(textBox);
     char* newText = NULL;
     size_t newSize;
     if (requiredLength)

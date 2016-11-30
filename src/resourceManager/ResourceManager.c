@@ -22,6 +22,7 @@
  * @date 10 Aug 2016
  * @brief File containing implementation of #ResourceManager.
  */
+#include <assert.h>
 #include "resourceManager/ResourceManager.h"
 #include <string.h>
 
@@ -70,8 +71,7 @@ static const struct ResourceManager_errorMessages {
  * @see #ResourceManager_constants
  */ 
 static enum ResourceManager_errors ResourceManager_constructTextureResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     if (!(rm->textureResourcesList = (struct TextureResource**)malloc(
             sizeof(struct TextureResource*) * RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES))) {
         Logger_log(rm->logger, ResourceManager_errorMessages.errTextureResListAlloc);
@@ -90,8 +90,7 @@ static enum ResourceManager_errors ResourceManager_constructTextureResourcesList
  * @see #ResourceManager_constants
  */ 
 static enum ResourceManager_errors ResourceManager_constructTextResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     if (!(rm->textResourcesList = (struct TextResource**)malloc(
             sizeof(struct TextResource*) * RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES))) {
         Logger_log(rm->logger, ResourceManager_errorMessages.errTextResListAlloc);
@@ -110,8 +109,7 @@ static enum ResourceManager_errors ResourceManager_constructTextResourcesList(st
  * @see #ResourceManager_constants
  */ 
 static enum ResourceManager_errors ResourceManager_constructScriptResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     if (!(rm->scriptResourcesList = (struct ScriptResource**)malloc(
             sizeof(struct ScriptResource*) * RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES))) {
         Logger_log(rm->logger, ResourceManager_errorMessages.errScriptResListAlloc);
@@ -130,8 +128,7 @@ static enum ResourceManager_errors ResourceManager_constructScriptResourcesList(
  * @see #ResourceManager_constants
  */ 
 static enum ResourceManager_errors ResourceManager_constructSoundResourcesMap(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     if (!(rm->soundResourcesList = (struct SoundResource**)malloc(
             sizeof(struct SoundResource*) * RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES))) {
         Logger_log(rm->logger, ResourceManager_errorMessages.errSoundResListAlloc);
@@ -252,8 +249,7 @@ void ResourceManager_destruct(struct ResourceManager* rm) {
  * @see #ResourceManager_errors
  */
 static enum ResourceManager_errors ResourceManager_reallocateTextureResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     struct TextureResource** textureResourcesList = NULL;
     size_t newSize = rm->allocatedTextureResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_TEXTURE_RESOURCES;
     if (!(textureResourcesList = (struct TextureResource**)malloc(sizeof(struct TextureResource*) * newSize))) {
@@ -277,8 +273,7 @@ static enum ResourceManager_errors ResourceManager_reallocateTextureResourcesLis
  * @see #ResourceManager_errors
  */
 static enum ResourceManager_errors ResourceManager_reallocateTextResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     struct TextResource** textResourcesList = NULL;
     size_t newSize = rm->allocatedTextResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_TEXT_RESOURCES;
     if (!(textResourcesList = (struct TextResource**)malloc(sizeof(struct TextResource*) * newSize))) {
@@ -302,8 +297,7 @@ static enum ResourceManager_errors ResourceManager_reallocateTextResourcesList(s
  * @see #ResourceManager_errors
  */
 static enum ResourceManager_errors ResourceManager_reallocateScriptResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     struct ScriptResource** scriptResourcesList = NULL;
     size_t newSize = rm->allocatedScriptResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_SCRIPT_RESOURCES;
     if (!(scriptResourcesList = (struct ScriptResource**)malloc(sizeof(struct ScriptResource*) * newSize))) {
@@ -327,8 +321,7 @@ static enum ResourceManager_errors ResourceManager_reallocateScriptResourcesList
  * @see #ResourceManager_errors
  */
 static enum ResourceManager_errors ResourceManager_reallocateSoundResourcesList(struct ResourceManager* rm) {
-    if (!rm)
-        return RM_ERR_NULL_ARGUMENT;
+    assert(rm);
     struct SoundResource** soundResourcesList = NULL;
     size_t newSize = rm->allocatedSoundResourcesCount + RM_INITIAL_NUMBER_ALLOCATED_SOUND_RESOURCES;
     if (!(soundResourcesList = (struct SoundResource**)malloc(sizeof(struct SoundResource*) * newSize))) {

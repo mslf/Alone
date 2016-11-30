@@ -22,6 +22,7 @@
  * @date 13 Aug 2016
  * @brief File containing implementation of #CheckBox.
  */
+#include <assert.h>
 #include "gui/CheckBox.h"
 #include "textParser/TextParser.h"
 
@@ -89,8 +90,11 @@ static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox
                                                  struct Renderer* const renderer,
                                                  struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                  struct TextParser* const textParser) {
-    if (!checkBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return CHECK_BOX_ERR_NULL_ARGUMENT;
+    assert(checkBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     const char* tempResId = TextParser_getString(textParser, CheckBoxSceneNode_parserString.spriteRes, 0);
     if (!tempResId) {
         Logger_log(resourceManager->logger, CheckBoxSceneNode_errorMessages.errSpriteRes);
@@ -127,8 +131,9 @@ static enum CheckBoxSceneNode_errors CheckBox_loadSpriteResource(struct CheckBox
  */
 static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager,
                                struct TextParser* textParser) {
-    if (!checkBox || !resourceManager || !textParser)
-        return;
+    assert(checkBox);
+    assert(resourceManager);
+    assert(textParser);
     const char* tempFocusedSoundResourceString = TextParser_getString(textParser,
                                                         CheckBoxSceneNode_parserString.focusedSoundRes, 0);
     if (!tempFocusedSoundResourceString)
@@ -168,8 +173,9 @@ static void CheckBox_loadSoundResources(struct CheckBox* checkBox, struct Resour
  */
 static void CheckBox_loadEventsResources(struct CheckBox* checkBox, struct ResourceManager* resourceManager, 
                                 struct TextParser* textParser){
-    if (!checkBox || !resourceManager || !textParser)
-        return;
+    assert(checkBox);
+    assert(resourceManager);
+    assert(textParser);
     const char* tempFocusedEventResourceString = TextParser_getString(textParser,
                                                           CheckBoxSceneNode_parserString.focusedEventRes, 0);
     if (!tempFocusedEventResourceString)
@@ -209,8 +215,11 @@ static enum CheckBoxSceneNode_errors CheckBox_tryGetSettingsFromTextParser(struc
                                                            struct Renderer* const renderer,
                                                            struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
                                                            struct TextParser* const textParser) {
-    if (!checkBox || !resourceManager || !renderer || !sceneNodeTypesRegistrar || !textParser)
-        return CHECK_BOX_ERR_NULL_ARGUMENT;
+    assert(checkBox);
+    assert(resourceManager);
+    assert(renderer);
+    assert(sceneNodeTypesRegistrar);
+    assert(textParser);
     CheckBox_loadEventsResources(checkBox, resourceManager, textParser);
     CheckBox_loadSoundResources(checkBox, resourceManager, textParser);
     return CheckBox_loadSpriteResource(checkBox, resourceManager, renderer,

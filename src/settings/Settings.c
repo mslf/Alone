@@ -22,6 +22,7 @@
  * @date 11 Aug 2016
  * @brief File containing implementation of #Settings.
  */
+#include <assert.h>
 #include <resourceManager/ResourceManager.h>
 #include "settings/Settings.h"
 #include "textParser/TextParser.h"
@@ -58,8 +59,7 @@ static const struct Settings_errorMessages {
  */
 static enum Settings_errors Settings_checkTextResourceType(struct TextParser* textParser,
                                                            struct Logger* logger) {
-    if (!textParser)
-        return SETTINGS_ERR_NULL_ARGUMENT;
+    assert(textParser);
     const char* settingsTypeString = NULL;
     settingsTypeString = TextParser_getString(textParser, TextParser_standartTypeString, 0);
     if (textParser->lastError) {
@@ -84,8 +84,8 @@ static enum Settings_errors Settings_checkTextResourceType(struct TextParser* te
  * @see #Settings_errors
  */
 static enum Settings_errors Settings_tryGetSettingsFromTextParser(struct Settings* settings, struct TextParser* textParser) {
-    if (!settings || !textParser)
-        return SETTINGS_ERR_NULL_ARGUMENT;
+    assert(settings);
+    assert(textParser);
     unsigned char result = 0;
     settings->w = (size_t)TextParser_getInt(textParser, Settings_parserStrings.screenSize, 0);
     if (textParser->lastError && ++result)
