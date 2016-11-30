@@ -9,6 +9,9 @@ var searchData=
   ['checkedsoundresource',['checkedSoundResource',['../struct_check_box.html#ac6c8715d0371c2a1d98681db939c703c',1,'CheckBox']]],
   ['color',['color',['../struct_text_scene_node__parser_strings.html#af47bf15ddbc37a9176ffcec20c5b4245',1,'TextSceneNode_parserStrings::color()'],['../struct_text.html#a631bf4babe4c1825a2cdc0c19c2bd04f',1,'Text::color()']]],
   ['command',['command',['../struct_game_event__parser_strings.html#ac7eef288127bdf6b327ed1ff5c8ab5bb',1,'GameEvent_parserStrings::command()'],['../struct_game_event.html#ade9cba72805fe52685a1deea307a8e82',1,'GameEvent::command()']]],
+  ['commandexit',['commandExit',['../struct_game_manager__events.html#afac7a26480a8e2415fd07a5a03c3c42c',1,'GameManager_events']]],
+  ['commandpopscene',['commandPopScene',['../struct_game_manager__events.html#a5b5b9674925e472ac8786fec0f928c88',1,'GameManager_events']]],
+  ['commandpushscene',['commandPushScene',['../struct_game_manager__events.html#a29d56a9145bf67e43bb5c531d68f862a',1,'GameManager_events']]],
   ['construct',['construct',['../struct_scene_node_type.html#a73c6b5f5faad9469791b4d28ad90495b',1,'SceneNodeType']]],
   ['contextmenu',['contextMenu',['../struct_list_box.html#a5b4d2d19ff75508aa4f61e4c42a42e3c',1,'ListBox']]],
   ['contextmenures',['contextMenuRes',['../struct_list_box_scene_node__parser_strings.html#aa0c1165ae5860dfdbb75c30c2611fcc2',1,'ListBoxSceneNode_parserStrings']]],
@@ -16,6 +19,8 @@ var searchData=
   ['controllers',['controllers',['../struct_scene__parser_strings.html#a0c08d3c7f1303858e3da9cc1da4636bb',1,'Scene_parserStrings']]],
   ['coordinates',['coordinates',['../struct_scene_node.html#a667ad041f76f3b99c2ea65cd78b668ea',1,'SceneNode']]],
   ['counter',['counter',['../struct_periodic_event_controller.html#a2d593f0ada8a5818ada3f6410141bcad',1,'PeriodicEventController']]],
+  ['currentanimation',['currentAnimation',['../struct_sprite.html#a712df7aeb9afad06723b1d6039536010',1,'Sprite']]],
+  ['currentframe',['currentFrame',['../struct_sprite.html#a3ff28beecee781f499b33b0884780b85',1,'Sprite']]],
   ['currentscreensize',['currentScreenSize',['../struct_renderer.html#aa5fcda74f70efa26b808237cba88d273',1,'Renderer']]],
   ['customgameeventscount',['customGameEventsCount',['../struct_event_manager.html#a44bc521b94d679d4a5566cd59866c259',1,'EventManager']]],
   ['customgameeventslist',['customGameEventsList',['../struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce',1,'EventManager']]]

@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('_settings_8c.html','');});
 
 <p>File containing implementation of <a class="el" href="struct_settings.html" title="Represents initial settings for GameManager. ">Settings</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="_resource_manager_8h_source.html">resourceManager/ResourceManager.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="_resource_manager_8h_source.html">resourceManager/ResourceManager.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="_settings_8h_source.html">settings/Settings.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_text_parser_8h_source.html">textParser/TextParser.h</a>&quot;</code><br />
 </div><table class="memberdecls">
@@ -170,8 +171,8 @@ Variables</h2></td></tr>
 <p>Checks type string in <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> for suitability for initializing <a class="el" href="struct_settings.html" title="Represents initial settings for GameManager. ">Settings</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with <a class="el" href="struct_settings__parser_strings.html#a8ff938fb2f815be425fd2859a21e6d61">Settings_parserStrings::type</a> string. Can be NULL. </td></tr>
-    <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. Can be NULL. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with <a class="el" href="struct_settings__parser_strings.html#a8ff938fb2f815be425fd2859a21e6d61">Settings_parserStrings::type</a> string. </td></tr>
+    <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. </td></tr>
   </table>
   </dd>
 </dl>
@@ -336,7 +337,7 @@ Variables</h2></td></tr>
 <p>Initalizes <a class="el" href="struct_settings.html" title="Represents initial settings for GameManager. ">Settings</a> from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">settings</td><td>Pointer to a <a class="el" href="struct_settings.html" title="Represents initial settings for GameManager. ">Settings</a> to be initalized. Can be NULL. </td></tr>
+    <tr><td class="paramname">settings</td><td>Pointer to a <a class="el" href="struct_settings.html" title="Represents initial settings for GameManager. ">Settings</a> to be initalized. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with <a class="el" href="struct_settings__parser_strings.html" title="Strings which are used for constructing Settings from TextParser. ">Settings_parserStrings</a>. </td></tr>
   </table>
   </dd>

@@ -49,6 +49,9 @@ var searchData=
   ['checkedsoundresource',['checkedSoundResource',['../struct_check_box.html#ac6c8715d0371c2a1d98681db939c703c',1,'CheckBox']]],
   ['color',['color',['../struct_text_scene_node__parser_strings.html#af47bf15ddbc37a9176ffcec20c5b4245',1,'TextSceneNode_parserStrings::color()'],['../struct_text.html#a631bf4babe4c1825a2cdc0c19c2bd04f',1,'Text::color()']]],
   ['command',['command',['../struct_game_event__parser_strings.html#ac7eef288127bdf6b327ed1ff5c8ab5bb',1,'GameEvent_parserStrings::command()'],['../struct_game_event.html#ade9cba72805fe52685a1deea307a8e82',1,'GameEvent::command()']]],
+  ['commandexit',['commandExit',['../struct_game_manager__events.html#afac7a26480a8e2415fd07a5a03c3c42c',1,'GameManager_events']]],
+  ['commandpopscene',['commandPopScene',['../struct_game_manager__events.html#a5b5b9674925e472ac8786fec0f928c88',1,'GameManager_events']]],
+  ['commandpushscene',['commandPushScene',['../struct_game_manager__events.html#a29d56a9145bf67e43bb5c531d68f862a',1,'GameManager_events']]],
   ['construct',['construct',['../struct_scene_node_type.html#a73c6b5f5faad9469791b4d28ad90495b',1,'SceneNodeType']]],
   ['context_5fmenu_5ferr_5falloc_5fprototype_5fstring',['CONTEXT_MENU_ERR_ALLOC_PROTOTYPE_STRING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a362e8951ef5fd2e327151b654e9e4e25',1,'ContextMenu.h']]],
   ['context_5fmenu_5ferr_5fbutton_5fconstructing',['CONTEXT_MENU_ERR_BUTTON_CONSTRUCTING',['../_context_menu_8h.html#a3f174a81bc47ed5960d18c4938ae2d42a8f2c19cbad97e3cd26a6b28fc7629b68',1,'ContextMenu.h']]],
@@ -92,6 +95,8 @@ var searchData=
   ['coordinates',['coordinates',['../struct_scene_node.html#a667ad041f76f3b99c2ea65cd78b668ea',1,'SceneNode']]],
   ['cotextmenu_5fupdatemenuoptionslist',['CotextMenu_updateMenuOptionsList',['../_context_menu_8c.html#a28a37c3762fea3e59f242734087792f6',1,'ContextMenu.c']]],
   ['counter',['counter',['../struct_periodic_event_controller.html#a2d593f0ada8a5818ada3f6410141bcad',1,'PeriodicEventController']]],
+  ['currentanimation',['currentAnimation',['../struct_sprite.html#a712df7aeb9afad06723b1d6039536010',1,'Sprite']]],
+  ['currentframe',['currentFrame',['../struct_sprite.html#a3ff28beecee781f499b33b0884780b85',1,'Sprite']]],
   ['currentscreensize',['currentScreenSize',['../struct_renderer.html#aa5fcda74f70efa26b808237cba88d273',1,'Renderer']]],
   ['customgameeventscount',['customGameEventsCount',['../struct_event_manager.html#a44bc521b94d679d4a5566cd59866c259',1,'EventManager']]],
   ['customgameeventslist',['customGameEventsList',['../struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce',1,'EventManager']]]

@@ -87,46 +87,228 @@ $(document).ready(function(){initNavTree('struct_sprite.html','');});
 <div class="title">Sprite Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Standart <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a> inheritor to render some texture. Texture can be animated and can have a lot of animations. Animations stores in plane texture like this: <code>A1Frame1 A1Frame2 A1Frame3 ... A1FrameN A2Frame1 A2Frame2 ... </code> So, frames of animation places in texture <b>horizontally</b>. Animations itself places in texture <b>vertically</b>. Frame size of each animation is constant. Animations can have defferent count of frames and theirs duration.  
+ <a href="struct_sprite.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_sprite_8h_source.html">Sprite.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a45180f86492824efb156e6ce52c39ff4"><td class="memItemLeft" align="right" valign="top"><a id="a45180f86492824efb156e6ce52c39ff4"></a>
-struct <a class="el" href="struct_dynamic_scene_node.html">DynamicSceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dynamicSceneNode</b></td></tr>
+<tr class="memitem:a45180f86492824efb156e6ce52c39ff4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_dynamic_scene_node.html">DynamicSceneNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a45180f86492824efb156e6ce52c39ff4">dynamicSceneNode</a></td></tr>
 <tr class="separator:a45180f86492824efb156e6ce52c39ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedd0da0c072332f83e64105f8682bbdf"><td class="memItemLeft" align="right" valign="top"><a id="aedd0da0c072332f83e64105f8682bbdf"></a>
-struct <a class="el" href="struct_texture_resource.html">TextureResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>textureResource</b></td></tr>
+<tr class="memitem:aedd0da0c072332f83e64105f8682bbdf"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_texture_resource.html">TextureResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#aedd0da0c072332f83e64105f8682bbdf">textureResource</a></td></tr>
 <tr class="separator:aedd0da0c072332f83e64105f8682bbdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23497f8f3357b38faee4390a9250a140"><td class="memItemLeft" align="right" valign="top"><a id="a23497f8f3357b38faee4390a9250a140"></a>
-struct <a class="el" href="struct_animation.html">Animation</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>animations</b></td></tr>
+<tr class="memitem:a23497f8f3357b38faee4390a9250a140"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_animation.html">Animation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a23497f8f3357b38faee4390a9250a140">animations</a></td></tr>
 <tr class="separator:a23497f8f3357b38faee4390a9250a140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2355bebafd752b94a82a7a3b89c4fb"><td class="memItemLeft" align="right" valign="top"><a id="abe2355bebafd752b94a82a7a3b89c4fb"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>animationsCount</b></td></tr>
+<tr class="memitem:abe2355bebafd752b94a82a7a3b89c4fb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#abe2355bebafd752b94a82a7a3b89c4fb">animationsCount</a></td></tr>
 <tr class="separator:abe2355bebafd752b94a82a7a3b89c4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a712df7aeb9afad06723b1d6039536010"><td class="memItemLeft" align="right" valign="top"><a id="a712df7aeb9afad06723b1d6039536010"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentAnimation</b></td></tr>
+<tr class="memitem:a712df7aeb9afad06723b1d6039536010"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a712df7aeb9afad06723b1d6039536010">currentAnimation</a></td></tr>
 <tr class="separator:a712df7aeb9afad06723b1d6039536010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ff28beecee781f499b33b0884780b85"><td class="memItemLeft" align="right" valign="top"><a id="a3ff28beecee781f499b33b0884780b85"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentFrame</b></td></tr>
+<tr class="memitem:a3ff28beecee781f499b33b0884780b85"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a3ff28beecee781f499b33b0884780b85">currentFrame</a></td></tr>
 <tr class="separator:a3ff28beecee781f499b33b0884780b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00e3e84ed927380c31f4dc8c78b9ece0"><td class="memItemLeft" align="right" valign="top"><a id="a00e3e84ed927380c31f4dc8c78b9ece0"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>frameSize</b></td></tr>
+<tr class="memitem:a00e3e84ed927380c31f4dc8c78b9ece0"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a00e3e84ed927380c31f4dc8c78b9ece0">frameSize</a></td></tr>
 <tr class="separator:a00e3e84ed927380c31f4dc8c78b9ece0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb68fcb1538fd0cf266d60d269fd692a"><td class="memItemLeft" align="right" valign="top"><a id="adb68fcb1538fd0cf266d60d269fd692a"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>virtualSize</b></td></tr>
+<tr class="memitem:adb68fcb1538fd0cf266d60d269fd692a"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#adb68fcb1538fd0cf266d60d269fd692a">virtualSize</a></td></tr>
 <tr class="separator:adb68fcb1538fd0cf266d60d269fd692a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0f217b6015a263a7772e05119a14cb2"><td class="memItemLeft" align="right" valign="top"><a id="aa0f217b6015a263a7772e05119a14cb2"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>renderingsCounter</b></td></tr>
+<tr class="memitem:aa0f217b6015a263a7772e05119a14cb2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#aa0f217b6015a263a7772e05119a14cb2">renderingsCounter</a></td></tr>
 <tr class="separator:aa0f217b6015a263a7772e05119a14cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0717c803d1a988e69bf04032a0a1adb6"><td class="memItemLeft" align="right" valign="top"><a id="a0717c803d1a988e69bf04032a0a1adb6"></a>
-SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><b>srcRect</b></td></tr>
+<tr class="memitem:a0717c803d1a988e69bf04032a0a1adb6"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a0717c803d1a988e69bf04032a0a1adb6">srcRect</a></td></tr>
 <tr class="separator:a0717c803d1a988e69bf04032a0a1adb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80f3f86b8f750b604dd07a40509447e0"><td class="memItemLeft" align="right" valign="top"><a id="a80f3f86b8f750b604dd07a40509447e0"></a>
-SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><b>dstRect</b></td></tr>
+<tr class="memitem:a80f3f86b8f750b604dd07a40509447e0"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#a80f3f86b8f750b604dd07a40509447e0">dstRect</a></td></tr>
 <tr class="separator:a80f3f86b8f750b604dd07a40509447e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3f156d306f0208105c9789d7a363d72"><td class="memItemLeft" align="right" valign="top"><a id="aa3f156d306f0208105c9789d7a363d72"></a>
-SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><b>percentsToRender</b></td></tr>
+<tr class="memitem:aa3f156d306f0208105c9789d7a363d72"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sprite.html#aa3f156d306f0208105c9789d7a363d72">percentsToRender</a></td></tr>
 <tr class="separator:aa3f156d306f0208105c9789d7a363d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Standart <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a> inheritor to render some texture. Texture can be animated and can have a lot of animations. Animations stores in plane texture like this: <code>A1Frame1 A1Frame2 A1Frame3 ... A1FrameN A2Frame1 A2Frame2 ... </code> So, frames of animation places in texture <b>horizontally</b>. Animations itself places in texture <b>vertically</b>. Frame size of each animation is constant. Animations can have defferent count of frames and theirs duration. </p>
+<dl class="section warning"><dt>Warning</dt><dd><a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> is an inheritor of the <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a>. It means, that other code is use <b>pointer casting</b> to <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> from <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a> and vise versa. You <b>SHOULD</b> include the <code>struct <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a> blablaNode;</code> at the begining of <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> struct, if you want code to work with <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> like with a <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a>. More, you <b>SHOULD</b> initialize <code>blablaNode</code> by calling <a class="el" href="_scene_node_8h.html#ab22573eee2d1ce295343a42f820198e6" title="Inits DynamicSceneNode and sets SceneNode::nodeType to SceneNodeBaseType::SCENE_NODE_DYNAMIC. ">SceneNode_initDynamic()</a>. Also function pointers in <a class="el" href="struct_dynamic_scene_node.html#aca8025f56fb4ce20b974ec9a3292a9e4">DynamicSceneNode::sceneNode</a> <b>SHOULD</b> be initialized to your function implementation. Don't forget to add this warning comment to your own new <a class="el" href="struct_dynamic_scene_node.html" title="Dynamic version of SceneNode. ">DynamicSceneNode</a> inheritors. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_animation.html" title="Represents animation with constant delay between frames. ">Animation</a> </dd>
+<dd>
+<a class="el" href="_sprite_8h.html#a53bf236a02fc7b21069dda31b8b617cc" title="Function to update Sprite and interacting with EventManager. Pointer to that function should be at Sp...">Sprite_update()</a> </dd>
+<dd>
+<a class="el" href="_sprite_8h.html#a774e8f26954e687c891cea181145a716" title="Function to render Sprite on the screen. Pointer to that function should be at Sprite::dynamicSceneNo...">Sprite_render()</a> </dd></dl>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a23497f8f3357b38faee4390a9250a140"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23497f8f3357b38faee4390a9250a140">&sect;&nbsp;</a></span>animations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_animation.html">Animation</a>* animations</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Array of <a class="el" href="struct_animation.html" title="Represents animation with constant delay between frames. ">Animation</a>, set from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
+
+</div>
+</div>
+<a id="abe2355bebafd752b94a82a7a3b89c4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe2355bebafd752b94a82a7a3b89c4fb">&sect;&nbsp;</a></span>animationsCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t animationsCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current number of existing <a class="el" href="struct_animation.html" title="Represents animation with constant delay between frames. ">Animation</a> in <a class="el" href="struct_sprite.html#a23497f8f3357b38faee4390a9250a140">Sprite::animations</a>. </p>
+
+</div>
+</div>
+<a id="a712df7aeb9afad06723b1d6039536010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712df7aeb9afad06723b1d6039536010">&sect;&nbsp;</a></span>currentAnimation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t currentAnimation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current active <a class="el" href="struct_animation.html" title="Represents animation with constant delay between frames. ">Animation</a>. </p>
+
+</div>
+</div>
+<a id="a3ff28beecee781f499b33b0884780b85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ff28beecee781f499b33b0884780b85">&sect;&nbsp;</a></span>currentFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t currentFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current frame in <a class="el" href="struct_animation.html" title="Represents animation with constant delay between frames. ">Animation</a>. </p>
+
+</div>
+</div>
+<a id="a80f3f86b8f750b604dd07a40509447e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f3f86b8f750b604dd07a40509447e0">&sect;&nbsp;</a></span>dstRect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect dstRect</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Destination rectangle of texture in <a class="el" href="struct_sprite.html#aedd0da0c072332f83e64105f8682bbdf">Sprite::textureResource</a>. Scale, projecting (from real pixels to Upixels) and camera offset changes are performed. </p>
+
+</div>
+</div>
+<a id="a45180f86492824efb156e6ce52c39ff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45180f86492824efb156e6ce52c39ff4">&sect;&nbsp;</a></span>dynamicSceneNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_dynamic_scene_node.html">DynamicSceneNode</a> dynamicSceneNode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inheritance stuff. </p>
+
+</div>
+</div>
+<a id="a00e3e84ed927380c31f4dc8c78b9ece0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00e3e84ed927380c31f4dc8c78b9ece0">&sect;&nbsp;</a></span>frameSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point frameSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Size of frame in <a class="el" href="struct_sprite.html#aedd0da0c072332f83e64105f8682bbdf">Sprite::textureResource</a> in real pixels. </p>
+
+</div>
+</div>
+<a id="aa3f156d306f0208105c9789d7a363d72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f156d306f0208105c9789d7a363d72">&sect;&nbsp;</a></span>percentsToRender</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point percentsToRender</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Number of <a class="el" href="struct_sprite.html#aedd0da0c072332f83e64105f8682bbdf">Sprite::textureResource</a> % to be rendered. Affects on <a class="el" href="struct_sprite.html#a0717c803d1a988e69bf04032a0a1adb6">Sprite::srcRect</a> and <a class="el" href="struct_sprite.html#a80f3f86b8f750b604dd07a40509447e0">Sprite::dstRect</a>. </p>
+
+</div>
+</div>
+<a id="aa0f217b6015a263a7772e05119a14cb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0f217b6015a263a7772e05119a14cb2">&sect;&nbsp;</a></span>renderingsCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t renderingsCounter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Counter of <a class="el" href="_sprite_8h.html#a774e8f26954e687c891cea181145a716" title="Function to render Sprite on the screen. Pointer to that function should be at Sprite::dynamicSceneNo...">Sprite_render()</a> calls. Used for updating animation's frame. </p>
+
+</div>
+</div>
+<a id="a0717c803d1a988e69bf04032a0a1adb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0717c803d1a988e69bf04032a0a1adb6">&sect;&nbsp;</a></span>srcRect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect srcRect</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Source rectangle of texture in <a class="el" href="struct_sprite.html#aedd0da0c072332f83e64105f8682bbdf">Sprite::textureResource</a>. </p>
+
+</div>
+</div>
+<a id="aedd0da0c072332f83e64105f8682bbdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedd0da0c072332f83e64105f8682bbdf">&sect;&nbsp;</a></span>textureResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_texture_resource.html">TextureResource</a>* textureResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_texture_resource.html" title="Resource, which is represents drawable texture. ">TextureResource</a> with frames which will be loaded by <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a>. </p>
+
+</div>
+</div>
+<a id="adb68fcb1538fd0cf266d60d269fd692a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb68fcb1538fd0cf266d60d269fd692a">&sect;&nbsp;</a></span>virtualSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point virtualSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Size of frame in <a class="el" href="struct_sprite.html#aedd0da0c072332f83e64105f8682bbdf">Sprite::textureResource</a> in Upixels. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="_sprite_8h_source.html">Sprite.h</a></li>
 </ul>

@@ -12,7 +12,7 @@ var searchData=
   ['microsection',['MicroSection',['../struct_micro_section.html',1,'']]],
   ['middlemenuoptionprototype',['middleMenuOptionPrototype',['../struct_context_menu.html#a0a8ee24ce84177029e35240a5d6fbac0',1,'ContextMenu']]],
   ['music',['music',['../struct_settings__parser_strings.html#a4f493dbf8fcceaed72384fc43e9f1b24',1,'Settings_parserStrings']]],
-  ['musican',['Musican',['../struct_musican.html',1,'']]],
+  ['musican',['Musican',['../struct_musican.html',1,'Musican'],['../struct_game_manager.html#a106db72962d8e9542c1662085e26950a',1,'GameManager::musican()']]],
   ['musican_2ec',['Musican.c',['../_musican_8c.html',1,'']]],
   ['musican_2eh',['Musican.h',['../_musican_8h.html',1,'']]],
   ['musican_5fconstruct',['Musican_construct',['../_musican_8h.html#a9ac406d8b4219e3cd8d6b3807ce03e28',1,'Musican_construct(struct Logger *logger, bool sound, bool music):&#160;Musican.c'],['../_musican_8c.html#a9ac406d8b4219e3cd8d6b3807ce03e28',1,'Musican_construct(struct Logger *logger, bool sound, bool music):&#160;Musican.c']]],

@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('_scene_8c.html','');});
 
 <p>File containing implementation of <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_scene_8h_source.html">scene/Scene.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_scene_8h_source.html">scene/Scene.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_text_parser_8h_source.html">textParser/TextParser.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -437,11 +438,11 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <p>Inits (adds <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> and <a class="el" href="struct_script_resource.html" title="Resource, which is represents runnable lua script. ">ScriptResource</a>) <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> to be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> where <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will get all needed resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> to construct <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> where <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will get all settings. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> to be initialized. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> where <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will get all needed resources. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> to construct <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </td></tr>
+    <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> where <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> will get all settings. </td></tr>
   </table>
   </dd>
 </dl>
@@ -503,9 +504,9 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <p>Inits <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> where last added <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> will be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNode</td><td>String with name of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> to find it in <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a> where last added <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> will be initialized. </td></tr>
+    <tr><td class="paramname">sceneNode</td><td>String with name of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> to find it in <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </td></tr>
+    <tr><td class="paramname">sceneTextParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -545,7 +546,7 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <p>Reallocates memory for <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>, increases <a class="el" href="struct_scene.html#ab2cf0332471e9bed9ab7792892fafbf0">Scene::eventControllersCount</a> by SCENE_EVENT_CONTROLLERS_REALLOOCATION_STEP. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where function will reallocate <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where function will reallocate <a class="el" href="struct_scene.html#aad33c3b6450afc793583a4796e53d859">Scene::eventControllersList</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -581,7 +582,7 @@ Use this function in pair with <a class="el" href="_scene_8h.html#a3d6c9b1e47f23
 <p>Reallocates memory for <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>, increases <a class="el" href="struct_scene.html#a11cef9a0dcadd4d0fb4b18f1f214fed0">Scene::sceneNodesCount</a> by SCENE_SCENE_NODES_REALLOCATION_STEP. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where function will reallocate <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">scene</td><td>Pointer to a <a class="el" href="struct_scene.html" title="Represents some array of SceneNode and ScriptResource, which are controls its behaviour. ">Scene</a>, where function will reallocate <a class="el" href="struct_scene.html#a5c2a731f55f56cdcfa5c21e60ccbb6e4">Scene::sceneNodesList</a>. </td></tr>
   </table>
   </dd>
 </dl>

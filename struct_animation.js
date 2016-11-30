@@ -1,5 +1,5 @@
 var struct_animation =
 [
-    [ "framesCount", "struct_animation.html#ace242ca3529b4a5ac307484da8872fd1", null ],
-    [ "oneFrameDuration", "struct_animation.html#a4890c8e40c8a418c675673efc57e86b9", null ]
+    [ "frameDuration", "struct_animation.html#a237b6de60cfdee8e901fe9bf6279f3be", null ],
+    [ "framesCount", "struct_animation.html#ace242ca3529b4a5ac307484da8872fd1", null ]
 ];

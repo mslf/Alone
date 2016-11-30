@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['listboxscenenode_5ferrors',['ListBoxSceneNode_errors',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735',1,'ListBox.h']]],
-  ['loggerstate',['LoggerState',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7',1,'Logger.h']]]
+  ['gamemanager_5fconstants',['GameManager_constants',['../_game_manager_8h.html#aac0823c3b79b915ddcd852438c179647',1,'GameManager.h']]],
+  ['gamemanager_5ferrors',['GameManager_errors',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2',1,'GameManager.h']]]
 ];

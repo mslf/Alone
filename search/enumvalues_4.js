@@ -1,15 +1,18 @@
 var searchData=
 [
-  ['parsing_5fitems_5farray_5fchecking_5fend',['PARSING_ITEMS_ARRAY_CHECKING_END',['../_text_parser_8c.html#abd3941186dc31daef19dd8bfa4f2a639adbb415be068436a1b237d7d2d0c79423',1,'TextParser.c']]],
-  ['parsing_5fitems_5farray_5ferr',['PARSING_ITEMS_ARRAY_ERR',['../_text_parser_8c.html#abd3941186dc31daef19dd8bfa4f2a639ad681ea147ec5e5e9feaf2cf347b5084d',1,'TextParser.c']]],
-  ['parsing_5fitems_5farray_5fin_5fquotes',['PARSING_ITEMS_ARRAY_IN_QUOTES',['../_text_parser_8c.html#abd3941186dc31daef19dd8bfa4f2a639ab5de94552f2d2e176ce2a0aa130fce87',1,'TextParser.c']]],
-  ['parsing_5fitems_5farray_5fnot_5fin_5fquotes',['PARSING_ITEMS_ARRAY_NOT_IN_QUOTES',['../_text_parser_8c.html#abd3941186dc31daef19dd8bfa4f2a639a31ae794685dc37a1fc9a158f2b6b7d34',1,'TextParser.c']]],
-  ['parsing_5fitems_5farray_5fon_5fend',['PARSING_ITEMS_ARRAY_ON_END',['../_text_parser_8c.html#abd3941186dc31daef19dd8bfa4f2a639a8029bde4eda4e99c1587948f209fde65',1,'TextParser.c']]],
-  ['progress_5fbar_5ferr_5fconstructig_5fsprite',['PROGRESS_BAR_ERR_CONSTRUCTIG_SPRITE',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258a1524617a10438ccb7c421e1eac0f17f1',1,'ProgressBar.h']]],
-  ['progress_5fbar_5ferr_5fconstructig_5ftext_5fparser',['PROGRESS_BAR_ERR_CONSTRUCTIG_TEXT_PARSER',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258a3bee99db1ca128f40f3348832cf056e7',1,'ProgressBar.h']]],
-  ['progress_5fbar_5ferr_5fno_5fsprite_5fres',['PROGRESS_BAR_ERR_NO_SPRITE_RES',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258aa1d5f1fc6a5f4e732c44d609ad4bca13',1,'ProgressBar.h']]],
-  ['progress_5fbar_5ferr_5fnot_5fenough_5fanimations',['PROGRESS_BAR_ERR_NOT_ENOUGH_ANIMATIONS',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258a3ee4d9b3c2127f0b7324b20aefd5fe38',1,'ProgressBar.h']]],
-  ['progress_5fbar_5ferr_5fnull_5fargument',['PROGRESS_BAR_ERR_NULL_ARGUMENT',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258acfe57ee1d76c22394bfb1a497e6c40a7',1,'ProgressBar.h']]],
-  ['progress_5fbar_5ferr_5fsaving',['PROGRESS_BAR_ERR_SAVING',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258a004b6aae76617ddf2120abd9e8402eb6',1,'ProgressBar.h']]],
-  ['progress_5fbar_5fno_5ferrors',['PROGRESS_BAR_NO_ERRORS',['../_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258a88f3c63e75cd310e503e3ce1f0b65ba2',1,'ProgressBar.h']]]
+  ['list_5fbox_5ferr_5fbutton_5fconstructing',['LIST_BOX_ERR_BUTTON_CONSTRUCTING',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735ab060a39e75c0b722b5a175e9740c75ee',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fconstructig_5ftext_5fparser',['LIST_BOX_ERR_CONSTRUCTIG_TEXT_PARSER',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735ae419fc6e913a326ec3dc92cceac9bb3d',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fcontext_5fmenu_5fconstructing',['LIST_BOX_ERR_CONTEXT_MENU_CONSTRUCTING',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a44f8893ab7a4949d49ed68c8c9a49cbb',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fcontext_5fmenu_5flabel_5flength_5fabove_5fmax',['LIST_BOX_ERR_CONTEXT_MENU_LABEL_LENGTH_ABOVE_MAX',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a7b63df7affab43062bd80756f9ca15da',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5floading_5fsettings',['LIST_BOX_ERR_LOADING_SETTINGS',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735aeeafdf12a15fc4ec946014659fadd607',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fno_5fbutton_5fres',['LIST_BOX_ERR_NO_BUTTON_RES',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735aec0206adf878827aeb9dec77f337e351',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fno_5fcontext_5fmenu_5fres',['LIST_BOX_ERR_NO_CONTEXT_MENU_RES',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a74b02c8ebd208de860921b2edee60a40',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fno_5ftext_5fbox_5fres',['LIST_BOX_ERR_NO_TEXT_BOX_RES',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a28121cc5816182070fea4bd12ba0d229',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fnull_5fargument',['LIST_BOX_ERR_NULL_ARGUMENT',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735aaa2770cf86bd02624f838bb29e3a1788',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5fsaving',['LIST_BOX_ERR_SAVING',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a2d92716b2ab4e387d18d96c61ad9e35a',1,'ListBox.h']]],
+  ['list_5fbox_5ferr_5ftext_5fbox_5fconstructing',['LIST_BOX_ERR_TEXT_BOX_CONSTRUCTING',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a2a780af78083f548c8fe9a28d11fd16e',1,'ListBox.h']]],
+  ['list_5fbox_5fno_5ferrors',['LIST_BOX_NO_ERRORS',['../_list_box_8h.html#a2b3b9fed8797ccdf42b4c2d30feba735a8dead83d519729974e874d0b7c3bfc56',1,'ListBox.h']]],
+  ['logger_5fdisabled',['LOGGER_DISABLED',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7a42d3e20acc16eae698865e09c334cae0',1,'Logger.h']]],
+  ['logger_5fenabled_5ffile',['LOGGER_ENABLED_FILE',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7a9615e175de9a5c148b211c486a57686f',1,'Logger.h']]],
+  ['logger_5fenabled_5fstderr',['LOGGER_ENABLED_STDERR',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7af15daa08850e7b3258fff985bdf1d436',1,'Logger.h']]]
 ];

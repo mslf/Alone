@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('_scene_node_types_registrar_8c.html','
 
 <p>File containing implementation of <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_scene_node_types_registrar_8h_source.html">scene/SceneNodeTypesRegistrar.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -193,12 +194,12 @@ Variables</h2></td></tr>
 <p>Checks <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> where to find registered types. Can be NULL. </td></tr>
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with type string, which will be checked. Can be NULL. </td></tr>
-    <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. Can be NULL. </td></tr>
-    <tr><td class="paramname">foundIndex</td><td>Pointer to a number, where this function will place index of found <a class="el" href="struct_scene_node_type.html" title="Represent SceneNode inheritor&#39;s type. ">SceneNodeType</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">requiredTypeString</td><td>String with wishful <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor type. Can be NULL. </td></tr>
-    <tr><td class="paramname">resId</td><td>String with ID (path) to the <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor resource. Can be NULL. Will be used only for logging purpose. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> where to find registered types. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with type string, which will be checked. </td></tr>
+    <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. </td></tr>
+    <tr><td class="paramname">foundIndex</td><td>Pointer to a number, where this function will place index of found <a class="el" href="struct_scene_node_type.html" title="Represent SceneNode inheritor&#39;s type. ">SceneNodeType</a>. </td></tr>
+    <tr><td class="paramname">requiredTypeString</td><td>String with wishful <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor type. </td></tr>
+    <tr><td class="paramname">resId</td><td>String with ID (path) to the <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> inheritor resource. Will be used only for logging purpose. </td></tr>
   </table>
   </dd>
 </dl>
@@ -339,7 +340,7 @@ Variables</h2></td></tr>
 <p>Reallocates memory for <a class="el" href="struct_scene_node_types_registrar.html#a26220f07d07585c20b71ddab90783db6">SceneNodeTypesRegistrar::sceneNodeTypesList</a>, increases <a class="el" href="struct_scene_node_types_registrar.html#a5a1d22eb74c59dd10779143e8b799dd0">SceneNodeTypesRegistrar::allocatedSceneNodeTypes</a> by SNTR_TYPES_REALLOCATION_STEP. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a>, where function will reallocate <a class="el" href="struct_scene_node_types_registrar.html#a26220f07d07585c20b71ddab90783db6">SceneNodeTypesRegistrar::sceneNodeTypesList</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a>, where function will reallocate <a class="el" href="struct_scene_node_types_registrar.html#a26220f07d07585c20b71ddab90783db6">SceneNodeTypesRegistrar::sceneNodeTypesList</a>. </td></tr>
   </table>
   </dd>
 </dl>

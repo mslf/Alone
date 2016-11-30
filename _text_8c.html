@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('_text_8c.html','');});
 
 <p>File containing implementation of <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_text_8h_source.html">text/Text.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_text_parser_8h_source.html">textParser/TextParser.h</a>&quot;</code><br />
 </div><table class="memberdecls">
@@ -452,10 +453,10 @@ Variables</h2></td></tr>
 <p>Loads <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a> settings from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> and calls <a class="el" href="_text_8c.html#aa98847f48045db3cde4593a40d3a1eee" title="Regenerates Text::textureResource with a new given settings. ">Text_regenerateTexture()</a> with them. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">text</td><td>Pointer to a <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>, which will be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for passing to <a class="el" href="_text_8c.html#aa98847f48045db3cde4593a40d3a1eee" title="Regenerates Text::textureResource with a new given settings. ">Text_regenerateTexture()</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for passing to <a class="el" href="_text_8c.html#aa98847f48045db3cde4593a40d3a1eee" title="Regenerates Text::textureResource with a new given settings. ">Text_regenerateTexture()</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data strings for initializing <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">text</td><td>Pointer to a <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>, which will be initialized. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for passing to <a class="el" href="_text_8c.html#aa98847f48045db3cde4593a40d3a1eee" title="Regenerates Text::textureResource with a new given settings. ">Text_regenerateTexture()</a>. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for passing to <a class="el" href="_text_8c.html#aa98847f48045db3cde4593a40d3a1eee" title="Regenerates Text::textureResource with a new given settings. ">Text_regenerateTexture()</a>. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data strings for initializing <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>. </td></tr>
     <tr><td class="paramname">logFlag</td><td>Poinnter to a bool flag. Will be set if sobe log happened in this function. </td></tr>
   </table>
   </dd>
@@ -572,9 +573,9 @@ Variables</h2></td></tr>
 <p>Updates <a class="el" href="struct_text.html#aed16a68b0664f36f420ddefb18c7a640">Text::fontPath</a>, <a class="el" href="struct_text.html#a5633b1433389cec21ade3811bbe9ca5b">Text::text</a>, <a class="el" href="struct_text.html#a439227feff9d7f55384e8780cfc2eb82">Text::size</a> and <a class="el" href="struct_text.html#a631bf4babe4c1825a2cdc0c19c2bd04f">Text::color</a> with new values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">text</td><td>Poinnter to a <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>, where fields will be changed. Can be NULL. </td></tr>
-    <tr><td class="paramname">textString</td><td>String with text rendered in <a class="el" href="struct_text.html#aedd0da0c072332f83e64105f8682bbdf">Text::textureResource</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">fontPath</td><td>String with path to the ttf font. Can be NULL. </td></tr>
+    <tr><td class="paramname">text</td><td>Poinnter to a <a class="el" href="struct_text.html" title="Standart DynamicSceneNode inheritor to render some (typically static) text. ">Text</a>, where fields will be changed. </td></tr>
+    <tr><td class="paramname">textString</td><td>String with text rendered in <a class="el" href="struct_text.html#aedd0da0c072332f83e64105f8682bbdf">Text::textureResource</a>. </td></tr>
+    <tr><td class="paramname">fontPath</td><td>String with path to the ttf font. </td></tr>
     <tr><td class="paramname">size</td><td>Vertical size of text in Upixels, which rendered in <a class="el" href="struct_text.html#aedd0da0c072332f83e64105f8682bbdf">Text::textureResource</a>. </td></tr>
     <tr><td class="paramname">color</td><td>RGBA color of text, which rendered in <a class="el" href="struct_text.html#aedd0da0c072332f83e64105f8682bbdf">Text::textureResource</a>. </td></tr>
   </table>

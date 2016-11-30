@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['game_5fmanager_5fdefault_5fsettings_5fpath',['GAME_MANAGER_DEFAULT_SETTINGS_PATH',['../_game_manager_8c.html#aec0f487b2946f1c8ca2ace0df6df9a92',1,'GameManager.c']]],
   ['gameevent',['GameEvent',['../struct_game_event.html',1,'']]],
   ['gameevent_2ec',['GameEvent.c',['../_game_event_8c.html',1,'']]],
   ['gameevent_2eh',['GameEvent.h',['../_game_event_8h.html',1,'']]],
@@ -9,5 +10,28 @@ var searchData=
   ['gameevent_5fparserstrings',['GameEvent_parserStrings',['../struct_game_event__parser_strings.html',1,'']]],
   ['gameeventscount',['gameEventsCount',['../struct_event_manager.html#ae586848fac4574f9c630a1b66a3b8c6c',1,'EventManager']]],
   ['gameeventslist',['gameEventsList',['../struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4',1,'EventManager']]],
-  ['gamemanager',['GameManager',['../struct_game_manager.html',1,'']]]
+  ['gamemanager',['GameManager',['../struct_game_manager.html',1,'']]],
+  ['gamemanager_2ec',['GameManager.c',['../_game_manager_8c.html',1,'']]],
+  ['gamemanager_2eh',['GameManager.h',['../_game_manager_8h.html',1,'']]],
+  ['gamemanager_5fconstants',['GameManager_constants',['../_game_manager_8h.html#aac0823c3b79b915ddcd852438c179647',1,'GameManager.h']]],
+  ['gamemanager_5fconstruct',['GameManager_construct',['../_game_manager_8h.html#a0b2b7c00fc3365c0f72f037222f28ab7',1,'GameManager_construct():&#160;GameManager.c'],['../_game_manager_8c.html#a0b2b7c00fc3365c0f72f037222f28ab7',1,'GameManager_construct():&#160;GameManager.c']]],
+  ['gamemanager_5fdestruct',['GameManager_destruct',['../_game_manager_8h.html#a2be192eaf90d3f4ab3a4ea94cc55eafb',1,'GameManager_destruct(struct GameManager *gm):&#160;GameManager.c'],['../_game_manager_8c.html#a2be192eaf90d3f4ab3a4ea94cc55eafb',1,'GameManager_destruct(struct GameManager *gm):&#160;GameManager.c']]],
+  ['gamemanager_5ferrormessages',['GameManager_errorMessages',['../struct_game_manager__error_messages.html',1,'']]],
+  ['gamemanager_5ferrors',['GameManager_errors',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2',1,'GameManager.h']]],
+  ['gamemanager_5fevents',['GameManager_events',['../struct_game_manager__events.html',1,'']]],
+  ['gamemanager_5fhandleevents',['GameManager_handleEvents',['../_game_manager_8c.html#a4cae5a2df20d0bbf4c0ae9f1deaccf3f',1,'GameManager.c']]],
+  ['gamemanager_5fmain',['GameManager_main',['../_game_manager_8h.html#af04f6b84323e4b8b8a1b1e081ce51570',1,'GameManager_main(struct GameManager *gm):&#160;GameManager.c'],['../_game_manager_8c.html#af04f6b84323e4b8b8a1b1e081ce51570',1,'GameManager_main(struct GameManager *gm):&#160;GameManager.c']]],
+  ['gamemanager_5fpopscene',['GameManager_popScene',['../_game_manager_8h.html#a98e34e58935d41ba1c35b84275416e30',1,'GameManager_popScene(struct GameManager *gm):&#160;GameManager.c'],['../_game_manager_8c.html#a98e34e58935d41ba1c35b84275416e30',1,'GameManager_popScene(struct GameManager *gm):&#160;GameManager.c']]],
+  ['gamemanager_5fpushscene',['GameManager_pushScene',['../_game_manager_8h.html#ab1f6da88efb9811aad550f0b5d5ea07f',1,'GameManager_pushScene(struct GameManager *gm, const char *const resId):&#160;GameManager.c'],['../_game_manager_8c.html#ab1f6da88efb9811aad550f0b5d5ea07f',1,'GameManager_pushScene(struct GameManager *gm, const char *const resId):&#160;GameManager.c']]],
+  ['gamemanager_5freallocatescenenodeslist',['GameManager_reallocateSceneNodesList',['../_game_manager_8c.html#a2bf2836bb3f428e122c6846095742626',1,'GameManager.c']]],
+  ['gamemanager_5fregisterscenenodetypes',['GameManager_registerSceneNodeTypes',['../_game_manager_8c.html#ac385171cbb077a6f2902a3b71dcac323',1,'GameManager.c']]],
+  ['gm_5ferr_5falloc_5fscenes_5fstack',['GM_ERR_ALLOC_SCENES_STACK',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2addd564115e565386237d6cd7892b6a4a',1,'GameManager.h']]],
+  ['gm_5ferr_5fconstructing_5fcontroller',['GM_ERR_CONSTRUCTING_CONTROLLER',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2a93558e8919d0088abd8bce6ab6769e86',1,'GameManager.h']]],
+  ['gm_5ferr_5fexisting_5fscene',['GM_ERR_EXISTING_SCENE',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2ae0e420fa480fbd82cb47b5008ad204e4',1,'GameManager.h']]],
+  ['gm_5ferr_5fnull_5fargument',['GM_ERR_NULL_ARGUMENT',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2a4eab83166687cf733b9a71923ae9700e',1,'GameManager.h']]],
+  ['gm_5ferr_5fregister_5ftypes',['GM_ERR_REGISTER_TYPES',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2a9bdde0bcf5c867d1912e26dceb134d8f',1,'GameManager.h']]],
+  ['gm_5ferr_5fsaving',['GM_ERR_SAVING',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2a3303e79291a616ec79a8a502ab71e895',1,'GameManager.h']]],
+  ['gm_5ferr_5fscene_5fconstructing',['GM_ERR_SCENE_CONSTRUCTING',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2ae1bfe20f2448c83f3b522a37b4e81a15',1,'GameManager.h']]],
+  ['gm_5finitial_5fnumber_5fallocated_5fscenes',['GM_INITIAL_NUMBER_ALLOCATED_SCENES',['../_game_manager_8h.html#aac0823c3b79b915ddcd852438c179647a98240d00736c688f279fbc5cc5f2cc50',1,'GameManager.h']]],
+  ['gm_5fno_5ferrors',['GM_NO_ERRORS',['../_game_manager_8h.html#ac2f526475e6d6717710fda60a062ffb2ad618b2e94222aef3368af220667af794',1,'GameManager.h']]]
 ];

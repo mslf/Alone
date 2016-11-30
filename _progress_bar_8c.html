@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('_progress_bar_8c.html','');});
 
 <p>File containing implementation of <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_progress_bar_8h_source.html">gui/ProgressBar.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_progress_bar_8h_source.html">gui/ProgressBar.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_text_parser_8h_source.html">textParser/TextParser.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -187,7 +188,7 @@ Variables</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Use only <a class="el" href="_progress_bar_8h.html#ac150bc4c4a6b818f29e16bacbd308c6d" title="Destructs ProgressBar and frees memory, used by it. Pointer to that function should be at ProgressBar...">ProgressBar_destruct()</a> or ProgressBar::sceneNode::destruct() to destruct returned <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> </dd>
 <dd>
-<a class="el" href="struct_sprite.html">Sprite</a> </dd>
+<a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> </dd>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> </dd>
 <dd>
@@ -284,18 +285,18 @@ Variables</h2></td></tr>
 <p>Function for loading and constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> where to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading <a class="el" href="struct_sprite.html">Sprite</a> resource. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>, where function will get <a class="el" href="struct_progress_bar_scene_node__parser_strings.html#a008090dd7a5af169656ea5a85a437385">ProgressBarSceneNode_parserStrings::spriteRes</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> where to construct <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> resource. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>, where function will get <a class="el" href="struct_progress_bar_scene_node__parser_strings.html#a008090dd7a5af169656ea5a85a437385">ProgressBarSceneNode_parserStrings::spriteRes</a>. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258" title="Error codes for ProgressBar. ">ProgressBarSceneNode_errors</a> value. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> </dd>
 <dd>
-<a class="el" href="struct_sprite.html">Sprite</a> </dd>
+<a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> </dd>
 <dd>
 <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> </dd>
 <dd>
@@ -456,18 +457,18 @@ Variables</h2></td></tr>
 <p>Function for loading settings and initializing <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> from <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> which will be initialized. Can be NULL. </td></tr>
-    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading required resources. Can be NULL. </td></tr>
-    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. Can be NULL. </td></tr>
-    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data strings. Can be NULL. </td></tr>
+    <tr><td class="paramname">progressBar</td><td>Pointer to a <a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> which will be initialized. </td></tr>
+    <tr><td class="paramname">resourceManager</td><td>Pointer to a <a class="el" href="struct_resource_manager.html" title="Resource subsystem. Loads and stores various resources in arrays. Provide effective managment of same...">ResourceManager</a> for loading required resources. </td></tr>
+    <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. </td></tr>
+    <tr><td class="paramname">sceneNodeTypesRegistrar</td><td>Pointer to a <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> for constructing <a class="el" href="struct_progress_bar.html#a415c2cf0f85f8877a0b5db473ae1a9ef">ProgressBar::spriteBase</a> and <a class="el" href="struct_progress_bar.html#aa77bb96f1837c2ce8c1d2c0f3f3f8bb1">ProgressBar::spriteBar</a>. </td></tr>
+    <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> with data strings. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="_progress_bar_8h.html#ae3a0521c41b87d840048e72163c97258" title="Error codes for ProgressBar. ">ProgressBarSceneNode_errors</a> value. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_progress_bar.html" title="Standart Gui element for drawing some progress. It draws part (in %) of ProgressBar::spriteBar on Pro...">ProgressBar</a> </dd>
 <dd>
-<a class="el" href="struct_sprite.html">Sprite</a> </dd>
+<a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> </dd>
 <dd>
 <a class="el" href="struct_scene_node_types_registrar.html" title="Contains list of all registered SceneNode inheritors with their constructors. ">SceneNodeTypesRegistrar</a> </dd>
 <dd>

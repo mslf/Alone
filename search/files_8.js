@@ -13,5 +13,7 @@ var searchData=
   ['slider_2ec',['Slider.c',['../_slider_8c.html',1,'']]],
   ['slider_2eh',['Slider.h',['../_slider_8h.html',1,'']]],
   ['soundresource_2ec',['SoundResource.c',['../_sound_resource_8c.html',1,'']]],
-  ['soundresource_2eh',['SoundResource.h',['../_sound_resource_8h.html',1,'']]]
+  ['soundresource_2eh',['SoundResource.h',['../_sound_resource_8h.html',1,'']]],
+  ['sprite_2ec',['Sprite.c',['../_sprite_8c.html',1,'']]],
+  ['sprite_2eh',['Sprite.h',['../_sprite_8h.html',1,'']]]
 ];

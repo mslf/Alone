@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('_event_manager_8c.html','');});
 
 <p>File containing implementation of <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_event_manager_8h_source.html">eventManager/EventManager.h</a>&quot;</code><br />
 <code>#include &quot;string.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -342,7 +343,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Reallocates memory for the <a class="el" href="struct_event_manager.html#a72dc8ad68e1875aed6c94372ff3a51ce">EventManager::customGameEventsList</a>. <a class="el" href="struct_event_manager.html#a274ca9e47ebe07804dc743b3cd3db162">EventManager::allocatedCustomGameEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a7c2180cec40b2488c4891f76d7c87fb8">EM_INITIAL_NUMBER_ALLOCATED_EVENTS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -378,7 +379,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Reallocates memory for the <a class="el" href="struct_event_manager.html#aa2b0ad79c0a87b310b5adf8feaf9ffd4">EventManager::gameEventsList</a>. <a class="el" href="struct_event_manager.html#a621a8cfb46dee22293a680cf51bc01e4">EventManager::allocatedGameEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a7c2180cec40b2488c4891f76d7c87fb8">EM_INITIAL_NUMBER_ALLOCATED_EVENTS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -414,7 +415,7 @@ Function firstly reset <a class="el" href="struct_event_manager.html#a44bc521b94
 <p>Reallocates memory for the <a class="el" href="struct_event_manager.html#ac563054d2cefbd8d20b1daf70eb35d78">EventManager::sdlEventsList</a>. <a class="el" href="struct_event_manager.html#a94a2584717ebaf6d143148d5c8b5bf7e">EventManager::allocatedSdlEventsCount</a> will be increased by <a class="el" href="_event_manager_8h.html#acb5ddf0662e99c234f1960098c20d285a94ee922abfc0c456eded72d6380e1712">EM_INITIAL_NUMBER_ALLOCATED_SDL_EVENTS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. Can be NULL. </td></tr>
+    <tr><td class="paramname">em</td><td>Pointer to a <a class="el" href="struct_event_manager.html" title="Event subsystem. EventManager provide access to the list with SDL_Events via EventManager::sdlEventsL...">EventManager</a>. </td></tr>
   </table>
   </dd>
 </dl>

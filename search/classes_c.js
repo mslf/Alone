@@ -15,5 +15,7 @@ var searchData=
   ['sliderscenenode_5fparserstrings',['SliderSceneNode_parserStrings',['../struct_slider_scene_node__parser_strings.html',1,'']]],
   ['sntr_5ferrormessages',['SNTR_errorMessages',['../struct_s_n_t_r__error_messages.html',1,'']]],
   ['soundresource',['SoundResource',['../struct_sound_resource.html',1,'']]],
-  ['sprite',['Sprite',['../struct_sprite.html',1,'']]]
+  ['sprite',['Sprite',['../struct_sprite.html',1,'']]],
+  ['spritescenenode_5ferrormessages',['SpriteSceneNode_errorMessages',['../struct_sprite_scene_node__error_messages.html',1,'']]],
+  ['spritescenenode_5fparserstrings',['SpriteSceneNode_parserStrings',['../struct_sprite_scene_node__parser_strings.html',1,'']]]
 ];
