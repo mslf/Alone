@@ -36,7 +36,7 @@ const char* const SPRITE_SCENENODE_WARN_ANIMATIONS_COUNT =
 const char* const SPRITE_SCENENODE_WARN_FRAMES_COUNT =
         "Sprite_initAnimations: framesCount haven't properly defined or ignored. Using default.";
 const char* const SPRITE_SCENENODE_WARN_ONE_FRAME_DURATION =
-        "Sprite_initAnimations: oneFrameDuration haven't properly defined or ignored. Using default.";
+        "Sprite_initAnimations: frameDuration haven't properly defined or ignored. Using default.";
 const char* const SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_W =
         "Sprite_initAnimations: frame size is not fit in texture size horizontally.";
 const char* const SPRITE_SCENENODE_WARN_FRAMES_NOT_FIT_W_DEFAULT =
@@ -124,11 +124,11 @@ static unsigned char Sprite_initAnimations(struct Sprite* sprite, struct Resourc
         }
         if (sprite->animations[i].framesCount > maxFramesCount)
             maxFramesCount = sprite->animations[i].framesCount;
-        sprite->animations[i].oneFrameDuration = (size_t)TextParser_getInt(textParser,
+        sprite->animations[i].frameDuration = (size_t)TextParser_getInt(textParser,
                                                                            SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION, i);
         if (useDefaultTexture || textParser->lastError) {
             Logger_log(resourceManager->logger, SPRITE_SCENENODE_WARN_ONE_FRAME_DURATION);
-            sprite->animations[i].oneFrameDuration = SPRITE_SCENENODE_DEFAULT_ONE_FRAME_DURATION;
+            sprite->animations[i].frameDuration = SPRITE_SCENENODE_DEFAULT_ONE_FRAME_DURATION;
         }
     }
     unsigned char result = Sprite_initFrameSize(sprite, resourceManager, textParser, usePresentForVirtual,
@@ -234,7 +234,7 @@ unsigned char Sprite_save(
         result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_FRAMES_COUNT,
                                     sprite->animations[i].framesCount) != 0);
         result += (TextParser_addInt(textParser, SPRITE_SCENENODE_PARSER_ONE_FRAME_DURATION,
-                                    sprite->animations[i].oneFrameDuration) != 0);
+                                    sprite->animations[i].frameDuration) != 0);
     }
     char* tempString = TextParser_convertToText(textParser);
     result += (textParser->lastError != 0);
@@ -267,7 +267,7 @@ void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
     if (!sceneNode || !renderer)
         return;
     struct Sprite* sprite = (struct Sprite*)sceneNode;
-    if (sprite->renderingsCounter > sprite->animations[sprite->currentAnimation].oneFrameDuration) {
+    if (sprite->renderingsCounter > sprite->animations[sprite->currentAnimation].frameDuration) {
         sprite->currentFrame++;
         sprite->renderingsCounter = 0;
     }
