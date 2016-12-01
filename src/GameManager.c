@@ -190,8 +190,8 @@ enum GameManager_errors GameManager_main(struct GameManager* gm) {
     unsigned char counter = 0;
     SDL_StartTextInput();
     while(!gm->eventManager->quit) {
-        gm->renderer->cameraPosition.x = (-state) *  counter;
-        gm->renderer->cameraPosition.y = (-state) * counter;
+        gm->renderer->cameraPosition.x = (-1) *  counter / 2;
+        gm->renderer->cameraPosition.y = (-1) * counter / 2;
         EventManager_updateSdlEvents(gm->eventManager);
         SDL_SetRenderDrawColor(gm->renderer->renderer, color, color, color, color);
         SDL_RenderClear(gm->renderer->renderer);
@@ -214,19 +214,19 @@ enum GameManager_errors GameManager_main(struct GameManager* gm) {
         }
         SDL_RenderPresent(gm->renderer->renderer);
         GameManager_handleEvents(gm);
-        counter++;
-        if (counter >= 200) {
-            counter = 0;
-            switch (state) {
-                case 0:
-                    color = 255;
-                        state = 1;
-                    break;
-                case 1:
-                    color = 0;
-                        state = 0;
-                    break;
-            }
+        if (counter >= 200 && state == 0)
+            state = 1;
+        if (counter <= 1 && state == 1)
+            state = 0;
+        switch (state) {
+            case 0:
+                counter++;
+                color = 255;
+                break;
+            case 1:
+                counter--;
+                color = 0;
+                break;
         }
     }
     SDL_StopTextInput();

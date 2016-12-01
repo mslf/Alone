@@ -308,8 +308,9 @@ void Sprite_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
     }
     if (sprite->currentFrame > sprite->animations[sprite->currentAnimation].framesCount - 1)
         sprite->currentFrame = 0;
+    SDL_Point convertedRotatePoint = Renderer_convertCoordinatesA(renderer, sprite->dynamicSceneNode.rotatePointCoordinates);
     SDL_RenderCopyEx(renderer->renderer, sprite->textureResource->texture, &sprite->srcRect, &sprite->dstRect,
-                     sprite->dynamicSceneNode.angle, &sprite->dynamicSceneNode.rotatePointCoordinates, sprite->dynamicSceneNode.flip);
+                     sprite->dynamicSceneNode.angle, &convertedRotatePoint, sprite->dynamicSceneNode.flip);
     sprite->renderingsCounter++;
 }
 
