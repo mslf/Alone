@@ -20,7 +20,7 @@
  * @file GameManager.h
  * @author mslf
  * @date 10 Aug 2016
- * @brief File containing #GameManager and it's stuff.
+ * @brief File containing #GameManager and its stuff.
  */
 #ifndef ALONE_GAMEMANAGER_H
 #define ALONE_GAMEMANAGER_H

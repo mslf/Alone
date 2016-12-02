@@ -20,7 +20,7 @@
  * @file GameEvent.h
  * @author mslf
  * @date 12 Aug 2016
- * @brief File containing #GameEvent and it's stuff.
+ * @brief File containing #GameEvent and its stuff.
  */
 #ifndef ALONE_GAMEEVENT_H
 #define ALONE_GAMEEVENT_H

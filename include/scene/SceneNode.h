@@ -20,7 +20,7 @@
  * @file SceneNode.h
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing #SceneNode and it's stuff.
+ * @brief File containing #SceneNode and its stuff.
  */
 #ifndef ALONE_SCENENODE_H
 #define ALONE_SCENENODE_H

@@ -20,7 +20,7 @@
  * @file Button.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #Button and it's stuff.
+ * @brief File containing #Button and its stuff.
  */
 #ifndef ALONE_BUTTON_H
 #define ALONE_BUTTON_H
@@ -118,7 +118,7 @@ enum ButtonState {
 };
 
 /**
- * @brief Standart Gui element to be clicked without holding it's state through the frames.
+ * @brief Standart Gui element to be clicked without holding its state through the frames.
  * Has some text on itself, focused and pressed #GameEvent and #SoundResource.
  * User can click the #Button, and some things will happen (such a #GameEvent or sound playing).
  * Also it's useful for other Gui elements, which are needed to be clicked without saving state.

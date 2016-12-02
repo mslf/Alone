@@ -20,7 +20,7 @@
  * @file Logger.h
  * @author mslf
  * @date 11 Oct 2016
- * @brief File containing #Logger and it's stuff.
+ * @brief File containing #Logger and its stuff.
  */
 #ifndef ALONE_LOGGER_H
 #define ALONE_LOGGER_H
@@ -50,7 +50,7 @@ struct Logger {
  * @brief Function for logging formatted string. End line char will be added at the end of the string.
  * @param logger Pointer to a #Logger. Can be NULL.
  * @param format String with a log message format string. Can be NULL.
- * @param ... You can pass other parameters, like in printf and other such functions. 
+ * @note ... You can pass other parameters, like in printf and other such functions.
  */
 void Logger_log(struct Logger* logger, const char* const format, ...);
 

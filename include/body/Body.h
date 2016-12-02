@@ -20,7 +20,7 @@
  * @file Body.h
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing #Body and it's stuff.
+ * @brief File containing #Body and its stuff.
  */
 #ifndef ALONE_BODY_H
 #define ALONE_BODY_H
@@ -60,11 +60,11 @@ enum BodySceneNode_errors {
     /**< Some of function's arguments are NULL. */
     BODY_ERR_NO_SPRITE_RES = 2,
     /**< No BodySceneNode_parserStrings#spriteRes string found in #TextParser. */
-    BODY_ERR_CONSTRUCTING_SPRITE = 6,
+    BODY_ERR_CONSTRUCTING_SPRITE = 3,
     /**< Constructing Body#sprite failed. */
-    BODY_ERR_CONSTRUCTIG_TEXT_PARSER = 7,
+    BODY_ERR_CONSTRUCTIG_TEXT_PARSER = 4,
     /**< Constructing new #TextParser for some required reason failed. */
-    BODY_ERR_SAVING = 8
+    BODY_ERR_SAVING = 5
     /**< Saving #Body failed due to internal reason. */
 };
 
@@ -146,7 +146,7 @@ enum BodySceneNode_errors Body_save(const struct Body* const body,
  * Pointer to that function should be at Body#physicalSceneNode#dynamicSceneNode#sceneNode#update.
  * @param sceneNode Pointer to a #Body, casted to #SceneNode. Can be NULL.
  * @param eventManager Not used. Just here due to univirsal constructors. Can be NULL.
- * @param renderer Pointer to a #Renderer for screen-depend coordinates converting. Can be NULL.
+ * @param renderer Not used. Just here due to univirsal constructors. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #Body is not accepted!
  * @note Don't use this function for drawing.
  */

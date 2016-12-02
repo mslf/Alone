@@ -20,7 +20,7 @@
  * @file TextBox.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #TextBox and it's stuff.
+ * @brief File containing #TextBox and its stuff.
  */
 #ifndef ALONE_TEXTBOX_H
 #define ALONE_TEXTBOX_H

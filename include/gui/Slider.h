@@ -20,7 +20,7 @@
  * @file Slider.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #Slider and it's stuff.
+ * @brief File containing #Slider and its stuff.
  */
 #ifndef ALONE_SLIDER_H
 #define ALONE_SLIDER_H

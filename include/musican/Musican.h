@@ -20,7 +20,7 @@
  * @file Musican.h
  * @author mslf
  * @date 10 Aug 2016
- * @brief File containing #Musican and it's stuff.
+ * @brief File containing #Musican and its stuff.
  */
 #ifndef ALONE_MUSICAN_H
 #define ALONE_MUSICAN_H

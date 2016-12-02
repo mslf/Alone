@@ -20,7 +20,7 @@
  * @file CheckBox.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #CheckBox and it's stuff.
+ * @brief File containing #CheckBox and its stuff.
  */
 #ifndef ALONE_CHECKBOX_H
 #define ALONE_CHECKBOX_H

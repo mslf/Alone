@@ -20,7 +20,7 @@
  * @file EventManager.h
  * @author mslf
  * @date 10 Aug 2016
- * @brief File containing #EventManager and it's stuff.
+ * @brief File containing #EventManager and its stuff.
  */
 #ifndef ALONE_EVENTMANAGER_H
 #define ALONE_EVENTMANAGER_H

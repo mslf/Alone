@@ -20,7 +20,7 @@
  * @file Text.h
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing #Text and it's stuff.
+ * @brief File containing #Text and its stuff.
  */
 #ifndef ALONE_TEXT_H
 #define ALONE_TEXT_H

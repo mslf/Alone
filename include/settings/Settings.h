@@ -20,7 +20,7 @@
  * @file Settings.h
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing #Settings and it's stuff.
+ * @brief File containing #Settings and its stuff.
  */
 #ifndef ALONE_SETTINGS_H
 #define ALONE_SETTINGS_H

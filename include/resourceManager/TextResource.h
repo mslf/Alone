@@ -20,7 +20,7 @@
  * @file TextResource.h
  * @author mslf
  * @date 22 Sep 2016
- * @brief File containing #TextResource and it's stuff.
+ * @brief File containing #TextResource and its stuff.
  */
 #ifndef ALONE_TEXTRESOURCE_H
 #define ALONE_TEXTRESOURCE_H

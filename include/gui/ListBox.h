@@ -20,7 +20,7 @@
  * @file ListBox.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #ListBox and it's stuff.
+ * @brief File containing #ListBox and its stuff.
  */
 #ifndef ALONE_LISTBOX_H
 #define ALONE_LISTBOX_H

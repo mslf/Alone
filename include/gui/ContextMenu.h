@@ -20,7 +20,7 @@
  * @file ContextMenu.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #ContextMenu and it's stuff.
+ * @brief File containing #ContextMenu and its stuff.
  */
 #ifndef ALONE_CONTEXTMENU_H
 #define ALONE_CONTEXTMENU_H

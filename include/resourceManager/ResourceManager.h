@@ -20,7 +20,7 @@
  * @file ResourceManager.h
  * @author mslf
  * @date 10 Aug 2016
- * @brief File containing #ResourceManager and it's stuff.
+ * @brief File containing #ResourceManager and its stuff.
  */
 #ifndef ALONE_RESOURCEMANAGER_H
 #define ALONE_RESOURCEMANAGER_H

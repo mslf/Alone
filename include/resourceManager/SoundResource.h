@@ -20,7 +20,7 @@
  * @file SoundResource.h
  * @author mslf
  * @date 22 Sep 2016
- * @brief File containing #SoundResource and it's stuff.
+ * @brief File containing #SoundResource and its stuff.
  */
 #ifndef ALONE_SOUNDRESOURCE_H
 #define ALONE_SOUNDRESOURCE_H

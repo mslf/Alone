@@ -20,7 +20,7 @@
  * @file ScriptResource.h
  * @author mslf
  * @date 26 Sep 2016
- * @brief File containing #ScriptResource and it's stuff.
+ * @brief File containing #ScriptResource and its stuff.
  */
 #ifndef ALONE_SCRIPTRESOURCE_H
 #define ALONE_SCRIPTRESOURCE_H

@@ -20,7 +20,7 @@
  * @file Sprite.h
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing #Sprite and it's stuff.
+ * @brief File containing #Sprite and its stuff.
  */
 #ifndef ALONE_SPRITE_H
 #define ALONE_SPRITE_H

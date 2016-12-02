@@ -20,7 +20,7 @@
  * @file Scene.h
  * @author mslf
  * @date 11 Aug 2016
- * @brief File containing #Scene and it's stuff.
+ * @brief File containing #Scene and its stuff.
  */
 #ifndef ALONE_SCENE_H
 #define ALONE_SCENE_H

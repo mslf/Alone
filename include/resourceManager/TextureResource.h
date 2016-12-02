@@ -20,7 +20,7 @@
  * @file TextureResource.h
  * @author mslf
  * @date 21 Sep 2016
- * @brief File containing #TextureResource and it's stuff.
+ * @brief File containing #TextureResource and its stuff.
  */
 #ifndef ALONE_TEXTURERESOURCE_H
 #define ALONE_TEXTURERESOURCE_H

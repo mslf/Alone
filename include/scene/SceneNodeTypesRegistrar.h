@@ -20,7 +20,7 @@
  * @file SceneNodeTypesRegistrar.h
  * @author mslf
  * @date 5 Nov 2016
- * @brief File containing #SceneNodeTypesRegistrar and it's stuff.
+ * @brief File containing #SceneNodeTypesRegistrar and its stuff.
  */
 #ifndef ALONE_SCENENODE_TYPES_REGISTRAR_H
 #define ALONE_SCENENODE_TYPES_REGISTRAR_H

@@ -20,7 +20,7 @@
  * @file ProgressBar.h
  * @author mslf
  * @date 13 Aug 2016
- * @brief File containing #ProgressBar and it's stuff.
+ * @brief File containing #ProgressBar and its stuff.
  */
 #ifndef ALONE_PROGRESSBAR_H
 #define ALONE_PROGRESSBAR_H

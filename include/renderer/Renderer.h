@@ -20,7 +20,7 @@
  * @file Renderer.h
  * @author mslf
  * @date 10 Aug 2016
- * @brief File containing #Renderer and it's stuff.
+ * @brief File containing #Renderer and its stuff.
  */
 #ifndef ALONE_RENDERER_H
 #define ALONE_RENDERER_H

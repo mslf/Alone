@@ -20,7 +20,7 @@
  * @file TextParser.h
  * @author mslf
  * @date 6 OCt 2016
- * @brief File containing #TextParser and it's stuff.
+ * @brief File containing #TextParser and its stuff.
  */
 #ifndef ALONE_TEXTPARSER_H
 #define ALONE_TEXTPARSER_H
@@ -33,7 +33,7 @@
 
 static const char* const TextParser_standartTypeString = "type";
 /**< Standart type string for all typed resources, which are loaded from #TextParser.
- * TextParser_getString(#TextParser, #TextParser_standartTypeString, 0) should return string, which is 
+ * <tt>TextParser_getString(#TextParser, #TextParser_standartTypeString, 0)</tt> should return string, which is
  * represent type of #TextResource, which was parsed by #TextParser.
  */
 
@@ -118,10 +118,10 @@ enum TextParser_errors {
  * @note #TextParser parses TextResource#text for assigments like this:
  * <tt>lvalue = rvalue;</tt>, and this:
  * <tt>lvalue = [item1, item2, item3, ..., itemN];</tt>
- * Also, you can quote your rvalue in quotes <"> for protecting spaces:
+ * Also, you can quote your rvalue in quotes '"' for protecting spaces:
  * <tt>lvalue1 = "rvalue 1";
  *     lvalue2 = ["item 1", "item 2"];</tt>
- * You can add a multiline comments like in C in any place of TextResource#text (remove <tt>_</tt> symbol).
+ * You can add a multiline comments like in C in any place of TextResource#text (remove'_' symbol).
  * <tt>/_* comment *_/</tt>
  * @see #Pair
  */
