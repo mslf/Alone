@@ -35,7 +35,7 @@
 #include "gui/ProgressBar.h"
 #include "gui/Slider.h"
 #include "gui/TextBox.h"
-#include "item/Item.h"
+#include "body/Body.h"
 #include "user/User.h"
 #include "level/Level.h"
 

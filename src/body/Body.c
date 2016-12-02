@@ -19,29 +19,29 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#include "item/Item.h"
+#include "body/Body.h"
 
-struct Item* Item_construct(struct ResourceManager* const resourceManager, const char* const itemResId) {
-
-}
-
-void Item_destruct(struct Item* item) {
+struct Body* Body_construct(struct ResourceManager* const resourceManager, const char* const itemResId) {
 
 }
 
-void Item_save(
-        const struct Item* const item, struct ResourceManager* const resourceManager, const char* const itemResId) {
+void Body_destruct(struct Body* item) {
 
 }
 
-void Item_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+void Body_save(
+        const struct Body* const item, struct ResourceManager* const resourceManager, const char* const itemResId) {
 
 }
 
-void Item_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+void Body_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
 
 }
 
-void Item_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+void Body_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+
+}
+
+void Body_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
 
 }
