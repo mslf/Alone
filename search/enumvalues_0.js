@@ -1,5 +1,11 @@
 var searchData=
 [
+  ['body_5ferr_5fconstructig_5ftext_5fparser',['BODY_ERR_CONSTRUCTIG_TEXT_PARSER',['../_body_8h.html#af5bf97b563f56272097986deddbb573da9619cd55fb3432a50c080cf154c2b39c',1,'Body.h']]],
+  ['body_5ferr_5fconstructing_5fsprite',['BODY_ERR_CONSTRUCTING_SPRITE',['../_body_8h.html#af5bf97b563f56272097986deddbb573dac78a5d1ab8ccb2ac366c001b3387fcf6',1,'Body.h']]],
+  ['body_5ferr_5fno_5fsprite_5fres',['BODY_ERR_NO_SPRITE_RES',['../_body_8h.html#af5bf97b563f56272097986deddbb573da57d3485bd147a3b27a8d327ed8c22b34',1,'Body.h']]],
+  ['body_5ferr_5fnull_5fargument',['BODY_ERR_NULL_ARGUMENT',['../_body_8h.html#af5bf97b563f56272097986deddbb573da8f02fe7d741757947a28f947b5d4107e',1,'Body.h']]],
+  ['body_5ferr_5fsaving',['BODY_ERR_SAVING',['../_body_8h.html#af5bf97b563f56272097986deddbb573da6da3256e60981c34073603dc3dfdfd0a',1,'Body.h']]],
+  ['body_5fno_5ferrors',['BODY_NO_ERRORS',['../_body_8h.html#af5bf97b563f56272097986deddbb573daf92b72a6cc49e5780c5acc5a179cf6d7',1,'Body.h']]],
   ['button_5ferr_5fconstructig_5ffocused_5fevent',['BUTTON_ERR_CONSTRUCTIG_FOCUSED_EVENT',['../_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541a7de8f3bf9838582d53ee571e40ca4e53',1,'Button.h']]],
   ['button_5ferr_5fconstructig_5fpressed_5fevent',['BUTTON_ERR_CONSTRUCTIG_PRESSED_EVENT',['../_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541a9c2549d82bd346f5bcec701a0bf0512b',1,'Button.h']]],
   ['button_5ferr_5fconstructig_5fsprite',['BUTTON_ERR_CONSTRUCTIG_SPRITE',['../_button_8h.html#a56aa7ab9e56ca13f0d24a2aa90746541ade3209bc63b0a416a6f81f090cce00bd',1,'Button.h']]],

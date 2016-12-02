@@ -45,7 +45,7 @@ var searchData=
   ['errnoprototypes',['errNoPrototypes',['../struct_context_menu_scen_node__error_messages.html#aa3be2475688e044bcc705c1ebf0849a8',1,'ContextMenuScenNode_errorMessages']]],
   ['errnoregisteredtype',['errNoRegisteredType',['../struct_s_n_t_r__error_messages.html#ab5f0891ed645fadad2e1a572b629b9aa',1,'SNTR_errorMessages']]],
   ['errnosize',['errNoSize',['../struct_text_scene_node__error_messages.html#ab61076d9c8aba3b352c63985df0752e8',1,'TextSceneNode_errorMessages']]],
-  ['errnospriteres',['errNoSpriteRes',['../struct_progress_bar_scene_node__error_messages.html#af73c38efe2913309a68efe53ed91f3b8',1,'ProgressBarSceneNode_errorMessages']]],
+  ['errnospriteres',['errNoSpriteRes',['../struct_body_scene_node__error_messages.html#af73c38efe2913309a68efe53ed91f3b8',1,'BodySceneNode_errorMessages::errNoSpriteRes()'],['../struct_progress_bar_scene_node__error_messages.html#af73c38efe2913309a68efe53ed91f3b8',1,'ProgressBarSceneNode_errorMessages::errNoSpriteRes()']]],
   ['errnotext',['errNoText',['../struct_text_scene_node__error_messages.html#ada72601d6e9aceb2e28f7e7d831eca8e',1,'TextSceneNode_errorMessages']]],
   ['errnotype',['errNoType',['../struct_scene__error_messages.html#a0162b451d34e4eba818bd0d2062edeff',1,'Scene_errorMessages']]],
   ['errnotypestring',['errNoTypeString',['../struct_s_n_t_r__error_messages.html#af2c725550fcf165d6b23fd95239a389b',1,'SNTR_errorMessages::errNoTypeString()'],['../struct_settings__error_messages.html#af2c725550fcf165d6b23fd95239a389b',1,'Settings_errorMessages::errNoTypeString()']]],

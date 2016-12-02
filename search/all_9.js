@@ -43,6 +43,7 @@ var searchData=
   ['logger_5fenabled_5fstderr',['LOGGER_ENABLED_STDERR',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7af15daa08850e7b3258fff985bdf1d436',1,'Logger.h']]],
   ['logger_5flog',['Logger_log',['../_logger_8h.html#ad2bb1379bcb87c38f97e542afd7d7862',1,'Logger_log(struct Logger *logger, const char *const format,...):&#160;Logger.c'],['../_logger_8c.html#ad2bb1379bcb87c38f97e542afd7d7862',1,'Logger_log(struct Logger *logger, const char *const format,...):&#160;Logger.c']]],
   ['loggerstate',['LoggerState',['../_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7',1,'Logger.h']]],
+  ['logicalsize',['logicalSize',['../struct_body_scene_node__parser_strings.html#a03c3f6dde81a4c2de579059c0a562a56',1,'BodySceneNode_parserStrings::logicalSize()'],['../struct_body.html#a744d84f8d7820098b9a469afa0ab0245',1,'Body::logicalSize()'],['../struct_physical_scene_node.html#a744d84f8d7820098b9a469afa0ab0245',1,'PhysicalSceneNode::logicalSize()']]],
   ['lowermenuoptionprototype',['lowerMenuOptionPrototype',['../struct_context_menu.html#a87a9f87725ed2420c45d02d2eb15a77b',1,'ContextMenu']]],
   ['luastate',['luaState',['../struct_script_resource.html#a977f3d6715c13c5f13e6134222ffd6f8',1,'ScriptResource']]]
 ];

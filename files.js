@@ -2,6 +2,8 @@ var files =
 [
     [ "ActiveModule.h", "_active_module_8h_source.html", null ],
     [ "BackgroundModule.h", "_background_module_8h_source.html", null ],
+    [ "Body.c", "_body_8c.html", "_body_8c" ],
+    [ "Body.h", "_body_8h.html", "_body_8h" ],
     [ "Button.c", "_button_8c.html", "_button_8c" ],
     [ "Button.h", "_button_8h.html", "_button_8h" ],
     [ "CheckBox.c", "_check_box_8c.html", "_check_box_8c" ],
@@ -15,7 +17,6 @@ var files =
     [ "GameEvent.h", "_game_event_8h.html", "_game_event_8h" ],
     [ "GameManager.c", "_game_manager_8c.html", "_game_manager_8c" ],
     [ "GameManager.h", "_game_manager_8h.html", "_game_manager_8h" ],
-    [ "Item.h", "_item_8h_source.html", null ],
     [ "Level.h", "_level_8h_source.html", null ],
     [ "ListBox.c", "_list_box_8c.html", "_list_box_8c" ],
     [ "ListBox.h", "_list_box_8h.html", "_list_box_8h" ],
