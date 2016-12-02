@@ -104,6 +104,7 @@ static enum Scene_errors Scene_initSceneNode(struct Scene* scene,
     size_t index = scene->sceneNodesCount - 1;
     // Don't care about errors here, because these setters are optional
     //? You could make a code easier to read if you use C99 struct initializers
+    // It doesn't becomes easier to read. Or I can't.
     /*struct SceneNode tempSceneNode = {
         .coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1),
         .coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2),
@@ -115,23 +116,25 @@ static enum Scene_errors Scene_initSceneNode(struct Scene* scene,
         .scaleY = TextParser_getDouble(sceneTextParser, sceneNode, 8)
     };
     SceneNode_partiallyInitFrom(scene->sceneNodesList[index], &tempSceneNode);*/
-    // It doesn't becomes easier to read. Or I can't.
-    // FIXME crap.
-    scene->sceneNodesList[index]->coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1);
-    scene->sceneNodesList[index]->coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2);
-    if (scene->sceneNodesList[index]->nodeType == SCENE_NODE_DYNAMIC) {
-        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->rotatePointCoordinates.x 
-                                                                = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
-        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->rotatePointCoordinates.y 
-                                                                = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
-        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->flip 
-                                                                = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 5);
-        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->angle 
-                                                                = TextParser_getDouble(sceneTextParser, sceneNode, 6);
-        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->scaleX 
-                                                                = TextParser_getDouble(sceneTextParser, sceneNode, 7);
-        ((struct DynamicSceneNode*)(scene->sceneNodesList[index]))->scaleY 
-                                                                = TextParser_getDouble(sceneTextParser, sceneNode, 8);
+    struct SceneNode* tempSceneNode = scene->sceneNodesList[index];
+    tempSceneNode->coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1);
+    tempSceneNode->coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2);
+    if (tempSceneNode->nodeType == SCENE_NODE_DYNAMIC || tempSceneNode->nodeType == SCENE_NODE_PHYSICAL) {
+        struct DynamicSceneNode* tempDynamicSceneNode = ((struct DynamicSceneNode*)tempSceneNode);
+        tempDynamicSceneNode->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
+        tempDynamicSceneNode->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
+        tempDynamicSceneNode->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 5);
+        tempDynamicSceneNode->angle = TextParser_getDouble(sceneTextParser, sceneNode, 6);
+        tempDynamicSceneNode->scaleX = TextParser_getDouble(sceneTextParser, sceneNode, 7);
+        tempDynamicSceneNode->scaleY = TextParser_getDouble(sceneTextParser, sceneNode, 8);
+        if (tempSceneNode->nodeType == SCENE_NODE_PHYSICAL) {
+            struct PhysicalSceneNode* tempPhysicalSceneNode = ((struct PhysicalSceneNode*)tempSceneNode);
+            tempPhysicalSceneNode->logicalSize.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 9);
+            tempPhysicalSceneNode->logicalSize.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 10);
+            tempPhysicalSceneNode->velX = TextParser_getDouble(sceneTextParser, sceneNode, 11);
+            tempPhysicalSceneNode->velY = TextParser_getDouble(sceneTextParser, sceneNode, 12);
+            tempPhysicalSceneNode->angleVel = TextParser_getDouble(sceneTextParser, sceneNode, 13);
+        }
     }
     return SCENE_NO_ERRORS;
 }
