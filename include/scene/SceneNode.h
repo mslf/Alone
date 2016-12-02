@@ -97,6 +97,8 @@ struct DynamicSceneNode {
 struct PhysicalSceneNode {
     struct DynamicSceneNode dynamicSceneNode;
     /**< Includes #DynamicSceneNode for compatibility with simple #DynamicSceneNode. */
+    SDL_Point logicalSize;
+    /**< Logical size of physical object. */
     double velX;
     /**< Velosity of #PhysicalSceneNode by X axis. */
     double velY;

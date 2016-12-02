@@ -54,7 +54,7 @@ void SceneNode_initDynamic(struct DynamicSceneNode* dynamicSceneNode) {
 }
 
 void SceneNode_initPhysical(struct PhysicalSceneNode* physicalSceneNode) {
-    if (physicalSceneNode)
+    if (!physicalSceneNode)
         return;
     SceneNode_initDynamic((struct DynamicSceneNode*)physicalSceneNode);
     physicalSceneNode->dynamicSceneNode.sceneNode.nodeType = SCENE_NODE_PHYSICAL;
