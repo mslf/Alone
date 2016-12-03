@@ -32,7 +32,7 @@
 #include "resourceManager/TextResource.h"
 
 static const char* const TextParser_standartTypeString = "type";
-/**< Standart type string for all typed resources, which are loaded from #TextParser.
+/**< Standard type string for all typed resources, which are loaded from #TextParser.
  * <tt>TextParser_getString(#TextParser, #TextParser_standartTypeString, 0)</tt> should return string, which is
  * represent type of #TextResource, which was parsed by #TextParser.
  */

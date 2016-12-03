@@ -123,7 +123,7 @@ enum CheckBoxState {
 };
 
 /**
- * @brief Standart Gui element to be clicked with holding it's state through the frames.
+ * @brief Standard Gui element to be clicked with holding it's state through the frames.
  * Has focused, checked and unChecked #GameEvent and #SoundResource.
  * User can click the #CheckBox, and some things will happen (such a #GameEvent or sound playing).
  * Also it's useful for other Gui elements, which are needed to be clicked with saving state.

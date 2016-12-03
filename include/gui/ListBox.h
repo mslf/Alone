@@ -86,7 +86,7 @@ enum ListBoxSceneNode_errors {
 };
     
 /**
- * @brief Standart Gui element for list box.
+ * @brief Standard Gui element for list box.
  * Normally draws ListBox#textBox and ListBox#button.
  * If user clicks ListBox#button, then ListBox#contextMenu will be displayed.
  * User can choose some menu option, and it will appears in ListBox#textBox.

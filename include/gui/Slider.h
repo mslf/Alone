@@ -102,7 +102,7 @@ enum SliderSceneNode_buttonAllignY {
 };
 
 /**
- * @brief Standart Gui element with some possible states.
+ * @brief Standard Gui element with some possible states.
  * Based on #ProgressBar and #Button. User can click and move #Button across the #ProgressBar and it will
  * indicates current state (if possible).
  * As user releases #Button then #Button will stops on last possible state.

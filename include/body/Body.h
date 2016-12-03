@@ -69,7 +69,7 @@ enum BodySceneNode_errors {
 };
 
 /**
- * @brief Standart #PhysicalSceneNode inheritor which is just a physical version of #Sprite.
+ * @brief Standard #PhysicalSceneNode inheritor which is just a physical version of #Sprite.
  * @warning #Sprite is an inheritor of the #PhysicalSceneNode.
  * It means, that other code is use <B>pointer casting</B> to #Sprite from #PhysicalSceneNode and vise versa.
  * You <B>SHOULD</B> include the <tt>struct PhysicalSceneNode blablaNode;</tt> at the begining of #Sprite struct, 

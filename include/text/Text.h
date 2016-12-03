@@ -76,7 +76,7 @@ enum TextSceneNode_errors {
 };
     
 /**
- * @brief Standart #DynamicSceneNode inheritor to render some (typically static) text.
+ * @brief Standard #DynamicSceneNode inheritor to render some (typically static) text.
  * @warning #Text is an inheritor of the #DynamicSceneNode.
  * It means, that other code is use <B>pointer casting</B> to #Text from #DynamicSceneNode and vise versa.
  * You <B>SHOULD</B> include the <tt>struct DynamicSceneNode blablaNode;</tt> at the begining of #Text struct, 

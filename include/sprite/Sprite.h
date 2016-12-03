@@ -94,7 +94,7 @@ struct Animation {
 };
 
 /**
- * @brief Standart #DynamicSceneNode inheritor to render some texture.
+ * @brief Standard #DynamicSceneNode inheritor to render some texture.
  * Texture can be animated and can have a lot of animations.
  * Animations stores in plane texture like this:
  * <tt>A1Frame1 A1Frame2 A1Frame3 ... A1FrameN

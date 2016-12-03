@@ -72,7 +72,7 @@ enum ProgressBarSceneNode_errors {
 };
         
 /**
- * @brief Standart Gui element for drawing some progress.
+ * @brief Standard Gui element for drawing some progress.
  * It draws part (in %) of ProgressBar#spriteBar on ProgressBar#spriteBase.
  * @warning #ProgressBar is an inheritor of the SceneNode.
  * It means, that other code is use <B>pointer casting</B> to #ProgressBar from #SceneNode and vise versa.

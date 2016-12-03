@@ -85,7 +85,7 @@ enum TextBoxSceneNode_constants{
 };
 
 /**
- * @brief Standart Gui element for some text editing, builded from #Button.
+ * @brief Standard Gui element for some text editing, builded from #Button.
  * User can input, delete, copy and paste text strings in it.
  * User can click the #TextBox, and some things will happen 
  * (such a #GameEvent or sound playing in TextBox#box).

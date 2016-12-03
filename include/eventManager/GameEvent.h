@@ -50,7 +50,7 @@ static const struct GameEvent_parserStrings {
     "data"};
     
 /**
- * @brief Standart structure for #SceneNode communication and more.
+ * @brief Standard structure for #SceneNode communication and more.
  * @see #EventManager
  */
 struct GameEvent {

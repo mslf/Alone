@@ -101,7 +101,7 @@ enum ContextMenuSceneNode_constants{
 };
 
 /**
- * @brief Standart Gui element for drawing menu, builded from #Button.
+ * @brief Standard Gui element for drawing menu, builded from #Button.
  * All menuOptions are have the similar to theirs prototypes design, but 
  * events and labels can be unique for each menuOption.
  * User can click the #ContextMenu, and some things will happen 

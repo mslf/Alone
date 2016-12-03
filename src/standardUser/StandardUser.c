@@ -19,34 +19,34 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#include "user/User.h"
+#include "standardUser/StandardUser.h"
 
-struct User* User_construct(struct ResourceManager* const resourceManager, const char* const userResId) {
-
-}
-
-void User_destruct(struct User* user) {
+struct StandardUser* StandartUser_construct(struct ResourceManager* const resourceManager, const char* const userResId) {
 
 }
 
-void User_save(
-        const struct User* const user, struct ResourceManager* const resourceManager,
+void StandartUser_destruct(struct StandardUser* standardUser) {
+
+}
+
+void StandartUser_save(
+        const struct StandardUser* const standardUser, struct ResourceManager* const resourceManager,
         const char* const userResId) {
 
 }
 
-void User_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+void StandartUser_control(struct SceneNode* sceneNode, struct EventManager* eventManager) {
 
 }
 
-void User_update(struct SceneNode* sceneNode, struct EventManager* eventManager){
+void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
 
 }
 
-void User_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+void StandartUser_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
 
 }
 
-void User_sound(struct SceneNode* sceneNode, struct Musican* musican) {
+void StandartUser_sound(struct SceneNode* sceneNode, struct Musican* musican){
 
 }

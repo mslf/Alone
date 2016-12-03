@@ -19,8 +19,8 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef ALONE_USER_H
-#define ALONE_USER_H
+#ifndef ALONE_STANDARD_USER_H
+#define ALONE_STANDARD_USER_H
 
 #include <SDL2/SDL.h>
 #include "scene/SceneNode.h"
@@ -34,7 +34,7 @@
 #include "resourceManager/SoundResource.h"
 #include "module/section/MacroSection.h"
 
-#define USER_SCENENODE_PARSER_TYPE_STRING "User"
+#define USER_SCENENODE_PARSER_TYPE_STRING "StandardUser"
 /*
  * User is an inheritor of the PhysicalSceneNode.
  * You SHOULD include the "struct PhysicalSceneNode* blablaNode;" at the begining of User struct,
@@ -47,7 +47,7 @@ struct InventoryItem {
     size_t count;
 };
 
-struct User {
+struct StandardUser {
     struct PhysicalSceneNode* physicalSceneNode;
     struct TextResource* spriteResource;
     struct TextureResource* textureResource;
@@ -63,15 +63,15 @@ struct User {
     SDL_Rect* dstRect;
 };
 
-struct User* User_construct(struct ResourceManager* const resourceManager, const char* const userResId);
-void User_destruct(struct User* user);
+struct StandardUser* StandartUser_construct(struct ResourceManager* const resourceManager, const char* const userResId);
+void StandartUser_destruct(struct StandardUser* standardUser);
 
-void User_save(
-        const struct User* const user, struct ResourceManager* const resourceManager,
+void StandartUser_save(
+        const struct StandardUser* const standardUser, struct ResourceManager* const resourceManager,
         const char* const userResId);
-void User_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void User_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
-void User_render(struct SceneNode* sceneNode, struct Renderer* renderer);
-void User_sound(struct SceneNode* sceneNode, struct Musican* musican);
+void StandartUser_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void StandartUser_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void StandartUser_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
-#endif //ALONE_USER_H
+#endif //ALONE_STANDARD_USER_H
