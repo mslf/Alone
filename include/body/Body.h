@@ -69,11 +69,11 @@ enum BodySceneNode_errors {
 };
 
 /**
- * @brief Standard #PhysicalSceneNode inheritor which is just a physical version of #Sprite.
- * @warning #Sprite is an inheritor of the #PhysicalSceneNode.
- * It means, that other code is use <B>pointer casting</B> to #Sprite from #PhysicalSceneNode and vise versa.
- * You <B>SHOULD</B> include the <tt>struct PhysicalSceneNode blablaNode;</tt> at the begining of #Sprite struct, 
- * if you want code to work with #Sprite like with a #PhysicalSceneNode. 
+ * @brief Standard #PhysicalSceneNode inheritor which is just a physical version of #Body.
+ * @warning #Body is an inheritor of the #PhysicalSceneNode.
+ * It means, that other code is use <B>pointer casting</B> to #Body from #PhysicalSceneNode and vise versa.
+ * You <B>SHOULD</B> include the <tt>struct PhysicalSceneNode blablaNode;</tt> at the begining of #Body struct, 
+ * if you want code to work with #Body like with a #PhysicalSceneNode. 
  * More, you <B>SHOULD</B> initialize <tt>blablaNode</tt> by calling SceneNode_initPhysical().
  * Also function pointers in PhysicalSceneNode#sceneNode <B>SHOULD</B> be initialized to your function implementation.
  * Don't forget to add this warning comment to your own new #PhysicalSceneNode inheritors.
@@ -125,12 +125,13 @@ void Body_destruct(struct SceneNode* body);
 
 /**
  * @brief Saves #Body to the filesystem via #ResourceManager.
- * Before saving, it updates Body#dynamicSceneNode#sceneNode#sceneNodeTextResource with the latest changes in #Body.
+ * Before saving, it updates Body#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource
+ * with the latest changes in #Body.
  * @param body Pointer to a #Body which will be saved. Can be NULL.
  * @param resourceManager Pointer to a #ResourceManager which is used to 
- * save Body#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeBodyResource. Can be NULL.
+ * save Body#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource. Can be NULL.
  * @param spriteResId Path string, where #ResourceManager will 
- * save Body#dynamicSceneNode#sceneNode#sceneNodeBodyResource. Can be NULL.
+ * save Body#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource. Can be NULL.
  * @return #BodySceneNode_errors value.
  * @see #Body
  * @see #SceneNode
