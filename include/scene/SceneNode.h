@@ -59,6 +59,12 @@ struct SceneNode {
     /**< String with type of #SceneNode inheritor. */
     SDL_Point coordinates;
     /**< Coordinates of #SceneNode in Upixels. */
+    SDL_Point parallax;
+    /**< Affects on how relatively should be converted coordinates (or other numbers) to the real pixels.
+     * If it is 100, then there is no any parallax (just converting coordinates).
+     * If is e.g. 50, then all offsets will be divided by two (50/100).
+     * If it is e.g. -50, then all offsets will be divided by minus two, so it will be moved in  half opposite way.
+     */
     void (*control)(struct SceneNode* sceneNode, struct EventManager* eventManager);
     /**< Pointer to a function, that implements controlling of #SceneNode inheritor. */
     void (*update)(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);

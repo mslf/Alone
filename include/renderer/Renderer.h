@@ -71,11 +71,14 @@ void Renderer_destruct(struct Renderer* renderer);
 /**
  * @brief Converts Upixels absolute coordinates to the real pixels, 
  * based on Renderer#virtualScreenSize, Renderer#currentScreenSize and Renderer#cameraPosition.
+ * Also, parallax effect will be applyed.
  * @param renderer Pointer to a #Renderer with needed numbers. Can be NULL.
  * @param point SDL_Point with world absolute coordinates in Upixels.
+ * @param parallax SDL_Point with parallax offsets.
+ * @see #SceneNode
  * @return SDL_Point with a screen and camera relative coordinates in real pixels.
  */
-SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point);
+SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point, SDL_Point parallax);
 
 /**
  * @brief Converts Upixels absolute coordinates to the real pixels, 

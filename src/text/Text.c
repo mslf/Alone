@@ -273,7 +273,7 @@ void Text_update(struct SceneNode* sceneNode, struct EventManager* eventManager,
     if (!sceneNode || !renderer)
         return;
     struct Text* text = (struct Text*)sceneNode;
-    SDL_Point coordinates = Renderer_convertCoordinates(renderer, text->dynamicSceneNode.sceneNode.coordinates);
+    SDL_Point coordinates = Renderer_convertCoordinates(renderer, sceneNode->coordinates, sceneNode->parallax);
     text->dstRect.x = coordinates.x;
     text->dstRect.y = coordinates.y;
     SDL_Point size;

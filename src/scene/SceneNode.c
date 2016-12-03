@@ -31,6 +31,8 @@ void SceneNode_init(struct SceneNode* sceneNode) {
     sceneNode->isActive = true;
     sceneNode->coordinates.x = 0;
     sceneNode->coordinates.y = 0;
+    sceneNode->parallax.x = 100;
+    sceneNode->parallax.y = 100;
     sceneNode->type = NULL;
     sceneNode->control = NULL;
     sceneNode->render = NULL;
