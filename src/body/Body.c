@@ -134,10 +134,17 @@ struct SceneNode* Body_construct(struct ResourceManager* const resourceManager,
     if (!body)
         return NULL;
     SceneNode_initPhysical(&(body->physicalSceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (Body_tryGetSettingsFromTextParser(body, resourceManager, renderer, sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         Body_destruct((struct SceneNode*)body);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     body->physicalSceneNode.dynamicSceneNode.sceneNode.update = Body_update;
     body->physicalSceneNode.dynamicSceneNode.sceneNode.render = Body_render;
     body->physicalSceneNode.dynamicSceneNode.sceneNode.destruct = Body_destruct;

@@ -237,11 +237,18 @@ struct SceneNode* CheckBox_construct(struct ResourceManager* const resourceManag
     if (!checkBox)
         return NULL;
     SceneNode_init(&(checkBox->sceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (CheckBox_tryGetSettingsFromTextParser(checkBox, resourceManager, renderer,
                                                 sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         CheckBox_destruct((struct SceneNode*)checkBox);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     checkBox->sceneNode.control = CheckBox_control;
     checkBox->sceneNode.update = CheckBox_update;
     checkBox->sceneNode.render = CheckBox_render;

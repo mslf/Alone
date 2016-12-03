@@ -144,11 +144,18 @@ struct SceneNode* ProgressBar_construct(struct ResourceManager* const resourceMa
     if (!progressBar)
         return NULL;
     SceneNode_init(&(progressBar->sceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (ProgressBar_tryGetSettingsFromTextParser(progressBar, resourceManager, renderer,
                                                             sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         ProgressBar_destruct((struct SceneNode*)progressBar);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     progressBar->sceneNode.update = ProgressBar_update;
     progressBar->sceneNode.render = ProgressBar_render;
     progressBar->sceneNode.destruct = ProgressBar_destruct;

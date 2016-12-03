@@ -228,10 +228,17 @@ struct SceneNode* ListBox_construct(struct ResourceManager* const resourceManage
     if (!listBox)
         return NULL;
     SceneNode_init(&(listBox->sceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (ListBox_tryGetSettingsFromTextParser(listBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         ListBox_destruct((struct SceneNode*)listBox);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     listBox->sceneNode.control = ListBox_control;
     listBox->sceneNode.update = ListBox_update;
     listBox->sceneNode.render = ListBox_render;

@@ -268,10 +268,17 @@ struct SceneNode* Button_construct(struct ResourceManager* const resourceManager
     if (!button)
         return NULL;
     SceneNode_init(&(button->sceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (Button_tryGetSettingsFromTextParser(button, resourceManager, renderer, sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         Button_destruct((struct SceneNode*)button);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     button->sceneNode.control = Button_control;
     button->sceneNode.update = Button_update;
     button->sceneNode.render = Button_render;

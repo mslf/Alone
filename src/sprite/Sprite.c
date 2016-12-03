@@ -219,10 +219,17 @@ struct SceneNode* Sprite_construct(struct ResourceManager* const resourceManager
     if (!sprite)
         return NULL;
     SceneNode_initDynamic(&(sprite->dynamicSceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (Sprite_tryGetSettingsFromTextParser(sprite, resourceManager, renderer, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         Sprite_destruct((struct SceneNode*)sprite);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     sprite->dynamicSceneNode.sceneNode.update = Sprite_update;
     sprite->dynamicSceneNode.sceneNode.render = Sprite_render;
     sprite->dynamicSceneNode.sceneNode.destruct = Sprite_destruct;

@@ -135,6 +135,10 @@ struct TextParser {
     enum TextParser_errors lastError;
     /**< Place for storing errors (if function return other useful value),
      * which are happened while doing some things with existing #TextParser. */
+    const char* file;
+    /**< String with ID (path) of file, which is parsed by #TextParser. Used for error messages. */
+    //size_t lineNumber;
+    /**< Indicates current line number. Used for error messages. */
 };
 
 /**

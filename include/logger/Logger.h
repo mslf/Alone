@@ -25,6 +25,8 @@
 #ifndef ALONE_LOGGER_H
 #define ALONE_LOGGER_H
 
+#include <stdbool.h>
+
 /**
  * @brief Possible #Logger states.
  */
@@ -40,10 +42,16 @@ enum LoggerState {
 /**
  * @brief Logging subsystem.
  * @note Logging to file is not implemented yet.
+ * @note Logger_saveUsedFlagAndSetToFalse() saves only one level of nesting.
+ * // FIXME Consider using stack?
  */
 struct Logger {
     enum LoggerState state;
     /**< Current #Logger state. */
+    bool wasUsed;
+    /**< Sets to true, when some logs was wrote. */
+    bool lastWasUsed;
+    /**< State of Logger#wasUsed before calling Logger_saveUsedFlagAndSetToFalse(). */
 };
 
 /**
@@ -54,4 +62,15 @@ struct Logger {
  */
 void Logger_log(struct Logger* logger, const char* const format, ...);
 
+/**
+ * @brief Saves Logger#wasUsed to Logger#lastWasUsed and sets Logger#wasUsed to false.
+ * @param logger Pointer to a #Logger, where flags will be set.
+ */
+void Logger_saveUsedFlagAndSetToFalse(struct Logger* logger);
+
+/**
+ * @brief Sets Logger#wasUsed to Logger#lastWasUsed.
+ * @param logger Pointer to a #Logger, where flag will be set.
+ */
+void Logger_revertUsedFlag(struct Logger* logger);
 #endif //ALONE_LOGGER_H

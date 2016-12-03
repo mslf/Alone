@@ -32,6 +32,19 @@ void Logger_log(struct Logger* logger, const char* const format, ...) {
         va_start(argptr, format);
         vfprintf(stderr, format, argptr);
         va_end(argptr);
+        logger->wasUsed = true;
         fprintf(stderr, "\n");
     }
+}
+
+void Logger_saveUsedFlagAndSetToFalse(struct Logger* logger) {
+    if (logger) {
+        logger->lastWasUsed = logger->wasUsed;
+        logger->wasUsed = false;
+    }
+}
+
+void Logger_revertUsedFlag(struct Logger* logger) {
+    if (logger)
+        logger->wasUsed = logger->lastWasUsed;
 }

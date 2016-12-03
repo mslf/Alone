@@ -718,7 +718,7 @@ static enum TextParser_errors TextParser_addPair(struct Logger* logger,
  * @see #TextParser_errors
  * @note You should free memory of dstText by yourself.
  */
-static enum TextParser_errors TextParser_deleteComments(char* const srcText, char** dstText) {
+static enum TextParser_errors TextParser_deleteComments(const char* srcText, char** dstText) {
     assert(srcText);
     assert(dstText);
     size_t length = strlen(srcText);
@@ -781,17 +781,17 @@ static enum TextParser_errors TextParser_deleteComments(char* const srcText, cha
  * @see #TextParser_constants
  * @see #TextParser_errorMesssages
  */
-static enum TextParser_errors TextParser_parseTextResource(struct Logger* logger,
+static enum TextParser_errors TextParser_parseText(struct Logger* logger,
                                                            struct TextParser* textParser,
-                                                           const struct TextResource* const textResource) {
+                                                           const char* text) {
     assert(textParser);
-    assert(textResource);
+    assert(text);
     char* leftValueString = NULL;
     char* rightValueString = NULL;
     leftValueString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_VALUE_STRING);
     rightValueString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_VALUE_STRING);
     if (!leftValueString || !rightValueString) {
-        Logger_log(logger, "%s ResourceID: %s", TextParser_errorMessages.errValueStringAlloc, textResource->id);
+        Logger_log(logger, "%s File: %s", TextParser_errorMessages.errValueStringAlloc, textParser->file);
         TextParser_destructTempValueStrings(leftValueString, rightValueString);
         return TEXT_PARSER_ERR_ALLOC_STRING;
     }
@@ -802,7 +802,7 @@ static enum TextParser_errors TextParser_parseTextResource(struct Logger* logger
     size_t i = 0;
     enum TextParser_errors state = TEXT_PARSER_NO_ERRORS;
     char* tempText = NULL;
-    if (TextParser_deleteComments(textResource->text, &tempText)) {
+    if (TextParser_deleteComments(text, &tempText)) {
         Logger_log(logger, TextParser_errorMessages.errDeletingComments);
         return TEXT_PARSER_ERR_DELETING_COMMENTS;
     }
@@ -815,12 +815,12 @@ static enum TextParser_errors TextParser_parseTextResource(struct Logger* logger
         if (state == TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF) {
             Logger_log(logger,
                        "%s ResourceID: %s", TextParser_errorMessages.errUnexpectedEofWhileSplittingAssigment,
-                       textResource->id);
+                       textParser->file);
             TextParser_destructTempValueStrings(leftValueString, rightValueString);
             return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF;
         }
         if (state == TEXT_PARSER_ERR_SPLITTING_ASSIGMENT) {
-            Logger_log(logger, "%s ResourceID: %s", TextParser_errorMessages.errSpliting, textResource->id);
+            Logger_log(logger, "%s ResourceID: %s", TextParser_errorMessages.errSpliting, textParser->file);
             TextParser_destructTempValueStrings(leftValueString, rightValueString);
             return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT;
         }
@@ -828,7 +828,7 @@ static enum TextParser_errors TextParser_parseTextResource(struct Logger* logger
             enum TextParser_errors result = TextParser_addPair(logger, textParser, leftValueString, leftCounter,
                                                                rightValueString, rightCounter);
             if (result) {
-                Logger_log(logger, "\t in ResourceID: %s", textResource->id);
+                Logger_log(logger, "\t in ResourceID: %s", textParser->file);
                 return result;
             }
         }
@@ -846,7 +846,8 @@ struct TextParser* TextParser_constructFromTextResource(struct Logger* logger,
     textParser = TextParser_constructEmpty();
     if (!textParser)
         return NULL;
-    if (TextParser_parseTextResource(logger, textParser, textResource)) {
+    textParser->file = textResource->id;
+    if (TextParser_parseText(logger, textParser, textResource->text)) {
         TextParser_destruct(textParser);
         return  NULL;
     }
@@ -858,6 +859,7 @@ struct TextParser* TextParser_constructEmpty() {
     textParser = (struct TextParser*)calloc(1, sizeof(struct TextParser));
     if (!textParser)
         return NULL;
+    textParser->file = "NO_FILE";
     textParser->pairsCount = 0;
     textParser->pairsList = (struct Pair*)malloc(sizeof(struct Pair) * TP_INITIAL_NUMBER_ALLOCATED_PAIRS);
     if (!textParser->pairsList) {

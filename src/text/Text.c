@@ -53,8 +53,8 @@ static const struct TextSceneNode_errorMessages {
  * @param resourceManager Pointer to a #ResourceManager for passing to Text_regenerateTexture().
  * @param renderer Pointer to a #Renderer for passing to Text_regenerateTexture().
  * @param textParser Pointer to a #TextParser with data strings for initializing #Text.
- * @param logFlag Poinnter to a bool flag. Will be set if sobe log happened in this function.
  * @return TextSceneNode_errors value.
+ * @note This function may set Logger#wasUsed flag.
  * @see #TextSceneNode_errors
  * @see #TextSceneNode_parserStrings
  * @see Text_regenerateTexture()
@@ -63,42 +63,40 @@ static const struct TextSceneNode_errorMessages {
 static enum TextSceneNode_errors Text_tryGetSettingsFromTextParser(struct Text* text,
                                                                    struct ResourceManager* const resourceManager,
                                                                    struct Renderer* const renderer,
-                                                                   struct TextParser* textParser,
-                                                                   bool* logFlag) {
+                                                                   struct TextParser* textParser) {
     assert(text);
     assert(resourceManager);
     assert(renderer);
     assert(textParser);
-    assert(logFlag);
     const char* tempFontPath = TextParser_getString(textParser, TextSceneNode_parserStrings.fontPath, 0);
-    if (!tempFontPath && ++(*logFlag)) {
+    if (!tempFontPath) {
         Logger_log(renderer->logger, TextSceneNode_errorMessages.errNoFontPath);
         tempFontPath = TextSceneNode_default.fontPath;
     }
     const char* tempTextString = TextParser_getString(textParser, TextSceneNode_parserStrings.text, 0);
-    if (!tempTextString && ++(*logFlag)) {
+    if (!tempTextString) {
         Logger_log(renderer->logger, TextSceneNode_errorMessages.errNoText);
         tempTextString = TextSceneNode_default.text;
     }
     size_t tempSize = (int)TextParser_getInt(textParser, TextSceneNode_parserStrings.size, 0);
-    if (tempSize <= 0 && ++(*logFlag)) {
+    if (tempSize <= 0) {
         Logger_log(renderer->logger, TextSceneNode_errorMessages.errNoSize);
         tempSize = TextSceneNode_default.size;
     }
     SDL_Color tempColor;
     tempColor.r = (Uint8)TextParser_getInt(textParser, TextSceneNode_parserStrings.color, 0);
-    if (textParser->lastError && ++(*logFlag)) {
+    if (textParser->lastError) {
         Logger_log(renderer->logger, TextSceneNode_errorMessages.errNoColor);
         tempColor = TextSceneNode_default.color;
     }
     tempColor.g = (Uint8)TextParser_getInt(textParser, TextSceneNode_parserStrings.color, 1);
-    if (textParser->lastError && ++(*logFlag))
+    if (textParser->lastError)
         tempColor.g = TextSceneNode_default.color.g;
     tempColor.b = (Uint8)TextParser_getInt(textParser, TextSceneNode_parserStrings.color, 2);
-    if (textParser->lastError && ++(*logFlag))
+    if (textParser->lastError)
         tempColor.b = TextSceneNode_default.color.b;
     tempColor.a = (Uint8)TextParser_getInt(textParser, TextSceneNode_parserStrings.color, 3);
-    if (textParser->lastError && ++(*logFlag))
+    if (textParser->lastError)
         tempColor.a = TextSceneNode_default.color.a;
     return Text_regenerateTexture(text, resourceManager, renderer, tempTextString, tempFontPath, tempSize, tempColor);
 }
@@ -119,17 +117,17 @@ struct SceneNode* Text_construct(struct ResourceManager* const resourceManager,
     text->fontPath = NULL;
     text->text = NULL;
     SceneNode_initDynamic(&(text->dynamicSceneNode));
-    bool logFlag = 0;
-    if (Text_tryGetSettingsFromTextParser(text, resourceManager, renderer, textParser, &logFlag)) {
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
+    if (Text_tryGetSettingsFromTextParser(text, resourceManager, renderer, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         Text_destruct((struct SceneNode*)text);
         return NULL;
     }
-    if (logFlag) {
-        /*char tempString[600];
-        sprintf(tempString, "\tin ResourceID: %s", textResId);*/
-        // FIXME: correct error message displaying
-        Logger_log(resourceManager->logger, "NOT_ENOUGH_DATA_TO_DISPLAY_ERROR_MESSAGE");
-    }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     text->dynamicSceneNode.sceneNode.update = Text_update;
     text->dynamicSceneNode.sceneNode.render = Text_render;
     text->dynamicSceneNode.sceneNode.destruct = Text_destruct;

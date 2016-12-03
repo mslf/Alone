@@ -107,10 +107,17 @@ struct SceneNode* TextBox_construct(struct ResourceManager* const resourceManage
     if (!textBox)
         return NULL;
     SceneNode_init(&(textBox->sceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (TextBox_tryGetSettingsFromTextParser(textBox, resourceManager, renderer, sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         TextBox_destruct((struct SceneNode*)textBox);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     textBox->sceneNode.control = TextBox_control;
     textBox->sceneNode.update = TextBox_update;
     textBox->sceneNode.render = TextBox_render;

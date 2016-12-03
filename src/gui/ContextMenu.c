@@ -222,11 +222,18 @@ struct SceneNode* ContextMenu_construct(struct ResourceManager* const resourceMa
         return NULL;
     }
     contextMenu->allocatedMenuOptions = CONTEXT_MENU_SCENENODE_INITIAL_NUMBER_ALLOCATED_MENU_OPTIONS;
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (ContextMenu_tryGetSettingsFromTextParser(contextMenu, resourceManager, renderer,
                                                     sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         ContextMenu_destruct((struct SceneNode*)contextMenu);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     contextMenu->sceneNode.control = ContextMenu_control;
     contextMenu->sceneNode.update = ContextMenu_update;
     contextMenu->sceneNode.render = ContextMenu_render;

@@ -191,11 +191,18 @@ struct SceneNode* Slider_construct(struct ResourceManager* const resourceManager
     if (!slider)
         return NULL;
     SceneNode_init(&(slider->sceneNode));
+    Logger_saveUsedFlagAndSetToFalse(renderer->logger);
     if (Slider_tryGetSettingsFromTextParser(slider, resourceManager, renderer,
                                             sceneNodeTypesRegistrar, textParser)) {
+        if (renderer->logger->wasUsed)
+            Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+        Logger_revertUsedFlag(renderer->logger);
         Slider_destruct((struct SceneNode*)slider);
         return NULL;
     }
+    if (renderer->logger->wasUsed)
+        Logger_log(renderer->logger, "\tin file: %s", textParser->file);
+    Logger_revertUsedFlag(renderer->logger);
     slider->sceneNode.control = Slider_control;
     slider->sceneNode.update = Slider_update;
     slider->sceneNode.render = Slider_render;
