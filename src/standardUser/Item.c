@@ -1,0 +1,51 @@
+/*
+	Copyright 2016 Golikov Vitaliy
+
+	This file is part of Alone.
+
+	Alone is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	Alone is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with Alone. If not, see <http://www.gnu.org/licenses/>.
+*/
+/**
+ * @file Item.c
+ * @author mslf
+ * @date 3 Dec 2016
+ * @brief File containing implementation of #Item.
+ */
+
+#include "standardUser/Item.h"
+
+struct SceneNode* Item_construct(struct ResourceManager* const resourceManager,
+                                 struct Renderer* const renderer,
+                                 struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                 struct TextParser* const textParser) {
+
+}
+
+void Item_destruct(struct SceneNode* item){
+
+}
+
+enum ItemSceneNode_errors Item_save(const struct Item* const item,
+                                    struct ResourceManager* const resourceManager,
+                                    const char* const itemResId){
+
+}
+
+void Item_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {
+
+}
+
+void Item_render(struct SceneNode* sceneNode, struct Renderer* renderer) {
+
+}

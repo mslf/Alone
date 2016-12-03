@@ -236,7 +236,7 @@ void StandartUser_control(struct SceneNode* sceneNode, struct EventManager* even
  * @warning Passing #SceneNode inheritors, which is not #StandardUser is not accepted!
  * @note Don't use this function for drawing.
  */
-void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 
 /**
  * @brief Function to render #StandardUser on the screen.

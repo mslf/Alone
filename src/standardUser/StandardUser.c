@@ -1,6 +1,3 @@
-//
-// Created by mslf on 9/28/16.
-//
 /*
 	Copyright 2016 Golikov Vitaliy
 
@@ -19,19 +16,28 @@
 	You should have received a copy of the GNU General Public License
 	along with Alone. If not, see <http://www.gnu.org/licenses/>.
 */
+/**
+ * @file StandardUser.c
+ * @author mslf
+ * @date 28 Sep 2016
+ * @brief File containing implementation of #StandardUser.
+ */
 #include "standardUser/StandardUser.h"
 
-struct StandardUser* StandartUser_construct(struct ResourceManager* const resourceManager, const char* const userResId) {
+struct SceneNode* StandardUser_construct(struct ResourceManager* const resourceManager,
+                                         struct Renderer* const renderer,
+                                         struct SceneNodeTypesRegistrar* sceneNodeTypesRegistrar,
+                                         struct TextParser* const textParser) {
 
 }
 
-void StandartUser_destruct(struct StandardUser* standardUser) {
+void StandartUser_destruct(struct SceneNode* standardUser) {
 
 }
 
-void StandartUser_save(
-        const struct StandardUser* const standardUser, struct ResourceManager* const resourceManager,
-        const char* const userResId) {
+enum StandardUserSceneNode_errors StandardUser_save(const struct StandardUser* const standardUser,
+                                                    struct ResourceManager* const resourceManager,
+                                                    const char* const userResId) {
 
 }
 
@@ -39,7 +45,7 @@ void StandartUser_control(struct SceneNode* sceneNode, struct EventManager* even
 
 }
 
-void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager) {
+void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer) {
 
 }
 

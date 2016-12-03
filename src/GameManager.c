@@ -36,6 +36,7 @@
 #include "gui/Slider.h"
 #include "gui/TextBox.h"
 #include "body/Body.h"
+#include "standardUser/Item.h"
 #include "standardUser/StandardUser.h"
 #include "level/Level.h"
 
@@ -109,13 +110,16 @@ static enum GameManager_errors GameManager_registerSceneNodeTypes(struct GameMan
     result += (SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                ListBoxSceneNode_parserStrings.type,
                                                                ListBox_construct) != 0);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+    result += (SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                BodySceneNode_parserStrings.type,
-                                                               Body_construct);
+                                                               Body_construct) != 0);
+    result += (SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+                                                               ItemSceneNode_parserStrings.type,
+                                                               Item_construct) != 0);
+    result += (SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
+                                                               StandardUser_parserStrings.type,
+                                                               StandardUser_construct) != 0);
     /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
-                                                               USER_SCENENODE_PARSER_TYPE_STRING,
-                                                               NULL);
-    result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar, 
                                                                LEVEL_SCENENODE_PARSER_TYPE_STRING,
                                                                NULL);*/
     if (result)
