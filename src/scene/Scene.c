@@ -119,21 +119,23 @@ static enum Scene_errors Scene_initSceneNode(struct Scene* scene,
     struct SceneNode* tempSceneNode = scene->sceneNodesList[index];
     tempSceneNode->coordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 1);
     tempSceneNode->coordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 2);
+    tempSceneNode->parallax.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
+    tempSceneNode->parallax.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
     if (tempSceneNode->nodeType == SCENE_NODE_DYNAMIC || tempSceneNode->nodeType == SCENE_NODE_PHYSICAL) {
         struct DynamicSceneNode* tempDynamicSceneNode = ((struct DynamicSceneNode*)tempSceneNode);
-        tempDynamicSceneNode->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 3);
-        tempDynamicSceneNode->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 4);
-        tempDynamicSceneNode->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 5);
-        tempDynamicSceneNode->angle = TextParser_getDouble(sceneTextParser, sceneNode, 6);
-        tempDynamicSceneNode->scaleX = TextParser_getDouble(sceneTextParser, sceneNode, 7);
-        tempDynamicSceneNode->scaleY = TextParser_getDouble(sceneTextParser, sceneNode, 8);
+        tempDynamicSceneNode->rotatePointCoordinates.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 5);
+        tempDynamicSceneNode->rotatePointCoordinates.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 6);
+        tempDynamicSceneNode->flip = (SDL_RendererFlip)TextParser_getInt(sceneTextParser, sceneNode, 7);
+        tempDynamicSceneNode->angle = TextParser_getDouble(sceneTextParser, sceneNode, 8);
+        tempDynamicSceneNode->scaleX = TextParser_getDouble(sceneTextParser, sceneNode, 9);
+        tempDynamicSceneNode->scaleY = TextParser_getDouble(sceneTextParser, sceneNode, 10);
         if (tempSceneNode->nodeType == SCENE_NODE_PHYSICAL) {
             struct PhysicalSceneNode* tempPhysicalSceneNode = ((struct PhysicalSceneNode*)tempSceneNode);
-            tempPhysicalSceneNode->logicalSize.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 9);
-            tempPhysicalSceneNode->logicalSize.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 10);
-            tempPhysicalSceneNode->velX = TextParser_getDouble(sceneTextParser, sceneNode, 11);
-            tempPhysicalSceneNode->velY = TextParser_getDouble(sceneTextParser, sceneNode, 12);
-            tempPhysicalSceneNode->angleVel = TextParser_getDouble(sceneTextParser, sceneNode, 13);
+            tempPhysicalSceneNode->logicalSize.x = (int)TextParser_getInt(sceneTextParser, sceneNode, 11);
+            tempPhysicalSceneNode->logicalSize.y = (int)TextParser_getInt(sceneTextParser, sceneNode, 12);
+            tempPhysicalSceneNode->velX = TextParser_getDouble(sceneTextParser, sceneNode, 13);
+            tempPhysicalSceneNode->velY = TextParser_getDouble(sceneTextParser, sceneNode, 14);
+            tempPhysicalSceneNode->angleVel = TextParser_getDouble(sceneTextParser, sceneNode, 15);
         }
     }
     return SCENE_NO_ERRORS;

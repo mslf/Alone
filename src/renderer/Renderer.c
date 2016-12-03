@@ -117,10 +117,10 @@ void Renderer_destruct(struct Renderer* renderer) {
 
 SDL_Point Renderer_convertCoordinates(struct Renderer* renderer, SDL_Point point, SDL_Point parallax) {
     SDL_Point newPoint = {
-        renderer->currentScreenSize.x * (point.x - renderer->cameraPosition.x) /
-                renderer->virtualScreenSize.x * parallax.x / 100,
-        renderer->currentScreenSize.y * (point.y - renderer->cameraPosition.y) /
-                renderer->virtualScreenSize.y * parallax.y / 100};
+        renderer->currentScreenSize.x * (point.x - renderer->cameraPosition.x  * parallax.x / 100) /
+                renderer->virtualScreenSize.x,
+        renderer->currentScreenSize.y * (point.y - renderer->cameraPosition.y * parallax.y / 100) /
+                renderer->virtualScreenSize.y};
     return newPoint;
 }
 
