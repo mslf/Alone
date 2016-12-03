@@ -14,6 +14,7 @@ sceneNodes = [
 menu_2 = [
     "data/menus/menu2.contextMenu",
     10, 10,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -22,6 +23,7 @@ menu_2 = [
 menu_3 = [
     "data/menus/menu3.contextMenu",
     170, 10,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -30,6 +32,7 @@ menu_3 = [
 slider_1 = [
     "data/slider/slider1.slider",
     340, 10,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -38,6 +41,7 @@ slider_1 = [
 slider_2 = [
     "data/slider/slider2.slider",
     340, 40,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -46,6 +50,7 @@ slider_2 = [
 slider_3 = [
     "data/slider/slider3.slider",
     340, 70,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -54,6 +59,7 @@ slider_3 = [
 box_1 = [
     "data/textBoxes/box1.textBox",
     170, 100,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -62,6 +68,7 @@ box_1 = [
 box_2 = [
     "data/textBoxes/box1.textBox",
     170, 126,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -70,6 +77,7 @@ box_2 = [
 listBox_1 = [
     "data/listBoxes/list1.listBox",
     10, 300,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -78,6 +86,7 @@ listBox_1 = [
 listBox_2 = [
     "data/listBoxes/list2.listBox",
     250, 300,
+    100, 100,
     0, 0,
     0,
     0.0,

@@ -1,0 +1,6 @@
+type = Sprite;
+textureResource = data/background.png;
+frameSize = [1366, 768];
+framesCountsList = [1];
+frameDurationsList = [0];
+virtualSize = [1366, 768];

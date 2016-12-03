@@ -1,6 +1,7 @@
 /* Demo main scene */
 type = Scene;
 sceneNodes = [
+    background,
     sprite_1,
     sprite_2,
     cmd,
@@ -14,7 +15,8 @@ sceneNodes = [
 ];
 sprite_1 = [
     "data/demoSprite1.sprite",
-    0, 0,      /* x, y */
+    0, 0,       /* x, y */
+    100, 100,   /* parallax x, y */
     25, 25,     /* rotCX, rotCY */
     0,          /* SDL_Flip */
     0.0,        /* angle */
@@ -22,7 +24,8 @@ sprite_1 = [
 ];
 sprite_2 = [
     "data/demoSprite2.sprite",
-    350, 0,      
+    350, 0,
+    100, 100,
     25, 25,     
     0,          
     45.0,       
@@ -31,6 +34,7 @@ sprite_2 = [
 cmd = [
     "data/cmd/cmd.button",
     100, 0,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -39,6 +43,7 @@ cmd = [
 flag = [
     "data/flag/flag.checkBox",
     150, 0,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -47,6 +52,7 @@ flag = [
 demoText = [
     "data/demoText.text",
     0, 50,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -55,6 +61,7 @@ demoText = [
 bar_1 = [
     "data/bar/bar1.progressBar",
     200, 0,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -63,6 +70,7 @@ bar_1 = [
 bar_2 = [
     "data/bar/bar2.progressBar",
     250, 0,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -71,6 +79,7 @@ bar_2 = [
 bar_3 = [
     "data/bar/bar3.progressBar",
     300, 0,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -79,6 +88,7 @@ bar_3 = [
 menu_1 = [
     "data/menus/menu1.contextMenu",
     10, 100,
+    100, 100,
     0, 0,
     0,
     0.0,
@@ -86,7 +96,17 @@ menu_1 = [
 ];
 body_1 = [
     "data/body1.body",
-    50, 0,      
+    50, 0,
+    100, 100,
+    25, 25,     
+    1,          
+    0.0,       
+    1.0, 1.0
+];
+background = [
+    "data/background.sprite",
+    -160, -160,
+    80, 80,
     25, 25,     
     1,          
     0.0,       
