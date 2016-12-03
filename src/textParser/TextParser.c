@@ -744,6 +744,7 @@ static enum TextParser_errors TextParser_deleteComments(const char* srcText, cha
                     state = 2;
                     break;
                 }
+                // FIXME If next char after '/' if a '/', then comment won't be deleted.
                 (*dstText)[counter] = '/';
                 counter++;
                 (*dstText)[counter] = c;
@@ -774,7 +775,7 @@ static enum TextParser_errors TextParser_deleteComments(const char* srcText, cha
  * @brief Parse #TextResource for assigments (#Pair) and adds them to the #TextParser.
  * @param logger Pointer to a #Logger for logging purpose.
  * @param textParser Pointer to a #TextParser, where new #Pair will be added.
- * @param textResource Pointer to a #TextResource with plain text data, to be parsed as a list of assigments.
+ * @param text String with plain text data, to be parsed as a list of assigments.
  * @return #TextParser_errors value.
  * @see #TextParser_errors
  * @see #Pair
@@ -791,7 +792,7 @@ static enum TextParser_errors TextParser_parseText(struct Logger* logger,
     leftValueString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_LEFT_VALUE_STRING);
     rightValueString = (char*)malloc(sizeof(char) * TP_INITIAL_NUMBER_ALLOCATED_SYMBOLS_FOR_RIGHT_VALUE_STRING);
     if (!leftValueString || !rightValueString) {
-        Logger_log(logger, "%s File: %s", TextParser_errorMessages.errValueStringAlloc, textParser->file);
+        Logger_log(logger, "%s \n\t in file: %s", TextParser_errorMessages.errValueStringAlloc, textParser->file);
         TextParser_destructTempValueStrings(leftValueString, rightValueString);
         return TEXT_PARSER_ERR_ALLOC_STRING;
     }
@@ -803,7 +804,9 @@ static enum TextParser_errors TextParser_parseText(struct Logger* logger,
     enum TextParser_errors state = TEXT_PARSER_NO_ERRORS;
     char* tempText = NULL;
     if (TextParser_deleteComments(text, &tempText)) {
-        Logger_log(logger, TextParser_errorMessages.errDeletingComments);
+        Logger_log(logger,
+                   "%s \n\t in file: %s", TextParser_errorMessages.errDeletingComments,
+                   textParser->file);
         return TEXT_PARSER_ERR_DELETING_COMMENTS;
     }
     while (i < strlen(tempText)) {
@@ -814,13 +817,13 @@ static enum TextParser_errors TextParser_parseText(struct Logger* logger,
                                            &allocatedCharsForRightValue);
         if (state == TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF) {
             Logger_log(logger,
-                       "%s ResourceID: %s", TextParser_errorMessages.errUnexpectedEofWhileSplittingAssigment,
+                       "%s \n\t in file: %s", TextParser_errorMessages.errUnexpectedEofWhileSplittingAssigment,
                        textParser->file);
             TextParser_destructTempValueStrings(leftValueString, rightValueString);
             return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT_EOF;
         }
         if (state == TEXT_PARSER_ERR_SPLITTING_ASSIGMENT) {
-            Logger_log(logger, "%s ResourceID: %s", TextParser_errorMessages.errSpliting, textParser->file);
+            Logger_log(logger, "%s \n\t in file: %s", TextParser_errorMessages.errSpliting, textParser->file);
             TextParser_destructTempValueStrings(leftValueString, rightValueString);
             return TEXT_PARSER_ERR_SPLITTING_ASSIGMENT;
         }
@@ -828,7 +831,7 @@ static enum TextParser_errors TextParser_parseText(struct Logger* logger,
             enum TextParser_errors result = TextParser_addPair(logger, textParser, leftValueString, leftCounter,
                                                                rightValueString, rightCounter);
             if (result) {
-                Logger_log(logger, "\t in ResourceID: %s", textParser->file);
+                Logger_log(logger, "\n\t in file: %s", textParser->file);
                 return result;
             }
         }
