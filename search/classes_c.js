@@ -17,5 +17,7 @@ var searchData=
   ['soundresource',['SoundResource',['../struct_sound_resource.html',1,'']]],
   ['sprite',['Sprite',['../struct_sprite.html',1,'']]],
   ['spritescenenode_5ferrormessages',['SpriteSceneNode_errorMessages',['../struct_sprite_scene_node__error_messages.html',1,'']]],
-  ['spritescenenode_5fparserstrings',['SpriteSceneNode_parserStrings',['../struct_sprite_scene_node__parser_strings.html',1,'']]]
+  ['spritescenenode_5fparserstrings',['SpriteSceneNode_parserStrings',['../struct_sprite_scene_node__parser_strings.html',1,'']]],
+  ['standarduser',['StandardUser',['../struct_standard_user.html',1,'']]],
+  ['standarduser_5fparserstrings',['StandardUser_parserStrings',['../struct_standard_user__parser_strings.html',1,'']]]
 ];

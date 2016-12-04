@@ -1,7 +1,7 @@
 var searchData=
 [
   ['game_5fmanager_5fdefault_5fsettings_5fpath',['GAME_MANAGER_DEFAULT_SETTINGS_PATH',['../_game_manager_8c.html#aec0f487b2946f1c8ca2ace0df6df9a92',1,'GameManager.c']]],
-  ['gameevent',['GameEvent',['../struct_game_event.html',1,'']]],
+  ['gameevent',['GameEvent',['../struct_game_event.html',1,'GameEvent'],['../struct_triggered_game_event.html#a08b9bf122777a5b69978864648a34e8c',1,'TriggeredGameEvent::gameEvent()']]],
   ['gameevent_2ec',['GameEvent.c',['../_game_event_8c.html',1,'']]],
   ['gameevent_2eh',['GameEvent.h',['../_game_event_8h.html',1,'']]],
   ['gameevent_5fconstruct',['GameEvent_construct',['../_game_event_8h.html#a17dd4ecf8a47610f392bb3b4e95921c8',1,'GameEvent_construct(const char *const channel, struct SceneNode *sender, const char *const command, const char *const data):&#160;GameEvent.c'],['../_game_event_8c.html#a17dd4ecf8a47610f392bb3b4e95921c8',1,'GameEvent_construct(const char *const channel, struct SceneNode *sender, const char *const command, const char *const data):&#160;GameEvent.c']]],

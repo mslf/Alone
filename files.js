@@ -17,6 +17,8 @@ var files =
     [ "GameEvent.h", "_game_event_8h.html", "_game_event_8h" ],
     [ "GameManager.c", "_game_manager_8c.html", "_game_manager_8c" ],
     [ "GameManager.h", "_game_manager_8h.html", "_game_manager_8h" ],
+    [ "Item.c", "_item_8c.html", "_item_8c" ],
+    [ "Item.h", "_item_8h.html", "_item_8h" ],
     [ "Level.h", "_level_8h_source.html", null ],
     [ "ListBox.c", "_list_box_8c.html", "_list_box_8c" ],
     [ "ListBox.h", "_list_box_8h.html", "_list_box_8h" ],
@@ -51,6 +53,8 @@ var files =
     [ "SoundResource.h", "_sound_resource_8h.html", "_sound_resource_8h" ],
     [ "Sprite.c", "_sprite_8c.html", "_sprite_8c" ],
     [ "Sprite.h", "_sprite_8h.html", "_sprite_8h" ],
+    [ "StandardUser.c", "_standard_user_8c.html", "_standard_user_8c" ],
+    [ "StandardUser.h", "_standard_user_8h.html", "_standard_user_8h" ],
     [ "Text.c", "_text_8c.html", "_text_8c" ],
     [ "Text.h", "_text_8h.html", "_text_8h" ],
     [ "TextBox.c", "_text_box_8c.html", "_text_box_8c" ],
@@ -60,6 +64,5 @@ var files =
     [ "TextResource.c", "_text_resource_8c.html", "_text_resource_8c" ],
     [ "TextResource.h", "_text_resource_8h.html", "_text_resource_8h" ],
     [ "TextureResource.c", "_texture_resource_8c.html", "_texture_resource_8c" ],
-    [ "TextureResource.h", "_texture_resource_8h.html", "_texture_resource_8h" ],
-    [ "User.h", "_user_8h_source.html", null ]
+    [ "TextureResource.h", "_texture_resource_8h.html", "_texture_resource_8h" ]
 ];

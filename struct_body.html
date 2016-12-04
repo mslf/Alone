@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('struct_body.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Standart <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> inheritor which is just a physical version of <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a>.  
+<p>Standard <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> inheritor which is just a physical version of <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a>.  
  <a href="struct_body.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_body_8h_source.html">Body.h</a>&gt;</code></p>
@@ -105,8 +105,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:a8ea7e8ac3e3330830aa7a4309390f3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Standart <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> inheritor which is just a physical version of <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a>. </p>
-<dl class="section warning"><dt>Warning</dt><dd><a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> is an inheritor of the <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a>. It means, that other code is use <b>pointer casting</b> to <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> from <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> and vise versa. You <b>SHOULD</b> include the <code>struct <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> blablaNode;</code> at the begining of <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> struct, if you want code to work with <a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a> like with a <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a>. More, you <b>SHOULD</b> initialize <code>blablaNode</code> by calling <a class="el" href="_scene_node_8h.html#a529a3b40d6b65c84977f4bf68b246201" title="Inits PhysicalSceneNode and sets SceneNode::nodeType to SceneNodeBaseType::SCENE_NODE_PHYSICAL. ">SceneNode_initPhysical()</a>. Also function pointers in PhysicalSceneNode::sceneNode <b>SHOULD</b> be initialized to your function implementation. Don't forget to add this warning comment to your own new <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> inheritors. </dd></dl>
+<div class="textblock"><p>Standard <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> inheritor which is just a physical version of <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a>. </p>
+<dl class="section warning"><dt>Warning</dt><dd><a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a> is an inheritor of the <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a>. It means, that other code is use <b>pointer casting</b> to <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a> from <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> and vise versa. You <b>SHOULD</b> include the <code>struct <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> blablaNode;</code> at the begining of <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a> struct, if you want code to work with <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a> like with a <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a>. More, you <b>SHOULD</b> initialize <code>blablaNode</code> by calling <a class="el" href="_scene_node_8h.html#a529a3b40d6b65c84977f4bf68b246201" title="Inits PhysicalSceneNode and sets SceneNode::nodeType to SceneNodeBaseType::SCENE_NODE_PHYSICAL. ">SceneNode_initPhysical()</a>. Also function pointers in PhysicalSceneNode::sceneNode <b>SHOULD</b> be initialized to your function implementation. Don't forget to add this warning comment to your own new <a class="el" href="struct_physical_scene_node.html" title="Physical version of DynamicSceneNode. ">PhysicalSceneNode</a> inheritors. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_body_8h.html#a6a31fa8360003f6d4fb4e7f1a8e944cf" title="Function to update Body and interacting with EventManager. Pointer to that function should be at Body...">Body_update()</a> </dd>
 <dd>
 <a class="el" href="_body_8h.html#adb107cbaa77e11ce4618e4aa1890a03f" title="Function to render Body on the screen. Pointer to that function should be at Body::physicalSceneNode:...">Body_render()</a> </dd></dl>
@@ -122,7 +122,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Flag, which is need to be changed when someone tried to iteract with <a class="el" href="struct_body.html" title="Standart PhysicalSceneNode inheritor which is just a physical version of Sprite. ">Body</a>. </p>
+<p>Flag, which is need to be changed when someone tried to iteract with <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a>. </p>
 
 </div>
 </div>
@@ -137,7 +137,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="struct_body.html" title="Standart PhysicalSceneNode inheritor which is just a physical version of Sprite. ">Body</a> logical size, which will be used for iteracting with other <a class="el" href="struct_body.html" title="Standart PhysicalSceneNode inheritor which is just a physical version of Sprite. ">Body</a>. I.e. can be less or more then <a class="el" href="struct_sprite.html#adb68fcb1538fd0cf266d60d269fd692a">Sprite::virtualSize</a>. </p>
+<p><a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a> logical size, which will be used for iteracting with other <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a>. I.e. can be less or more then <a class="el" href="struct_sprite.html#adb68fcb1538fd0cf266d60d269fd692a">Sprite::virtualSize</a>. </p>
 
 </div>
 </div>
@@ -167,7 +167,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="struct_sprite.html" title="Standart DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a>, which is represents image of <a class="el" href="struct_body.html" title="Standart PhysicalSceneNode inheritor which is just a physical version of Sprite. ">Body</a>. </p>
+<p><a class="el" href="struct_sprite.html" title="Standard DynamicSceneNode inheritor to render some texture. Texture can be animated and can have a lo...">Sprite</a>, which is represents image of <a class="el" href="struct_body.html" title="Standard PhysicalSceneNode inheritor which is just a physical version of Body. ">Body</a>. </p>
 
 </div>
 </div>

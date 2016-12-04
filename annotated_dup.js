@@ -24,6 +24,9 @@ var annotated_dup =
     [ "GameManager_errorMessages", "struct_game_manager__error_messages.html", "struct_game_manager__error_messages" ],
     [ "GameManager_events", "struct_game_manager__events.html", "struct_game_manager__events" ],
     [ "InventoryItem", "struct_inventory_item.html", "struct_inventory_item" ],
+    [ "Item", "struct_item.html", "struct_item" ],
+    [ "ItemSceneNode_errorMessages", "struct_item_scene_node__error_messages.html", "struct_item_scene_node__error_messages" ],
+    [ "ItemSceneNode_parserStrings", "struct_item_scene_node__parser_strings.html", "struct_item_scene_node__parser_strings" ],
     [ "Level", "struct_level.html", "struct_level" ],
     [ "ListBox", "struct_list_box.html", "struct_list_box" ],
     [ "ListBoxSceneNode_errorMessages", "struct_list_box_scene_node__error_messages.html", "struct_list_box_scene_node__error_messages" ],
@@ -68,6 +71,8 @@ var annotated_dup =
     [ "Sprite", "struct_sprite.html", "struct_sprite" ],
     [ "SpriteSceneNode_errorMessages", "struct_sprite_scene_node__error_messages.html", "struct_sprite_scene_node__error_messages" ],
     [ "SpriteSceneNode_parserStrings", "struct_sprite_scene_node__parser_strings.html", "struct_sprite_scene_node__parser_strings" ],
+    [ "StandardUser", "struct_standard_user.html", "struct_standard_user" ],
+    [ "StandardUser_parserStrings", "struct_standard_user__parser_strings.html", "struct_standard_user__parser_strings" ],
     [ "Text", "struct_text.html", "struct_text" ],
     [ "TextBox", "struct_text_box.html", "struct_text_box" ],
     [ "TextBoxSceneNode_errorMessages", "struct_text_box_scene_node__error_messages.html", "struct_text_box_scene_node__error_messages" ],
@@ -79,5 +84,5 @@ var annotated_dup =
     [ "TextSceneNode_parserStrings", "struct_text_scene_node__parser_strings.html", "struct_text_scene_node__parser_strings" ],
     [ "TextureResource", "struct_texture_resource.html", "struct_texture_resource" ],
     [ "TextureResource_errorMessages", "struct_texture_resource__error_messages.html", "struct_texture_resource__error_messages" ],
-    [ "User", "struct_user.html", "struct_user" ]
+    [ "TriggeredGameEvent", "struct_triggered_game_event.html", "struct_triggered_game_event" ]
 ];

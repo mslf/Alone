@@ -87,18 +87,105 @@ $(document).ready(function(){initNavTree('struct_inventory_item.html','');});
 <div class="title">InventoryItem Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents an item in <a class="el" href="struct_standard_user.html" title="Standard PhysicalSceneNode inheritor which is Body with some number of SoundResource, input-triggered GameEvent, InventoryItem and MicroSection. ">StandardUser</a> inventory.  
+ <a href="struct_inventory_item.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_standard_user_8h_source.html">StandardUser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a5ac083a645d964373f022d03df4849c8"><td class="memItemLeft" align="right" valign="top"><a id="a5ac083a645d964373f022d03df4849c8"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
-<tr class="separator:a5ac083a645d964373f022d03df4849c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76d971a3c552bc58ba9f0d5fceae9806"><td class="memItemLeft" align="right" valign="top"><a id="a76d971a3c552bc58ba9f0d5fceae9806"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>count</b></td></tr>
+<tr class="memitem:a9c064aaad5082619b80df44eda8e1c63"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_resource.html">TextResource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_inventory_item.html#a9c064aaad5082619b80df44eda8e1c63">textResource</a></td></tr>
+<tr class="separator:a9c064aaad5082619b80df44eda8e1c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f8f80d37794cde9472343e4487ba3eb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_inventory_item.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></td></tr>
+<tr class="separator:a8f8f80d37794cde9472343e4487ba3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd493013564faa22504133cbb4416573"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_inventory_item.html#acd493013564faa22504133cbb4416573">itemResource</a></td></tr>
+<tr class="separator:acd493013564faa22504133cbb4416573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca12a18a790b1a1e2f33383502f8c054"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_game_event.html">GameEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_inventory_item.html#aca12a18a790b1a1e2f33383502f8c054">usedEvent</a></td></tr>
+<tr class="separator:aca12a18a790b1a1e2f33383502f8c054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76d971a3c552bc58ba9f0d5fceae9806"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_inventory_item.html#a76d971a3c552bc58ba9f0d5fceae9806">count</a></td></tr>
 <tr class="separator:a76d971a3c552bc58ba9f0d5fceae9806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents an item in <a class="el" href="struct_standard_user.html" title="Standard PhysicalSceneNode inheritor which is Body with some number of SoundResource, input-triggered GameEvent, InventoryItem and MicroSection. ">StandardUser</a> inventory. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a76d971a3c552bc58ba9f0d5fceae9806"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76d971a3c552bc58ba9f0d5fceae9806">&sect;&nbsp;</a></span>count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Count of such <a class="el" href="struct_inventory_item.html" title="Represents an item in StandardUser inventory. ">InventoryItem</a> in the <a class="el" href="struct_standard_user.html" title="Standard PhysicalSceneNode inheritor which is Body with some number of SoundResource, input-triggered GameEvent, InventoryItem and MicroSection. ">StandardUser</a> inventory. </p>
+
+</div>
+</div>
+<a id="acd493013564faa22504133cbb4416573"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd493013564faa22504133cbb4416573">&sect;&nbsp;</a></span>itemResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* itemResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_item.html" title="Standard PhysicalSceneNode inheritor which is an physical equivalent of InventoryItem. ">Item</a> resource ID, which will be created when <a class="el" href="struct_inventory_item.html" title="Represents an item in StandardUser inventory. ">InventoryItem</a> dropped from <a class="el" href="struct_standard_user.html" title="Standard PhysicalSceneNode inheritor which is Body with some number of SoundResource, input-triggered GameEvent, InventoryItem and MicroSection. ">StandardUser</a> inventory. </p>
+
+</div>
+</div>
+<a id="a8f8f80d37794cde9472343e4487ba3eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8f80d37794cde9472343e4487ba3eb">&sect;&nbsp;</a></span>name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Displaying name string of the <a class="el" href="struct_inventory_item.html" title="Represents an item in StandardUser inventory. ">InventoryItem</a>. </p>
+
+</div>
+</div>
+<a id="a9c064aaad5082619b80df44eda8e1c63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c064aaad5082619b80df44eda8e1c63">&sect;&nbsp;</a></span>textResource</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_text_resource.html">TextResource</a>* textResource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> from which <a class="el" href="struct_inventory_item.html" title="Represents an item in StandardUser inventory. ">InventoryItem</a> was constructed. </p>
+
+</div>
+</div>
+<a id="aca12a18a790b1a1e2f33383502f8c054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca12a18a790b1a1e2f33383502f8c054">&sect;&nbsp;</a></span>usedEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_game_event.html">GameEvent</a>* usedEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="struct_game_event.html" title="Standard structure for SceneNode communication and more. ">GameEvent</a>, which will happened when <a class="el" href="struct_inventory_item.html" title="Represents an item in StandardUser inventory. ">InventoryItem</a> dropped from <a class="el" href="struct_standard_user.html" title="Standard PhysicalSceneNode inheritor which is Body with some number of SoundResource, input-triggered GameEvent, InventoryItem and MicroSection. ">StandardUser</a> inventory. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="_user_8h_source.html">User.h</a></li>
+<li><a class="el" href="_standard_user_8h_source.html">StandardUser.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

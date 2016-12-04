@@ -9,7 +9,7 @@ var searchData=
   ['menuoptionslist',['menuOptionsList',['../struct_context_menu.html#ab97fe0e08e073e863f4fd62197738747',1,'ContextMenu']]],
   ['microconnection',['MicroConnection',['../struct_micro_connection.html',1,'']]],
   ['micromodule',['MicroModule',['../struct_micro_module.html',1,'']]],
-  ['microsection',['MicroSection',['../struct_micro_section.html',1,'']]],
+  ['microsection',['MicroSection',['../struct_micro_section.html',1,'MicroSection'],['../struct_standard_user.html#a0b4ce7c227ae464ff25b5e194f8e3d48',1,'StandardUser::microSection()']]],
   ['middlemenuoptionprototype',['middleMenuOptionPrototype',['../struct_context_menu.html#a0a8ee24ce84177029e35240a5d6fbac0',1,'ContextMenu']]],
   ['music',['music',['../struct_settings__parser_strings.html#a4f493dbf8fcceaed72384fc43e9f1b24',1,'Settings_parserStrings']]],
   ['musican',['Musican',['../struct_musican.html',1,'Musican'],['../struct_game_manager.html#a106db72962d8e9542c1662085e26950a',1,'GameManager::musican()']]],

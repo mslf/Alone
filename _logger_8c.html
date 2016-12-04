@@ -99,6 +99,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ad2bb1379bcb87c38f97e542afd7d7862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8c.html#ad2bb1379bcb87c38f97e542afd7d7862">Logger_log</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger, const char *const format,...)</td></tr>
 <tr class="memdesc:ad2bb1379bcb87c38f97e542afd7d7862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for logging formatted string. End line char will be added at the end of the string.  <a href="#ad2bb1379bcb87c38f97e542afd7d7862">More...</a><br /></td></tr>
 <tr class="separator:ad2bb1379bcb87c38f97e542afd7d7862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639ef32b1e1f785e93a0c3b845455636"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8c.html#a639ef32b1e1f785e93a0c3b845455636">Logger_saveUsedFlagAndSetToFalse</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger)</td></tr>
+<tr class="memdesc:a639ef32b1e1f785e93a0c3b845455636"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> to <a class="el" href="struct_logger.html#ac07f79fc02dd54e9a1f344d3594a617e">Logger::lastWasUsed</a> and sets <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> to false.  <a href="#a639ef32b1e1f785e93a0c3b845455636">More...</a><br /></td></tr>
+<tr class="separator:a639ef32b1e1f785e93a0c3b845455636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b93a1cde06c71c17873fccfe9f19646"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8c.html#a6b93a1cde06c71c17873fccfe9f19646">Logger_revertUsedFlag</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger)</td></tr>
+<tr class="memdesc:a6b93a1cde06c71c17873fccfe9f19646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> to <a class="el" href="struct_logger.html#ac07f79fc02dd54e9a1f344d3594a617e">Logger::lastWasUsed</a>.  <a href="#a6b93a1cde06c71c17873fccfe9f19646">More...</a><br /></td></tr>
+<tr class="separator:a6b93a1cde06c71c17873fccfe9f19646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File containing implementation of <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a>. </p>
@@ -146,6 +152,58 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>... You can pass other parameters, like in printf and other such functions. </dd></dl>
+
+</div>
+</div>
+<a id="a6b93a1cde06c71c17873fccfe9f19646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b93a1cde06c71c17873fccfe9f19646">&sect;&nbsp;</a></span>Logger_revertUsedFlag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logger_revertUsedFlag </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> to <a class="el" href="struct_logger.html#ac07f79fc02dd54e9a1f344d3594a617e">Logger::lastWasUsed</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a>, where flag will be set. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a639ef32b1e1f785e93a0c3b845455636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639ef32b1e1f785e93a0c3b845455636">&sect;&nbsp;</a></span>Logger_saveUsedFlagAndSetToFalse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logger_saveUsedFlagAndSetToFalse </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> to <a class="el" href="struct_logger.html#ac07f79fc02dd54e9a1f344d3594a617e">Logger::lastWasUsed</a> and sets <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> to false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a>, where flags will be set. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

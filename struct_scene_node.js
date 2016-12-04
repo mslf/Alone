@@ -5,6 +5,7 @@ var struct_scene_node =
     [ "destruct", "struct_scene_node.html#a33da6753937fe159afc33054641a556f", null ],
     [ "isActive", "struct_scene_node.html#a96eff8420fb9ee1b4c5d5f1bcace116d", null ],
     [ "nodeType", "struct_scene_node.html#a8ba1de8afbaa8cfa16a049b8aa9bb8ad", null ],
+    [ "parallax", "struct_scene_node.html#a0ac82770427c48f39aef118d548f1a31", null ],
     [ "render", "struct_scene_node.html#addb4ef28bccaae82a75ab780569a3b58", null ],
     [ "sceneNodeTextResource", "struct_scene_node.html#a9595a68ef5977595b838f7edad1bcfe3", null ],
     [ "sound", "struct_scene_node.html#a2157f5f26dcdffd419c5c675961e9a8a", null ],

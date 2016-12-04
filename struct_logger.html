@@ -97,11 +97,32 @@ $(document).ready(function(){initNavTree('struct_logger.html','');});
 Data Fields</h2></td></tr>
 <tr class="memitem:a3fb7893f6204638fe146909298361904"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_logger_8h.html#ae76f91bb9647d57a2602df8747cf77c7">LoggerState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_logger.html#a3fb7893f6204638fe146909298361904">state</a></td></tr>
 <tr class="separator:a3fb7893f6204638fe146909298361904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8090a0ffe11a884dd74f395f2ba61978"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">wasUsed</a></td></tr>
+<tr class="separator:a8090a0ffe11a884dd74f395f2ba61978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac07f79fc02dd54e9a1f344d3594a617e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_logger.html#ac07f79fc02dd54e9a1f344d3594a617e">lastWasUsed</a></td></tr>
+<tr class="separator:ac07f79fc02dd54e9a1f344d3594a617e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logging subsystem. </p>
-<dl class="section note"><dt>Note</dt><dd>Logging to file is not implemented yet. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Logging to file is not implemented yet. </dd>
+<dd>
+<a class="el" href="_logger_8h.html#a639ef32b1e1f785e93a0c3b845455636" title="Saves Logger::wasUsed to Logger::lastWasUsed and sets Logger::wasUsed to false. ">Logger_saveUsedFlagAndSetToFalse()</a> saves only one level of nesting. // FIXME Consider using stack? </dd></dl>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="ac07f79fc02dd54e9a1f344d3594a617e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac07f79fc02dd54e9a1f344d3594a617e">&sect;&nbsp;</a></span>lastWasUsed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool lastWasUsed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>State of <a class="el" href="struct_logger.html#a8090a0ffe11a884dd74f395f2ba61978">Logger::wasUsed</a> before calling <a class="el" href="_logger_8h.html#a639ef32b1e1f785e93a0c3b845455636" title="Saves Logger::wasUsed to Logger::lastWasUsed and sets Logger::wasUsed to false. ">Logger_saveUsedFlagAndSetToFalse()</a>. </p>
+
+</div>
+</div>
 <a id="a3fb7893f6204638fe146909298361904"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3fb7893f6204638fe146909298361904">&sect;&nbsp;</a></span>state</h2>
 
@@ -114,6 +135,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Current <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> state. </p>
+
+</div>
+</div>
+<a id="a8090a0ffe11a884dd74f395f2ba61978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8090a0ffe11a884dd74f395f2ba61978">&sect;&nbsp;</a></span>wasUsed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool wasUsed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets to true, when some logs was wrote. </p>
 
 </div>
 </div>

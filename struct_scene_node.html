@@ -105,6 +105,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:a23506fc4821ab6d9671f3e6222591a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a667ad041f76f3b99c2ea65cd78b668ea"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a667ad041f76f3b99c2ea65cd78b668ea">coordinates</a></td></tr>
 <tr class="separator:a667ad041f76f3b99c2ea65cd78b668ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac82770427c48f39aef118d548f1a31"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a0ac82770427c48f39aef118d548f1a31">parallax</a></td></tr>
+<tr class="separator:a0ac82770427c48f39aef118d548f1a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8153fb8b7d19bc0fb8c732014085e19b"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a8153fb8b7d19bc0fb8c732014085e19b">control</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager)</td></tr>
 <tr class="separator:a8153fb8b7d19bc0fb8c732014085e19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f53df0be4e8b1ea881a1612fecc6fd6"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_scene_node.html#a6f53df0be4e8b1ea881a1612fecc6fd6">update</a> )(struct <a class="el" href="struct_scene_node.html">SceneNode</a> *sceneNode, struct <a class="el" href="struct_event_manager.html">EventManager</a> *eventManager, struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
@@ -192,6 +194,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Determines type of <a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a>. </p>
+
+</div>
+</div>
+<a id="a0ac82770427c48f39aef118d548f1a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac82770427c48f39aef118d548f1a31">&sect;&nbsp;</a></span>parallax</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point parallax</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affects on how relatively should be converted coordinates (or other numbers) to the real pixels. If it is 100, then there is no any parallax (just converting coordinates). If is e.g. 50, then all offsets will be divided by two (50/100). If it is e.g. -50, then all offsets will be divided by minus two, so it will be moved in half opposite way. </p>
 
 </div>
 </div>

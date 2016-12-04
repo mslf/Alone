@@ -1,12 +1,15 @@
 var searchData=
 [
   ['id',['id',['../struct_script_resource.html#aecb3b0d045ada529257a2fbf8f829599',1,'ScriptResource::id()'],['../struct_sound_resource.html#aecb3b0d045ada529257a2fbf8f829599',1,'SoundResource::id()'],['../struct_text_resource.html#aecb3b0d045ada529257a2fbf8f829599',1,'TextResource::id()'],['../struct_texture_resource.html#aecb3b0d045ada529257a2fbf8f829599',1,'TextureResource::id()']]],
+  ['inventoryitemres',['inventoryItemRes',['../struct_item_scene_node__parser_strings.html#acb1faefba9ca2f155b4b22e7af45aaf5',1,'ItemSceneNode_parserStrings::inventoryItemRes()'],['../struct_item.html#a997721c08be0c231338c19e3063833e2',1,'Item::inventoryItemRes()']]],
+  ['inventoryitemscount',['inventoryItemsCount',['../struct_standard_user.html#a468e1f1dbde8028ff761045261ff1e00',1,'StandardUser']]],
+  ['inventoryitemslist',['inventoryItemsList',['../struct_standard_user__parser_strings.html#aa4a191c86e9e5d0ff54ba98ac9d3908e',1,'StandardUser_parserStrings::inventoryItemsList()'],['../struct_standard_user.html#a278e5f835be84f8df6c155f8e2a4101d',1,'StandardUser::inventoryItemsList()']]],
   ['isactive',['isActive',['../struct_scene_node.html#a96eff8420fb9ee1b4c5d5f1bcace116d',1,'SceneNode']]],
   ['isbuttonmoving',['isButtonMoving',['../struct_slider.html#a5046816c8ca0b6b9c5948de82c1cbc44',1,'Slider']]],
   ['iscontextmenushown',['isContextMenuShown',['../struct_list_box.html#a06e83cefd5236408ec725d6dd353ec63',1,'ListBox']]],
   ['iscreatedwithresourcemanager',['isCreatedWithResourceManager',['../struct_texture_resource.html#adcd8ef68b8cee94150537c32674888ce',1,'TextureResource']]],
   ['isfullscreen',['isFullscreen',['../struct_settings.html#acf2d18d9a8396938ecf48c975f249e71',1,'Settings']]],
-  ['isgeometrychanged',['isGeometryChanged',['../struct_body.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Body::isGeometryChanged()'],['../struct_button.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Button::isGeometryChanged()'],['../struct_check_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'CheckBox::isGeometryChanged()'],['../struct_context_menu.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'ContextMenu::isGeometryChanged()'],['../struct_list_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'ListBox::isGeometryChanged()'],['../struct_progress_bar.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'ProgressBar::isGeometryChanged()'],['../struct_slider.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Slider::isGeometryChanged()'],['../struct_text_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'TextBox::isGeometryChanged()']]],
+  ['isgeometrychanged',['isGeometryChanged',['../struct_body.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Body::isGeometryChanged()'],['../struct_button.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Button::isGeometryChanged()'],['../struct_check_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'CheckBox::isGeometryChanged()'],['../struct_context_menu.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'ContextMenu::isGeometryChanged()'],['../struct_list_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'ListBox::isGeometryChanged()'],['../struct_progress_bar.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'ProgressBar::isGeometryChanged()'],['../struct_slider.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Slider::isGeometryChanged()'],['../struct_text_box.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'TextBox::isGeometryChanged()'],['../struct_item.html#a8ea7e8ac3e3330830aa7a4309390f3ac',1,'Item::isGeometryChanged()']]],
   ['ismusicactive',['isMusicActive',['../struct_musican.html#abc26db848e0a6faf8a443fefaeb42f50',1,'Musican::isMusicActive()'],['../struct_settings.html#abc26db848e0a6faf8a443fefaeb42f50',1,'Settings::isMusicActive()']]],
   ['isneeded',['isNeeded',['../struct_game_event.html#a1c2e66c0da32aeb6b56a788ad2beee8c',1,'GameEvent']]],
   ['issoundactive',['isSoundActive',['../struct_musican.html#a5c6626343a76aeeea67da93f5e14fd45',1,'Musican::isSoundActive()'],['../struct_settings.html#a5c6626343a76aeeea67da93f5e14fd45',1,'Settings::isSoundActive()']]],
@@ -15,6 +18,7 @@ var searchData=
   ['isstringexistinlist',['isStringExistInList',['../struct_list_box.html#a284c5592089954400f6ea24229c31617',1,'ListBox']]],
   ['isunique',['isUnique',['../struct_text_resource.html#a1bf1b6bebe561b86cd3d6b5dbf54be1c',1,'TextResource']]],
   ['isvsyncactive',['isVsyncActive',['../struct_settings.html#a268770171cd0fa68cd268fa1b0ee8c6a',1,'Settings']]],
+  ['itemresource',['itemResource',['../struct_inventory_item.html#acd493013564faa22504133cbb4416573',1,'InventoryItem']]],
   ['itemscount',['itemsCount',['../struct_right_value.html#a48e4ac11eaaa4c16805d455ffe2c5f5f',1,'RightValue']]],
   ['itemslist',['itemsList',['../struct_right_value.html#a1137a9f799202660c420a7894e9257e2',1,'RightValue']]]
 ];

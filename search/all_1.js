@@ -2,7 +2,7 @@ var searchData=
 [
   ['backgroundmodule',['BackgroundModule',['../struct_background_module.html',1,'']]],
   ['base',['base',['../struct_slider.html#a686905c1a3f09ace5f334088ada4ee71',1,'Slider']]],
-  ['body',['Body',['../struct_body.html',1,'']]],
+  ['body',['Body',['../struct_body.html',1,'Body'],['../struct_item.html#a5d4b20fb6acb8bdb769db95280c18dcb',1,'Item::body()'],['../struct_standard_user.html#a5d4b20fb6acb8bdb769db95280c18dcb',1,'StandardUser::body()']]],
   ['body_2ec',['Body.c',['../_body_8c.html',1,'']]],
   ['body_2eh',['Body.h',['../_body_8h.html',1,'']]],
   ['body_5fconstruct',['Body_construct',['../_body_8h.html#a0a316d9b3b4d558f19ffd4be3b86ff06',1,'Body_construct(struct ResourceManager *const resourceManager, struct Renderer *const renderer, struct SceneNodeTypesRegistrar *sceneNodeTypesRegistrar, struct TextParser *const textParser):&#160;Body.c'],['../_body_8c.html#a0a316d9b3b4d558f19ffd4be3b86ff06',1,'Body_construct(struct ResourceManager *const resourceManager, struct Renderer *const renderer, struct SceneNodeTypesRegistrar *sceneNodeTypesRegistrar, struct TextParser *const textParser):&#160;Body.c']]],
@@ -18,6 +18,7 @@ var searchData=
   ['body_5fsave',['Body_save',['../_body_8h.html#ab00b354ea378c48229f51cecbf548a5f',1,'Body_save(const struct Body *const body, struct ResourceManager *const resourceManager, const char *const bodyResId):&#160;Body.c'],['../_body_8c.html#ab00b354ea378c48229f51cecbf548a5f',1,'Body_save(const struct Body *const body, struct ResourceManager *const resourceManager, const char *const bodyResId):&#160;Body.c']]],
   ['body_5ftrygetsettingsfromtextparser',['Body_tryGetSettingsFromTextParser',['../_body_8c.html#a0f1c795859d3bb5780ed77e7ceb1e490',1,'Body.c']]],
   ['body_5fupdate',['Body_update',['../_body_8h.html#a6a31fa8360003f6d4fb4e7f1a8e944cf',1,'Body_update(struct SceneNode *sceneNode, struct EventManager *eventManager, struct Renderer *renderer):&#160;Body.c'],['../_body_8c.html#a6a31fa8360003f6d4fb4e7f1a8e944cf',1,'Body_update(struct SceneNode *sceneNode, struct EventManager *eventManager, struct Renderer *renderer):&#160;Body.c']]],
+  ['bodyres',['bodyRes',['../struct_item_scene_node__parser_strings.html#adf56a4083356da6846996a4907461a96',1,'ItemSceneNode_parserStrings::bodyRes()'],['../struct_standard_user__parser_strings.html#adf56a4083356da6846996a4907461a96',1,'StandardUser_parserStrings::bodyRes()']]],
   ['bodyscenenode_5ferrormessages',['BodySceneNode_errorMessages',['../struct_body_scene_node__error_messages.html',1,'']]],
   ['bodyscenenode_5ferrors',['BodySceneNode_errors',['../_body_8h.html#af5bf97b563f56272097986deddbb573d',1,'Body.h']]],
   ['bodyscenenode_5fparserstrings',['BodySceneNode_parserStrings',['../struct_body_scene_node__parser_strings.html',1,'']]],

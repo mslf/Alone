@@ -110,9 +110,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a51ad1fb41d909c7c1dfab687f2c84563"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_renderer_8h.html#a51ad1fb41d909c7c1dfab687f2c84563">Renderer_destruct</a> (struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer)</td></tr>
 <tr class="memdesc:a51ad1fb41d909c7c1dfab687f2c84563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> and frees memory, used by it. Also it closes SDL subsystems (SDL_image, SDL_ttf) and SDL at all.  <a href="#a51ad1fb41d909c7c1dfab687f2c84563">More...</a><br /></td></tr>
 <tr class="separator:a51ad1fb41d909c7c1dfab687f2c84563"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c226dd4e1388e2ce96aeb8cd4533b20"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_renderer_8h.html#a6c226dd4e1388e2ce96aeb8cd4533b20">Renderer_convertCoordinates</a> (struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer, SDL_Point point)</td></tr>
-<tr class="memdesc:a6c226dd4e1388e2ce96aeb8cd4533b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts Upixels absolute coordinates to the real pixels, based on <a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">Renderer::virtualScreenSize</a>, <a class="el" href="struct_renderer.html#aa5fcda74f70efa26b808237cba88d273">Renderer::currentScreenSize</a> and <a class="el" href="struct_renderer.html#a100180e2e1f4392fe765aa7e5b800215">Renderer::cameraPosition</a>.  <a href="#a6c226dd4e1388e2ce96aeb8cd4533b20">More...</a><br /></td></tr>
-<tr class="separator:a6c226dd4e1388e2ce96aeb8cd4533b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28517170a1b3b8fece795d6829524d91"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_renderer_8h.html#a28517170a1b3b8fece795d6829524d91">Renderer_convertCoordinates</a> (struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer, SDL_Point point, SDL_Point parallax)</td></tr>
+<tr class="memdesc:a28517170a1b3b8fece795d6829524d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts Upixels absolute coordinates to the real pixels, based on <a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">Renderer::virtualScreenSize</a>, <a class="el" href="struct_renderer.html#aa5fcda74f70efa26b808237cba88d273">Renderer::currentScreenSize</a> and <a class="el" href="struct_renderer.html#a100180e2e1f4392fe765aa7e5b800215">Renderer::cameraPosition</a>. Also, parallax effect will be applyed.  <a href="#a28517170a1b3b8fece795d6829524d91">More...</a><br /></td></tr>
+<tr class="separator:a28517170a1b3b8fece795d6829524d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03a30501192cf164c30a374909554520"><td class="memItemLeft" align="right" valign="top">SDL_Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_renderer_8h.html#a03a30501192cf164c30a374909554520">Renderer_convertCoordinatesA</a> (struct <a class="el" href="struct_renderer.html">Renderer</a> *renderer, SDL_Point point)</td></tr>
 <tr class="memdesc:a03a30501192cf164c30a374909554520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts Upixels absolute coordinates to the real pixels, based on <a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">Renderer::virtualScreenSize</a> and <a class="el" href="struct_renderer.html#aa5fcda74f70efa26b808237cba88d273">Renderer::currentScreenSize</a>.  <a href="#a03a30501192cf164c30a374909554520">More...</a><br /></td></tr>
 <tr class="separator:a03a30501192cf164c30a374909554520"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,8 +168,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6c226dd4e1388e2ce96aeb8cd4533b20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c226dd4e1388e2ce96aeb8cd4533b20">&sect;&nbsp;</a></span>Renderer_convertCoordinates()</h2>
+<a id="a28517170a1b3b8fece795d6829524d91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28517170a1b3b8fece795d6829524d91">&sect;&nbsp;</a></span>Renderer_convertCoordinates()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +184,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">SDL_Point&#160;</td>
-          <td class="paramname"><em>point</em>&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Point&#160;</td>
+          <td class="paramname"><em>parallax</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -194,14 +200,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Converts Upixels absolute coordinates to the real pixels, based on <a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">Renderer::virtualScreenSize</a>, <a class="el" href="struct_renderer.html#aa5fcda74f70efa26b808237cba88d273">Renderer::currentScreenSize</a> and <a class="el" href="struct_renderer.html#a100180e2e1f4392fe765aa7e5b800215">Renderer::cameraPosition</a>. </p>
+<p>Converts Upixels absolute coordinates to the real pixels, based on <a class="el" href="struct_renderer.html#a43723e61c3f9430011b1fee41436e6ae">Renderer::virtualScreenSize</a>, <a class="el" href="struct_renderer.html#aa5fcda74f70efa26b808237cba88d273">Renderer::currentScreenSize</a> and <a class="el" href="struct_renderer.html#a100180e2e1f4392fe765aa7e5b800215">Renderer::cameraPosition</a>. Also, parallax effect will be applyed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">renderer</td><td>Pointer to a <a class="el" href="struct_renderer.html" title="Rendering subsystem. ">Renderer</a> with needed numbers. Can be NULL. </td></tr>
     <tr><td class="paramname">point</td><td>SDL_Point with world absolute coordinates in Upixels. </td></tr>
+    <tr><td class="paramname">parallax</td><td>SDL_Point with parallax offsets. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="struct_scene_node.html" title="Basic object, which is represent node of Scene. Use SceneNode_init() to init this SceneNode...">SceneNode</a> </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>SDL_Point with a screen and camera relative coordinates in real pixels. </dd></dl>
 
 </div>

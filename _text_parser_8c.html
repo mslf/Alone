@@ -190,12 +190,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a7556e566a367278cfee29a9c08d57f9b"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_text_parser_8c.html#a7556e566a367278cfee29a9c08d57f9b">TextParser_addPair</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger, struct <a class="el" href="struct_text_parser.html">TextParser</a> *textParser, char *const leftValueString, size_t leftCounter, char *const rightValueString, size_t rightCounter)</td></tr>
 <tr class="memdesc:a7556e566a367278cfee29a9c08d57f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds and inits <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a> in the <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> from the value (left and right) strings.  <a href="#a7556e566a367278cfee29a9c08d57f9b">More...</a><br /></td></tr>
 <tr class="separator:a7556e566a367278cfee29a9c08d57f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a844dbe8e68da392b0062a23c2a9e5074"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_text_parser_8c.html#a844dbe8e68da392b0062a23c2a9e5074">TextParser_deleteComments</a> (char *const srcText, char **dstText)</td></tr>
-<tr class="memdesc:a844dbe8e68da392b0062a23c2a9e5074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes C-style comment blocks (/_* comment *_/, without of '_') from string.  <a href="#a844dbe8e68da392b0062a23c2a9e5074">More...</a><br /></td></tr>
-<tr class="separator:a844dbe8e68da392b0062a23c2a9e5074"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aff2db7f026e75ae3dc9f38356a423c"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_text_parser_8c.html#a6aff2db7f026e75ae3dc9f38356a423c">TextParser_parseTextResource</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger, struct <a class="el" href="struct_text_parser.html">TextParser</a> *textParser, const struct <a class="el" href="struct_text_resource.html">TextResource</a> *const textResource)</td></tr>
-<tr class="memdesc:a6aff2db7f026e75ae3dc9f38356a423c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> for assigments (<a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a>) and adds them to the <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>.  <a href="#a6aff2db7f026e75ae3dc9f38356a423c">More...</a><br /></td></tr>
-<tr class="separator:a6aff2db7f026e75ae3dc9f38356a423c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a991e9239aff8f0c5c500a901238907ae"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_text_parser_8c.html#a991e9239aff8f0c5c500a901238907ae">TextParser_deleteComments</a> (const char *srcText, char **dstText)</td></tr>
+<tr class="memdesc:a991e9239aff8f0c5c500a901238907ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes C-style comment blocks (/_* comment *_/, without of '_') from string.  <a href="#a991e9239aff8f0c5c500a901238907ae">More...</a><br /></td></tr>
+<tr class="separator:a991e9239aff8f0c5c500a901238907ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaccf7c542515c408418086ac6723cf4"><td class="memItemLeft" align="right" valign="top">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_text_parser_8c.html#acaccf7c542515c408418086ac6723cf4">TextParser_parseText</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger, struct <a class="el" href="struct_text_parser.html">TextParser</a> *textParser, const char *text)</td></tr>
+<tr class="memdesc:acaccf7c542515c408418086ac6723cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> for assigments (<a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a>) and adds them to the <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>.  <a href="#acaccf7c542515c408418086ac6723cf4">More...</a><br /></td></tr>
+<tr class="separator:acaccf7c542515c408418086ac6723cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe31f1509bce55ecca044877a6fdfeb1"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_text_parser.html">TextParser</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_text_parser_8c.html#afe31f1509bce55ecca044877a6fdfeb1">TextParser_constructFromTextResource</a> (struct <a class="el" href="struct_logger.html">Logger</a> *logger, const struct <a class="el" href="struct_text_resource.html">TextResource</a> *const textResource)</td></tr>
 <tr class="memdesc:afe31f1509bce55ecca044877a6fdfeb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and inits <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a> from <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a>.  <a href="#afe31f1509bce55ecca044877a6fdfeb1">More...</a><br /></td></tr>
 <tr class="separator:afe31f1509bce55ecca044877a6fdfeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -878,8 +878,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a844dbe8e68da392b0062a23c2a9e5074"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a844dbe8e68da392b0062a23c2a9e5074">&sect;&nbsp;</a></span>TextParser_deleteComments()</h2>
+<a id="a991e9239aff8f0c5c500a901238907ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a991e9239aff8f0c5c500a901238907ae">&sect;&nbsp;</a></span>TextParser_deleteComments()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -890,7 +890,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a> TextParser_deleteComments </td>
           <td>(</td>
-          <td class="paramtype">char *const&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>srcText</em>, </td>
         </tr>
         <tr>
@@ -1642,8 +1642,8 @@ This functions sets <a class="el" href="struct_text_parser.html#a4f39065075c00c7
 
 </div>
 </div>
-<a id="a6aff2db7f026e75ae3dc9f38356a423c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6aff2db7f026e75ae3dc9f38356a423c">&sect;&nbsp;</a></span>TextParser_parseTextResource()</h2>
+<a id="acaccf7c542515c408418086ac6723cf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaccf7c542515c408418086ac6723cf4">&sect;&nbsp;</a></span>TextParser_parseText()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1652,7 +1652,7 @@ This functions sets <a class="el" href="struct_text_parser.html#a4f39065075c00c7
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a> TextParser_parseTextResource </td>
+          <td class="memname">static enum <a class="el" href="_text_parser_8h.html#a822683d3056f812c46664330ca6b19a9">TextParser_errors</a> TextParser_parseText </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="struct_logger.html">Logger</a> *&#160;</td>
           <td class="paramname"><em>logger</em>, </td>
@@ -1666,8 +1666,8 @@ This functions sets <a class="el" href="struct_text_parser.html#a4f39065075c00c7
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const struct <a class="el" href="struct_text_resource.html">TextResource</a> *const&#160;</td>
-          <td class="paramname"><em>textResource</em>&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1687,7 +1687,7 @@ This functions sets <a class="el" href="struct_text_parser.html#a4f39065075c00c7
   <table class="params">
     <tr><td class="paramname">logger</td><td>Pointer to a <a class="el" href="struct_logger.html" title="Logging subsystem. ">Logger</a> for logging purpose. </td></tr>
     <tr><td class="paramname">textParser</td><td>Pointer to a <a class="el" href="struct_text_parser.html" title="Represents structure for containing Pair, parsed from TextResource. Some info about parsing format: ...">TextParser</a>, where new <a class="el" href="struct_pair.html" title="Represents one assigment pair. ">Pair</a> will be added. </td></tr>
-    <tr><td class="paramname">textResource</td><td>Pointer to a <a class="el" href="struct_text_resource.html" title="Resource, which is represents changeable string. Also, you can save it back to the filesystem using T...">TextResource</a> with plain text data, to be parsed as a list of assigments. </td></tr>
+    <tr><td class="paramname">text</td><td>String with plain text data, to be parsed as a list of assigments. </td></tr>
   </table>
   </dd>
 </dl>
