@@ -69,16 +69,16 @@ enum ItemSceneNode_errors {
     ITEM_ERR_NO_INVENTORY_ITEM = 2,
     /**< No ItemSceneNode_parserStrings#inventoryItemRes string found in #TextParser. */
     ITEM_ERR_NO_BODY_RES = 3,
-    /**< No ItemSceneNode_parserStrings#sbodyRes string found in #TextParser. */
+    /**< No ItemSceneNode_parserStrings#bodyRes string found in #TextParser. */
     ITEM_ERR_CONSTRUCTING_BODY = 4,
     /**< Constructing Item#body failed. */
     ITEM_ERR_NO_PICKED_EVENT_RES = 5,
     /**< Loading new Item#pickedEventResource from #ResourceManager failed. */
     ITEM_ERR_CONSTRUCTING_PICKED_EVENT = 6,
     /**< Constructing Item#pickedEvent failed. */
-    ITEM_ERR_CONSTRUCTIG_TEXT_PARSER = 5,
+    ITEM_ERR_CONSTRUCTIG_TEXT_PARSER = 7,
     /**< Constructing new #TextParser for some required reason failed. */
-    ITEM_ERR_SAVING = 6
+    ITEM_ERR_SAVING = 8
     /**< Saving #Item failed due to internal reason. */
 };
 
