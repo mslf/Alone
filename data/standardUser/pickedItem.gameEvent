@@ -1,0 +1,4 @@
+type = GameEvent;
+channel = StandardUser;
+command = StateChanged;
+data = PickedEvent;

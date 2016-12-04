@@ -11,7 +11,8 @@ sceneNodes = [
     bar_2,
     bar_3,
     menu_1,
-    body_1
+    body_1,
+    item_1
 ];
 sprite_1 = [
     "data/demoSprite1.sprite",
@@ -109,6 +110,15 @@ background = [
     80, 80,
     25, 25,     
     1,          
+    0.0,       
+    1.0, 1.0
+];
+item_1 = [
+    "data/standardUser/items/item1.item",
+    400, 0,
+    100, 100,
+    25, 25,     
+    0,          
     0.0,       
     1.0, 1.0
 ];

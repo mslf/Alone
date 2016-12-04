@@ -1,0 +1,5 @@
+type  = Item;
+bodyResource = data/standardUser/items/item1.body;
+inventoryItemResource = data/standardUser/items/item1.inventoryItem;
+count = 3;
+pickedEventResource = data/standardUser/pickedItem.gameEvent;

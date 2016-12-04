@@ -1,0 +1,6 @@
+type = Sprite;
+textureResource = data/standardUser/items/item1.png;
+frameSize = [128, 128];
+framesCountsList = [4];
+frameDurationsList = [5];
+virtualSize = [50, 50];
