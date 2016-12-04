@@ -66,13 +66,19 @@ enum ItemSceneNode_errors {
     /**< All right, no errors. */
     ITEM_ERR_NULL_ARGUMENT = 1,
     /**< Some of function's arguments are NULL. */
-    ITEM_ERR_NO_SPRITE_RES = 2,
-    /**< No ItemSceneNode_parserStrings#spriteRes string found in #TextParser. */
-    ITEM_ERR_CONSTRUCTING_SPRITE = 3,
-    /**< Constructing Item#sprite failed. */
-    ITEM_ERR_CONSTRUCTIG_TEXT_PARSER = 4,
+    ITEM_ERR_NO_INVENTORY_ITEM = 2,
+    /**< No ItemSceneNode_parserStrings#inventoryItemRes string found in #TextParser. */
+    ITEM_ERR_NO_BODY_RES = 3,
+    /**< No ItemSceneNode_parserStrings#sbodyRes string found in #TextParser. */
+    ITEM_ERR_CONSTRUCTING_BODY = 4,
+    /**< Constructing Item#body failed. */
+    ITEM_ERR_NO_PICKED_EVENT_RES = 5,
+    /**< Loading new Item#pickedEventResource from #ResourceManager failed. */
+    ITEM_ERR_CONSTRUCTING_PICKED_EVENT = 6,
+    /**< Constructing Item#pickedEvent failed. */
+    ITEM_ERR_CONSTRUCTIG_TEXT_PARSER = 5,
     /**< Constructing new #TextParser for some required reason failed. */
-    ITEM_ERR_SAVING = 5
+    ITEM_ERR_SAVING = 6
     /**< Saving #Item failed due to internal reason. */
 };
 
@@ -136,13 +142,31 @@ struct SceneNode* Item_construct(struct ResourceManager* const resourceManager,
 void Item_destruct(struct SceneNode* item);
 
 /**
+ * @brief Changes Item#pickedEventResource and Item#pickedEvent.
+ * Sets old Item#pickedEvent#isNeeded to false, if exists.
+ * Decreases old Item#pickedEventResource#pointersCount if exists.
+ * @param item Pointer to a #Item. Can be NULL.
+ * @param resourceManager Pointer to a #ResourceManager which is used to load 
+ * new Item#pickedEventResource. Can be NULL.
+ * @param pickedEventResId String with ID of new #GameEvent to load via #ResourceManager. Can be NULL.
+ * @return #ItemSceneNode_errors value.
+ * @see #Item
+ * @see #GameEvent
+ * @see #ResourceManager
+ * @see #ItemSceneNode_errors
+ */
+enum ItemSceneNode_errors Item_changePickedEventResource(struct Item* item,
+                                                         struct ResourceManager* resourceManager,
+                                                         const char* const pickedEventResId);
+
+/**
  * @brief Saves #Item to the filesystem via #ResourceManager.
  * Before saving, it updates Item#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource
  * with the latest changes in #Item.
  * @param item Pointer to a #Item which will be saved. Can be NULL.
  * @param resourceManager Pointer to a #ResourceManager which is used to 
  * save Item#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource. Can be NULL.
- * @param spriteResId Path string, where #ResourceManager will 
+ * @param itemResId Path string, where #ResourceManager will 
  * save Item#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource. Can be NULL.
  * @return #ItemSceneNode_errors value.
  * @see #Item
