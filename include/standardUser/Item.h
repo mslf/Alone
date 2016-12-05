@@ -104,7 +104,7 @@ struct Item {
     size_t count;
     /**< Count of such #InventoryItem in the that #Item. */
     bool isGeometryChanged;
-    /**< Flag, which is need to be changed when someone tried to iteract with #Body. */
+    /**< Flag, which is need to be changed when someone tried to iteract with #Item. */
     struct TextResource* pickedEventResource;
     /**< #TextResource to construct Item#pickedEvent. */
     struct GameEvent* pickedEvent;

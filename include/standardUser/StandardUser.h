@@ -48,7 +48,7 @@
  * It contains array of #NanoSection names, which will be found in #TextParser, so they will contain actual data.
  * @see StandardUser_construct
  */
-static const struct StandardUser_parserStrings {
+static const struct StandardUserSceneNode_parserStrings {
     const char* const type;
     /**< Type string, which is used to distinquish #StandardUser resource from others. */
     const char* const bodyRes;
@@ -64,7 +64,7 @@ static const struct StandardUser_parserStrings {
     const char* const nanoSections;
     /**< List of strings with name of #NanoSection, which #StandardUser will find in #TextParser
      * to init StandardUser#microSection. */
-}StandardUser_parserStrings = {
+}StandardUserSceneNode_parserStrings = {
         "StandardUser",
         "bodyResource",
         "inventoryItemsList",
@@ -86,8 +86,12 @@ enum StandardUserSceneNode_errors {
     /**< Constructing StandardUser#sprite failed. */
     STD_USER_ERR_CONSTRUCTIG_TEXT_PARSER = 4,
     /**< Constructing new #TextParser for some required reason failed. */
-    STD_USER_ERR_SAVING = 5
+    STD_USER_ERR_SAVING = 5,
     /**< Saving #StandardUser failed due to internal reason. */
+    STD_USER_ERR_NO_BODY_RES = 6,
+    /**< No StandardUser_parserStrings#bodyRes string found in #TextParser. */
+    STD_USER_ERR_CONSTRUCTING_BODY = 7
+    /**< Constructing StandardUser#body failed. */
 };
 
 /**
@@ -162,6 +166,8 @@ struct StandardUser {
     /**< Current number of existing #TriggeredGameEvent in the StandardUser#triggeredEventsList. */
     size_t allocatedTriggeredEventsCount;
     /**< Current number of allocated #TriggeredGameEvent in the StandardUser#triggeredEventsList. */
+    bool isGeometryChanged;
+    /**< Flag, which is need to be changed when someone tried to iteract with #StandardUser. */
 };
 
 /**
@@ -193,7 +199,7 @@ struct SceneNode* StandardUser_construct(struct ResourceManager* const resourceM
 /**
  * @brief Destructs #StandardUser and frees memory, used by it.
  * Pointer to that function should be at StandardUser#physicalSceneNode#dynamicSceneNode#sceneNode#destruct.
- * @param body Pointer to a #StandardUser, casted to #SceneNode. Can be not fully initialized. Can be NULL.
+ * @param standardUser Pointer to a #StandardUser, casted to #SceneNode. Can be not fully initialized. Can be NULL.
  * @warning Use this function only in pair with StandardUser_construct()!
  * @see StandardUser_construct()
  */
@@ -203,10 +209,10 @@ void StandardUser_destruct(struct SceneNode* standardUser);
  * @brief Saves #StandardUser to the filesystem via #ResourceManager.
  * Before saving, it updates StandardUser#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource
  * with the latest changes in #StandardUser.
- * @param body Pointer to a #StandardUser which will be saved. Can be NULL.
+ * @param standardUser Pointer to a #StandardUser which will be saved. Can be NULL.
  * @param resourceManager Pointer to a #ResourceManager which is used to 
  * save StandardUser#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource. Can be NULL.
- * @param spriteResId Path string, where #ResourceManager will 
+ * @param userResId Path string, where #ResourceManager will 
  * save StandardUser#physicalSceneNode#dynamicSceneNode#sceneNode#sceneNodeTextResource. Can be NULL.
  * @return #StandardUserSceneNode_errors value.
  * @see #StandardUser
@@ -225,7 +231,7 @@ enum StandardUserSceneNode_errors StandardUser_save(const struct StandardUser* c
  * @param eventManager Pointer to an #EventManager, where that function will get user input events. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #StandardUser is not accepted!
  */
-void StandartUser_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
+void StandardUser_control(struct SceneNode* sceneNode, struct EventManager* eventManager);
 
 /**
  * @brief Function to update #StandardUser and interacting with #EventManager.
@@ -236,7 +242,7 @@ void StandartUser_control(struct SceneNode* sceneNode, struct EventManager* even
  * @warning Passing #SceneNode inheritors, which is not #StandardUser is not accepted!
  * @note Don't use this function for drawing.
  */
-void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
+void StandardUser_update(struct SceneNode* sceneNode, struct EventManager* eventManager, struct Renderer* renderer);
 
 /**
  * @brief Function to render #StandardUser on the screen.
@@ -245,7 +251,7 @@ void StandartUser_update(struct SceneNode* sceneNode, struct EventManager* event
  * @param renderer Pointer to a #Renderer for drawing #StandardUser. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #StandardUser is not accepted!
  */
-void StandartUser_render(struct SceneNode* sceneNode, struct Renderer* renderer);
+void StandardUser_render(struct SceneNode* sceneNode, struct Renderer* renderer);
 
 /**
  * @brief Function to play sounds of a #StandardUser.
@@ -254,6 +260,6 @@ void StandartUser_render(struct SceneNode* sceneNode, struct Renderer* renderer)
  * @param musican Pointer to a #Musican for playing audio of a #StandardUser. Can be NULL.
  * @warning Passing #SceneNode inheritors, which is not #StandardUser is not accepted!
  */
-void StandartUser_sound(struct SceneNode* sceneNode, struct Musican* musican);
+void StandardUser_sound(struct SceneNode* sceneNode, struct Musican* musican);
 
 #endif //ALONE_STANDARD_USER_H

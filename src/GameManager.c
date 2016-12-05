@@ -117,7 +117,7 @@ static enum GameManager_errors GameManager_registerSceneNodeTypes(struct GameMan
                                                                ItemSceneNode_parserStrings.type,
                                                                Item_construct) != 0);
     result += (SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
-                                                               StandardUser_parserStrings.type,
+                                                               StandardUserSceneNode_parserStrings.type,
                                                                StandardUser_construct) != 0);
     /*result += SceneNodeTypesRegistrar_registerNewSceneNodeType(gm->sceneNodeTypesRegistrar,
                                                                LEVEL_SCENENODE_PARSER_TYPE_STRING,
